@@ -5,7 +5,7 @@ A particle system library for the PixiJS library.
 
 ##Documentation##
 
-http://cloudkidstudio.github.io/CreateJSParticless/
+http://cloudkidstudio.github.io/CloudKidParticles/
 
 ##Installation##
 
