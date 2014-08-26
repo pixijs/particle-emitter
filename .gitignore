@@ -1,0 +1,5 @@
+.DS_Store
+.grunt
+docs
+node_modules
+examples/libs

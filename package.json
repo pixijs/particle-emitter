@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "dependencies": {
+    "grunt": "~0.4.5",
+    "grunt-library-builder": "CloudKidStudio/grunt-library-builder"
+  }
+}

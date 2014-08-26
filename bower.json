@@ -1,0 +1,18 @@
+{
+	"name": "cloudkid-particles",
+	"version": "0.0.1",
+	"main": "dist/cloudkid-particles.min.js",
+	"dependencies": {
+		"cloudkid-debug": "*",
+		"cloudkid-namespace": "*",
+		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git",
+		"tweenjs": "https://github.com/CloudKidStudio/TweenJS.git"
+	},
+	"ignore": [
+		"Gruntfile.js",
+		"build.json",
+		"examples",
+		"docs",
+		"src"
+	]
+}
