@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Particle Editor</title>
+        <meta name="description" content="">
+
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <script src="../libs/modernizr/modernizr.js"></script>
+		<script src="../libs/jquery/dist/jquery.min.js"></script>
+		<script src="../libs/preloadjs/lib/preloadjs.min.js"></script>
+		<script src="../libs/pixi.js/bin/pixi.dev.js"></script>
+		<script src="../libs/cloudkid-namespace/namespace.js"></script>
+		<script src="../libs/cloudkid-debug/dist/cloudkid-debug.js"></script>
+		<script src="../libs/cloudkid-framework/dist/cloudkid-framework.js"></script>
+		<script src="../libs/cloudkid-tasks/dist/cloudkid-tasks.js"></script>
+		<script src="../libs/cloudkid-pixi-display/dist/cloudkid-pixi-display.js"></script>
+		
+		<script src="../../dist/cloudkid-particles.js"></script>
+
+		<script src="Editor.js"></script>
+    </head>
+    <body>
+		<div id="content">
+			<div id="framerate" style="z-index:1; position:absolute;"></div>
+			<canvas id="stage" style="z-index:0;" width="800" height="500"></canvas>
+			<script>
+				var app = new cloudkid.Editor({
+					framerate: "framerate",
+					fps: 60,
+					raf: true,
+					parseQueryString: true,
+					debug: true,
+
+					canvasId: "stage",
+					display: cloudkid.PixiDisplay,
+					displayOptions: {
+						clearView: true,
+						transparent: false,
+						backgroundColor: 0x999999
+					}
+				});
+			</script>
+		</div>
+		<footer>CloudKid 2012</footer>
+    </body>
+</html>

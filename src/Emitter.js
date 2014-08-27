@@ -5,7 +5,8 @@
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils;
+	var ParticleUtils = cloudkid.ParticleUtils,
+		Particle = cloudkid.Particle;
 
 	/**
 	*	A particle emitter.
@@ -241,11 +242,11 @@
 		//set up the color
 		if (config.color)
 		{
-			this.startColor = ColorUtils.hexToRGB(config.color.start);
+			this.startColor = ParticleUtils.hexToRGB(config.color.start);
 			//if it's just one color, only use the start color
 			if (config.color.start != config.color.end)
 			{
-				this.endColor = ColorUtils.hexToRGB(config.color.end);
+				this.endColor = ParticleUtils.hexToRGB(config.color.end);
 			}
 			else
 				this.endColor = null;
@@ -297,8 +298,8 @@
 		//readd to pool
 		this._pool.push(particle);
 		//remove child from display
-		if(this.particle.parent)
-			this.particle.parent.removeChild(this.particle);
+		if(particle.parent)
+			particle.parent.removeChild(particle);
 	};
 	
 	/**
@@ -394,7 +395,7 @@
 				if(-this._spawnTimer < lifetime)
 				{
 					//create particle
-					var p = _pool.length ? _pool.pop() : new Particle(this);
+					var p = this._pool.length ? this._pool.pop() : new Particle(this);
 					//set a random texture if we have more than one
 					if(this.particleImages.length > 1)
 						p.setTexture(this.particleImages.random());
@@ -417,13 +418,13 @@
 					if (this._prevPosIsValid && this._posChanged)
 					{
 						var lerp = 1 + this._spawnTimer / delta;//1 - _spawnTimer / delta, but _spawnTimer is negative
-						p.x = (curX - prevX) * lerp + prevX;
-						p.y = (curY - prevY) * lerp + prevY;
+						p.position.x = (curX - prevX) * lerp + prevX;
+						p.position.y = (curY - prevY) * lerp + prevY;
 					}
 					else//otherwise just set to the spawn position
 					{
-						p.x = curX;
-						p.y = curY;
+						p.position.x = curX;
+						p.position.y = curY;
 					}
 					//initialize particle
 					p.init();
@@ -469,7 +470,6 @@
 	*/
 	p.destroy = function()
 	{
-		super.destroy();
 		this.cleanup();
 		for(var i = this._pool.length - 1; i >= 0; --i)
 		{

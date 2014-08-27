@@ -5,8 +5,7 @@
 	"dependencies": {
 		"cloudkid-debug": "*",
 		"cloudkid-namespace": "*",
-		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git",
-		"tweenjs": "https://github.com/CloudKidStudio/TweenJS.git"
+		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git#dev"
 	},
 	"ignore": [
 		"Gruntfile.js",

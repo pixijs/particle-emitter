@@ -174,7 +174,7 @@
 		//set up the velocity based on the start speed and rotation
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
-		GeomUtils.rotatePoint(this.rotation, this.velocity);
+		ParticleUtils.rotatePoint(this.rotation, this.velocity);
 		//set alpha to inital alpha
 		this.alpha = this.startAlpha;
 		//set scale to initial scale
@@ -208,7 +208,7 @@
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
 	*/
-	this.update = function(delta)
+	p.update = function(delta)
 	{
 		//increase age
 		this.age += delta;
