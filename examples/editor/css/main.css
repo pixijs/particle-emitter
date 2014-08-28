@@ -67,19 +67,6 @@ textarea {
 	margin-left:auto;
 	margin-right:auto;
 	display:block;
-	background-color: #fff;
-	background-image: linear-gradient(bottom, rgb(255,255,255) 23%, rgb(238,238,238) 81%);
-	background-image: -o-linear-gradient(bottom, rgb(255,255,255) 23%, rgb(238,238,238) 81%);
-	background-image: -moz-linear-gradient(bottom, rgb(255,255,255) 23%, rgb(238,238,238) 81%);
-	background-image: -webkit-linear-gradient(bottom, rgb(255,255,255) 23%, rgb(238,238,238) 81%);
-	background-image: -ms-linear-gradient(bottom, rgb(255,255,255) 23%, rgb(238,238,238) 81%);
-	background-image: -webkit-gradient(
-		linear,
-		left bottom,
-		left top,
-		color-stop(0.23, rgb(255,255,255)),
-		color-stop(0.81, rgb(238,238,238))
-	);
 }
 
 body, html {
