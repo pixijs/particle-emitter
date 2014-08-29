@@ -165,7 +165,7 @@
 		*	stops new particles from being created, but allows existing ones to die out.
 		*	@property {Boolean} emit
 		*/
-		this.emit = true;
+		this.emit = false;
 		/**
 		*	The timer for when to spawn particles, where numbers less 
 		*	than 0 mean that particles should be spawned.
@@ -199,6 +199,8 @@
 	*/
 	p.init = function(particleImages, config)
 	{
+		if(!particleImages || !config)
+			return;
 		//clean up any existing particles
 		this.cleanup();
 		//set up the array of textures
@@ -215,6 +217,9 @@
 				}
 			}
 		}
+		///////////////////////////
+		// Particle Properties   //
+		///////////////////////////
 		//set up the alpha
 		if (config.alpha)
 		{
@@ -251,6 +256,17 @@
 			else
 				this.endColor = null;
 		}
+		//set up the lifetime
+		this.minLifetime = config.lifetime.min;
+		this.maxLifetime = config.lifetime.max;
+		//use the custom ease if provided
+		if (config.ease)
+		{
+			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
+		}
+		//////////////////////////
+		// Emitter Properties   //
+		//////////////////////////
 		//set up the angle for spawning particles in
 		if(config.angle)
 		{
@@ -259,18 +275,10 @@
 		}
 		else
 			this.minAngle = this.maxAngle = 0;
-		//set up the lifetime
-		this.minLifetime = config.lifetime.min;
-		this.maxLifetime = config.lifetime.max;
 		//set the spawning frequency
 		this.frequency = config.frequency;
 		//determine if we should add the particle at the back of the list or not
 		this.addAtBack = !!config.addAtBack;
-		//use the custom ease if provided
-		if (config.ease)
-		{
-			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
-		}
 		//reset the emitter position and rotation variables
 		this.rotation = 0;
 		this.ownerPos = new PIXI.Point();
@@ -399,6 +407,8 @@
 					//set a random texture if we have more than one
 					if(this.particleImages.length > 1)
 						p.setTexture(this.particleImages.random());
+					else
+						p.setTexture(this.particleImages[0]);//if they are actually the same texture, this call will quit early
 					//set up the start and end values
 					p.startAlpha = this.startAlpha;
 					p.endAlpha = this.endAlpha;

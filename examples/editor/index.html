@@ -8,12 +8,13 @@
 
         <link rel="stylesheet" href="css/normalize.min.css">
         <link rel="stylesheet" href="css/main.css">
-		<link href="jquery-ui-smoothness/jquery-ui.css" rel="stylesheet">
+		<link href="jquery-ui-smoothness/jquery-ui.min.css" rel="stylesheet">
+		<link href="colorpicker/jquery.colorpicker.css" rel="stylesheet">
 		
 		<script src="jquery-ui-smoothness/external/jquery/jquery.js"></script>
-		<script src="jquery-ui-smoothness/jquery-ui.js"></script>
+		<script src="jquery-ui-smoothness/jquery-ui.min.js"></script>
+		<script src="colorpicker/jquery.colorpicker.js"></script>
 
-        <script src="../libs/modernizr/modernizr.js"></script>
 		<script src="../libs/preloadjs/lib/preloadjs.min.js"></script>
 		<script src="../libs/pixi.js/bin/pixi.dev.js"></script>
 		<script src="../libs/cloudkid-namespace/namespace.js"></script>
@@ -32,9 +33,19 @@
 			<canvas id="stage" style="z-index:0;" width="800" height="500"></canvas>
 		</div>
 		<div id="editor">
-			<button id="refresh" title="Reloads the displayed particles from the settings below">Refresh Display</button>
-			<div id="alpha" class="option" title="Transparency of the particles from 0 (transparent) to 1 (opaque)">
-				<div class="category">Alpha</div>
+			<div class="option">
+				<button id="refresh" title="Reloads the displayed particles from the settings below">Refresh Display</button>
+				<button id="loadConfig" title="Load a particle settings file to edit">Load</button>
+				<!--<button id="clipboard" title="Copy the particle settings to the clipboard">Copy to Clipboard</button>-->
+				<button id="downloadConfig" title="Download a JSON file of the particle settings">Download</button>
+			</div>
+			<div id="configDialog" title="Upload a particle settings JSON:">
+				<input id="configUpload" type="file" accept='text/json'></input>
+				<textarea id="configPaste" class="ui-autocomplete-input" rows="5"></textarea>
+			</div>
+			<h3>Particle Properties</h3>
+			<div id="alpha" class="option">
+				<div class="category" title="Transparency of the particles from 0 (transparent) to 1 (opaque)">Alpha</div>
 				<div class="label">Start</div>
 				<div id="alphaStart" class="unitSlider slider">
 					<input type="text" class="ui-autocomplete-input"></input>
@@ -48,11 +59,89 @@
 					<label class="sliderEnd">1</label>
 				</div>
 			</div>
+			<div id="scale" class="option">
+				<div class="category" title="Scale of the particles, with a minimum value of 0">Scale</div>
+				<div class="label">Start</div>
+				<input id="scaleStart" type="text" class="positiveSpinner spinner"></input>
+				<div class="label">End</div>
+				<input id="scaleEnd" type="text" class="positiveSpinner spinner"></input>
+			</div>
+			<div id="color" class="option">
+				<div class="category" title="Color of the particles">Color</div>
+				<div class="label">Start</div>
+				<input id="colorStart" type="text" class="colorPicker"></input>
+				<div class="label">End</div>
+				<input id="colorEnd" type="text" class="colorPicker"></input>
+			</div>
+			<div id="speed" class="option">
+				<div class="category" title="Speed of the particles">Speed</div>
+				<div class="label">Start</div>
+				<input id="speedStart" type="text" class="generalSpinner spinner"></input>
+				<div class="label">End</div>
+				<input id="speedEnd" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="particleLife" class="option">
+				<div class="category" title="Lifetime of each particle in seconds">Lifetime</div>
+				<div class="label">Min</div>
+				<input id="lifeMin" type="text" class="positiveSpinner spinner"></input>
+				<div class="label">Max</div>
+				<input id="lifeMax" type="text" class="positiveSpinner spinner"></input>
+			</div>
+			<div id="ease" class="option">
+				<div class="category" title="Custom ease, as shown by the array output by http://www.greensock.com/customease/">Custom Ease</div>
+				<input id="customEase" type="text" class="ui-autocomplete-input"></input>
+			</div>
+			<div id="images" class="option">
+				<div class="category" title="Images that each particle will be given randomly when spawned">Particle Images</div>
+				<button id="addImage" class="ui-icon ui-icon-folder-open"></button>
+				<div id="imageList">
+					<div class="particleImage">
+						<img class="actualImage" src="particle.png" />
+						<button class="download"></button>
+						<button class="remove"></button>
+					</div>
+				</div>
+			</div>
+			<div id="imageDialog" title="Choose an image:">
+				<select id="defaultImageSelector">
+					<option selected="selected">-Default Images-</option>
+					<option>particle.png</option>
+				</select>
+				<input id="imageUpload" type="file" multiple accept='image/*'></input>
+			</div>
+			<h3>Emitter Properties</h3>
+			<div id="frequency" class="option">
+				<div class="category" title="Seconds between each particle being spawned">Spawn Frequency</div>
+				<input id="emitFrequency" type="text" class="frequencySpinner spinner"></input>
+			</div>
+			<div id="angle" class="option">
+				<div class="category" title="Angle at which particles are emitted - 0 is to the right">Emission Angle</div>
+				<div class="label">Min</div>
+				<input id="emitAngleMin" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Max</div>
+				<input id="emitAngleMax" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="spawnPos" class="option">
+				<div class="category" title="Position relative to the emitter's owner at which to spawn particles">Spawn Position</div>
+				<div class="label">X</div>
+				<input id="emitSpawnPosX" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Y</div>
+				<input id="emitSpawnPosY" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="addAtBack" class="option">
+				<div class="category" title="If particles should be added to the back of the display list instead of the top">Add Particles At Back</div>
+				<input id="emitAddAtBack" type="checkbox"></input>
+			</div>
 		</div>
 		<script>
 			//initialize jquery UI
 			$(document).tooltip();//enable tooltips for any element with a title attribute
-			$("button").button();//enable all button elements
+			//enable the buttons at the top
+			$("#refresh").button({icons:{primary:"ui-icon-arrowrefresh-1-s"}});
+			$("#loadConfig").button({icons:{primary:"ui-icon-folder-open"}});
+			//$("#clipboard").button({icons:{primary:"ui-icon-copy"}});
+			$("#downloadConfig").button({icons:{primary:"ui-icon-arrowthickstop-1-s"}});
+			//$("button").button();//enable all button elements
 			//enable all unit sliders (0-1)
 			$(".unitSlider").slider({
 				animate: "fast",
@@ -70,6 +159,75 @@
 			//this also changes the text input, which clamps values in the sliders
 			$(".slider input").change(function() {
 				$(this).parent().slider("value", $(this).val().replace(/[^0-9.]+/,""));
+			});
+			//set up all spinners that can't go negative
+			$(".positiveSpinner").spinner({
+				min: 0,
+				numberFormat: "n",
+				step: 0.01
+			});
+			//set up all spinners that can't go negative
+			$(".frequencySpinner").spinner({
+				min: 0,
+				numberFormat: "n",
+				step: 0.001
+			});
+			//set up general pickers
+			$(".generalSpinner").spinner({
+				numberFormat: "n",
+				step: 0.1
+			});
+			//enable color pickers
+			$(".colorPicker").colorpicker({
+				parts: ["header", "map", "bar", "hsv", "rgb", "hex", "preview", "footer"],
+				showOn: "both",
+				buttonColorize: true,
+				revert: true,
+				mode: "h",
+				buttonImage: "colorpicker/images/ui-colorpicker.png"
+			});
+			//enable image upload dialog
+			$("#addImage").button();
+			$("#addImage").click(function(event) {
+				$("#defaultImageSelector").find("option:contains('-Default Images-')").prop("selected",true);
+				$("#defaultImageSelector").selectmenu("refresh");
+				$("#imageUpload").wrap('<form>').parent('form').trigger('reset');
+    			$("#imageUpload").unwrap();
+				$("#imageDialog").dialog("open");
+				event.preventDefault();
+			});
+			$("#imageDialog").dialog({
+				autoOpen: false,
+				width: 400,
+				buttons: [
+					{
+						text: "Cancel",
+						click: function() {
+							$(this).dialog( "close" );
+						}
+					}
+				]
+			});
+			$("#defaultImageSelector").selectmenu();
+			//enable config upload dialog
+			$("#loadConfig").click(function(event) {
+				$("#configUpload").wrap('<form>').parent('form').trigger('reset');
+    			$("#configUpload").unwrap();
+    			$("#configPaste").val("");
+				$("#configDialog").dialog("open");
+				event.preventDefault();
+			});
+			$("#configDialog").dialog({
+				autoOpen: false,
+				width: 400,
+				buttons: [
+					{
+						text: "Cancel",
+						click: function() {
+							$(this).dialog( "close" );
+						}
+					}
+				]
 			});
 		</script>
 		<script>

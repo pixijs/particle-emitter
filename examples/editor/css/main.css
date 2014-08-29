@@ -78,6 +78,23 @@ textarea {
 	padding-top:20px;
 }
 
+#editor .ui-state-focus {
+    outline: none;
+}
+
+.ui-selectmenu-button {
+    outline: none;
+}
+
+#editor .option div {
+    display: inline-block;
+    margin: 5px;
+}
+
+#editor .category {
+    font-weight: bold;
+}
+
 .unitSlider {
 	width:150px;
 	margin-left: 45px !important;
@@ -101,9 +118,65 @@ textarea {
 	left: -45px;
 }
 
-#editor .option div {
-	display: inline-block;
-	margin: 5px;
+.positiveSpinner {
+    width: 30px;
+}
+
+.generalSpinner, .frequencySpinner {
+    width: 50px;
+}
+
+.colorPicker {
+    width: 50px;
+}
+
+.particleImage {
+    position: relative;
+
+}
+
+.particleImage button {
+    position: absolute;
+    top: 0px;
+    width: 16px !important;
+    height: 16px;
+    z-index:1;
+    display: none;
+}
+
+.particleImage button .ui-button-text {
+    display: none;
+}
+
+.particleImage button .ui-icon {
+    margin-top: -8px;
+    margin-left: -8px;
+}
+
+.particleImage .remove {
+    right: 0px;
+}
+
+.particleImage .download {
+    right: 20px;
+}
+
+.particleImage:hover button {
+    display: block;
+}
+
+#defaultImageSelector {
+    width: 200px;
+}
+
+#imageUpload {
+    margin-top: 10px;
+    height: 30px;
+}
+
+#configDialog textarea {
+    margin-top: 15px;
+    width: 365px;
 }
 
 body, html {
