@@ -14,7 +14,6 @@
 		<script src="jquery-ui-smoothness/jquery-ui.js"></script>
 
         <script src="../libs/modernizr/modernizr.js"></script>
-		<script src="../libs/jquery/dist/jquery.min.js"></script>
 		<script src="../libs/preloadjs/lib/preloadjs.min.js"></script>
 		<script src="../libs/pixi.js/bin/pixi.dev.js"></script>
 		<script src="../libs/cloudkid-namespace/namespace.js"></script>
@@ -31,26 +30,64 @@
 		<div id="content">
 			<div id="framerate" style="z-index:1; position:absolute;"></div>
 			<canvas id="stage" style="z-index:0;" width="800" height="500"></canvas>
-			<script>
-				var app = new cloudkid.Editor({
-					framerate: "framerate",
-					fps: 60,
-					raf: true,
-					parseQueryString: true,
-					debug: true,
-
-					canvasId: "stage",
-					display: cloudkid.PixiDisplay,
-					displayOptions: {
-						clearView: true,
-						transparent: false,
-						backgroundColor: 0x999999
-					}
-				});
-			</script>
 		</div>
 		<div id="editor">
+			<button id="refresh" title="Reloads the displayed particles from the settings below">Refresh Display</button>
+			<div id="alpha" class="option" title="Transparency of the particles from 0 (transparent) to 1 (opaque)">
+				<div class="category">Alpha</div>
+				<div class="label">Start</div>
+				<div id="alphaStart" class="unitSlider slider">
+					<input type="text" class="ui-autocomplete-input"></input>
+					<label class="sliderStart">0</label>
+					<label class="sliderEnd">1</label>
+				</div>
+				<div class="label">End</div>
+				<div id="alphaEnd" class="unitSlider slider">
+					<input type="text" class="ui-autocomplete-input"></input>
+					<label class="sliderStart">0</label>
+					<label class="sliderEnd">1</label>
+				</div>
+			</div>
 		</div>
+		<script>
+			//initialize jquery UI
+			$(document).tooltip();//enable tooltips for any element with a title attribute
+			$("button").button();//enable all button elements
+			//enable all unit sliders (0-1)
+			$(".unitSlider").slider({
+				animate: "fast",
+				min: 0,
+				max: 1,
+				step: 0.01
+			});
+			//set up all sliders to change their text input when they slide or
+			//or are changed externally
+			var sliders = $(".slider");
+			sliders.on("slide slidechange", function(event, ui) {
+				$(this).children("input").val(ui.value);
+			});
+			//set up all sliders to get changed by their text inputs
+			//this also changes the text input, which clamps values in the sliders
+			$(".slider input").change(function() {
+				$(this).parent().slider("value", $(this).val().replace(/[^0-9.]+/,""));
+			});
+		</script>
+		<script>
+			//initialize editor app
+			var app = new cloudkid.Editor({
+				framerate: "framerate",
+				fps: 60,
+				raf: true,
+
+				canvasId: "stage",
+				display: cloudkid.PixiDisplay,
+				displayOptions: {
+					clearView: true,
+					transparent: false,
+					backgroundColor: 0x999999
+				}
+			});
+		</script>
 		<footer>CloudKid 2012</footer>
     </body>
 </html>

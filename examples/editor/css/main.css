@@ -69,6 +69,43 @@ textarea {
 	display:block;
 }
 
+#editor {
+	width:800px;
+	min-height:200px;
+	margin-left:auto;
+	margin-right:auto;
+	display:block;
+	padding-top:20px;
+}
+
+.unitSlider {
+	width:150px;
+	margin-left: 45px !important;
+}
+
+.slider label {
+	margin-top: 10px;
+}
+
+.slider .sliderStart {
+	float: left;
+}
+
+.slider .sliderEnd {
+	float: right;
+}
+
+.slider input {
+	width: 30px;
+	position: absolute;
+	left: -45px;
+}
+
+#editor .option div {
+	display: inline-block;
+	margin: 5px;
+}
+
 body, html {
 	margin: 0;
 	padding: 0;
