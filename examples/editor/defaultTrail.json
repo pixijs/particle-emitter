@@ -3,9 +3,13 @@
 	"color":{"start":"#E3F9FF", "end":"#0EC8F8"},//start and end color (no alpha)
 	"scale":{"start":1, "end":0.3},//start and end scale
 	"speed":{"start":0, "end":0},//speed in units/sec to move at, at start and end of life
+	"startRotation":{"min":0, "max":0},//minimum and maximum rotation (affects movement) of particle when emitting
 	"lifetime":{"min":0.2, "max":0.2},//lifetime of particles in seconds
 	//"ease":[{"s":0,"cp":0.482,"e":0.732},{"s":0.732,"cp":0.982,"e":1}],//custom ease, as created by http://www.greensock.com/customease/
 	"frequency":0.008,//how often to emit particles, in seconds (emitter can handle doing more than one per frame)
+	"maxParticles":1000,//probably no more than 25 for the particle life and frequency for these settings
+	"emitterLifetime":-1,//-1 is emit forever
+	"spawnType":"point",//drop particles in place
 	"angle":{"min":0, "max":0},//minimum and maximum rotation (affects movement) when emitting
 	"pos":{"x":0, "y":0},//position relative to emitter's owner's origin
 	"addAtBack":false//add at back of display list

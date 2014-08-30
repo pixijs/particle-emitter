@@ -179,6 +179,10 @@ textarea {
     width: 365px;
 }
 
+#emitSpawnType {
+	width: 150px;
+}
+
 body, html {
 	margin: 0;
 	padding: 0;

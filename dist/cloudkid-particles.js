@@ -498,20 +498,6 @@
 		*/
 		this.endColor = null;
 		/**
-		*	The minimum spawn angle of all particles in degrees.
-		*	This controls both movement direction and initial rotation
-		*	@property {Number} minAngle
-		*	@default 0
-		*/
-		this.minAngle = 0;
-		/**
-		*	The maximum spawn angle of all particles in degrees.
-		*	This controls both movement direction and initial rotation
-		*	@property {Number} maxAngle
-		*	@default 0
-		*/
-		this.maxAngle = 0;
-		/**
 		*	The minimum lifetime for a particle, in seconds.
 		*	@property {Number} minLifetime
 		*/
@@ -521,6 +507,18 @@
 		*	@property {Number} maxLifetime
 		*/
 		this.maxLifetime = 0;
+		/**
+		*	The minimum start rotation for a particle, in degrees. This value
+		*	is ignored if the spawn type is "burst" or "arc".
+		*	@property {Number} minStartRotation
+		*/
+		this.minStartRotation = 0;
+		/**
+		*	The maximum start rotation for a particle, in degrees. This value
+		*	is ignored if the spawn type is "burst" or "arc".
+		*	@property {Number} maxStartRotation
+		*/
+		this.maxStartRotation = 0;
 		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
@@ -534,6 +532,20 @@
 		*/
 		this.frequency = 0;
 		/**
+		*	Maximum number of particles to keep alive at a time. If this limit 
+		*	is reached, no more particles will spawn until some have died.
+		*	@property {int} maxParticles
+		*	@default 1000
+		*/
+		this.maxParticles = 1000;
+		/**
+		*	The amount of time in seconds to emit for before setting emit to false.
+		*	A value of -1 is an unlimited amount of time.
+		*	@property {Number} emitterLifetime
+		*	@default -1
+		*/
+		this.emitterLifetime = -1;
+		/**
 		*	Position at which to spawn particles, relative to the emitter's owner's origin.
 		*	For example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}
 		*	to spawn at the rear of the rocket.
@@ -542,6 +554,32 @@
 		*	@readOnly
 		*/
 		this.spawnPos = null;
+		/**
+		*	How the particles will be spawned. Valid types are "point", "arc", "rectangle", "circle", "burst".
+		*	@property {String} spawnType
+		*	@readOnly
+		*/
+		this.spawnType = null;
+		/**
+		*	A reference to the emitter function specific to the spawn type.
+		*	@property {Function} _spawnFunc
+		*	@private
+		*/
+		this._spawnFunc = null;
+		/**
+		*	The minimum spawn angle of arc spawned particles in degrees.
+		*	This controls both movement direction and initial rotation
+		*	@property {Number} minAngle
+		*	@default 0
+		*/
+		this.minAngle = 0;
+		/**
+		*	The maximum spawn angle of arc spawned particles in degrees.
+		*	This controls both movement direction and initial rotation
+		*	@property {Number} maxAngle
+		*	@default 0
+		*/
+		this.maxAngle = 0;
 		/**
 		*	Rotation of the emitter or emitter's owner in degreess. This is added to the calculated spawn angle.
 		*	To change this, use rotate().
@@ -590,16 +628,23 @@
 		/**
 		*	If particles should be emitted during update() calls. Setting this to false
 		*	stops new particles from being created, but allows existing ones to die out.
-		*	@property {Boolean} emit
+		*	@property {Boolean} _emit
+		*	@private
 		*/
-		this.emit = false;
+		this._emit = false;
 		/**
-		*	The timer for when to spawn particles, where numbers less 
+		*	The timer for when to spawn particles in seconds, where numbers less 
 		*	than 0 mean that particles should be spawned.
 		*	@property {Number} _spawnTimer
 		*	@private
 		*/
 		this._spawnTimer = 0;
+		/**
+		*	The life of the emitter in seconds.
+		*	@property {Number} _emitterLife
+		*	@private
+		*/
+		this._emitterLife = -1;
 		/**
 		*	The particles that are active and on the display list.
 		*	@property {Array} _activeParticles
@@ -683,6 +728,14 @@
 			else
 				this.endColor = null;
 		}
+		//set up the start rotation
+		if (config.startRotation)
+		{
+			this.minStartRotation = config.startRotation.min;
+			this.maxStartRotation = config.startRotation.max;
+		}
+		else
+			this.minStartRotation = this.maxStartRotation = 0;
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
@@ -694,16 +747,41 @@
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
-		//set up the angle for spawning particles in
-		if(config.angle)
+		//reset spawn type specific settings
+		this.minAngle = this.maxAngle = 0;
+		//determine the spawn function to use
+		if(!config.spawnType || !config.spawnType.type)
 		{
-			this.minAngle = config.angle.min;
-			this.maxAngle = config.angle.max;
+			this.spawnType = "point";
+			this._spawnFunc = this.spawnPoint;
 		}
 		else
-			this.minAngle = this.maxAngle = 0;
+		{
+			switch(config.spawnType.type)
+			{
+				case "arc":
+					this.spawnType = "arc";
+					this._spawnFunc = this.spawnArc;
+					//set up the angle for spawning particles in
+					this.minAngle = config.angle.min;
+					this.maxAngle = config.angle.max;
+					break;
+				case "point":
+					this.spawnType = "point";
+					this._spawnFunc = this.spawnPoint;
+					break;
+				default:
+					this.spawnType = "point";
+					this._spawnFunc = this.spawnPoint;
+					break;
+			}
+		}
 		//set the spawning frequency
 		this.frequency = config.frequency;
+		//set the emitter lifetime
+		this.emitterLifetime = config.emitterLifetime || -1;
+		//set the max particles
+		this.maxParticles = config.maxParticles > 0 ? config.maxParticles : 1000;
 		//determine if we should add the particle at the back of the list or not
 		this.addAtBack = !!config.addAtBack;
 		//reset the emitter position and rotation variables
@@ -791,6 +869,21 @@
 	{
 		this._prevPosIsValid = false;
 	};
+	
+	/**
+	*	If particles should be emitted during update() calls. Setting this to false
+	*	stops new particles from being created, but allows existing ones to die out.
+	*	@property {Boolean} emit
+	*/
+	Object.defineProperty(p, "emit",
+	{
+		get: function() { return this._emit; },
+		set: function(value)
+		{
+			this._emit = !!value;
+			this._emitterLife = this.emitterLifetime;
+		}
+	});
 
 	/**
 	*	Updates all particles spawned by this emitter and emits new ones.
@@ -820,6 +913,24 @@
 			//while _spawnTimer < 0, we have particles to spawn
 			while(this._spawnTimer <= 0)
 			{
+				//determine if the emitter should stop spawning
+				if(this._emitterLife > 0)
+				{
+					this._emitterLife -= this.frequency;
+					if(this._emitterLife <= 0)
+					{
+						this._spawnTimer = 0;
+						this._emitterLife = 0;
+						this.emit = false;
+						break;
+					}
+				}
+				//determine if we have hit the particle limit
+				if(this._activeParticles.length >= this.maxParticles)
+				{
+					this._spawnTimer += this.frequency;
+					continue;
+				}
 				//determine the particle lifetime
 				var lifetime;
 				if (this.minLifetime == this.maxLifetime)
@@ -846,23 +957,21 @@
 					p.startColor = this.startColor;
 					p.endColor = this.endColor;
 					p.maxLife = lifetime;
-					//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
-					if (this.minAngle == this.maxAngle)
-						p.rotation = this.minAngle + this.rotation;
-					else
-						p.rotation = Math.random() * (this.maxAngle - this.minAngle) + this.minAngle + this.rotation;
 					//If the position has changed and this isn't the first spawn, interpolate the spawn position
+					var emitPosX, emitPosY;
 					if (this._prevPosIsValid && this._posChanged)
 					{
 						var lerp = 1 + this._spawnTimer / delta;//1 - _spawnTimer / delta, but _spawnTimer is negative
-						p.position.x = (curX - prevX) * lerp + prevX;
-						p.position.y = (curY - prevY) * lerp + prevY;
+						emitPosX = (curX - prevX) * lerp + prevX;
+						emitPosY = (curY - prevY) * lerp + prevY;
 					}
 					else//otherwise just set to the spawn position
 					{
-						p.position.x = curX;
-						p.position.y = curY;
+						emitPosX = curX;
+						emitPosY = curY;
 					}
+					//call the proper function to handle rotation and position of particle
+					this._spawnFunc(p, emitPosX, emitPosY);
 					//initialize particle
 					p.init();
 					//update the particle by the time passed, so the particles are spread out properly
@@ -887,6 +996,30 @@
 			this._prevPosIsValid = true;
 			this._posChanged = false;
 		}
+	};
+	
+	p.spawnPoint = function(p, emitPosX, emitPosY)
+	{
+		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		if (this.minStartRotation == this.maxStartRotation)
+			p.rotation = this.minStartRotation + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
+		//drop the particle at the emitter's position
+		p.position.x = emitPosX;
+		p.position.y = emitPosY;
+	};
+	
+	p.spawnArc = function(p, emitPosX, emitPosY)
+	{
+		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
+		if (this.minAngle == this.maxAngle)
+			p.rotation = this.minAngle + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxAngle - this.minAngle) + this.minAngle + this.rotation;
+		//drop the particle at the emitter's position
+		p.position.x = emitPosX;
+		p.position.y = emitPosY;
 	};
 
 	/**

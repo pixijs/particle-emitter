@@ -80,6 +80,13 @@
 				<div class="label">End</div>
 				<input id="speedEnd" type="text" class="generalSpinner spinner"></input>
 			</div>
+			<div id="startRotation" class="option">
+				<div class="category" title="Angle at which particles are are pointed when emitted in degrees - 0 is to the right. This is ignored in 'arc' and 'burst' emission types">Start Rotation</div>
+				<div class="label">Min</div>
+				<input id="startRotationMin" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Max</div>
+				<input id="startRotationMax" type="text" class="generalSpinner spinner"></input>
+			</div>
 			<div id="particleLife" class="option">
 				<div class="category" title="Lifetime of each particle in seconds">Lifetime</div>
 				<div class="label">Min</div>
@@ -114,8 +121,23 @@
 				<div class="category" title="Seconds between each particle being spawned">Spawn Frequency</div>
 				<input id="emitFrequency" type="text" class="frequencySpinner spinner"></input>
 			</div>
-			<div id="angle" class="option">
-				<div class="category" title="Angle at which particles are emitted - 0 is to the right">Emission Angle</div>
+			<div id="emitLife" class="option">
+				<div class="category" title="Lifetime of the emitter in seconds before it disables itself">Emitter Lifetime</div>
+				<input id="emitLifetime" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="maxParticles" class="option">
+				<div class="category" title="Maximum number of particles that can exist at once">Max Particles</div>
+				<input id="emitMaxParticles" type="text" class="posIntSpinner spinner"></input>
+			</div>
+			<div id="spawnType" class="option">
+				<div class="category" title="Settings that control different types of particle spawning">Spawn Type</div>
+				<select id="emitSpawnType">
+					<option selected="selected">point</option>
+					<option>arc</option>
+				</select>
+			</div>
+			<div id="angle" class="option settings-arc">
+				<div class="category" title="Angle at which particles are emitted in degrees - 0 is to the right">Emission Angle</div>
 				<div class="label">Min</div>
 				<input id="emitAngleMin" type="text" class="generalSpinner spinner"></input>
 				<div class="label">Max</div>
@@ -172,10 +194,15 @@
 				numberFormat: "n",
 				step: 0.001
 			});
-			//set up general pickers
+			//set up general spinners
 			$(".generalSpinner").spinner({
 				numberFormat: "n",
 				step: 0.1
+			});
+			//set up integer spinners
+			$(".posIntSpinner").spinner({
+				min: 1,
+				step: 1
 			});
 			//enable color pickers
 			$(".colorPicker").colorpicker({
@@ -228,6 +255,21 @@
 						}
 					}
 				]
+			});
+			//enable spawn type stuff
+			$("#emitSpawnType").selectmenu({
+				select: function(event, ui)
+				{
+					var spawnTypes = cloudkid.Application.instance.spawnTypes;
+					var value = $("#emitSpawnType option:selected").text();
+					for(var i = 0; i < spawnTypes.length; ++i)
+					{
+						if(spawnTypes[i] == value)
+							$(".settings-" + spawnTypes[i]).show();
+						else
+							$(".settings-" + spawnTypes[i]).hide();
+					}
+				}
 			});
 		</script>
 		<script>

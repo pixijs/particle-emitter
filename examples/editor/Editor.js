@@ -12,9 +12,13 @@
 		Application.call(this, options);
 	};
 	
+	// Extend the createjs container
+	var p = Editor.prototype = Object.create(Application.prototype);
+	
 	var stage;
 
 	var emitter;
+	var emitterEnableTimer = 0;
 
 	var particleDefaults;
 	var particleDefaultImages;
@@ -22,11 +26,10 @@
 	var defaultTexture = "particle.png";
 	var defaultNames = ["trail"];
 	var defaultImages = ["particle.png"];
+	
+	p.spawnTypes = ["point", "arc"];
 
 	var jqImageDiv = null;
-	
-	// Extend the createjs container
-	var p = Editor.prototype = Object.create(Application.prototype);
 	
 	p.init = function()
 	{
@@ -77,7 +80,6 @@
 
 		emitter = new cloudkid.Emitter(stage);
 		this.loadDefault("trail");
-		emitter.updateOwnerPos(400, 250);
 	};
 
 	p.loadDefault = function(name)
@@ -95,6 +97,7 @@
 
 	p.updateUI = function(config)
 	{
+		//particle settings
 		$("#alphaStart").slider("value", config.alpha ? config.alpha.start : 1);
 		$("#alphaEnd").slider("value", config.alpha ? config.alpha.end : 1);
 		$("#scaleStart").spinner("value", config.scale ? config.scale.start : 1);
@@ -103,15 +106,36 @@
 		$("#colorEnd").colorpicker("setColor", config.color ? config.color.end : "FFFFFF");
 		$("#speedStart").spinner("value", config.speed ? config.speed.start : 0);
 		$("#speedEnd").spinner("value", config.speed ? config.speed.end : 0);
+		$("#startRotationMin").spinner("value", config.startRotation ? config.startRotation.min : 0);
+		$("#startRotationMax").spinner("value", config.startRotation ? config.startRotation.max : 0);
 		$("#lifeMin").spinner("value", config.lifetime ? config.lifetime.min : 1);
 		$("#lifeMax").spinner("value", config.lifetime ? config.lifetime.max : 1);
 		$("#customEase").val(config.ease ? JSON.stringify(config.ease) : "");
+		//emitter settings
 		$("#emitFrequency").spinner("value", config.frequency || 0.5);
-		$("#emitAngleMin").spinner("value", config.angle ? config.angle.min : 0);
-		$("#emitAngleMax").spinner("value", config.angle ? config.angle.max : 0);
+		$("#emitLifetime").spinner("value", config.emitterLifetime || -1);
+		$("#emitMaxParticles").spinner("value", config.maxParticles || 1000);
 		$("#emitSpawnPosX").spinner("value", config.pos ? config.pos.x : 0);
 		$("#emitSpawnPosY").spinner("value", config.pos ? config.pos.y : 0);
 		$("#emitAddAtBack").prop("checked", !!config.addAtBack);
+		//spawn type
+		var spawnType = config.spawnType, spawnTypes = this.spawnTypes;
+		if(spawnTypes.indexOf(spawnType) == -1)
+			spawnType = spawnTypes[0];
+		//update dropdown
+		$("#emitSpawnType").find("option:contains(" + spawnType + ")").prop("selected",true);
+		$("#emitSpawnType").selectmenu("refresh");
+		//hide non-type options
+		for(var i = 0; i < spawnTypes.length; ++i)
+		{
+			if(spawnTypes[i] == spawnType)
+				$(".settings-" + spawnTypes[i]).show();
+			else
+				$(".settings-" + spawnTypes[i]).hide();
+		}
+		//set or reset these options
+		$("#emitAngleMin").spinner("value", config.angle ? config.angle.min : 0);
+		$("#emitAngleMax").spinner("value", config.angle ? config.angle.max : 0);
 	};
 
 	p.loadConfig = function(type, event, ui)
@@ -214,11 +238,13 @@
 	p.generateConfig = function()
 	{
 		var output = {};
-
+		
+		//particle settings
 		output.alpha = {start: $("#alphaStart").slider("value"), end: $("#alphaEnd").slider("value")};
 		output.scale = {start: $("#scaleStart").spinner("value"), end: $("#scaleEnd").spinner("value")};
 		output.color = {start: $("#colorStart").val(), end: $("#colorEnd").val()};
 		output.speed = {start: $("#speedStart").spinner("value"), end: $("#speedEnd").spinner("value")};
+		output.startRotation = {min: $("#startRotationMin").spinner("value"), max: $("#startRotationMax").spinner("value")};
 		output.lifetime = {min: $("#lifeMin").spinner("value"), max: $("#lifeMax").spinner("value")};
 		var val = $("#customEase").val();
 		if(val)
@@ -232,10 +258,16 @@
 			{
 			}
 		}
+		//emitter settings
 		output.frequency = $("#emitFrequency").spinner("value");
-		output.angle = {min: $("#emitAngleMin").spinner("value"), max: $("#emitAngleMax").spinner("value")};
+		output.emitterLifetime = $("#emitLifetime").spinner("value");
+		output.maxParticles = $("#emitMaxParticles").spinner("value");
 		output.pos = {x: $("#emitSpawnPosX").spinner("value"), y: $("#emitSpawnPosY").spinner("value")};
 		output.addAtBack = $("#emitAddAtBack").prop("checked");
+		//spawn type stuff
+		var spawnType = output.spawnType = $("#emitSpawnType option:selected").text();
+		if(spawnType == "arc")
+			output.angle = {min: $("#emitAngleMin").spinner("value"), max: $("#emitAngleMax").spinner("value")};
 
 		return output;
 	};
@@ -273,11 +305,23 @@
 	{
 		emitter.init(images, config);
 		emitter.updateOwnerPos(400, 250);
+		emitterEnableTimer = 0;
 	};
 
 	p.update = function(elapsed)
 	{
 		emitter.update(elapsed * 0.001);
+		
+		if(!emitter.emit && emitterEnableTimer <= 0)
+		{
+			emitterEnableTimer = 1000 + emitter.maxLifetime * 1000;
+		}
+		else if(emitterEnableTimer > 0)
+		{
+			emitterEnableTimer -= elapsed;
+			if(emitterEnableTimer <= 0)
+				emitter.emit = true;
+		}
 	};
 
 	p.onMouseIn = function()
