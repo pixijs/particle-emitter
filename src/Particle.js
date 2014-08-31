@@ -175,6 +175,10 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
+		//convert rotation to Radians from Degrees
+		this.rotation *= ParticleUtils.DEG_TO_RADS;
+		//convert rotation speed to Radians from Degrees
+		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 		//set alpha to inital alpha
 		this.alpha = this.startAlpha;
 		//set scale to initial scale
@@ -233,6 +237,7 @@
 			var scale = (this.endScale - this.startScale) * lerp + this.startScale;
 			this.scale.x = this.scale.y = scale;
 		}
+		//handle movement
 		if(this._doSpeed || this.startSpeed !== 0)
 		{
 			//interpolate speed
@@ -253,6 +258,11 @@
 			var g = (this._eG - this._sG) * lerp + this._sG;
 			var b = (this._eB - this._sB) * lerp + this._sB;
 			this.tint = ParticleUtils.combineRGBComponents(r, g, b);
+		}
+		//update rotation
+		if(this.rotationSpeed !== 0)
+		{
+			this.rotation += this.rotationSpeed * delta;
 		}
 	};
 

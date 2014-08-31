@@ -12,7 +12,7 @@
 	*/
 	var ParticleUtils = {};
 
-	var DEG_TO_RADS = Math.PI / 180;
+	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 
 	/**
 	*	Rotates a point by a given angle.

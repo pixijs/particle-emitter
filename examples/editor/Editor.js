@@ -112,6 +112,8 @@
 		$("#speedEnd").spinner("value", config.speed ? config.speed.end : 0);
 		$("#startRotationMin").spinner("value", config.startRotation ? config.startRotation.min : 0);
 		$("#startRotationMax").spinner("value", config.startRotation ? config.startRotation.max : 0);
+		$("#rotationSpeedMin").spinner("value", config.rotationSpeed ? config.rotationSpeed.min : 0);
+		$("#rotationSpeedMax").spinner("value", config.rotationSpeed ? config.rotationSpeed.max : 0);
 		$("#lifeMin").spinner("value", config.lifetime ? config.lifetime.min : 1);
 		$("#lifeMax").spinner("value", config.lifetime ? config.lifetime.max : 1);
 		$("#customEase").val(config.ease ? JSON.stringify(config.ease) : "");
@@ -264,6 +266,7 @@
 		output.color = {start: $("#colorStart").val(), end: $("#colorEnd").val()};
 		output.speed = {start: $("#speedStart").spinner("value"), end: $("#speedEnd").spinner("value")};
 		output.startRotation = {min: $("#startRotationMin").spinner("value"), max: $("#startRotationMax").spinner("value")};
+		output.rotationSpeed = {min: $("#rotationSpeedMin").spinner("value"), max: $("#rotationSpeedMax").spinner("value")};
 		output.lifetime = {min: $("#lifeMin").spinner("value"), max: $("#lifeMax").spinner("value")};
 		var val = $("#customEase").val();
 		if(val)

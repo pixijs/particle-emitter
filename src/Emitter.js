@@ -93,6 +93,18 @@
 		*/
 		this.maxStartRotation = 0;
 		/**
+		*	The minimum rotation speed for a particle, in degrees per second.
+		*	This only visually spins the particle, it does not change direction of movement.
+		*	@property {Number} minRotationSpeed
+		*/
+		this.minRotationSpeed = 0;
+		/**
+		*	The maximum rotation speed for a particle, in degrees per second.
+		*	This only visually spins the particle, it does not change direction of movement.
+		*	@property {Number} maxRotationSpeed
+		*/
+		this.maxRotationSpeed = 0;
+		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
 		*	@property {Function} customeEase
@@ -321,6 +333,14 @@
 		}
 		else
 			this.minStartRotation = this.maxStartRotation = 0;
+		//set up the rotation speed
+		if (config.rotationSpeed)
+		{
+			this.minRotationSpeed = config.rotationSpeed.min;
+			this.maxRotationSpeed = config.rotationSpeed.max;
+		}
+		else
+			this.minRotationSpeed = this.maxRotationSpeed = 0;
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
@@ -545,6 +565,10 @@
 					p.endScale = this.endScale;
 					p.startColor = this.startColor;
 					p.endColor = this.endColor;
+					if(this.minRotationSpeed == this.maxRotationSpeed)
+						p.rotationSpeed = this.minRotationSpeed;
+					else
+						p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
 					p.maxLife = lifetime;
 					//If the position has changed and this isn't the first spawn, interpolate the spawn position
 					var emitPosX, emitPosY;

@@ -13,7 +13,7 @@
 	*/
 	var ParticleUtils = {};
 
-	var DEG_TO_RADS = Math.PI / 180;
+	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 
 	/**
 	*	Rotates a point by a given angle.
@@ -332,7 +332,10 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
-		//console.log("initialized particle with speed " + this.startSpeed + ", velocity: " + this.velocity);
+		//convert rotation to Radians from Degrees
+		this.rotation *= ParticleUtils.DEG_TO_RADS;
+		//convert rotation speed to Radians from Degrees
+		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 		//set alpha to inital alpha
 		this.alpha = this.startAlpha;
 		//set scale to initial scale
@@ -391,6 +394,7 @@
 			var scale = (this.endScale - this.startScale) * lerp + this.startScale;
 			this.scale.x = this.scale.y = scale;
 		}
+		//handle movement
 		if(this._doSpeed || this.startSpeed !== 0)
 		{
 			//interpolate speed
@@ -403,7 +407,6 @@
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
 			this.position.y += this.velocity.y * delta;
-			//console.log("particle with velocity " + this.velocity + " now has position " + this.position);
 		}
 		//interpolate color
 		if (this._doColor)
@@ -412,6 +415,11 @@
 			var g = (this._eG - this._sG) * lerp + this._sG;
 			var b = (this._eB - this._sB) * lerp + this._sB;
 			this.tint = ParticleUtils.combineRGBComponents(r, g, b);
+		}
+		//update rotation
+		if(this.rotationSpeed !== 0)
+		{
+			this.rotation += this.rotationSpeed * delta;
 		}
 	};
 
@@ -523,6 +531,18 @@
 		*	@property {Number} maxStartRotation
 		*/
 		this.maxStartRotation = 0;
+		/**
+		*	The minimum rotation speed for a particle, in degrees per second.
+		*	This only visually spins the particle, it does not change direction of movement.
+		*	@property {Number} minRotationSpeed
+		*/
+		this.minRotationSpeed = 0;
+		/**
+		*	The maximum rotation speed for a particle, in degrees per second.
+		*	This only visually spins the particle, it does not change direction of movement.
+		*	@property {Number} maxRotationSpeed
+		*/
+		this.maxRotationSpeed = 0;
 		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
@@ -752,6 +772,14 @@
 		}
 		else
 			this.minStartRotation = this.maxStartRotation = 0;
+		//set up the rotation speed
+		if (config.rotationSpeed)
+		{
+			this.minRotationSpeed = config.rotationSpeed.min;
+			this.maxRotationSpeed = config.rotationSpeed.max;
+		}
+		else
+			this.minRotationSpeed = this.maxRotationSpeed = 0;
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
@@ -976,6 +1004,10 @@
 					p.endScale = this.endScale;
 					p.startColor = this.startColor;
 					p.endColor = this.endColor;
+					if(this.minRotationSpeed == this.maxRotationSpeed)
+						p.rotationSpeed = this.minRotationSpeed;
+					else
+						p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
 					p.maxLife = lifetime;
 					//If the position has changed and this isn't the first spawn, interpolate the spawn position
 					var emitPosX, emitPosY;
