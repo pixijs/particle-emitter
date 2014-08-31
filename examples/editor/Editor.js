@@ -24,10 +24,10 @@
 	var particleDefaultImages;
 
 	var defaultTexture = "particle.png";
-	var defaultNames = ["trail"];
+	var defaultNames = ["trail", "flame"];
 	var defaultImages = ["particle.png"];
 	
-	p.spawnTypes = ["point", "arc"];
+	p.spawnTypes = ["point", "arc", "circle", "rect"];
 
 	var jqImageDiv = null;
 	
@@ -48,6 +48,7 @@
 
 		var tasks = [
 			new cloudkid.LoadTask("trail", "defaultTrail.json", this.onConfigLoaded),
+			new cloudkid.LoadTask("flame", "defaultFlame.json", this.onConfigLoaded),
 			new cloudkid.PixiTask("particle", ["particle.png"], this.onTexturesLoaded)
 		];
 		
@@ -63,6 +64,8 @@
 	{
 		particleDefaultImageUrls["trail"] = ["particle.png"];
 		particleDefaultImages["trail"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["flame"] = ["particle.png"];
+		particleDefaultImages["flame"] = [PIXI.Texture.fromImage("particle")];
 	};
 	
 	p._onCompletedLoad = function()
@@ -123,7 +126,8 @@
 		if(spawnTypes.indexOf(spawnType) == -1)
 			spawnType = spawnTypes[0];
 		//update dropdown
-		$("#emitSpawnType").find("option:contains(" + spawnType + ")").prop("selected",true);
+		//$("#emitSpawnType").find("option:contains(" + spawnType + ")").prop("selected",true);
+		$("#emitSpawnType").val(spawnType);
 		$("#emitSpawnType").selectmenu("refresh");
 		//hide non-type options
 		for(var i = 0; i < spawnTypes.length; ++i)
@@ -136,6 +140,13 @@
 		//set or reset these options
 		$("#emitAngleMin").spinner("value", config.angle ? config.angle.min : 0);
 		$("#emitAngleMax").spinner("value", config.angle ? config.angle.max : 0);
+		$("#emitRectX").spinner("value", config.spawnRect ? config.spawnRect.x : 0);
+		$("#emitRectY").spinner("value", config.spawnRect ? config.spawnRect.y : 0);
+		$("#emitRectW").spinner("value", config.spawnRect ? config.spawnRect.w : 0);
+		$("#emitRectH").spinner("value", config.spawnRect ? config.spawnRect.h : 0);
+		$("#emitCircleX").spinner("value", config.spawnCircle ? config.spawnCircle.x : 0);
+		$("#emitCircleY").spinner("value", config.spawnCircle ? config.spawnCircle.y : 0);
+		$("#emitCircleR").spinner("value", config.spawnCircle ? config.spawnCircle.R : 0);
 	};
 
 	p.loadConfig = function(type, event, ui)
@@ -265,10 +276,15 @@
 		output.pos = {x: $("#emitSpawnPosX").spinner("value"), y: $("#emitSpawnPosY").spinner("value")};
 		output.addAtBack = $("#emitAddAtBack").prop("checked");
 		//spawn type stuff
-		var spawnType = output.spawnType = $("#emitSpawnType option:selected").text();
+		var spawnType = output.spawnType = $("#emitSpawnType option:selected").val();
 		if(spawnType == "arc")
 			output.angle = {min: $("#emitAngleMin").spinner("value"), max: $("#emitAngleMax").spinner("value")};
-
+		else if(spawnType == "rect")
+			output.spawnRect = {x: $("#emitRectX").spinner("value"), y: $("#emitRectY").spinner("value"),
+								w: $("#emitRectW").spinner("value"), h: $("#emitRectH").spinner("value")};
+		else if(spawnType == "circle")
+			output.spawnCircle = {x: $("#emitCircleX").spinner("value"), y: $("#emitCircleY").spinner("value"),
+								r: $("#emitCircleR").spinner("value")};
 		return output;
 	};
 

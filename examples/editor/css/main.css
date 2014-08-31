@@ -76,6 +76,7 @@ textarea {
 	margin-right:auto;
 	display:block;
 	padding-top:20px;
+	padding-bottom:100px;
 }
 
 #editor .ui-state-focus {

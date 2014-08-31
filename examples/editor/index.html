@@ -81,7 +81,7 @@
 				<input id="speedEnd" type="text" class="generalSpinner spinner"></input>
 			</div>
 			<div id="startRotation" class="option">
-				<div class="category" title="Angle at which particles are are pointed when emitted in degrees - 0 is to the right. This is ignored in 'arc' and 'burst' emission types">Start Rotation</div>
+				<div class="category" title="Angle at which particles are are pointed when emitted in degrees - 0 is to the right, 90 is down. This is ignored in 'arc' and 'burst' emission types">Start Rotation</div>
 				<div class="label">Min</div>
 				<input id="startRotationMin" type="text" class="generalSpinner spinner"></input>
 				<div class="label">Max</div>
@@ -132,8 +132,10 @@
 			<div id="spawnType" class="option">
 				<div class="category" title="Settings that control different types of particle spawning">Spawn Type</div>
 				<select id="emitSpawnType">
-					<option selected="selected">point</option>
-					<option>arc</option>
+					<option value="point" selected="selected">Point</option>
+					<option value="arc">Arc</option>
+					<option value="rect">Rectangle</option>
+					<option value="circle">Circle</option>
 				</select>
 			</div>
 			<div id="angle" class="option settings-arc">
@@ -142,6 +144,26 @@
 				<input id="emitAngleMin" type="text" class="generalSpinner spinner"></input>
 				<div class="label">Max</div>
 				<input id="emitAngleMax" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="rect" class="option settings-rect">
+				<div class="category" title="Rectangle relative to the Spawn Position inside which particles are spawned">Emission Rectangle</div>
+				<div class="label">X</div>
+				<input id="emitRectX" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Y</div>
+				<input id="emitRectY" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Width</div>
+				<input id="emitRectW" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Height</div>
+				<input id="emitRectH" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="circle" class="option settings-circle">
+				<div class="category" title="Circle relative to the Spawn Position inside which particles are spawned">Emission Circle</div>
+				<div class="label">X</div>
+				<input id="emitCircleX" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Y</div>
+				<input id="emitCircleY" type="text" class="generalSpinner spinner"></input>
+				<div class="label">Radius</div>
+				<input id="emitCircleR" type="text" class="generalSpinner spinner"></input>
 			</div>
 			<div id="spawnPos" class="option">
 				<div class="category" title="Position relative to the emitter's owner at which to spawn particles">Spawn Position</div>
@@ -261,7 +283,7 @@
 				select: function(event, ui)
 				{
 					var spawnTypes = cloudkid.Application.instance.spawnTypes;
-					var value = $("#emitSpawnType option:selected").text();
+					var value = $("#emitSpawnType option:selected").val();
 					for(var i = 0; i < spawnTypes.length; ++i)
 					{
 						if(spawnTypes[i] == value)

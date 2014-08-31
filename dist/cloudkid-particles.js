@@ -21,9 +21,10 @@
 	*	@param {Number} angle The angle to rotate by in degrees
 	*	@param {PIXI.Point} p The point to rotate around 0,0.
 	*	@static
-	*/		
+	*/
 	ParticleUtils.rotatePoint = function(angle, p)
 	{
+		if(!angle) return;
 		angle *= DEG_TO_RADS;
 		var s = Math.sin(angle);
 		var c = Math.cos(angle);
@@ -331,6 +332,7 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
+		//console.log("initialized particle with speed " + this.startSpeed + ", velocity: " + this.velocity);
 		//set alpha to inital alpha
 		this.alpha = this.startAlpha;
 		//set scale to initial scale
@@ -395,11 +397,13 @@
 			if (this._doSpeed)
 			{
 				var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
-				this.velocity.normalize(speed);
+				this.velocity.normalize();
+				this.velocity.scaleBy(speed);
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
 			this.position.y += this.velocity.y * delta;
+			//console.log("particle with velocity " + this.velocity + " now has position " + this.position);
 		}
 		//interpolate color
 		if (this._doColor)
@@ -581,7 +585,17 @@
 		*/
 		this.maxAngle = 0;
 		/**
-		*	Rotation of the emitter or emitter's owner in degreess. This is added to the calculated spawn angle.
+		*	A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
+		*	@property {PIXI.Rectangle} spawnRect
+		*/
+		this.spawnRect = null;
+		/**
+		*	A circle rlative to spawnPos to spawn particles inside if the spawn type is "circle".
+		*	@property {PIXI.Circle} spawnCircle
+		*/
+		this.spawnCircle = null;
+		/**
+		*	Rotation of the emitter or emitter's owner in degrees. This is added to the calculated spawn angle.
 		*	To change this, use rotate().
 		*	@property {Number} rotation
 		*	@default 0
@@ -662,6 +676,8 @@
 	
 	// Reference to the prototype
 	var p = Emitter.prototype = {};
+	
+	var helperPoint = new PIXI.Point();
 
 	/**
 	*	Sets up the emitter based on the config settings.
@@ -750,31 +766,35 @@
 		//reset spawn type specific settings
 		this.minAngle = this.maxAngle = 0;
 		//determine the spawn function to use
-		if(!config.spawnType || !config.spawnType.type)
+		switch(config.spawnType)
 		{
-			this.spawnType = "point";
-			this._spawnFunc = this.spawnPoint;
-		}
-		else
-		{
-			switch(config.spawnType.type)
-			{
-				case "arc":
-					this.spawnType = "arc";
-					this._spawnFunc = this.spawnArc;
-					//set up the angle for spawning particles in
-					this.minAngle = config.angle.min;
-					this.maxAngle = config.angle.max;
-					break;
-				case "point":
-					this.spawnType = "point";
-					this._spawnFunc = this.spawnPoint;
-					break;
-				default:
-					this.spawnType = "point";
-					this._spawnFunc = this.spawnPoint;
-					break;
-			}
+			case "rect":
+				this.spawnType = "rect";
+				this._spawnFunc = this._spawnRect;
+				var spawnRect = config.spawnRect;
+				this.spawnRect = new PIXI.Rectangle(spawnRect.x, spawnRect.y, spawnRect.w, spawnRect.h);
+				break;
+			case "circle":
+				this.spawnType = "circle";
+				this._spawnFunc = this._spawnCircle;
+				var spawnCircle = config.spawnCircle;
+				this.spawnCircle = new PIXI.Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r);
+				break;
+			case "arc":
+				this.spawnType = "arc";
+				this._spawnFunc = this._spawnArc;
+				//set up the angle for spawning particles in
+				this.minAngle = config.angle.min;
+				this.maxAngle = config.angle.max;
+				break;
+			case "point":
+				this.spawnType = "point";
+				this._spawnFunc = this._spawnPoint;
+				break;
+			default:
+				this.spawnType = "point";
+				this._spawnFunc = this._spawnPoint;
+				break;
 		}
 		//set the spawning frequency
 		this.frequency = config.frequency;
@@ -998,7 +1018,7 @@
 		}
 	};
 	
-	p.spawnPoint = function(p, emitPosX, emitPosY)
+	p._spawnPoint = function(p, emitPosX, emitPosY)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
@@ -1010,7 +1030,7 @@
 		p.position.y = emitPosY;
 	};
 	
-	p.spawnArc = function(p, emitPosX, emitPosY)
+	p._spawnArc = function(p, emitPosX, emitPosY)
 	{
 		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
 		if (this.minAngle == this.maxAngle)
@@ -1020,6 +1040,41 @@
 		//drop the particle at the emitter's position
 		p.position.x = emitPosX;
 		p.position.y = emitPosY;
+	};
+	
+	p._spawnRect = function(p, emitPosX, emitPosY)
+	{
+		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		if (this.minStartRotation == this.maxStartRotation)
+			p.rotation = this.minStartRotation + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
+		//place the particle at a random point in the rectangle
+		helperPoint.x = Math.random() * this.spawnRect.width + this.spawnRect.x;
+		helperPoint.y = Math.random() * this.spawnRect.height + this.spawnRect.y;
+		if(this.rotation !== 0)
+			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		p.position.x = emitPosX + helperPoint.x;
+		p.position.y = emitPosY + helperPoint.y;
+	};
+	
+	p._spawnCircle = function(p, emitPosX, emitPosY)
+	{
+		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		if (this.minStartRotation == this.maxStartRotation)
+			p.rotation = this.minStartRotation + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
+		//place the particle at a random point in the circle
+		helperPoint.x = Math.random() * this.spawnCircle.radius;// + this.spawnRect.x;
+		helperPoint.y = 0;
+		ParticleUtils.rotatePoint(Math.random() * 360, helperPoint);
+		helperPoint.x += this.spawnCircle.x;
+		helperPoint.y += this.spawnCircle.y;
+		if(this.rotation !== 0)
+			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		p.position.x = emitPosX + helperPoint.x;
+		p.position.y = emitPosY + helperPoint.y;
 	};
 
 	/**

@@ -20,9 +20,10 @@
 	*	@param {Number} angle The angle to rotate by in degrees
 	*	@param {PIXI.Point} p The point to rotate around 0,0.
 	*	@static
-	*/		
+	*/
 	ParticleUtils.rotatePoint = function(angle, p)
 	{
+		if(!angle) return;
 		angle *= DEG_TO_RADS;
 		var s = Math.sin(angle);
 		var c = Math.cos(angle);
