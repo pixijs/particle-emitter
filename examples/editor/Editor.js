@@ -27,7 +27,7 @@
 	var defaultNames = ["trail", "flame", "gas", "explosion", "explosion2", "megamanDeath"];
 	var defaultImages = ["particle.png"];
 	
-	p.spawnTypes = ["point", "arc", "circle", "rect", "burst"];
+	p.spawnTypes = ["point", "circle", "rect", "burst"];
 
 	var jqImageDiv = null;
 	
@@ -152,8 +152,6 @@
 				$(".settings-" + spawnTypes[i]).hide();
 		}
 		//set or reset these options
-		$("#emitAngleMin").spinner("value", config.angle ? config.angle.min : 0);
-		$("#emitAngleMax").spinner("value", config.angle ? config.angle.max : 0);
 		$("#emitRectX").spinner("value", config.spawnRect ? config.spawnRect.x : 0);
 		$("#emitRectY").spinner("value", config.spawnRect ? config.spawnRect.y : 0);
 		$("#emitRectW").spinner("value", config.spawnRect ? config.spawnRect.w : 0);
@@ -302,9 +300,7 @@
 		output.addAtBack = $("#emitAddAtBack").prop("checked");
 		//spawn type stuff
 		var spawnType = output.spawnType = $("#emitSpawnType option:selected").val();
-		if(spawnType == "arc")
-			output.angle = {min: $("#emitAngleMin").spinner("value"), max: $("#emitAngleMax").spinner("value")};
-		else if(spawnType == "rect")
+		if(spawnType == "rect")
 			output.spawnRect = {x: $("#emitRectX").spinner("value"), y: $("#emitRectY").spinner("value"),
 								w: $("#emitRectW").spinner("value"), h: $("#emitRectH").spinner("value")};
 		else if(spawnType == "circle")

@@ -140,7 +140,7 @@
 		*/
 		this.spawnPos = null;
 		/**
-		*	How the particles will be spawned. Valid types are "point", "arc", "rectangle", "circle", "burst".
+		*	How the particles will be spawned. Valid types are "point", "rectangle", "circle", "burst".
 		*	@property {String} spawnType
 		*	@readOnly
 		*/
@@ -151,20 +151,6 @@
 		*	@private
 		*/
 		this._spawnFunc = null;
-		/**
-		*	The minimum spawn angle of arc spawned particles in degrees.
-		*	This controls both movement direction and initial rotation
-		*	@property {Number} minAngle
-		*	@default 0
-		*/
-		this.minAngle = 0;
-		/**
-		*	The maximum spawn angle of arc spawned particles in degrees.
-		*	This controls both movement direction and initial rotation
-		*	@property {Number} maxAngle
-		*	@default 0
-		*/
-		this.maxAngle = 0;
 		/**
 		*	A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
 		*	@property {PIXI.Rectangle} spawnRect
@@ -646,6 +632,15 @@
 		}
 	};
 	
+	/**
+	*	Positions a particle for a point type emitter.
+	*	@method _spawnPoint
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -658,18 +653,15 @@
 		p.position.y = emitPosY;
 	};
 	
-	p._spawnArc = function(p, emitPosX, emitPosY, i)
-	{
-		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
-		if (this.minAngle == this.maxAngle)
-			p.rotation = this.minAngle + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxAngle - this.minAngle) + this.minAngle + this.rotation;
-		//drop the particle at the emitter's position
-		p.position.x = emitPosX;
-		p.position.y = emitPosY;
-	};
-	
+	/**
+	*	Positions a particle for a rectangle type emitter.
+	*	@method _spawnRect
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -686,6 +678,15 @@
 		p.position.y = emitPosY + helperPoint.y;
 	};
 	
+	/**
+	*	Positions a particle for a circle type emitter.
+	*	@method _spawnCircle
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -705,6 +706,15 @@
 		p.position.y = emitPosY + helperPoint.y;
 	};
 	
+	/**
+	*	Positions a particle for a burst type emitter.
+	*	@method _spawnBurst
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave.
+	*/
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
