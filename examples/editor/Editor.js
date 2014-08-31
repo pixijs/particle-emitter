@@ -24,7 +24,7 @@
 	var particleDefaultImages;
 
 	var defaultTexture = "particle.png";
-	var defaultNames = ["trail", "flame"];
+	var defaultNames = ["trail", "flame", "gas"];
 	var defaultImages = ["particle.png"];
 	
 	p.spawnTypes = ["point", "arc", "circle", "rect"];
@@ -49,6 +49,7 @@
 		var tasks = [
 			new cloudkid.LoadTask("trail", "defaultTrail.json", this.onConfigLoaded),
 			new cloudkid.LoadTask("flame", "defaultFlame.json", this.onConfigLoaded),
+			new cloudkid.LoadTask("gas", "defaultGas.json", this.onConfigLoaded),
 			new cloudkid.PixiTask("particle", ["particle.png"], this.onTexturesLoaded)
 		];
 		
@@ -66,6 +67,8 @@
 		particleDefaultImages["trail"] = [PIXI.Texture.fromImage("particle")];
 		particleDefaultImageUrls["flame"] = ["particle.png"];
 		particleDefaultImages["flame"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["gas"] = ["particle.png"];
+		particleDefaultImages["gas"] = [PIXI.Texture.fromImage("particle")];
 	};
 	
 	p._onCompletedLoad = function()
