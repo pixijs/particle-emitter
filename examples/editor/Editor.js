@@ -78,6 +78,7 @@
 		$("#downloadConfig").click(this.downloadConfig.bind(this));
 		$("#defaultImageSelector").on("selectmenuselect", this.loadImage.bind(this, "select"));
 		$("#imageUpload").change(this.loadImage.bind(this, "upload"));
+		$("#defaultConfigSelector").on("selectmenuselect", this.loadConfig.bind(this, "default"));
 		$("#configUpload").change(this.loadConfig.bind(this, "upload"));
 		$("#configPaste").on('paste', this.loadConfig.bind(this, "paste"));
 
@@ -151,7 +152,15 @@
 
 	p.loadConfig = function(type, event, ui)
 	{
-		if(type == "paste")
+		if(type == "default")
+		{
+			var value = $("#defaultConfigSelector option:selected").text();
+			if(value == "-Default Emitters-")
+				return;
+			this.loadDefault(value);
+			$("#configDialog").dialog("close");
+		}
+		else if(type == "paste")
 		{
 			var elem = $("#configPaste");
 			setTimeout(function()
@@ -166,7 +175,6 @@
 				}
 				$("#configDialog").dialog("close");//close the dialog after the delay
 			}.bind(this), 10);
-
 		}
 		else if(type == "upload")
 		{

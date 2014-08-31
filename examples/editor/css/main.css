@@ -133,7 +133,6 @@ textarea {
 
 .particleImage {
     position: relative;
-
 }
 
 .particleImage button {
@@ -167,6 +166,10 @@ textarea {
 }
 
 #defaultImageSelector {
+    width: 200px;
+}
+
+#defaultConfigSelector {
     width: 200px;
 }
 

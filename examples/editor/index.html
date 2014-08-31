@@ -40,6 +40,11 @@
 				<button id="downloadConfig" title="Download a JSON file of the particle settings">Download</button>
 			</div>
 			<div id="configDialog" title="Upload a particle settings JSON:">
+				<select id="defaultConfigSelector">
+					<option selected="selected">-Default Emitters-</option>
+					<option>trail</option>
+					<option>flame</option>
+				</select>
 				<input id="configUpload" type="file" accept='text/json'></input>
 				<textarea id="configPaste" class="ui-autocomplete-input" rows="5"></textarea>
 			</div>
@@ -260,6 +265,8 @@
 			$("#defaultImageSelector").selectmenu();
 			//enable config upload dialog
 			$("#loadConfig").click(function(event) {
+				$("#defaultConfigSelector").find("option:contains('-Default Emitters-')").prop("selected",true);
+				$("#defaultConfigSelector").selectmenu("refresh");
 				$("#configUpload").wrap('<form>').parent('form').trigger('reset');
     			$("#configUpload").unwrap();
     			$("#configPaste").val("");
@@ -278,6 +285,7 @@
 					}
 				]
 			});
+			$("#defaultConfigSelector").selectmenu();
 			//enable spawn type stuff
 			$("#emitSpawnType").selectmenu({
 				select: function(event, ui)
