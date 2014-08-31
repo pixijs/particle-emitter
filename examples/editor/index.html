@@ -45,6 +45,9 @@
 					<option>trail</option>
 					<option>flame</option>
 					<option>gas</option>
+					<option>explosion</option>
+					<option>explosion2</option>
+					<option>megamanDeath</option>
 				</select>
 				<input id="configUpload" type="file" accept='text/json'></input>
 				<textarea id="configPaste" class="ui-autocomplete-input" rows="5"></textarea>
@@ -149,6 +152,7 @@
 					<option value="arc">Arc</option>
 					<option value="rect">Rectangle</option>
 					<option value="circle">Circle</option>
+					<option value="burst">Burst</option>
 				</select>
 			</div>
 			<div id="angle" class="option settings-arc">
@@ -177,6 +181,18 @@
 				<input id="emitCircleY" type="text" class="generalSpinner spinner"></input>
 				<div class="label">Radius</div>
 				<input id="emitCircleR" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="particlesPerWave" class="option settings-burst">
+				<div class="category" title="Number of particles to spawn in each burst wave">Particles per Wave</div>
+				<input id="emitParticlesPerWave" type="text" class="posIntSpinner spinner"></input>
+			</div>
+			<div id="particleSpacing" class="option settings-burst">
+				<div class="category" title="Spacing in degrees between particles within a wave. 0 gives a random angle for each particle">Particle Spacing</div>
+				<input id="emitParticleSpacing" type="text" class="generalSpinner spinner"></input>
+			</div>
+			<div id="angleStart" class="option settings-burst">
+				<div class="category" title="Angle to start spawning particles at in each wave">Start Angle</div>
+				<input id="emitAngleStart" type="text" class="generalSpinner spinner"></input>
 			</div>
 			<div id="spawnPos" class="option">
 				<div class="category" title="Position relative to the emitter's owner at which to spawn particles">Spawn Position</div>
@@ -326,6 +342,6 @@
 				}
 			});
 		</script>
-		<footer>CloudKid 2012</footer>
+		<footer>CloudKid 2014, smoke particle image from http://stemkoski.github.io/Three.js/images/smokeparticle.png</footer>
     </body>
 </html>

@@ -24,10 +24,10 @@
 	var particleDefaultImages;
 
 	var defaultTexture = "particle.png";
-	var defaultNames = ["trail", "flame", "gas"];
+	var defaultNames = ["trail", "flame", "gas", "explosion", "explosion2", "megamanDeath"];
 	var defaultImages = ["particle.png"];
 	
-	p.spawnTypes = ["point", "arc", "circle", "rect"];
+	p.spawnTypes = ["point", "arc", "circle", "rect", "burst"];
 
 	var jqImageDiv = null;
 	
@@ -50,7 +50,10 @@
 			new cloudkid.LoadTask("trail", "defaultTrail.json", this.onConfigLoaded),
 			new cloudkid.LoadTask("flame", "defaultFlame.json", this.onConfigLoaded),
 			new cloudkid.LoadTask("gas", "defaultGas.json", this.onConfigLoaded),
-			new cloudkid.PixiTask("particle", ["particle.png"], this.onTexturesLoaded)
+			new cloudkid.LoadTask("explosion", "explosion.json", this.onConfigLoaded),
+			new cloudkid.LoadTask("explosion2", "explosion2.json", this.onConfigLoaded),
+			new cloudkid.LoadTask("megamanDeath", "megamanDeath.json", this.onConfigLoaded),
+			new cloudkid.PixiTask("particle", ["particle.png", "smokeparticle.png"], this.onTexturesLoaded)
 		];
 		
 		cloudkid.TaskManager.process(tasks, this._onCompletedLoad.bind(this));
@@ -67,8 +70,14 @@
 		particleDefaultImages["trail"] = [PIXI.Texture.fromImage("particle")];
 		particleDefaultImageUrls["flame"] = ["particle.png"];
 		particleDefaultImages["flame"] = [PIXI.Texture.fromImage("particle")];
-		particleDefaultImageUrls["gas"] = ["particle.png"];
-		particleDefaultImages["gas"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["gas"] = ["smokeparticle.png"];
+		particleDefaultImages["gas"] = [PIXI.Texture.fromImage("smokeparticle")];
+		particleDefaultImageUrls["explosion"] = ["particle.png"];
+		particleDefaultImages["explosion"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["explosion2"] = ["particle.png"];
+		particleDefaultImages["explosion2"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["megamanDeath"] = ["particle.png"];
+		particleDefaultImages["megamanDeath"] = [PIXI.Texture.fromImage("particle")];
 	};
 	
 	p._onCompletedLoad = function()
@@ -132,7 +141,6 @@
 		if(spawnTypes.indexOf(spawnType) == -1)
 			spawnType = spawnTypes[0];
 		//update dropdown
-		//$("#emitSpawnType").find("option:contains(" + spawnType + ")").prop("selected",true);
 		$("#emitSpawnType").val(spawnType);
 		$("#emitSpawnType").selectmenu("refresh");
 		//hide non-type options
@@ -153,6 +161,9 @@
 		$("#emitCircleX").spinner("value", config.spawnCircle ? config.spawnCircle.x : 0);
 		$("#emitCircleY").spinner("value", config.spawnCircle ? config.spawnCircle.y : 0);
 		$("#emitCircleR").spinner("value", config.spawnCircle ? config.spawnCircle.R : 0);
+		$("#emitParticlesPerWave").spinner("value", config.particlesPerWave > 0 ? config.particlesPerWave : 1);
+		$("#emitParticleSpacing").spinner("value", config.particleSpacing ? config.particleSpacing : 0);
+		$("#emitAngleStart").spinner("value", config.angleStart ? config.angleStart : 0);
 	};
 
 	p.loadConfig = function(type, event, ui)
@@ -299,6 +310,12 @@
 		else if(spawnType == "circle")
 			output.spawnCircle = {x: $("#emitCircleX").spinner("value"), y: $("#emitCircleY").spinner("value"),
 								r: $("#emitCircleR").spinner("value")};
+		else if(spawnType == "burst")
+		{
+			output.particlesPerWave = $("#emitParticlesPerWave").spinner("value");
+			output.particleSpacing = $("#emitParticleSpacing").spinner("value");
+			output.angleStart = $("#emitAngleStart").spinner("value");
+		}
 		return output;
 	};
 

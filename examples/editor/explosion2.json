@@ -4,16 +4,16 @@
 		"end": 0.1
 	},
 	"scale": {
-		"start": 0.5,
-		"end": 0.4
+		"start": 1,
+		"end": 0.3
 	},
 	"color": {
-		"start": "a225fe",
-		"end": "904bfe"
+		"start": "fd1111",
+		"end": "f7a134"
 	},
 	"speed": {
-		"start": 0,
-		"end": 0
+		"start": 200,
+		"end": 200
 	},
 	"startRotation": {
 		"min": 0,
@@ -24,22 +24,19 @@
 		"max": 0
 	},
 	"lifetime": {
-		"min": 2,
-		"max": 1.8
+		"min": 0.5,
+		"max": 0.5
 	},
-	"frequency": 0.04,
-	"emitterLifetime": -1,
+	"frequency": 0.1,
+	"emitterLifetime": 0.31,
 	"maxParticles": 1000,
 	"pos": {
 		"x": 0,
 		"y": 0
 	},
 	"addAtBack": false,
-	"spawnType": "rect",
-	"spawnRect": {
-		"x": -100,
-		"y": -100,
-		"w": 200,
-		"h": 200
-	}
+	"spawnType": "burst",
+	"particlesPerWave": 10,
+	"particleSpacing": 0,
+	"angleStart": 0
 }

@@ -4,42 +4,41 @@
 		"end": 0.1
 	},
 	"scale": {
-		"start": 0.5,
-		"end": 0.4
+		"start": 1,
+		"end": 0.3
 	},
 	"color": {
-		"start": "a225fe",
-		"end": "904bfe"
+		"start": "fb1010",
+		"end": "f5b830"
 	},
 	"speed": {
-		"start": 0,
-		"end": 0
+		"start": 200,
+		"end": 100
 	},
 	"startRotation": {
 		"min": 0,
-		"max": 0
+		"max": 360
 	},
 	"rotationSpeed": {
 		"min": 0,
 		"max": 0
 	},
 	"lifetime": {
-		"min": 2,
-		"max": 1.8
+		"min": 0.5,
+		"max": 0.5
 	},
-	"frequency": 0.04,
-	"emitterLifetime": -1,
+	"frequency": 0.008,
+	"emitterLifetime": 0.31,
 	"maxParticles": 1000,
 	"pos": {
 		"x": 0,
 		"y": 0
 	},
 	"addAtBack": false,
-	"spawnType": "rect",
-	"spawnRect": {
-		"x": -100,
-		"y": -100,
-		"w": 200,
-		"h": 200
+	"spawnType": "circle",
+	"spawnCircle": {
+		"x": 0,
+		"y": 0,
+		"r": 10
 	}
 }
