@@ -175,7 +175,6 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
-		//console.log("initialized particle with speed " + this.startSpeed + ", velocity: " + this.velocity);
 		//set alpha to inital alpha
 		this.alpha = this.startAlpha;
 		//set scale to initial scale
@@ -246,7 +245,6 @@
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
 			this.position.y += this.velocity.y * delta;
-			//console.log("particle with velocity " + this.velocity + " now has position " + this.position);
 		}
 		//interpolate color
 		if (this._doColor)
