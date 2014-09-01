@@ -1,6 +1,6 @@
 {
 	"alpha": {
-		"start": 0.8,
+		"start": 0.4,
 		"end": 0.1
 	},
 	"scale": {
@@ -12,12 +12,12 @@
 		"end": "904bfe"
 	},
 	"speed": {
-		"start": 0,
-		"end": 0
+		"start": 10,
+		"end": 10
 	},
 	"startRotation": {
 		"min": 0,
-		"max": 0
+		"max": 360
 	},
 	"rotationSpeed": {
 		"min": 0,
@@ -27,7 +27,7 @@
 		"min": 2,
 		"max": 1.8
 	},
-	"frequency": 0.04,
+	"frequency": 0.03,
 	"emitterLifetime": -1,
 	"maxParticles": 1000,
 	"pos": {
@@ -35,11 +35,10 @@
 		"y": 0
 	},
 	"addAtBack": false,
-	"spawnType": "rect",
-	"spawnRect": {
-		"x": -100,
-		"y": -100,
-		"w": 200,
-		"h": 200
+	"spawnType": "circle",
+	"spawnCircle": {
+		"x": 0,
+		"y": 0,
+		"r": 150
 	}
 }

@@ -24,8 +24,8 @@
 	var particleDefaultImages;
 
 	var defaultTexture = "particle.png";
-	var defaultNames = ["trail", "flame", "gas", "explosion", "explosion2", "megamanDeath"];
-	var defaultImages = ["particle.png"];
+	var defaultNames = ["trail", "flame", "gas", "explosion", "explosion2", "megamanDeath", "rain"];
+	var defaultImages = ["particle.png", "smokeparticle.png", "rain.png"];
 	
 	p.spawnTypes = ["point", "circle", "rect", "burst"];
 
@@ -53,7 +53,8 @@
 			new cloudkid.LoadTask("explosion", "explosion.json", this.onConfigLoaded),
 			new cloudkid.LoadTask("explosion2", "explosion2.json", this.onConfigLoaded),
 			new cloudkid.LoadTask("megamanDeath", "megamanDeath.json", this.onConfigLoaded),
-			new cloudkid.PixiTask("particle", ["particle.png", "smokeparticle.png"], this.onTexturesLoaded)
+			new cloudkid.LoadTask("rain", "rain.json", this.onConfigLoaded),
+			new cloudkid.PixiTask("particle", ["particle.png", "smokeparticle.png", "rain.png"], this.onTexturesLoaded)
 		];
 		
 		cloudkid.TaskManager.process(tasks, this._onCompletedLoad.bind(this));
@@ -78,6 +79,8 @@
 		particleDefaultImages["explosion2"] = [PIXI.Texture.fromImage("particle")];
 		particleDefaultImageUrls["megamanDeath"] = ["particle.png"];
 		particleDefaultImages["megamanDeath"] = [PIXI.Texture.fromImage("particle")];
+		particleDefaultImageUrls["rain"] = ["rain.png"];
+		particleDefaultImages["rain"] = [PIXI.Texture.fromImage("rain")];
 	};
 	
 	p._onCompletedLoad = function()
