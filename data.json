@@ -1,0 +1,1281 @@
+{
+    "project": {
+        "name": "Particles",
+        "description": "Particle system for PixiJS",
+        "version": "0.0.1",
+        "url": "http://github.com/CloudKidStudio/Particles"
+    },
+    "files": {
+        "src/Emitter.js": {
+            "name": "src/Emitter.js",
+            "modules": {
+                "cloudkid": 1
+            },
+            "classes": {
+                "Emitter": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/Particle.js": {
+            "name": "src/Particle.js",
+            "modules": {},
+            "classes": {
+                "Particle": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/ParticleUtils.js": {
+            "name": "src/ParticleUtils.js",
+            "modules": {
+                "global": 1
+            },
+            "classes": {
+                "ParticleUtils": 1,
+                "Array.prototype": 1
+            },
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {
+        "cloudkid": {
+            "name": "cloudkid",
+            "submodules": {},
+            "classes": {
+                "Emitter": 1,
+                "Particle": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/Particle.js",
+            "line": 10
+        },
+        "global": {
+            "name": "global",
+            "submodules": {},
+            "classes": {
+                "ParticleUtils": 1,
+                "Array.prototype": 1
+            },
+            "fors": {},
+            "namespaces": {},
+            "tag": "module",
+            "file": "src/ParticleUtils.js",
+            "line": 116
+        }
+    },
+    "classes": {
+        "Emitter": {
+            "name": "Emitter",
+            "shortname": "Emitter",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "cloudkid",
+            "namespace": "",
+            "file": "src/Emitter.js",
+            "line": 11,
+            "description": "A particle emitter.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "particleParent",
+                    "description": "The display object to add the particles to.",
+                    "type": "PIXI.DisplayObjectContainer"
+                },
+                {
+                    "name": "particleImages",
+                    "description": "A texture or array of textures to use for the particles.",
+                    "type": "Array|PIXI.Texture",
+                    "optional": true
+                },
+                {
+                    "name": "config",
+                    "description": "A configuration object containing settings for the emitter.",
+                    "type": "Object",
+                    "optional": true
+                }
+            ]
+        },
+        "Particle": {
+            "name": "Particle",
+            "shortname": "Particle",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "cloudkid",
+            "namespace": "",
+            "file": "src/Particle.js",
+            "line": 10,
+            "description": "An individual particle image. You shouldn't have to deal with these.",
+            "is_constructor": 1,
+            "params": [
+                {
+                    "name": "emitter",
+                    "description": "The emitter that controls this particle.",
+                    "type": "Emitter"
+                }
+            ]
+        },
+        "ParticleUtils": {
+            "name": "ParticleUtils",
+            "shortname": "ParticleUtils",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global",
+            "namespace": "",
+            "file": "src/ParticleUtils.js",
+            "line": 8,
+            "description": "Contains helper functions for particles and emitters to use.",
+            "static": 1
+        },
+        "Array.prototype": {
+            "name": "Array.prototype",
+            "shortname": "Array.prototype",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "global",
+            "namespace": "",
+            "file": "src/ParticleUtils.js",
+            "line": 116,
+            "description": "Add methods to Array\nSee https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
+        }
+    },
+    "classitems": [
+        {
+            "file": "src/Emitter.js",
+            "line": 22,
+            "description": "An array of PIXI Texture objects.",
+            "itemtype": "property",
+            "name": "particleImages",
+            "type": "Array",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 27,
+            "description": "The starting alpha of all particles.",
+            "itemtype": "property",
+            "name": "startAlpha",
+            "type": "Number",
+            "default": "1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 33,
+            "description": "The ending alpha of all particles.",
+            "itemtype": "property",
+            "name": "endAlpha",
+            "type": "Number",
+            "default": "1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 39,
+            "description": "The starting speed of all particles.",
+            "itemtype": "property",
+            "name": "startSpeed",
+            "type": "Number",
+            "default": "0",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 45,
+            "description": "The ending speed of all particles.",
+            "itemtype": "property",
+            "name": "endSpeed",
+            "type": "Number",
+            "default": "0",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 51,
+            "description": "The starting scale of all particles.",
+            "itemtype": "property",
+            "name": "startScale",
+            "type": "Number",
+            "default": "1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 57,
+            "description": "The ending scale of all particles.",
+            "itemtype": "property",
+            "name": "endScale",
+            "type": "Number",
+            "default": "1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 63,
+            "description": "The starting color of all particles, as red, green, and blue uints from 0-255.",
+            "itemtype": "property",
+            "name": "startColor",
+            "type": "Array",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 68,
+            "description": "The ending color of all particles, as red, green, and blue uints from 0-255.",
+            "itemtype": "property",
+            "name": "endColor",
+            "type": "Array",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 73,
+            "description": "The minimum lifetime for a particle, in seconds.",
+            "itemtype": "property",
+            "name": "minLifetime",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 78,
+            "description": "The maximum lifetime for a particle, in seconds.",
+            "itemtype": "property",
+            "name": "maxLifetime",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 83,
+            "description": "The minimum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
+            "itemtype": "property",
+            "name": "minStartRotation",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 89,
+            "description": "The maximum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
+            "itemtype": "property",
+            "name": "maxStartRotation",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 95,
+            "description": "The minimum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
+            "itemtype": "property",
+            "name": "minRotationSpeed",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 101,
+            "description": "The maximum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
+            "itemtype": "property",
+            "name": "maxRotationSpeed",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 107,
+            "description": "An easing function for nonlinear interpolation of values. Accepts a single parameter of time\nas a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.",
+            "itemtype": "property",
+            "name": "customeEase",
+            "type": "Function",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 114,
+            "description": "Time between particle spawns in seconds.",
+            "itemtype": "property",
+            "name": "frequency",
+            "type": "Number",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 119,
+            "description": "Maximum number of particles to keep alive at a time. If this limit \nis reached, no more particles will spawn until some have died.",
+            "itemtype": "property",
+            "name": "maxParticles",
+            "type": "Int",
+            "default": "1000",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 126,
+            "description": "The amount of time in seconds to emit for before setting emit to false.\nA value of -1 is an unlimited amount of time.",
+            "itemtype": "property",
+            "name": "emitterLifetime",
+            "type": "Number",
+            "default": "-1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 133,
+            "description": "Position at which to spawn particles, relative to the emitter's owner's origin.\nFor example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}\nto spawn at the rear of the rocket.\nTo change this, use updateSpawnPos().",
+            "itemtype": "property",
+            "name": "spawnPos",
+            "type": "PIXI.Point",
+            "readonly": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 142,
+            "description": "How the particles will be spawned. Valid types are \"point\", \"rectangle\", \"circle\", \"burst\".",
+            "itemtype": "property",
+            "name": "spawnType",
+            "type": "String",
+            "readonly": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 148,
+            "description": "A reference to the emitter function specific to the spawn type.",
+            "itemtype": "property",
+            "name": "_spawnFunc",
+            "type": "Function",
+            "access": "private",
+            "tagname": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 154,
+            "description": "A rectangle relative to spawnPos to spawn particles inside if the spawn type is \"rect\".",
+            "itemtype": "property",
+            "name": "spawnRect",
+            "type": "PIXI.Rectangle",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 159,
+            "description": "A circle relative to spawnPos to spawn particles inside if the spawn type is \"circle\".",
+            "itemtype": "property",
+            "name": "spawnCircle",
+            "type": "PIXI.Circle",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 164,
+            "description": "Number of particles to spawn each wave in a burst.",
+            "itemtype": "property",
+            "name": "particlesPerWave",
+            "type": "Int",
+            "default": "1",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 170,
+            "description": "Spacing between particles in a burst. 0 gives a random angle for each particle.",
+            "itemtype": "property",
+            "name": "particleSpacing",
+            "type": "Number",
+            "default": "0",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 176,
+            "description": "Angle at which to start spawning particles in a burst.",
+            "itemtype": "property",
+            "name": "angleStart",
+            "type": "Number",
+            "default": "0",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 182,
+            "description": "Rotation of the emitter or emitter's owner in degrees. This is added to the calculated spawn angle.\nTo change this, use rotate().",
+            "itemtype": "property",
+            "name": "rotation",
+            "type": "Number",
+            "default": "0",
+            "readonly": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 190,
+            "description": "The world position of the emitter's owner, to add spawnPos to when spawning particles. To change this,\nuse updateSpawnOrigin().",
+            "itemtype": "property",
+            "name": "ownerPos",
+            "type": "PIXI.Point",
+            "default": "{x:0, y:0}",
+            "readonly": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 198,
+            "description": "The origin + spawnPos in the previous update, so that the spawn position\ncan be interpolated to space out particles better.",
+            "itemtype": "property",
+            "name": "_prevEmitterPos",
+            "type": "PIXI.Point",
+            "access": "private",
+            "tagname": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 205,
+            "description": "If _prevEmitterPos is valid, to prevent interpolation on the first update",
+            "itemtype": "property",
+            "name": "_prevPosIsValid",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "default": "false",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 212,
+            "description": "If either ownerPos or spawnPos has changed since the previous update.",
+            "itemtype": "property",
+            "name": "_posChanged",
+            "type": "Boolean",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 217,
+            "description": "The display object to add particles to.",
+            "itemtype": "property",
+            "name": "parent",
+            "type": "PIXI.DisplayObjectContainer",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 222,
+            "description": "If particles should be added at the back of the display list instead of the front.",
+            "itemtype": "property",
+            "name": "addAtBack",
+            "type": "Boolean",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 227,
+            "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
+            "itemtype": "property",
+            "name": "_emit",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 234,
+            "description": "The timer for when to spawn particles in seconds, where numbers less \nthan 0 mean that particles should be spawned.",
+            "itemtype": "property",
+            "name": "_spawnTimer",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 241,
+            "description": "The life of the emitter in seconds.",
+            "itemtype": "property",
+            "name": "_emitterLife",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 247,
+            "description": "The particles that are active and on the display list.",
+            "itemtype": "property",
+            "name": "_activeParticles",
+            "type": "Array",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 252,
+            "description": "The particles that are not currently being used.",
+            "itemtype": "property",
+            "name": "_pool",
+            "type": "Array",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 267,
+            "description": "Sets up the emitter based on the config settings.",
+            "itemtype": "method",
+            "name": "init",
+            "params": [
+                {
+                    "name": "particleImages",
+                    "description": "A texture or array of textures to use for the particles.",
+                    "type": "Array|PIXI.Texture"
+                },
+                {
+                    "name": "config",
+                    "description": "A configuration object containing settings for the emitter.",
+                    "type": "Object"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 423,
+            "description": "Recycles an individual particle.",
+            "itemtype": "method",
+            "name": "recycle",
+            "params": [
+                {
+                    "name": "particle",
+                    "description": "The particle to recycle.",
+                    "type": "Particle"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 442,
+            "description": "Sets the rotation of the emitter to a new value.",
+            "itemtype": "method",
+            "name": "rotate",
+            "params": [
+                {
+                    "name": "newRot",
+                    "description": "The new rotation, in degrees.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 459,
+            "description": "Changes the spawn position of the emitter.",
+            "itemtype": "method",
+            "name": "updateSpawnPos",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "The new x value of the spawn position for the emitter.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "The new y value of the spawn position for the emitter.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 472,
+            "description": "Changes the position of the emitter's owner. You should call this if you are adding\nparticles to the world display object that your emitter's owner is moving around in.",
+            "itemtype": "method",
+            "name": "updateOwnerPos",
+            "params": [
+                {
+                    "name": "x",
+                    "description": "The new x value of the emitter's owner.",
+                    "type": "Number"
+                },
+                {
+                    "name": "y",
+                    "description": "The new y value of the emitter's owner.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 486,
+            "description": "Prevents emitter position interpolation in the next update.\nThis should be used if you made a major position change of your emitter's owner\nthat was not normal movement.",
+            "itemtype": "method",
+            "name": "resetPositionTracking",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 497,
+            "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
+            "itemtype": "property",
+            "name": "emit",
+            "type": "Boolean",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 512,
+            "description": "Updates all particles spawned by this emitter and emits new ones.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "delta",
+                    "description": "Time elapsed since the previous frame, in __seconds__.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 635,
+            "description": "Positions a particle for a point type emitter.",
+            "itemtype": "method",
+            "name": "_spawnPoint",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "p",
+                    "description": "The particle to position and rotate.",
+                    "type": "Particle"
+                },
+                {
+                    "name": "emitPosX",
+                    "description": "The emitter's x position",
+                    "type": "Number"
+                },
+                {
+                    "name": "emitPosY",
+                    "description": "The emitter's y position",
+                    "type": "Number"
+                },
+                {
+                    "name": "i",
+                    "description": "The particle number in the current wave. Not used for this function.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 656,
+            "description": "Positions a particle for a rectangle type emitter.",
+            "itemtype": "method",
+            "name": "_spawnRect",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "p",
+                    "description": "The particle to position and rotate.",
+                    "type": "Particle"
+                },
+                {
+                    "name": "emitPosX",
+                    "description": "The emitter's x position",
+                    "type": "Number"
+                },
+                {
+                    "name": "emitPosY",
+                    "description": "The emitter's y position",
+                    "type": "Number"
+                },
+                {
+                    "name": "i",
+                    "description": "The particle number in the current wave. Not used for this function.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 681,
+            "description": "Positions a particle for a circle type emitter.",
+            "itemtype": "method",
+            "name": "_spawnCircle",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "p",
+                    "description": "The particle to position and rotate.",
+                    "type": "Particle"
+                },
+                {
+                    "name": "emitPosX",
+                    "description": "The emitter's x position",
+                    "type": "Number"
+                },
+                {
+                    "name": "emitPosY",
+                    "description": "The emitter's y position",
+                    "type": "Number"
+                },
+                {
+                    "name": "i",
+                    "description": "The particle number in the current wave. Not used for this function.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 709,
+            "description": "Positions a particle for a burst type emitter.",
+            "itemtype": "method",
+            "name": "_spawnBurst",
+            "access": "private",
+            "tagname": "",
+            "params": [
+                {
+                    "name": "p",
+                    "description": "The particle to position and rotate.",
+                    "type": "Particle"
+                },
+                {
+                    "name": "emitPosX",
+                    "description": "The emitter's x position",
+                    "type": "Number"
+                },
+                {
+                    "name": "emitPosY",
+                    "description": "The emitter's y position",
+                    "type": "Number"
+                },
+                {
+                    "name": "i",
+                    "description": "The particle number in the current wave.",
+                    "type": "Int"
+                }
+            ],
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 730,
+            "description": "Kills all active particles immediately.",
+            "itemtype": "method",
+            "name": "cleanup",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 742,
+            "description": "Destroys the emitter and all of its particles.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 20,
+            "description": "The emitter that controls this particle.",
+            "itemtype": "property",
+            "name": "emitter",
+            "type": "Emitter",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 26,
+            "description": "The velocity of the particle. Speed may change, but the angle also \ncontained in velocity is constant.",
+            "itemtype": "property",
+            "name": "velocity",
+            "type": "PIXI.Point",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 32,
+            "description": "The maximum lifetime of this particle, in seconds.",
+            "itemtype": "property",
+            "name": "maxLife",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 37,
+            "description": "The current age of the particle, in seconds.",
+            "itemtype": "property",
+            "name": "age",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 42,
+            "description": "A simple easing function to be applied to all properties that\nare being interpolated.",
+            "itemtype": "property",
+            "name": "ease",
+            "type": "Function",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 48,
+            "description": "The alpha of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "startAlpha",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 53,
+            "description": "The alpha of the particle at the end of its life.",
+            "itemtype": "property",
+            "name": "endAlpha",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 58,
+            "description": "The speed of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "startSpeed",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 63,
+            "description": "The speed of the particle at the end of its life.",
+            "itemtype": "property",
+            "name": "endSpeed",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 68,
+            "description": "The scale of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "startScale",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 73,
+            "description": "The scale of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "endScale",
+            "type": "Number",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 78,
+            "description": "The tint of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "startColor",
+            "type": "Array",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 83,
+            "description": "The red tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
+            "itemtype": "property",
+            "name": "_sR",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 90,
+            "description": "The green tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
+            "itemtype": "property",
+            "name": "_sG",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 97,
+            "description": "The blue tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
+            "itemtype": "property",
+            "name": "_sB",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 104,
+            "description": "The tint of the particle at the start of its life.",
+            "itemtype": "property",
+            "name": "endColor",
+            "type": "Array",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 109,
+            "description": "The red tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
+            "itemtype": "property",
+            "name": "_eR",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 116,
+            "description": "The green tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
+            "itemtype": "property",
+            "name": "_sG",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 123,
+            "description": "The blue tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
+            "itemtype": "property",
+            "name": "_sB",
+            "type": "Uint",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 130,
+            "description": "If alpha should be interpolated at all.",
+            "itemtype": "property",
+            "name": "_doAlpha",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 136,
+            "description": "If scale should be interpolated at all.",
+            "itemtype": "property",
+            "name": "_doScale",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 142,
+            "description": "If speed should be interpolated at all.",
+            "itemtype": "property",
+            "name": "_doSpeed",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 148,
+            "description": "If color should be interpolated at all.",
+            "itemtype": "property",
+            "name": "_doColor",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 154,
+            "description": "One divided by the max life of the particle, saved for slightly faster math.",
+            "itemtype": "property",
+            "name": "_oneOverLife",
+            "type": "Number",
+            "access": "private",
+            "tagname": "",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 165,
+            "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
+            "itemtype": "method",
+            "name": "init",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 210,
+            "description": "Updates the particle.",
+            "itemtype": "method",
+            "name": "update",
+            "params": [
+                {
+                    "name": "delta",
+                    "description": "Time elapsed since the previous frame, in __seconds__.",
+                    "type": "Number"
+                }
+            ],
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 269,
+            "description": "Destroys the particle, removing references and preventing future use.",
+            "itemtype": "method",
+            "name": "destroy",
+            "class": "Particle",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 17,
+            "description": "Rotates a point by a given angle.",
+            "itemtype": "method",
+            "name": "rotatePoint",
+            "params": [
+                {
+                    "name": "angle",
+                    "description": "The angle to rotate by in degrees",
+                    "type": "Number"
+                },
+                {
+                    "name": "p",
+                    "description": "The point to rotate around 0,0.",
+                    "type": "PIXI.Point"
+                }
+            ],
+            "static": 1,
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 36,
+            "description": "Combines separate color components (0-255) into a single uint color.",
+            "itemtype": "method",
+            "name": "combineRGBComponents",
+            "params": [
+                {
+                    "name": "r",
+                    "description": "The red value of the color",
+                    "type": "Uint"
+                },
+                {
+                    "name": "g",
+                    "description": "The green value of the color",
+                    "type": "Uint"
+                },
+                {
+                    "name": "b",
+                    "description": "The blue value of the color",
+                    "type": "Uint"
+                }
+            ],
+            "return": {
+                "description": "The color in the form of 0xRRGGBB",
+                "type": "Uint"
+            },
+            "static": 1,
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 50,
+            "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\", \"AARRGGBB\", or \"RRGGBB\" \nto an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].",
+            "itemtype": "method",
+            "name": "hexToRGB",
+            "params": [
+                {
+                    "name": "color",
+                    "description": "The input color string.",
+                    "type": "String"
+                },
+                {
+                    "name": "output",
+                    "description": "An array to put the output in. If omitted, a new array is created.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "The array of numeric color values."
+            },
+            "static": 1,
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 83,
+            "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated \nby the related tool at http://www.greensock.com/customease/.",
+            "itemtype": "method",
+            "name": "generateEase",
+            "params": [
+                {
+                    "name": "segments",
+                    "description": "An array of segments, as created by http://www.greensock.com/customease/.",
+                    "type": "Array"
+                }
+            ],
+            "return": {
+                "description": "A function that calculates the percentage of change at a given point in time (0-1 inclusive).",
+                "type": "Function"
+            },
+            "static": 1,
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 122,
+            "description": "Shuffles the array",
+            "itemtype": "method",
+            "name": "shuffle",
+            "return": {
+                "description": "The array, for chaining calls.",
+                "type": "Array"
+            },
+            "class": "Array.prototype",
+            "module": "global"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 141,
+            "description": "Get a random item from an array",
+            "itemtype": "method",
+            "name": "random",
+            "return": {
+                "description": "The random item",
+                "type": "*"
+            },
+            "class": "Array.prototype",
+            "module": "global"
+        }
+    ],
+    "warnings": []
+}
