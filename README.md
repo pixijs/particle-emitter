@@ -12,7 +12,7 @@ http://cloudkidstudio.github.io/CloudKidParticles/
 CloudKid Particles can be installed using Bower.
 
 ```bash
-bower install git@github.com:CloudKidStudio/CloudKidParticles.git
+bower install cloudkid-particles
 ```
 
 ##License##
