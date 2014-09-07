@@ -1071,6 +1071,15 @@
 		}
 	};
 	
+	/**
+	*	Positions a particle for a point type emitter.
+	*	@method _spawnPoint
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -1083,6 +1092,15 @@
 		p.position.y = emitPosY;
 	};
 	
+	/**
+	*	Positions a particle for a rectangle type emitter.
+	*	@method _spawnRect
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -1099,6 +1117,15 @@
 		p.position.y = emitPosY + helperPoint.y;
 	};
 	
+	/**
+	*	Positions a particle for a circle type emitter.
+	*	@method _spawnCircle
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
@@ -1118,6 +1145,15 @@
 		p.position.y = emitPosY + helperPoint.y;
 	};
 	
+	/**
+	*	Positions a particle for a burst type emitter.
+	*	@method _spawnBurst
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave.
+	*/
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
