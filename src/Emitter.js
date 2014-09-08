@@ -285,7 +285,10 @@
 			{
 				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
 				{
-					Debug.warn("CloudKid Particles: using particle textures from different images may hinder performance in WebGL");
+					if(window.Debug)
+						Debug.warn("CloudKid Particles: using particle textures from different images may hinder performance in WebGL");
+					else
+						console.warn("CloudKid Particles: using particle textures from different images may hinder performance in WebGL");
 					break;
 				}
 			}

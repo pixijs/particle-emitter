@@ -10,6 +10,8 @@ http://cloudkidstudio.github.io/CloudKidParticles/
 ##Installation##
 
 CloudKid Particles can be installed using Bower.
+While the Bower file specifies CloudKid's fork of PixiJS, the library should work fine with
+the official release of PixiJS.
 
 ```bash
 bower install cloudkid-particles

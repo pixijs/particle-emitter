@@ -3,9 +3,11 @@
 	"version": "0.0.1",
 	"main": "dist/cloudkid-particles.min.js",
 	"dependencies": {
-		"cloudkid-debug": "*",
 		"cloudkid-namespace": "*",
-		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git#^1.6.2",
+		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git#^1.6.2"
+	},
+	"devDependencies": {
+		"cloudkid-debug": "*",
 		"cloudkid-framework": "*",
 		"cloudkid-pixi-display": "*"
 	},
