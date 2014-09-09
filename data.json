@@ -1,9 +1,9 @@
 {
     "project": {
-        "name": "Particles",
+        "name": "PixiParticles",
         "description": "Particle system for PixiJS",
         "version": "0.0.1",
-        "url": "http://github.com/CloudKidStudio/Particles"
+        "url": "http://github.com/CloudKidStudio/PixiParticles"
     },
     "files": {
         "src/Emitter.js": {
@@ -598,7 +598,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 423,
+            "line": 426,
             "description": "Recycles an individual particle.",
             "itemtype": "method",
             "name": "recycle",
@@ -614,7 +614,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 442,
+            "line": 445,
             "description": "Sets the rotation of the emitter to a new value.",
             "itemtype": "method",
             "name": "rotate",
@@ -630,7 +630,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 459,
+            "line": 462,
             "description": "Changes the spawn position of the emitter.",
             "itemtype": "method",
             "name": "updateSpawnPos",
@@ -651,7 +651,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 472,
+            "line": 475,
             "description": "Changes the position of the emitter's owner. You should call this if you are adding\nparticles to the world display object that your emitter's owner is moving around in.",
             "itemtype": "method",
             "name": "updateOwnerPos",
@@ -672,7 +672,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 486,
+            "line": 489,
             "description": "Prevents emitter position interpolation in the next update.\nThis should be used if you made a major position change of your emitter's owner\nthat was not normal movement.",
             "itemtype": "method",
             "name": "resetPositionTracking",
@@ -681,7 +681,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 497,
+            "line": 500,
             "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
             "itemtype": "property",
             "name": "emit",
@@ -691,7 +691,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 512,
+            "line": 515,
             "description": "Updates all particles spawned by this emitter and emits new ones.",
             "itemtype": "method",
             "name": "update",
@@ -707,7 +707,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 635,
+            "line": 638,
             "description": "Positions a particle for a point type emitter.",
             "itemtype": "method",
             "name": "_spawnPoint",
@@ -740,7 +740,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 656,
+            "line": 659,
             "description": "Positions a particle for a rectangle type emitter.",
             "itemtype": "method",
             "name": "_spawnRect",
@@ -773,7 +773,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 681,
+            "line": 684,
             "description": "Positions a particle for a circle type emitter.",
             "itemtype": "method",
             "name": "_spawnCircle",
@@ -806,7 +806,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 709,
+            "line": 712,
             "description": "Positions a particle for a burst type emitter.",
             "itemtype": "method",
             "name": "_spawnBurst",
@@ -839,7 +839,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 730,
+            "line": 733,
             "description": "Kills all active particles immediately.",
             "itemtype": "method",
             "name": "cleanup",
@@ -848,7 +848,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 742,
+            "line": 745,
             "description": "Destroys the emitter and all of its particles.",
             "itemtype": "method",
             "name": "destroy",
