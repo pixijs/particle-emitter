@@ -1,7 +1,7 @@
 {
-	"name": "cloudkid-particles",
+	"name": "pixi-particles",
 	"version": "0.0.1",
-	"main": "dist/cloudkid-particles.min.js",
+	"main": "dist/pixi-particles.min.js",
 	"dependencies": {
 		"cloudkid-namespace": "*",
 		"pixi.js": "https://github.com/CloudKidStudio/pixi.js.git#^1.6.2"
