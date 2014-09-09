@@ -1,9 +1,9 @@
 {
-	"name" : "Particles",
+	"name" : "PixiParticles",
 	"version" : "0.0.1",
 	"description" : "Particle system for PixiJS",
-	"url" : "http://github.com/CloudKidStudio/Particles",
-	"output" : "cloudkid-particles",
+	"url" : "http://github.com/CloudKidStudio/PixiParticles",
+	"output" : "pixi-particles",
 	"main" : [
 		"src/ParticleUtils.js",
 		"src/Particle.js",
