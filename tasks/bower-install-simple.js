@@ -5,7 +5,7 @@ module.exports = {
 	},
 	prod: {
 		options: {
-			production: true
+			production: false
 		}
 	},
 };

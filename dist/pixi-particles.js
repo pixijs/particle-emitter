@@ -1,4 +1,4 @@
-/*! Particles 0.0.1 */
+/*! PixiParticles 0.0.1 */
 /**
 *  @module cloudkid
 */
