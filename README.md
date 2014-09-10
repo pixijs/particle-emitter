@@ -1,7 +1,7 @@
 Pixi Particles
 =================
 
-A particle system library for the PixiJS library.
+A particle system library for the PixiJS library. Also, we created an [interactive particle editor](http://cloudkidstudio.github.io/ParticleEditor/) to design and preview custom particle emitters which utilitze PixiParticles. 
 
 ##Documentation##
 
