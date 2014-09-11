@@ -64,7 +64,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/ParticleUtils.js",
-            "line": 153
+            "line": 156
         }
     },
     "classes": {
@@ -150,7 +150,7 @@
             "module": "global",
             "namespace": "",
             "file": "src/ParticleUtils.js",
-            "line": 153,
+            "line": 156,
             "description": "Add methods to Array\nSee https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
         }
     },
@@ -1210,6 +1210,7 @@
             "description": "Reduces the point to a length of 1.",
             "itemtype": "method",
             "name": "normalize",
+            "static": 1,
             "params": [
                 {
                     "name": "point",
@@ -1222,10 +1223,11 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 64,
+            "line": 65,
             "description": "Multiplies the x and y values of this point by a value.",
             "itemtype": "method",
             "name": "scaleBy",
+            "static": 1,
             "params": [
                 {
                     "name": "point",
@@ -1243,10 +1245,11 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 76,
+            "line": 78,
             "description": "Returns the length (or magnitude) of this point.",
             "itemtype": "method",
             "name": "length",
+            "static": 1,
             "params": [
                 {
                     "name": "point",
@@ -1262,7 +1265,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 87,
+            "line": 90,
             "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\", \"AARRGGBB\", or \"RRGGBB\" \nto an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].",
             "itemtype": "method",
             "name": "hexToRGB",
@@ -1287,7 +1290,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 120,
+            "line": 123,
             "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated \nby the related tool at http://www.greensock.com/customease/.",
             "itemtype": "method",
             "name": "generateEase",
@@ -1308,7 +1311,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 159,
+            "line": 162,
             "description": "Shuffles the array",
             "itemtype": "method",
             "name": "shuffle",
@@ -1321,7 +1324,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 178,
+            "line": 181,
             "description": "Get a random item from an array",
             "itemtype": "method",
             "name": "random",
