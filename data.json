@@ -64,7 +64,7 @@
             "namespaces": {},
             "tag": "module",
             "file": "src/ParticleUtils.js",
-            "line": 116
+            "line": 153
         }
     },
     "classes": {
@@ -135,7 +135,7 @@
             "module": "global",
             "namespace": "",
             "file": "src/ParticleUtils.js",
-            "line": 8,
+            "line": 10,
             "description": "Contains helper functions for particles and emitters to use.",
             "static": 1
         },
@@ -150,7 +150,7 @@
             "module": "global",
             "namespace": "",
             "file": "src/ParticleUtils.js",
-            "line": 116,
+            "line": 153,
             "description": "Add methods to Array\nSee https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
         }
     },
@@ -1153,7 +1153,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 17,
+            "line": 19,
             "description": "Rotates a point by a given angle.",
             "itemtype": "method",
             "name": "rotatePoint",
@@ -1175,7 +1175,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 36,
+            "line": 38,
             "description": "Combines separate color components (0-255) into a single uint color.",
             "itemtype": "method",
             "name": "combineRGBComponents",
@@ -1206,7 +1206,63 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 50,
+            "line": 52,
+            "description": "Reduces the point to a length of 1.",
+            "itemtype": "method",
+            "name": "normalize",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "The point to normalize",
+                    "type": "PIXI.Point"
+                }
+            ],
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 64,
+            "description": "Multiplies the x and y values of this point by a value.",
+            "itemtype": "method",
+            "name": "scaleBy",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "The point to scaleBy",
+                    "type": "PIXI.Point"
+                },
+                {
+                    "name": "value",
+                    "description": "The value to scale by.",
+                    "type": "Number"
+                }
+            ],
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 76,
+            "description": "Returns the length (or magnitude) of this point.",
+            "itemtype": "method",
+            "name": "length",
+            "params": [
+                {
+                    "name": "point",
+                    "description": "The point to measure length",
+                    "type": "PIXI.Point"
+                }
+            ],
+            "return": {
+                "description": "The length of this point."
+            },
+            "class": "ParticleUtils",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/ParticleUtils.js",
+            "line": 87,
             "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\", \"AARRGGBB\", or \"RRGGBB\" \nto an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].",
             "itemtype": "method",
             "name": "hexToRGB",
@@ -1231,7 +1287,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 83,
+            "line": 120,
             "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated \nby the related tool at http://www.greensock.com/customease/.",
             "itemtype": "method",
             "name": "generateEase",
@@ -1252,7 +1308,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 122,
+            "line": 159,
             "description": "Shuffles the array",
             "itemtype": "method",
             "name": "shuffle",
@@ -1265,7 +1321,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 141,
+            "line": 178,
             "description": "Get a random item from an array",
             "itemtype": "method",
             "name": "random",

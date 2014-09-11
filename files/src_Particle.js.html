@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
-    <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+    <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
 	<title>PixiParticles v0.0.1 API Documentation : src/Particle.js</title>  
 </head>
 <body class="yui3-skin-sam">
@@ -98,7 +98,7 @@
 /**
 *  @module cloudkid
 */
-(function(undefined) {
+(function(cloudkid, undefined) {
 
 	&quot;use strict&quot;;
 
@@ -341,8 +341,8 @@
 			if (this._doSpeed)
 			{
 				var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
-				this.velocity.normalize();
-				this.velocity.scaleBy(speed);
+				ParticleUtils.normalize(this.velocity);
+				ParticleUtils.scaleBy(this.velocity, speed);
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -375,8 +375,9 @@
 		this.ease = null;
 	};
 
-	namespace(&#x27;cloudkid&#x27;).Particle = Particle;
-}());
+	cloudkid.Particle = Particle;
+	
+}(cloudkid));
     </pre>
 </div>
 
