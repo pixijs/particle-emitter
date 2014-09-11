@@ -2,7 +2,7 @@
     "project": {
         "name": "PixiParticles",
         "description": "Particle system for PixiJS",
-        "version": "0.0.1",
+        "version": "1.0.0",
         "url": "http://github.com/CloudKidStudio/PixiParticles"
     },
     "files": {
