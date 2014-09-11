@@ -52,6 +52,7 @@
 	/**
 	 * Reduces the point to a length of 1.
 	 * @method normalize
+	 * @static
 	 * @param {PIXI.Point} point The point to normalize
 	 */
 	ParticleUtils.normalize = function(point)
@@ -64,6 +65,7 @@
 	/**
 	 * Multiplies the x and y values of this point by a value.
 	 * @method scaleBy 
+	 * @static
 	 * @param {PIXI.Point} point The point to scaleBy
 	 * @param value {Number} The value to scale by.
 	 */
@@ -76,6 +78,7 @@
 	/**
 	 * Returns the length (or magnitude) of this point.
 	 * @method length
+	 * @static
 	 * @param {PIXI.Point} point The point to measure length
 	 * @return The length of this point.
 	 */
