@@ -1,7 +1,7 @@
 /**
 *  @module cloudkid
 */
-(function(undefined) {
+(function(cloudkid, undefined) {
 
 	"use strict";
 
@@ -764,5 +764,6 @@
 		this.customEase = null;
 	};
 
-	namespace('cloudkid').Emitter = Emitter;
-}());
+	cloudkid.Emitter = Emitter;
+
+}(cloudkid));

@@ -1,9 +1,5 @@
 (function(window){
 
-	var Application = cloudkid.Application,
-		PixiDisplay = cloudkid.PixiDisplay,
-		Emitter = cloudkid.Emitter;
-
 	/**
 	*  Basic example setup
 	*  @class ParticleExample
@@ -13,47 +9,61 @@
 	*/
 	var ParticleExample = function(imagePath, config)
 	{
+		// Basic PIXI Setup
+		var canvas = document.getElementById("stage"),
+			stage = new PIXI.Stage(0x0),
+			emitter = null,
+			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, canvas);
+
+		// Calculate the current time
+		var elapsed = Date.now();
+
+		// Update function every frame
+		var update = function(){
+			
+			// Update the next frame
+			requestAnimFrame(update);
+
+			var now = Date.now();
+			emitter.update((now - elapsed) * 0.001);
+			elapsed = now;
+
+			// render the stage
+		    renderer.render(stage);
+		};
+
+		// Resize the canvas to the size of the window
+		window.onresize = function(event) {
+			canvas.width = window.innerWidth;
+			canvas.height = window.innerHeight;
+			renderer.resize(canvas.width, canvas.height);
+		};
+		window.onresize();
+
 		// Preload the particle image and create a PIXI texture from it
 		var image = new Image();
 		image.src = imagePath;
 		image.onload = function()
 		{
-			// Create a new application
-			var app = new Application({
-				framerate : "framerate",
-				resizeElement: window,
-				uniformResize: false,
-				canvasId: "stage",
-				display: PixiDisplay,
-				displayOptions: {
-					clearView: true,
-					transparent: false,
-					backgroundColor: 0x0
-				}
-			});
-
 			// Create the new emitter and attach it to the stage
-			var emitter = new Emitter(
-				app.display.stage,
+			emitter = new cloudkid.Emitter(
+				stage,
 				PIXI.Texture.fromImage(image.src),
 				config
 			);
 
-			// Don't emit initially
-			emitter.emit = false;
-
-			// Add application update listener
-			// this is needed to update the emitter display
-			app.on('update', function(elapsed){
-				emitter.update(elapsed * 0.001);
-			});
+			// Center on the stage
+			emitter.updateOwnerPos(window.innerWidth / 2, window.innerHeight / 2);
 
 			// Click on the canvas to trigger 
-			app.display.canvas.addEventListener('mouseup', function(e){
+			canvas.addEventListener('mouseup', function(e){
 				emitter.emit = true;
 				emitter.resetPositionTracking();
 				emitter.updateOwnerPos(e.offsetX, e.offsetY);
 			});
+
+			// Start the update
+			update();
 		};
 	};
 

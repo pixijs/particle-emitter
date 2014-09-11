@@ -1,7 +1,7 @@
 /**
 *  @module cloudkid
 */
-(function(undefined) {
+(function(cloudkid, undefined) {
 
 	"use strict";
 
@@ -244,8 +244,8 @@
 			if (this._doSpeed)
 			{
 				var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
-				this.velocity.normalize();
-				this.velocity.scaleBy(speed);
+				ParticleUtils.normalize(this.velocity);
+				ParticleUtils.scaleBy(this.velocity, speed);
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -278,5 +278,6 @@
 		this.ease = null;
 	};
 
-	namespace('cloudkid').Particle = Particle;
-}());
+	cloudkid.Particle = Particle;
+	
+}(cloudkid));

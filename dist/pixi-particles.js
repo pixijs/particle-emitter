@@ -6,6 +6,8 @@
 
 	"use strict";
 
+	window.cloudkid = window.cloudkid || {};
+
 	/**
 	*	Contains helper functions for particles and emitters to use.
 	*	@class ParticleUtils
@@ -46,6 +48,41 @@
 	ParticleUtils.combineRGBComponents = function(r, g, b/*, a*/)
 	{
 		return /*a << 24 |*/ r << 16 | g << 8 | b;
+	};
+
+	/**
+	 * Reduces the point to a length of 1.
+	 * @method normalize
+	 * @param {PIXI.Point} point The point to normalize
+	 */
+	ParticleUtils.normalize = function(point)
+	{
+		var oneOverLen = 1 / ParticleUtils.length(point);
+		point.x *= oneOverLen;
+		point.y *= oneOverLen;
+	};
+
+	/**
+	 * Multiplies the x and y values of this point by a value.
+	 * @method scaleBy 
+	 * @param {PIXI.Point} point The point to scaleBy
+	 * @param value {Number} The value to scale by.
+	 */
+	ParticleUtils.scaleBy = function(point, value)
+	{
+		point.x *= value;
+		point.y *= value;
+	};
+
+	/**
+	 * Returns the length (or magnitude) of this point.
+	 * @method length
+	 * @param {PIXI.Point} point The point to measure length
+	 * @return The length of this point.
+	 */
+	ParticleUtils.length = function(point)
+	{
+		return Math.sqrt(point.x * point.x + point.y * point.y);
 	};
 
 	/**
@@ -109,7 +146,7 @@
 		return simpleEase;
 	};
 
-	namespace('cloudkid').ParticleUtils = ParticleUtils;
+	cloudkid.ParticleUtils = ParticleUtils;
 
 	/**
 	*  @module global
@@ -158,7 +195,7 @@
 /**
 *  @module cloudkid
 */
-(function(undefined) {
+(function(cloudkid, undefined) {
 
 	"use strict";
 
@@ -401,8 +438,8 @@
 			if (this._doSpeed)
 			{
 				var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
-				this.velocity.normalize();
-				this.velocity.scaleBy(speed);
+				ParticleUtils.normalize(this.velocity);
+				ParticleUtils.scaleBy(this.velocity, speed);
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -435,12 +472,13 @@
 		this.ease = null;
 	};
 
-	namespace('cloudkid').Particle = Particle;
-}());
+	cloudkid.Particle = Particle;
+	
+}(cloudkid));
 /**
 *  @module cloudkid
 */
-(function(undefined) {
+(function(cloudkid, undefined) {
 
 	"use strict";
 
@@ -1203,5 +1241,6 @@
 		this.customEase = null;
 	};
 
-	namespace('cloudkid').Emitter = Emitter;
-}());
+	cloudkid.Emitter = Emitter;
+
+}(cloudkid));
