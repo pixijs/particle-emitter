@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="https://yui-s.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
-    <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.0.0 API Documentation : Particle</title>  
+    <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+	<title>PixiParticles v1.1.0 API Documentation : Particle</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.0.0</em>
+            <em>API Documentation for: 1.1.0</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -234,6 +234,13 @@
                     <ul class="index-list methods">
                         
                             <li class="index-item method">
+                                <a href="#method_applyArt">applyArt</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
                                 <a href="#method_destroy">destroy</a>
 
                                 
@@ -242,6 +249,13 @@
                         
                             <li class="index-item method">
                                 <a href="#method_init">init</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item method">
+                                <a href="#method_kill">kill</a>
 
                                 
                                 
@@ -391,6 +405,13 @@
                             </li>
                         
                             <li class="index-item property">
+                                <a href="#property_extraData">extraData</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property">
                                 <a href="#property_maxLife">maxLife</a>
 
                                 
@@ -446,6 +467,96 @@
                 <h2 class="off-left">Methods</h2>
 
                 
+                    <div id="method_applyArt" class="method item">
+    <h3 class="name"><code>applyArt</code></h3>
+
+    
+        <div class="args">
+            <span class="paren">(</span><ul class="args-list inline commas">
+            
+                <li class="arg">
+                    
+                        <code>art</code>
+                    
+                </li>
+            
+            </ul><span class="paren">)</span>
+        </div>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_Particle.js.html#l216"><code>applyArt:216</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Sets the texture for the particle. This can be overridden to allow
+for an animated particle.</p>
+
+    </div>
+
+    
+        <div class="params">
+            <h4>Parameters:</h4>
+
+            <ul class="params-list">
+            
+                <li class="param">
+                    
+                        <code class="param-name">art</code>
+                        <span class="type">PIXI.Texture</span>
+                    
+
+                    
+
+                    <div class="param-description">
+                        <p>The texture to set.</p>
+
+                    </div>
+
+                    
+                </li>
+            
+            </ul>
+        </div>
+    
+
+    
+
+    
+</div>
+
+                
                     <div id="method_destroy" class="method item">
     <h3 class="name"><code>destroy</code></h3>
 
@@ -478,7 +589,7 @@
             
         
         
-        <a href="../files/src_Particle.js.html#l269"><code>destroy:269</code></a>
+        <a href="../files/src_Particle.js.html#l296"><code>destroy:296</code></a>
         
         </p>
 
@@ -533,7 +644,7 @@
             
         
         
-        <a href="../files/src_Particle.js.html#l165"><code>init:165</code></a>
+        <a href="../files/src_Particle.js.html#l171"><code>init:171</code></a>
         
         </p>
 
@@ -546,6 +657,62 @@
     <div class="description">
         <p>Initializes the particle for use, based on the properties that have to
 have been set already on the particle.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="method_kill" class="method item">
+    <h3 class="name"><code>kill</code></h3>
+
+    
+        <span class="paren">()</span>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_Particle.js.html#l286"><code>kill:286</code></a>
+        
+        </p>
+
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Kills the particle, removing it from the display list
+and telling the emitter to recycle it.</p>
 
     </div>
 
@@ -599,7 +766,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l210"><code>update:210</code></a>
+        <a href="../files/src_Particle.js.html#l227"><code>update:227</code></a>
         
         </p>
 
@@ -679,7 +846,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l130"><code>_doAlpha:130</code></a>
+        <a href="../files/src_Particle.js.html#l136"><code>_doAlpha:136</code></a>
         
         </p>
 
@@ -726,7 +893,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l148"><code>_doColor:148</code></a>
+        <a href="../files/src_Particle.js.html#l154"><code>_doColor:154</code></a>
         
         </p>
 
@@ -773,7 +940,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l136"><code>_doScale:136</code></a>
+        <a href="../files/src_Particle.js.html#l142"><code>_doScale:142</code></a>
         
         </p>
 
@@ -820,7 +987,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l142"><code>_doSpeed:142</code></a>
+        <a href="../files/src_Particle.js.html#l148"><code>_doSpeed:148</code></a>
         
         </p>
 
@@ -867,7 +1034,7 @@ have been set already on the particle.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l109"><code>_eR:109</code></a>
+        <a href="../files/src_Particle.js.html#l115"><code>_eR:115</code></a>
         
         </p>
 
@@ -915,7 +1082,7 @@ This is pulled from endColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l154"><code>_oneOverLife:154</code></a>
+        <a href="../files/src_Particle.js.html#l160"><code>_oneOverLife:160</code></a>
         
         </p>
 
@@ -962,7 +1129,7 @@ This is pulled from endColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l123"><code>_sB:123</code></a>
+        <a href="../files/src_Particle.js.html#l129"><code>_sB:129</code></a>
         
         </p>
 
@@ -1010,7 +1177,7 @@ This is pulled from endColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l97"><code>_sB:97</code></a>
+        <a href="../files/src_Particle.js.html#l103"><code>_sB:103</code></a>
         
         </p>
 
@@ -1058,7 +1225,7 @@ This is pulled from startColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l116"><code>_sG:116</code></a>
+        <a href="../files/src_Particle.js.html#l122"><code>_sG:122</code></a>
         
         </p>
 
@@ -1106,7 +1273,7 @@ This is pulled from endColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l90"><code>_sG:90</code></a>
+        <a href="../files/src_Particle.js.html#l96"><code>_sG:96</code></a>
         
         </p>
 
@@ -1154,7 +1321,7 @@ This is pulled from startColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l83"><code>_sR:83</code></a>
+        <a href="../files/src_Particle.js.html#l89"><code>_sR:89</code></a>
         
         </p>
 
@@ -1200,7 +1367,7 @@ This is pulled from startColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l37"><code>age:37</code></a>
+        <a href="../files/src_Particle.js.html#l38"><code>age:38</code></a>
         
         </p>
 
@@ -1245,7 +1412,7 @@ This is pulled from startColor in init().</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l42"><code>ease:42</code></a>
+        <a href="../files/src_Particle.js.html#l43"><code>ease:43</code></a>
         
         </p>
 
@@ -1291,7 +1458,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l20"><code>emitter:20</code></a>
+        <a href="../files/src_Particle.js.html#l21"><code>emitter:21</code></a>
         
         </p>
 
@@ -1336,7 +1503,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l53"><code>endAlpha:53</code></a>
+        <a href="../files/src_Particle.js.html#l59"><code>endAlpha:59</code></a>
         
         </p>
 
@@ -1381,7 +1548,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l104"><code>endColor:104</code></a>
+        <a href="../files/src_Particle.js.html#l110"><code>endColor:110</code></a>
         
         </p>
 
@@ -1426,7 +1593,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l73"><code>endScale:73</code></a>
+        <a href="../files/src_Particle.js.html#l79"><code>endScale:79</code></a>
         
         </p>
 
@@ -1471,7 +1638,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l63"><code>endSpeed:63</code></a>
+        <a href="../files/src_Particle.js.html#l69"><code>endSpeed:69</code></a>
         
         </p>
 
@@ -1482,6 +1649,51 @@ are being interpolated.</p>
 
     <div class="description">
         <p>The speed of the particle at the end of its life.</p>
+
+    </div>
+
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property_extraData" class="property item">
+    <h3 class="name"><code>extraData</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_Particle.js.html#l49"><code>extraData:49</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Extra data that the emitter passes along for custom particles.</p>
 
     </div>
 
@@ -1516,7 +1728,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l32"><code>maxLife:32</code></a>
+        <a href="../files/src_Particle.js.html#l33"><code>maxLife:33</code></a>
         
         </p>
 
@@ -1561,7 +1773,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l48"><code>startAlpha:48</code></a>
+        <a href="../files/src_Particle.js.html#l54"><code>startAlpha:54</code></a>
         
         </p>
 
@@ -1606,7 +1818,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l78"><code>startColor:78</code></a>
+        <a href="../files/src_Particle.js.html#l84"><code>startColor:84</code></a>
         
         </p>
 
@@ -1651,7 +1863,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l68"><code>startScale:68</code></a>
+        <a href="../files/src_Particle.js.html#l74"><code>startScale:74</code></a>
         
         </p>
 
@@ -1696,7 +1908,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l58"><code>startSpeed:58</code></a>
+        <a href="../files/src_Particle.js.html#l64"><code>startSpeed:64</code></a>
         
         </p>
 
@@ -1741,7 +1953,7 @@ are being interpolated.</p>
             
         
         
-        <a href="../files/src_Particle.js.html#l26"><code>velocity:26</code></a>
+        <a href="../files/src_Particle.js.html#l27"><code>velocity:27</code></a>
         
         </p>
 
