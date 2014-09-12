@@ -18,6 +18,12 @@
 	*/
 	var Emitter = function(particleParent, particleImages, config)
 	{
+		/**
+		 *	The constructor used to create new particles. The default is
+		 *	the built in particle class.
+		 * 	@property {Function} particleConstructor
+		 */
+		this.particleConstructor = Particle;
 		//properties for individual particles
 		/**
 		*	An array of PIXI Texture objects.
@@ -107,9 +113,15 @@
 		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
-		*	@property {Function} customeEase
+		*	@property {Function} customEase
 		*/
 		this.customEase = null;
+		/**
+		 *	Extra data for use in custom particles. The emitter doesn't look inside, but
+		 *	passes it on to the particle to use in init().
+		 *	@property {Object} extraData
+		 */
+		this.extraData = null;
 		//properties for spawning particles
 		/**
 		*	Time between particle spawns in seconds.
@@ -356,6 +368,7 @@
 		{
 			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
 		}
+		this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -586,12 +599,12 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i < len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ? this._pool.pop() : new Particle(this);
+						var p = this._pool.length ? this._pool.pop() : new this.particleConstructor(this);
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
-							p.setTexture(this.particleImages.random());
+							p.applyArt(this.particleImages.random());
 						else
-							p.setTexture(this.particleImages[0]);//if they are actually the same texture, this call will quit early
+							p.applyArt(this.particleImages[0]);//if they are actually the same texture, this call will quit early
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
@@ -601,11 +614,17 @@
 						p.endScale = this.endScale;
 						p.startColor = this.startColor;
 						p.endColor = this.endColor;
+						//randomize the rotation speed
 						if(this.minRotationSpeed == this.maxRotationSpeed)
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						//set up the lifetime
 						p.maxLife = lifetime;
+						//set the custom ease, if any
+						p.ease = this.customEase;
+						//set the extra data, if any
+						p.extraData = this.extraData;
 						//call the proper function to handle rotation and position of particle
 						this._spawnFunc(p, emitPosX, emitPosY, i);
 						//initialize particle

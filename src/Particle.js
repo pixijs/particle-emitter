@@ -15,7 +15,8 @@
 	*/
 	var Particle = function(emitter)
 	{
-		PIXI.Sprite.call(this, emitter.particleImages[0]);
+		var art = emitter.particleImages[0] instanceof PIXI.Texture ? [emitter.particleImages[0]] : emitter.particleImages[0];
+		PIXI.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -45,6 +46,11 @@
 		*	@property {Function} ease
 		*/
 		this.ease = null;
+		/**
+		*	Extra data that the emitter passes along for custom particles.
+		*	@property {Object} extraData
+		*/
+		this.extraData = null;
 		/**
 		*	The alpha of the particle at the start of its life.
 		*	@property {Number} startAlpha
@@ -160,7 +166,7 @@
 	};
 	
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(PIXI.Sprite.prototype);
+	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -208,6 +214,17 @@
 	};
 
 	/**
+	*	Sets the texture for the particle. This can be overridden to allow
+	*	for an animated particle.
+	*	@method applyArt
+	*	@param {PIXI.Texture} art The texture to set.
+	*/
+	p.applyArt = function(art)
+	{
+		this.setTexture(art);
+	};
+
+	/**
 	*	Updates the particle.
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
@@ -219,7 +236,7 @@
 		//recycle particle if it is too old
 		if(this.age >= this.maxLife)
 		{
-			this.emitter.recycle(this);
+			this.kill();
 			return;
 		}
 		
@@ -264,6 +281,16 @@
 		{
 			this.rotation += this.rotationSpeed * delta;
 		}
+	};
+
+	/**
+	*	Kills the particle, removing it from the display list
+	*	and telling the emitter to recycle it.
+	*	@method kill
+	*/
+	p.kill = function()
+	{
+		this.emitter.recycle(this);
 	};
 
 	/**

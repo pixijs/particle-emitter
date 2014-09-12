@@ -1,4 +1,4 @@
-/*! PixiParticles 0.0.1 */
+/*! PixiParticles 1.1.0 */
 /**
 *  @module cloudkid
 */
@@ -212,7 +212,8 @@
 	*/
 	var Particle = function(emitter)
 	{
-		PIXI.Sprite.call(this, emitter.particleImages[0]);
+		var art = emitter.particleImages[0] instanceof PIXI.Texture ? [emitter.particleImages[0]] : emitter.particleImages[0];
+		PIXI.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -242,6 +243,11 @@
 		*	@property {Function} ease
 		*/
 		this.ease = null;
+		/**
+		*	Extra data that the emitter passes along for custom particles.
+		*	@property {Object} extraData
+		*/
+		this.extraData = null;
 		/**
 		*	The alpha of the particle at the start of its life.
 		*	@property {Number} startAlpha
@@ -357,7 +363,7 @@
 	};
 	
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(PIXI.Sprite.prototype);
+	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -405,6 +411,17 @@
 	};
 
 	/**
+	*	Sets the texture for the particle. This can be overridden to allow
+	*	for an animated particle.
+	*	@method applyArt
+	*	@param {PIXI.Texture} art The texture to set.
+	*/
+	p.applyArt = function(art)
+	{
+		this.setTexture(art);
+	};
+
+	/**
 	*	Updates the particle.
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
@@ -416,7 +433,7 @@
 		//recycle particle if it is too old
 		if(this.age >= this.maxLife)
 		{
-			this.emitter.recycle(this);
+			this.kill();
 			return;
 		}
 		
@@ -464,6 +481,16 @@
 	};
 
 	/**
+	*	Kills the particle, removing it from the display list
+	*	and telling the emitter to recycle it.
+	*	@method kill
+	*/
+	p.kill = function()
+	{
+		this.emitter.recycle(this);
+	};
+
+	/**
 	*	Destroys the particle, removing references and preventing future use.
 	*	@method destroy
 	*/
@@ -498,6 +525,12 @@
 	*/
 	var Emitter = function(particleParent, particleImages, config)
 	{
+		/**
+		 *	The constructor used to create new particles. The default is
+		 *	the built in particle class.
+		 * 	@property {Function} particleConstructor
+		 */
+		this.particleConstructor = Particle;
 		//properties for individual particles
 		/**
 		*	An array of PIXI Texture objects.
@@ -587,9 +620,15 @@
 		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
-		*	@property {Function} customeEase
+		*	@property {Function} customEase
 		*/
 		this.customEase = null;
+		/**
+		 *	Extra data for use in custom particles. The emitter doesn't look inside, but
+		 *	passes it on to the particle to use in init().
+		 *	@property {Object} extraData
+		 */
+		this.extraData = null;
 		//properties for spawning particles
 		/**
 		*	Time between particle spawns in seconds.
@@ -836,6 +875,7 @@
 		{
 			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
 		}
+		this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -1066,12 +1106,12 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i < len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ? this._pool.pop() : new Particle(this);
+						var p = this._pool.length ? this._pool.pop() : new this.particleConstructor(this);
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
-							p.setTexture(this.particleImages.random());
+							p.applyArt(this.particleImages.random());
 						else
-							p.setTexture(this.particleImages[0]);//if they are actually the same texture, this call will quit early
+							p.applyArt(this.particleImages[0]);//if they are actually the same texture, this call will quit early
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
@@ -1081,11 +1121,17 @@
 						p.endScale = this.endScale;
 						p.startColor = this.startColor;
 						p.endColor = this.endColor;
+						//randomize the rotation speed
 						if(this.minRotationSpeed == this.maxRotationSpeed)
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						//set up the lifetime
 						p.maxLife = lifetime;
+						//set the custom ease, if any
+						p.ease = this.customEase;
+						//set the extra data, if any
+						p.extraData = this.extraData;
 						//call the proper function to handle rotation and position of particle
 						this._spawnFunc(p, emitPosX, emitPosY, i);
 						//initialize particle
