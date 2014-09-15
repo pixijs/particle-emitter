@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
-    <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+    <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
 	<title>PixiParticles v1.1.0 API Documentation : src/ParticleUtils.js</title>  
 </head>
 <body class="yui3-skin-sam">
@@ -243,6 +243,22 @@
 			return (s.s + t * (2 * (1 - t) * (s.cp - s.s) + t * (s.e - s.s)));
 		};
 		return simpleEase;
+	};
+
+	/**
+	*	Gets a blend mode, ensuring that it is valid.
+	*	@method getBlendMode
+	*	@param {String} name The name of the blend mode to get.
+	*	@return {int} The blend mode as specified in the PIXI.blendModes enumeration.
+	*	@static
+	*/
+	ParticleUtils.getBlendMode = function(name)
+	{
+		if(!name) return PIXI.blendModes.NORMAL;
+		name = name.toUpperCase();
+		while(name.indexOf(&quot; &quot;) &gt;= 0)
+			name = name.replace(&quot; &quot;, &quot;_&quot;);
+		return PIXI.blendModes[name] || PIXI.blendModes.NORMAL;
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;

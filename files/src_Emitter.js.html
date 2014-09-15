@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <link rel="stylesheet" href="http://yui.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
     <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
-    <script src="http://yui.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+    <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
 	<title>PixiParticles v1.1.0 API Documentation : src/Emitter.js</title>  
 </head>
 <body class="yui3-skin-sam">
@@ -207,6 +207,11 @@
 		*	@property {Number} maxRotationSpeed
 		*/
 		this.maxRotationSpeed = 0;
+		/**
+		*	The blend mode for all particles, as named by PIXI.blendModes.
+		*	@property {int} particleBlendMode
+		*/
+		this.particleBlendMode = 0;
 		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
@@ -460,6 +465,8 @@
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
+		//get the blend mode
+		this.particleBlendMode = ParticleUtils.getBlendMode(config.blendMode);
 		//use the custom ease if provided
 		if (config.ease)
 		{
@@ -718,6 +725,8 @@
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
 						//set up the lifetime
 						p.maxLife = lifetime;
+						//set the blend mode
+						p.blendMode = this.particleBlendMode;
 						//set the custom ease, if any
 						p.ease = this.customEase;
 						//set the extra data, if any
