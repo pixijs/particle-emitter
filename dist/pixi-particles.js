@@ -149,6 +149,22 @@
 		return simpleEase;
 	};
 
+	/**
+	*	Gets a blend mode, ensuring that it is valid.
+	*	@method getBlendMode
+	*	@param {String} name The name of the blend mode to get.
+	*	@return {int} The blend mode as specified in the PIXI.blendModes enumeration.
+	*	@static
+	*/
+	ParticleUtils.getBlendMode = function(name)
+	{
+		if(!name) return PIXI.blendModes.NORMAL;
+		name = name.toUpperCase();
+		while(name.indexOf(" ") >= 0)
+			name = name.replace(" ", "_");
+		return PIXI.blendModes[name] || PIXI.blendModes.NORMAL;
+	};
+
 	cloudkid.ParticleUtils = ParticleUtils;
 
 	/**
@@ -618,6 +634,11 @@
 		*/
 		this.maxRotationSpeed = 0;
 		/**
+		*	The blend mode for all particles, as named by PIXI.blendModes.
+		*	@property {int} particleBlendMode
+		*/
+		this.particleBlendMode = 0;
+		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
 		*	@property {Function} customEase
@@ -870,6 +891,8 @@
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
+		//get the blend mode
+		this.particleBlendMode = ParticleUtils.getBlendMode(config.blendMode);
 		//use the custom ease if provided
 		if (config.ease)
 		{
@@ -1128,6 +1151,8 @@
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
 						//set up the lifetime
 						p.maxLife = lifetime;
+						//set the blend mode
+						p.blendMode = this.particleBlendMode;
 						//set the custom ease, if any
 						p.ease = this.customEase;
 						//set the extra data, if any

@@ -148,6 +148,22 @@
 		return simpleEase;
 	};
 
+	/**
+	*	Gets a blend mode, ensuring that it is valid.
+	*	@method getBlendMode
+	*	@param {String} name The name of the blend mode to get.
+	*	@return {int} The blend mode as specified in the PIXI.blendModes enumeration.
+	*	@static
+	*/
+	ParticleUtils.getBlendMode = function(name)
+	{
+		if(!name) return PIXI.blendModes.NORMAL;
+		name = name.toUpperCase();
+		while(name.indexOf(" ") >= 0)
+			name = name.replace(" ", "_");
+		return PIXI.blendModes[name] || PIXI.blendModes.NORMAL;
+	};
+
 	cloudkid.ParticleUtils = ParticleUtils;
 
 	/**

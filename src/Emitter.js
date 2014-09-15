@@ -111,6 +111,11 @@
 		*/
 		this.maxRotationSpeed = 0;
 		/**
+		*	The blend mode for all particles, as named by PIXI.blendModes.
+		*	@property {int} particleBlendMode
+		*/
+		this.particleBlendMode = 0;
+		/**
 		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
 		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
 		*	@property {Function} customEase
@@ -363,6 +368,8 @@
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
+		//get the blend mode
+		this.particleBlendMode = ParticleUtils.getBlendMode(config.blendMode);
 		//use the custom ease if provided
 		if (config.ease)
 		{
@@ -621,6 +628,8 @@
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
 						//set up the lifetime
 						p.maxLife = lifetime;
+						//set the blend mode
+						p.blendMode = this.particleBlendMode;
 						//set the custom ease, if any
 						p.ease = this.customEase;
 						//set the extra data, if any
