@@ -143,7 +143,7 @@
 			var t, s;
 			var i = (qty * time) | 0;//do a quick floor operation
 			t = (time - (i * oneOverQty)) * qty;
-			s = segments[i];
+			s = segments[i] || segments[qty - 1];
 			return (s.s + t * (2 * (1 - t) * (s.cp - s.s) + t * (s.e - s.s)));
 		};
 		return simpleEase;
