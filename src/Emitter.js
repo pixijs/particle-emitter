@@ -21,9 +21,10 @@
 		/**
 		 *	The constructor used to create new particles. The default is
 		 *	the built in particle class.
-		 * 	@property {Function} particleConstructor
+		 * 	@property {Function} _particleConstructor
+		 * 	@private
 		 */
-		this.particleConstructor = Particle;
+		this._particleConstructor = Particle;
 		//properties for individual particles
 		/**
 		*	An array of PIXI Texture objects.
@@ -280,6 +281,29 @@
 	var p = Emitter.prototype = {};
 	
 	var helperPoint = new PIXI.Point();
+
+
+	/**
+	 *	The constructor used to create new particles. The default is
+	 *	the built in Particle class. Setting this will dump any active or
+	 *	pooled particles, if the emitter has already been used.
+	 * 	@property {Function} particleConstructor
+	 */
+	Object.defineProperty(p, "particleConstructor",
+	{
+		get: function() { return this._particleConstructor; },
+		set: function(value)
+		{
+			if(value != this._particleConstructor)
+			{
+				this._particleConstructor = value;
+				if(this._activeParticles.length)
+					this._activeParticles.length = 0;
+				if(this._pool.length)
+					this._pool.length = 0;
+			}
+		}
+	});
 
 	/**
 	*	Sets up the emitter based on the config settings.
