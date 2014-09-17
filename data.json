@@ -160,14 +160,16 @@
             "line": 21,
             "description": "The constructor used to create new particles. The default is\nthe built in particle class.",
             "itemtype": "property",
-            "name": "particleConstructor",
+            "name": "_particleConstructor",
             "type": "Function",
+            "access": "private",
+            "tagname": "",
             "class": "Emitter",
             "module": "cloudkid"
         },
         {
             "file": "src/Emitter.js",
-            "line": 28,
+            "line": 29,
             "description": "An array of PIXI Texture objects.",
             "itemtype": "property",
             "name": "particleImages",
@@ -177,7 +179,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 33,
+            "line": 34,
             "description": "The starting alpha of all particles.",
             "itemtype": "property",
             "name": "startAlpha",
@@ -188,7 +190,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 39,
+            "line": 40,
             "description": "The ending alpha of all particles.",
             "itemtype": "property",
             "name": "endAlpha",
@@ -199,7 +201,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 45,
+            "line": 46,
             "description": "The starting speed of all particles.",
             "itemtype": "property",
             "name": "startSpeed",
@@ -210,7 +212,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 51,
+            "line": 52,
             "description": "The ending speed of all particles.",
             "itemtype": "property",
             "name": "endSpeed",
@@ -221,7 +223,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 57,
+            "line": 58,
             "description": "The starting scale of all particles.",
             "itemtype": "property",
             "name": "startScale",
@@ -232,7 +234,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 63,
+            "line": 64,
             "description": "The ending scale of all particles.",
             "itemtype": "property",
             "name": "endScale",
@@ -243,7 +245,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 69,
+            "line": 70,
             "description": "The starting color of all particles, as red, green, and blue uints from 0-255.",
             "itemtype": "property",
             "name": "startColor",
@@ -253,7 +255,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 74,
+            "line": 75,
             "description": "The ending color of all particles, as red, green, and blue uints from 0-255.",
             "itemtype": "property",
             "name": "endColor",
@@ -263,7 +265,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 79,
+            "line": 80,
             "description": "The minimum lifetime for a particle, in seconds.",
             "itemtype": "property",
             "name": "minLifetime",
@@ -273,7 +275,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 84,
+            "line": 85,
             "description": "The maximum lifetime for a particle, in seconds.",
             "itemtype": "property",
             "name": "maxLifetime",
@@ -283,7 +285,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 89,
+            "line": 90,
             "description": "The minimum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
             "itemtype": "property",
             "name": "minStartRotation",
@@ -293,7 +295,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 95,
+            "line": 96,
             "description": "The maximum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
             "itemtype": "property",
             "name": "maxStartRotation",
@@ -303,7 +305,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 101,
+            "line": 102,
             "description": "The minimum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
             "itemtype": "property",
             "name": "minRotationSpeed",
@@ -313,7 +315,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 107,
+            "line": 108,
             "description": "The maximum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
             "itemtype": "property",
             "name": "maxRotationSpeed",
@@ -323,7 +325,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 113,
+            "line": 114,
             "description": "The blend mode for all particles, as named by PIXI.blendModes.",
             "itemtype": "property",
             "name": "particleBlendMode",
@@ -333,7 +335,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 118,
+            "line": 119,
             "description": "An easing function for nonlinear interpolation of values. Accepts a single parameter of time\nas a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.",
             "itemtype": "property",
             "name": "customEase",
@@ -343,7 +345,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 124,
+            "line": 125,
             "description": "Extra data for use in custom particles. The emitter doesn't look inside, but\npasses it on to the particle to use in init().",
             "itemtype": "property",
             "name": "extraData",
@@ -353,7 +355,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 131,
+            "line": 132,
             "description": "Time between particle spawns in seconds.",
             "itemtype": "property",
             "name": "frequency",
@@ -363,7 +365,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 136,
+            "line": 137,
             "description": "Maximum number of particles to keep alive at a time. If this limit \nis reached, no more particles will spawn until some have died.",
             "itemtype": "property",
             "name": "maxParticles",
@@ -374,7 +376,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 143,
+            "line": 144,
             "description": "The amount of time in seconds to emit for before setting emit to false.\nA value of -1 is an unlimited amount of time.",
             "itemtype": "property",
             "name": "emitterLifetime",
@@ -385,7 +387,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 150,
+            "line": 151,
             "description": "Position at which to spawn particles, relative to the emitter's owner's origin.\nFor example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}\nto spawn at the rear of the rocket.\nTo change this, use updateSpawnPos().",
             "itemtype": "property",
             "name": "spawnPos",
@@ -396,7 +398,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 159,
+            "line": 160,
             "description": "How the particles will be spawned. Valid types are \"point\", \"rectangle\", \"circle\", \"burst\".",
             "itemtype": "property",
             "name": "spawnType",
@@ -407,7 +409,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 165,
+            "line": 166,
             "description": "A reference to the emitter function specific to the spawn type.",
             "itemtype": "property",
             "name": "_spawnFunc",
@@ -419,7 +421,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 171,
+            "line": 172,
             "description": "A rectangle relative to spawnPos to spawn particles inside if the spawn type is \"rect\".",
             "itemtype": "property",
             "name": "spawnRect",
@@ -429,7 +431,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 176,
+            "line": 177,
             "description": "A circle relative to spawnPos to spawn particles inside if the spawn type is \"circle\".",
             "itemtype": "property",
             "name": "spawnCircle",
@@ -439,7 +441,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 181,
+            "line": 182,
             "description": "Number of particles to spawn each wave in a burst.",
             "itemtype": "property",
             "name": "particlesPerWave",
@@ -450,7 +452,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 187,
+            "line": 188,
             "description": "Spacing between particles in a burst. 0 gives a random angle for each particle.",
             "itemtype": "property",
             "name": "particleSpacing",
@@ -461,7 +463,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 193,
+            "line": 194,
             "description": "Angle at which to start spawning particles in a burst.",
             "itemtype": "property",
             "name": "angleStart",
@@ -472,7 +474,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 199,
+            "line": 200,
             "description": "Rotation of the emitter or emitter's owner in degrees. This is added to the calculated spawn angle.\nTo change this, use rotate().",
             "itemtype": "property",
             "name": "rotation",
@@ -484,7 +486,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 207,
+            "line": 208,
             "description": "The world position of the emitter's owner, to add spawnPos to when spawning particles. To change this,\nuse updateSpawnOrigin().",
             "itemtype": "property",
             "name": "ownerPos",
@@ -496,7 +498,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 215,
+            "line": 216,
             "description": "The origin + spawnPos in the previous update, so that the spawn position\ncan be interpolated to space out particles better.",
             "itemtype": "property",
             "name": "_prevEmitterPos",
@@ -508,7 +510,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 222,
+            "line": 223,
             "description": "If _prevEmitterPos is valid, to prevent interpolation on the first update",
             "itemtype": "property",
             "name": "_prevPosIsValid",
@@ -521,7 +523,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 229,
+            "line": 230,
             "description": "If either ownerPos or spawnPos has changed since the previous update.",
             "itemtype": "property",
             "name": "_posChanged",
@@ -531,7 +533,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 234,
+            "line": 235,
             "description": "The display object to add particles to.",
             "itemtype": "property",
             "name": "parent",
@@ -541,7 +543,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 239,
+            "line": 240,
             "description": "If particles should be added at the back of the display list instead of the front.",
             "itemtype": "property",
             "name": "addAtBack",
@@ -551,7 +553,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 244,
+            "line": 245,
             "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
             "itemtype": "property",
             "name": "_emit",
@@ -563,7 +565,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 251,
+            "line": 252,
             "description": "The timer for when to spawn particles in seconds, where numbers less \nthan 0 mean that particles should be spawned.",
             "itemtype": "property",
             "name": "_spawnTimer",
@@ -575,7 +577,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 258,
+            "line": 259,
             "description": "The life of the emitter in seconds.",
             "itemtype": "property",
             "name": "_emitterLife",
@@ -587,7 +589,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 264,
+            "line": 265,
             "description": "The particles that are active and on the display list.",
             "itemtype": "property",
             "name": "_activeParticles",
@@ -597,7 +599,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 269,
+            "line": 270,
             "description": "The particles that are not currently being used.",
             "itemtype": "property",
             "name": "_pool",
@@ -607,7 +609,17 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 284,
+            "line": 286,
+            "description": "The constructor used to create new particles. The default is\nthe built in Particle class. Setting this will dump any active or\npooled particles, if the emitter has already been used.",
+            "itemtype": "property",
+            "name": "particleConstructor",
+            "type": "Function",
+            "class": "Emitter",
+            "module": "cloudkid"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 308,
             "description": "Sets up the emitter based on the config settings.",
             "itemtype": "method",
             "name": "init",
@@ -628,7 +640,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 446,
+            "line": 470,
             "description": "Recycles an individual particle.",
             "itemtype": "method",
             "name": "recycle",
@@ -644,7 +656,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 465,
+            "line": 489,
             "description": "Sets the rotation of the emitter to a new value.",
             "itemtype": "method",
             "name": "rotate",
@@ -660,7 +672,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 482,
+            "line": 506,
             "description": "Changes the spawn position of the emitter.",
             "itemtype": "method",
             "name": "updateSpawnPos",
@@ -681,7 +693,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 495,
+            "line": 519,
             "description": "Changes the position of the emitter's owner. You should call this if you are adding\nparticles to the world display object that your emitter's owner is moving around in.",
             "itemtype": "method",
             "name": "updateOwnerPos",
@@ -702,7 +714,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 509,
+            "line": 533,
             "description": "Prevents emitter position interpolation in the next update.\nThis should be used if you made a major position change of your emitter's owner\nthat was not normal movement.",
             "itemtype": "method",
             "name": "resetPositionTracking",
@@ -711,7 +723,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 520,
+            "line": 544,
             "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
             "itemtype": "property",
             "name": "emit",
@@ -721,7 +733,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 535,
+            "line": 559,
             "description": "Updates all particles spawned by this emitter and emits new ones.",
             "itemtype": "method",
             "name": "update",
@@ -737,7 +749,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 666,
+            "line": 690,
             "description": "Positions a particle for a point type emitter.",
             "itemtype": "method",
             "name": "_spawnPoint",
@@ -770,7 +782,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 687,
+            "line": 711,
             "description": "Positions a particle for a rectangle type emitter.",
             "itemtype": "method",
             "name": "_spawnRect",
@@ -803,7 +815,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 712,
+            "line": 736,
             "description": "Positions a particle for a circle type emitter.",
             "itemtype": "method",
             "name": "_spawnCircle",
@@ -836,7 +848,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 740,
+            "line": 764,
             "description": "Positions a particle for a burst type emitter.",
             "itemtype": "method",
             "name": "_spawnBurst",
@@ -869,7 +881,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 761,
+            "line": 785,
             "description": "Kills all active particles immediately.",
             "itemtype": "method",
             "name": "cleanup",
@@ -878,7 +890,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 773,
+            "line": 797,
             "description": "Destroys the emitter and all of its particles.",
             "itemtype": "method",
             "name": "destroy",
