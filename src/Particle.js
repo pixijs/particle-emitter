@@ -260,7 +260,7 @@
 			this.scale.x = this.scale.y = scale;
 		}
 		//handle movement
-		if(this._doSpeed || this.startSpeed !== 0)
+		if(this._doSpeed || this.startSpeed !== 0 || this.acceleration)
 		{
 			//interpolate speed
 			if (this._doSpeed)
