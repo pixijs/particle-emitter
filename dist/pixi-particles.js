@@ -285,6 +285,11 @@
 		*/
 		this.endSpeed = 0;
 		/**
+		*	Acceleration to apply to the particle.
+		*	@property {PIXI.Point} accleration
+		*/
+		this.acceleration = null;
+		/**
 		*	The scale of the particle at the start of its life.
 		*	@property {Number} startScale
 		*/
@@ -477,6 +482,11 @@
 				ParticleUtils.normalize(this.velocity);
 				ParticleUtils.scaleBy(this.velocity, speed);
 			}
+			else if(this.acceleration)
+			{
+				this.velocity.x += this.acceleration.x * delta;
+				this.velocity.y += this.acceleration.y * delta;
+			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
 			this.position.y += this.velocity.y * delta;
@@ -493,6 +503,10 @@
 		if(this.rotationSpeed !== 0)
 		{
 			this.rotation += this.rotationSpeed * delta;
+		}
+		else if(this.acceleration)
+		{
+			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
 	};
 
@@ -578,6 +592,13 @@
 		*	@default 0
 		*/
 		this.endSpeed = 0;
+		/**
+		*	Acceleration to apply to particles. Using this disables
+		*	any interpolation of particle speed.
+		*	@property {PIXI.Point} acceleration
+		*	@default null
+		*/
+		this.acceleration = null;
 		/**
 		*	The starting scale of all particles.
 		*	@property {Number} startScale
@@ -876,6 +897,14 @@
 		}
 		else
 			this.startSpeed = this.endSpeed = 0;
+		var acceleration = config.acceleration;
+		if(acceleration && (acceleration.x || acceleration.y))
+		{
+			this.endSpeed = this.startSpeed;
+			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
+		}
+		else
+			this.acceleration = null;
 		//set up the scale
 		if (config.scale)
 		{
@@ -1164,6 +1193,7 @@
 						p.endAlpha = this.endAlpha;
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
+						p.acceleration = this.acceleration;
 						p.startScale = this.startScale;
 						p.endScale = this.endScale;
 						p.startColor = this.startColor;

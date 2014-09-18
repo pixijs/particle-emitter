@@ -56,6 +56,15 @@
 		*/
 		this.endSpeed = 0;
 		/**
+		*	Acceleration to apply to particles. Using this disables
+		*	any interpolation of particle speed. If the particles do
+		*	not have a rotation speed, then they will be rotated to
+		*	match the direction of travel.
+		*	@property {PIXI.Point} acceleration
+		*	@default null
+		*/
+		this.acceleration = null;
+		/**
 		*	The starting scale of all particles.
 		*	@property {Number} startScale
 		*	@default 1
@@ -353,6 +362,14 @@
 		}
 		else
 			this.startSpeed = this.endSpeed = 0;
+		var acceleration = config.acceleration;
+		if(acceleration && (acceleration.x || acceleration.y))
+		{
+			this.endSpeed = this.startSpeed;
+			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
+		}
+		else
+			this.acceleration = null;
 		//set up the scale
 		if (config.scale)
 		{
@@ -641,6 +658,7 @@
 						p.endAlpha = this.endAlpha;
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
+						p.acceleration = this.acceleration;
 						p.startScale = this.startScale;
 						p.endScale = this.endScale;
 						p.startColor = this.startColor;
