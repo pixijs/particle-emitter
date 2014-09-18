@@ -257,9 +257,9 @@
         {
             "file": "src/Emitter.js",
             "line": 79,
-            "description": "A minimum multiplier for the scale of a particle at both start and\nend. A value between minimumScaleMultipler and 1 is randomly generated\nand multiplied with startScale and endScale to provide the actual\nstartScale and endScale for each particle.",
+            "description": "A minimum multiplier for the scale of a particle at both start and\nend. A value between minimumScaleMultiplier and 1 is randomly generated\nand multiplied with startScale and endScale to provide the actual\nstartScale and endScale for each particle.",
             "itemtype": "property",
-            "name": "minimumScaleMultipler",
+            "name": "minimumScaleMultiplier",
             "type": "Number",
             "default": "1",
             "class": "Emitter",
