@@ -594,7 +594,9 @@
 		this.endSpeed = 0;
 		/**
 		*	Acceleration to apply to particles. Using this disables
-		*	any interpolation of particle speed.
+		*	any interpolation of particle speed. If the particles do
+		*	not have a rotation speed, then they will be rotated to
+		*	match the direction of travel.
 		*	@property {PIXI.Point} acceleration
 		*	@default null
 		*/
@@ -611,6 +613,15 @@
 		*	@default 1
 		*/
 		this.endScale = 1;
+		/**
+		*	A minimum multiplier for the scale of a particle at both start and
+		*	end. A value between minimumScaleMultipler and 1 is randomly generated
+		*	and multiplied with startScale and endScale to provide the actual
+		*	startScale and endScale for each particle.
+		*	@property {Number} minimumScaleMultipler
+		*	@default 1
+		*/
+		this.minimumScaleMultipler = 1;
 		/**
 		*	The starting color of all particles, as red, green, and blue uints from 0-255.
 		*	@property {Array} startColor
@@ -910,9 +921,10 @@
 		{
 			this.startScale = config.scale.start;
 			this.endScale = config.scale.end;
+			this.minimumScaleMultipler = config.scale.minimumScaleMultipler || 1;
 		}
 		else
-			this.startScale = this.endScale = 1;
+			this.startScale = this.endScale = this.minimumScaleMultipler = 1;
 		//set up the color
 		if (config.color)
 		{
@@ -1194,8 +1206,17 @@
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
 						p.acceleration = this.acceleration;
-						p.startScale = this.startScale;
-						p.endScale = this.endScale;
+						if(this.minimumScaleMultipler != 1)
+						{
+							var rand = Math.random() * (1 - this.minimumScaleMultipler) + this.minimumScaleMultipler;
+							p.startScale = this.startScale * rand;
+							p.endScale = this.endScale * rand;
+						}
+						else
+						{
+							p.startScale = this.startScale;
+							p.endScale = this.endScale;
+						}
 						p.startColor = this.startColor;
 						p.endColor = this.endColor;
 						//randomize the rotation speed
