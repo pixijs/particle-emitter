@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>flame</title>
+        <title>Flame</title>
         <meta name="description" content="flame emitter">
         <link rel="stylesheet" href="css/main.css">
 
@@ -24,53 +24,53 @@
 			// See js/ParticleExample.js for actual setup
 			new ParticleExample(
 				// The image to use
-				"images/particle.png", 
+				["images/particle.png", "images/Fire.png"], 
 
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
 					"alpha": {
-						"start": 0.8,
-						"end": 0.1
+						"start": 0.62,
+						"end": 0
 					},
 					"scale": {
-						"start": 0.6,
-						"end": 0.4
+						"start": 0.25,
+						"end": 0.75
 					},
 					"color": {
-						"start": "fe8e06",
-						"end": "fffd00"
+						"start": "fff191",
+						"end": "ff622c"
 					},
 					"speed": {
-						"start": 100,
-						"end": 150
+						"start": 500,
+						"end": 500
 					},
 					"startRotation": {
-						"min": -45,
-						"max": -135
+						"min": 265,
+						"max": 275
 					},
 					"rotationSpeed": {
-						"min": 0,
-						"max": 0
+						"min": 50,
+						"max": 50
 					},
 					"lifetime": {
-						"min": 0.3,
-						"max": 0.8
+						"min": 0.1,
+						"max": 0.75
 					},
-					"frequency": 0.008,
-					"emitterLifetime": -1,
+					"blendMode": "normal",
+					"frequency": 0.001,
+					"emitterLifetime": 0,
 					"maxParticles": 1000,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
 					"addAtBack": false,
-					"spawnType": "rect",
-					"spawnRect": {
-						"x": -15,
-						"y": -2,
-						"w": 30,
-						"h": 4
+					"spawnType": "circle",
+					"spawnCircle": {
+						"x": 0,
+						"y": 0,
+						"r": 10
 					}
 				});
 		</script>

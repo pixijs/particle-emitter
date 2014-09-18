@@ -4,16 +4,17 @@
 	*  Basic example setup
 	*  @class ParticleExample
 	*  @constructor
-	*  @param {String} imagePath The local path to the image source
+	*  @param {String[]} imagePaths The local path to the image source
 	*  @param {Object} config The emitter configuration
 	*/
-	var ParticleExample = function(imagePath, config)
+	var ParticleExample = function(imagePaths, config)
 	{
 		// Basic PIXI Setup
 		var canvas = document.getElementById("stage"),
 			stage = new PIXI.Stage(0x0),
 			emitter = null,
-			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, canvas);
+			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, canvas),
+			bg = null;
 
 		// Calculate the current time
 		var elapsed = Date.now();
@@ -37,18 +38,37 @@
 			canvas.width = window.innerWidth;
 			canvas.height = window.innerHeight;
 			renderer.resize(canvas.width, canvas.height);
+			if(bg)
+			{
+				//bg is a 1px by 1px image
+				bg.scale.x = canvas.width;
+				bg.scale.y = canvas.height;
+			}
 		};
 		window.onresize();
 
-		// Preload the particle image and create a PIXI texture from it
-		var image = new Image();
-		image.src = imagePath;
-		image.onload = function()
+		// Preload the particle images and create PIXI textures from it
+		var urls = imagePaths.slice();
+		urls.push("images/bg.png");
+		var loader = new PIXI.AssetLoader(imagePaths);
+		loader.onComplete = function()
 		{
+			bg = new PIXI.Sprite(PIXI.Texture.fromImage("images/bg.png"));
+			//bg is a 1px by 1px image
+			bg.scale.x = canvas.width;
+			bg.scale.y = canvas.height;
+			bg.tint = 0x000000;
+			stage.addChild(bg);
+			//collect the textures, now that they are all loaded
+			var textures = [];
+			for(var i = 0; i < imagePaths.length; ++i)
+				textures.push(PIXI.Texture.fromImage(imagePaths[i]));
 			// Create the new emitter and attach it to the stage
+			var emitterContainer = new PIXI.DisplayObjectContainer();
+			stage.addChild(emitterContainer);
 			emitter = new cloudkid.Emitter(
-				stage,
-				PIXI.Texture.fromImage(image.src),
+				emitterContainer,
+				textures,
 				config
 			);
 
@@ -65,6 +85,7 @@
 			// Start the update
 			update();
 		};
+		loader.load();
 	};
 
 	// Assign to global space

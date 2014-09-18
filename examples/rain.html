@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>rain</title>
+        <title>Rain</title>
         <meta name="description" content="rain emitter">
         <link rel="stylesheet" href="css/main.css">
 
@@ -24,7 +24,7 @@
 			// See js/ParticleExample.js for actual setup
 			new ParticleExample(
 				// The image to use
-				"images/rain.png", 
+				["images/HardRain.png"], 
 
 				// Emitter configuration, edit this to change the look
 				// of the emitter
@@ -38,16 +38,16 @@
 						"end": 1
 					},
 					"color": {
-						"start": "267dff",
-						"end": "267dff"
+						"start": "ffffff",
+						"end": "ffffff"
 					},
 					"speed": {
-						"start": 600,
-						"end": 600
+						"start": 3000,
+						"end": 3000
 					},
 					"startRotation": {
-						"min": 85,
-						"max": 95
+						"min": 65,
+						"max": 65
 					},
 					"rotationSpeed": {
 						"min": 0,
@@ -57,8 +57,9 @@
 						"min": 0.81,
 						"max": 0.81
 					},
+					"blendMode": "normal",
 					"frequency": 0.004,
-					"emitterLifetime": -1,
+					"emitterLifetime": 0,
 					"maxParticles": 1000,
 					"pos": {
 						"x": 0,
@@ -67,8 +68,8 @@
 					"addAtBack": false,
 					"spawnType": "rect",
 					"spawnRect": {
-						"x": -500,
-						"y": -260,
+						"x": -600,
+						"y": -460,
 						"w": 900,
 						"h": 20
 					}
