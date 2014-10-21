@@ -1,4 +1,4 @@
-/*! PixiParticles 1.1.0 */
+/*! PixiParticles 1.1.1 */
 /**
 *  @module cloudkid
 */
@@ -690,7 +690,7 @@
 		*/
 		this.frequency = 0;
 		/**
-		*	Maximum number of particles to keep alive at a time. If this limit 
+		*	Maximum number of particles to keep alive at a time. If this limit
 		*	is reached, no more particles will spawn until some have died.
 		*	@property {int} maxParticles
 		*	@default 1000
@@ -805,7 +805,7 @@
 		*/
 		this._emit = false;
 		/**
-		*	The timer for when to spawn particles in seconds, where numbers less 
+		*	The timer for when to spawn particles in seconds, where numbers less
 		*	than 0 mean that particles should be spawned.
 		*	@property {Number} _spawnTimer
 		*	@private
@@ -882,9 +882,9 @@
 				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
 				{
 					if(window.Debug)
-						Debug.warn("CloudKid Particles: using particle textures from different images may hinder performance in WebGL");
-					else
-						console.warn("CloudKid Particles: using particle textures from different images may hinder performance in WebGL");
+						Debug.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
+					else if(window.console)
+						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
 					break;
 				}
 			}
