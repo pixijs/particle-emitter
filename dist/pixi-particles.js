@@ -1,4 +1,4 @@
-/*! PixiParticles 1.1.1 */
+/*! PixiParticles 1.2.2 */
 /**
 *  @module cloudkid
 */
