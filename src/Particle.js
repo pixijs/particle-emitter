@@ -15,7 +15,9 @@
 	*/
 	var Particle = function(emitter)
 	{
-		var art = emitter.particleImages[0] instanceof PIXI.Texture ? [emitter.particleImages[0]] : emitter.particleImages[0];
+		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
+															[emitter.particleImages[0]] :
+															emitter.particleImages[0];
 		PIXI.MovieClip.call(this, art);
 
 		/**
@@ -25,7 +27,7 @@
 		this.emitter = emitter;
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
-		*	The velocity of the particle. Speed may change, but the angle also 
+		*	The velocity of the particle. Speed may change, but the angle also
 		*	contained in velocity is constant.
 		*	@property {PIXI.Point} velocity
 		*/
@@ -248,7 +250,20 @@
 		//determine our interpolation value
 		var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
 		if (this.ease)
-			lerp = this.ease(lerp);
+		{
+			if(this.ease.length == 4)
+			{
+				//the t, b, c, d parameters that some tween libraries use
+				//(time, initial value, end value, duration)
+				lerp = this.ease(lerp, 0, 1, 1);
+			}
+			else
+			{
+				//the simplified version that we like that takes
+				//one parameter, time from 0-1. TweenJS eases provide this usage.
+				lerp = this.ease(lerp);
+			}
+		}
 		
 		//interpolate alpha
 		if (this._doAlpha)

@@ -64,7 +64,7 @@
 
 	/**
 	 * Multiplies the x and y values of this point by a value.
-	 * @method scaleBy 
+	 * @method scaleBy
 	 * @static
 	 * @param {PIXI.Point} point The point to scaleBy
 	 * @param value {Number} The value to scale by.
@@ -88,8 +88,9 @@
 	};
 
 	/**
-	*	Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB", "AARRGGBB", or "RRGGBB" 
-	*	to an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].
+	*	Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+	*	"AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+	*	[r, g, b, (a)].
 	*	@method hexToRGB
 	*	@param {String} color The input color string.
 	*	@param {Array} output An array to put the output in. If omitted, a new array is created.
@@ -121,11 +122,13 @@
 	};
 
 	/**
-	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated 
+	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
 	*	by the related tool at http://www.greensock.com/customease/.
 	*	@method generateEase
-	*	@param {Array} segments An array of segments, as created by http://www.greensock.com/customease/.
-	*	@return {Function} A function that calculates the percentage of change at a given point in time (0-1 inclusive).
+	*	@param {Array} segments An array of segments, as created by
+	*	http://www.greensock.com/customease/.
+	*	@return {Function} A function that calculates the percentage of change at
+	*						a given point in time (0-1 inclusive).
 	*	@static
 	*/
 	ParticleUtils.generateEase = function(segments)
@@ -134,8 +137,9 @@
 		var oneOverQty = 1 / qty;
 		/*
 		*	Calculates the percentage of change at a given point in time (0-1 inclusive).
-		*	@param time The time of the ease, 0-1 inclusive.
-		*	@return The percentage of the change, 0-1 inclusive (unless your ease goes outside those bounds).
+		*	@param {Number} time The time of the ease, 0-1 inclusive.
+		*	@return {Number} The percentage of the change, 0-1 inclusive (unless your
+		*			ease goes outside those bounds).
 		*/
 		var simpleEase = function(time)
 		{
@@ -186,7 +190,7 @@
 		// to make it not enumerable set the enumerable property to false
 		Object.defineProperty(Array.prototype, 'shuffle', {
 			enumerable: false,
-			writable:false, 
+			writable:false,
 			value: function() {
 				for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
 				return this;

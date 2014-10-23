@@ -12,18 +12,20 @@
 	*	A particle emitter.
 	*	@class Emitter
 	*	@constructor
-	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the particles to.
-	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use for the particles.
+	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+	*														particles to.
+	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
+	*												for the particles.
 	*	@param {Object} [config] A configuration object containing settings for the emitter.
 	*/
 	var Emitter = function(particleParent, particleImages, config)
 	{
 		/**
-		 *	The constructor used to create new particles. The default is
-		 *	the built in particle class.
-		 * 	@property {Function} _particleConstructor
-		 * 	@private
-		 */
+		*	The constructor used to create new particles. The default is
+		*	the built in particle class.
+		*	@property {Function} _particleConstructor
+		*	@private
+		*/
 		this._particleConstructor = Particle;
 		//properties for individual particles
 		/**
@@ -135,8 +137,9 @@
 		*/
 		this.particleBlendMode = 0;
 		/**
-		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
-		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
+		*	An easing function for nonlinear interpolation of values. Accepts a single
+		*	parameter of time as a value from 0-1, inclusive. Expected outputs are values
+		*	from 0-1, inclusive.
 		*	@property {Function} customEase
 		*/
 		this.customEase = null;
@@ -168,7 +171,8 @@
 		this.emitterLifetime = -1;
 		/**
 		*	Position at which to spawn particles, relative to the emitter's owner's origin.
-		*	For example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}
+		*	For example, the flames of a rocket travelling right might have a spawnPos
+		*	of {x:-50, y:0}.
 		*	to spawn at the rear of the rocket.
 		*	To change this, use updateSpawnPos().
 		*	@property {PIXI.Point} spawnPos
@@ -176,7 +180,8 @@
 		*/
 		this.spawnPos = null;
 		/**
-		*	How the particles will be spawned. Valid types are "point", "rectangle", "circle", "burst".
+		*	How the particles will be spawned. Valid types are "point", "rectangle",
+		*	"circle", "burst".
 		*	@property {String} spawnType
 		*	@readOnly
 		*/
@@ -216,7 +221,8 @@
 		*/
 		this.angleStart = 0;
 		/**
-		*	Rotation of the emitter or emitter's owner in degrees. This is added to the calculated spawn angle.
+		*	Rotation of the emitter or emitter's owner in degrees. This is added to
+		*	the calculated spawn angle.
 		*	To change this, use rotate().
 		*	@property {Number} rotation
 		*	@default 0
@@ -224,8 +230,8 @@
 		*/
 		this.rotation = 0;
 		/**
-		*	The world position of the emitter's owner, to add spawnPos to when spawning particles. To change this,
-		*	use updateSpawnOrigin().
+		*	The world position of the emitter's owner, to add spawnPos to when
+		*	spawning particles. To change this, use updateSpawnOrigin().
 		*	@property {PIXI.Point} ownerPos
 		*	@default {x:0, y:0}
 		*	@readOnly
@@ -302,11 +308,11 @@
 
 
 	/**
-	 *	The constructor used to create new particles. The default is
-	 *	the built in Particle class. Setting this will dump any active or
-	 *	pooled particles, if the emitter has already been used.
-	 * 	@property {Function} particleConstructor
-	 */
+	*	The constructor used to create new particles. The default is
+	*	the built in Particle class. Setting this will dump any active or
+	*	pooled particles, if the emitter has already been used.
+	*	@property {Function} particleConstructor
+	*/
 	Object.defineProperty(p, "particleConstructor",
 	{
 		get: function() { return this._particleConstructor; },
@@ -326,7 +332,8 @@
 	/**
 	*	Sets up the emitter based on the config settings.
 	*	@method init
-	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to use for the particles.
+	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to
+	*												use for the particles.
 	*	@param {Object} config A configuration object containing settings for the emitter.
 	*/
 	p.init = function(particleImages, config)
@@ -336,8 +343,11 @@
 		//clean up any existing particles
 		this.cleanup();
 		//set up the array of textures
-		this.particleImages = particleImages instanceof PIXI.Texture ? [particleImages] : particleImages;
-		//particles from different base textures will be slower in WebGL than if they were from one spritesheet
+		this.particleImages = particleImages instanceof PIXI.Texture ?
+																[particleImages] :
+																particleImages;
+		//particles from different base textures will be slower in WebGL than if they
+		//were from one spritesheet
 		if(this.particleImages.length > 1)
 		{
 			for(var i = this.particleImages.length - 1; i > 0; --i)
@@ -424,7 +434,9 @@
 		//use the custom ease if provided
 		if (config.ease)
 		{
-			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
+			this.customEase = typeof config.ease == "function" ?
+														config.ease :
+														ParticleUtils.generateEase(config.ease);
 		}
 		this.extraData = config.extraData || null;
 		//////////////////////////
@@ -639,11 +651,13 @@
 				//only make the particle if it wouldn't immediately destroy itself
 				if(-this._spawnTimer < lifetime)
 				{
-					//If the position has changed and this isn't the first spawn, interpolate the spawn position
+					//If the position has changed and this isn't the first spawn,
+					//interpolate the spawn position
 					var emitPosX, emitPosY;
 					if (this._prevPosIsValid && this._posChanged)
 					{
-						var lerp = 1 + this._spawnTimer / delta;//1 - _spawnTimer / delta, but _spawnTimer is negative
+						//1 - _spawnTimer / delta, but _spawnTimer is negative
+						var lerp = 1 + this._spawnTimer / delta;
 						emitPosX = (curX - prevX) * lerp + prevX;
 						emitPosY = (curY - prevY) * lerp + prevY;
 					}
@@ -657,12 +671,20 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i < len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ? this._pool.pop() : new this.particleConstructor(this);
+						var p = this._pool.length ?
+												this._pool.pop() :
+												new this.particleConstructor(this);
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
+						{
 							p.applyArt(this.particleImages.random());
+						}
 						else
-							p.applyArt(this.particleImages[0]);//if they are actually the same texture, this call will quit early
+						{
+							//if they are actually the same texture, a standard particle
+							//will quit early from the texture setting in setTexture().
+							p.applyArt(this.particleImages[0]);
+						}
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
@@ -735,7 +757,8 @@
 	*/
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on
+		//starting particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -756,7 +779,8 @@
 	*/
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -781,7 +805,8 @@
 	*/
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -809,7 +834,8 @@
 	*/
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on spawn
+		//angle and rotation of emitter
 		if(this.particleSpacing === 0)
 			p.rotation = Math.random() * 360;
 		else
