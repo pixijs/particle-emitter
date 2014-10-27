@@ -348,7 +348,7 @@
 																particleImages;
 		//particles from different base textures will be slower in WebGL than if they
 		//were from one spritesheet
-		if(this.particleImages.length > 1)
+		if(DEBUG && this.particleImages.length > 1)
 		{
 			for(var i = this.particleImages.length - 1; i > 0; --i)
 			{
@@ -438,6 +438,8 @@
 														config.ease :
 														ParticleUtils.generateEase(config.ease);
 		}
+		else
+			this.customEase = null;
 		this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //

@@ -65,7 +65,7 @@
 
 	/**
 	 * Multiplies the x and y values of this point by a value.
-	 * @method scaleBy 
+	 * @method scaleBy
 	 * @static
 	 * @param {PIXI.Point} point The point to scaleBy
 	 * @param value {Number} The value to scale by.
@@ -89,8 +89,9 @@
 	};
 
 	/**
-	*	Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB", "AARRGGBB", or "RRGGBB" 
-	*	to an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].
+	*	Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+	*	"AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+	*	[r, g, b, (a)].
 	*	@method hexToRGB
 	*	@param {String} color The input color string.
 	*	@param {Array} output An array to put the output in. If omitted, a new array is created.
@@ -122,11 +123,13 @@
 	};
 
 	/**
-	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated 
+	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
 	*	by the related tool at http://www.greensock.com/customease/.
 	*	@method generateEase
-	*	@param {Array} segments An array of segments, as created by http://www.greensock.com/customease/.
-	*	@return {Function} A function that calculates the percentage of change at a given point in time (0-1 inclusive).
+	*	@param {Array} segments An array of segments, as created by
+	*	http://www.greensock.com/customease/.
+	*	@return {Function} A function that calculates the percentage of change at
+	*						a given point in time (0-1 inclusive).
 	*	@static
 	*/
 	ParticleUtils.generateEase = function(segments)
@@ -135,8 +138,9 @@
 		var oneOverQty = 1 / qty;
 		/*
 		*	Calculates the percentage of change at a given point in time (0-1 inclusive).
-		*	@param time The time of the ease, 0-1 inclusive.
-		*	@return The percentage of the change, 0-1 inclusive (unless your ease goes outside those bounds).
+		*	@param {Number} time The time of the ease, 0-1 inclusive.
+		*	@return {Number} The percentage of the change, 0-1 inclusive (unless your
+		*			ease goes outside those bounds).
 		*/
 		var simpleEase = function(time)
 		{
@@ -187,7 +191,7 @@
 		// to make it not enumerable set the enumerable property to false
 		Object.defineProperty(Array.prototype, 'shuffle', {
 			enumerable: false,
-			writable:false, 
+			writable:false,
 			value: function() {
 				for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
 				return this;
@@ -228,7 +232,9 @@
 	*/
 	var Particle = function(emitter)
 	{
-		var art = emitter.particleImages[0] instanceof PIXI.Texture ? [emitter.particleImages[0]] : emitter.particleImages[0];
+		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
+															[emitter.particleImages[0]] :
+															emitter.particleImages[0];
 		PIXI.MovieClip.call(this, art);
 
 		/**
@@ -238,7 +244,7 @@
 		this.emitter = emitter;
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
-		*	The velocity of the particle. Speed may change, but the angle also 
+		*	The velocity of the particle. Speed may change, but the angle also
 		*	contained in velocity is constant.
 		*	@property {PIXI.Point} velocity
 		*/
@@ -461,7 +467,20 @@
 		//determine our interpolation value
 		var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
 		if (this.ease)
-			lerp = this.ease(lerp);
+		{
+			if(this.ease.length == 4)
+			{
+				//the t, b, c, d parameters that some tween libraries use
+				//(time, initial value, end value, duration)
+				lerp = this.ease(lerp, 0, 1, 1);
+			}
+			else
+			{
+				//the simplified version that we like that takes
+				//one parameter, time from 0-1. TweenJS eases provide this usage.
+				lerp = this.ease(lerp);
+			}
+		}
 		
 		//interpolate alpha
 		if (this._doAlpha)
@@ -544,23 +563,166 @@
 
 	var ParticleUtils = cloudkid.ParticleUtils,
 		Particle = cloudkid.Particle;
+	
+	/**
+	*	An individual particle image with an animation. You shouldn't have to deal with these.
+	*	@class AnimatedParticle
+	*	@constructor
+	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
+	*/
+	var AnimatedParticle = function(emitter)
+	{
+		Particle.call(this, emitter);
+		
+		/**
+		 * Array used to avoid damaging previous texture arrays
+		 * when applyArt() passes a texture instead of an array.
+		 * @property {Array} _helperTextures
+		 * @private
+		 */
+		this._helperTextures = [];
+	};
+	
+	// Reference to the super class
+	var s = Particle.prototype;
+	// Reference to the prototype
+	var p = AnimatedParticle.prototype = Object.create(s);
+	
+	/**
+	*	Initializes the particle for use, based on the properties that have to
+	*	have been set already on the particle.
+	*	@method init
+	*/
+	p.init = function()
+	{
+		s.init.call(this);
+		
+		//set the standard PIXI animationSpeed
+		if(this.extraData)
+		{
+			//fps will work differently for CloudKid's fork of PIXI than
+			//standard PIXI, where it will just be a variable
+			if(this.extraData.fps)
+			{
+				this.fps = this.extraData.fps;
+			}
+			else
+			{
+				this.fps = 60;
+			}
+			var animationSpeed = this.extraData.animationSpeed || 1;
+			if(animationSpeed == "matchLife")
+			{
+				this.loop = false;
+				//animation should end when the particle does
+				if(this.hasOwnProperty("_duration"))
+				{
+					//CloudKid's fork of PIXI redoes how MovieClips animate,
+					//with duration and elapsed time
+					this.animationSpeed = this._duration / this.maxLife;
+				}
+				else
+				{
+					//standard PIXI - assume game tick rate of 60 fps
+					this.animationSpeed = this.textures.length / this.maxLife / 60;
+				}
+			}
+			else
+			{
+				this.loop = true;
+				this.animationSpeed = animationSpeed;
+			}
+		}
+		else
+		{
+			this.loop = true;
+			this.animationSpeed = 1;
+		}
+		this.play();//start playing
+	};
+	
+	/**
+	*	Sets the textures for the particle.
+	*	@method applyArt
+	*	@param {Array} art An array of PIXI.Texture objects for this animated particle.
+	*/
+	p.applyArt = function(art)
+	{
+		if(Array.isArray(art))
+			this.textures = art;
+		else
+		{
+			this._helperTextures[0] = art;
+			this.textures = this._helperTextures;
+		}
+		this.gotoAndStop(0);
+	};
+
+	/**
+	*	Updates the particle.
+	*	@method update
+	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*/
+	p.update = function(delta)
+	{
+		s.update.call(this, delta);
+		if(this.age < this.maxLife)
+		{
+			//only animate the particle if it is still alive
+			if(this._duration)
+			{
+				//work with CloudKid's fork
+				this.updateAnim(delta);
+			}
+			else
+			{
+				//standard PIXI - movieclip will advance automatically - this means
+				//that the movieclip will animate even if the emitter (and the particles)
+				//are paused
+			}
+		}
+	};
+	
+	/**
+	*	Destroys the particle, removing references and preventing future use.
+	*	@method destroy
+	*/
+	p.destroy = function()
+	{
+		s.destroy.call(this);
+	};
+	
+	cloudkid.AnimatedParticle = AnimatedParticle;
+	
+}(cloudkid));
+/**
+*  @module cloudkid
+*/
+(function(cloudkid, undefined) {
+
+	"use strict";
+
+	var ParticleUtils = cloudkid.ParticleUtils,
+		Particle = cloudkid.Particle;
 
 	/**
 	*	A particle emitter.
 	*	@class Emitter
 	*	@constructor
-	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the particles to.
-	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use for the particles.
+	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+	*														particles to.
+	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
+	*												for the particles.
 	*	@param {Object} [config] A configuration object containing settings for the emitter.
 	*/
 	var Emitter = function(particleParent, particleImages, config)
 	{
 		/**
-		 *	The constructor used to create new particles. The default is
-		 *	the built in particle class.
-		 * 	@property {Function} _particleConstructor
-		 * 	@private
-		 */
+		*	The constructor used to create new particles. The default is
+		*	the built in particle class.
+		*	@property {Function} _particleConstructor
+		*	@private
+		*/
 		this._particleConstructor = Particle;
 		//properties for individual particles
 		/**
@@ -672,8 +834,9 @@
 		*/
 		this.particleBlendMode = 0;
 		/**
-		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
-		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
+		*	An easing function for nonlinear interpolation of values. Accepts a single
+		*	parameter of time as a value from 0-1, inclusive. Expected outputs are values
+		*	from 0-1, inclusive.
 		*	@property {Function} customEase
 		*/
 		this.customEase = null;
@@ -705,7 +868,8 @@
 		this.emitterLifetime = -1;
 		/**
 		*	Position at which to spawn particles, relative to the emitter's owner's origin.
-		*	For example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}
+		*	For example, the flames of a rocket travelling right might have a spawnPos
+		*	of {x:-50, y:0}.
 		*	to spawn at the rear of the rocket.
 		*	To change this, use updateSpawnPos().
 		*	@property {PIXI.Point} spawnPos
@@ -713,7 +877,8 @@
 		*/
 		this.spawnPos = null;
 		/**
-		*	How the particles will be spawned. Valid types are "point", "rectangle", "circle", "burst".
+		*	How the particles will be spawned. Valid types are "point", "rectangle",
+		*	"circle", "burst".
 		*	@property {String} spawnType
 		*	@readOnly
 		*/
@@ -753,7 +918,8 @@
 		*/
 		this.angleStart = 0;
 		/**
-		*	Rotation of the emitter or emitter's owner in degrees. This is added to the calculated spawn angle.
+		*	Rotation of the emitter or emitter's owner in degrees. This is added to
+		*	the calculated spawn angle.
 		*	To change this, use rotate().
 		*	@property {Number} rotation
 		*	@default 0
@@ -761,8 +927,8 @@
 		*/
 		this.rotation = 0;
 		/**
-		*	The world position of the emitter's owner, to add spawnPos to when spawning particles. To change this,
-		*	use updateSpawnOrigin().
+		*	The world position of the emitter's owner, to add spawnPos to when
+		*	spawning particles. To change this, use updateSpawnOrigin().
 		*	@property {PIXI.Point} ownerPos
 		*	@default {x:0, y:0}
 		*	@readOnly
@@ -839,11 +1005,11 @@
 
 
 	/**
-	 *	The constructor used to create new particles. The default is
-	 *	the built in Particle class. Setting this will dump any active or
-	 *	pooled particles, if the emitter has already been used.
-	 * 	@property {Function} particleConstructor
-	 */
+	*	The constructor used to create new particles. The default is
+	*	the built in Particle class. Setting this will dump any active or
+	*	pooled particles, if the emitter has already been used.
+	*	@property {Function} particleConstructor
+	*/
 	Object.defineProperty(p, "particleConstructor",
 	{
 		get: function() { return this._particleConstructor; },
@@ -863,7 +1029,8 @@
 	/**
 	*	Sets up the emitter based on the config settings.
 	*	@method init
-	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to use for the particles.
+	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to
+	*												use for the particles.
 	*	@param {Object} config A configuration object containing settings for the emitter.
 	*/
 	p.init = function(particleImages, config)
@@ -873,9 +1040,12 @@
 		//clean up any existing particles
 		this.cleanup();
 		//set up the array of textures
-		this.particleImages = particleImages instanceof PIXI.Texture ? [particleImages] : particleImages;
-		//particles from different base textures will be slower in WebGL than if they were from one spritesheet
-		if(this.particleImages.length > 1)
+		this.particleImages = particleImages instanceof PIXI.Texture ?
+																[particleImages] :
+																particleImages;
+		//particles from different base textures will be slower in WebGL than if they
+		//were from one spritesheet
+		if(true && this.particleImages.length > 1)
 		{
 			for(var i = this.particleImages.length - 1; i > 0; --i)
 			{
@@ -961,8 +1131,12 @@
 		//use the custom ease if provided
 		if (config.ease)
 		{
-			this.customEase = typeof config.ease == "function" ? config.ease : ParticleUtils.generateEase(config.ease);
+			this.customEase = typeof config.ease == "function" ?
+														config.ease :
+														ParticleUtils.generateEase(config.ease);
 		}
+		else
+			this.customEase = null;
 		this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //
@@ -1176,11 +1350,13 @@
 				//only make the particle if it wouldn't immediately destroy itself
 				if(-this._spawnTimer < lifetime)
 				{
-					//If the position has changed and this isn't the first spawn, interpolate the spawn position
+					//If the position has changed and this isn't the first spawn,
+					//interpolate the spawn position
 					var emitPosX, emitPosY;
 					if (this._prevPosIsValid && this._posChanged)
 					{
-						var lerp = 1 + this._spawnTimer / delta;//1 - _spawnTimer / delta, but _spawnTimer is negative
+						//1 - _spawnTimer / delta, but _spawnTimer is negative
+						var lerp = 1 + this._spawnTimer / delta;
 						emitPosX = (curX - prevX) * lerp + prevX;
 						emitPosY = (curY - prevY) * lerp + prevY;
 					}
@@ -1194,12 +1370,20 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i < len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ? this._pool.pop() : new this.particleConstructor(this);
+						var p = this._pool.length ?
+												this._pool.pop() :
+												new this.particleConstructor(this);
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
+						{
 							p.applyArt(this.particleImages.random());
+						}
 						else
-							p.applyArt(this.particleImages[0]);//if they are actually the same texture, this call will quit early
+						{
+							//if they are actually the same texture, a standard particle
+							//will quit early from the texture setting in setTexture().
+							p.applyArt(this.particleImages[0]);
+						}
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
@@ -1272,7 +1456,8 @@
 	*/
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on
+		//starting particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -1293,7 +1478,8 @@
 	*/
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -1318,7 +1504,8 @@
 	*/
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -1346,7 +1533,8 @@
 	*/
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on spawn
+		//angle and rotation of emitter
 		if(this.particleSpacing === 0)
 			p.rotation = Math.random() * 360;
 		else
