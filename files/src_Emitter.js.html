@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
     <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.1.0 API Documentation : src/Emitter.js</title>  
+	<title>PixiParticles v1.2.2 API Documentation : src\Emitter.js</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.1.0</em>
+            <em>API Documentation for: 1.2.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -34,10 +34,12 @@
         </div>
 		<ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-			<li><a href="#api-modules">Namespaces</a></li>
+			<li><a href="#api-modules">Modules</a></li>
         </ul>
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AnimatedParticle.html">AnimatedParticle</a></li>
             
                 <li><a href="../classes/Array.prototype.html">Array.prototype</a></li>
             
@@ -46,6 +48,8 @@
                 <li><a href="../classes/Particle.html">Particle</a></li>
             
                 <li><a href="../classes/ParticleUtils.html">ParticleUtils</a></li>
+            
+                <li><a href="../classes/PathParticle.html">PathParticle</a></li>
             
             </ul>
 
@@ -89,9 +93,9 @@
                 <div id="docs-main">
                     <div class="content">
                         <script>
-	var name = src/Emitter.js      
+	var name = src\Emitter.js      
 </script>
-<h1 class="file-heading">File:Emitter.js</h1>
+<h1 class="file-heading">File:src\Emitter.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -109,18 +113,20 @@
 	*	A particle emitter.
 	*	@class Emitter
 	*	@constructor
-	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the particles to.
-	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use for the particles.
+	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+	*														particles to.
+	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
+	*												for the particles.
 	*	@param {Object} [config] A configuration object containing settings for the emitter.
 	*/
 	var Emitter = function(particleParent, particleImages, config)
 	{
 		/**
-		 *	The constructor used to create new particles. The default is
-		 *	the built in particle class.
-		 * 	@property {Function} _particleConstructor
-		 * 	@private
-		 */
+		*	The constructor used to create new particles. The default is
+		*	the built in particle class.
+		*	@property {Function} _particleConstructor
+		*	@private
+		*/
 		this._particleConstructor = Particle;
 		//properties for individual particles
 		/**
@@ -232,8 +238,9 @@
 		*/
 		this.particleBlendMode = 0;
 		/**
-		*	An easing function for nonlinear interpolation of values. Accepts a single parameter of time
-		*	as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
+		*	An easing function for nonlinear interpolation of values. Accepts a single
+		*	parameter of time as a value from 0-1, inclusive. Expected outputs are values
+		*	from 0-1, inclusive.
 		*	@property {Function} customEase
 		*/
 		this.customEase = null;
@@ -250,7 +257,7 @@
 		*/
 		this.frequency = 0;
 		/**
-		*	Maximum number of particles to keep alive at a time. If this limit 
+		*	Maximum number of particles to keep alive at a time. If this limit
 		*	is reached, no more particles will spawn until some have died.
 		*	@property {int} maxParticles
 		*	@default 1000
@@ -265,7 +272,8 @@
 		this.emitterLifetime = -1;
 		/**
 		*	Position at which to spawn particles, relative to the emitter&#x27;s owner&#x27;s origin.
-		*	For example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}
+		*	For example, the flames of a rocket travelling right might have a spawnPos
+		*	of {x:-50, y:0}.
 		*	to spawn at the rear of the rocket.
 		*	To change this, use updateSpawnPos().
 		*	@property {PIXI.Point} spawnPos
@@ -273,7 +281,8 @@
 		*/
 		this.spawnPos = null;
 		/**
-		*	How the particles will be spawned. Valid types are &quot;point&quot;, &quot;rectangle&quot;, &quot;circle&quot;, &quot;burst&quot;.
+		*	How the particles will be spawned. Valid types are &quot;point&quot;, &quot;rectangle&quot;,
+		*	&quot;circle&quot;, &quot;burst&quot;.
 		*	@property {String} spawnType
 		*	@readOnly
 		*/
@@ -313,7 +322,8 @@
 		*/
 		this.angleStart = 0;
 		/**
-		*	Rotation of the emitter or emitter&#x27;s owner in degrees. This is added to the calculated spawn angle.
+		*	Rotation of the emitter or emitter&#x27;s owner in degrees. This is added to
+		*	the calculated spawn angle.
 		*	To change this, use rotate().
 		*	@property {Number} rotation
 		*	@default 0
@@ -321,8 +331,8 @@
 		*/
 		this.rotation = 0;
 		/**
-		*	The world position of the emitter&#x27;s owner, to add spawnPos to when spawning particles. To change this,
-		*	use updateSpawnOrigin().
+		*	The world position of the emitter&#x27;s owner, to add spawnPos to when
+		*	spawning particles. To change this, use updateSpawnOrigin().
 		*	@property {PIXI.Point} ownerPos
 		*	@default {x:0, y:0}
 		*	@readOnly
@@ -365,7 +375,7 @@
 		*/
 		this._emit = false;
 		/**
-		*	The timer for when to spawn particles in seconds, where numbers less 
+		*	The timer for when to spawn particles in seconds, where numbers less
 		*	than 0 mean that particles should be spawned.
 		*	@property {Number} _spawnTimer
 		*	@private
@@ -380,30 +390,38 @@
 		/**
 		*	The particles that are active and on the display list.
 		*	@property {Array} _activeParticles
+		*	@private
 		*/
 		this._activeParticles = [];
 		/**
 		*	The particles that are not currently being used.
 		*	@property {Array} _pool
+		*	@private
 		*/
 		this._pool = [];
+		/**
+		*	Extra data storage for particle subclasses to share things that have been
+		*	generated from configuration data.
+		*	@property {Object} _sharedExtraData
+		*	@private
+		*/
+		this._sharedExtraData = null;
 
 		if(particleImages &amp;&amp; config)
 			this.init(particleImages, config);
 	};
-	
+
 	// Reference to the prototype
 	var p = Emitter.prototype = {};
-	
+
 	var helperPoint = new PIXI.Point();
 
-
 	/**
-	 *	The constructor used to create new particles. The default is
-	 *	the built in Particle class. Setting this will dump any active or
-	 *	pooled particles, if the emitter has already been used.
-	 * 	@property {Function} particleConstructor
-	 */
+	*	The constructor used to create new particles. The default is
+	*	the built in Particle class. Setting this will dump any active or
+	*	pooled particles, if the emitter has already been used.
+	*	@property {Function} particleConstructor
+	*/
 	Object.defineProperty(p, &quot;particleConstructor&quot;,
 	{
 		get: function() { return this._particleConstructor; },
@@ -412,6 +430,7 @@
 			if(value != this._particleConstructor)
 			{
 				this._particleConstructor = value;
+				this.cleanup();
 				if(this._activeParticles.length)
 					this._activeParticles.length = 0;
 				if(this._pool.length)
@@ -423,7 +442,8 @@
 	/**
 	*	Sets up the emitter based on the config settings.
 	*	@method init
-	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to use for the particles.
+	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to
+	*												use for the particles.
 	*	@param {Object} config A configuration object containing settings for the emitter.
 	*/
 	p.init = function(particleImages, config)
@@ -433,18 +453,21 @@
 		//clean up any existing particles
 		this.cleanup();
 		//set up the array of textures
-		this.particleImages = particleImages instanceof PIXI.Texture ? [particleImages] : particleImages;
-		//particles from different base textures will be slower in WebGL than if they were from one spritesheet
-		if(this.particleImages.length &gt; 1)
+		this.particleImages = particleImages instanceof PIXI.Texture ?
+																[particleImages] :
+																particleImages;
+		//particles from different base textures will be slower in WebGL than if they
+		//were from one spritesheet
+		if(DEBUG &amp;&amp; this.particleImages.length &gt; 1)
 		{
 			for(var i = this.particleImages.length - 1; i &gt; 0; --i)
 			{
 				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
 				{
 					if(window.Debug)
-						Debug.warn(&quot;CloudKid Particles: using particle textures from different images may hinder performance in WebGL&quot;);
-					else
-						console.warn(&quot;CloudKid Particles: using particle textures from different images may hinder performance in WebGL&quot;);
+						Debug.warn(&quot;PixiParticles: using particle textures from different images may hinder performance in WebGL&quot;);
+					else if(window.console)
+						console.warn(&quot;PixiParticles: using particle textures from different images may hinder performance in WebGL&quot;);
 					break;
 				}
 			}
@@ -521,9 +544,14 @@
 		//use the custom ease if provided
 		if (config.ease)
 		{
-			this.customEase = typeof config.ease == &quot;function&quot; ? config.ease : ParticleUtils.generateEase(config.ease);
+			this.customEase = typeof config.ease == &quot;function&quot; ?
+														config.ease :
+														ParticleUtils.generateEase(config.ease);
 		}
+		else
+			this.customEase = null;
 		this.extraData = config.extraData || null;
+		this._sharedExtraData = {};
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -609,7 +637,7 @@
 		if(particle.parent)
 			particle.parent.removeChild(particle);
 	};
-	
+
 	/**
 	*	Sets the rotation of the emitter to a new value.
 	*	@method rotate
@@ -626,7 +654,7 @@
 		//mark the position as having changed
 		this._posChanged = true;
 	};
-	
+
 	/**
 	*	Changes the spawn position of the emitter.
 	*	@method updateSpawnPos
@@ -639,7 +667,7 @@
 		this.spawnPos.x = x;
 		this.spawnPos.y = y;
 	};
-	
+
 	/**
 	*	Changes the position of the emitter&#x27;s owner. You should call this if you are adding
 	*	particles to the world display object that your emitter&#x27;s owner is moving around in.
@@ -653,7 +681,7 @@
 		this.ownerPos.x = x;
 		this.ownerPos.y = y;
 	};
-	
+
 	/**
 	*	Prevents emitter position interpolation in the next update.
 	*	This should be used if you made a major position change of your emitter&#x27;s owner
@@ -664,7 +692,7 @@
 	{
 		this._prevPosIsValid = false;
 	};
-	
+
 	/**
 	*	If particles should be emitted during update() calls. Setting this to false
 	*	stops new particles from being created, but allows existing ones to die out.
@@ -736,11 +764,13 @@
 				//only make the particle if it wouldn&#x27;t immediately destroy itself
 				if(-this._spawnTimer &lt; lifetime)
 				{
-					//If the position has changed and this isn&#x27;t the first spawn, interpolate the spawn position
+					//If the position has changed and this isn&#x27;t the first spawn,
+					//interpolate the spawn position
 					var emitPosX, emitPosY;
 					if (this._prevPosIsValid &amp;&amp; this._posChanged)
 					{
-						var lerp = 1 + this._spawnTimer / delta;//1 - _spawnTimer / delta, but _spawnTimer is negative
+						//1 - _spawnTimer / delta, but _spawnTimer is negative
+						var lerp = 1 + this._spawnTimer / delta;
 						emitPosX = (curX - prevX) * lerp + prevX;
 						emitPosY = (curY - prevY) * lerp + prevY;
 					}
@@ -754,12 +784,20 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i &lt; len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ? this._pool.pop() : new this.particleConstructor(this);
+						var p = this._pool.length ?
+												this._pool.pop() :
+												new this.particleConstructor(this);
 						//set a random texture if we have more than one
 						if(this.particleImages.length &gt; 1)
+						{
 							p.applyArt(this.particleImages.random());
+						}
 						else
-							p.applyArt(this.particleImages[0]);//if they are actually the same texture, this call will quit early
+						{
+							//if they are actually the same texture, a standard particle
+							//will quit early from the texture setting in setTexture().
+							p.applyArt(this.particleImages[0]);
+						}
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
@@ -820,7 +858,7 @@
 			this._posChanged = false;
 		}
 	};
-	
+
 	/**
 	*	Positions a particle for a point type emitter.
 	*	@method _spawnPoint
@@ -832,7 +870,8 @@
 	*/
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on
+		//starting particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -841,7 +880,7 @@
 		p.position.x = emitPosX;
 		p.position.y = emitPosY;
 	};
-	
+
 	/**
 	*	Positions a particle for a rectangle type emitter.
 	*	@method _spawnRect
@@ -853,7 +892,8 @@
 	*/
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -866,7 +906,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a circle type emitter.
 	*	@method _spawnCircle
@@ -878,7 +918,8 @@
 	*/
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on starting particle angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
@@ -894,7 +935,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a burst type emitter.
 	*	@method _spawnBurst
@@ -906,7 +947,8 @@
 	*/
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
-		//set the initial rotation/direction of the particle based on spawn angle and rotation of emitter
+		//set the initial rotation/direction of the particle based on spawn
+		//angle and rotation of emitter
 		if(this.particleSpacing === 0)
 			p.rotation = Math.random() * 360;
 		else
@@ -927,7 +969,7 @@
 			this.recycle(this._activeParticles[i]);
 		}
 	};
-	
+
 	/**
 	*	Destroys the emitter and all of its particles.
 	*	@method destroy

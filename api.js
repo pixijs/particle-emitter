@@ -1,10 +1,12 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
+        "AnimatedParticle",
         "Array.prototype",
         "Emitter",
         "Particle",
-        "ParticleUtils"
+        "ParticleUtils",
+        "PathParticle"
     ],
     "modules": [
         "cloudkid",

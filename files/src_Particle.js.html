@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
     <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.1.0 API Documentation : src/Particle.js</title>  
+	<title>PixiParticles v1.2.2 API Documentation : src\Particle.js</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.1.0</em>
+            <em>API Documentation for: 1.2.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -34,10 +34,12 @@
         </div>
 		<ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-			<li><a href="#api-modules">Namespaces</a></li>
+			<li><a href="#api-modules">Modules</a></li>
         </ul>
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AnimatedParticle.html">AnimatedParticle</a></li>
             
                 <li><a href="../classes/Array.prototype.html">Array.prototype</a></li>
             
@@ -46,6 +48,8 @@
                 <li><a href="../classes/Particle.html">Particle</a></li>
             
                 <li><a href="../classes/ParticleUtils.html">ParticleUtils</a></li>
+            
+                <li><a href="../classes/PathParticle.html">PathParticle</a></li>
             
             </ul>
 
@@ -89,9 +93,9 @@
                 <div id="docs-main">
                     <div class="content">
                         <script>
-	var name = src/Particle.js      
+	var name = src\Particle.js      
 </script>
-<h1 class="file-heading">File:Particle.js</h1>
+<h1 class="file-heading">File:src\Particle.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -112,7 +116,9 @@
 	*/
 	var Particle = function(emitter)
 	{
-		var art = emitter.particleImages[0] instanceof PIXI.Texture ? [emitter.particleImages[0]] : emitter.particleImages[0];
+		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
+															[emitter.particleImages[0]] :
+															emitter.particleImages[0];
 		PIXI.MovieClip.call(this, art);
 
 		/**
@@ -122,7 +128,7 @@
 		this.emitter = emitter;
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
-		*	The velocity of the particle. Speed may change, but the angle also 
+		*	The velocity of the particle. Speed may change, but the angle also
 		*	contained in velocity is constant.
 		*	@property {PIXI.Point} velocity
 		*/
@@ -260,13 +266,20 @@
 		*/
 		this._doColor = false;
 		/**
+		*	If normal movement should be handled. Subclasses wishing to override movement
+		*	can set this to false in init().
+		*	@property {Boolean} _doNormalMovement
+		*	@private
+		*/
+		this._doNormalMovement = false;
+		/**
 		*	One divided by the max life of the particle, saved for slightly faster math.
 		*	@property {Number} _oneOverLife
 		*	@private
 		*/
 		this._oneOverLife = 0;
 	};
-	
+
 	// Reference to the prototype
 	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
 
@@ -275,7 +288,12 @@
 	*	have been set already on the particle.
 	*	@method init
 	*/
-	p.init = function()
+	/**
+	*	A reference to init, so that subclasses can access it without the penalty of Function.call()
+	*	@method Particle_init
+	*	@private
+	*/
+	p.init = p.Particle_init = function()
 	{
 		//reset the age
 		this.age = 0;
@@ -309,6 +327,8 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		//_doNormalMovement can be cancelled by subclasses
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -330,8 +350,19 @@
 	*	Updates the particle.
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
 	*/
-	p.update = function(delta)
+	/**
+	*	A reference to update so that subclasses can access the original without the overhead
+	*	of Function.call().
+	*	@method Particle_update
+	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
+	*	@private
+	*/
+	p.update = p.Particle_update = function(delta)
 	{
 		//increase age
 		this.age += delta;
@@ -339,14 +370,27 @@
 		if(this.age &gt;= this.maxLife)
 		{
 			this.kill();
-			return;
+			return -1;
 		}
-		
+
 		//determine our interpolation value
 		var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
 		if (this.ease)
-			lerp = this.ease(lerp);
-		
+		{
+			if(this.ease.length == 4)
+			{
+				//the t, b, c, d parameters that some tween libraries use
+				//(time, initial value, end value, duration)
+				lerp = this.ease(lerp, 0, 1, 1);
+			}
+			else
+			{
+				//the simplified version that we like that takes
+				//one parameter, time from 0-1. TweenJS eases provide this usage.
+				lerp = this.ease(lerp);
+			}
+		}
+
 		//interpolate alpha
 		if (this._doAlpha)
 			this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
@@ -357,7 +401,7 @@
 			this.scale.x = this.scale.y = scale;
 		}
 		//handle movement
-		if(this._doSpeed || this.startSpeed !== 0 || this.acceleration)
+		if(this._doNormalMovement)
 		{
 			//interpolate speed
 			if (this._doSpeed)
@@ -392,6 +436,7 @@
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
+		return lerp;
 	};
 
 	/**
@@ -417,7 +462,7 @@
 	};
 
 	cloudkid.Particle = Particle;
-	
+
 }(cloudkid));
     </pre>
 </div>

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
     <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.1.0 API Documentation : src/ParticleUtils.js</title>  
+	<title>PixiParticles v1.2.2 API Documentation : src\ParticleUtils.js</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.1.0</em>
+            <em>API Documentation for: 1.2.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -34,10 +34,12 @@
         </div>
 		<ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-			<li><a href="#api-modules">Namespaces</a></li>
+			<li><a href="#api-modules">Modules</a></li>
         </ul>
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AnimatedParticle.html">AnimatedParticle</a></li>
             
                 <li><a href="../classes/Array.prototype.html">Array.prototype</a></li>
             
@@ -46,6 +48,8 @@
                 <li><a href="../classes/Particle.html">Particle</a></li>
             
                 <li><a href="../classes/ParticleUtils.html">ParticleUtils</a></li>
+            
+                <li><a href="../classes/PathParticle.html">PathParticle</a></li>
             
             </ul>
 
@@ -89,9 +93,9 @@
                 <div id="docs-main">
                     <div class="content">
                         <script>
-	var name = src/ParticleUtils.js      
+	var name = src\ParticleUtils.js      
 </script>
-<h1 class="file-heading">File:ParticleUtils.js</h1>
+<h1 class="file-heading">File:src\ParticleUtils.js</h1>
 
 <div class="file">
     <pre class="code prettyprint linenums">
@@ -161,7 +165,7 @@
 
 	/**
 	 * Multiplies the x and y values of this point by a value.
-	 * @method scaleBy 
+	 * @method scaleBy
 	 * @static
 	 * @param {PIXI.Point} point The point to scaleBy
 	 * @param value {Number} The value to scale by.
@@ -185,8 +189,9 @@
 	};
 
 	/**
-	*	Converts a hex string from &quot;#AARRGGBB&quot;, &quot;#RRGGBB&quot;, &quot;0xAARRGGBB&quot;, &quot;0xRRGGBB&quot;, &quot;AARRGGBB&quot;, or &quot;RRGGBB&quot; 
-	*	to an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].
+	*	Converts a hex string from &quot;#AARRGGBB&quot;, &quot;#RRGGBB&quot;, &quot;0xAARRGGBB&quot;, &quot;0xRRGGBB&quot;,
+	*	&quot;AARRGGBB&quot;, or &quot;RRGGBB&quot; to an array of ints of 0-255 or Numbers from 0-1, as
+	*	[r, g, b, (a)].
 	*	@method hexToRGB
 	*	@param {String} color The input color string.
 	*	@param {Array} output An array to put the output in. If omitted, a new array is created.
@@ -218,11 +223,13 @@
 	};
 
 	/**
-	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated 
+	*	Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
 	*	by the related tool at http://www.greensock.com/customease/.
 	*	@method generateEase
-	*	@param {Array} segments An array of segments, as created by http://www.greensock.com/customease/.
-	*	@return {Function} A function that calculates the percentage of change at a given point in time (0-1 inclusive).
+	*	@param {Array} segments An array of segments, as created by
+	*	http://www.greensock.com/customease/.
+	*	@return {Function} A function that calculates the percentage of change at
+	*						a given point in time (0-1 inclusive).
 	*	@static
 	*/
 	ParticleUtils.generateEase = function(segments)
@@ -231,8 +238,9 @@
 		var oneOverQty = 1 / qty;
 		/*
 		*	Calculates the percentage of change at a given point in time (0-1 inclusive).
-		*	@param time The time of the ease, 0-1 inclusive.
-		*	@return The percentage of the change, 0-1 inclusive (unless your ease goes outside those bounds).
+		*	@param {Number} time The time of the ease, 0-1 inclusive.
+		*	@return {Number} The percentage of the change, 0-1 inclusive (unless your
+		*			ease goes outside those bounds).
 		*/
 		var simpleEase = function(time)
 		{
@@ -283,7 +291,7 @@
 		// to make it not enumerable set the enumerable property to false
 		Object.defineProperty(Array.prototype, &#x27;shuffle&#x27;, {
 			enumerable: false,
-			writable:false, 
+			writable:false,
 			value: function() {
 				for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
 				return this;

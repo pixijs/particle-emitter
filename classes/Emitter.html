@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
     <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.1.0 API Documentation : Emitter</title>  
+	<title>PixiParticles v1.2.2 API Documentation : Emitter</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.1.0</em>
+            <em>API Documentation for: 1.2.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -34,10 +34,12 @@
         </div>
 		<ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-			<li><a href="#api-modules">Namespaces</a></li>
+			<li><a href="#api-modules">Modules</a></li>
         </ul>
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AnimatedParticle.html">AnimatedParticle</a></li>
             
                 <li><a href="../classes/Array.prototype.html">Array.prototype</a></li>
             
@@ -46,6 +48,8 @@
                 <li><a href="../classes/Particle.html">Particle</a></li>
             
                 <li><a href="../classes/ParticleUtils.html">ParticleUtils</a></li>
+            
+                <li><a href="../classes/PathParticle.html">PathParticle</a></li>
             
             </ul>
 
@@ -102,7 +106,7 @@
 
     
         
-            Namespace: <a href="../modules/cloudkid.html">cloudkid</a>
+            Module: <a href="../modules/cloudkid.html">cloudkid</a>
         
     
 
@@ -202,7 +206,8 @@
                     
 
                     <div class="param-description">
-                        <p>The display object to add the particles to.</p>
+                        <p>The display object to add the
+                                                    particles to.</p>
 
                     </div>
 
@@ -219,7 +224,8 @@
                     
 
                     <div class="param-description">
-                        <p>A texture or array of textures to use for the particles.</p>
+                        <p>A texture or array of textures to use
+                                            for the particles.</p>
 
                     </div>
 
@@ -380,7 +386,7 @@
 
                     <ul class="index-list properties">
                         
-                            <li class="index-item property">
+                            <li class="index-item property private">
                                 <a href="#property__activeParticles">_activeParticles</a>
 
                                 
@@ -408,7 +414,7 @@
                                 
                             </li>
                         
-                            <li class="index-item property">
+                            <li class="index-item property private">
                                 <a href="#property__pool">_pool</a>
 
                                 
@@ -431,6 +437,13 @@
                         
                             <li class="index-item property private">
                                 <a href="#property__prevPosIsValid">_prevPosIsValid</a>
+
+                                
+                                
+                            </li>
+                        
+                            <li class="index-item property private">
+                                <a href="#property__sharedExtraData">_sharedExtraData</a>
 
                                 
                                 
@@ -778,7 +791,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l801"><code>_spawnBurst:801</code></a>
+        <a href="../files/src_Emitter.js.html#l838"><code>_spawnBurst:838</code></a>
         
         </p>
 
@@ -935,7 +948,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l773"><code>_spawnCircle:773</code></a>
+        <a href="../files/src_Emitter.js.html#l809"><code>_spawnCircle:809</code></a>
         
         </p>
 
@@ -1092,7 +1105,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l727"><code>_spawnPoint:727</code></a>
+        <a href="../files/src_Emitter.js.html#l761"><code>_spawnPoint:761</code></a>
         
         </p>
 
@@ -1249,7 +1262,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l748"><code>_spawnRect:748</code></a>
+        <a href="../files/src_Emitter.js.html#l783"><code>_spawnRect:783</code></a>
         
         </p>
 
@@ -1376,7 +1389,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l822"><code>cleanup:822</code></a>
+        <a href="../files/src_Emitter.js.html#l860"><code>cleanup:860</code></a>
         
         </p>
 
@@ -1431,7 +1444,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l834"><code>destroy:834</code></a>
+        <a href="../files/src_Emitter.js.html#l872"><code>destroy:872</code></a>
         
         </p>
 
@@ -1502,7 +1515,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l326"><code>init:326</code></a>
+        <a href="../files/src_Emitter.js.html#l341"><code>init:341</code></a>
         
         </p>
 
@@ -1532,7 +1545,8 @@
                     
 
                     <div class="param-description">
-                        <p>A texture or array of textures to use for the particles.</p>
+                        <p>A texture or array of textures to
+                                            use for the particles.</p>
 
                     </div>
 
@@ -1607,7 +1621,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l497"><code>recycle:497</code></a>
+        <a href="../files/src_Emitter.js.html#l521"><code>recycle:521</code></a>
         
         </p>
 
@@ -1686,7 +1700,7 @@
             
         
         
-        <a href="../files/src_Emitter.js.html#l560"><code>resetPositionTracking:560</code></a>
+        <a href="../files/src_Emitter.js.html#l584"><code>resetPositionTracking:584</code></a>
         
         </p>
 
@@ -1753,7 +1767,7 @@ that was not normal movement.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l516"><code>rotate:516</code></a>
+        <a href="../files/src_Emitter.js.html#l540"><code>rotate:540</code></a>
         
         </p>
 
@@ -1842,7 +1856,7 @@ that was not normal movement.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l586"><code>update:586</code></a>
+        <a href="../files/src_Emitter.js.html#l610"><code>update:610</code></a>
         
         </p>
 
@@ -1937,7 +1951,7 @@ that was not normal movement.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l546"><code>updateOwnerPos:546</code></a>
+        <a href="../files/src_Emitter.js.html#l570"><code>updateOwnerPos:570</code></a>
         
         </p>
 
@@ -2049,7 +2063,7 @@ particles to the world display object that your emitter&#39;s owner is moving ar
             
         
         
-        <a href="../files/src_Emitter.js.html#l533"><code>updateSpawnPos:533</code></a>
+        <a href="../files/src_Emitter.js.html#l557"><code>updateSpawnPos:557</code></a>
         
         </p>
 
@@ -2120,12 +2134,14 @@ particles to the world display object that your emitter&#39;s owner is moving ar
                 <h2 class="off-left">Properties</h2>
 
                 
-                    <div id="property__activeParticles" class="property item">
+                    <div id="property__activeParticles" class="property item private">
     <h3 class="name"><code>_activeParticles</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
 
     
 
+    
+        <span class="flag private">private</span>
     
 
     
@@ -2143,7 +2159,7 @@ particles to the world display object that your emitter&#39;s owner is moving ar
             
         
         
-        <a href="../files/src_Emitter.js.html#l283"><code>_activeParticles:283</code></a>
+        <a href="../files/src_Emitter.js.html#l289"><code>_activeParticles:289</code></a>
         
         </p>
 
@@ -2190,7 +2206,7 @@ particles to the world display object that your emitter&#39;s owner is moving ar
             
         
         
-        <a href="../files/src_Emitter.js.html#l263"><code>_emit:263</code></a>
+        <a href="../files/src_Emitter.js.html#l269"><code>_emit:269</code></a>
         
         </p>
 
@@ -2238,7 +2254,7 @@ stops new particles from being created, but allows existing ones to die out.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l277"><code>_emitterLife:277</code></a>
+        <a href="../files/src_Emitter.js.html#l283"><code>_emitterLife:283</code></a>
         
         </p>
 
@@ -2285,7 +2301,7 @@ stops new particles from being created, but allows existing ones to die out.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l21"><code>_particleConstructor:21</code></a>
+        <a href="../files/src_Emitter.js.html#l23"><code>_particleConstructor:23</code></a>
         
         </p>
 
@@ -2308,12 +2324,14 @@ the built in particle class.</p>
 </div>
 
                 
-                    <div id="property__pool" class="property item">
+                    <div id="property__pool" class="property item private">
     <h3 class="name"><code>_pool</code></h3>
     <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
 
     
 
+    
+        <span class="flag private">private</span>
     
 
     
@@ -2331,7 +2349,7 @@ the built in particle class.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l288"><code>_pool:288</code></a>
+        <a href="../files/src_Emitter.js.html#l295"><code>_pool:295</code></a>
         
         </p>
 
@@ -2376,7 +2394,7 @@ the built in particle class.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l248"><code>_posChanged:248</code></a>
+        <a href="../files/src_Emitter.js.html#l254"><code>_posChanged:254</code></a>
         
         </p>
 
@@ -2423,7 +2441,7 @@ the built in particle class.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l234"><code>_prevEmitterPos:234</code></a>
+        <a href="../files/src_Emitter.js.html#l240"><code>_prevEmitterPos:240</code></a>
         
         </p>
 
@@ -2471,7 +2489,7 @@ can be interpolated to space out particles better.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l241"><code>_prevPosIsValid:241</code></a>
+        <a href="../files/src_Emitter.js.html#l247"><code>_prevPosIsValid:247</code></a>
         
         </p>
 
@@ -2487,6 +2505,54 @@ can be interpolated to space out particles better.</p>
 
     
         <p><strong>Default:</strong> false</p>
+    
+
+    
+
+    
+</div>
+
+                
+                    <div id="property__sharedExtraData" class="property item private">
+    <h3 class="name"><code>_sharedExtraData</code></h3>
+    <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Object" class="crosslink external" target="_blank">Object</a></span>
+
+    
+
+    
+        <span class="flag private">private</span>
+    
+
+    
+
+    
+
+    <div class="meta">
+        
+            
+                
+                <p>
+                
+                Defined in
+                
+            
+        
+        
+        <a href="../files/src_Emitter.js.html#l301"><code>_sharedExtraData:301</code></a>
+        
+        </p>
+
+        
+
+        
+    </div>
+
+    <div class="description">
+        <p>Extra data storage for particle subclasses to share things that have been
+generated from configuration data.</p>
+
+    </div>
+
     
 
     
@@ -2520,7 +2586,7 @@ can be interpolated to space out particles better.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l184"><code>_spawnFunc:184</code></a>
+        <a href="../files/src_Emitter.js.html#l189"><code>_spawnFunc:189</code></a>
         
         </p>
 
@@ -2567,7 +2633,7 @@ can be interpolated to space out particles better.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l270"><code>_spawnTimer:270</code></a>
+        <a href="../files/src_Emitter.js.html#l276"><code>_spawnTimer:276</code></a>
         
         </p>
 
@@ -2577,7 +2643,7 @@ can be interpolated to space out particles better.</p>
     </div>
 
     <div class="description">
-        <p>The timer for when to spawn particles in seconds, where numbers less 
+        <p>The timer for when to spawn particles in seconds, where numbers less
 than 0 mean that particles should be spawned.</p>
 
     </div>
@@ -2613,7 +2679,7 @@ than 0 mean that particles should be spawned.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l58"><code>acceleration:58</code></a>
+        <a href="../files/src_Emitter.js.html#l60"><code>acceleration:60</code></a>
         
         </p>
 
@@ -2663,7 +2729,7 @@ match the direction of travel.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l258"><code>addAtBack:258</code></a>
+        <a href="../files/src_Emitter.js.html#l264"><code>addAtBack:264</code></a>
         
         </p>
 
@@ -2708,7 +2774,7 @@ match the direction of travel.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l212"><code>angleStart:212</code></a>
+        <a href="../files/src_Emitter.js.html#l217"><code>angleStart:217</code></a>
         
         </p>
 
@@ -2755,7 +2821,7 @@ match the direction of travel.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l137"><code>customEase:137</code></a>
+        <a href="../files/src_Emitter.js.html#l139"><code>customEase:139</code></a>
         
         </p>
 
@@ -2765,8 +2831,9 @@ match the direction of travel.</p>
     </div>
 
     <div class="description">
-        <p>An easing function for nonlinear interpolation of values. Accepts a single parameter of time
-as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.</p>
+        <p>An easing function for nonlinear interpolation of values. Accepts a single
+parameter of time as a value from 0-1, inclusive. Expected outputs are values
+from 0-1, inclusive.</p>
 
     </div>
 
@@ -2801,7 +2868,7 @@ as a value from 0-1, inclusive. Expected outputs are values from 0-1, inclusive.
             
         
         
-        <a href="../files/src_Emitter.js.html#l571"><code>emit:571</code></a>
+        <a href="../files/src_Emitter.js.html#l595"><code>emit:595</code></a>
         
         </p>
 
@@ -2847,7 +2914,7 @@ stops new particles from being created, but allows existing ones to die out.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l162"><code>emitterLifetime:162</code></a>
+        <a href="../files/src_Emitter.js.html#l165"><code>emitterLifetime:165</code></a>
         
         </p>
 
@@ -2895,7 +2962,7 @@ A value of -1 is an unlimited amount of time.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l40"><code>endAlpha:40</code></a>
+        <a href="../files/src_Emitter.js.html#l42"><code>endAlpha:42</code></a>
         
         </p>
 
@@ -2942,7 +3009,7 @@ A value of -1 is an unlimited amount of time.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l93"><code>endColor:93</code></a>
+        <a href="../files/src_Emitter.js.html#l95"><code>endColor:95</code></a>
         
         </p>
 
@@ -2987,7 +3054,7 @@ A value of -1 is an unlimited amount of time.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l73"><code>endScale:73</code></a>
+        <a href="../files/src_Emitter.js.html#l75"><code>endScale:75</code></a>
         
         </p>
 
@@ -3034,7 +3101,7 @@ A value of -1 is an unlimited amount of time.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l52"><code>endSpeed:52</code></a>
+        <a href="../files/src_Emitter.js.html#l54"><code>endSpeed:54</code></a>
         
         </p>
 
@@ -3081,7 +3148,7 @@ A value of -1 is an unlimited amount of time.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l143"><code>extraData:143</code></a>
+        <a href="../files/src_Emitter.js.html#l146"><code>extraData:146</code></a>
         
         </p>
 
@@ -3127,7 +3194,7 @@ passes it on to the particle to use in init().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l150"><code>frequency:150</code></a>
+        <a href="../files/src_Emitter.js.html#l153"><code>frequency:153</code></a>
         
         </p>
 
@@ -3172,7 +3239,7 @@ passes it on to the particle to use in init().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l103"><code>maxLifetime:103</code></a>
+        <a href="../files/src_Emitter.js.html#l105"><code>maxLifetime:105</code></a>
         
         </p>
 
@@ -3217,7 +3284,7 @@ passes it on to the particle to use in init().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l155"><code>maxParticles:155</code></a>
+        <a href="../files/src_Emitter.js.html#l158"><code>maxParticles:158</code></a>
         
         </p>
 
@@ -3227,7 +3294,7 @@ passes it on to the particle to use in init().</p>
     </div>
 
     <div class="description">
-        <p>Maximum number of particles to keep alive at a time. If this limit 
+        <p>Maximum number of particles to keep alive at a time. If this limit
 is reached, no more particles will spawn until some have died.</p>
 
     </div>
@@ -3265,7 +3332,7 @@ is reached, no more particles will spawn until some have died.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l126"><code>maxRotationSpeed:126</code></a>
+        <a href="../files/src_Emitter.js.html#l128"><code>maxRotationSpeed:128</code></a>
         
         </p>
 
@@ -3311,7 +3378,7 @@ This only visually spins the particle, it does not change direction of movement.
             
         
         
-        <a href="../files/src_Emitter.js.html#l114"><code>maxStartRotation:114</code></a>
+        <a href="../files/src_Emitter.js.html#l116"><code>maxStartRotation:116</code></a>
         
         </p>
 
@@ -3357,7 +3424,7 @@ is ignored if the spawn type is "burst" or "arc".</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l79"><code>minimumScaleMultiplier:79</code></a>
+        <a href="../files/src_Emitter.js.html#l81"><code>minimumScaleMultiplier:81</code></a>
         
         </p>
 
@@ -3407,7 +3474,7 @@ startScale and endScale for each particle.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l98"><code>minLifetime:98</code></a>
+        <a href="../files/src_Emitter.js.html#l100"><code>minLifetime:100</code></a>
         
         </p>
 
@@ -3452,7 +3519,7 @@ startScale and endScale for each particle.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l120"><code>minRotationSpeed:120</code></a>
+        <a href="../files/src_Emitter.js.html#l122"><code>minRotationSpeed:122</code></a>
         
         </p>
 
@@ -3498,7 +3565,7 @@ This only visually spins the particle, it does not change direction of movement.
             
         
         
-        <a href="../files/src_Emitter.js.html#l108"><code>minStartRotation:108</code></a>
+        <a href="../files/src_Emitter.js.html#l110"><code>minStartRotation:110</code></a>
         
         </p>
 
@@ -3544,7 +3611,7 @@ is ignored if the spawn type is "burst" or "arc".</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l226"><code>ownerPos:226</code></a>
+        <a href="../files/src_Emitter.js.html#l232"><code>ownerPos:232</code></a>
         
         </p>
 
@@ -3554,8 +3621,8 @@ is ignored if the spawn type is "burst" or "arc".</p>
     </div>
 
     <div class="description">
-        <p>The world position of the emitter&#39;s owner, to add spawnPos to when spawning particles. To change this,
-use updateSpawnOrigin().</p>
+        <p>The world position of the emitter&#39;s owner, to add spawnPos to when
+spawning particles. To change this, use updateSpawnOrigin().</p>
 
     </div>
 
@@ -3592,7 +3659,7 @@ use updateSpawnOrigin().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l253"><code>parent:253</code></a>
+        <a href="../files/src_Emitter.js.html#l259"><code>parent:259</code></a>
         
         </p>
 
@@ -3637,7 +3704,7 @@ use updateSpawnOrigin().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l132"><code>particleBlendMode:132</code></a>
+        <a href="../files/src_Emitter.js.html#l134"><code>particleBlendMode:134</code></a>
         
         </p>
 
@@ -3682,7 +3749,7 @@ use updateSpawnOrigin().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l304"><code>particleConstructor:304</code></a>
+        <a href="../files/src_Emitter.js.html#l318"><code>particleConstructor:318</code></a>
         
         </p>
 
@@ -3729,7 +3796,7 @@ pooled particles, if the emitter has already been used.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l29"><code>particleImages:29</code></a>
+        <a href="../files/src_Emitter.js.html#l31"><code>particleImages:31</code></a>
         
         </p>
 
@@ -3774,7 +3841,7 @@ pooled particles, if the emitter has already been used.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l206"><code>particleSpacing:206</code></a>
+        <a href="../files/src_Emitter.js.html#l211"><code>particleSpacing:211</code></a>
         
         </p>
 
@@ -3821,7 +3888,7 @@ pooled particles, if the emitter has already been used.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l200"><code>particlesPerWave:200</code></a>
+        <a href="../files/src_Emitter.js.html#l205"><code>particlesPerWave:205</code></a>
         
         </p>
 
@@ -3868,7 +3935,7 @@ pooled particles, if the emitter has already been used.</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l218"><code>rotation:218</code></a>
+        <a href="../files/src_Emitter.js.html#l223"><code>rotation:223</code></a>
         
         </p>
 
@@ -3878,7 +3945,8 @@ pooled particles, if the emitter has already been used.</p>
     </div>
 
     <div class="description">
-        <p>Rotation of the emitter or emitter&#39;s owner in degrees. This is added to the calculated spawn angle.
+        <p>Rotation of the emitter or emitter&#39;s owner in degrees. This is added to
+the calculated spawn angle.
 To change this, use rotate().</p>
 
     </div>
@@ -3916,7 +3984,7 @@ To change this, use rotate().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l195"><code>spawnCircle:195</code></a>
+        <a href="../files/src_Emitter.js.html#l200"><code>spawnCircle:200</code></a>
         
         </p>
 
@@ -3961,7 +4029,7 @@ To change this, use rotate().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l169"><code>spawnPos:169</code></a>
+        <a href="../files/src_Emitter.js.html#l172"><code>spawnPos:172</code></a>
         
         </p>
 
@@ -3972,7 +4040,8 @@ To change this, use rotate().</p>
 
     <div class="description">
         <p>Position at which to spawn particles, relative to the emitter&#39;s owner&#39;s origin.
-For example, the flames of a rocket travelling right might have a spawnPos of {x:-50, y:0}
+For example, the flames of a rocket travelling right might have a spawnPos
+of {x:-50, y:0}.
 to spawn at the rear of the rocket.
 To change this, use updateSpawnPos().</p>
 
@@ -4009,7 +4078,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l190"><code>spawnRect:190</code></a>
+        <a href="../files/src_Emitter.js.html#l195"><code>spawnRect:195</code></a>
         
         </p>
 
@@ -4054,7 +4123,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l178"><code>spawnType:178</code></a>
+        <a href="../files/src_Emitter.js.html#l182"><code>spawnType:182</code></a>
         
         </p>
 
@@ -4064,7 +4133,8 @@ To change this, use updateSpawnPos().</p>
     </div>
 
     <div class="description">
-        <p>How the particles will be spawned. Valid types are "point", "rectangle", "circle", "burst".</p>
+        <p>How the particles will be spawned. Valid types are "point", "rectangle",
+"circle", "burst".</p>
 
     </div>
 
@@ -4099,7 +4169,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l34"><code>startAlpha:34</code></a>
+        <a href="../files/src_Emitter.js.html#l36"><code>startAlpha:36</code></a>
         
         </p>
 
@@ -4146,7 +4216,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l88"><code>startColor:88</code></a>
+        <a href="../files/src_Emitter.js.html#l90"><code>startColor:90</code></a>
         
         </p>
 
@@ -4191,7 +4261,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l67"><code>startScale:67</code></a>
+        <a href="../files/src_Emitter.js.html#l69"><code>startScale:69</code></a>
         
         </p>
 
@@ -4238,7 +4308,7 @@ To change this, use updateSpawnPos().</p>
             
         
         
-        <a href="../files/src_Emitter.js.html#l46"><code>startSpeed:46</code></a>
+        <a href="../files/src_Emitter.js.html#l48"><code>startSpeed:48</code></a>
         
         </p>
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
     <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
     <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
-	<title>PixiParticles v1.1.0 API Documentation : ParticleUtils</title>  
+	<title>PixiParticles v1.2.2 API Documentation : ParticleUtils</title>  
 </head>
 <body class="yui3-skin-sam">
 
@@ -19,7 +19,7 @@
             
         </div>
         <div class="yui3-u-1-4 version">
-            <em>API Documentation for: 1.1.0</em>
+            <em>API Documentation for: 1.2.2</em>
         </div>
     </div>
     <div id="bd" class="yui3-g">
@@ -34,10 +34,12 @@
         </div>
 		<ul class="tabs">
             <li><a href="#api-classes">Classes</a></li>
-			<li><a href="#api-modules">Namespaces</a></li>
+			<li><a href="#api-modules">Modules</a></li>
         </ul>
         <div id="api-tabview-panel">
             <ul id="api-classes" class="apis classes">
+            
+                <li><a href="../classes/AnimatedParticle.html">AnimatedParticle</a></li>
             
                 <li><a href="../classes/Array.prototype.html">Array.prototype</a></li>
             
@@ -46,6 +48,8 @@
                 <li><a href="../classes/Particle.html">Particle</a></li>
             
                 <li><a href="../classes/ParticleUtils.html">ParticleUtils</a></li>
+            
+                <li><a href="../classes/PathParticle.html">PathParticle</a></li>
             
             </ul>
 
@@ -102,7 +106,7 @@
 
     
         
-            Namespace: <a href="../modules/global.html">global</a>
+            Module: <a href="../modules/global.html">global</a>
         
     
 
@@ -433,7 +437,7 @@
             
         
         
-        <a href="../files/src_ParticleUtils.js.html#l123"><code>generateEase:123</code></a>
+        <a href="../files/src_ParticleUtils.js.html#l124"><code>generateEase:124</code></a>
         
         </p>
 
@@ -444,7 +448,7 @@
     </div>
 
     <div class="description">
-        <p>Generates a custom ease function, based on the GreenSock custom ease, as demonstrated 
+        <p>Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
 by the related tool at <a href="http://www.greensock.com/customease/">http://www.greensock.com/customease/</a>.</p>
 
     </div>
@@ -464,7 +468,8 @@ by the related tool at <a href="http://www.greensock.com/customease/">http://www
                     
 
                     <div class="param-description">
-                        <p>An array of segments, as created by <a href="http://www.greensock.com/customease/">http://www.greensock.com/customease/</a>.</p>
+                        <p>An array of segments, as created by
+<a href="http://www.greensock.com/customease/">http://www.greensock.com/customease/</a>.</p>
 
                     </div>
 
@@ -484,7 +489,8 @@ by the related tool at <a href="http://www.greensock.com/customease/">http://www
                     
                         <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>:
                     
-                    <p>A function that calculates the percentage of change at a given point in time (0-1 inclusive).</p>
+                    <p>A function that calculates the percentage of change at
+                    a given point in time (0-1 inclusive).</p>
 
                 
             </div>
@@ -545,7 +551,7 @@ by the related tool at <a href="http://www.greensock.com/customease/">http://www
             
         
         
-        <a href="../files/src_ParticleUtils.js.html#l151"><code>getBlendMode:151</code></a>
+        <a href="../files/src_ParticleUtils.js.html#l155"><code>getBlendMode:155</code></a>
         
         </p>
 
@@ -673,8 +679,9 @@ by the related tool at <a href="http://www.greensock.com/customease/">http://www
     </div>
 
     <div class="description">
-        <p>Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB", "AARRGGBB", or "RRGGBB" 
-to an array of ints of 0-255 or Numbers from 0-1, as [r, g, b, (a)].</p>
+        <p>Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+"AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+[r, g, b, (a)].</p>
 
     </div>
 
