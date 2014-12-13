@@ -7,13 +7,20 @@
 	*  @param {String[]} imagePaths The local path to the image source
 	*  @param {Object} config The emitter configuration
 	*/
-	var ParticleExample = function(imagePaths, config)
+	var ParticleExample = function(imagePaths, config, type)
 	{
+		var canvas = document.getElementById("stage");
 		// Basic PIXI Setup
-		var canvas = document.getElementById("stage"),
-			stage = new PIXI.Stage(0x0),
+		var rendererOptions =
+		{
+			view: canvas,
+		};
+		/*var preMultAlpha = !!options.preMultAlpha;
+		if(rendererOptions.transparent && !preMultAlpha)
+			rendererOptions.transparent = "notMultiplied";*/
+		var stage = new PIXI.Stage(0x0),
 			emitter = null,
-			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, canvas),
+			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, rendererOptions),
 			bg = null;
 
 		// Calculate the current time
@@ -21,7 +28,7 @@
 
 		// Update function every frame
 		var update = function(){
-			
+
 			// Update the next frame
 			requestAnimFrame(update);
 
@@ -71,15 +78,19 @@
 				textures,
 				config
 			);
+			if(type == "path")
+				emitter.particleConstructor = cloudkid.PathParticle;
+			else if(type == "anim")
+				emitter.particleConstructor = cloudkid.AnimatedParticle;
 
 			// Center on the stage
 			emitter.updateOwnerPos(window.innerWidth / 2, window.innerHeight / 2);
 
-			// Click on the canvas to trigger 
+			// Click on the canvas to trigger
 			canvas.addEventListener('mouseup', function(e){
 				emitter.emit = true;
 				emitter.resetPositionTracking();
-				emitter.updateOwnerPos(e.offsetX, e.offsetY);
+				emitter.updateOwnerPos(e.offsetX || e.layerX, e.offsetY || e.layerY);
 			});
 
 			// Start the update

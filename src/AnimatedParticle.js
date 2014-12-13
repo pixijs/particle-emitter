@@ -7,9 +7,10 @@
 
 	var ParticleUtils = cloudkid.ParticleUtils,
 		Particle = cloudkid.Particle;
-	
+
 	/**
-	*	An individual particle image with an animation. You shouldn't have to deal with these.
+	*	An individual particle image with an animation. While this class may be functional, it
+	*	has not gotten thorough testing or examples yet, and is not considered to be release ready.
 	*	@class AnimatedParticle
 	*	@constructor
 	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
@@ -17,21 +18,21 @@
 	var AnimatedParticle = function(emitter)
 	{
 		Particle.call(this, emitter);
-		
+
 		/**
-		 * Array used to avoid damaging previous texture arrays
+		 * Array used to avoid damaging previous texture arrays or creating new ones
 		 * when applyArt() passes a texture instead of an array.
 		 * @property {Array} _helperTextures
 		 * @private
 		 */
 		this._helperTextures = [];
 	};
-	
+
 	// Reference to the super class
 	var s = Particle.prototype;
 	// Reference to the prototype
 	var p = AnimatedParticle.prototype = Object.create(s);
-	
+
 	/**
 	*	Initializes the particle for use, based on the properties that have to
 	*	have been set already on the particle.
@@ -39,12 +40,12 @@
 	*/
 	p.init = function()
 	{
-		s.init.call(this);
-		
+		this.Particle_init();
+
 		//set the standard PIXI animationSpeed
 		if(this.extraData)
 		{
-			//fps will work differently for CloudKid's fork of PIXI than
+			//fps will work differently for SpringRoll's fork of PIXI than
 			//standard PIXI, where it will just be a variable
 			if(this.extraData.fps)
 			{
@@ -61,7 +62,7 @@
 				//animation should end when the particle does
 				if(this.hasOwnProperty("_duration"))
 				{
-					//CloudKid's fork of PIXI redoes how MovieClips animate,
+					//SpringRoll's fork of PIXI redoes how MovieClips animate,
 					//with duration and elapsed time
 					this.animationSpeed = this._duration / this.maxLife;
 				}
@@ -84,7 +85,7 @@
 		}
 		this.play();//start playing
 	};
-	
+
 	/**
 	*	Sets the textures for the particle.
 	*	@method applyArt
@@ -109,13 +110,12 @@
 	*/
 	p.update = function(delta)
 	{
-		s.update.call(this, delta);
-		if(this.age < this.maxLife)
+		//only animate the particle if it is still alive
+		if(this.Particle_update(delta) >= 0)
 		{
-			//only animate the particle if it is still alive
 			if(this._duration)
 			{
-				//work with CloudKid's fork
+				//work with SpringRoll's fork
 				this.updateAnim(delta);
 			}
 			else
@@ -126,7 +126,7 @@
 			}
 		}
 	};
-	
+
 	/**
 	*	Destroys the particle, removing references and preventing future use.
 	*	@method destroy
@@ -135,7 +135,7 @@
 	{
 		s.destroy.call(this);
 	};
-	
+
 	cloudkid.AnimatedParticle = AnimatedParticle;
-	
+
 }(cloudkid));

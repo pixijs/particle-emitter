@@ -7,6 +7,7 @@
 	"main" : [
 		"src/ParticleUtils.js",
 		"src/Particle.js",
+		"src/PathParticle.js",
 		"src/AnimatedParticle.js",
 		"src/Emitter.js"
 	]

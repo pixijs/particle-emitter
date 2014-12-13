@@ -2,7 +2,7 @@ module.exports = function(grunt)
 {
 	grunt.registerTask(
 		'examples',
-		'Install the example depencencies',
+		'Install the example dependencies',
 		['bower-install-simple']
 	);
 };

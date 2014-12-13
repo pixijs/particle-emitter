@@ -289,23 +289,31 @@
 		/**
 		*	The particles that are active and on the display list.
 		*	@property {Array} _activeParticles
+		*	@private
 		*/
 		this._activeParticles = [];
 		/**
 		*	The particles that are not currently being used.
 		*	@property {Array} _pool
+		*	@private
 		*/
 		this._pool = [];
+		/**
+		*	Extra data storage for particle subclasses to share things that have been
+		*	generated from configuration data.
+		*	@property {Object} _sharedExtraData
+		*	@private
+		*/
+		this._sharedExtraData = null;
 
 		if(particleImages && config)
 			this.init(particleImages, config);
 	};
-	
+
 	// Reference to the prototype
 	var p = Emitter.prototype = {};
-	
-	var helperPoint = new PIXI.Point();
 
+	var helperPoint = new PIXI.Point();
 
 	/**
 	*	The constructor used to create new particles. The default is
@@ -321,6 +329,7 @@
 			if(value != this._particleConstructor)
 			{
 				this._particleConstructor = value;
+				this.cleanup();
 				if(this._activeParticles.length)
 					this._activeParticles.length = 0;
 				if(this._pool.length)
@@ -441,6 +450,7 @@
 		else
 			this.customEase = null;
 		this.extraData = config.extraData || null;
+		this._sharedExtraData = {};
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -526,7 +536,7 @@
 		if(particle.parent)
 			particle.parent.removeChild(particle);
 	};
-	
+
 	/**
 	*	Sets the rotation of the emitter to a new value.
 	*	@method rotate
@@ -543,7 +553,7 @@
 		//mark the position as having changed
 		this._posChanged = true;
 	};
-	
+
 	/**
 	*	Changes the spawn position of the emitter.
 	*	@method updateSpawnPos
@@ -556,7 +566,7 @@
 		this.spawnPos.x = x;
 		this.spawnPos.y = y;
 	};
-	
+
 	/**
 	*	Changes the position of the emitter's owner. You should call this if you are adding
 	*	particles to the world display object that your emitter's owner is moving around in.
@@ -570,7 +580,7 @@
 		this.ownerPos.x = x;
 		this.ownerPos.y = y;
 	};
-	
+
 	/**
 	*	Prevents emitter position interpolation in the next update.
 	*	This should be used if you made a major position change of your emitter's owner
@@ -581,7 +591,7 @@
 	{
 		this._prevPosIsValid = false;
 	};
-	
+
 	/**
 	*	If particles should be emitted during update() calls. Setting this to false
 	*	stops new particles from being created, but allows existing ones to die out.
@@ -747,7 +757,7 @@
 			this._posChanged = false;
 		}
 	};
-	
+
 	/**
 	*	Positions a particle for a point type emitter.
 	*	@method _spawnPoint
@@ -769,7 +779,7 @@
 		p.position.x = emitPosX;
 		p.position.y = emitPosY;
 	};
-	
+
 	/**
 	*	Positions a particle for a rectangle type emitter.
 	*	@method _spawnRect
@@ -795,7 +805,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a circle type emitter.
 	*	@method _spawnCircle
@@ -824,7 +834,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a burst type emitter.
 	*	@method _spawnBurst
@@ -858,7 +868,7 @@
 			this.recycle(this._activeParticles[i]);
 		}
 	};
-	
+
 	/**
 	*	Destroys the emitter and all of its particles.
 	*	@method destroy

@@ -382,13 +382,20 @@
 		*/
 		this._doColor = false;
 		/**
+		*	If normal movement should be handled. Subclasses wishing to override movement
+		*	can set this to false in init().
+		*	@property {Boolean} _doNormalMovement
+		*	@private
+		*/
+		this._doNormalMovement = false;
+		/**
 		*	One divided by the max life of the particle, saved for slightly faster math.
 		*	@property {Number} _oneOverLife
 		*	@private
 		*/
 		this._oneOverLife = 0;
 	};
-	
+
 	// Reference to the prototype
 	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
 
@@ -397,7 +404,12 @@
 	*	have been set already on the particle.
 	*	@method init
 	*/
-	p.init = function()
+	/**
+	*	A reference to init, so that subclasses can access it without the penalty of Function.call()
+	*	@method Particle_init
+	*	@private
+	*/
+	p.init = p.Particle_init = function()
 	{
 		//reset the age
 		this.age = 0;
@@ -431,6 +443,8 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		//_doNormalMovement can be cancelled by subclasses
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -452,8 +466,19 @@
 	*	Updates the particle.
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
 	*/
-	p.update = function(delta)
+	/**
+	*	A reference to update so that subclasses can access the original without the overhead
+	*	of Function.call().
+	*	@method Particle_update
+	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
+	*	@private
+	*/
+	p.update = p.Particle_update = function(delta)
 	{
 		//increase age
 		this.age += delta;
@@ -461,9 +486,9 @@
 		if(this.age >= this.maxLife)
 		{
 			this.kill();
-			return;
+			return -1;
 		}
-		
+
 		//determine our interpolation value
 		var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
 		if (this.ease)
@@ -481,7 +506,7 @@
 				lerp = this.ease(lerp);
 			}
 		}
-		
+
 		//interpolate alpha
 		if (this._doAlpha)
 			this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
@@ -492,7 +517,7 @@
 			this.scale.x = this.scale.y = scale;
 		}
 		//handle movement
-		if(this._doSpeed || this.startSpeed !== 0 || this.acceleration)
+		if(this._doNormalMovement)
 		{
 			//interpolate speed
 			if (this._doSpeed)
@@ -527,6 +552,7 @@
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
+		return lerp;
 	};
 
 	/**
@@ -552,7 +578,7 @@
 	};
 
 	cloudkid.Particle = Particle;
-	
+
 }(cloudkid));
 /**
 *  @module cloudkid
@@ -563,31 +589,68 @@
 
 	var ParticleUtils = cloudkid.ParticleUtils,
 		Particle = cloudkid.Particle;
-	
+
 	/**
-	*	An individual particle image with an animation. You shouldn't have to deal with these.
-	*	@class AnimatedParticle
+	*	An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
+	*	"5x + 3".
+	*	To use this class, the particle config must have a "path" string in the
+	*	"extraData" parameter. This string should have "x" in it to represent movement (from the
+	*	speed settings of the particle). It may have numbers, parentheses, the four basic
+	*	operations, and the following Math functions or properties (without the preceding "Math."):
+	*	"pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
+	*	"acos", "atan", "atan2", "log".
+	*	The overall movement of the particle and the expression value become x and y positions for
+	*	the particle, respectively. The final position is rotated by the spawn rotation/angle of
+	*	the particle.
+	*
+	*	Some example paths:
+	*	sin(x/10) * 20 : A sine wave path.
+	*	cos(x/100) * 30 : Particles curve counterclockwise (for medium speed/low lifetime particles)
+	*	pow(x/10, 2) / 2 : Particles curve clockwise (remember, +y is down).
+	*
+	*	@class PathParticle
 	*	@constructor
-	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
+	*	@param {Emitter} emitter The emitter that controls this PathParticle.
 	*/
-	var AnimatedParticle = function(emitter)
+	var PathParticle = function(emitter)
 	{
 		Particle.call(this, emitter);
-		
 		/**
-		 * Array used to avoid damaging previous texture arrays
-		 * when applyArt() passes a texture instead of an array.
-		 * @property {Array} _helperTextures
-		 * @private
-		 */
-		this._helperTextures = [];
+		*	The function representing the path the particle should take.
+		*	@property {Function} path
+		*/
+		this.path = null;
+		/**
+		*	The initial rotation in degrees of the particle, because the direction of the path
+		*	is based on that.
+		*	@property {Number} initialRotation
+		*/
+		this.initialRotation = 0;
+		/**
+		*	The initial position of the particle, as all path movement is added to that.
+		*	@property {PIXI.Point} initialPosition
+		*/
+		this.initialPosition = new PIXI.Point();
+		/**
+		*	Total single directional movement, due to speed.
+		*	@property {Number} movement
+		*/
+		this.movement = 0;
 	};
-	
+
 	// Reference to the super class
 	var s = Particle.prototype;
 	// Reference to the prototype
-	var p = AnimatedParticle.prototype = Object.create(s);
-	
+	var p = PathParticle.prototype = Object.create(s);
+
+	/**
+	*	A helper point for math things.
+	*	@property {Function} helperPoint
+	*	@private
+	*	@static
+	*/
+	var helperPoint = new PIXI.Point();
+
 	/**
 	*	Initializes the particle for use, based on the properties that have to
 	*	have been set already on the particle.
@@ -595,12 +658,172 @@
 	*/
 	p.init = function()
 	{
-		s.init.call(this);
-		
+		//get initial rotation before it is converted to radians
+		this.initialRotation = this.rotation;
+		//standard init
+		this.Particle_init();
+		//cancel the normal movement behavior
+		this._doNormalMovement = false;
+
+		//set the standard PIXI animationSpeed
+		if(this.extraData && this.extraData.path)
+		{
+			var _sharedExtraData = this.emitter._sharedExtraData;
+			if(_sharedExtraData.path)
+				this.path = _sharedExtraData.path;
+			else
+				this.path = _sharedExtraData.path = parsePath(this.extraData.path);
+		}
+		else
+		{
+			console.error("PathParticle requires a path string in extraData!");
+		}
+		//reset movement
+		this.movement = 0;
+		//grab position
+		this.initialPosition.x = this.position.x;
+		this.initialPosition.y = this.position.y;
+	};
+
+	//a hand picked list of Math functions (and a couple properties) that are allowable.
+	//they should be used without the preceding "Math."
+	var MATH_FUNCS =
+	[
+		"pow",
+		"sqrt",
+		"abs",
+		"floor",
+		"round",
+		"ceil",
+		"E",
+		"PI",
+		"sin",
+		"cos",
+		"tan",
+		"asin",
+		"acos",
+		"atan",
+		"atan2",
+		"log"
+	];
+	//Allow the 4 basic operations, parentheses and all numbers/decimals, as well
+	//as 'x', for the variable usage.
+	var WHITELISTER = "[01234567890\\.\\*\\-\\+\\/\\(\\)x ,]";
+	//add the math functions to the regex string.
+	for(var index = MATH_FUNCS.length - 1; index >= 0; --index)
+	{
+		WHITELISTER += "|" + MATH_FUNCS[index];
+	}
+	//create an actual regular expression object from the string
+	WHITELISTER = new RegExp(WHITELISTER, "g");
+
+	/**
+	*	Parses a string into a function for path following.
+	*	This involves whitelisting the string for safety, inserting "Math." to math function
+	*	names, and using eval() to generate a function.
+	*	@method parsePath
+	*	@private
+	*	@static
+	*	@param {String} pathString The string to parse.
+	*	@return {Function} The path function - takes x, outputs y.
+	*/
+	var parsePath = function(pathString)
+	{
+		var rtn;
+		var matches = pathString.match(WHITELISTER);
+		for(var i = matches.length - 1; i >= 0; --i)
+		{
+			if(MATH_FUNCS.indexOf(matches[i]) >= 0)
+				matches[i] = "Math." + matches[i];
+		}
+		pathString = matches.join("");
+		eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
+		return rtn;
+	};
+
+	/**
+	*	Updates the particle.
+	*	@method update
+	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*/
+	p.update = function(delta)
+	{
+		var lerp = this.Particle_update(delta);
+		//if the particle died during the update, then don't bother
+		if(lerp >= 0)
+		{
+			//increase linear movement based on speed
+			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+			this.movement += speed * delta;
+			//set up the helper point for rotation
+			helperPoint.x = this.movement;
+			helperPoint.y = this.path(this.movement);
+			ParticleUtils.rotatePoint(this.initialRotation, helperPoint);
+			this.position.x = this.initialPosition.x + helperPoint.x;
+			this.position.y = this.initialPosition.y + helperPoint.y;
+		}
+	};
+
+	/**
+	*	Destroys the particle, removing references and preventing future use.
+	*	@method destroy
+	*/
+	p.destroy = function()
+	{
+		s.destroy.call(this);
+	};
+
+	cloudkid.PathParticle = PathParticle;
+
+}(cloudkid));
+/**
+*  @module cloudkid
+*/
+(function(cloudkid, undefined) {
+
+	"use strict";
+
+	var ParticleUtils = cloudkid.ParticleUtils,
+		Particle = cloudkid.Particle;
+
+	/**
+	*	An individual particle image with an animation. While this class may be functional, it
+	*	has not gotten thorough testing or examples yet, and is not considered to be release ready.
+	*	@class AnimatedParticle
+	*	@constructor
+	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
+	*/
+	var AnimatedParticle = function(emitter)
+	{
+		Particle.call(this, emitter);
+
+		/**
+		 * Array used to avoid damaging previous texture arrays or creating new ones
+		 * when applyArt() passes a texture instead of an array.
+		 * @property {Array} _helperTextures
+		 * @private
+		 */
+		this._helperTextures = [];
+	};
+
+	// Reference to the super class
+	var s = Particle.prototype;
+	// Reference to the prototype
+	var p = AnimatedParticle.prototype = Object.create(s);
+
+	/**
+	*	Initializes the particle for use, based on the properties that have to
+	*	have been set already on the particle.
+	*	@method init
+	*/
+	p.init = function()
+	{
+		this.Particle_init();
+
 		//set the standard PIXI animationSpeed
 		if(this.extraData)
 		{
-			//fps will work differently for CloudKid's fork of PIXI than
+			//fps will work differently for SpringRoll's fork of PIXI than
 			//standard PIXI, where it will just be a variable
 			if(this.extraData.fps)
 			{
@@ -617,7 +840,7 @@
 				//animation should end when the particle does
 				if(this.hasOwnProperty("_duration"))
 				{
-					//CloudKid's fork of PIXI redoes how MovieClips animate,
+					//SpringRoll's fork of PIXI redoes how MovieClips animate,
 					//with duration and elapsed time
 					this.animationSpeed = this._duration / this.maxLife;
 				}
@@ -640,7 +863,7 @@
 		}
 		this.play();//start playing
 	};
-	
+
 	/**
 	*	Sets the textures for the particle.
 	*	@method applyArt
@@ -665,13 +888,12 @@
 	*/
 	p.update = function(delta)
 	{
-		s.update.call(this, delta);
-		if(this.age < this.maxLife)
+		//only animate the particle if it is still alive
+		if(this.Particle_update(delta) >= 0)
 		{
-			//only animate the particle if it is still alive
 			if(this._duration)
 			{
-				//work with CloudKid's fork
+				//work with SpringRoll's fork
 				this.updateAnim(delta);
 			}
 			else
@@ -682,7 +904,7 @@
 			}
 		}
 	};
-	
+
 	/**
 	*	Destroys the particle, removing references and preventing future use.
 	*	@method destroy
@@ -691,9 +913,9 @@
 	{
 		s.destroy.call(this);
 	};
-	
+
 	cloudkid.AnimatedParticle = AnimatedParticle;
-	
+
 }(cloudkid));
 /**
 *  @module cloudkid
@@ -986,23 +1208,31 @@
 		/**
 		*	The particles that are active and on the display list.
 		*	@property {Array} _activeParticles
+		*	@private
 		*/
 		this._activeParticles = [];
 		/**
 		*	The particles that are not currently being used.
 		*	@property {Array} _pool
+		*	@private
 		*/
 		this._pool = [];
+		/**
+		*	Extra data storage for particle subclasses to share things that have been
+		*	generated from configuration data.
+		*	@property {Object} _sharedExtraData
+		*	@private
+		*/
+		this._sharedExtraData = null;
 
 		if(particleImages && config)
 			this.init(particleImages, config);
 	};
-	
+
 	// Reference to the prototype
 	var p = Emitter.prototype = {};
-	
-	var helperPoint = new PIXI.Point();
 
+	var helperPoint = new PIXI.Point();
 
 	/**
 	*	The constructor used to create new particles. The default is
@@ -1018,6 +1248,7 @@
 			if(value != this._particleConstructor)
 			{
 				this._particleConstructor = value;
+				this.cleanup();
 				if(this._activeParticles.length)
 					this._activeParticles.length = 0;
 				if(this._pool.length)
@@ -1138,6 +1369,7 @@
 		else
 			this.customEase = null;
 		this.extraData = config.extraData || null;
+		this._sharedExtraData = {};
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -1223,7 +1455,7 @@
 		if(particle.parent)
 			particle.parent.removeChild(particle);
 	};
-	
+
 	/**
 	*	Sets the rotation of the emitter to a new value.
 	*	@method rotate
@@ -1240,7 +1472,7 @@
 		//mark the position as having changed
 		this._posChanged = true;
 	};
-	
+
 	/**
 	*	Changes the spawn position of the emitter.
 	*	@method updateSpawnPos
@@ -1253,7 +1485,7 @@
 		this.spawnPos.x = x;
 		this.spawnPos.y = y;
 	};
-	
+
 	/**
 	*	Changes the position of the emitter's owner. You should call this if you are adding
 	*	particles to the world display object that your emitter's owner is moving around in.
@@ -1267,7 +1499,7 @@
 		this.ownerPos.x = x;
 		this.ownerPos.y = y;
 	};
-	
+
 	/**
 	*	Prevents emitter position interpolation in the next update.
 	*	This should be used if you made a major position change of your emitter's owner
@@ -1278,7 +1510,7 @@
 	{
 		this._prevPosIsValid = false;
 	};
-	
+
 	/**
 	*	If particles should be emitted during update() calls. Setting this to false
 	*	stops new particles from being created, but allows existing ones to die out.
@@ -1444,7 +1676,7 @@
 			this._posChanged = false;
 		}
 	};
-	
+
 	/**
 	*	Positions a particle for a point type emitter.
 	*	@method _spawnPoint
@@ -1466,7 +1698,7 @@
 		p.position.x = emitPosX;
 		p.position.y = emitPosY;
 	};
-	
+
 	/**
 	*	Positions a particle for a rectangle type emitter.
 	*	@method _spawnRect
@@ -1492,7 +1724,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a circle type emitter.
 	*	@method _spawnCircle
@@ -1521,7 +1753,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	*	Positions a particle for a burst type emitter.
 	*	@method _spawnBurst
@@ -1555,7 +1787,7 @@
 			this.recycle(this._activeParticles[i]);
 		}
 	};
-	
+
 	/**
 	*	Destroys the emitter and all of its particles.
 	*	@method destroy

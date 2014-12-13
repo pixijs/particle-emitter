@@ -165,13 +165,20 @@
 		*/
 		this._doColor = false;
 		/**
+		*	If normal movement should be handled. Subclasses wishing to override movement
+		*	can set this to false in init().
+		*	@property {Boolean} _doNormalMovement
+		*	@private
+		*/
+		this._doNormalMovement = false;
+		/**
 		*	One divided by the max life of the particle, saved for slightly faster math.
 		*	@property {Number} _oneOverLife
 		*	@private
 		*/
 		this._oneOverLife = 0;
 	};
-	
+
 	// Reference to the prototype
 	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
 
@@ -180,7 +187,12 @@
 	*	have been set already on the particle.
 	*	@method init
 	*/
-	p.init = function()
+	/**
+	*	A reference to init, so that subclasses can access it without the penalty of Function.call()
+	*	@method Particle_init
+	*	@private
+	*/
+	p.init = p.Particle_init = function()
 	{
 		//reset the age
 		this.age = 0;
@@ -214,6 +226,8 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		//_doNormalMovement can be cancelled by subclasses
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -235,8 +249,19 @@
 	*	Updates the particle.
 	*	@method update
 	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
 	*/
-	p.update = function(delta)
+	/**
+	*	A reference to update so that subclasses can access the original without the overhead
+	*	of Function.call().
+	*	@method Particle_update
+	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	*                    properties. A value of -1 means the particle died of old age instead.
+	*	@private
+	*/
+	p.update = p.Particle_update = function(delta)
 	{
 		//increase age
 		this.age += delta;
@@ -244,9 +269,9 @@
 		if(this.age >= this.maxLife)
 		{
 			this.kill();
-			return;
+			return -1;
 		}
-		
+
 		//determine our interpolation value
 		var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
 		if (this.ease)
@@ -264,7 +289,7 @@
 				lerp = this.ease(lerp);
 			}
 		}
-		
+
 		//interpolate alpha
 		if (this._doAlpha)
 			this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
@@ -275,7 +300,7 @@
 			this.scale.x = this.scale.y = scale;
 		}
 		//handle movement
-		if(this._doSpeed || this.startSpeed !== 0 || this.acceleration)
+		if(this._doNormalMovement)
 		{
 			//interpolate speed
 			if (this._doSpeed)
@@ -310,6 +335,7 @@
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
+		return lerp;
 	};
 
 	/**
@@ -335,5 +361,5 @@
 	};
 
 	cloudkid.Particle = Particle;
-	
+
 }(cloudkid));
