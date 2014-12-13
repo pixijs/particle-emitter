@@ -22,9 +22,10 @@
 	*	the particle.
 	*
 	*	Some example paths:
-	*	sin(x/10) * 20 : A sine wave path.
-	*	cos(x/100) * 30 : Particles curve counterclockwise (for medium speed/low lifetime particles)
-	*	pow(x/10, 2) / 2 : Particles curve clockwise (remember, +y is down).
+	*
+	*		"sin(x/10) * 20" // A sine wave path.
+	*		"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
+	*		"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
 	*
 	*	@class PathParticle
 	*	@constructor
