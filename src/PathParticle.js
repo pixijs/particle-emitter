@@ -81,22 +81,33 @@
 		this.initialRotation = this.rotation;
 		//standard init
 		this.Particle_init();
-		//cancel the normal movement behavior
-		this._doNormalMovement = false;
 
 		//set the standard PIXI animationSpeed
 		if(this.extraData && this.extraData.path)
 		{
 			var _sharedExtraData = this.emitter._sharedExtraData;
-			if(_sharedExtraData.path)
+			if(_sharedExtraData.path !== undefined)
 				this.path = _sharedExtraData.path;
 			else
-				this.path = _sharedExtraData.path = parsePath(this.extraData.path);
+			{
+				try
+				{
+					this.path = _sharedExtraData.path = parsePath(this.extraData.path);
+				}
+				catch(e)
+				{
+					console.error("PathParticle: error in parsing path expression");
+					this.path = _sharedExtraData.path = null;
+				}
+			}
 		}
 		else
 		{
 			console.error("PathParticle requires a path string in extraData!");
+			this.path = null;
 		}
+		//cancel the normal movement behavior
+		this._doNormalMovement = !this.path;
 		//reset movement
 		this.movement = 0;
 		//grab position
@@ -169,7 +180,7 @@
 	{
 		var lerp = this.Particle_update(delta);
 		//if the particle died during the update, then don't bother
-		if(lerp >= 0)
+		if(lerp >= 0 && this.path)
 		{
 			//increase linear movement based on speed
 			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
