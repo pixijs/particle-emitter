@@ -110,6 +110,10 @@ the official release of PixiJS.
 bower install pixi-particles
 ```
 
+##Use in Haxe##
+
+Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi)
+
 ##License##
 
 Copyright (c) 2014 [CloudKid](http://github.com/cloudkidstudio)
