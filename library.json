@@ -1,6 +1,6 @@
 {
 	"name" : "PixiParticles",
-	"version" : "1.2.2",
+	"version" : "1.4.0",
 	"description" : "Particle system for PixiJS",
 	"url" : "http://github.com/CloudKidStudio/PixiParticles",
 	"output" : "pixi-particles",

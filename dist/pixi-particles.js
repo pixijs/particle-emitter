@@ -1,4 +1,4 @@
-/*! PixiParticles 1.2.2 */
+/*! PixiParticles 1.4.0 */
 /**
 *  @module cloudkid
 */
@@ -1112,7 +1112,7 @@
 		this.spawnPos = null;
 		/**
 		*	How the particles will be spawned. Valid types are "point", "rectangle",
-		*	"circle", "burst".
+		*	"circle", "burst", "ring".
 		*	@property {String} spawnType
 		*	@readOnly
 		*/
@@ -1386,11 +1386,11 @@
 		// Emitter Properties   //
 		//////////////////////////
 		//reset spawn type specific settings
-		this.minAngle = this.maxAngle = 0;
 		this.spawnRect = this.spawnCircle = null;
 		this.particlesPerWave = 1;
 		this.particleSpacing = 0;
 		this.angleStart = 0;
+		var spawnCircle;
 		//determine the spawn function to use
 		switch(config.spawnType)
 		{
@@ -1403,15 +1403,15 @@
 			case "circle":
 				this.spawnType = "circle";
 				this._spawnFunc = this._spawnCircle;
-				var spawnCircle = config.spawnCircle;
+				spawnCircle = config.spawnCircle;
 				this.spawnCircle = new PIXI.Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r);
 				break;
-			case "arc":
-				this.spawnType = "arc";
-				this._spawnFunc = this._spawnArc;
-				//set up the angle for spawning particles in
-				this.minAngle = config.angle.min;
-				this.maxAngle = config.angle.max;
+			case "ring":
+				this.spawnType = "ring";
+				this._spawnFunc = this._spawnRing;
+				spawnCircle = config.spawnCircle;
+				this.spawnCircle = new PIXI.Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r);
+				this.spawnCircle.minRadius = spawnCircle.minR;
 				break;
 			case "burst":
 				this.spawnType = "burst";
@@ -1546,9 +1546,9 @@
 	p.update = function(delta)
 	{
 		//update existing particles
-		var i;
-		for(i = this._activeParticles.length - 1; i >= 0; --i)
-			this._activeParticles[i].update(delta);
+		var i, _activeParticles = this._activeParticles;
+		for(i = _activeParticles.length - 1; i >= 0; --i)
+			_activeParticles[i].update(delta);
 		var prevX, prevY;
 		//if the previous position is valid, store these for later interpolation
 		if(this._prevPosIsValid)
@@ -1672,7 +1672,7 @@
 						else
 							this.parent.addChild(p);
 						//add particle to list of active particles
-						this._activeParticles.push(p);
+						_activeParticles.push(p);
 					}
 				}
 				//increase timer and continue on to any other particles that need to be created
@@ -1753,15 +1753,65 @@
 		if (this.minStartRotation == this.maxStartRotation)
 			p.rotation = this.minStartRotation + this.rotation;
 		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
-		//place the particle at a random point in the circle
-		helperPoint.x = Math.random() * this.spawnCircle.radius;// + this.spawnRect.x;
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
+						this.minStartRotation + this.rotation;
+		//place the particle at a random radius in the circle
+		helperPoint.x = Math.random() * this.spawnCircle.radius;
 		helperPoint.y = 0;
-		ParticleUtils.rotatePoint(Math.random() * 360, helperPoint);
+		//rotate the point to a random angle in the circle
+		var angle = Math.random() * 360;
+		p.rotation += angle;
+		ParticleUtils.rotatePoint(angle, helperPoint);
+		//offset by the circle's center
 		helperPoint.x += this.spawnCircle.x;
 		helperPoint.y += this.spawnCircle.y;
+		//rotate the point by the emitter's rotation
 		if(this.rotation !== 0)
 			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		//set the position, offset by the emitter's position
+		p.position.x = emitPosX + helperPoint.x;
+		p.position.y = emitPosY + helperPoint.y;
+	};
+	
+	/**
+	*	Positions a particle for a ring type emitter.
+	*	@method _spawnRing
+	*	@private
+	*	@param {Particle} p The particle to position and rotate.
+	*	@param {Number} emitPosX The emitter's x position
+	*	@param {Number} emitPosY The emitter's y position
+	*	@param {int} i The particle number in the current wave. Not used for this function.
+	*/
+	p._spawnRing = function(p, emitPosX, emitPosY, i)
+	{
+		var spawnCircle = this.spawnCircle;
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
+		if (this.minStartRotation == this.maxStartRotation)
+			p.rotation = this.minStartRotation + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
+						this.minStartRotation + this.rotation;
+		//place the particle at a random radius in the ring
+		if(spawnCircle.minRadius == spawnCircle.radius)
+		{
+			helperPoint.x = Math.random() * (spawnCircle.radius - spawnCircle.minRadius) +
+							spawnCircle.minRadius;
+		}
+		else
+			helperPoint.x = spawnCircle.radius;
+		helperPoint.y = 0;
+		//rotate the point to a random angle in the circle
+		var angle = Math.random() * 360;
+		p.rotation += angle;
+		ParticleUtils.rotatePoint(angle, helperPoint);
+		//offset by the circle's center
+		helperPoint.x += this.spawnCircle.x;
+		helperPoint.y += this.spawnCircle.y;
+		//rotate the point by the emitter's rotation
+		if(this.rotation !== 0)
+			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		//set the position, offset by the emitter's position
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
