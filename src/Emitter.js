@@ -828,9 +828,7 @@
 		helperPoint.x = Math.random() * this.spawnCircle.radius;
 		helperPoint.y = 0;
 		//rotate the point to a random angle in the circle
-		var angle = Math.random() * 360;
-		p.rotation += angle;
-		ParticleUtils.rotatePoint(angle, helperPoint);
+		ParticleUtils.rotatePoint(Math.random() * 360, helperPoint);
 		//offset by the circle's center
 		helperPoint.x += this.spawnCircle.x;
 		helperPoint.y += this.spawnCircle.y;
