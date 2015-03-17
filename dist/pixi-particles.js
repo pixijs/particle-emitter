@@ -394,6 +394,14 @@
 		*	@private
 		*/
 		this._oneOverLife = 0;
+		
+		//save often used functions on the instance instead of the prototype for better speed
+		this.init = this.init;
+		this.Particle_init = this.Particle_init;
+		this.update = this.update;
+		this.Particle_update = this.Particle_update;
+		this.applyArt = this.applyArt;
+		this.kill = this.kill;
 	};
 
 	// Reference to the prototype
@@ -1162,7 +1170,7 @@
 		this.rotation = 0;
 		/**
 		*	The world position of the emitter's owner, to add spawnPos to when
-		*	spawning particles. To change this, use updateSpawnOrigin().
+		*	spawning particles. To change this, use updateOwnerPos().
 		*	@property {PIXI.Point} ownerPos
 		*	@default {x:0, y:0}
 		*	@readOnly
@@ -1239,6 +1247,13 @@
 
 		if(particleImages && config)
 			this.init(particleImages, config);
+		
+		//save often used functions on the instance instead of the prototype for better speed
+		this.recycle = this.recycle;
+		this.update = this.update;
+		this.rotate = this.rotate;
+		this.updateSpawnPos = this.updateSpawnPos;
+		this.updateOwnerPos = this.updateOwnerPos;
 	};
 
 	// Reference to the prototype

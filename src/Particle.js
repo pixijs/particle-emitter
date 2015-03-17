@@ -177,6 +177,14 @@
 		*	@private
 		*/
 		this._oneOverLife = 0;
+		
+		//save often used functions on the instance instead of the prototype for better speed
+		this.init = this.init;
+		this.Particle_init = this.Particle_init;
+		this.update = this.update;
+		this.Particle_update = this.Particle_update;
+		this.applyArt = this.applyArt;
+		this.kill = this.kill;
 	};
 
 	// Reference to the prototype
