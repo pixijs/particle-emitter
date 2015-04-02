@@ -370,9 +370,7 @@
 			{
 				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
 				{
-					if(window.Debug)
-						Debug.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
-					else if(window.console)
+					if (window.console)
 						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
 					break;
 				}
