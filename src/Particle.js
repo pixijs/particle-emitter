@@ -18,7 +18,7 @@
 		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
 															[emitter.particleImages[0]] :
 															emitter.particleImages[0];
-		PIXI.MovieClip.call(this, art);
+		PIXI.extras.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -188,7 +188,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
+	var p = Particle.prototype = Object.create(PIXI.extras.MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -250,7 +250,7 @@
 	*/
 	p.applyArt = function(art)
 	{
-		this.setTexture(art);
+		this.texture=art;
 	};
 
 	/**
