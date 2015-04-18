@@ -18,7 +18,10 @@
 		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
 															[emitter.particleImages[0]] :
 															emitter.particleImages[0];
-		PIXI.extras.MovieClip.call(this, art);
+
+
+        if(PIXI.MovieClip) PIXI.MovieClip.call(this, art);
+        else PIXI.extras.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -250,7 +253,12 @@
 	*/
 	p.applyArt = function(art)
 	{
-		this.texture=art;
+        if (PIXI.MovieClip) {
+            this.setTexture(art);
+        } else {
+            //remove warning on PIXI 3
+            this.texture = art;
+        }
 	};
 
 	/**
