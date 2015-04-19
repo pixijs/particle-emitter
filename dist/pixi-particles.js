@@ -162,11 +162,13 @@
 	*/
 	ParticleUtils.getBlendMode = function(name)
 	{
-		if(!name) return PIXI.blendModes.NORMAL;
-		name = name.toUpperCase();
-		while(name.indexOf(" ") >= 0)
-			name = name.replace(" ", "_");
-		return PIXI.blendModes[name] || PIXI.blendModes.NORMAL;
+        if (!name) return PIXI.blendModes ? PIXI.blendModes.NORMAL : PIXI.BLEND_MODES.NORMAL;
+        name = name.toUpperCase();
+        while (name.indexOf(" ") >= 0)
+            name = name.replace(" ", "_");
+        return PIXI.blendModes ?
+            (PIXI.blendModes[name] || PIXI.blendModes.NORMAL) :
+            (PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL);
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;
@@ -235,7 +237,10 @@
 		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
 															[emitter.particleImages[0]] :
 															emitter.particleImages[0];
-		PIXI.MovieClip.call(this, art);
+
+
+        if(PIXI.MovieClip) PIXI.MovieClip.call(this, art);
+        else PIXI.extras.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -405,7 +410,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(PIXI.MovieClip.prototype);
+	var p = Particle.prototype = Object.create(PIXI.extras.MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -467,7 +472,12 @@
 	*/
 	p.applyArt = function(art)
 	{
-		this.setTexture(art);
+        if (PIXI.MovieClip) {
+            this.setTexture(art);
+        } else {
+            //remove warning on PIXI 3
+            this.texture = art;
+        }
 	};
 
 	/**

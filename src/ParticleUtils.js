@@ -161,11 +161,13 @@
 	*/
 	ParticleUtils.getBlendMode = function(name)
 	{
-		if(!name) return PIXI.blendModes.NORMAL;
-		name = name.toUpperCase();
-		while(name.indexOf(" ") >= 0)
-			name = name.replace(" ", "_");
-		return PIXI.blendModes[name] || PIXI.blendModes.NORMAL;
+        if (!name) return PIXI.blendModes ? PIXI.blendModes.NORMAL : PIXI.BLEND_MODES.NORMAL;
+        name = name.toUpperCase();
+        while (name.indexOf(" ") >= 0)
+            name = name.replace(" ", "_");
+        return PIXI.blendModes ?
+            (PIXI.blendModes[name] || PIXI.blendModes.NORMAL) :
+            (PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL);
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;
