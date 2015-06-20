@@ -166,8 +166,8 @@
         while (name.indexOf(" ") >= 0)
             name = name.replace(" ", "_");
         return PIXI.BLEND_MODES ?
-			(PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL) :
-			(PIXI.blendModes[name] || PIXI.blendModes.NORMAL);
+            (PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL) :
+            (PIXI.blendModes[name] || PIXI.blendModes.NORMAL);
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;

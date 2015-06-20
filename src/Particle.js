@@ -254,10 +254,10 @@
 	p.applyArt = function(art)
 	{
         if (PIXI.extras && PIXI.extras.MovieClip) {
-			//remove warning on PIXI 3
-			this.texture = art;
+            //remove warning on PIXI 3
+            this.texture = art;
         } else {
-			this.setTexture(art);
+            this.setTexture(art);
         }
 	};
 
