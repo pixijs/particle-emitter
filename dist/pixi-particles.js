@@ -167,8 +167,8 @@
         while (name.indexOf(" ") >= 0)
             name = name.replace(" ", "_");
         return PIXI.BLEND_MODES ?
-			(PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL) :
-			(PIXI.blendModes[name] || PIXI.blendModes.NORMAL);
+            (PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL) :
+            (PIXI.blendModes[name] || PIXI.blendModes.NORMAL);
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;
@@ -473,10 +473,10 @@
 	p.applyArt = function(art)
 	{
         if (PIXI.extras && PIXI.extras.MovieClip) {
-			//remove warning on PIXI 3
-			this.texture = art;
+            //remove warning on PIXI 3
+            this.texture = art;
         } else {
-			this.setTexture(art);
+            this.setTexture(art);
         }
 	};
 
