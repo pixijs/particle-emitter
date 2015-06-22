@@ -9,12 +9,12 @@
 		Particle = cloudkid.Particle;
 
 	/**
-	*	An individual particle image with an animation. While this class may be functional, it
-	*	has not gotten thorough testing or examples yet, and is not considered to be release ready.
-	*	@class AnimatedParticle
-	*	@constructor
-	*	@param {Emitter} emitter The emitter that controls this AnimatedParticle.
-	*/
+	 * An individual particle image with an animation. While this class may be functional, it
+	 * has not gotten thorough testing or examples yet, and is not considered to be release ready.
+	 * @class AnimatedParticle
+	 * @constructor
+	 * @param {Emitter} emitter The emitter that controls this AnimatedParticle.
+	 */
 	var AnimatedParticle = function(emitter)
 	{
 		Particle.call(this, emitter);
@@ -34,10 +34,10 @@
 	var p = AnimatedParticle.prototype = Object.create(s);
 
 	/**
-	*	Initializes the particle for use, based on the properties that have to
-	*	have been set already on the particle.
-	*	@method init
-	*/
+	 * Initializes the particle for use, based on the properties that have to
+	 * have been set already on the particle.
+	 * @method init
+	 */
 	p.init = function()
 	{
 		this.Particle_init();
@@ -87,10 +87,10 @@
 	};
 
 	/**
-	*	Sets the textures for the particle.
-	*	@method applyArt
-	*	@param {Array} art An array of PIXI.Texture objects for this animated particle.
-	*/
+	 * Sets the textures for the particle.
+	 * @method applyArt
+	 * @param {Array} art An array of PIXI.Texture objects for this animated particle.
+	 */
 	p.applyArt = function(art)
 	{
 		if(Array.isArray(art))
@@ -104,10 +104,10 @@
 	};
 
 	/**
-	*	Updates the particle.
-	*	@method update
-	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	*/
+	 * Updates the particle.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 */
 	p.update = function(delta)
 	{
 		//only animate the particle if it is still alive
@@ -128,9 +128,9 @@
 	};
 
 	/**
-	*	Destroys the particle, removing references and preventing future use.
-	*	@method destroy
-	*/
+	 * Destroys the particle, removing references and preventing future use.
+	 * @method destroy
+	 */
 	p.destroy = function()
 	{
 		s.destroy.call(this);

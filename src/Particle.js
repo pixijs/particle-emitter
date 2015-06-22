@@ -19,11 +19,11 @@
 	}
 
 	/**
-	*	An individual particle image. You shouldn't have to deal with these.
-	*	@class Particle
-	*	@constructor
-	*	@param {Emitter} emitter The emitter that controls this particle.
-	*/
+	 * An individual particle image. You shouldn't have to deal with these.
+	 * @class Particle
+	 * @constructor
+	 * @param {Emitter} emitter The emitter that controls this particle.
+	 */
 	var Particle = function(emitter)
 	{
 		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
@@ -34,161 +34,161 @@
 		MovieClip.call(this, art);
 
 		/**
-		*	The emitter that controls this particle.
-		*	@property {Emitter} emitter
-		*/
+		 * The emitter that controls this particle.
+		 * @property {Emitter} emitter
+		 */
 		this.emitter = emitter;
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
-		*	The velocity of the particle. Speed may change, but the angle also
-		*	contained in velocity is constant.
-		*	@property {PIXI.Point} velocity
-		*/
+		 * The velocity of the particle. Speed may change, but the angle also
+		 * contained in velocity is constant.
+		 * @property {PIXI.Point} velocity
+		 */
 		this.velocity = new PIXI.Point();
 		/**
-		*	The maximum lifetime of this particle, in seconds.
-		*	@property {Number} maxLife
-		*/
+		 * The maximum lifetime of this particle, in seconds.
+		 * @property {Number} maxLife
+		 */
 		this.maxLife = 0;
 		/**
-		*	The current age of the particle, in seconds.
-		*	@property {Number} age
-		*/
+		 * The current age of the particle, in seconds.
+		 * @property {Number} age
+		 */
 		this.age = 0;
 		/**
-		*	A simple easing function to be applied to all properties that
-		*	are being interpolated.
-		*	@property {Function} ease
-		*/
+		 * A simple easing function to be applied to all properties that
+		 * are being interpolated.
+		 * @property {Function} ease
+		 */
 		this.ease = null;
 		/**
-		*	Extra data that the emitter passes along for custom particles.
-		*	@property {Object} extraData
-		*/
+		 * Extra data that the emitter passes along for custom particles.
+		 * @property {Object} extraData
+		 */
 		this.extraData = null;
 		/**
-		*	The alpha of the particle at the start of its life.
-		*	@property {Number} startAlpha
-		*/
+		 * The alpha of the particle at the start of its life.
+		 * @property {Number} startAlpha
+		 */
 		this.startAlpha = 0;
 		/**
-		*	The alpha of the particle at the end of its life.
-		*	@property {Number} endAlpha
-		*/
+		 * The alpha of the particle at the end of its life.
+		 * @property {Number} endAlpha
+		 */
 		this.endAlpha = 0;
 		/**
-		*	The speed of the particle at the start of its life.
-		*	@property {Number} startSpeed
-		*/
+		 * The speed of the particle at the start of its life.
+		 * @property {Number} startSpeed
+		 */
 		this.startSpeed = 0;
 		/**
-		*	The speed of the particle at the end of its life.
-		*	@property {Number} endSpeed
-		*/
+		 * The speed of the particle at the end of its life.
+		 * @property {Number} endSpeed
+		 */
 		this.endSpeed = 0;
 		/**
-		*	Acceleration to apply to the particle.
-		*	@property {PIXI.Point} accleration
-		*/
+		 * Acceleration to apply to the particle.
+		 * @property {PIXI.Point} accleration
+		 */
 		this.acceleration = null;
 		/**
-		*	The scale of the particle at the start of its life.
-		*	@property {Number} startScale
-		*/
+		 * The scale of the particle at the start of its life.
+		 * @property {Number} startScale
+		 */
 		this.startScale = 0;
 		/**
-		*	The scale of the particle at the start of its life.
-		*	@property {Number} endScale
-		*/
+		 * The scale of the particle at the start of its life.
+		 * @property {Number} endScale
+		 */
 		this.endScale = 0;
 		/**
-		*	The tint of the particle at the start of its life.
-		*	@property {Array} startColor
-		*/
+		 * The tint of the particle at the start of its life.
+		 * @property {Array} startColor
+		 */
 		this.startColor = null;
 		/**
-		*	The red tint of the particle at the start of its life.
-		*	This is pulled from startColor in init().
-		*	@property {uint} _sR
-		*	@private
-		*/
+		 * The red tint of the particle at the start of its life.
+		 * This is pulled from startColor in init().
+		 * @property {uint} _sR
+		 * @private
+		 */
 		this._sR = 0;
 		/**
-		*	The green tint of the particle at the start of its life.
-		*	This is pulled from startColor in init().
-		*	@property {uint} _sG
-		*	@private
-		*/
+		 * The green tint of the particle at the start of its life.
+		 * This is pulled from startColor in init().
+		 * @property {uint} _sG
+		 * @private
+		 */
 		this._sG = 0;
 		/**
-		*	The blue tint of the particle at the start of its life.
-		*	This is pulled from startColor in init().
-		*	@property {uint} _sB
-		*	@private
-		*/
+		 * The blue tint of the particle at the start of its life.
+		 * This is pulled from startColor in init().
+		 * @property {uint} _sB
+		 * @private
+		 */
 		this._sB = 0;
 		/**
-		*	The tint of the particle at the start of its life.
-		*	@property {Array} endColor
-		*/
+		 * The tint of the particle at the start of its life.
+		 * @property {Array} endColor
+		 */
 		this.endColor = null;
 		/**
-		*	The red tint of the particle at the end of its life.
-		*	This is pulled from endColor in init().
-		*	@property {uint} _eR
-		*	@private
-		*/
+		 * The red tint of the particle at the end of its life.
+		 * This is pulled from endColor in init().
+		 * @property {uint} _eR
+		 * @private
+		 */
 		this._eR = 0;
 		/**
-		*	The green tint of the particle at the end of its life.
-		*	This is pulled from endColor in init().
-		*	@property {uint} _sG
-		*	@private
-		*/
+		 * The green tint of the particle at the end of its life.
+		 * This is pulled from endColor in init().
+		 * @property {uint} _sG
+		 * @private
+		 */
 		this._eG = 0;
 		/**
-		*	The blue tint of the particle at the end of its life.
-		*	This is pulled from endColor in init().
-		*	@property {uint} _sB
-		*	@private
-		*/
+		 * The blue tint of the particle at the end of its life.
+		 * This is pulled from endColor in init().
+		 * @property {uint} _sB
+		 * @private
+		 */
 		this._eB = 0;
 		/**
-		*	If alpha should be interpolated at all.
-		*	@property {Boolean} _doAlpha
-		*	@private
-		*/
+		 * If alpha should be interpolated at all.
+		 * @property {Boolean} _doAlpha
+		 * @private
+		 */
 		this._doAlpha = false;
 		/**
-		*	If scale should be interpolated at all.
-		*	@property {Boolean} _doScale
-		*	@private
-		*/
+		 * If scale should be interpolated at all.
+		 * @property {Boolean} _doScale
+		 * @private
+		 */
 		this._doScale = false;
 		/**
-		*	If speed should be interpolated at all.
-		*	@property {Boolean} _doSpeed
-		*	@private
-		*/
+		 * If speed should be interpolated at all.
+		 * @property {Boolean} _doSpeed
+		 * @private
+		 */
 		this._doSpeed = false;
 		/**
-		*	If color should be interpolated at all.
-		*	@property {Boolean} _doColor
-		*	@private
-		*/
+		 * If color should be interpolated at all.
+		 * @property {Boolean} _doColor
+		 * @private
+		 */
 		this._doColor = false;
 		/**
-		*	If normal movement should be handled. Subclasses wishing to override movement
-		*	can set this to false in init().
-		*	@property {Boolean} _doNormalMovement
-		*	@private
-		*/
+		 * If normal movement should be handled. Subclasses wishing to override movement
+		 * can set this to false in init().
+		 * @property {Boolean} _doNormalMovement
+		 * @private
+		 */
 		this._doNormalMovement = false;
 		/**
-		*	One divided by the max life of the particle, saved for slightly faster math.
-		*	@property {Number} _oneOverLife
-		*	@private
-		*/
+		 * One divided by the max life of the particle, saved for slightly faster math.
+		 * @property {Number} _oneOverLife
+		 * @private
+		 */
 		this._oneOverLife = 0;
 		
 		//save often used functions on the instance instead of the prototype for better speed
@@ -204,15 +204,15 @@
 	var p = Particle.prototype = Object.create(MovieClip.prototype);
 
 	/**
-	*	Initializes the particle for use, based on the properties that have to
-	*	have been set already on the particle.
-	*	@method init
-	*/
+	 * Initializes the particle for use, based on the properties that have to
+	 * have been set already on the particle.
+	 * @method init
+	 */
 	/**
-	*	A reference to init, so that subclasses can access it without the penalty of Function.call()
-	*	@method Particle_init
-	*	@private
-	*/
+	 * A reference to init, so that subclasses can access it without the penalty of Function.call()
+	 * @method Particle_init
+	 * @private
+	 */
 	p.init = p.Particle_init = function()
 	{
 		//reset the age
@@ -256,11 +256,11 @@
 	};
 
 	/**
-	*	Sets the texture for the particle. This can be overridden to allow
-	*	for an animated particle.
-	*	@method applyArt
-	*	@param {PIXI.Texture} art The texture to set.
-	*/
+	 * Sets the texture for the particle. This can be overridden to allow
+	 * for an animated particle.
+	 * @method applyArt
+	 * @param {PIXI.Texture} art The texture to set.
+	 */
 	p.applyArt = function(art)
 	{
 		if (useAPI3)
@@ -275,21 +275,21 @@
 	};
 
 	/**
-	*	Updates the particle.
-	*	@method update
-	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
-	*                    properties. A value of -1 means the particle died of old age instead.
-	*/
+	 * Updates the particle.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	 *                   properties. A value of -1 means the particle died of old age instead.
+	 */
 	/**
-	*	A reference to update so that subclasses can access the original without the overhead
-	*	of Function.call().
-	*	@method Particle_update
-	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	*	@return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
-	*                    properties. A value of -1 means the particle died of old age instead.
-	*	@private
-	*/
+	 * A reference to update so that subclasses can access the original without the overhead
+	 * of Function.call().
+	 * @method Particle_update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	 *                   properties. A value of -1 means the particle died of old age instead.
+	 * @private
+	 */
 	p.update = p.Particle_update = function(delta)
 	{
 		//increase age
@@ -368,19 +368,19 @@
 	};
 
 	/**
-	*	Kills the particle, removing it from the display list
-	*	and telling the emitter to recycle it.
-	*	@method kill
-	*/
+	 * Kills the particle, removing it from the display list
+	 * and telling the emitter to recycle it.
+	 * @method kill
+	 */
 	p.kill = function()
 	{
 		this.emitter.recycle(this);
 	};
 
 	/**
-	*	Destroys the particle, removing references and preventing future use.
-	*	@method destroy
-	*/
+	 * Destroys the particle, removing references and preventing future use.
+	 * @method destroy
+	 */
 	p.destroy = function()
 	{
 		this.emitter = null;

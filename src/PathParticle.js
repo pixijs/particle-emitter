@@ -9,51 +9,51 @@
 		Particle = cloudkid.Particle;
 
 	/**
-	*	An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
-	*	"5x + 3".
-	*	To use this class, the particle config must have a "path" string in the
-	*	"extraData" parameter. This string should have "x" in it to represent movement (from the
-	*	speed settings of the particle). It may have numbers, parentheses, the four basic
-	*	operations, and the following Math functions or properties (without the preceding "Math."):
-	*	"pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
-	*	"acos", "atan", "atan2", "log".
-	*	The overall movement of the particle and the expression value become x and y positions for
-	*	the particle, respectively. The final position is rotated by the spawn rotation/angle of
-	*	the particle.
+	 * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
+	 * "5x + 3".
+	 * To use this class, the particle config must have a "path" string in the
+	 * "extraData" parameter. This string should have "x" in it to represent movement (from the
+	 * speed settings of the particle). It may have numbers, parentheses, the four basic
+	 * operations, and the following Math functions or properties (without the preceding "Math."):
+	 * "pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
+	 * "acos", "atan", "atan2", "log".
+	 * The overall movement of the particle and the expression value become x and y positions for
+	 * the particle, respectively. The final position is rotated by the spawn rotation/angle of
+	 * the particle.
 	*
-	*	Some example paths:
+	 * Some example paths:
 	*
-	*		"sin(x/10) * 20" // A sine wave path.
-	*		"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
-	*		"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
+	 * 	"sin(x/10) * 20" // A sine wave path.
+	 * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
+	 * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
 	*
-	*	@class PathParticle
-	*	@constructor
-	*	@param {Emitter} emitter The emitter that controls this PathParticle.
-	*/
+	 * @class PathParticle
+	 * @constructor
+	 * @param {Emitter} emitter The emitter that controls this PathParticle.
+	 */
 	var PathParticle = function(emitter)
 	{
 		Particle.call(this, emitter);
 		/**
-		*	The function representing the path the particle should take.
-		*	@property {Function} path
-		*/
+		 * The function representing the path the particle should take.
+		 * @property {Function} path
+		 */
 		this.path = null;
 		/**
-		*	The initial rotation in degrees of the particle, because the direction of the path
-		*	is based on that.
-		*	@property {Number} initialRotation
-		*/
+		 * The initial rotation in degrees of the particle, because the direction of the path
+		 * is based on that.
+		 * @property {Number} initialRotation
+		 */
 		this.initialRotation = 0;
 		/**
-		*	The initial position of the particle, as all path movement is added to that.
-		*	@property {PIXI.Point} initialPosition
-		*/
+		 * The initial position of the particle, as all path movement is added to that.
+		 * @property {PIXI.Point} initialPosition
+		 */
 		this.initialPosition = new PIXI.Point();
 		/**
-		*	Total single directional movement, due to speed.
-		*	@property {Number} movement
-		*/
+		 * Total single directional movement, due to speed.
+		 * @property {Number} movement
+		 */
 		this.movement = 0;
 	};
 
@@ -63,18 +63,18 @@
 	var p = PathParticle.prototype = Object.create(s);
 
 	/**
-	*	A helper point for math things.
-	*	@property {Function} helperPoint
-	*	@private
-	*	@static
-	*/
+	 * A helper point for math things.
+	 * @property {Function} helperPoint
+	 * @private
+	 * @static
+	 */
 	var helperPoint = new PIXI.Point();
 
 	/**
-	*	Initializes the particle for use, based on the properties that have to
-	*	have been set already on the particle.
-	*	@method init
-	*/
+	 * Initializes the particle for use, based on the properties that have to
+	 * have been set already on the particle.
+	 * @method init
+	 */
 	p.init = function()
 	{
 		//get initial rotation before it is converted to radians
@@ -148,15 +148,15 @@
 	WHITELISTER = new RegExp(WHITELISTER, "g");
 
 	/**
-	*	Parses a string into a function for path following.
-	*	This involves whitelisting the string for safety, inserting "Math." to math function
-	*	names, and using eval() to generate a function.
-	*	@method parsePath
-	*	@private
-	*	@static
-	*	@param {String} pathString The string to parse.
-	*	@return {Function} The path function - takes x, outputs y.
-	*/
+	 * Parses a string into a function for path following.
+	 * This involves whitelisting the string for safety, inserting "Math." to math function
+	 * names, and using eval() to generate a function.
+	 * @method parsePath
+	 * @private
+	 * @static
+	 * @param {String} pathString The string to parse.
+	 * @return {Function} The path function - takes x, outputs y.
+	 */
 	var parsePath = function(pathString)
 	{
 		var rtn;
@@ -172,10 +172,10 @@
 	};
 
 	/**
-	*	Updates the particle.
-	*	@method update
-	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	*/
+	 * Updates the particle.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 */
 	p.update = function(delta)
 	{
 		var lerp = this.Particle_update(delta);
@@ -195,9 +195,9 @@
 	};
 
 	/**
-	*	Destroys the particle, removing references and preventing future use.
-	*	@method destroy
-	*/
+	 * Destroys the particle, removing references and preventing future use.
+	 * @method destroy
+	 */
 	p.destroy = function()
 	{
 		s.destroy.call(this);

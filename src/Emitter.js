@@ -9,139 +9,139 @@
 		Particle = cloudkid.Particle;
 
 	/**
-	*	A particle emitter.
-	*	@class Emitter
-	*	@constructor
-	*	@param {PIXI.DisplayObjectContainer} particleParent The display object to add the
-	*														particles to.
-	*	@param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
-	*												for the particles.
-	*	@param {Object} [config] A configuration object containing settings for the emitter.
-	*/
+	 * A particle emitter.
+	 * @class Emitter
+	 * @constructor
+	 * @param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+	 *                                                     particles to.
+	 * @param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
+	 *                                              for the particles.
+	 * @param {Object} [config] A configuration object containing settings for the emitter.
+	 */
 	var Emitter = function(particleParent, particleImages, config)
 	{
 		/**
-		*	The constructor used to create new particles. The default is
-		*	the built in particle class.
-		*	@property {Function} _particleConstructor
-		*	@private
-		*/
+		 * The constructor used to create new particles. The default is
+		 * the built in particle class.
+		 * @property {Function} _particleConstructor
+		 * @private
+		 */
 		this._particleConstructor = Particle;
 		//properties for individual particles
 		/**
-		*	An array of PIXI Texture objects.
-		*	@property {Array} particleImages
-		*/
+		 * An array of PIXI Texture objects.
+		 * @property {Array} particleImages
+		 */
 		this.particleImages = null;
 		/**
-		*	The starting alpha of all particles.
-		*	@property {Number} startAlpha
-		*	@default 1
-		*/
+		 * The starting alpha of all particles.
+		 * @property {Number} startAlpha
+		 * @default 1
+		 */
 		this.startAlpha = 1;
 		/**
-		*	The ending alpha of all particles.
-		*	@property {Number} endAlpha
-		*	@default 1
-		*/
+		 * The ending alpha of all particles.
+		 * @property {Number} endAlpha
+		 * @default 1
+		 */
 		this.endAlpha = 1;
 		/**
-		*	The starting speed of all particles.
-		*	@property {Number} startSpeed
-		*	@default 0
-		*/
+		 * The starting speed of all particles.
+		 * @property {Number} startSpeed
+		 * @default 0
+		 */
 		this.startSpeed = 0;
 		/**
-		*	The ending speed of all particles.
-		*	@property {Number} endSpeed
-		*	@default 0
-		*/
+		 * The ending speed of all particles.
+		 * @property {Number} endSpeed
+		 * @default 0
+		 */
 		this.endSpeed = 0;
 		/**
-		*	Acceleration to apply to particles. Using this disables
-		*	any interpolation of particle speed. If the particles do
-		*	not have a rotation speed, then they will be rotated to
-		*	match the direction of travel.
-		*	@property {PIXI.Point} acceleration
-		*	@default null
-		*/
+		 * Acceleration to apply to particles. Using this disables
+		 * any interpolation of particle speed. If the particles do
+		 * not have a rotation speed, then they will be rotated to
+		 * match the direction of travel.
+		 * @property {PIXI.Point} acceleration
+		 * @default null
+		 */
 		this.acceleration = null;
 		/**
-		*	The starting scale of all particles.
-		*	@property {Number} startScale
-		*	@default 1
-		*/
+		 * The starting scale of all particles.
+		 * @property {Number} startScale
+		 * @default 1
+		 */
 		this.startScale = 1;
 		/**
-		*	The ending scale of all particles.
-		*	@property {Number} endScale
-		*	@default 1
-		*/
+		 * The ending scale of all particles.
+		 * @property {Number} endScale
+		 * @default 1
+		 */
 		this.endScale = 1;
 		/**
-		*	A minimum multiplier for the scale of a particle at both start and
-		*	end. A value between minimumScaleMultiplier and 1 is randomly generated
-		*	and multiplied with startScale and endScale to provide the actual
-		*	startScale and endScale for each particle.
-		*	@property {Number} minimumScaleMultiplier
-		*	@default 1
-		*/
+		 * A minimum multiplier for the scale of a particle at both start and
+		 * end. A value between minimumScaleMultiplier and 1 is randomly generated
+		 * and multiplied with startScale and endScale to provide the actual
+		 * startScale and endScale for each particle.
+		 * @property {Number} minimumScaleMultiplier
+		 * @default 1
+		 */
 		this.minimumScaleMultiplier = 1;
 		/**
-		*	The starting color of all particles, as red, green, and blue uints from 0-255.
-		*	@property {Array} startColor
-		*/
+		 * The starting color of all particles, as red, green, and blue uints from 0-255.
+		 * @property {Array} startColor
+		 */
 		this.startColor = null;
 		/**
-		*	The ending color of all particles, as red, green, and blue uints from 0-255.
-		*	@property {Array} endColor
-		*/
+		 * The ending color of all particles, as red, green, and blue uints from 0-255.
+		 * @property {Array} endColor
+		 */
 		this.endColor = null;
 		/**
-		*	The minimum lifetime for a particle, in seconds.
-		*	@property {Number} minLifetime
-		*/
+		 * The minimum lifetime for a particle, in seconds.
+		 * @property {Number} minLifetime
+		 */
 		this.minLifetime = 0;
 		/**
-		*	The maximum lifetime for a particle, in seconds.
-		*	@property {Number} maxLifetime
-		*/
+		 * The maximum lifetime for a particle, in seconds.
+		 * @property {Number} maxLifetime
+		 */
 		this.maxLifetime = 0;
 		/**
-		*	The minimum start rotation for a particle, in degrees. This value
-		*	is ignored if the spawn type is "burst" or "arc".
-		*	@property {Number} minStartRotation
-		*/
+		 * The minimum start rotation for a particle, in degrees. This value
+		 * is ignored if the spawn type is "burst" or "arc".
+		 * @property {Number} minStartRotation
+		 */
 		this.minStartRotation = 0;
 		/**
-		*	The maximum start rotation for a particle, in degrees. This value
-		*	is ignored if the spawn type is "burst" or "arc".
-		*	@property {Number} maxStartRotation
-		*/
+		 * The maximum start rotation for a particle, in degrees. This value
+		 * is ignored if the spawn type is "burst" or "arc".
+		 * @property {Number} maxStartRotation
+		 */
 		this.maxStartRotation = 0;
 		/**
-		*	The minimum rotation speed for a particle, in degrees per second.
-		*	This only visually spins the particle, it does not change direction of movement.
-		*	@property {Number} minRotationSpeed
-		*/
+		 * The minimum rotation speed for a particle, in degrees per second.
+		 * This only visually spins the particle, it does not change direction of movement.
+		 * @property {Number} minRotationSpeed
+		 */
 		this.minRotationSpeed = 0;
 		/**
-		*	The maximum rotation speed for a particle, in degrees per second.
-		*	This only visually spins the particle, it does not change direction of movement.
-		*	@property {Number} maxRotationSpeed
-		*/
+		 * The maximum rotation speed for a particle, in degrees per second.
+		 * This only visually spins the particle, it does not change direction of movement.
+		 * @property {Number} maxRotationSpeed
+		 */
 		this.maxRotationSpeed = 0;
 		/**
-		*	The blend mode for all particles, as named by PIXI.blendModes.
-		*	@property {int} particleBlendMode
-		*/
+		 * The blend mode for all particles, as named by PIXI.blendModes.
+		 * @property {int} particleBlendMode
+		 */
 		this.particleBlendMode = 0;
 		/**
-		*	An easing function for nonlinear interpolation of values. Accepts a single
-		*	parameter of time as a value from 0-1, inclusive. Expected outputs are values
-		*	from 0-1, inclusive.
-		*	@property {Function} customEase
-		*/
+		 * An easing function for nonlinear interpolation of values. Accepts a single
+		 * parameter of time as a value from 0-1, inclusive. Expected outputs are values
+		 * from 0-1, inclusive.
+		 * @property {Function} customEase
+		 */
 		this.customEase = null;
 		/**
 		 *	Extra data for use in custom particles. The emitter doesn't look inside, but
@@ -151,159 +151,159 @@
 		this.extraData = null;
 		//properties for spawning particles
 		/**
-		*	Time between particle spawns in seconds.
-		*	@property {Number} frequency
-		*/
+		 * Time between particle spawns in seconds.
+		 * @property {Number} frequency
+		 */
 		this.frequency = 0;
 		/**
-		*	Maximum number of particles to keep alive at a time. If this limit
-		*	is reached, no more particles will spawn until some have died.
-		*	@property {int} maxParticles
-		*	@default 1000
-		*/
+		 * Maximum number of particles to keep alive at a time. If this limit
+		 * is reached, no more particles will spawn until some have died.
+		 * @property {int} maxParticles
+		 * @default 1000
+		 */
 		this.maxParticles = 1000;
 		/**
-		*	The amount of time in seconds to emit for before setting emit to false.
-		*	A value of -1 is an unlimited amount of time.
-		*	@property {Number} emitterLifetime
-		*	@default -1
-		*/
+		 * The amount of time in seconds to emit for before setting emit to false.
+		 * A value of -1 is an unlimited amount of time.
+		 * @property {Number} emitterLifetime
+		 * @default -1
+		 */
 		this.emitterLifetime = -1;
 		/**
-		*	Position at which to spawn particles, relative to the emitter's owner's origin.
-		*	For example, the flames of a rocket travelling right might have a spawnPos
-		*	of {x:-50, y:0}.
-		*	to spawn at the rear of the rocket.
-		*	To change this, use updateSpawnPos().
-		*	@property {PIXI.Point} spawnPos
-		*	@readOnly
-		*/
+		 * Position at which to spawn particles, relative to the emitter's owner's origin.
+		 * For example, the flames of a rocket travelling right might have a spawnPos
+		 * of {x:-50, y:0}.
+		 * to spawn at the rear of the rocket.
+		 * To change this, use updateSpawnPos().
+		 * @property {PIXI.Point} spawnPos
+		 * @readOnly
+		 */
 		this.spawnPos = null;
 		/**
-		*	How the particles will be spawned. Valid types are "point", "rectangle",
-		*	"circle", "burst", "ring".
-		*	@property {String} spawnType
-		*	@readOnly
-		*/
+		 * How the particles will be spawned. Valid types are "point", "rectangle",
+		 * "circle", "burst", "ring".
+		 * @property {String} spawnType
+		 * @readOnly
+		 */
 		this.spawnType = null;
 		/**
-		*	A reference to the emitter function specific to the spawn type.
-		*	@property {Function} _spawnFunc
-		*	@private
-		*/
+		 * A reference to the emitter function specific to the spawn type.
+		 * @property {Function} _spawnFunc
+		 * @private
+		 */
 		this._spawnFunc = null;
 		/**
-		*	A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
-		*	@property {PIXI.Rectangle} spawnRect
-		*/
+		 * A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
+		 * @property {PIXI.Rectangle} spawnRect
+		 */
 		this.spawnRect = null;
 		/**
-		*	A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
-		*	@property {PIXI.Circle} spawnCircle
-		*/
+		 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
+		 * @property {PIXI.Circle} spawnCircle
+		 */
 		this.spawnCircle = null;
 		/**
-		*	Number of particles to spawn each wave in a burst.
-		*	@property {int} particlesPerWave
-		*	@default 1
-		*/
+		 * Number of particles to spawn each wave in a burst.
+		 * @property {int} particlesPerWave
+		 * @default 1
+		 */
 		this.particlesPerWave = 1;
 		/**
-		*	Spacing between particles in a burst. 0 gives a random angle for each particle.
-		*	@property {Number} particleSpacing
-		*	@default 0
-		*/
+		 * Spacing between particles in a burst. 0 gives a random angle for each particle.
+		 * @property {Number} particleSpacing
+		 * @default 0
+		 */
 		this.particleSpacing = 0;
 		/**
-		*	Angle at which to start spawning particles in a burst.
-		*	@property {Number} angleStart
-		*	@default 0
-		*/
+		 * Angle at which to start spawning particles in a burst.
+		 * @property {Number} angleStart
+		 * @default 0
+		 */
 		this.angleStart = 0;
 		/**
-		*	Rotation of the emitter or emitter's owner in degrees. This is added to
-		*	the calculated spawn angle.
-		*	To change this, use rotate().
-		*	@property {Number} rotation
-		*	@default 0
-		*	@readOnly
-		*/
+		 * Rotation of the emitter or emitter's owner in degrees. This is added to
+		 * the calculated spawn angle.
+		 * To change this, use rotate().
+		 * @property {Number} rotation
+		 * @default 0
+		 * @readOnly
+		 */
 		this.rotation = 0;
 		/**
-		*	The world position of the emitter's owner, to add spawnPos to when
-		*	spawning particles. To change this, use updateOwnerPos().
-		*	@property {PIXI.Point} ownerPos
-		*	@default {x:0, y:0}
-		*	@readOnly
-		*/
+		 * The world position of the emitter's owner, to add spawnPos to when
+		 * spawning particles. To change this, use updateOwnerPos().
+		 * @property {PIXI.Point} ownerPos
+		 * @default {x:0, y:0}
+		 * @readOnly
+		 */
 		this.ownerPos = null;
 		/**
-		*	The origin + spawnPos in the previous update, so that the spawn position
-		*	can be interpolated to space out particles better.
-		*	@property {PIXI.Point} _prevEmitterPos
-		*	@private
-		*/
+		 * The origin + spawnPos in the previous update, so that the spawn position
+		 * can be interpolated to space out particles better.
+		 * @property {PIXI.Point} _prevEmitterPos
+		 * @private
+		 */
 		this._prevEmitterPos = null;
 		/**
-		*	If _prevEmitterPos is valid, to prevent interpolation on the first update
-		*	@property {Boolean} _prevPosIsValid
-		*	@private
-		*	@default false
-		*/
+		 * If _prevEmitterPos is valid, to prevent interpolation on the first update
+		 * @property {Boolean} _prevPosIsValid
+		 * @private
+		 * @default false
+		 */
 		this._prevPosIsValid = false;
 		/**
-		*	If either ownerPos or spawnPos has changed since the previous update.
-		*	@property {Boolean} _posChanged
-		*/
+		 * If either ownerPos or spawnPos has changed since the previous update.
+		 * @property {Boolean} _posChanged
+		 */
 		this._posChanged = false;
 		/**
-		*	The display object to add particles to.
-		*	@property {PIXI.DisplayObjectContainer} parent
-		*/
+		 * The display object to add particles to.
+		 * @property {PIXI.DisplayObjectContainer} parent
+		 */
 		this.parent = particleParent;
 		/**
-		*	If particles should be added at the back of the display list instead of the front.
-		*	@property {Boolean} addAtBack
-		*/
+		 * If particles should be added at the back of the display list instead of the front.
+		 * @property {Boolean} addAtBack
+		 */
 		this.addAtBack = false;
 		/**
-		*	If particles should be emitted during update() calls. Setting this to false
-		*	stops new particles from being created, but allows existing ones to die out.
-		*	@property {Boolean} _emit
-		*	@private
-		*/
+		 * If particles should be emitted during update() calls. Setting this to false
+		 * stops new particles from being created, but allows existing ones to die out.
+		 * @property {Boolean} _emit
+		 * @private
+		 */
 		this._emit = false;
 		/**
-		*	The timer for when to spawn particles in seconds, where numbers less
-		*	than 0 mean that particles should be spawned.
-		*	@property {Number} _spawnTimer
-		*	@private
-		*/
+		 * The timer for when to spawn particles in seconds, where numbers less
+		 * than 0 mean that particles should be spawned.
+		 * @property {Number} _spawnTimer
+		 * @private
+		 */
 		this._spawnTimer = 0;
 		/**
-		*	The life of the emitter in seconds.
-		*	@property {Number} _emitterLife
-		*	@private
-		*/
+		 * The life of the emitter in seconds.
+		 * @property {Number} _emitterLife
+		 * @private
+		 */
 		this._emitterLife = -1;
 		/**
-		*	The particles that are active and on the display list.
-		*	@property {Array} _activeParticles
-		*	@private
-		*/
+		 * The particles that are active and on the display list.
+		 * @property {Array} _activeParticles
+		 * @private
+		 */
 		this._activeParticles = [];
 		/**
-		*	The particles that are not currently being used.
-		*	@property {Array} _pool
-		*	@private
-		*/
+		 * The particles that are not currently being used.
+		 * @property {Array} _pool
+		 * @private
+		 */
 		this._pool = [];
 		/**
-		*	Extra data storage for particle subclasses to share things that have been
-		*	generated from configuration data.
-		*	@property {Object} _sharedExtraData
-		*	@private
-		*/
+		 * Extra data storage for particle subclasses to share things that have been
+		 * generated from configuration data.
+		 * @property {Object} _sharedExtraData
+		 * @private
+		 */
 		this._sharedExtraData = null;
 
 		if(particleImages && config)
@@ -323,11 +323,11 @@
 	var helperPoint = new PIXI.Point();
 
 	/**
-	*	The constructor used to create new particles. The default is
-	*	the built in Particle class. Setting this will dump any active or
-	*	pooled particles, if the emitter has already been used.
-	*	@property {Function} particleConstructor
-	*/
+	 * The constructor used to create new particles. The default is
+	 * the built in Particle class. Setting this will dump any active or
+	 * pooled particles, if the emitter has already been used.
+	 * @property {Function} particleConstructor
+	 */
 	Object.defineProperty(p, "particleConstructor",
 	{
 		get: function() { return this._particleConstructor; },
@@ -346,12 +346,12 @@
 	});
 
 	/**
-	*	Sets up the emitter based on the config settings.
-	*	@method init
-	*	@param {Array|PIXI.Texture} particleImages A texture or array of textures to
-	*												use for the particles.
-	*	@param {Object} config A configuration object containing settings for the emitter.
-	*/
+	 * Sets up the emitter based on the config settings.
+	 * @method init
+	 * @param {Array|PIXI.Texture} particleImages A texture or array of textures to
+	 *                                            use for the particles.
+	 * @param {Object} config A configuration object containing settings for the emitter.
+	 */
 	p.init = function(particleImages, config)
 	{
 		if(!particleImages || !config)
@@ -524,10 +524,10 @@
 	};
 
 	/**
-	*	Recycles an individual particle.
-	*	@method recycle
-	*	@param {Particle} particle The particle to recycle.
-	*/
+	 * Recycles an individual particle.
+	 * @method recycle
+	 * @param {Particle} particle The particle to recycle.
+	 */
 	p.recycle = function(particle)
 	{
 		var index = this._activeParticles.indexOf(particle);
@@ -543,10 +543,10 @@
 	};
 
 	/**
-	*	Sets the rotation of the emitter to a new value.
-	*	@method rotate
-	*	@param {Number} newRot The new rotation, in degrees.
-	*/
+	 * Sets the rotation of the emitter to a new value.
+	 * @method rotate
+	 * @param {Number} newRot The new rotation, in degrees.
+	 */
 	p.rotate = function(newRot)
 	{
 		if (this.rotation == newRot) return;
@@ -560,11 +560,11 @@
 	};
 
 	/**
-	*	Changes the spawn position of the emitter.
-	*	@method updateSpawnPos
-	*	@param {Number} x The new x value of the spawn position for the emitter.
-	*	@param {Number} y The new y value of the spawn position for the emitter.
-	*/
+	 * Changes the spawn position of the emitter.
+	 * @method updateSpawnPos
+	 * @param {Number} x The new x value of the spawn position for the emitter.
+	 * @param {Number} y The new y value of the spawn position for the emitter.
+	 */
 	p.updateSpawnPos = function(x, y)
 	{
 		this._posChanged = true;
@@ -573,12 +573,12 @@
 	};
 
 	/**
-	*	Changes the position of the emitter's owner. You should call this if you are adding
-	*	particles to the world display object that your emitter's owner is moving around in.
-	*	@method updateOwnerPos
-	*	@param {Number} x The new x value of the emitter's owner.
-	*	@param {Number} y The new y value of the emitter's owner.
-	*/
+	 * Changes the position of the emitter's owner. You should call this if you are adding
+	 * particles to the world display object that your emitter's owner is moving around in.
+	 * @method updateOwnerPos
+	 * @param {Number} x The new x value of the emitter's owner.
+	 * @param {Number} y The new y value of the emitter's owner.
+	 */
 	p.updateOwnerPos = function(x, y)
 	{
 		this._posChanged = true;
@@ -587,21 +587,21 @@
 	};
 
 	/**
-	*	Prevents emitter position interpolation in the next update.
-	*	This should be used if you made a major position change of your emitter's owner
-	*	that was not normal movement.
-	*	@method resetPositionTracking
-	*/
+	 * Prevents emitter position interpolation in the next update.
+	 * This should be used if you made a major position change of your emitter's owner
+	 * that was not normal movement.
+	 * @method resetPositionTracking
+	 */
 	p.resetPositionTracking = function()
 	{
 		this._prevPosIsValid = false;
 	};
 
 	/**
-	*	If particles should be emitted during update() calls. Setting this to false
-	*	stops new particles from being created, but allows existing ones to die out.
-	*	@property {Boolean} emit
-	*/
+	 * If particles should be emitted during update() calls. Setting this to false
+	 * stops new particles from being created, but allows existing ones to die out.
+	 * @property {Boolean} emit
+	 */
 	Object.defineProperty(p, "emit",
 	{
 		get: function() { return this._emit; },
@@ -613,10 +613,10 @@
 	});
 
 	/**
-	*	Updates all particles spawned by this emitter and emits new ones.
-	*	@method update
-	*	@param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	*/
+	 * Updates all particles spawned by this emitter and emits new ones.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 */
 	p.update = function(delta)
 	{
 		//update existing particles
@@ -764,14 +764,14 @@
 	};
 
 	/**
-	*	Positions a particle for a point type emitter.
-	*	@method _spawnPoint
-	*	@private
-	*	@param {Particle} p The particle to position and rotate.
-	*	@param {Number} emitPosX The emitter's x position
-	*	@param {Number} emitPosY The emitter's y position
-	*	@param {int} i The particle number in the current wave. Not used for this function.
-	*/
+	 * Positions a particle for a point type emitter.
+	 * @method _spawnPoint
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 */
 	p._spawnPoint = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on
@@ -786,14 +786,14 @@
 	};
 
 	/**
-	*	Positions a particle for a rectangle type emitter.
-	*	@method _spawnRect
-	*	@private
-	*	@param {Particle} p The particle to position and rotate.
-	*	@param {Number} emitPosX The emitter's x position
-	*	@param {Number} emitPosY The emitter's y position
-	*	@param {int} i The particle number in the current wave. Not used for this function.
-	*/
+	 * Positions a particle for a rectangle type emitter.
+	 * @method _spawnRect
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 */
 	p._spawnRect = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting
@@ -812,14 +812,14 @@
 	};
 
 	/**
-	*	Positions a particle for a circle type emitter.
-	*	@method _spawnCircle
-	*	@private
-	*	@param {Particle} p The particle to position and rotate.
-	*	@param {Number} emitPosX The emitter's x position
-	*	@param {Number} emitPosY The emitter's y position
-	*	@param {int} i The particle number in the current wave. Not used for this function.
-	*/
+	 * Positions a particle for a circle type emitter.
+	 * @method _spawnCircle
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 */
 	p._spawnCircle = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on starting
@@ -846,14 +846,14 @@
 	};
 	
 	/**
-	*	Positions a particle for a ring type emitter.
-	*	@method _spawnRing
-	*	@private
-	*	@param {Particle} p The particle to position and rotate.
-	*	@param {Number} emitPosX The emitter's x position
-	*	@param {Number} emitPosY The emitter's y position
-	*	@param {int} i The particle number in the current wave. Not used for this function.
-	*/
+	 * Positions a particle for a ring type emitter.
+	 * @method _spawnRing
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 */
 	p._spawnRing = function(p, emitPosX, emitPosY, i)
 	{
 		var spawnCircle = this.spawnCircle;
@@ -889,14 +889,14 @@
 	};
 
 	/**
-	*	Positions a particle for a burst type emitter.
-	*	@method _spawnBurst
-	*	@private
-	*	@param {Particle} p The particle to position and rotate.
-	*	@param {Number} emitPosX The emitter's x position
-	*	@param {Number} emitPosY The emitter's y position
-	*	@param {int} i The particle number in the current wave.
-	*/
+	 * Positions a particle for a burst type emitter.
+	 * @method _spawnBurst
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave.
+	 */
 	p._spawnBurst = function(p, emitPosX, emitPosY, i)
 	{
 		//set the initial rotation/direction of the particle based on spawn
@@ -911,9 +911,9 @@
 	};
 
 	/**
-	*	Kills all active particles immediately.
-	*	@method cleanup
-	*/
+	 * Kills all active particles immediately.
+	 * @method cleanup
+	 */
 	p.cleanup = function()
 	{
 		for (var i = this._activeParticles.length - 1; i >= 0; --i)
@@ -923,9 +923,9 @@
 	};
 
 	/**
-	*	Destroys the emitter and all of its particles.
-	*	@method destroy
-	*/
+	 * Destroys the emitter and all of its particles.
+	 * @method destroy
+	 */
 	p.destroy = function()
 	{
 		this.cleanup();
