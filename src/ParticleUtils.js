@@ -6,6 +6,8 @@
 	"use strict";
 
 	window.cloudkid = window.cloudkid || {};
+	
+	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 
 	/**
 	*	Contains helper functions for particles and emitters to use.
@@ -161,13 +163,11 @@
 	*/
 	ParticleUtils.getBlendMode = function(name)
 	{
-        if (!name) return PIXI.BLEND_MODES ? PIXI.BLEND_MODES.NORMAL : PIXI.blendModes.NORMAL;
-        name = name.toUpperCase();
-        while (name.indexOf(" ") >= 0)
-            name = name.replace(" ", "_");
-        return PIXI.BLEND_MODES ?
-            (PIXI.BLEND_MODES[name] || PIXI.BLEND_MODES.NORMAL) :
-            (PIXI.blendModes[name] || PIXI.blendModes.NORMAL);
+		if (!name) return BLEND_MODES.NORMAL;
+		name = name.toUpperCase();
+		while (name.indexOf(" ") >= 0)
+			name = name.replace(" ", "_");
+		return BLEND_MODES[name] || BLEND_MODES.NORMAL;
 	};
 
 	cloudkid.ParticleUtils = ParticleUtils;
