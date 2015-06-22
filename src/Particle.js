@@ -20,8 +20,8 @@
 															emitter.particleImages[0];
 
 
-        if(PIXI.MovieClip) PIXI.MovieClip.call(this, art);
-        else PIXI.extras.MovieClip.call(this, art);
+        if(PIXI.extras.MovieClip) PIXI.extras.MovieClip.call(this, art);
+        else PIXI.MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -191,7 +191,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(PIXI.extras.MovieClip.prototype);
+	var p = Particle.prototype = Object.create((PIXI.extras.MovieClip) ? PIXI.extras.MovieClip.prototype : PIXI.MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -253,11 +253,11 @@
 	*/
 	p.applyArt = function(art)
 	{
-        if (PIXI.MovieClip) {
-            this.setTexture(art);
-        } else {
+        if (PIXI.extras && PIXI.extras.MovieClip) {
             //remove warning on PIXI 3
             this.texture = art;
+        } else {
+            this.setTexture(art);
         }
 	};
 
