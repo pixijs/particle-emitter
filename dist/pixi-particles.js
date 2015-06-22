@@ -225,6 +225,17 @@
 	"use strict";
 
 	var ParticleUtils = cloudkid.ParticleUtils;
+	var MovieClip, useAPI3;
+	if(PIXI.extras && PIXI.extras.MovieClip)
+	{
+		MovieClip = PIXI.extras.MovieClip;
+		useAPI3 = true;
+	}
+	else
+	{
+		MovieClip = PIXI.MovieClip;
+		useAPI3 = false;
+	}
 
 	/**
 	*	An individual particle image. You shouldn't have to deal with these.
@@ -239,8 +250,7 @@
 															emitter.particleImages[0];
 
 
-        if(PIXI.extras.MovieClip) PIXI.extras.MovieClip.call(this, art);
-        else PIXI.MovieClip.call(this, art);
+		MovieClip.call(this, art);
 
 		/**
 		*	The emitter that controls this particle.
@@ -410,7 +420,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create((PIXI.extras.MovieClip) ? PIXI.extras.MovieClip.prototype : PIXI.MovieClip.prototype);
+	var p = Particle.prototype = Object.create(MovieClip.prototype);
 
 	/**
 	*	Initializes the particle for use, based on the properties that have to
@@ -472,12 +482,15 @@
 	*/
 	p.applyArt = function(art)
 	{
-        if (PIXI.extras && PIXI.extras.MovieClip) {
-            //remove warning on PIXI 3
-            this.texture = art;
-        } else {
-            this.setTexture(art);
-        }
+		if (useAPI3)
+		{
+			//remove warning on PIXI 3
+			this.texture = art;
+		}
+		else
+		{
+			this.setTexture(art);
+		}
 	};
 
 	/**
