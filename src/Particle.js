@@ -190,7 +190,7 @@
 		 * @private
 		 */
 		this._oneOverLife = 0;
-		
+
 		//save often used functions on the instance instead of the prototype for better speed
 		this.init = this.init;
 		this.Particle_init = this.Particle_init;
@@ -253,6 +253,8 @@
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
 		this.tint = ParticleUtils.combineRGBComponents(this._sR, this._sG, this._sB);
+		//ensure visibility
+		this.visible = true;
 	};
 
 	/**

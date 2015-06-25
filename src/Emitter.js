@@ -6,7 +6,8 @@
 	"use strict";
 
 	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle;
+		Particle = cloudkid.Particle,
+		ParticleContainer = PIXI.ParticleContainer;
 
 	/**
 	 * A particle emitter.
@@ -257,9 +258,17 @@
 		 */
 		this._posChanged = false;
 		/**
-		 * The display object to add particles to.
-		 * @property {PIXI.DisplayObjectContainer} parent
+		 * If the parent is a ParticleContainer from Pixi V3
+		 * @property {Boolean} _parentIsPC
+		 * @private
 		 */
+		this._parentIsPC = false;
+		/**
+		 * The display object to add particles to.
+		 * @property {PIXI.DisplayObjectContainer} _parent
+		 * @private
+		 */
+		this._parent = null;
 		this.parent = particleParent;
 		/**
 		 * If particles should be added at the back of the display list instead of the front.
@@ -308,7 +317,7 @@
 
 		if(particleImages && config)
 			this.init(particleImages, config);
-		
+
 		//save often used functions on the instance instead of the prototype for better speed
 		this.recycle = this.recycle;
 		this.update = this.update;
@@ -342,6 +351,21 @@
 				if(this._pool.length)
 					this._pool.length = 0;
 			}
+		}
+	});
+
+	/**
+	* The display object to add particles to. Settings this will dump any active particles.
+	* @property {PIXI.DisplayObjectContainer} parent
+	*/
+	Object.defineProperty(p, "parent",
+	{
+		get: function() { return this._parent; },
+		set: function(value)
+		{
+			this.cleanup();
+			this._parent = value;
+			this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
 		}
 	});
 
@@ -537,9 +561,17 @@
 		this._activeParticles.pop();
 		//readd to pool
 		this._pool.push(particle);
-		//remove child from display
-		if(particle.parent)
-			particle.parent.removeChild(particle);
+		//remove child from display, or make it invisible if it is in a ParticleContainer
+		if(this._parentIsPC)
+		{
+			particle.alpha = 0;
+			particle.visible = false;
+		}
+		else
+		{
+			if(particle.parent)
+				particle.parent.removeChild(particle);
+		}
 	};
 
 	/**
@@ -741,10 +773,30 @@
 						//update the particle by the time passed, so the particles are spread out properly
 						p.update(-this._spawnTimer);//we want a positive delta, because a negative delta messes things up
 						//add the particle to the display list
-						if (this.addAtBack)
-							this.parent.addChildAt(p, 0);
+						if(!this._parentIsPC || !p.parent)
+						{
+							if (this.addAtBack)
+								this._parent.addChildAt(p, 0);
+							else
+								this._parent.addChild(p);
+						}
 						else
-							this.parent.addChild(p);
+						{
+							//shuffle children to correct place
+							var children = this._parent.children;
+							//avoid using splice if possible
+							var index = children.indexOf(p);
+							if(index < 1)
+								children.shift();
+							else if(index == children.length - 1)
+								children.pop();
+							else
+								children.splice(index, 1);
+							if(this.addAtBack)
+								children.unshift(p);
+							else
+								children.push(p);
+						}
 						//add particle to list of active particles
 						_activeParticles.push(p);
 					}
@@ -844,7 +896,7 @@
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	};
-	
+
 	/**
 	 * Positions a particle for a ring type emitter.
 	 * @method _spawnRing
@@ -918,7 +970,10 @@
 	{
 		for (var i = this._activeParticles.length - 1; i >= 0; --i)
 		{
-			this.recycle(this._activeParticles[i]);
+			var particle = this._activeParticles[i];
+			this.recycle(particle);
+			if(particle.parent)
+				particle.parent.removeChild(particle);
 		}
 	};
 
@@ -935,7 +990,7 @@
 		}
 		this._pool = null;
 		this._activeParticles = null;
-		this.parent = null;
+		this._parent = null;
 		this.particleImages = null;
 		this.spawnPos = null;
 		this.ownerPos = null;
