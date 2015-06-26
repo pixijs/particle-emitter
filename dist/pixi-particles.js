@@ -1234,7 +1234,6 @@
 		 * @private
 		 */
 		this._parent = null;
-		this.parent = particleParent;
 		/**
 		 * If particles should be added at the back of the display list instead of the front.
 		 * @property {Boolean} addAtBack
@@ -1279,6 +1278,9 @@
 		 * @private
 		 */
 		this._sharedExtraData = null;
+
+		//set the initial parent
+		this.parent = particleParent;
 
 		if(particleImages && config)
 			this.init(particleImages, config);
@@ -1330,7 +1332,7 @@
 		{
 			this.cleanup();
 			this._parent = value;
-			this._parentIsPC = ParticleContainer && value instanceof ParticleContainer;
+			this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
 		}
 	});
 
@@ -1741,14 +1743,14 @@
 						if(!this._parentIsPC || !p.parent)
 						{
 							if (this.addAtBack)
-								this.parent.addChildAt(p, 0);
+								this._parent.addChildAt(p, 0);
 							else
-								this.parent.addChild(p);
+								this._parent.addChild(p);
 						}
 						else
 						{
 							//shuffle children to correct place
-							var children = this.parent.children;
+							var children = this._parent.children;
 							//avoid using splice if possible
 							var index = children.indexOf(p);
 							if(index < 1)

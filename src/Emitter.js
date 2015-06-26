@@ -269,7 +269,6 @@
 		 * @private
 		 */
 		this._parent = null;
-		this.parent = particleParent;
 		/**
 		 * If particles should be added at the back of the display list instead of the front.
 		 * @property {Boolean} addAtBack
@@ -314,6 +313,9 @@
 		 * @private
 		 */
 		this._sharedExtraData = null;
+
+		//set the initial parent
+		this.parent = particleParent;
 
 		if(particleImages && config)
 			this.init(particleImages, config);
