@@ -1,3 +1,4 @@
+/*! PixiParticles 1.5.0 */
 /**
 *  @module cloudkid
 */

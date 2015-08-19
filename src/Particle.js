@@ -6,16 +6,14 @@
 	"use strict";
 
 	var ParticleUtils = cloudkid.ParticleUtils;
-	var MovieClip, useAPI3;
-	if(PIXI.extras && PIXI.extras.MovieClip)
+	var Sprite = PIXI.Sprite;
+	var EMPTY_TEXTURE;
+	var useAPI3 = ParticleUtils.useAPI3;
+	if(!useAPI3)
 	{
-		MovieClip = PIXI.extras.MovieClip;
-		useAPI3 = true;
-	}
-	else
-	{
-		MovieClip = PIXI.MovieClip;
-		useAPI3 = false;
+		var canvas = document.createElement("canvas");
+		canvas.width = canvas.height = 1;
+		EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
 	}
 
 	/**
@@ -26,18 +24,20 @@
 	 */
 	var Particle = function(emitter)
 	{
-		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
-															[emitter.particleImages[0]] :
-															emitter.particleImages[0];
-
-
-		MovieClip.call(this, art);
+		//start off the sprite with a blank texture, since we are going to replace it
+		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
+		//blank texture for us.
+		if(useAPI3)
+			Sprite.call(this);
+		else
+			Sprite.call(this, EMPTY_TEXTURE);
 
 		/**
 		 * The emitter that controls this particle.
 		 * @property {Emitter} emitter
 		 */
 		this.emitter = emitter;
+		//particles should be centered
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
 		 * The velocity of the particle. Speed may change, but the angle also
@@ -201,7 +201,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(MovieClip.prototype);
+	var p = Particle.prototype = Object.create(Sprite.prototype);
 
 	/**
 	 * Initializes the particle for use, based on the properties that have to
@@ -389,6 +389,41 @@
 		this.velocity = null;
 		this.startColor = this.endColor = null;
 		this.ease = null;
+	};
+	
+	/**
+	 * Checks over the art that was passed to the Emitter's init() function, to do any special
+	 * modifications to prepare it ahead of time.
+	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
+	 *                     Any strings in the array will be converted to Textures via
+	 *                     Texture.fromImage().
+	 * @return {Array} The art, after any needed modifications.
+	 */
+	Particle.parseArt = function(art)
+	{
+		//convert any strings to Textures.
+		var i;
+		for(i = art.length; i >= 0; --i)
+		{
+			if(typeof art[i] == "string")
+				art[i] = PIXI.Texture.fromImage(art[i]);
+		}
+		//particles from different base textures will be slower in WebGL than if they
+		//were from one spritesheet
+		if(DEBUG)
+		{
+			for(i = art.length - 1; i > 0; --i)
+			{
+				if(art[i].baseTexture != art[i - 1].baseTexture)
+				{
+					if (window.console)
+						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
+					break;
+				}
+			}
+		}
+		
+		return art;
 	};
 
 	cloudkid.Particle = Particle;

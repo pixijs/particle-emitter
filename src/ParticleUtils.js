@@ -17,6 +17,14 @@
 	var ParticleUtils = {};
 
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
+	
+	ParticleUtils.useAPI3 = false;
+	// avoid the string replacement of 'VERSION'
+	var version = PIXI["VER"+"SION"];// jshint ignore:line
+	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
+	{
+		ParticleUtils.useAPI3 = true;
+	}
 
 	/**
 	 * Rotates a point by a given angle.

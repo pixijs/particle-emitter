@@ -1,4 +1,4 @@
-/*! PixiParticles 1.4.6 */
+/*! PixiParticles 1.5.0 */
 /**
 *  @module cloudkid
 */
@@ -18,6 +18,14 @@
 	var ParticleUtils = {};
 
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
+	
+	ParticleUtils.useAPI3 = false;
+	// avoid the string replacement of '"1.5.0"'
+	var version = PIXI["VER"+"SION"];// jshint ignore:line
+	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
+	{
+		ParticleUtils.useAPI3 = true;
+	}
 
 	/**
 	 * Rotates a point by a given angle.
@@ -225,16 +233,14 @@
 	"use strict";
 
 	var ParticleUtils = cloudkid.ParticleUtils;
-	var MovieClip, useAPI3;
-	if(PIXI.extras && PIXI.extras.MovieClip)
+	var Sprite = PIXI.Sprite;
+	var EMPTY_TEXTURE;
+	var useAPI3 = ParticleUtils.useAPI3;
+	if(!useAPI3)
 	{
-		MovieClip = PIXI.extras.MovieClip;
-		useAPI3 = true;
-	}
-	else
-	{
-		MovieClip = PIXI.MovieClip;
-		useAPI3 = false;
+		var canvas = document.createElement("canvas");
+		canvas.width = canvas.height = 1;
+		EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
 	}
 
 	/**
@@ -245,18 +251,20 @@
 	 */
 	var Particle = function(emitter)
 	{
-		var art = emitter.particleImages[0] instanceof PIXI.Texture ?
-															[emitter.particleImages[0]] :
-															emitter.particleImages[0];
-
-
-		MovieClip.call(this, art);
+		//start off the sprite with a blank texture, since we are going to replace it
+		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
+		//blank texture for us.
+		if(useAPI3)
+			Sprite.call(this);
+		else
+			Sprite.call(this, EMPTY_TEXTURE);
 
 		/**
 		 * The emitter that controls this particle.
 		 * @property {Emitter} emitter
 		 */
 		this.emitter = emitter;
+		//particles should be centered
 		this.anchor.x = this.anchor.y = 0.5;
 		/**
 		 * The velocity of the particle. Speed may change, but the angle also
@@ -420,7 +428,7 @@
 	};
 
 	// Reference to the prototype
-	var p = Particle.prototype = Object.create(MovieClip.prototype);
+	var p = Particle.prototype = Object.create(Sprite.prototype);
 
 	/**
 	 * Initializes the particle for use, based on the properties that have to
@@ -609,360 +617,46 @@
 		this.startColor = this.endColor = null;
 		this.ease = null;
 	};
+	
+	/**
+	 * Checks over the art that was passed to the Emitter's init() function, to do any special
+	 * modifications to prepare it ahead of time.
+	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
+	 *                     Any strings in the array will be converted to Textures via
+	 *                     Texture.fromImage().
+	 * @return {Array} The art, after any needed modifications.
+	 */
+	Particle.parseArt = function(art)
+	{
+		//convert any strings to Textures.
+		var i;
+		for(i = art.length; i >= 0; --i)
+		{
+			if(typeof art[i] == "string")
+				art[i] = PIXI.Texture.fromImage(art[i]);
+		}
+		//particles from different base textures will be slower in WebGL than if they
+		//were from one spritesheet
+		if(true)
+		{
+			for(i = art.length - 1; i > 0; --i)
+			{
+				if(art[i].baseTexture != art[i - 1].baseTexture)
+				{
+					if (window.console)
+						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
+					break;
+				}
+			}
+		}
+		
+		return art;
+	};
 
 	cloudkid.Particle = Particle;
 
 }(cloudkid));
 
-/**
-*  @module cloudkid
-*/
-(function(cloudkid, undefined) {
-
-	"use strict";
-
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle;
-
-	/**
-	 * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
-	 * "5x + 3".
-	 * To use this class, the particle config must have a "path" string in the
-	 * "extraData" parameter. This string should have "x" in it to represent movement (from the
-	 * speed settings of the particle). It may have numbers, parentheses, the four basic
-	 * operations, and the following Math functions or properties (without the preceding "Math."):
-	 * "pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
-	 * "acos", "atan", "atan2", "log".
-	 * The overall movement of the particle and the expression value become x and y positions for
-	 * the particle, respectively. The final position is rotated by the spawn rotation/angle of
-	 * the particle.
-	*
-	 * Some example paths:
-	*
-	 * 	"sin(x/10) * 20" // A sine wave path.
-	 * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
-	 * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
-	*
-	 * @class PathParticle
-	 * @constructor
-	 * @param {Emitter} emitter The emitter that controls this PathParticle.
-	 */
-	var PathParticle = function(emitter)
-	{
-		Particle.call(this, emitter);
-		/**
-		 * The function representing the path the particle should take.
-		 * @property {Function} path
-		 */
-		this.path = null;
-		/**
-		 * The initial rotation in degrees of the particle, because the direction of the path
-		 * is based on that.
-		 * @property {Number} initialRotation
-		 */
-		this.initialRotation = 0;
-		/**
-		 * The initial position of the particle, as all path movement is added to that.
-		 * @property {PIXI.Point} initialPosition
-		 */
-		this.initialPosition = new PIXI.Point();
-		/**
-		 * Total single directional movement, due to speed.
-		 * @property {Number} movement
-		 */
-		this.movement = 0;
-	};
-
-	// Reference to the super class
-	var s = Particle.prototype;
-	// Reference to the prototype
-	var p = PathParticle.prototype = Object.create(s);
-
-	/**
-	 * A helper point for math things.
-	 * @property {Function} helperPoint
-	 * @private
-	 * @static
-	 */
-	var helperPoint = new PIXI.Point();
-
-	/**
-	 * Initializes the particle for use, based on the properties that have to
-	 * have been set already on the particle.
-	 * @method init
-	 */
-	p.init = function()
-	{
-		//get initial rotation before it is converted to radians
-		this.initialRotation = this.rotation;
-		//standard init
-		this.Particle_init();
-
-		//set the standard PIXI animationSpeed
-		if(this.extraData && this.extraData.path)
-		{
-			var _sharedExtraData = this.emitter._sharedExtraData;
-			if(_sharedExtraData.path !== undefined)
-				this.path = _sharedExtraData.path;
-			else
-			{
-				try
-				{
-					this.path = _sharedExtraData.path = parsePath(this.extraData.path);
-				}
-				catch(e)
-				{
-					console.error("PathParticle: error in parsing path expression");
-					this.path = _sharedExtraData.path = null;
-				}
-			}
-		}
-		else
-		{
-			console.error("PathParticle requires a path string in extraData!");
-			this.path = null;
-		}
-		//cancel the normal movement behavior
-		this._doNormalMovement = !this.path;
-		//reset movement
-		this.movement = 0;
-		//grab position
-		this.initialPosition.x = this.position.x;
-		this.initialPosition.y = this.position.y;
-	};
-
-	//a hand picked list of Math functions (and a couple properties) that are allowable.
-	//they should be used without the preceding "Math."
-	var MATH_FUNCS =
-	[
-		"pow",
-		"sqrt",
-		"abs",
-		"floor",
-		"round",
-		"ceil",
-		"E",
-		"PI",
-		"sin",
-		"cos",
-		"tan",
-		"asin",
-		"acos",
-		"atan",
-		"atan2",
-		"log"
-	];
-	//Allow the 4 basic operations, parentheses and all numbers/decimals, as well
-	//as 'x', for the variable usage.
-	var WHITELISTER = "[01234567890\\.\\*\\-\\+\\/\\(\\)x ,]";
-	//add the math functions to the regex string.
-	for(var index = MATH_FUNCS.length - 1; index >= 0; --index)
-	{
-		WHITELISTER += "|" + MATH_FUNCS[index];
-	}
-	//create an actual regular expression object from the string
-	WHITELISTER = new RegExp(WHITELISTER, "g");
-
-	/**
-	 * Parses a string into a function for path following.
-	 * This involves whitelisting the string for safety, inserting "Math." to math function
-	 * names, and using eval() to generate a function.
-	 * @method parsePath
-	 * @private
-	 * @static
-	 * @param {String} pathString The string to parse.
-	 * @return {Function} The path function - takes x, outputs y.
-	 */
-	var parsePath = function(pathString)
-	{
-		var rtn;
-		var matches = pathString.match(WHITELISTER);
-		for(var i = matches.length - 1; i >= 0; --i)
-		{
-			if(MATH_FUNCS.indexOf(matches[i]) >= 0)
-				matches[i] = "Math." + matches[i];
-		}
-		pathString = matches.join("");
-		eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
-		return rtn;
-	};
-
-	/**
-	 * Updates the particle.
-	 * @method update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	 */
-	p.update = function(delta)
-	{
-		var lerp = this.Particle_update(delta);
-		//if the particle died during the update, then don't bother
-		if(lerp >= 0 && this.path)
-		{
-			//increase linear movement based on speed
-			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
-			this.movement += speed * delta;
-			//set up the helper point for rotation
-			helperPoint.x = this.movement;
-			helperPoint.y = this.path(this.movement);
-			ParticleUtils.rotatePoint(this.initialRotation, helperPoint);
-			this.position.x = this.initialPosition.x + helperPoint.x;
-			this.position.y = this.initialPosition.y + helperPoint.y;
-		}
-	};
-
-	/**
-	 * Destroys the particle, removing references and preventing future use.
-	 * @method destroy
-	 */
-	p.destroy = function()
-	{
-		s.destroy.call(this);
-	};
-
-	cloudkid.PathParticle = PathParticle;
-
-}(cloudkid));
-/**
-*  @module cloudkid
-*/
-(function(cloudkid, undefined) {
-
-	"use strict";
-
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle;
-
-	/**
-	 * An individual particle image with an animation. While this class may be functional, it
-	 * has not gotten thorough testing or examples yet, and is not considered to be release ready.
-	 * @class AnimatedParticle
-	 * @constructor
-	 * @param {Emitter} emitter The emitter that controls this AnimatedParticle.
-	 */
-	var AnimatedParticle = function(emitter)
-	{
-		Particle.call(this, emitter);
-
-		/**
-		 * Array used to avoid damaging previous texture arrays or creating new ones
-		 * when applyArt() passes a texture instead of an array.
-		 * @property {Array} _helperTextures
-		 * @private
-		 */
-		this._helperTextures = [];
-	};
-
-	// Reference to the super class
-	var s = Particle.prototype;
-	// Reference to the prototype
-	var p = AnimatedParticle.prototype = Object.create(s);
-
-	/**
-	 * Initializes the particle for use, based on the properties that have to
-	 * have been set already on the particle.
-	 * @method init
-	 */
-	p.init = function()
-	{
-		this.Particle_init();
-
-		//set the standard PIXI animationSpeed
-		if(this.extraData)
-		{
-			//fps will work differently for SpringRoll's fork of PIXI than
-			//standard PIXI, where it will just be a variable
-			if(this.extraData.fps)
-			{
-				this.fps = this.extraData.fps;
-			}
-			else
-			{
-				this.fps = 60;
-			}
-			var animationSpeed = this.extraData.animationSpeed || 1;
-			if(animationSpeed == "matchLife")
-			{
-				this.loop = false;
-				//animation should end when the particle does
-				if(this.hasOwnProperty("_duration"))
-				{
-					//SpringRoll's fork of PIXI redoes how MovieClips animate,
-					//with duration and elapsed time
-					this.animationSpeed = this._duration / this.maxLife;
-				}
-				else
-				{
-					//standard PIXI - assume game tick rate of 60 fps
-					this.animationSpeed = this.textures.length / this.maxLife / 60;
-				}
-			}
-			else
-			{
-				this.loop = true;
-				this.animationSpeed = animationSpeed;
-			}
-		}
-		else
-		{
-			this.loop = true;
-			this.animationSpeed = 1;
-		}
-		this.play();//start playing
-	};
-
-	/**
-	 * Sets the textures for the particle.
-	 * @method applyArt
-	 * @param {Array} art An array of PIXI.Texture objects for this animated particle.
-	 */
-	p.applyArt = function(art)
-	{
-		if(Array.isArray(art))
-			this.textures = art;
-		else
-		{
-			this._helperTextures[0] = art;
-			this.textures = this._helperTextures;
-		}
-		this.gotoAndStop(0);
-	};
-
-	/**
-	 * Updates the particle.
-	 * @method update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	 */
-	p.update = function(delta)
-	{
-		//only animate the particle if it is still alive
-		if(this.Particle_update(delta) >= 0)
-		{
-			if(this._duration)
-			{
-				//work with SpringRoll's fork
-				this.updateAnim(delta);
-			}
-			else
-			{
-				//standard PIXI - movieclip will advance automatically - this means
-				//that the movieclip will animate even if the emitter (and the particles)
-				//are paused
-			}
-		}
-	};
-
-	/**
-	 * Destroys the particle, removing references and preventing future use.
-	 * @method destroy
-	 */
-	p.destroy = function()
-	{
-		s.destroy.call(this);
-	};
-
-	cloudkid.AnimatedParticle = AnimatedParticle;
-
-}(cloudkid));
 /**
 *  @module cloudkid
 */
@@ -980,8 +674,9 @@
 	 * @constructor
 	 * @param {PIXI.DisplayObjectContainer} particleParent The display object to add the
 	 *                                                     particles to.
-	 * @param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
-	 *                                              for the particles.
+	 * @param {Array|PIXI.Texture|String} [particleImages] A texture or array of textures to use
+	 *                                                     for the particles. Strings will be turned
+	 *                                                     into textures via Texture.fromImage().
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
@@ -1272,12 +967,17 @@
 		 */
 		this._pool = [];
 		/**
-		 * Extra data storage for particle subclasses to share things that have been
-		 * generated from configuration data.
-		 * @property {Object} _sharedExtraData
+		 * The original config object that this emitter was initialized with.
+		 * @property {Object} _origConfig
 		 * @private
 		 */
-		this._sharedExtraData = null;
+		this._origConfig = null;
+		/**
+		 * The original particle image data that this emitter was initialized with.
+		 * @property {PIXI.Texture|Array|String} _origArt
+		 * @private
+		 */
+		this._origArt = null;
 
 		//set the initial parent
 		this.parent = particleParent;
@@ -1312,11 +1012,16 @@
 			if(value != this._particleConstructor)
 			{
 				this._particleConstructor = value;
+				//clean up existing particles
 				this.cleanup();
+				//scrap all the particles
 				if(this._activeParticles.length)
 					this._activeParticles.length = 0;
 				if(this._pool.length)
 					this._pool.length = 0;
+				//re-initialize the emitter so that the new constructor can do anything it needs to
+				if(this._origConfig && this._origArt)
+					this.init(this._origArt, this._origConfig);
 			}
 		}
 	});
@@ -1339,34 +1044,26 @@
 	/**
 	 * Sets up the emitter based on the config settings.
 	 * @method init
-	 * @param {Array|PIXI.Texture} particleImages A texture or array of textures to
-	 *                                            use for the particles.
+	 * @param {Array|PIXI.Texture} art A texture or array of textures to use for the particles.
 	 * @param {Object} config A configuration object containing settings for the emitter.
 	 */
-	p.init = function(particleImages, config)
+	p.init = function(art, config)
 	{
-		if(!particleImages || !config)
+		if(!art || !config)
 			return;
 		//clean up any existing particles
 		this.cleanup();
-		//set up the array of textures
-		this.particleImages = particleImages instanceof PIXI.Texture ?
-																[particleImages] :
-																particleImages;
-		//particles from different base textures will be slower in WebGL than if they
-		//were from one spritesheet
-		if(true && this.particleImages.length > 1)
-		{
-			for(var i = this.particleImages.length - 1; i > 0; --i)
-			{
-				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
-				{
-					if (window.console)
-						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
-					break;
-				}
-			}
-		}
+		
+		//store the original config and particle images, in case we need to re-initialize
+		//when the particle constructor is changed
+		this._origConfig = config;
+		this._origArt = art;
+		
+		//set up the array of data, also ensuring that it is an array
+		art = Array.isArray(art) ? art.slice() : [art];
+		//run the art through the particle class's parsing function
+		var partClass = this._particleConstructor;
+		this.particleImages = partClass.parseArt ? partClass.parseArt(art) : art;
 		///////////////////////////
 		// Particle Properties   //
 		///////////////////////////
@@ -1386,6 +1083,7 @@
 		}
 		else
 			this.startSpeed = this.endSpeed = 0;
+		//set up acceleration
 		var acceleration = config.acceleration;
 		if(acceleration && (acceleration.x || acceleration.y))
 		{
@@ -1445,8 +1143,11 @@
 		}
 		else
 			this.customEase = null;
-		this.extraData = config.extraData || null;
-		this._sharedExtraData = {};
+		//set up the extra data, running it through the particle class's parseData function.
+		if(partClass.parseData)
+			this.extraData = partClass.parseData(config.extraData);
+		else
+			this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////

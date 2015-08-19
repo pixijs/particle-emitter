@@ -55,9 +55,18 @@
 		window.onresize();
 
 		// Preload the particle images and create PIXI textures from it
-		var urls = imagePaths.slice();
+		var urls, makeTextures = false;
+		if(imagePaths.spritesheet)
+			urls = [imagePaths.spritesheet];
+		else if(imagePaths.textures)
+			urls = imagePaths.textures.slice();
+		else
+		{
+			urls = imagePaths.slice();
+			makeTextures = true;
+		}
 		urls.push("images/bg.png");
-		var loader = new PIXI.AssetLoader(imagePaths);
+		var loader = new PIXI.AssetLoader(urls);
 		loader.onComplete = function()
 		{
 			bg = new PIXI.Sprite(PIXI.Texture.fromImage("images/bg.png"));
@@ -67,15 +76,21 @@
 			bg.tint = 0x000000;
 			stage.addChild(bg);
 			//collect the textures, now that they are all loaded
-			var textures = [];
-			for(var i = 0; i < imagePaths.length; ++i)
-				textures.push(PIXI.Texture.fromImage(imagePaths[i]));
+			var art;
+			if(makeTextures)
+			{
+				art = [];
+				for(var i = 0; i < imagePaths.length; ++i)
+					art.push(PIXI.Texture.fromImage(imagePaths[i]));
+			}
+			else
+				art = imagePaths.art;
 			// Create the new emitter and attach it to the stage
 			var emitterContainer = new PIXI.DisplayObjectContainer();
 			stage.addChild(emitterContainer);
 			emitter = new cloudkid.Emitter(
 				emitterContainer,
-				textures,
+				art,
 				config
 			);
 			if(type == "path")

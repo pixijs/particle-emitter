@@ -1,3 +1,4 @@
+/*! PixiParticles 1.5.0 */
 /**
 *  @module cloudkid
 */
@@ -212,14 +213,14 @@
 			}
 			catch(e)
 			{
-				if(DEBUG)
+				if(true)
 					console.error("PathParticle: error in parsing path expression");
 				output.path = null;
 			}
 		}
 		else
 		{
-			if(DEBUG)
+			if(true)
 				console.error("PathParticle requires a path string in extraData!");
 			output.path = null;
 		}

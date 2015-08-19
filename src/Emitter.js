@@ -15,8 +15,9 @@
 	 * @constructor
 	 * @param {PIXI.DisplayObjectContainer} particleParent The display object to add the
 	 *                                                     particles to.
-	 * @param {Array|PIXI.Texture} [particleImages] A texture or array of textures to use
-	 *                                              for the particles.
+	 * @param {Array|PIXI.Texture|String} [particleImages] A texture or array of textures to use
+	 *                                                     for the particles. Strings will be turned
+	 *                                                     into textures via Texture.fromImage().
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
@@ -307,12 +308,17 @@
 		 */
 		this._pool = [];
 		/**
-		 * Extra data storage for particle subclasses to share things that have been
-		 * generated from configuration data.
-		 * @property {Object} _sharedExtraData
+		 * The original config object that this emitter was initialized with.
+		 * @property {Object} _origConfig
 		 * @private
 		 */
-		this._sharedExtraData = null;
+		this._origConfig = null;
+		/**
+		 * The original particle image data that this emitter was initialized with.
+		 * @property {PIXI.Texture|Array|String} _origArt
+		 * @private
+		 */
+		this._origArt = null;
 
 		//set the initial parent
 		this.parent = particleParent;
@@ -347,11 +353,16 @@
 			if(value != this._particleConstructor)
 			{
 				this._particleConstructor = value;
+				//clean up existing particles
 				this.cleanup();
+				//scrap all the particles
 				if(this._activeParticles.length)
 					this._activeParticles.length = 0;
 				if(this._pool.length)
 					this._pool.length = 0;
+				//re-initialize the emitter so that the new constructor can do anything it needs to
+				if(this._origConfig && this._origArt)
+					this.init(this._origArt, this._origConfig);
 			}
 		}
 	});
@@ -374,34 +385,26 @@
 	/**
 	 * Sets up the emitter based on the config settings.
 	 * @method init
-	 * @param {Array|PIXI.Texture} particleImages A texture or array of textures to
-	 *                                            use for the particles.
+	 * @param {Array|PIXI.Texture} art A texture or array of textures to use for the particles.
 	 * @param {Object} config A configuration object containing settings for the emitter.
 	 */
-	p.init = function(particleImages, config)
+	p.init = function(art, config)
 	{
-		if(!particleImages || !config)
+		if(!art || !config)
 			return;
 		//clean up any existing particles
 		this.cleanup();
-		//set up the array of textures
-		this.particleImages = particleImages instanceof PIXI.Texture ?
-																[particleImages] :
-																particleImages;
-		//particles from different base textures will be slower in WebGL than if they
-		//were from one spritesheet
-		if(DEBUG && this.particleImages.length > 1)
-		{
-			for(var i = this.particleImages.length - 1; i > 0; --i)
-			{
-				if(this.particleImages[i].baseTexture != this.particleImages[i - 1].baseTexture)
-				{
-					if (window.console)
-						console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
-					break;
-				}
-			}
-		}
+		
+		//store the original config and particle images, in case we need to re-initialize
+		//when the particle constructor is changed
+		this._origConfig = config;
+		this._origArt = art;
+		
+		//set up the array of data, also ensuring that it is an array
+		art = Array.isArray(art) ? art.slice() : [art];
+		//run the art through the particle class's parsing function
+		var partClass = this._particleConstructor;
+		this.particleImages = partClass.parseArt ? partClass.parseArt(art) : art;
 		///////////////////////////
 		// Particle Properties   //
 		///////////////////////////
@@ -421,6 +424,7 @@
 		}
 		else
 			this.startSpeed = this.endSpeed = 0;
+		//set up acceleration
 		var acceleration = config.acceleration;
 		if(acceleration && (acceleration.x || acceleration.y))
 		{
@@ -480,8 +484,11 @@
 		}
 		else
 			this.customEase = null;
-		this.extraData = config.extraData || null;
-		this._sharedExtraData = {};
+		//set up the extra data, running it through the particle class's parseData function.
+		if(partClass.parseData)
+			this.extraData = partClass.parseData(config.extraData);
+		else
+			this.extraData = config.extraData || null;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
