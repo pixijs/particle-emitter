@@ -1222,11 +1222,12 @@
 	 */
 	p.recycle = function(particle)
 	{
-		var index = this._activeParticles.indexOf(particle);
+		var _activeParticles = this._activeParticles;
+		var index = _activeParticles.indexOf(particle);
 		//pop is preferrable to slice, so always pop the particles off the end
-		if(index < this._activeParticles.length - 1)
-			this._activeParticles[index] = this._activeParticles[this._activeParticles.length - 1];
-		this._activeParticles.pop();
+		if(index < _activeParticles.length - 1)
+			_activeParticles[index] = _activeParticles[_activeParticles.length - 1];
+		_activeParticles.pop();
 		//readd to pool
 		this._pool.push(particle);
 		//remove child from display, or make it invisible if it is in a ParticleContainer

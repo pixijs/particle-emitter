@@ -21,6 +21,13 @@ body {
     position:absolute;
 }
 
+#particleCount {
+    font-size:75%;
+    padding:4px;
+    top: 20px;
+    position:absolute;
+}
+
 #instructions {
     color:#fff;
     text-align:center;
