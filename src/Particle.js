@@ -190,6 +190,20 @@
 		 * @private
 		 */
 		this._oneOverLife = 0;
+		
+		/**
+		 * Reference to the next particle in the list.
+		 * @property {Particle} next
+		 * @private
+		 */
+		this.next = null;
+		
+		/**
+		 * Reference to the previous particle in the list.
+		 * @property {Particle} prev
+		 * @private
+		 */
+		this.prev = null;
 
 		//save often used functions on the instance instead of the prototype for better speed
 		this.init = this.init;
@@ -385,10 +399,8 @@
 	 */
 	p.destroy = function()
 	{
-		this.emitter = null;
-		this.velocity = null;
-		this.startColor = this.endColor = null;
-		this.ease = null;
+		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
+			this.next = this.prev = null;
 	};
 	
 	/**

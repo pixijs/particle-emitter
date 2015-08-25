@@ -28,12 +28,14 @@
 
 		// Calculate the current time
 		var elapsed = Date.now();
+		
+		var updateId;
 
 		// Update function every frame
 		var update = function(){
 
 			// Update the next frame
-			requestAnimationFrame(update);
+			updateId = requestAnimationFrame(update);
 
 			var now = Date.now();
 			emitter.update((now - elapsed) * 0.001);
@@ -43,10 +45,10 @@
 			elapsed = now;
 			
 			if(particleCount)
-				particleCount.innerHTML = emitter._activeParticles.length;
+				particleCount.innerHTML = emitter.particleCount;
 
 			// render the stage
-		    renderer.render(stage);
+			renderer.render(stage);
 		};
 
 		// Resize the canvas to the size of the window
@@ -127,6 +129,7 @@
 
 			// Click on the canvas to trigger
 			canvas.addEventListener('mouseup', function(e){
+				if(!emitter) return;
 				emitter.emit = true;
 				emitter.resetPositionTracking();
 				emitter.updateOwnerPos(e.offsetX || e.layerX, e.offsetY || e.layerY);
@@ -134,6 +137,16 @@
 
 			// Start the update
 			update();
+			
+			window.destroyEmitter = function()
+			{
+				emitter.destroy();
+				emitter = null;
+				window.destroyEmitter = null;
+				cancelAnimationFrame(updateId);
+				
+				renderer.render(stage);
+			};
 		});
 	};
 

@@ -276,6 +276,12 @@
 		 */
 		this.addAtBack = false;
 		/**
+		 * The current number of active particles.
+		 * @property {Number} particleCount
+		 * @readOnly
+		 */
+		this.particleCount = 0;
+		/**
 		 * If particles should be emitted during update() calls. Setting this to false
 		 * stops new particles from being created, but allows existing ones to die out.
 		 * @property {Boolean} _emit
@@ -296,17 +302,26 @@
 		 */
 		this._emitterLife = -1;
 		/**
-		 * The particles that are active and on the display list.
-		 * @property {Array} _activeParticles
+		 * The particles that are active and on the display list. This is the first particle in a
+		 * linked list.
+		 * @property {Particle} _activeParticlesFirst
 		 * @private
 		 */
-		this._activeParticles = [];
+		this._activeParticlesFirst = null;
 		/**
-		 * The particles that are not currently being used.
-		 * @property {Array} _pool
+		 * The particles that are active and on the display list. This is the last particle in a
+		 * linked list.
+		 * @property {Particle} _activeParticlesLast
 		 * @private
 		 */
-		this._pool = [];
+		this._activeParticlesLast = null;
+		/**
+		 * The particles that are not currently being used. This is the first particle in a
+		 * linked list.
+		 * @property {Particle} _poolFirst
+		 * @private
+		 */
+		this._poolFirst = null;
 		/**
 		 * The original config object that this emitter was initialized with.
 		 * @property {Object} _origConfig
@@ -356,10 +371,11 @@
 				//clean up existing particles
 				this.cleanup();
 				//scrap all the particles
-				if(this._activeParticles.length)
-					this._activeParticles.length = 0;
-				if(this._pool.length)
-					this._pool.length = 0;
+				for (var particle = this._poolFirst; particle; particle = particle.next)
+				{
+					particle.destroy();
+				}
+				this._poolFirst = null;
 				//re-initialize the emitter so that the new constructor can do anything it needs to
 				if(this._origConfig && this._origArt)
 					this.init(this._origArt, this._origConfig);
@@ -563,14 +579,18 @@
 	 */
 	p.recycle = function(particle)
 	{
-		var _activeParticles = this._activeParticles;
-		var index = _activeParticles.indexOf(particle);
-		//pop is preferrable to slice, so always pop the particles off the end
-		if(index < _activeParticles.length - 1)
-			_activeParticles[index] = _activeParticles[_activeParticles.length - 1];
-		_activeParticles.pop();
-		//readd to pool
-		this._pool.push(particle);
+		if(particle.next)
+			particle.next.prev = particle.prev;
+		if(particle.prev)
+			particle.prev.next = particle.next;
+		if(particle == this._activeParticlesLast)
+			this._activeParticlesLast = particle.prev;
+		if(particle == this._activeParticlesFirst)
+			this._activeParticlesFirst = particle.next;
+		//add to pool
+		particle.prev = null;
+		particle.next = this._poolFirst;
+		this._poolFirst = particle;
 		//remove child from display, or make it invisible if it is in a ParticleContainer
 		if(this._parentIsPC)
 		{
@@ -582,6 +602,8 @@
 			if(particle.parent)
 				particle.parent.removeChild(particle);
 		}
+		//decrease count
+		--this.particleCount;
 	};
 
 	/**
@@ -662,9 +684,12 @@
 	p.update = function(delta)
 	{
 		//update existing particles
-		var i, _activeParticles = this._activeParticles;
-		for(i = _activeParticles.length - 1; i >= 0; --i)
-			_activeParticles[i].update(delta);
+		var i, particle, next;
+		for (particle = this._activeParticlesFirst; particle; particle = next)
+		{
+			next = particle.next;
+			particle.update(delta);
+		}
 		var prevX, prevY;
 		//if the previous position is valid, store these for later interpolation
 		if(this._prevPosIsValid)
@@ -696,7 +721,7 @@
 					}
 				}
 				//determine if we have hit the particle limit
-				if(this._activeParticles.length >= this.maxParticles)
+				if(this.particleCount >= this.maxParticles)
 				{
 					this._spawnTimer += this.frequency;
 					continue;
@@ -727,12 +752,21 @@
 					}
 					//create enough particles to fill the wave (non-burst types have a wave of 1)
 					i = 0;
-					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this._activeParticles.length); i < len; ++i)
+					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i)
 					{
 						//create particle
-						var p = this._pool.length ?
-												this._pool.pop() :
-												new this.particleConstructor(this);
+						var p;
+						if(this._poolFirst)
+						{
+							p = this._poolFirst;
+							this._poolFirst = this._poolFirst.next;
+							p.next = null;
+						}
+						else
+						{
+							p = new this.particleConstructor(this);
+						}
+												
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
@@ -808,7 +842,17 @@
 								children.push(p);
 						}
 						//add particle to list of active particles
-						_activeParticles.push(p);
+						if(this._activeParticlesLast)
+						{
+							this._activeParticlesLast.next = p;
+							p.prev = this._activeParticlesLast;
+							this._activeParticlesLast = p;
+						}
+						else
+						{
+							this._activeParticlesLast = this._activeParticlesFirst = p;
+						}
+						++this.particleCount;
 					}
 				}
 				//increase timer and continue on to any other particles that need to be created
@@ -978,13 +1022,16 @@
 	 */
 	p.cleanup = function()
 	{
-		for (var i = this._activeParticles.length - 1; i >= 0; --i)
+		var particle, next;
+		for (particle = this._activeParticlesFirst; particle; particle = next)
 		{
-			var particle = this._activeParticles[i];
+			next = particle.next;
 			this.recycle(particle);
 			if(particle.parent)
 				particle.parent.removeChild(particle);
 		}
+		this._activeParticlesFirst = this._activeParticlesLast = null;
+		this.particleCount = 0;
 	};
 
 	/**
@@ -994,19 +1041,12 @@
 	p.destroy = function()
 	{
 		this.cleanup();
-		for(var i = this._pool.length - 1; i >= 0; --i)
+		for (var particle = this._poolFirst; particle; particle = particle.next)
 		{
-			this._pool[i].destroy();
+			particle.destroy();
 		}
-		this._pool = null;
-		this._activeParticles = null;
-		this._parent = null;
-		this.particleImages = null;
-		this.spawnPos = null;
-		this.ownerPos = null;
-		this.startColor = null;
-		this.endColor = null;
-		this.customEase = null;
+		this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =
+			this.startColor = this.endColor = this.customEase = null;
 	};
 
 	cloudkid.Emitter = Emitter;
