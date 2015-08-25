@@ -1,5 +1,6 @@
 /**
-*  @module cloudkid
+*  @module Pixi Particles
+*  @namespace cloudkid
 */
 (function(cloudkid, undefined) {
 

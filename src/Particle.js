@@ -1,5 +1,6 @@
 /**
-*  @module cloudkid
+*  @module Pixi Particles
+*  @namespace cloudkid
 */
 (function(cloudkid, undefined) {
 
@@ -406,6 +407,8 @@
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time.
+	 * @method parseArt
+	 * @static
 	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
 	 *                     Any strings in the array will be converted to Textures via
 	 *                     Texture.fromImage().
@@ -436,6 +439,19 @@
 		}
 		
 		return art;
+	};
+	
+	/**
+	 * Parses extra emitter data to ensure it is set up for this particle class.
+	 * Particle does nothing to the extra data.
+	 * @method parseData
+	 * @static
+	 * @param  {Object} extraData The extra data from the particle config.
+	 * @return {Object} The parsed extra data.
+	 */
+	Particle.parseData = function(extraData)
+	{
+		return extraData;
 	};
 
 	cloudkid.Particle = Particle;

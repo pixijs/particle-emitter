@@ -1,5 +1,6 @@
 /**
-*  @module cloudkid
+*  @module Pixi Particles
+*  @namespace cloudkid
 */
 (function(undefined) {
 
@@ -181,7 +182,8 @@
 	cloudkid.ParticleUtils = ParticleUtils;
 
 	/**
-	 * @module global
+	 * @module Pixi Particles
+	 * @namespace window
 	 */
 	/**
 	 * Add methods to Array
