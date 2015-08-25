@@ -1,25 +1,30 @@
 YUI.add("yuidoc-meta", function(Y) {
    Y.YUIDoc = { meta: {
     "classes": [
-        "AnimatedParticle",
-        "Array.prototype",
-        "Emitter",
-        "Particle",
-        "ParticleUtils",
-        "PathParticle"
+        "cloudkid.AnimatedParticle",
+        "cloudkid.Emitter",
+        "cloudkid.Particle",
+        "cloudkid.PathParticle",
+        "window.Array.prototype",
+        "window.ParticleUtils"
     ],
     "modules": [
-        "cloudkid",
-        "global"
+        "Animated Particle",
+        "Path Particle",
+        "Pixi Particles"
     ],
     "allModules": [
         {
-            "displayName": "cloudkid",
-            "name": "cloudkid"
+            "displayName": "Animated Particle",
+            "name": "Animated Particle"
         },
         {
-            "displayName": "global",
-            "name": "global"
+            "displayName": "Path Particle",
+            "name": "Path Particle"
+        },
+        {
+            "displayName": "Pixi Particles",
+            "name": "Pixi Particles"
         }
     ]
 } };
