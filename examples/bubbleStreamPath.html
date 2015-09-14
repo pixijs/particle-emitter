@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html class="no-js">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-        <title>Bubble Stream (path following)</title>
-        <meta name="description" content="bubble stream">
-        <link rel="stylesheet" href="css/main.css">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Bubble Stream (path following)</title>
+		<meta name="description" content="bubble stream">
+		<link rel="stylesheet" href="css/main.css">
 
-        <!-- Required dependencies -->
+		<!-- Required dependencies -->
 		<script src="libs/pixi.js/bin/pixi.js"></script>
 		<script src="../dist/pixi-particles.js"></script>
 		<script src="../dist/modules/path-particle.js"></script>
@@ -15,8 +15,8 @@
 		<!-- Example scaffolding -->
 		<script src="js/ParticleExample.js"></script>
 
-    </head>
-    <body>
+	</head>
+	<body>
 		<div id="framerate"></div>
 		<div id="instructions">Click Anywhere</div>
 		<canvas id="stage" width="400" height="400"></canvas>
@@ -69,13 +69,13 @@
 					},
 					"addAtBack": false,
 					"spawnType": "point",
-                    "extraData":
-                    {
-                        "path":"sin(x/10)*20"
-                    }
+					"extraData":
+					{
+						"path":"sin(x/10)*20"
+					}
 				},
-                //tell the particle example to use cloudkid.PathParticle
-                "path");
+				//tell the particle example to use cloudkid.PathParticle
+				"path");
 		</script>
-    </body>
+	</body>
 </html>
