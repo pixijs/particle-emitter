@@ -155,9 +155,10 @@
 		//properties for spawning particles
 		/**
 		 * Time between particle spawns in seconds.
-		 * @property {Number} frequency
+		 * @property {Number} _frequency
+		 * @private
 		 */
-		this.frequency = 0;
+		this._frequency = 1;
 		/**
 		 * Maximum number of particles to keep alive at a time. If this limit
 		 * is reached, no more particles will spawn until some have died.
@@ -354,6 +355,24 @@
 	var p = Emitter.prototype = {};
 
 	var helperPoint = new PIXI.Point();
+	
+	/**
+	 * Time between particle spawns in seconds. If this value is not a number greater than 0,
+	 * it will be set to 1 (particle per second) to prevent infinite loops.
+	 * @property {Number} frequency
+	 */
+	Object.defineProperty(p, "frequency",
+	{
+		get: function() { return this._frequency; },
+		set: function(value)
+		{
+			//do some error checking to prevent infinite loops
+			if(typeof value == "number" && value > 0)
+				this._frequency = value;
+			else
+				this._frequency = 1;
+		}
+	});
 
 	/**
 	 * The constructor used to create new particles. The default is
@@ -712,7 +731,7 @@
 				//determine if the emitter should stop spawning
 				if(this._emitterLife > 0)
 				{
-					this._emitterLife -= this.frequency;
+					this._emitterLife -= this._frequency;
 					if(this._emitterLife <= 0)
 					{
 						this._spawnTimer = 0;
@@ -724,7 +743,7 @@
 				//determine if we have hit the particle limit
 				if(this.particleCount >= this.maxParticles)
 				{
-					this._spawnTimer += this.frequency;
+					this._spawnTimer += this._frequency;
 					continue;
 				}
 				//determine the particle lifetime
@@ -857,7 +876,7 @@
 					}
 				}
 				//increase timer and continue on to any other particles that need to be created
-				this._spawnTimer += this.frequency;
+				this._spawnTimer += this._frequency;
 			}
 		}
 		//if the position changed before this update, then keep track of that
