@@ -1,4 +1,4 @@
-Pixi Particles
+Pixi Particles [![Build Status](https://travis-ci.org/CloudKidStudio/PixiParticles.svg)](https://travis-ci.org/CloudKidStudio/PixiParticles) [![Dependency Status](https://david-dm.org/CloudKidStudio/PixiParticles.svg?style=flat)](https://david-dm.org/CloudKidStudio/PixiParticles) [![GitHub version](https://badge.fury.io/gh/CloudKidStudio%2FPixiParticles.svg)](https://github.com/CloudKidStudio/PixiParticles/releases/latest)
 =================
 
 A particle system library for the [PixiJS](https://github.com/GoodBoyDigital/pixi.js) library. Also, we created an [interactive particle editor](http://cloudkidstudio.github.io/PixiParticlesEditor/) to design and preview custom particle emitters which utilitze PixiParticles. 
