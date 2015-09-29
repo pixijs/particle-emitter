@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://yui-s.yahooapis.com/3.8.0/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.ico">
+    <script src="https://yui-s.yahooapis.com/3.10.1/build/yui/yui-min.js"></script>
+	<title>PixiParticles v1.5.1 API Documentation : cloudkid.AnimatedParticle</title>  
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+                <h1><a href="http://github.com/CloudKidStudio/PixiParticles"><img src="../assets/css/logo.png" title="PixiParticles"></a></h1>
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Documentation for: 1.5.1</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+                    <h2 class="off-left">APIs</h2>
+                    <div id="api-tabview" class="tabview">
+                        <div id="api-tabview-filter">
+                            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+                        </div>
+                		<ul class="tabs">
+                            <li><a href="#api-classes">Classes</a></li>
+                			<li><a href="#api-modules">Modules</a></li>
+                        </ul>
+                        <div id="api-tabview-panel">
+                            <ul id="api-classes" class="apis classes">
+                                <li><a href="../classes/cloudkid.AnimatedParticle.html">cloudkid.AnimatedParticle</a></li>
+                                <li><a href="../classes/cloudkid.Emitter.html">cloudkid.Emitter</a></li>
+                                <li><a href="../classes/cloudkid.Particle.html">cloudkid.Particle</a></li>
+                                <li><a href="../classes/cloudkid.PathParticle.html">cloudkid.PathParticle</a></li>
+                                <li><a href="../classes/window.Array.prototype.html">window.Array.prototype</a></li>
+                                <li><a href="../classes/window.ParticleUtils.html">window.ParticleUtils</a></li>
+                            </ul>
+                
+                            <ul id="api-modules" class="apis modules">
+                                <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
+                                <li><a href="../modules/Path Particle.html">Path Particle</a></li>
+                                <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+            <div id="api-options">
+                    Show:
+                    <label for="api-show-inherited">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </div>            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<h1>cloudkid.AnimatedParticle Class</h1>
+<div class="box meta">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/src_AnimatedParticle.js.html#l14"><code>cloudkid.AnimatedParticle:14</code></a>
+        </div>
+
+            Module: <a href="../modules/Animated Particle.html">Animated Particle</a>
+
+</div>
+
+
+<div class="box intro">
+    <p>An individual particle image with an animation. Art data passed to the emitter must be
+formatted in a particular way for AnimatedParticle to be able to handle it:</p>
+<pre class="code prettyprint"><code>{
+    //framerate is required. It is the animation speed of the particle in frames per
+    //second.
+    //A value of "matchLife" causes the animation to match the lifetime of an individual
+    //particle, instead of at a constant framerate. This causes the animation to play
+    //through one time, completing when the particle expires.
+    framerate: 6,
+    //loop is optional, and defaults to false.
+    loop: true,
+    //textures is required, and can be an array of any (non-zero) length.
+    textures: [
+        //each entry represents a single texture that should be used for one or more
+        //frames. Any strings will be converted to Textures with Texture.fromImage().
+        //Instances of PIXI.Texture will be used directly.
+        "animFrame1.png",
+        //entries can be an object with a 'count' property, telling AnimatedParticle to
+        //use that texture for 'count' frames sequentially.
+        {
+            texture: "animFrame2.png",
+            count: 3
+        },
+        "animFrame3.png"
+    ]
+}</code></pre>
+
+</div>
+
+    <div class="constructor">
+        <h2>Constructor</h2>
+        <div id="method_cloudkid.AnimatedParticle" class="method item">
+            <h3 class="name"><code>cloudkid.AnimatedParticle</code></h3>
+        
+                <div class="args">
+                    <span class="paren">(</span><ul class="args-list inline commas">
+                        <li class="arg">
+                                <code>emitter</code>
+                        </li>
+                    </ul><span class="paren">)</span>
+                </div>
+        
+        
+        
+        
+        
+        
+        
+        
+            <div class="meta">
+                        <p>
+                        Defined in
+                <a href="../files/src_AnimatedParticle.js.html#l14"><code>cloudkid.AnimatedParticle:14</code></a>
+                </p>
+        
+        
+        
+            </div>
+        
+            <div class="description">
+                
+            </div>
+        
+                <div class="params">
+                    <h4>Parameters:</h4>
+        
+                    <ul class="params-list">
+                        <li class="param">
+                                <code class="param-name">emitter</code>
+                                <span class="type">Emitter</span>
+        
+        
+                            <div class="param-description">
+                                <p>The emitter that controls this AnimatedParticle.</p>
+        
+                            </div>
+        
+                        </li>
+                    </ul>
+                </div>
+        
+        
+        </div>
+    </div>
+
+<div id="classdocs" class="tabview">
+    <ul class="api-class-tabs">
+        <li class="api-class-tab index"><a href="#index">Index</a></li>
+
+            <li class="api-class-tab methods"><a href="#methods">Methods</a></li>
+            <li class="api-class-tab properties"><a href="#properties">Properties</a></li>
+    </ul>
+
+    <div>
+        <div id="index" class="api-class-tabpanel index">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#method_applyArt">applyArt</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_destroy">destroy</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_init">init</a>
+
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_parseArt">parseArt</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#method_update">update</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+                <div class="index-section properties">
+                    <h3>Properties</h3>
+
+                    <ul class="index-list properties">
+                            <li class="index-item property private">
+                                <a href="#property_duration">duration</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_elapsed">elapsed</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_framerate">framerate</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_loop">loop</a>
+
+                            </li>
+                            <li class="index-item property private">
+                                <a href="#property_textures">textures</a>
+
+                            </li>
+                    </ul>
+                </div>
+
+
+        </div>
+
+            <div id="methods" class="api-class-tabpanel">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_applyArt" class="method item">
+                        <h3 class="name"><code>applyArt</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>art</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l111"><code>applyArt:111</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Sets the textures for the particle.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">art</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>An array of PIXI.Texture objects for this animated particle.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_destroy" class="method item">
+                        <h3 class="name"><code>destroy</code></h3>
+                    
+                            <span class="paren">()</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l152"><code>destroy:152</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Destroys the particle, removing references and preventing future use.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_init" class="method item">
+                        <h3 class="name"><code>init</code></h3>
+                    
+                            <span class="paren">()</span>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l92"><code>init:92</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Initializes the particle for use, based on the properties that have to
+                    have been set already on the particle.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="method_parseArt" class="method item">
+                        <h3 class="name"><code>parseArt</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>art</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l161"><code>parseArt:161</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Checks over the art that was passed to the Emitter's init() function, to do any special
+                    modifications to prepare it ahead of time.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">art</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The array of art data, properly formatted for AnimatedParticle.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>:
+                                        <p>The art, after any needed modifications.</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_update" class="method item">
+                        <h3 class="name"><code>update</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>delta</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l124"><code>update:124</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Updates the particle.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">delta</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>Time elapsed since the previous frame, in <strong>seconds</strong>.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
+
+            <div id="properties" class="api-class-tabpanel">
+                <h2 class="off-left">Properties</h2>
+
+                    <div id="property_duration" class="property item private">
+                        <h3 class="name"><code>duration</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l58"><code>duration:58</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Duration of the animation, in seconds.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_elapsed" class="property item private">
+                        <h3 class="name"><code>elapsed</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l72"><code>elapsed:72</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Animation time elapsed, in seconds.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_framerate" class="property item private">
+                        <h3 class="name"><code>framerate</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l65"><code>framerate:65</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Animation framerate, in frames per second.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_loop" class="property item private">
+                        <h3 class="name"><code>loop</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Boolean" class="crosslink external" target="_blank">Boolean</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l79"><code>loop:79</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>If this particle animation should loop.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+                    <div id="property_textures" class="property item private">
+                        <h3 class="name"><code>textures</code></h3>
+                        <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                            <span class="flag private">private</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_AnimatedParticle.js.html#l51"><code>textures:51</code></a>
+                            </p>
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Texture array used as each frame of animation, similarly to how MovieClip works.</p>
+                    
+                        </div>
+                    
+                    
+                    
+                    </div>
+            </div>
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>
