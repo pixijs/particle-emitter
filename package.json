@@ -1,8 +1,28 @@
 {
-  "private": true,
-  "dependencies": {
-      "grunt": "~0.4.5",
-      "library-grunt": "~0.6.0",
-      "grunt-bower-install-simple": "~1.0.0"
-  }
+	"name": "pixi-particles",
+	"version": "1.5.1",
+	"main": "dist/pixi-particles.min.js",
+	"author": "Cloud Kid Studio <inquiries@cloudkid.com>",
+	"dependencies": {
+		"pixi.js": "*"
+	},
+  	"devDependencies": {
+		"grunt": "~0.4.5",
+	  	"library-grunt": "~0.6.0",
+	  	"grunt-bower-install-simple": "~1.0.0"
+  	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/CloudKidStudio/PixiParticles"
+	},
+	"bugs": {
+		"url": "https://github.com/CloudKidStudio/PixiParticles/issues"
+	},
+	"keywords": [
+		"webgl",
+		"pixi",
+		"pixi.js",
+		"particles"
+	],
+	"license": "MIT"
 }
