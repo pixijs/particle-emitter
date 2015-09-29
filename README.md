@@ -98,7 +98,7 @@ update();
 
 ##Documentation##
 
-http://cloudkidstudio.github.io/PixiParticles/
+http://cloudkidstudio.github.io/PixiParticles/docs/
 
 ##Installation##
 
