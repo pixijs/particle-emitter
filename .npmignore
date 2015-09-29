@@ -1,9 +1,10 @@
 .gitignore
+.editorconfig
 .bowerrc
 bower.json
+library.json
 tasks
 Gruntfile.js
-build.json
 examples
 docs
 src

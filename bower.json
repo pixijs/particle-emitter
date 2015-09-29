@@ -8,10 +8,11 @@
 	"ignore": [
 		".gitignore",
 		".bowerrc",
+		".editorconfig",
 		"package.json",
 		"tasks",
 		"Gruntfile.js",
-		"build.json",
+		"library.json",
 		"examples",
 		"docs",
 		"src"

@@ -2,7 +2,7 @@
 	"name": "pixi-particles",
 	"version": "1.5.1",
 	"main": "dist/pixi-particles.min.js",
-	"author": "Cloud Kid Studio <inquiries@cloudkid.com>",
+	"author": "CloudKid <tools@cloudkid.com>",
 	"dependencies": {
 		"pixi.js": "*"
 	},
