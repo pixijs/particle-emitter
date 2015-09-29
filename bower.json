@@ -6,6 +6,7 @@
 		"pixi.js": "*"
 	},
 	"ignore": [
+		".travis.yml",
 		".gitignore",
 		".bowerrc",
 		".editorconfig",

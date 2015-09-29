@@ -1,8 +1,13 @@
 module.exports = function(grunt)
 {
 	grunt.registerTask(
-		'examples',
-		'Install the example dependencies',
-		['bower-install-simple']
+		'docs-live',
+		'Generate documentation and push to gh-pages branch', [
+			'clean:docs',
+			'file-creator:redirect',
+			'yuidoc',
+			'gh-pages',
+			'clean:redirect'
+		]
 	);
 };

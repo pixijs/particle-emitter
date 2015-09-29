@@ -1,6 +1,7 @@
 module.exports = function(grunt)
 {
 	require('library-grunt')(grunt, {
-		themePath: '../CloudKidTheme'
+		themePath: '../CloudKidTheme',
+		bowerPath: 'examples/libs'
 	});
 };

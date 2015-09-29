@@ -8,8 +8,7 @@
 	},
   	"devDependencies": {
 		"grunt": "~0.4.5",
-	  	"library-grunt": "~0.6.0",
-	  	"grunt-bower-install-simple": "~1.0.0"
+	  	"library-grunt": "~0.6.0"
   	},
 	"repository": {
 		"type": "git",
@@ -17,6 +16,9 @@
 	},
 	"bugs": {
 		"url": "https://github.com/CloudKidStudio/PixiParticles/issues"
+	},
+	"scripts": {
+		"test": "grunt default --verbose"
 	},
 	"keywords": [
 		"webgl",
