@@ -112,6 +112,31 @@ bower install pixi-particles
 npm install pixi-particles
 ```
 
+##Examples##
+
+* [Explosion 1](https://cloudkidstudio.github.io/PixiParticles/examples/explosion.html)
+* [Explosion 2](https://cloudkidstudio.github.io/PixiParticles/examples/explosion2.html)
+* [Explosion 3](https://cloudkidstudio.github.io/PixiParticles/examples/explosion3.html)
+* [Explosion Ring](https://cloudkidstudio.github.io/PixiParticles/examples/explosionRing.html)
+* [Megaman Death](https://cloudkidstudio.github.io/PixiParticles/examples/megamanDeath.html)
+* [Rain](https://cloudkidstudio.github.io/PixiParticles/examples/rain.html)
+* [Flame](https://cloudkidstudio.github.io/PixiParticles/examples/flame.html)
+* [Gas](https://cloudkidstudio.github.io/PixiParticles/examples/gas.html)
+* [Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/bubbles.html)
+* [Bubble Spray](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleSpray.html)
+* [Bubble Stream](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleStream.html)
+* [Bubble Stream - path following](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleStreamPath.html)
+* [Vertical Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/bubblesVertical.html)
+* [Cartoon Smoke](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmoke.html)
+* [Cartoon Smoke Alt.](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmoke2.html)
+* [Cartoon Smoke Blast](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmokeBlast.html)
+* [Snow](https://cloudkidstudio.github.io/PixiParticles/examples/snow.html)
+* [Sparks](https://cloudkidstudio.github.io/PixiParticles/examples/sparks.html)
+* [Fountain](https://cloudkidstudio.github.io/PixiParticles/examples/fountain.html)
+* [Animated Coins](https://cloudkidstudio.github.io/PixiParticles/examples/coins.html)
+* [Animated Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/animatedBubbles.html)
+* [Particle Container Performance](https://cloudkidstudio.github.io/PixiParticles/examples/particleContainerPerformance.html)
+
 ##Use in Haxe##
 
 Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi)
