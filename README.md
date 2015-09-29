@@ -102,12 +102,14 @@ http://cloudkidstudio.github.io/PixiParticles/
 
 ##Installation##
 
-PixiParticles can be installed using Bower.
-While the Bower file specifies CloudKid's fork of PixiJS, the library should work fine with
-the official release of PixiJS.
+PixiParticles can be installed using Bower or NPM.
 
 ```bash
 bower install pixi-particles
+```
+
+```bash
+npm install pixi-particles
 ```
 
 ##Use in Haxe##
