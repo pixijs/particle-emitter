@@ -8,7 +8,8 @@
 	},
   	"devDependencies": {
 		"grunt": "~0.4.5",
-	  	"library-grunt": "~0.6.0"
+	  	"library-grunt": "~0.6.0",
+	  	"grunt-file-creator": "^0.1.3"
   	},
 	"repository": {
 		"type": "git",
