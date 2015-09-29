@@ -118,6 +118,6 @@ Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com
 
 ##License##
 
-Copyright (c) 2014 [CloudKid](http://github.com/cloudkidstudio)
+Copyright (c) 2015 [CloudKid](http://github.com/cloudkidstudio)
 
 Released under the MIT License.
