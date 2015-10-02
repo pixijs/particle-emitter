@@ -91,7 +91,7 @@
 		 * Acceleration to apply to the particle.
 		 * @property {PIXI.Point} accleration
 		 */
-		this.acceleration = null;
+		this.acceleration = new PIXI.Point();
 		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
@@ -172,6 +172,13 @@
 		 * @private
 		 */
 		this._doSpeed = false;
+		/**
+		 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
+		 * and _doSpeed gets priority.
+		 * @property {Boolean} _doAcceleration
+		 * @private
+		 */
+		this._doAcceleration = false;
 		/**
 		 * If color should be interpolated at all.
 		 * @property {Boolean} _doColor
@@ -262,8 +269,9 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		this._doAcceleration = this.acceleration.x !== 0 || this.acceleration.y !== 0;
 		//_doNormalMovement can be cancelled by subclasses
-		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this._doAcceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -355,7 +363,7 @@
 				ParticleUtils.normalize(this.velocity);
 				ParticleUtils.scaleBy(this.velocity, speed);
 			}
-			else if(this.acceleration)
+			else if(this._doAcceleration)
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;

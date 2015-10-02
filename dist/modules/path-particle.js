@@ -1,4 +1,4 @@
-/*! PixiParticles 1.5.1 */
+/*! PixiParticles 1.5.2 */
 /**
 *  @module Path Particle
 *  @namespace cloudkid

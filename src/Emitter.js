@@ -468,7 +468,7 @@
 			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
 		}
 		else
-			this.acceleration = null;
+			this.acceleration = new PIXI.Point();
 		//set up the scale
 		if (config.scale)
 		{
@@ -803,7 +803,8 @@
 						p.endAlpha = this.endAlpha;
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
-						p.acceleration = this.acceleration;
+						p.acceleration.x = this.acceleration.x;
+						p.acceleration.y = this.acceleration.y;
 						if(this.minimumScaleMultiplier != 1)
 						{
 							var rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;

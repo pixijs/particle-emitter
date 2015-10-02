@@ -1,4 +1,4 @@
-/*! PixiParticles 1.5.1 */
+/*! PixiParticles 1.5.2 */
 /**
 *  @module Pixi Particles
 *  @namespace cloudkid
@@ -21,7 +21,7 @@
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.5.1"'
+	// avoid the string replacement of '"1.5.2"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
@@ -320,7 +320,7 @@
 		 * Acceleration to apply to the particle.
 		 * @property {PIXI.Point} accleration
 		 */
-		this.acceleration = null;
+		this.acceleration = new PIXI.Point();
 		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
@@ -401,6 +401,13 @@
 		 * @private
 		 */
 		this._doSpeed = false;
+		/**
+		 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
+		 * and _doSpeed gets priority.
+		 * @property {Boolean} _doAcceleration
+		 * @private
+		 */
+		this._doAcceleration = false;
 		/**
 		 * If color should be interpolated at all.
 		 * @property {Boolean} _doColor
@@ -491,8 +498,9 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		this._doAcceleration = this.acceleration.x !== 0 || this.acceleration.y !== 0;
 		//_doNormalMovement can be cancelled by subclasses
-		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this._doAcceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -584,7 +592,7 @@
 				ParticleUtils.normalize(this.velocity);
 				ParticleUtils.scaleBy(this.velocity, speed);
 			}
-			else if(this.acceleration)
+			else if(this._doAcceleration)
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
@@ -1157,7 +1165,7 @@
 			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
 		}
 		else
-			this.acceleration = null;
+			this.acceleration = new PIXI.Point();
 		//set up the scale
 		if (config.scale)
 		{
@@ -1492,7 +1500,8 @@
 						p.endAlpha = this.endAlpha;
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
-						p.acceleration = this.acceleration;
+						p.acceleration.x = this.acceleration.x;
+						p.acceleration.y = this.acceleration.y;
 						if(this.minimumScaleMultiplier != 1)
 						{
 							var rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;

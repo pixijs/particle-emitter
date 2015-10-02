@@ -1,16 +1,16 @@
 {
 	"name": "pixi-particles",
-	"version": "1.5.1",
+	"version": "1.5.2",
 	"main": "dist/pixi-particles.min.js",
 	"author": "CloudKid <tools@cloudkid.com>",
 	"dependencies": {
 		"pixi.js": "*"
 	},
-  	"devDependencies": {
+	"devDependencies": {
 		"grunt": "~0.4.5",
-	  	"library-grunt": "~0.6.0",
-	  	"grunt-file-creator": "^0.1.3"
-  	},
+		"library-grunt": "~0.6.0",
+		"grunt-file-creator": "^0.1.3"
+	},
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/CloudKidStudio/PixiParticles"
