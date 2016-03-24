@@ -10,7 +10,7 @@ Please see the examples for various pre-made particle configurations.
 ```js
 
 // Create a new emitter
-var emitter = new cloudkid.Emitter(
+var emitter = new PIXI.particles.Emitter(
 
   // The DisplayObjectContainer to put the emitter in
   // if using blend modes, it's important to put this
