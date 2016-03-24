@@ -5,6 +5,7 @@
 	"url": "http://github.com/pixijs/pixi-particles",
 	"output": "pixi-particles",
 	"main": [
+		"src/polyfills.js",
 		"src/main.js",
 		"src/ParticleUtils.js",
 		"src/Particle.js",
