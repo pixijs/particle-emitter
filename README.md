@@ -13,55 +13,55 @@ Please see the examples for various pre-made particle configurations.
 // Create a new emitter
 var emitter = new PIXI.particles.Emitter(
 
-  // The DisplayObjectContainer to put the emitter in
-  // if using blend modes, it's important to put this
-  // on top of a bitmap, and not use the PIXI.Stage
-  container,
+	// The PIXI.Container to put the emitter in
+	// if using blend modes, it's important to put this
+	// on top of a bitmap, and not use the root stage Container
+	container,
   
-  // The collection of particle images to use
-  [PIXI.Texture.fromImage('image.jpg')],
+	// The collection of particle images to use
+	[PIXI.Texture.fromImage('image.jpg')],
   
 	// Emitter configuration, edit this to change the look
 	// of the emitter
 	{
-		"alpha": {
-			"start": 0.8,
-			"end": 0.1
+		alpha: {
+			start: 0.8,
+			end: 0.1
 		},
-		"scale": {
-			"start": 1,
-			"end": 0.3
+		scale: {
+			start: 1,
+			end: 0.3
 		},
-		"color": {
-			"start": "fb1010",
-			"end": "f5b830"
+		color: {
+			start: "fb1010",
+			end: "f5b830"
 		},
-		"speed": {
-			"start": 200,
-			"end": 100
+		speed: {
+			start: 200,
+			end: 100
 		},
-		"startRotation": {
-			"min": 0,
-			"max": 360
+		startRotation: {
+			min: 0,
+			max: 360
 		},
-		"rotationSpeed": {
-			"min": 0,
-			"max": 0
+		rotationSpeed: {
+			min: 0,
+			max: 0
 		},
-		"lifetime": {
-			"min": 0.5,
-			"max": 0.5
+		lifetime: {
+			min: 0.5,
+			max: 0.5
 		},
-		"frequency": 0.008,
-		"emitterLifetime": 0.31,
-		"maxParticles": 1000,
-		"pos": {
+		frequency: 0.008,
+		emitterLifetime: 0.31,
+		maxParticles: 1000,
+		pos: {
 			"x": 0,
 			"y": 0
 		},
-		"addAtBack": false,
-		"spawnType": "circle",
-		"spawnCircle": {
+		addAtBack: false,
+		spawnType: "circle",
+		spawnCircle: {
 			"x": 0,
 			"y": 0,
 			"r": 10
@@ -94,7 +94,6 @@ emitter.emit = true;
 
 // Start the update
 update();
-
 ```
 
 ##Documentation##
