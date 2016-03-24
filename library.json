@@ -1,6 +1,6 @@
 {
 	"name": "pixi-particles",
-	"version": "1.6.0",
+	"version": "1.6.1",
 	"description": "Particle system for PixiJS",
 	"url": "http://github.com/pixijs/pixi-particles",
 	"output": "pixi-particles",
