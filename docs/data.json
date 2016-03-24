@@ -2,7 +2,7 @@
     "project": {
         "name": "pixi-particles",
         "description": "Particle system for PixiJS",
-        "version": "1.6.0",
+        "version": "1.6.1",
         "url": "http://github.com/pixijs/pixi-particles",
         "logo": "https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png"
     },
