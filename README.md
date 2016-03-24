@@ -1,5 +1,4 @@
-Pixi Particles 
-=================
+# Pixi Particles 
 
 [![Build Status](https://travis-ci.org/pixijs/pixi-particles.svg)](https://travis-ci.org/pixijs/pixi-particles) [![Dependency Status](https://david-dm.org/pixijs/pixi-particles.svg?style=flat)](https://david-dm.org/pixijs/pixi-particles) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg)](https://github.com/pixijs/pixi-particles/releases/latest)
 
