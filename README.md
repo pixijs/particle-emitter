@@ -56,15 +56,15 @@ var emitter = new PIXI.particles.Emitter(
 		emitterLifetime: 0.31,
 		maxParticles: 1000,
 		pos: {
-			"x": 0,
-			"y": 0
+			x: 0,
+			y: 0
 		},
 		addAtBack: false,
 		spawnType: "circle",
 		spawnCircle: {
-			"x": 0,
-			"y": 0,
-			"r": 10
+			x: 0,
+			y: 0,
+			r: 10
 		}
 	}
 );
