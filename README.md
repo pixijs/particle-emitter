@@ -4,12 +4,11 @@
 
 A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles. 
 
-##Sample Usage
+## Sample Usage
 
 Please see the examples for various pre-made particle configurations.
 
 ```js
-
 // Create a new emitter
 var emitter = new PIXI.particles.Emitter(
 
@@ -96,11 +95,11 @@ emitter.emit = true;
 update();
 ```
 
-##Documentation##
+## Documentation
 
 http://pixijs.github.io/pixi-particles/docs/
 
-##Installation##
+## Installation
 
 PixiParticles can be installed using Bower or NPM.
 
@@ -112,7 +111,7 @@ bower install pixi-particles
 npm install pixi-particles
 ```
 
-##Examples##
+## Examples
 
 * [Explosion 1](https://pixijs.github.io/pixi-particles/examples/explosion.html)
 * [Explosion 2](https://pixijs.github.io/pixi-particles/examples/explosion2.html)
@@ -137,11 +136,11 @@ npm install pixi-particles
 * [Animated Bubbles](https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html)
 * [Particle Container Performance](https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html)
 
-##Use in Haxe##
+## Use in Haxe
 
 Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi)
 
-##License##
+## License
 
 Copyright (c) 2015 [CloudKid](http://github.com/cloudkidstudio)
 
