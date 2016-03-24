@@ -1,8 +1,12 @@
 {
 	"name": "pixi-particles",
-	"version": "1.5.2",
+	"version": "1.6.0",
 	"main": "dist/pixi-particles.min.js",
-	"author": "CloudKid <tools@cloudkid.com>",
+	"author": "Andrew Start <start.andrew@gmail.com>",
+	"contributors": [{
+		"name" : "Matt Karl", 
+		"email" : "matt@mattkarl.com"
+	}],
 	"dependencies": {
 		"pixi.js": "*"
 	},
@@ -13,10 +17,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/CloudKidStudio/PixiParticles"
+		"url": "https://github.com/pixijs/pixi-particles"
 	},
 	"bugs": {
-		"url": "https://github.com/CloudKidStudio/PixiParticles/issues"
+		"url": "https://github.com/pixijs/pixi-particles/issues"
 	},
 	"scripts": {
 		"test": "grunt default --verbose"

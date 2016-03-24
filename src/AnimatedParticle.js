@@ -1,13 +1,13 @@
 /**
 *  @module Animated Particle
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle,
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle,
 		Texture = PIXI.Texture;
 	var useAPI3 = ParticleUtils.useAPI3;
 
@@ -219,6 +219,6 @@
 		return art;
 	};
 
-	cloudkid.AnimatedParticle = AnimatedParticle;
+	PIXI.particles.AnimatedParticle = AnimatedParticle;
 
-}(cloudkid));
+}(PIXI));

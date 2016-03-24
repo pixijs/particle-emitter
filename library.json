@@ -1,13 +1,15 @@
 {
-	"name": "PixiParticles",
-	"version": "1.5.2",
+	"name": "pixi-particles",
+	"version": "1.6.0",
 	"description": "Particle system for PixiJS",
-	"url": "http://github.com/CloudKidStudio/PixiParticles",
+	"url": "http://github.com/pixijs/pixi-particles",
 	"output": "pixi-particles",
 	"main": [
+		"src/main.js",
 		"src/ParticleUtils.js",
 		"src/Particle.js",
-		"src/Emitter.js"
+		"src/Emitter.js",
+		"src/deprecation.js"
 	],
 	"modules": {
 		"pathparticle": {

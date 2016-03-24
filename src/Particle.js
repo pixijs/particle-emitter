@@ -1,12 +1,12 @@
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils;
+	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
 	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
@@ -462,6 +462,6 @@
 		return extraData;
 	};
 
-	cloudkid.Particle = Particle;
+	PIXI.particles.Particle = Particle;
 
-}(cloudkid));
+}(PIXI));

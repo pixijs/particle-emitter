@@ -1,7 +1,7 @@
-Pixi Particles [![Build Status](https://travis-ci.org/CloudKidStudio/PixiParticles.svg)](https://travis-ci.org/CloudKidStudio/PixiParticles) [![Dependency Status](https://david-dm.org/CloudKidStudio/PixiParticles.svg?style=flat)](https://david-dm.org/CloudKidStudio/PixiParticles) [![GitHub version](https://badge.fury.io/gh/CloudKidStudio%2FPixiParticles.svg)](https://github.com/CloudKidStudio/PixiParticles/releases/latest)
+Pixi Particles [![Build Status](https://travis-ci.org/pixijs/pixi-particles.svg)](https://travis-ci.org/pixijs/pixi-particles) [![Dependency Status](https://david-dm.org/pixijs/pixi-particles.svg?style=flat)](https://david-dm.org/pixijs/pixi-particles) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg)](https://github.com/pixijs/pixi-particles/releases/latest)
 =================
 
-A particle system library for the [PixiJS](https://github.com/GoodBoyDigital/pixi.js) library. Also, we created an [interactive particle editor](http://cloudkidstudio.github.io/PixiParticlesEditor/) to design and preview custom particle emitters which utilitze PixiParticles. 
+A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles. 
 
 ##Sample Usage
 
@@ -98,7 +98,7 @@ update();
 
 ##Documentation##
 
-http://cloudkidstudio.github.io/PixiParticles/docs/
+http://pixijs.github.io/pixi-particles/docs/
 
 ##Installation##
 
@@ -114,28 +114,28 @@ npm install pixi-particles
 
 ##Examples##
 
-* [Explosion 1](https://cloudkidstudio.github.io/PixiParticles/examples/explosion.html)
-* [Explosion 2](https://cloudkidstudio.github.io/PixiParticles/examples/explosion2.html)
-* [Explosion 3](https://cloudkidstudio.github.io/PixiParticles/examples/explosion3.html)
-* [Explosion Ring](https://cloudkidstudio.github.io/PixiParticles/examples/explosionRing.html)
-* [Megaman Death](https://cloudkidstudio.github.io/PixiParticles/examples/megamanDeath.html)
-* [Rain](https://cloudkidstudio.github.io/PixiParticles/examples/rain.html)
-* [Flame](https://cloudkidstudio.github.io/PixiParticles/examples/flame.html)
-* [Gas](https://cloudkidstudio.github.io/PixiParticles/examples/gas.html)
-* [Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/bubbles.html)
-* [Bubble Spray](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleSpray.html)
-* [Bubble Stream](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleStream.html)
-* [Bubble Stream - path following](https://cloudkidstudio.github.io/PixiParticles/examples/bubbleStreamPath.html)
-* [Vertical Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/bubblesVertical.html)
-* [Cartoon Smoke](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmoke.html)
-* [Cartoon Smoke Alt.](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmoke2.html)
-* [Cartoon Smoke Blast](https://cloudkidstudio.github.io/PixiParticles/examples/cartoonSmokeBlast.html)
-* [Snow](https://cloudkidstudio.github.io/PixiParticles/examples/snow.html)
-* [Sparks](https://cloudkidstudio.github.io/PixiParticles/examples/sparks.html)
-* [Fountain](https://cloudkidstudio.github.io/PixiParticles/examples/fountain.html)
-* [Animated Coins](https://cloudkidstudio.github.io/PixiParticles/examples/coins.html)
-* [Animated Bubbles](https://cloudkidstudio.github.io/PixiParticles/examples/animatedBubbles.html)
-* [Particle Container Performance](https://cloudkidstudio.github.io/PixiParticles/examples/particleContainerPerformance.html)
+* [Explosion 1](https://pixijs.github.io/pixi-particles/examples/explosion.html)
+* [Explosion 2](https://pixijs.github.io/pixi-particles/examples/explosion2.html)
+* [Explosion 3](https://pixijs.github.io/pixi-particles/examples/explosion3.html)
+* [Explosion Ring](https://pixijs.github.io/pixi-particles/examples/explosionRing.html)
+* [Megaman Death](https://pixijs.github.io/pixi-particles/examples/megamanDeath.html)
+* [Rain](https://pixijs.github.io/pixi-particles/examples/rain.html)
+* [Flame](https://pixijs.github.io/pixi-particles/examples/flame.html)
+* [Gas](https://pixijs.github.io/pixi-particles/examples/gas.html)
+* [Bubbles](https://pixijs.github.io/pixi-particles/examples/bubbles.html)
+* [Bubble Spray](https://pixijs.github.io/pixi-particles/examples/bubbleSpray.html)
+* [Bubble Stream](https://pixijs.github.io/pixi-particles/examples/bubbleStream.html)
+* [Bubble Stream - path following](https://pixijs.github.io/pixi-particles/examples/bubbleStreamPath.html)
+* [Vertical Bubbles](https://pixijs.github.io/pixi-particles/examples/bubblesVertical.html)
+* [Cartoon Smoke](https://pixijs.github.io/pixi-particles/examples/cartoonSmoke.html)
+* [Cartoon Smoke Alt.](https://pixijs.github.io/pixi-particles/examples/cartoonSmoke2.html)
+* [Cartoon Smoke Blast](https://pixijs.github.io/pixi-particles/examples/cartoonSmokeBlast.html)
+* [Snow](https://pixijs.github.io/pixi-particles/examples/snow.html)
+* [Sparks](https://pixijs.github.io/pixi-particles/examples/sparks.html)
+* [Fountain](https://pixijs.github.io/pixi-particles/examples/fountain.html)
+* [Animated Coins](https://pixijs.github.io/pixi-particles/examples/coins.html)
+* [Animated Bubbles](https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html)
+* [Particle Container Performance](https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html)
 
 ##Use in Haxe##
 

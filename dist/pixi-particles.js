@@ -1,13 +1,55 @@
-/*! PixiParticles 1.5.2 */
+/*! pixi-particles 1.6.0 */
 /**
-*  @module Pixi Particles
-*  @namespace cloudkid
-*/
-(function(undefined) {
+ * @module Pixi Particles
+ * @namespace PIXI.particles
+ */
+(function(){
 
 	"use strict";
 
-	window.cloudkid = window.cloudkid || {};
+	// Check for window, fallback to global
+	var global = typeof window !== 'undefined' ? window : GLOBAL;
+
+	// Define PIXI Flash namespace
+	var particles = {};
+
+	// Export for Node-compatible environments like Electron
+	if (typeof module !== 'undefined' && module.exports)
+	{
+		// Attempt to require the pixi module
+		if (typeof PIXI === 'undefined')
+		{
+			// Include the Pixi.js module
+			require('pixi.js');
+		}
+
+		// Export the module
+		module.exports = particles;
+	}
+	// If we're in the browser make sure PIXI is available 
+	else if (typeof PIXI === 'undefined')
+	{
+		if (true)
+		{
+			throw "pixi-particles requires pixi.js to be loaded first";
+		}
+		else
+		{
+			throw "Requires pixi.js";
+		}
+	}
+
+	// Assign to global namespace
+	global.PIXI.particles = particles;
+
+}());
+/**
+*  @module Pixi Particles
+*  @namespace PIXI.particles
+*/
+(function(PIXI, undefined) {
+
+	"use strict";
 	
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 
@@ -21,7 +63,7 @@
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.5.2"'
+	// avoid the string replacement of '"1.6.0"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
@@ -180,7 +222,7 @@
 		return BLEND_MODES[name] || BLEND_MODES.NORMAL;
 	};
 
-	cloudkid.ParticleUtils = ParticleUtils;
+	PIXI.particles.ParticleUtils = ParticleUtils;
 
 	/**
 	 * @module Pixi Particles
@@ -226,16 +268,16 @@
 			}
 		});
 	}
-}());
+}(PIXI));
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils;
+	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
 	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
@@ -691,20 +733,20 @@
 		return extraData;
 	};
 
-	cloudkid.Particle = Particle;
+	PIXI.particles.Particle = Particle;
 
-}(cloudkid));
+}(PIXI));
 
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle,
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle,
 		ParticleContainer = PIXI.ParticleContainer;
 
 	/**
@@ -1767,6 +1809,74 @@
 			this.startColor = this.endColor = this.customEase = null;
 	};
 
-	cloudkid.Emitter = Emitter;
+	PIXI.particles.Emitter = Emitter;
 
-}(cloudkid));
+}(PIXI));
+
+(function(undefined){
+	
+	// Check for window, fallback to global
+	var global = typeof window !== 'undefined' ? window : GLOBAL;
+	
+	// Deprecate support for the cloudkid namespace
+	if (typeof cloudkid === "undefined")
+	{
+		global.cloudkid = {};
+	}
+
+	//  Get classes from the PIXI.particles namespace
+	Object.defineProperties(global.cloudkid, 
+	{
+		AnimatedParticle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.AnimatedParticle;
+			}
+		},
+		Emitter: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.Emitter;
+			}
+		},
+		Particle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.Particle;
+			}
+		},
+		ParticleUtils: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.ParticleUtils;
+			}
+		},
+		PathParticle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.PathParticle;
+			}
+		}
+	});
+
+}());

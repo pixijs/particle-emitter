@@ -1,12 +1,10 @@
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
-
-	window.cloudkid = window.cloudkid || {};
 	
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 
@@ -179,7 +177,7 @@
 		return BLEND_MODES[name] || BLEND_MODES.NORMAL;
 	};
 
-	cloudkid.ParticleUtils = ParticleUtils;
+	PIXI.particles.ParticleUtils = ParticleUtils;
 
 	/**
 	 * @module Pixi Particles
@@ -225,4 +223,4 @@
 			}
 		});
 	}
-}());
+}(PIXI));

@@ -1,13 +1,13 @@
 /**
 *  @module Path Particle
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle;
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle;
 
 	/**
 	 * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
@@ -231,6 +231,6 @@
 		return output;
 	};
 
-	cloudkid.PathParticle = PathParticle;
+	PIXI.particles.PathParticle = PathParticle;
 
-}(cloudkid));
+}(PIXI));
