@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.1 */
+/*! pixi-particles 1.6.2 */
 /**
  * @module Pixi Particles
  * @namespace window
@@ -107,7 +107,7 @@ if(!Array.prototype.random)
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.6.1"'
+	// avoid the string replacement of '"1.6.2"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{

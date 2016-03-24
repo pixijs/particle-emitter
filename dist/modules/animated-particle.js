@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.1 */
+/*! pixi-particles 1.6.2 */
 /**
 *  @module Animated Particle
 *  @namespace PIXI.particles
