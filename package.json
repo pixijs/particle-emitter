@@ -1,35 +1,38 @@
 {
-	"name": "pixi-particles",
-	"version": "1.6.0",
-	"main": "dist/pixi-particles.min.js",
-	"author": "Andrew Start <start.andrew@gmail.com>",
-	"contributors": [{
-		"name" : "Matt Karl", 
-		"email" : "matt@mattkarl.com"
-	}],
-	"dependencies": {
-		"pixi.js": "*"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.5",
-		"library-grunt": "~0.6.0",
-		"grunt-file-creator": "^0.1.3"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/pixijs/pixi-particles"
-	},
-	"bugs": {
-		"url": "https://github.com/pixijs/pixi-particles/issues"
-	},
-	"scripts": {
-		"test": "grunt default --verbose"
-	},
-	"keywords": [
-		"webgl",
-		"pixi",
-		"pixi.js",
-		"particles"
-	],
-	"license": "MIT"
+  "name": "pixi-particles",
+  "version": "1.6.0",
+  "main": "dist/pixi-particles.min.js",
+  "author": "Andrew Start <start.andrew@gmail.com>",
+  "contributors": [
+    {
+      "name": "Matt Karl",
+      "email": "matt@mattkarl.com"
+    }
+  ],
+  "dependencies": {
+    "pixi.js": "*"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.5",
+    "library-grunt": "~0.6.0",
+    "grunt-file-creator": "^0.1.3",
+    "yuidoc-bootstrap-theme": "^1.0.6"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixijs/pixi-particles"
+  },
+  "bugs": {
+    "url": "https://github.com/pixijs/pixi-particles/issues"
+  },
+  "scripts": {
+    "test": "grunt default --verbose"
+  },
+  "keywords": [
+    "webgl",
+    "pixi",
+    "pixi.js",
+    "particles"
+  ],
+  "license": "MIT"
 }
