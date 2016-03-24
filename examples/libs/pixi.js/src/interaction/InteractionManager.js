@@ -14,7 +14,7 @@ Object.assign(
  *
  * @class
  * @memberof PIXI.interaction
- * @param renderer {CanvasRenderer|WebGLRenderer} A reference to the current renderer
+ * @param renderer {PIXI.CanvasRenderer|PIXI.WebGLRenderer} A reference to the current renderer
  * @param [options] {object}
  * @param [options.autoPreventDefault=true] {boolean} Should the manager automatically prevent default browser actions.
  * @param [options.interactionFrequency=10] {number} Frequency increases the interaction events will be checked.
@@ -26,7 +26,7 @@ function InteractionManager(renderer, options)
     /**
      * The renderer this interaction manager works for.
      *
-     * @member {SystemRenderer}
+     * @member {PIXI.SystemRenderer}
      */
     this.renderer = renderer;
 
@@ -49,14 +49,14 @@ function InteractionManager(renderer, options)
     /**
      * The mouse data
      *
-     * @member {InteractionData}
+     * @member {PIXI.interaction.InteractionData}
      */
     this.mouse = new InteractionData();
 
     /**
      * An event data object to handle all the event tracking/dispatching
      *
-     * @member {EventData}
+     * @member {object}
      */
     this.eventData = {
         stopped: false,
@@ -71,7 +71,7 @@ function InteractionManager(renderer, options)
     /**
      * Tiny little interactiveData pool !
      *
-     * @member {Array}
+     * @member {PIXI.interaction.InteractionData[]}
      */
     this.interactiveDataPool = [];
 
@@ -83,6 +83,16 @@ function InteractionManager(renderer, options)
      */
     this.interactionDOMElement = null;
 
+    /**
+     * This property determins if mousemove and touchmove events are fired only when the cursror is over the object
+     * Setting to true will make things work more in line with how the DOM verison works.
+     * Setting to false can make things easier for things like dragging
+     * It is currently set to false as this is how pixi used to work. This will be set to true in future versions of pixi.
+     * @member {HTMLElement}
+     * @private
+     */
+    this.moveWhenInside = false;
+    
     /**
      * Have events been attached to the dom element?
      *
@@ -150,10 +160,11 @@ function InteractionManager(renderer, options)
 
     /**
      * Internal cached var
-     * @member {Point}
+     * @member {PIXI.Point}
      * @private
      */
     this._tempPoint = new core.Point();
+    
 
     /**
      * The current resolution
@@ -189,6 +200,7 @@ InteractionManager.prototype.setTargetElement = function (element, resolution)
 
 /**
  * Registers all the DOM events
+ *
  * @private
  */
 InteractionManager.prototype.addEvents = function ()
@@ -221,6 +233,7 @@ InteractionManager.prototype.addEvents = function ()
 
 /**
  * Removes all the DOM events that were previously registered
+ *
  * @private
  */
 InteractionManager.prototype.removeEvents = function ()
@@ -298,9 +311,10 @@ InteractionManager.prototype.update = function (deltaTime)
 
 /**
  * Dispatches an event on the display object that was interacted with
- * @param displayObject {Container|Sprite|TilingSprite} the display object in question
+ *
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} the display object in question
  * @param eventString {string} the name of the event (e.g, mousedown)
- * @param eventData {EventData} the event data object
+ * @param eventData {object} the event data object
  * @private
  */
 InteractionManager.prototype.dispatchEvent = function ( displayObject, eventString, eventData )
@@ -323,7 +337,7 @@ InteractionManager.prototype.dispatchEvent = function ( displayObject, eventStri
  * Maps x and y coords from a DOM object and maps them correctly to the pixi view. The resulting value is stored in the point.
  * This takes into account the fact that the DOM element could be scaled and positioned anywhere on the screen.
  *
- * @param  {Point} point the point that the result will be stored in
+ * @param  {PIXI.Point} point the point that the result will be stored in
  * @param  {number} x     the x coord of the position to map
  * @param  {number} y     the y coord of the position to map
  */
@@ -338,51 +352,84 @@ InteractionManager.prototype.mapPositionToPoint = function ( point, x, y )
  * This function is provides a neat way of crawling through the scene graph and running a specified function on all interactive objects it finds.
  * It will also take care of hit testing the interactive objects and passes the hit across in the function.
  *
- * @param  {Point} point the point that is tested for collision
- * @param  {Container|Sprite|TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
- * @param  {function} func the function that will be called on each interactive object. The displayObject and hit will be passed to the function
+ * @param  {PIXI.Point} point the point that is tested for collision
+ * @param  {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} displayObject the displayObject that will be hit test (recurcsivly crawls its children)
+ * @param  {Function} func the function that will be called on each interactive object. The displayObject and hit will be passed to the function
  * @param  {boolean} hitTest this indicates if the objects inside should be hit test against the point
  * @return {boolean} returns true if the displayObject hit the point
  */
-InteractionManager.prototype.processInteractive = function (point, displayObject, func, hitTest, interactive )
+InteractionManager.prototype.processInteractive = function (point, displayObject, func, hitTest, interactive)
 {
-    if(!displayObject.visible)
+    if(!displayObject || !displayObject.visible)
     {
         return false;
     }
 
-    var children = displayObject.children;
+    // Took a little while to rework this function correctly! But now it is done and nice and optimised. ^_^
+    // 
+    // This function will now loop through all objects and then only hit test the objects it HAS to, not all of them. MUCH faster..
+    // An object will be hit test if the following is true:
+    // 
+    // 1: It is interactive.
+    // 2: It belongs to a parent that is interactive AND one of the parents children have not already been hit.
+    // 
+    // As another little optimisation once an interactive object has been hit we can carry on through the scenegraph, but we know that there will be no more hits! So we can avoid extra hit tests
+    // A final optimisation is that an object is not hit test directly if a child has already been hit.
+    
+    var hit = false,
+        interactiveParent = interactive = displayObject.interactive || interactive;
 
-    var hit = false;
-
-    // if the object is interactive we must hit test all its children..
-    interactive = interactive || displayObject.interactive;
-
-    if(displayObject.interactiveChildren)
+    // if the displayobject has a hitArea, then it does not need to hitTest children.
+    if(displayObject.hitArea)
     {
-
-        for (var i = children.length-1; i >= 0; i--)
-        {
-            if(! hit  && hitTest)
-            {
-                hit = this.processInteractive(point, children[i], func, true, interactive );
-            }
-            else
-            {
-                // now we know we can miss it all!
-                this.processInteractive(point, children[i], func, false, false );
-            }
-        }
-
+        interactiveParent = false;
     }
 
+    // ** FREE TIP **! If an object is not interacttive or has no buttons in it (such as a game scene!) set interactiveChildren to false for that displayObject.
+    // This will allow pixi to completly ignore and bypass checking the displayObjects children.
+    if(displayObject.interactiveChildren)
+    {       
+        var children = displayObject.children;
+        
+        for (var i = children.length-1; i >= 0; i--)
+        {
+
+            var child = children[i];
+
+            // time to get recursive.. if this function will return if somthing is hit..
+            if(this.processInteractive(point, child, func, hitTest, interactiveParent))
+            {
+                // its a good idea to check if a child has lost its parent.
+                // this means it has been removed whilst looping so its best
+                if(!child.parent)
+                {
+                    continue;
+                }
+
+                hit = true;
+
+                // we no longer need to hit test any more objects in this container as we we now know the parent has been hit
+                interactiveParent = false;
+                
+                // If the child is interactive , that means that the object hit was actually interactive and not just the child of an interactive object. 
+                // This means we no longer need to hit test anything else. We still need to run through all objects, but we don't need to perform any hit tests.
+                if(child.interactive)
+                {
+                    hitTest = false;
+                }
+            }
+        }
+    }
+
+    // no point running this if the item is not interactive or does not have an interactive parent.
     if(interactive)
     {
-        if(hitTest)
-        {
+        // if we are hit testing (as in we have no hit any objects yet)
+        // We also don't need to worry about hit testing if once of the displayObjects children has already been hit!
+        if(hitTest && !hit)
+        {  
             if(displayObject.hitArea)
             {
-                // lets use the hit object first!
                 displayObject.worldTransform.applyInverse(point,  this._tempPoint);
                 hit = displayObject.hitArea.contains( this._tempPoint.x, this._tempPoint.y );
             }
@@ -394,14 +441,13 @@ InteractionManager.prototype.processInteractive = function (point, displayObject
 
         if(displayObject.interactive)
         {
-            func(displayObject, hit);
+            func(displayObject, hit); 
         }
     }
 
     return hit;
+  
 };
-
-
 
 
 /**
@@ -430,14 +476,14 @@ InteractionManager.prototype.onMouseDown = function (event)
 /**
  * Processes the result of the mouse down check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the dispay object
  * @private
  */
 InteractionManager.prototype.processMouseDown = function ( displayObject, hit )
 {
     var e = this.mouse.originalEvent;
-
+    
     var isRightButton = e.button === 2 || e.which === 3;
 
     if(hit)
@@ -470,7 +516,7 @@ InteractionManager.prototype.onMouseUp = function (event)
 /**
  * Processes the result of the mouse up check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
@@ -534,14 +580,19 @@ InteractionManager.prototype.onMouseMove = function (event)
 /**
  * Processes the result of the mouse move check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
 InteractionManager.prototype.processMouseMove = function ( displayObject, hit )
 {
-    this.dispatchEvent( displayObject, 'mousemove', this.eventData);
     this.processMouseOverOut(displayObject, hit);
+    
+    // only display on mouse over
+    if(!this.moveWhenInside || hit)
+    {
+        this.dispatchEvent( displayObject, 'mousemove', this.eventData);
+    }
 };
 
 
@@ -570,7 +621,7 @@ InteractionManager.prototype.onMouseOut = function (event)
 /**
  * Processes the result of the mouse over/out check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
@@ -636,13 +687,12 @@ InteractionManager.prototype.onTouchStart = function (event)
 /**
  * Processes the result of a touch check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
 InteractionManager.prototype.processTouchStart = function ( displayObject, hit )
 {
-    //console.log("hit" + hit)
     if(hit)
     {
         displayObject._touchDown = true;
@@ -653,8 +703,8 @@ InteractionManager.prototype.processTouchStart = function ( displayObject, hit )
 
 /**
  * Is called when a touch ends on the renderer element
- * @param event {Event} The DOM event of a touch ending on the renderer view
  *
+ * @param event {Event} The DOM event of a touch ending on the renderer view
  */
 InteractionManager.prototype.onTouchEnd = function (event)
 {
@@ -688,7 +738,7 @@ InteractionManager.prototype.onTouchEnd = function (event)
 /**
  * Processes the result of the end of a touch and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
@@ -741,7 +791,7 @@ InteractionManager.prototype.onTouchMove = function (event)
         this.eventData.data = touchData;
         this.eventData.stopped = false;
 
-        this.processInteractive( touchData.global, this.renderer._lastObjectRendered, this.processTouchMove, false );
+        this.processInteractive( touchData.global, this.renderer._lastObjectRendered, this.processTouchMove, this.moveWhenInside );
 
         this.returnTouchData( touchData );
     }
@@ -750,14 +800,16 @@ InteractionManager.prototype.onTouchMove = function (event)
 /**
  * Processes the result of a touch move check and dispatches the event if need be
  *
- * @param displayObject {Container|Sprite|TilingSprite} The display object that was tested
+ * @param displayObject {PIXI.Container|PIXI.Sprite|PIXI.extras.TilingSprite} The display object that was tested
  * @param hit {boolean} the result of the hit test on the display object
  * @private
  */
 InteractionManager.prototype.processTouchMove = function ( displayObject, hit )
 {
-    hit = hit;
-    this.dispatchEvent( displayObject, 'touchmove', this.eventData);
+    if(!this.moveWhenInside || hit)
+    {
+        this.dispatchEvent( displayObject, 'touchmove', this.eventData);
+    }
 };
 
 /**
@@ -794,7 +846,7 @@ InteractionManager.prototype.getTouchData = function (touchEvent)
 /**
  * Returns an interaction data object to the internal pool
  *
- * @param touchData {InteractionData} The touch data object we want to return to the pool
+ * @param touchData {PIXI.interaction.InteractionData} The touch data object we want to return to the pool
  *
  * @private
  */
@@ -805,6 +857,7 @@ InteractionManager.prototype.returnTouchData = function ( touchData )
 
 /**
  * Destroys the interaction manager
+ *
  */
 InteractionManager.prototype.destroy = function () {
     this.removeEvents();

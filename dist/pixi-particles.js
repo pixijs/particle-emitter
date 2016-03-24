@@ -1,13 +1,99 @@
-/*! PixiParticles 1.5.1 */
+/*! pixi-particles 1.6.0 */
 /**
-*  @module Pixi Particles
-*  @namespace cloudkid
-*/
-(function(undefined) {
+ * @module Pixi Particles
+ * @namespace window
+ */
+/**
+ * Add methods to Array
+ * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+ * @class Array
+ */
+
+/**
+ * Shuffles the array
+ * @method shuffle
+ * @return {Array} The array, for chaining calls.
+ */
+if(!Array.prototype.shuffle)
+{
+	// In EcmaScript 5 specs and browsers that support it you can use the Object.defineProperty
+	// to make it not enumerable set the enumerable property to false
+	Object.defineProperty(Array.prototype, 'shuffle', {
+		enumerable: false,
+		writable:false,
+		value: function() {
+			for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
+			return this;
+		}
+	});
+}
+
+/**
+ * Get a random item from an array
+ * @method random
+ * @return {*} The random item
+ */
+if(!Array.prototype.random)
+{
+	Object.defineProperty(Array.prototype, 'random', {
+		enumerable: false,
+		writable: false,
+		value: function() {
+			return this[Math.floor(Math.random() * this.length)];
+		}
+	});
+}
+/**
+ * @module Pixi Particles
+ * @namespace PIXI.particles
+ */
+(function(){
 
 	"use strict";
 
-	window.cloudkid = window.cloudkid || {};
+	// Check for window, fallback to global
+	var global = typeof window !== 'undefined' ? window : GLOBAL;
+
+	// Define PIXI Flash namespace
+	var particles = {};
+
+	// Export for Node-compatible environments like Electron
+	if (typeof module !== 'undefined' && module.exports)
+	{
+		// Attempt to require the pixi module
+		if (typeof PIXI === 'undefined')
+		{
+			// Include the Pixi.js module
+			require('pixi.js');
+		}
+
+		// Export the module
+		module.exports = particles;
+	}
+	// If we're in the browser make sure PIXI is available 
+	else if (typeof PIXI === 'undefined')
+	{
+		if (true)
+		{
+			throw "pixi-particles requires pixi.js to be loaded first";
+		}
+		else
+		{
+			throw "Requires pixi.js";
+		}
+	}
+
+	// Assign to global namespace
+	global.PIXI.particles = particles;
+
+}());
+/**
+*  @module Pixi Particles
+*  @namespace PIXI.particles
+*/
+(function(PIXI, undefined) {
+
+	"use strict";
 	
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 
@@ -21,7 +107,7 @@
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.5.1"'
+	// avoid the string replacement of '"1.6.0"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
@@ -180,62 +266,18 @@
 		return BLEND_MODES[name] || BLEND_MODES.NORMAL;
 	};
 
-	cloudkid.ParticleUtils = ParticleUtils;
+	PIXI.particles.ParticleUtils = ParticleUtils;
 
-	/**
-	 * @module Pixi Particles
-	 * @namespace window
-	 */
-	/**
-	 * Add methods to Array
-	 * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
-	 * @class Array.prototype
-	 */
-
-	/**
-	 * Shuffles the array
-	 * @method shuffle
-	 * @return {Array} The array, for chaining calls.
-	 */
-	if(!Array.prototype.shuffle)
-	{
-		// In EcmaScript 5 specs and browsers that support it you can use the Object.defineProperty
-		// to make it not enumerable set the enumerable property to false
-		Object.defineProperty(Array.prototype, 'shuffle', {
-			enumerable: false,
-			writable:false,
-			value: function() {
-				for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
-				return this;
-			}
-		});
-	}
-
-	/**
-	 * Get a random item from an array
-	 * @method random
-	 * @return {*} The random item
-	 */
-	if(!Array.prototype.random)
-	{
-		Object.defineProperty(Array.prototype, 'random', {
-			enumerable: false,
-			writable: false,
-			value: function() {
-				return this[Math.floor(Math.random() * this.length)];
-			}
-		});
-	}
-}());
+}(PIXI));
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils;
+	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
 	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
@@ -320,7 +362,7 @@
 		 * Acceleration to apply to the particle.
 		 * @property {PIXI.Point} accleration
 		 */
-		this.acceleration = null;
+		this.acceleration = new PIXI.Point();
 		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
@@ -401,6 +443,13 @@
 		 * @private
 		 */
 		this._doSpeed = false;
+		/**
+		 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
+		 * and _doSpeed gets priority.
+		 * @property {Boolean} _doAcceleration
+		 * @private
+		 */
+		this._doAcceleration = false;
 		/**
 		 * If color should be interpolated at all.
 		 * @property {Boolean} _doColor
@@ -491,8 +540,9 @@
 		this._doSpeed = this.startSpeed != this.endSpeed;
 		this._doScale = this.startScale != this.endScale;
 		this._doColor = !!this.endColor;
+		this._doAcceleration = this.acceleration.x !== 0 || this.acceleration.y !== 0;
 		//_doNormalMovement can be cancelled by subclasses
-		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this.acceleration;
+		this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this._doAcceleration;
 		//save our lerp helper
 		this._oneOverLife = 1 / this.maxLife;
 		//set the inital color
@@ -584,7 +634,7 @@
 				ParticleUtils.normalize(this.velocity);
 				ParticleUtils.scaleBy(this.velocity, speed);
 			}
-			else if(this.acceleration)
+			else if(this._doAcceleration)
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
@@ -683,20 +733,20 @@
 		return extraData;
 	};
 
-	cloudkid.Particle = Particle;
+	PIXI.particles.Particle = Particle;
 
-}(cloudkid));
+}(PIXI));
 
 /**
 *  @module Pixi Particles
-*  @namespace cloudkid
+*  @namespace PIXI.particles
 */
-(function(cloudkid, undefined) {
+(function(PIXI, undefined) {
 
 	"use strict";
 
-	var ParticleUtils = cloudkid.ParticleUtils,
-		Particle = cloudkid.Particle,
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle,
 		ParticleContainer = PIXI.ParticleContainer;
 
 	/**
@@ -1157,7 +1207,7 @@
 			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
 		}
 		else
-			this.acceleration = null;
+			this.acceleration = new PIXI.Point();
 		//set up the scale
 		if (config.scale)
 		{
@@ -1492,7 +1542,8 @@
 						p.endAlpha = this.endAlpha;
 						p.startSpeed = this.startSpeed;
 						p.endSpeed = this.endSpeed;
-						p.acceleration = this.acceleration;
+						p.acceleration.x = this.acceleration.x;
+						p.acceleration.y = this.acceleration.y;
 						if(this.minimumScaleMultiplier != 1)
 						{
 							var rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
@@ -1758,6 +1809,74 @@
 			this.startColor = this.endColor = this.customEase = null;
 	};
 
-	cloudkid.Emitter = Emitter;
+	PIXI.particles.Emitter = Emitter;
 
-}(cloudkid));
+}(PIXI));
+
+(function(undefined){
+	
+	// Check for window, fallback to global
+	var global = typeof window !== 'undefined' ? window : GLOBAL;
+	
+	// Deprecate support for the cloudkid namespace
+	if (typeof cloudkid === "undefined")
+	{
+		global.cloudkid = {};
+	}
+
+	//  Get classes from the PIXI.particles namespace
+	Object.defineProperties(global.cloudkid, 
+	{
+		AnimatedParticle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.AnimatedParticle;
+			}
+		},
+		Emitter: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.Emitter;
+			}
+		},
+		Particle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.Particle;
+			}
+		},
+		ParticleUtils: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.ParticleUtils;
+			}
+		},
+		PathParticle: {
+			get: function()
+			{
+				if (true)
+				{
+					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
+				}
+				return PIXI.particles.PathParticle;
+			}
+		}
+	});
+
+}());

@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/main.js - pixi-particles</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+	    <img alt="pixi-particles" src="https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png" style="max-height: 65%;" title="pixi-particles">
+            pixi-particles
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>1.6.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Animated Particle", "modules/Path Particle", "modules/Pixi Particles"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+	        <h3>APIs</h3>
+	        <div id="sidebar">
+	            <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+	                <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+	                <li><a href="#modules" data-toggle="tab">Modules</a></li>
+	            </ul>
+	    
+	            <div id="api-tabview-filter">
+	                <input type="search" placeholder="Type to filter APIs">
+	            </div>
+	    
+	            <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+	                <div class="tab-pane active" id="classes">
+	                    <ul id="api-classes" class="nav nav-list">
+	                            <li><a href="../classes/PIXI.particles.AnimatedParticle.html">PIXI.particles.AnimatedParticle</a></li>
+	                            <li><a href="../classes/PIXI.particles.Emitter.html">PIXI.particles.Emitter</a></li>
+	                            <li><a href="../classes/PIXI.particles.Particle.html">PIXI.particles.Particle</a></li>
+	                            <li><a href="../classes/PIXI.particles.ParticleUtils.html">PIXI.particles.ParticleUtils</a></li>
+	                            <li><a href="../classes/PIXI.particles.PathParticle.html">PIXI.particles.PathParticle</a></li>
+	                            <li><a href="../classes/window.Array.html">window.Array</a></li>
+	                    </ul>
+	                </div>
+	    
+	                <div class="tab-pane" id="modules">
+	                    <ul id="api-modules" class="nav nav-list">
+	                            <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
+	                            <li><a href="../modules/Path Particle.html">Path Particle</a></li>
+	                            <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>src/main.js <small>File</small></h1>
+</div>
+
+<div class="file">
+    <pre class="prettyprint linenums">
+/**
+ * @module Pixi Particles
+ * @namespace PIXI.particles
+ */
+(function(){
+
+	&quot;use strict&quot;;
+
+	// Check for window, fallback to global
+	var global = typeof window !== &#x27;undefined&#x27; ? window : GLOBAL;
+
+	// Define PIXI Flash namespace
+	var particles = {};
+
+	// Export for Node-compatible environments like Electron
+	if (typeof module !== &#x27;undefined&#x27; &amp;&amp; module.exports)
+	{
+		// Attempt to require the pixi module
+		if (typeof PIXI === &#x27;undefined&#x27;)
+		{
+			// Include the Pixi.js module
+			require(&#x27;pixi.js&#x27;);
+		}
+
+		// Export the module
+		module.exports = particles;
+	}
+	// If we&#x27;re in the browser make sure PIXI is available 
+	else if (typeof PIXI === &#x27;undefined&#x27;)
+	{
+		if (DEBUG)
+		{
+			throw &quot;pixi-particles requires pixi.js to be loaded first&quot;;
+		}
+		else
+		{
+			throw &quot;Requires pixi.js&quot;;
+		}
+	}
+
+	// Assign to global namespace
+	global.PIXI.particles = particles;
+
+}());
+    </pre>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>

@@ -11,7 +11,7 @@ var CONST = {
      * @constant
      * @property {string} VERSION
      */
-    VERSION: require('../../package.json').version,
+    VERSION: '__VERSION__',
 
     /**
      * @property {number} PI_2 - Two Pi
@@ -189,7 +189,8 @@ var CONST = {
         transparent: false,
         backgroundColor: 0x000000,
         clearBeforeRender: true,
-        preserveDrawingBuffer: false
+        preserveDrawingBuffer: false,
+        roundPixels: false
     },
 
     /**

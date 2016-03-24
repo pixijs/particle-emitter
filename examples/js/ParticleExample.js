@@ -114,15 +114,15 @@
 			else
 				emitterContainer = new PIXI.Container();
 			stage.addChild(emitterContainer);
-			emitter = new cloudkid.Emitter(
+			emitter = new PIXI.particles.Emitter(
 				emitterContainer,
 				art,
 				config
 			);
 			if(type == "path")
-				emitter.particleConstructor = cloudkid.PathParticle;
+				emitter.particleConstructor = PIXI.particles.PathParticle;
 			else if(type == "anim")
-				emitter.particleConstructor = cloudkid.AnimatedParticle;
+				emitter.particleConstructor = PIXI.particles.AnimatedParticle;
 
 			// Center on the stage
 			emitter.updateOwnerPos(window.innerWidth / 2, window.innerHeight / 2);

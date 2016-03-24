@@ -1,9 +1,10 @@
 {
     "project": {
-        "name": "PixiParticles",
+        "name": "pixi-particles",
         "description": "Particle system for PixiJS",
-        "version": "1.5.1",
-        "url": "http://github.com/CloudKidStudio/PixiParticles"
+        "version": "1.6.0",
+        "url": "http://github.com/pixijs/pixi-particles",
+        "logo": "https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png"
     },
     "files": {
         "src/AnimatedParticle.js": {
@@ -12,48 +13,44 @@
                 "Animated Particle": 1
             },
             "classes": {
-                "cloudkid.AnimatedParticle": 1
+                "PIXI.particles.AnimatedParticle": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
             }
         },
         "src/Emitter.js": {
             "name": "src/Emitter.js",
-            "modules": {
-                "Pixi Particles": 1
-            },
+            "modules": {},
             "classes": {
-                "cloudkid.Emitter": 1
+                "PIXI.particles.Emitter": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
             }
         },
         "src/Particle.js": {
             "name": "src/Particle.js",
             "modules": {},
             "classes": {
-                "cloudkid.Particle": 1
+                "PIXI.particles.Particle": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
             }
         },
         "src/ParticleUtils.js": {
             "name": "src/ParticleUtils.js",
             "modules": {},
             "classes": {
-                "window.ParticleUtils": 1,
-                "window.Array.prototype": 1
+                "PIXI.particles.ParticleUtils": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1,
-                "window": 1
+                "PIXI.particles": 1
             }
         },
         "src/PathParticle.js": {
@@ -62,11 +59,33 @@
                 "Path Particle": 1
             },
             "classes": {
-                "cloudkid.PathParticle": 1
+                "PIXI.particles.PathParticle": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
+            }
+        },
+        "src/main.js": {
+            "name": "src/main.js",
+            "modules": {
+                "Pixi Particles": 1
+            },
+            "classes": {},
+            "fors": {},
+            "namespaces": {
+                "PIXI.particles": 1
+            }
+        },
+        "src/polyfills.js": {
+            "name": "src/polyfills.js",
+            "modules": {},
+            "classes": {
+                "window.Array": 1
+            },
+            "fors": {},
+            "namespaces": {
+                "window": 1
             }
         }
     },
@@ -75,11 +94,11 @@
             "name": "Animated Particle",
             "submodules": {},
             "classes": {
-                "cloudkid.AnimatedParticle": 1
+                "PIXI.particles.AnimatedParticle": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
             },
             "tag": "module",
             "file": "src/AnimatedParticle.js",
@@ -89,29 +108,29 @@
             "name": "Pixi Particles",
             "submodules": {},
             "classes": {
-                "cloudkid.Emitter": 1,
-                "cloudkid.Particle": 1,
-                "window.ParticleUtils": 1,
-                "window.Array.prototype": 1
+                "PIXI.particles.Emitter": 1,
+                "PIXI.particles.Particle": 1,
+                "PIXI.particles.ParticleUtils": 1,
+                "window.Array": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1,
+                "PIXI.particles": 1,
                 "window": 1
             },
             "tag": "module",
-            "file": "src/ParticleUtils.js",
-            "line": 188
+            "file": "src/polyfills.js",
+            "line": 5
         },
         "Path Particle": {
             "name": "Path Particle",
             "submodules": {},
             "classes": {
-                "cloudkid.PathParticle": 1
+                "PIXI.particles.PathParticle": 1
             },
             "fors": {},
             "namespaces": {
-                "cloudkid": 1
+                "PIXI.particles": 1
             },
             "tag": "module",
             "file": "src/PathParticle.js",
@@ -119,8 +138,8 @@
         }
     },
     "classes": {
-        "cloudkid.AnimatedParticle": {
-            "name": "cloudkid.AnimatedParticle",
+        "PIXI.particles.AnimatedParticle": {
+            "name": "PIXI.particles.AnimatedParticle",
             "shortname": "AnimatedParticle",
             "classitems": [],
             "plugins": [],
@@ -128,7 +147,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Animated Particle",
-            "namespace": "cloudkid",
+            "namespace": "PIXI.particles",
             "file": "src/AnimatedParticle.js",
             "line": 14,
             "description": "An individual particle image with an animation. Art data passed to the emitter must be\nformatted in a particular way for AnimatedParticle to be able to handle it:\n\n    {\n        //framerate is required. It is the animation speed of the particle in frames per\n        //second.\n        //A value of \"matchLife\" causes the animation to match the lifetime of an individual\n        //particle, instead of at a constant framerate. This causes the animation to play\n        //through one time, completing when the particle expires.\n        framerate: 6,\n        //loop is optional, and defaults to false.\n        loop: true,\n        //textures is required, and can be an array of any (non-zero) length.\n        textures: [\n            //each entry represents a single texture that should be used for one or more\n            //frames. Any strings will be converted to Textures with Texture.fromImage().\n            //Instances of PIXI.Texture will be used directly.\n            \"animFrame1.png\",\n            //entries can be an object with a 'count' property, telling AnimatedParticle to\n            //use that texture for 'count' frames sequentially.\n            {\n                texture: \"animFrame2.png\",\n                count: 3\n            },\n            \"animFrame3.png\"\n        ]\n    }",
@@ -141,8 +160,8 @@
                 }
             ]
         },
-        "cloudkid.Emitter": {
-            "name": "cloudkid.Emitter",
+        "PIXI.particles.Emitter": {
+            "name": "PIXI.particles.Emitter",
             "shortname": "Emitter",
             "classitems": [],
             "plugins": [],
@@ -150,7 +169,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Pixi Particles",
-            "namespace": "cloudkid",
+            "namespace": "PIXI.particles",
             "file": "src/Emitter.js",
             "line": 13,
             "description": "A particle emitter.",
@@ -175,8 +194,8 @@
                 }
             ]
         },
-        "cloudkid.Particle": {
-            "name": "cloudkid.Particle",
+        "PIXI.particles.Particle": {
+            "name": "PIXI.particles.Particle",
             "shortname": "Particle",
             "classitems": [],
             "plugins": [],
@@ -184,7 +203,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Pixi Particles",
-            "namespace": "cloudkid",
+            "namespace": "PIXI.particles",
             "file": "src/Particle.js",
             "line": 20,
             "description": "An individual particle image. You shouldn't have to deal with these.",
@@ -197,8 +216,8 @@
                 }
             ]
         },
-        "window.ParticleUtils": {
-            "name": "window.ParticleUtils",
+        "PIXI.particles.ParticleUtils": {
+            "name": "PIXI.particles.ParticleUtils",
             "shortname": "ParticleUtils",
             "classitems": [],
             "plugins": [],
@@ -206,28 +225,14 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Pixi Particles",
-            "namespace": "window",
+            "namespace": "PIXI.particles",
             "file": "src/ParticleUtils.js",
-            "line": 13,
+            "line": 11,
             "description": "Contains helper functions for particles and emitters to use.",
             "static": 1
         },
-        "window.Array.prototype": {
-            "name": "window.Array.prototype",
-            "shortname": "Array.prototype",
-            "classitems": [],
-            "plugins": [],
-            "extensions": [],
-            "plugin_for": [],
-            "extension_for": [],
-            "module": "Pixi Particles",
-            "namespace": "window",
-            "file": "src/ParticleUtils.js",
-            "line": 188,
-            "description": "Add methods to Array\nSee https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
-        },
-        "cloudkid.PathParticle": {
-            "name": "cloudkid.PathParticle",
+        "PIXI.particles.PathParticle": {
+            "name": "PIXI.particles.PathParticle",
             "shortname": "PathParticle",
             "classitems": [],
             "plugins": [],
@@ -235,7 +240,7 @@
             "plugin_for": [],
             "extension_for": [],
             "module": "Path Particle",
-            "namespace": "cloudkid",
+            "namespace": "PIXI.particles",
             "file": "src/PathParticle.js",
             "line": 12,
             "description": "An particle that follows a path defined by an algebraic expression, e.g. \"sin(x)\" or\n\"5x + 3\".\nTo use this class, the particle config must have a \"path\" string in the\n\"extraData\" parameter. This string should have \"x\" in it to represent movement (from the\nspeed settings of the particle). It may have numbers, parentheses, the four basic\noperations, and the following Math functions or properties (without the preceding \"Math.\"):\n\"pow\", \"sqrt\", \"abs\", \"floor\", \"round\", \"ceil\", \"E\", \"PI\", \"sin\", \"cos\", \"tan\", \"asin\",\n\"acos\", \"atan\", \"atan2\", \"log\".\nThe overall movement of the particle and the expression value become x and y positions for\nthe particle, respectively. The final position is rotated by the spawn rotation/angle of\nthe particle.\n\nSome example paths:\n\n\t\"sin(x/10) * 20\" // A sine wave path.\n\t\"cos(x/100) * 30\" // Particles curve counterclockwise (for medium speed/low lifetime particles)\n\t\"pow(x/10, 2) / 2\" // Particles curve clockwise (remember, +y is down).",
@@ -247,6 +252,20 @@
                     "type": "Emitter"
                 }
             ]
+        },
+        "window.Array": {
+            "name": "window.Array",
+            "shortname": "Array",
+            "classitems": [],
+            "plugins": [],
+            "extensions": [],
+            "plugin_for": [],
+            "extension_for": [],
+            "module": "Pixi Particles",
+            "namespace": "window",
+            "file": "src/polyfills.js",
+            "line": 5,
+            "description": "Add methods to Array\nSee https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty"
         }
     },
     "classitems": [
@@ -259,9 +278,9 @@
             "type": "Array",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -272,9 +291,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -285,9 +304,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -298,9 +317,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -311,9 +330,9 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -321,9 +340,9 @@
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -338,9 +357,9 @@
                     "type": "Array"
                 }
             ],
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -355,9 +374,9 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -365,9 +384,9 @@
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
@@ -387,9 +406,9 @@
                 "description": "The art, after any needed modifications.",
                 "type": "Array"
             },
-            "class": "cloudkid.AnimatedParticle",
+            "class": "PIXI.particles.AnimatedParticle",
             "module": "Animated Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -400,9 +419,9 @@
             "type": "Function",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -411,9 +430,9 @@
             "itemtype": "property",
             "name": "particleImages",
             "type": "Array",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -423,9 +442,9 @@
             "name": "startAlpha",
             "type": "Number",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -435,9 +454,9 @@
             "name": "endAlpha",
             "type": "Number",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -447,9 +466,9 @@
             "name": "startSpeed",
             "type": "Number",
             "default": "0",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -459,9 +478,9 @@
             "name": "endSpeed",
             "type": "Number",
             "default": "0",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -471,9 +490,9 @@
             "name": "acceleration",
             "type": "PIXI.Point",
             "default": "null",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -483,9 +502,9 @@
             "name": "startScale",
             "type": "Number",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -495,9 +514,9 @@
             "name": "endScale",
             "type": "Number",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -507,9 +526,9 @@
             "name": "minimumScaleMultiplier",
             "type": "Number",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -518,9 +537,9 @@
             "itemtype": "property",
             "name": "startColor",
             "type": "Array",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -529,9 +548,9 @@
             "itemtype": "property",
             "name": "endColor",
             "type": "Array",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -540,9 +559,9 @@
             "itemtype": "property",
             "name": "minLifetime",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -551,9 +570,9 @@
             "itemtype": "property",
             "name": "maxLifetime",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -562,9 +581,9 @@
             "itemtype": "property",
             "name": "minStartRotation",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -573,9 +592,9 @@
             "itemtype": "property",
             "name": "maxStartRotation",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -584,9 +603,9 @@
             "itemtype": "property",
             "name": "minRotationSpeed",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -595,9 +614,9 @@
             "itemtype": "property",
             "name": "maxRotationSpeed",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -606,9 +625,9 @@
             "itemtype": "property",
             "name": "particleBlendMode",
             "type": "Int",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -617,9 +636,9 @@
             "itemtype": "property",
             "name": "customEase",
             "type": "Function",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -628,9 +647,9 @@
             "itemtype": "property",
             "name": "extraData",
             "type": "Object",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -641,9 +660,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -653,9 +672,9 @@
             "name": "maxParticles",
             "type": "Int",
             "default": "1000",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -665,9 +684,9 @@
             "name": "emitterLifetime",
             "type": "Number",
             "default": "-1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -677,9 +696,9 @@
             "name": "spawnPos",
             "type": "PIXI.Point",
             "readonly": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -689,9 +708,9 @@
             "name": "spawnType",
             "type": "String",
             "readonly": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -702,9 +721,9 @@
             "type": "Function",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -713,9 +732,9 @@
             "itemtype": "property",
             "name": "spawnRect",
             "type": "PIXI.Rectangle",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -724,9 +743,9 @@
             "itemtype": "property",
             "name": "spawnCircle",
             "type": "PIXI.Circle",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -736,9 +755,9 @@
             "name": "particlesPerWave",
             "type": "Int",
             "default": "1",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -748,9 +767,9 @@
             "name": "particleSpacing",
             "type": "Number",
             "default": "0",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -760,9 +779,9 @@
             "name": "angleStart",
             "type": "Number",
             "default": "0",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -773,9 +792,9 @@
             "type": "Number",
             "default": "0",
             "readonly": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -786,9 +805,9 @@
             "type": "PIXI.Point",
             "default": "{x:0, y:0}",
             "readonly": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -799,9 +818,9 @@
             "type": "PIXI.Point",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -813,9 +832,9 @@
             "access": "private",
             "tagname": "",
             "default": "false",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -824,9 +843,9 @@
             "itemtype": "property",
             "name": "_posChanged",
             "type": "Boolean",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -837,9 +856,9 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -850,9 +869,9 @@
             "type": "PIXI.DisplayObjectContainer",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -861,9 +880,9 @@
             "itemtype": "property",
             "name": "addAtBack",
             "type": "Boolean",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -873,9 +892,9 @@
             "name": "particleCount",
             "type": "Number",
             "readonly": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -886,9 +905,9 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -899,9 +918,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -912,9 +931,9 @@
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -925,9 +944,9 @@
             "type": "Particle",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -938,9 +957,9 @@
             "type": "Particle",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -951,9 +970,9 @@
             "type": "Particle",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -964,9 +983,9 @@
             "type": "Object",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -977,9 +996,9 @@
             "type": "PIXI.Texture|Array|String",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -988,9 +1007,9 @@
             "itemtype": "property",
             "name": "frequency",
             "type": "Number",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -999,9 +1018,9 @@
             "itemtype": "property",
             "name": "particleConstructor",
             "type": "Function",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1010,9 +1029,9 @@
             "itemtype": "property",
             "name": "parent",
             "type": "PIXI.DisplayObjectContainer",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1032,9 +1051,9 @@
                     "type": "Object"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1049,9 +1068,9 @@
                     "type": "Particle"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1066,9 +1085,9 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1088,9 +1107,9 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1110,9 +1129,9 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1120,9 +1139,9 @@
             "description": "Prevents emitter position interpolation in the next update.\nThis should be used if you made a major position change of your emitter's owner\nthat was not normal movement.",
             "itemtype": "method",
             "name": "resetPositionTracking",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1131,9 +1150,9 @@
             "itemtype": "property",
             "name": "emit",
             "type": "Boolean",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
@@ -1148,13 +1167,13 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 892,
+            "line": 893,
             "description": "Positions a particle for a point type emitter.",
             "itemtype": "method",
             "name": "_spawnPoint",
@@ -1182,13 +1201,13 @@
                     "type": "Int"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 914,
+            "line": 915,
             "description": "Positions a particle for a rectangle type emitter.",
             "itemtype": "method",
             "name": "_spawnRect",
@@ -1216,13 +1235,13 @@
                     "type": "Int"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 940,
+            "line": 941,
             "description": "Positions a particle for a circle type emitter.",
             "itemtype": "method",
             "name": "_spawnCircle",
@@ -1250,13 +1269,13 @@
                     "type": "Int"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 974,
+            "line": 975,
             "description": "Positions a particle for a ring type emitter.",
             "itemtype": "method",
             "name": "_spawnRing",
@@ -1284,13 +1303,13 @@
                     "type": "Int"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 1017,
+            "line": 1018,
             "description": "Positions a particle for a burst type emitter.",
             "itemtype": "method",
             "name": "_spawnBurst",
@@ -1318,29 +1337,29 @@
                     "type": "Int"
                 }
             ],
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 1039,
+            "line": 1040,
             "description": "Kills all active particles immediately.",
             "itemtype": "method",
             "name": "cleanup",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Emitter.js",
-            "line": 1057,
+            "line": 1058,
             "description": "Destroys the emitter and all of its particles.",
             "itemtype": "method",
             "name": "destroy",
-            "class": "cloudkid.Emitter",
+            "class": "PIXI.particles.Emitter",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1349,9 +1368,9 @@
             "itemtype": "property",
             "name": "emitter",
             "type": "Emitter",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1360,9 +1379,9 @@
             "itemtype": "property",
             "name": "velocity",
             "type": "PIXI.Point",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1371,9 +1390,9 @@
             "itemtype": "property",
             "name": "maxLife",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1382,9 +1401,9 @@
             "itemtype": "property",
             "name": "age",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1393,9 +1412,9 @@
             "itemtype": "property",
             "name": "ease",
             "type": "Function",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1404,9 +1423,9 @@
             "itemtype": "property",
             "name": "extraData",
             "type": "Object",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1415,9 +1434,9 @@
             "itemtype": "property",
             "name": "startAlpha",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1426,9 +1445,9 @@
             "itemtype": "property",
             "name": "endAlpha",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1437,9 +1456,9 @@
             "itemtype": "property",
             "name": "startSpeed",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1448,9 +1467,9 @@
             "itemtype": "property",
             "name": "endSpeed",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1459,9 +1478,9 @@
             "itemtype": "property",
             "name": "accleration",
             "type": "PIXI.Point",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1470,9 +1489,9 @@
             "itemtype": "property",
             "name": "startScale",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1481,9 +1500,9 @@
             "itemtype": "property",
             "name": "endScale",
             "type": "Number",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1492,9 +1511,9 @@
             "itemtype": "property",
             "name": "startColor",
             "type": "Array",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1505,9 +1524,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1518,9 +1537,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1531,9 +1550,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1542,9 +1561,9 @@
             "itemtype": "property",
             "name": "endColor",
             "type": "Array",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1555,9 +1574,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1568,9 +1587,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1581,9 +1600,9 @@
             "type": "Uint",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1594,9 +1613,9 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1607,9 +1626,9 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
@@ -1620,100 +1639,113 @@
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
             "line": 175,
+            "description": "If acceleration should be handled at all. _doSpeed is mutually exclusive with this,\nand _doSpeed gets priority.",
+            "itemtype": "property",
+            "name": "_doAcceleration",
+            "type": "Boolean",
+            "access": "private",
+            "tagname": "",
+            "class": "PIXI.particles.Particle",
+            "module": "Pixi Particles",
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 182,
             "description": "If color should be interpolated at all.",
             "itemtype": "property",
             "name": "_doColor",
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 181,
+            "line": 188,
             "description": "If normal movement should be handled. Subclasses wishing to override movement\ncan set this to false in init().",
             "itemtype": "property",
             "name": "_doNormalMovement",
             "type": "Boolean",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 188,
+            "line": 195,
             "description": "One divided by the max life of the particle, saved for slightly faster math.",
             "itemtype": "property",
             "name": "_oneOverLife",
             "type": "Number",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 195,
+            "line": 202,
             "description": "Reference to the next particle in the list.",
             "itemtype": "property",
             "name": "next",
             "type": "Particle",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 202,
+            "line": 209,
             "description": "Reference to the previous particle in the list.",
             "itemtype": "property",
             "name": "prev",
             "type": "Particle",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 221,
+            "line": 228,
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 226,
+            "line": 233,
             "description": "A reference to init, so that subclasses can access it without the penalty of Function.call()",
             "itemtype": "method",
             "name": "Particle_init",
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 275,
+            "line": 283,
             "description": "Sets the texture for the particle. This can be overridden to allow\nfor an animated particle.",
             "itemtype": "method",
             "name": "applyArt",
@@ -1724,13 +1756,13 @@
                     "type": "PIXI.Texture"
                 }
             ],
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 294,
+            "line": 302,
             "description": "Updates the particle.",
             "itemtype": "method",
             "name": "update",
@@ -1745,13 +1777,13 @@
                 "description": "The standard interpolation multiplier (0-1) used for all relevant particle\n                  properties. A value of -1 means the particle died of old age instead.",
                 "type": "Number"
             },
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 301,
+            "line": 309,
             "description": "A reference to update so that subclasses can access the original without the overhead\nof Function.call().",
             "itemtype": "method",
             "name": "Particle_update",
@@ -1768,33 +1800,33 @@
             },
             "access": "private",
             "tagname": "",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 387,
+            "line": 395,
             "description": "Kills the particle, removing it from the display list\nand telling the emitter to recycle it.",
             "itemtype": "method",
             "name": "kill",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 397,
+            "line": 405,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 407,
+            "line": 415,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time.",
             "itemtype": "method",
             "name": "parseArt",
@@ -1810,13 +1842,13 @@
                 "description": "The art, after any needed modifications.",
                 "type": "Array"
             },
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/Particle.js",
-            "line": 444,
+            "line": 452,
             "description": "Parses extra emitter data to ensure it is set up for this particle class.\nParticle does nothing to the extra data.",
             "itemtype": "method",
             "name": "parseData",
@@ -1832,13 +1864,13 @@
                 "description": "The parsed extra data.",
                 "type": "Object"
             },
-            "class": "cloudkid.Particle",
+            "class": "PIXI.particles.Particle",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 30,
+            "line": 28,
             "description": "Rotates a point by a given angle.",
             "itemtype": "method",
             "name": "rotatePoint",
@@ -1855,13 +1887,13 @@
                 }
             ],
             "static": 1,
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 49,
+            "line": 47,
             "description": "Combines separate color components (0-255) into a single uint color.",
             "itemtype": "method",
             "name": "combineRGBComponents",
@@ -1887,13 +1919,13 @@
                 "type": "Uint"
             },
             "static": 1,
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 63,
+            "line": 61,
             "description": "Reduces the point to a length of 1.",
             "itemtype": "method",
             "name": "normalize",
@@ -1905,13 +1937,13 @@
                     "type": "PIXI.Point"
                 }
             ],
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 76,
+            "line": 74,
             "description": "Multiplies the x and y values of this point by a value.",
             "itemtype": "method",
             "name": "scaleBy",
@@ -1928,13 +1960,13 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 89,
+            "line": 87,
             "description": "Returns the length (or magnitude) of this point.",
             "itemtype": "method",
             "name": "length",
@@ -1949,13 +1981,13 @@
             "return": {
                 "description": "The length of this point."
             },
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 101,
+            "line": 99,
             "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\",\n\"AARRGGBB\", or \"RRGGBB\" to an array of ints of 0-255 or Numbers from 0-1, as\n[r, g, b, (a)].",
             "itemtype": "method",
             "name": "hexToRGB",
@@ -1975,13 +2007,13 @@
                 "description": "The array of numeric color values."
             },
             "static": 1,
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 135,
+            "line": 133,
             "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated\nby the related tool at http://www.greensock.com/customease/.",
             "itemtype": "method",
             "name": "generateEase",
@@ -1997,13 +2029,13 @@
                 "type": "Function"
             },
             "static": 1,
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 166,
+            "line": 164,
             "description": "Gets a blend mode, ensuring that it is valid.",
             "itemtype": "method",
             "name": "getBlendMode",
@@ -2019,37 +2051,9 @@
                 "type": "Int"
             },
             "static": 1,
-            "class": "cloudkid.ParticleUtils",
+            "class": "PIXI.particles.ParticleUtils",
             "module": "Pixi Particles",
-            "namespace": "cloudkid"
-        },
-        {
-            "file": "src/ParticleUtils.js",
-            "line": 194,
-            "description": "Shuffles the array",
-            "itemtype": "method",
-            "name": "shuffle",
-            "return": {
-                "description": "The array, for chaining calls.",
-                "type": "Array"
-            },
-            "class": "window.Array.prototype",
-            "module": "Pixi Particles",
-            "namespace": "window"
-        },
-        {
-            "file": "src/ParticleUtils.js",
-            "line": 213,
-            "description": "Get a random item from an array",
-            "itemtype": "method",
-            "name": "random",
-            "return": {
-                "description": "The random item",
-                "type": "*"
-            },
-            "class": "window.Array.prototype",
-            "module": "Pixi Particles",
-            "namespace": "window"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2058,9 +2062,9 @@
             "itemtype": "property",
             "name": "path",
             "type": "Function",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2069,9 +2073,9 @@
             "itemtype": "property",
             "name": "initialRotation",
             "type": "Number",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2080,9 +2084,9 @@
             "itemtype": "property",
             "name": "initialPosition",
             "type": "PIXI.Point",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2091,9 +2095,9 @@
             "itemtype": "property",
             "name": "movement",
             "type": "Number",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2105,9 +2109,9 @@
             "access": "private",
             "tagname": "",
             "static": 1,
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2115,9 +2119,9 @@
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2139,9 +2143,9 @@
                 "description": "The path function - takes x, outputs y.",
                 "type": "Function"
             },
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2156,9 +2160,9 @@
                     "type": "Number"
                 }
             ],
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2166,9 +2170,9 @@
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2188,9 +2192,9 @@
                 "description": "The art, after any needed modifications.",
                 "type": "Array"
             },
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
         },
         {
             "file": "src/PathParticle.js",
@@ -2210,9 +2214,37 @@
                 "description": "The parsed extra data.",
                 "type": "Object"
             },
-            "class": "cloudkid.PathParticle",
+            "class": "PIXI.particles.PathParticle",
             "module": "Path Particle",
-            "namespace": "cloudkid"
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/polyfills.js",
+            "line": 11,
+            "description": "Shuffles the array",
+            "itemtype": "method",
+            "name": "shuffle",
+            "return": {
+                "description": "The array, for chaining calls.",
+                "type": "Array"
+            },
+            "class": "window.Array",
+            "module": "Pixi Particles",
+            "namespace": "window"
+        },
+        {
+            "file": "src/polyfills.js",
+            "line": 30,
+            "description": "Get a random item from an array",
+            "itemtype": "method",
+            "name": "random",
+            "return": {
+                "description": "The random item",
+                "type": "*"
+            },
+            "class": "window.Array",
+            "module": "Pixi Particles",
+            "namespace": "window"
         }
     ],
     "warnings": []

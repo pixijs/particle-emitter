@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>PIXI.particles.ParticleUtils - pixi-particles</title>
+    <link rel="stylesheet" href="">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="stylesheet" href="../assets/css/custom.css">
+    <link rel="stylesheet" href="../assets/vendor/bootstrap/css/bootstrap.css">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+</head>
+<body class="yui3-skin-sam">
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <h1 class="brand" style="padding: 10px 16px 10px; height: 20px; line-height: 20px; margin-left: 0;">
+	    <img alt="pixi-particles" src="https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png" style="max-height: 65%;" title="pixi-particles">
+            pixi-particles
+        </h1>
+	<div class="nav">
+            <li class="divider-vertical"></li>
+            <li>
+                <p class="navbar-text">
+                    API Docs for Version: <b>1.6.0</b>
+                </p>
+            </li>
+        </div>
+        <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Animated Particle", "modules/Path Particle", "modules/Pixi Particles"]'>
+        </form>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="span3">
+	    <div>
+	        <h3>APIs</h3>
+	        <div id="sidebar">
+	            <ul id="main-nav" class="nav nav-tabs" style="margin-bottom:0;">
+	                <li class="active"><a href="#classes" data-toggle="tab">Classes</a></li>
+	                <li><a href="#modules" data-toggle="tab">Modules</a></li>
+	            </ul>
+	    
+	            <div id="api-tabview-filter">
+	                <input type="search" placeholder="Type to filter APIs">
+	            </div>
+	    
+	            <div class="tab-content" style="border: 1px solid #DDD; border-top:0;">
+	                <div class="tab-pane active" id="classes">
+	                    <ul id="api-classes" class="nav nav-list">
+	                            <li><a href="../classes/PIXI.particles.AnimatedParticle.html">PIXI.particles.AnimatedParticle</a></li>
+	                            <li><a href="../classes/PIXI.particles.Emitter.html">PIXI.particles.Emitter</a></li>
+	                            <li><a href="../classes/PIXI.particles.Particle.html">PIXI.particles.Particle</a></li>
+	                            <li><a href="../classes/PIXI.particles.ParticleUtils.html">PIXI.particles.ParticleUtils</a></li>
+	                            <li><a href="../classes/PIXI.particles.PathParticle.html">PIXI.particles.PathParticle</a></li>
+	                            <li><a href="../classes/window.Array.html">window.Array</a></li>
+	                    </ul>
+	                </div>
+	    
+	                <div class="tab-pane" id="modules">
+	                    <ul id="api-modules" class="nav nav-list">
+	                            <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
+	                            <li><a href="../modules/Path Particle.html">Path Particle</a></li>
+	                            <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
+	                    </ul>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+        </div>
+        <div class="span9">
+                <form id="options-form" class="form-inline pull-right">
+                    Show:
+                    <label for="api-show-inherited" class="checkbox">
+                        <input type="checkbox" id="api-show-inherited" checked>
+                        Inherited
+                    </label>
+            
+                    <label for="api-show-protected" class="checkbox">
+                        <input type="checkbox" id="api-show-protected">
+                        Protected
+                    </label>
+            
+                    <label for="api-show-private" class="checkbox">
+                        <input type="checkbox" id="api-show-private">
+                        Private
+                    </label>
+                    <label for="api-show-deprecated" class="checkbox">
+                        <input type="checkbox" id="api-show-deprecated">
+                        Deprecated
+                    </label>
+            
+                </form>
+            
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+<div class="page-header">
+    <h1>PIXI.particles.ParticleUtils <small>Class</small></h1>
+</div>
+
+<div class="well well-small">
+
+
+        <div class="foundat">
+            Defined in: <a href="../files/src_ParticleUtils.js.html#l11"><code>src&#x2F;ParticleUtils.js:11</code></a>
+        </div>
+
+            Module: <a href="../modules/Pixi Particles.html">Pixi Particles</a>
+
+</div>
+
+
+<div class="well well-small">
+    <p>Contains helper functions for particles and emitters to use.</p>
+
+</div>
+
+
+<div>
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#index">Index</a></li>
+
+            <li><a data-toggle="tab" href="#methods">Methods</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div id="index" class="tab-pane active">
+            <h2 class="off-left">Item Index</h2>
+
+                <div class="index-section methods">
+                    <h3>Methods</h3>
+
+                    <ul class="index-list methods">
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_combineRGBComponents" data-tablink="combineRGBComponents">combineRGBComponents</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_generateEase" data-tablink="generateEase">generateEase</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_getBlendMode" data-tablink="getBlendMode">getBlendMode</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_hexToRGB" data-tablink="hexToRGB">hexToRGB</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_length" data-tablink="length">length</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_normalize" data-tablink="normalize">normalize</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_rotatePoint" data-tablink="rotatePoint">rotatePoint</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                            <li class="index-item method">
+                                <a href="#" data-tabid="#methods" data-anchor="#method_scaleBy" data-tablink="scaleBy">scaleBy</a>
+
+                                    <span class="flag static">static</span>
+                            </li>
+                    </ul>
+                </div>
+
+
+
+        </div>
+
+            <div id="methods" class="tab-pane">
+                <h2 class="off-left">Methods</h2>
+
+                    <div id="method_combineRGBComponents" class="method item">
+                        <h3 class="name"><code>combineRGBComponents</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>r</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>g</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>b</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type">Uint</span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l47"><code>src&#x2F;ParticleUtils.js:47</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Combines separate color components (0-255) into a single uint color.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">r</code>
+                                            <span class="type">Uint</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The red value of the color</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">g</code>
+                                            <span class="type">Uint</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The green value of the color</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">b</code>
+                                            <span class="type">Uint</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The blue value of the color</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                            <span class="type">Uint</span>:
+                                        <p>The color in the form of 0xRRGGBB</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_generateEase" class="method item">
+                        <h3 class="name"><code>generateEase</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>segments</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l133"><code>src&#x2F;ParticleUtils.js:133</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
+                    by the related tool at <a href="http://www.greensock.com/customease/">http://www.greensock.com/customease/</a>.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">segments</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>An array of segments, as created by
+                    <a href="http://www.greensock.com/customease/">http://www.greensock.com/customease/</a>.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Function" class="crosslink external" target="_blank">Function</a></span>:
+                                        <p>A function that calculates the percentage of change at
+                    a given point in time (0-1 inclusive).</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_getBlendMode" class="method item">
+                        <h3 class="name"><code>getBlendMode</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>name</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type">Int</span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l164"><code>src&#x2F;ParticleUtils.js:164</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Gets a blend mode, ensuring that it is valid.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">name</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The name of the blend mode to get.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                            <span class="type">Int</span>:
+                                        <p>The blend mode as specified in the PIXI.blendModes enumeration.</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_hexToRGB" class="method item">
+                        <h3 class="name"><code>hexToRGB</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>color</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>output</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type"></span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l99"><code>src&#x2F;ParticleUtils.js:99</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+                    "AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+                    [r, g, b, (a)].</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">color</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/String" class="crosslink external" target="_blank">String</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The input color string.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">output</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Array" class="crosslink external" target="_blank">Array</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>An array to put the output in. If omitted, a new array is created.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                        <p>The array of numeric color values.</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_length" class="method item">
+                        <h3 class="name"><code>length</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>point</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                            <span class="returns-inline">
+                                <span class="type"></span>
+                            </span>
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l87"><code>src&#x2F;ParticleUtils.js:87</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Returns the length (or magnitude) of this point.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">point</code>
+                                            <span class="type">PIXI.Point</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The point to measure length</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                            <div class="returns">
+                                <h4>Returns:</h4>
+                    
+                                <div class="returns-description">
+                                        <p>The length of this point.</p>
+                    
+                                </div>
+                            </div>
+                    
+                    </div>
+                    <div id="method_normalize" class="method item">
+                        <h3 class="name"><code>normalize</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>point</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l61"><code>src&#x2F;ParticleUtils.js:61</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Reduces the point to a length of 1.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">point</code>
+                                            <span class="type">PIXI.Point</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The point to normalize</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_rotatePoint" class="method item">
+                        <h3 class="name"><code>rotatePoint</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>angle</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>p</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l28"><code>src&#x2F;ParticleUtils.js:28</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Rotates a point by a given angle.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">angle</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The angle to rotate by in degrees</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">p</code>
+                                            <span class="type">PIXI.Point</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The point to rotate around 0,0.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+                    <div id="method_scaleBy" class="method item">
+                        <h3 class="name"><code>scaleBy</code></h3>
+                    
+                            <div class="args">
+                                <span class="paren">(</span><ul class="args-list inline commas">
+                                    <li class="arg">
+                                            <code>point</code>
+                                    </li>
+                                    <li class="arg">
+                                            <code>value</code>
+                                    </li>
+                                </ul><span class="paren">)</span>
+                            </div>
+                    
+                    
+                    
+                    
+                    
+                            <span class="flag static">static</span>
+                    
+                    
+                    
+                        <div class="meta">
+                                    <p>
+                                    Defined in
+                            <a href="../files/src_ParticleUtils.js.html#l74"><code>src&#x2F;ParticleUtils.js:74</code></a>
+                            </p>
+                    
+                    
+                    
+                        </div>
+                    
+                        <div class="description">
+                            <p>Multiplies the x and y values of this point by a value.</p>
+                    
+                        </div>
+                    
+                            <div class="params">
+                                <h4>Parameters:</h4>
+                    
+                                <ul class="params-list">
+                                    <li class="param">
+                                            <code class="param-name">point</code>
+                                            <span class="type">PIXI.Point</span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The point to scaleBy</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                    <li class="param">
+                                            <code class="param-name">value</code>
+                                            <span class="type"><a href="https://developer.mozilla.org/en/JavaScript/Reference/Global_Objects/Number" class="crosslink external" target="_blank">Number</a></span>
+                    
+                    
+                                        <div class="param-description">
+                                            <p>The value to scale by.</p>
+                    
+                                        </div>
+                    
+                                    </li>
+                                </ul>
+                            </div>
+                    
+                    
+                    </div>
+            </div>
+
+
+
+    </div>
+</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/jquery/jquery-1.8.2.min.js"></script>
+<script src="../assets/vendor/bootstrap/js/bootstrap.js"></script>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script src="../assets/js/yuidoc-bootstrap.js"></script>
+<script>prettyPrint();</script>
+</body>
+</html>
