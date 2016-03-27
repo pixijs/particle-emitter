@@ -1061,9 +1061,14 @@
 	 */
 	p.destroy = function()
 	{
+		//puts all active particles in the pool, and removes them from the particle parent
 		this.cleanup();
-		for (var particle = this._poolFirst; particle; particle = particle.next)
+		//wipe the pool clean
+		var next;
+		for (var particle = this._poolFirst; particle; particle = next)
 		{
+			//store next value so we don't lose it in our destroy call
+			next = particle.next;
 			particle.destroy();
 		}
 		this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =

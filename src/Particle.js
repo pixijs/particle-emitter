@@ -402,12 +402,15 @@
 		this.emitter.recycle(this);
 	};
 
+	p.Sprite_Destroy = Sprite.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
+		if (this.Sprite_Destroy)
+			this.Sprite_Destroy();
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
 			this.next = this.prev = null;
 	};
