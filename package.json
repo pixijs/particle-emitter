@@ -1,6 +1,6 @@
 {
 	"name": "pixi-particles",
-	"version": "1.6.2",
+	"version": "1.6.3",
 	"main": "dist/pixi-particles.min.js",
 	"description": "Particle emitter for Pixi.js",
 	"author": "Andrew Start <start.andrew@gmail.com>",

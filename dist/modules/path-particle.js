@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.2 */
+/*! pixi-particles 1.6.3 */
 /**
 *  @module Path Particle
 *  @namespace PIXI.particles
@@ -174,13 +174,14 @@
 		}
 	};
 
+	p.Particle_destroy = Particle.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
-		s.destroy.call(this);
+		this.Particle_destroy();
 	};
 	
 	/**

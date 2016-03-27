@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.2 */
+/*! pixi-particles 1.6.3 */
 /**
  * @module Pixi Particles
  * @namespace window
@@ -107,7 +107,7 @@ if(!Array.prototype.random)
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.6.2"'
+	// avoid the string replacement of '"1.6.3"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
@@ -673,12 +673,15 @@ if(!Array.prototype.random)
 		this.emitter.recycle(this);
 	};
 
+	p.Sprite_Destroy = Sprite.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
+		if (this.Sprite_Destroy)
+			this.Sprite_Destroy();
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
 			this.next = this.prev = null;
 	};
@@ -1800,9 +1803,14 @@ if(!Array.prototype.random)
 	 */
 	p.destroy = function()
 	{
+		//puts all active particles in the pool, and removes them from the particle parent
 		this.cleanup();
-		for (var particle = this._poolFirst; particle; particle = particle.next)
+		//wipe the pool clean
+		var next;
+		for (var particle = this._poolFirst; particle; particle = next)
 		{
+			//store next value so we don't lose it in our destroy call
+			next = particle.next;
 			particle.destroy();
 		}
 		this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =
