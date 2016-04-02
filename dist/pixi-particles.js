@@ -70,7 +70,7 @@ if(!Array.prototype.random)
 		// Export the module
 		module.exports = particles;
 	}
-	// If we're in the browser make sure PIXI is available 
+	// If we're in the browser make sure PIXI is available
 	else if (typeof PIXI === 'undefined')
 	{
 		if (true)
@@ -84,7 +84,7 @@ if(!Array.prototype.random)
 	}
 
 	// Assign to global namespace
-	global.PIXI.particles = particles;
+	global.PIXI.particles = global.PIXI.particles || particles;
 
 }());
 /**

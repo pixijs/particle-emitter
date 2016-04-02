@@ -25,7 +25,7 @@
 		// Export the module
 		module.exports = particles;
 	}
-	// If we're in the browser make sure PIXI is available 
+	// If we're in the browser make sure PIXI is available
 	else if (typeof PIXI === 'undefined')
 	{
 		if (DEBUG)
@@ -39,6 +39,6 @@
 	}
 
 	// Assign to global namespace
-	global.PIXI.particles = particles;
+	global.PIXI.particles = global.PIXI.particles || particles;
 
 }());
