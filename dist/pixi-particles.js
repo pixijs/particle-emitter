@@ -750,7 +750,7 @@ if(!Array.prototype.random)
 
 	var ParticleUtils = PIXI.particles.ParticleUtils,
 		Particle = PIXI.particles.Particle,
-		ParticleContainer = PIXI.ParticleContainer;
+		ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer;
 
 	/**
 	 * A particle emitter.
