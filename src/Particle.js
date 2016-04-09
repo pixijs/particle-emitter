@@ -29,9 +29,18 @@
 		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
 		//blank texture for us.
 		if(useAPI3)
+		{
 			Sprite.call(this);
+			//remove PIXI v3 texture from empty texture to prevent memory leak
+			//This should be fixed in v4, but doing this anyway shouldn't hurt anything
+			this._texture.off('update', this._onTextureUpdate, this);
+		}
 		else
+		{
 			Sprite.call(this, EMPTY_TEXTURE);
+			//remove PIXI v2 listener from empty texture to prevent memory leak
+			this.texture.off( 'update', this.onTextureUpdateBind );
+		}
 
 		/**
 		 * The emitter that controls this particle.

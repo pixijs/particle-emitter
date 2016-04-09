@@ -1,8 +1,8 @@
-# Pixi Particles 
+# Pixi Particles
 
 [![Build Status](https://travis-ci.org/pixijs/pixi-particles.svg)](https://travis-ci.org/pixijs/pixi-particles) [![Dependency Status](https://david-dm.org/pixijs/pixi-particles.svg?style=flat)](https://david-dm.org/pixijs/pixi-particles) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg)](https://github.com/pixijs/pixi-particles/releases/latest)
 
-A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles. 
+A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles.
 
 ## Sample Usage
 
@@ -94,6 +94,9 @@ emitter.emit = true;
 // Start the update
 update();
 ```
+
+## Note on Emitter Cleanup
+When using PixiJS 3+, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, _in WebGL only_, reset the SpriteRenderer's sprite batching with `yourRenderer.plugins.sprite.sprites.length = 0`;
 
 ## Documentation
 

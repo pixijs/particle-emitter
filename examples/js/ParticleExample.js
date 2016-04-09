@@ -138,12 +138,17 @@
 			// Start the update
 			update();
 			
+			//for testing and debugging
 			window.destroyEmitter = function()
 			{
 				emitter.destroy();
 				emitter = null;
 				window.destroyEmitter = null;
 				cancelAnimationFrame(updateId);
+				
+				//reset SpriteRenderer's batching to fully release particles for GC
+				if (renderer.plugins && renderer.plugins.sprite && renderer.plugins.sprite.sprites)
+					renderer.plugins.sprite.sprites.length = 0;
 				
 				renderer.render(stage);
 			};
