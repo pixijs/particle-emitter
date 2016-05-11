@@ -27,7 +27,7 @@
 	}
 	
 	var empty = ParticleUtils.EMPTY_TEXTURE = null;
-	if(useAPI3)
+	if(ParticleUtils.useAPI3)
 	{
 		empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
 		//prevent any events from being used on the empty texture, as well as destruction of it
