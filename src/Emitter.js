@@ -861,16 +861,19 @@
 						}
 						else
 						{
+							//kind of hacky, but performance friendly
 							//shuffle children to correct place
 							var children = this._parent.children;
 							//avoid using splice if possible
-							var index = children.indexOf(p);
-							if(index < 1)
+							if(children[0] == p)
 								children.shift();
-							else if(index == children.length - 1)
+							else if(children[children.length-1] == p)
 								children.pop();
 							else
+							{
+								var index = children.indexOf(p);
 								children.splice(index, 1);
+							}
 							if(this.addAtBack)
 								children.unshift(p);
 							else
