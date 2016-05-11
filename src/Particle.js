@@ -418,6 +418,8 @@
 	 */
 	p.destroy = function()
 	{
+		if (this.parent)
+			this.parent.removeChild(this);
 		if (this.Sprite_Destroy)
 			this.Sprite_Destroy();
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
