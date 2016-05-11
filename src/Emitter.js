@@ -20,6 +20,8 @@
 	 *                                                     for the particles. Strings will be turned
 	 *                                                     into textures via Texture.fromImage().
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
+	 * @param {Boolean} [config.emit=true] If config.emit is explicitly passed as false, the Emitter
+	 *                                     will start disabled.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
 	{
