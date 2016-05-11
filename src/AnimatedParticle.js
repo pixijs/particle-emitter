@@ -157,6 +157,7 @@
 	p.destroy = function()
 	{
 		this.Particle_destroy();
+		this.textures = null;
 	};
 	
 	/**

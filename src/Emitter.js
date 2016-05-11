@@ -414,6 +414,15 @@
 		get: function() { return this._parent; },
 		set: function(value)
 		{
+			//if our previous parent was a ParticleContainer, then we need to remove
+			//pooled particles from it
+			if (this._parentIsPC) {
+				for (var particle = this._poolFirst; particle; particle = particle.next)
+				{
+					if(particle.parent)
+						particle.parent.removeChild(particle);
+				}
+			}
 			this.cleanup();
 			this._parent = value;
 			this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
@@ -705,6 +714,9 @@
 	 */
 	p.update = function(delta)
 	{
+		//if we don't have a parent to add particles to, then don't do anything.
+		//this also works as a isDestroyed check
+		if (!this._parent) return;
 		//update existing particles
 		var i, particle, next;
 		for (particle = this._activeParticlesFirst; particle; particle = next)
