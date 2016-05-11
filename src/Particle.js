@@ -8,14 +8,7 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
-	if(!useAPI3)
-	{
-		var canvas = document.createElement("canvas");
-		canvas.width = canvas.height = 1;
-		EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
-	}
 
 	/**
 	 * An individual particle image. You shouldn't have to deal with these.
@@ -31,15 +24,10 @@
 		if(useAPI3)
 		{
 			Sprite.call(this);
-			//remove PIXI v3 texture from empty texture to prevent memory leak
-			//This should be fixed in v4, but doing this anyway shouldn't hurt anything
-			this._texture.off('update', this._onTextureUpdate, this);
 		}
 		else
 		{
-			Sprite.call(this, EMPTY_TEXTURE);
-			//remove PIXI v2 listener from empty texture to prevent memory leak
-			this.texture.off( 'update', this.onTextureUpdateBind );
+			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
 		}
 
 		/**
@@ -300,11 +288,11 @@
 		if (useAPI3)
 		{
 			//remove warning on PIXI 3
-			this.texture = art;
+			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 		}
 		else
 		{
-			this.setTexture(art);
+			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
 		}
 	};
 

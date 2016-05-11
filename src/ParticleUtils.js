@@ -7,6 +7,7 @@
 	"use strict";
 	
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
+	var Texture = PIXI.Texture;
 
 	/**
 	 * Contains helper functions for particles and emitters to use.
@@ -23,6 +24,26 @@
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
 		ParticleUtils.useAPI3 = true;
+	}
+	
+	var empty = ParticleUtils.EMPTY_TEXTURE = null;
+	if(useAPI3)
+	{
+		empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
+		//prevent any events from being used on the empty texture, as well as destruction of it
+		//v4 of Pixi does this, but doing it again won't hurt
+		empty.on = empty.destroy = empty.once = empty.emit = function() {};
+	}
+	else
+	{
+		var canvas = document.createElement("canvas");
+		canvas.width = canvas.height = 1;
+		empty = ParticleUtils.EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
+		//have the particle not render, even though we have an empty canvas that would be
+		//safe to render
+		empty.baseTexture.hasLoaded = false;
+		//prevent any events from being used on the empty texture, as well as destruction of it
+		empty.on = empty.destroy = empty.once = empty.emit = function() {};
 	}
 
 	/**
