@@ -589,7 +589,7 @@
 		this._prevPosIsValid = false;
 		//start emitting
 		this._spawnTimer = 0;
-		this.emit = config.emit === undefined ? true : config.emit;
+		this.emit = config.emit === undefined ? true : !!config.emit;
 	};
 
 	/**
