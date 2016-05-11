@@ -182,6 +182,7 @@
 	p.destroy = function()
 	{
 		this.Particle_destroy();
+		this.path = this.initialPosition = null;
 	};
 	
 	/**

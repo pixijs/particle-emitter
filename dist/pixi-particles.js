@@ -96,6 +96,7 @@ if(!Array.prototype.random)
 	"use strict";
 	
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
+	var Texture = PIXI.Texture;
 
 	/**
 	 * Contains helper functions for particles and emitters to use.
@@ -112,6 +113,26 @@ if(!Array.prototype.random)
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
 		ParticleUtils.useAPI3 = true;
+	}
+	
+	var empty = ParticleUtils.EMPTY_TEXTURE = null;
+	if(ParticleUtils.useAPI3)
+	{
+		empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
+		//prevent any events from being used on the empty texture, as well as destruction of it
+		//v4 of Pixi does this, but doing it again won't hurt
+		empty.on = empty.destroy = empty.once = empty.emit = function() {};
+	}
+	else
+	{
+		var canvas = document.createElement("canvas");
+		canvas.width = canvas.height = 1;
+		empty = ParticleUtils.EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
+		//have the particle not render, even though we have an empty canvas that would be
+		//safe to render
+		empty.baseTexture.hasLoaded = false;
+		//prevent any events from being used on the empty texture, as well as destruction of it
+		empty.on = empty.destroy = empty.once = empty.emit = function() {};
 	}
 
 	/**
@@ -279,14 +300,7 @@ if(!Array.prototype.random)
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
-	if(!useAPI3)
-	{
-		var canvas = document.createElement("canvas");
-		canvas.width = canvas.height = 1;
-		EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
-	}
 
 	/**
 	 * An individual particle image. You shouldn't have to deal with these.
@@ -302,15 +316,10 @@ if(!Array.prototype.random)
 		if(useAPI3)
 		{
 			Sprite.call(this);
-			//remove PIXI v3 texture from empty texture to prevent memory leak
-			//This should be fixed in v4, but doing this anyway shouldn't hurt anything
-			this._texture.off('update', this._onTextureUpdate, this);
 		}
 		else
 		{
-			Sprite.call(this, EMPTY_TEXTURE);
-			//remove PIXI v2 listener from empty texture to prevent memory leak
-			this.texture.off( 'update', this.onTextureUpdateBind );
+			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
 		}
 
 		/**
@@ -571,11 +580,11 @@ if(!Array.prototype.random)
 		if (useAPI3)
 		{
 			//remove warning on PIXI 3
-			this.texture = art;
+			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 		}
 		else
 		{
-			this.setTexture(art);
+			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
 		}
 	};
 
@@ -689,6 +698,8 @@ if(!Array.prototype.random)
 	 */
 	p.destroy = function()
 	{
+		if (this.parent)
+			this.parent.removeChild(this);
 		if (this.Sprite_Destroy)
 			this.Sprite_Destroy();
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
@@ -771,6 +782,8 @@ if(!Array.prototype.random)
 	 *                                                     for the particles. Strings will be turned
 	 *                                                     into textures via Texture.fromImage().
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
+	 * @param {Boolean} [config.emit=true] If config.emit is explicitly passed as false, the Emitter
+	 *                                     will start disabled.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
 	{
@@ -1163,6 +1176,15 @@ if(!Array.prototype.random)
 		get: function() { return this._parent; },
 		set: function(value)
 		{
+			//if our previous parent was a ParticleContainer, then we need to remove
+			//pooled particles from it
+			if (this._parentIsPC) {
+				for (var particle = this._poolFirst; particle; particle = particle.next)
+				{
+					if(particle.parent)
+						particle.parent.removeChild(particle);
+				}
+			}
 			this.cleanup();
 			this._parent = value;
 			this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
@@ -1340,7 +1362,7 @@ if(!Array.prototype.random)
 		this._prevPosIsValid = false;
 		//start emitting
 		this._spawnTimer = 0;
-		this.emit = true;
+		this.emit = config.emit === undefined ? true : !!config.emit;
 	};
 
 	/**
@@ -1454,6 +1476,9 @@ if(!Array.prototype.random)
 	 */
 	p.update = function(delta)
 	{
+		//if we don't have a parent to add particles to, then don't do anything.
+		//this also works as a isDestroyed check
+		if (!this._parent) return;
 		//update existing particles
 		var i, particle, next;
 		for (particle = this._activeParticlesFirst; particle; particle = next)
@@ -1598,16 +1623,19 @@ if(!Array.prototype.random)
 						}
 						else
 						{
+							//kind of hacky, but performance friendly
 							//shuffle children to correct place
 							var children = this._parent.children;
 							//avoid using splice if possible
-							var index = children.indexOf(p);
-							if(index < 1)
+							if(children[0] == p)
 								children.shift();
-							else if(index == children.length - 1)
+							else if(children[children.length-1] == p)
 								children.pop();
 							else
+							{
+								var index = children.indexOf(p);
 								children.splice(index, 1);
+							}
 							if(this.addAtBack)
 								children.unshift(p);
 							else
