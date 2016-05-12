@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.6 */
+/*! pixi-particles 1.6.7 */
 /**
 *  @module Path Particle
 *  @namespace PIXI.particles
