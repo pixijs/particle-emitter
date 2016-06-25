@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.7 */
+/*! pixi-particles 1.6.8 */
 /**
  * @module Pixi Particles
  * @namespace window
@@ -108,7 +108,7 @@ if(!Array.prototype.random)
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
 	
 	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.6.7"'
+	// avoid the string replacement of '"1.6.8"'
 	var version = PIXI["VER"+"SION"];// jshint ignore:line
 	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
 	{
@@ -532,8 +532,15 @@ if(!Array.prototype.random)
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
-		//convert rotation to Radians from Degrees
-		this.rotation *= ParticleUtils.DEG_TO_RADS;
+		if (this.noRotation)
+		{
+			this.rotation = 0;
+		}
+		else
+		{
+			//convert rotation to Radians from Degrees
+			this.rotation *= ParticleUtils.DEG_TO_RADS;
+		}
 		//convert rotation speed to Radians from Degrees
 		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 		//set alpha to inital alpha
@@ -674,7 +681,7 @@ if(!Array.prototype.random)
 		{
 			this.rotation += this.rotationSpeed * delta;
 		}
-		else if(this.acceleration)
+		else if(this.acceleration && !this.noRotation)
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
@@ -887,14 +894,23 @@ if(!Array.prototype.random)
 		 */
 		this.maxStartRotation = 0;
 		/**
+		 * If no particle rotation should occur. Starting rotation will still
+		 * affect the direction in which particles move. If the rotation speed
+		 * is set, then this will be ignored.
+		 * @property {Boolean} maxStartRotation
+		 */
+		this.noRotation = false;
+		/**
 		 * The minimum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} minRotationSpeed
 		 */
 		this.minRotationSpeed = 0;
 		/**
 		 * The maximum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} maxRotationSpeed
 		 */
 		this.maxRotationSpeed = 0;
@@ -1271,6 +1287,13 @@ if(!Array.prototype.random)
 		}
 		else
 			this.minStartRotation = this.maxStartRotation = 0;
+		if (config.noRotation &&
+			(this.minStartRotation || this.maxStartRotation))
+		{
+			this.noRotation = !!config.noRotation;
+		}
+		else
+			this.noRotation = false;
 		//set up the rotation speed
 		if (config.rotationSpeed)
 		{
@@ -1599,6 +1622,7 @@ if(!Array.prototype.random)
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						p.noRotation = this.noRotation;
 						//set up the lifetime
 						p.maxLife = lifetime;
 						//set the blend mode

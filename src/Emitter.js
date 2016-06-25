@@ -125,14 +125,23 @@
 		 */
 		this.maxStartRotation = 0;
 		/**
+		 * If no particle rotation should occur. Starting rotation will still
+		 * affect the direction in which particles move. If the rotation speed
+		 * is set, then this will be ignored.
+		 * @property {Boolean} maxStartRotation
+		 */
+		this.noRotation = false;
+		/**
 		 * The minimum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} minRotationSpeed
 		 */
 		this.minRotationSpeed = 0;
 		/**
 		 * The maximum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} maxRotationSpeed
 		 */
 		this.maxRotationSpeed = 0;
@@ -509,6 +518,13 @@
 		}
 		else
 			this.minStartRotation = this.maxStartRotation = 0;
+		if (config.noRotation &&
+			(this.minStartRotation || this.maxStartRotation))
+		{
+			this.noRotation = !!config.noRotation;
+		}
+		else
+			this.noRotation = false;
 		//set up the rotation speed
 		if (config.rotationSpeed)
 		{
@@ -837,6 +853,7 @@
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						p.noRotation = this.noRotation;
 						//set up the lifetime
 						p.maxLife = lifetime;
 						//set the blend mode

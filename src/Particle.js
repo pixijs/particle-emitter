@@ -240,8 +240,15 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
-		//convert rotation to Radians from Degrees
-		this.rotation *= ParticleUtils.DEG_TO_RADS;
+		if (this.noRotation)
+		{
+			this.rotation = 0;
+		}
+		else
+		{
+			//convert rotation to Radians from Degrees
+			this.rotation *= ParticleUtils.DEG_TO_RADS;
+		}
 		//convert rotation speed to Radians from Degrees
 		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 		//set alpha to inital alpha
@@ -382,7 +389,7 @@
 		{
 			this.rotation += this.rotationSpeed * delta;
 		}
-		else if(this.acceleration)
+		else if(this.acceleration && !this.noRotation)
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
