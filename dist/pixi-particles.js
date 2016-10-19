@@ -832,6 +832,15 @@ if(!Array.prototype.random)
 		 */
 		this.endSpeed = 0;
 		/**
+		 * A minimum multiplier for the speed of a particle at both start and
+		 * end. A value between minimumSpeedMultiplier and 1 is randomly generated
+		 * and multiplied with startSpeed and endSpeed to provide the actual
+		 * startSpeed and endSpeed for each particle.
+		 * @property {Number} minimumSpeedMultiplier
+		 * @default 1
+		 */
+		this.minimumSpeedMultiplier = 1;
+		/**
 		 * Acceleration to apply to particles. Using this disables
 		 * any interpolation of particle speed. If the particles do
 		 * not have a rotation speed, then they will be rotated to
@@ -1246,9 +1255,13 @@ if(!Array.prototype.random)
 		{
 			this.startSpeed = config.speed.start;
 			this.endSpeed = config.speed.end;
+			this.minimumSpeedMultiplier = config.speed.minimumSpeedMultiplier || 1;
 		}
 		else
+		{
+			this.minimumSpeedMultiplier = 1;
 			this.startSpeed = this.endSpeed = 0;
+		}
 		//set up acceleration
 		var acceleration = config.acceleration;
 		if(acceleration && (acceleration.x || acceleration.y))
@@ -1574,7 +1587,7 @@ if(!Array.prototype.random)
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i)
 					{
 						//create particle
-						var p;
+						var p, rand;
 						if(this._poolFirst)
 						{
 							p = this._poolFirst;
@@ -1600,13 +1613,19 @@ if(!Array.prototype.random)
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
-						p.startSpeed = this.startSpeed;
-						p.endSpeed = this.endSpeed;
+						if(this.minimumSpeedMultiplier != 1) {
+							rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
+							p.startSpeed = this.startSpeed * rand;
+							p.endSpeed = this.endSpeed * rand;
+                                                } else {
+							p.startSpeed = this.startSpeed;
+							p.endSpeed = this.endSpeed;
+						}
 						p.acceleration.x = this.acceleration.x;
 						p.acceleration.y = this.acceleration.y;
 						if(this.minimumScaleMultiplier != 1)
 						{
-							var rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
+							rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
 							p.startScale = this.startScale * rand;
 							p.endScale = this.endScale * rand;
 						}
