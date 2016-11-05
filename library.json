@@ -10,20 +10,8 @@
 		"src/ParticleUtils.js",
 		"src/Particle.js",
 		"src/Emitter.js",
+		"src/PathParticle.js",
+		"src/AnimatedParticle.js",
 		"src/deprecation.js"
-	],
-	"modules": {
-		"pathparticle": {
-			"output": "path-particle",
-			"main": [
-				"src/PathParticle.js"
-			]
-		},
-		"animatedparticle": {
-			"output": "animated-particle",
-			"main": [
-				"src/AnimatedParticle.js"
-			]
-		}
-	}
+	]
 }

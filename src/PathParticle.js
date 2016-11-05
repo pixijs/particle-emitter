@@ -1,5 +1,5 @@
 /**
-*  @module Path Particle
+*  @module Pixi Particles
 *  @namespace PIXI.particles
 */
 (function(PIXI, undefined) {
@@ -183,7 +183,7 @@
 		this.Particle_destroy();
 		this.path = this.initialPosition = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time. This just runs Particle.parseArt().
@@ -198,7 +198,7 @@
 	{
 		return Particle.parseArt(art);
 	};
-	
+
 	/**
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * PathParticle checks for the existence of path data, and parses the path data for use

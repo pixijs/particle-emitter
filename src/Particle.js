@@ -8,7 +8,6 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var useAPI3 = ParticleUtils.useAPI3;
 
 	/**
 	 * An individual particle image. You shouldn't have to deal with these.
@@ -21,14 +20,7 @@
 		//start off the sprite with a blank texture, since we are going to replace it
 		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
 		//blank texture for us.
-		if(useAPI3)
-		{
-			Sprite.call(this);
-		}
-		else
-		{
-			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
-		}
+		Sprite.call(this);
 
 		/**
 		 * The emitter that controls this particle.
@@ -299,15 +291,7 @@
 	 */
 	p.applyArt = function(art)
 	{
-		if (useAPI3)
-		{
-			//remove warning on PIXI 3
-			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
-		}
-		else
-		{
-			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
-		}
+		this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 	};
 
 	/**

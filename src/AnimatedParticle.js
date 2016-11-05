@@ -1,5 +1,5 @@
 /**
-*  @module Animated Particle
+*  @module Pixi Particles
 *  @namespace PIXI.particles
 */
 (function(PIXI, undefined) {
@@ -9,7 +9,6 @@
 	var ParticleUtils = PIXI.particles.ParticleUtils,
 		Particle = PIXI.particles.Particle,
 		Texture = PIXI.Texture;
-	var useAPI3 = ParticleUtils.useAPI3;
 
 	/**
 	 * An individual particle image with an animation. Art data passed to the emitter must be
@@ -54,28 +53,28 @@
 		 * @private
 		 */
 		this.textures = null;
-		
+
 		/**
 		 * Duration of the animation, in seconds.
 		 * @property {Number} duration
 		 * @private
 		 */
 		this.duration = 0;
-		
+
 		/**
 		 * Animation framerate, in frames per second.
 		 * @property {Number} framerate
 		 * @private
 		 */
 		this.framerate = 0;
-		
+
 		/**
 		 * Animation time elapsed, in seconds.
 		 * @property {Number} elapsed
 		 * @private
 		 */
 		this.elapsed = 0;
-		
+
 		/**
 		 * If this particle animation should loop.
 		 * @property {Boolean} loop
@@ -97,9 +96,9 @@
 	p.init = function()
 	{
 		this.Particle_init();
-		
+
 		this.elapsed = 0;
-		
+
 		//if the animation needs to match the particle's life, then cacluate variables
 		if(this.framerate < 0)
 		{
@@ -142,10 +141,7 @@
 					this.elapsed = this.duration - 0.000001;
 			}
 			var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
-			if(useAPI3)
-				this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
-			else
-				this.setTexture(this.textures[frame] || ParticleUtils.EMPTY_TEXTURE);
+			this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
 		}
 	};
 
@@ -159,7 +155,7 @@
 		this.Particle_destroy();
 		this.textures = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time.
@@ -198,7 +194,7 @@
 					}
 				}
 			}
-			
+
 			//use these values to signify that the animation should match the particle life time.
 			if(data.framerate == "matchLife")
 			{
@@ -217,7 +213,7 @@
 				output.duration = outTextures.length / output.framerate;
 			}
 		}
-		
+
 		return art;
 	};
 
