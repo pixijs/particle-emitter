@@ -90,6 +90,13 @@
 		 */
 		this.acceleration = new PIXI.Point();
 		/**
+		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+		 * will disable the maximum speed.
+		 * @property {Number} maxSpeed
+		 * @default NaN
+		 */
+		this.maxSpeed = NaN;
+		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
 		 */
@@ -195,14 +202,14 @@
 		 * @private
 		 */
 		this._oneOverLife = 0;
-		
+
 		/**
 		 * Reference to the next particle in the list.
 		 * @property {Particle} next
 		 * @private
 		 */
 		this.next = null;
-		
+
 		/**
 		 * Reference to the previous particle in the list.
 		 * @property {Particle} prev
@@ -371,6 +378,16 @@
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
+				if (this.maxSpeed)
+				{
+					var currentSpeed = ParticleUtils.length(this.velocity);
+					//if we are going faster than we should, clamp at the max speed
+					//DO NOT recalculate vector length
+					if (currentSpeed > this.maxSpeed)
+					{
+						ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
+					}
+				}
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -420,7 +437,7 @@
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
 			this.next = this.prev = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time.
@@ -454,10 +471,10 @@
 				}
 			}
 		}
-		
+
 		return art;
 	};
-	
+
 	/**
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * Particle does nothing to the extra data.

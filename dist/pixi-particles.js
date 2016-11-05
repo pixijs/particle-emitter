@@ -382,6 +382,13 @@ if(!Array.prototype.random)
 		 */
 		this.acceleration = new PIXI.Point();
 		/**
+		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+		 * will disable the maximum speed.
+		 * @property {Number} maxSpeed
+		 * @default NaN
+		 */
+		this.maxSpeed = NaN;
+		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
 		 */
@@ -487,14 +494,14 @@ if(!Array.prototype.random)
 		 * @private
 		 */
 		this._oneOverLife = 0;
-		
+
 		/**
 		 * Reference to the next particle in the list.
 		 * @property {Particle} next
 		 * @private
 		 */
 		this.next = null;
-		
+
 		/**
 		 * Reference to the previous particle in the list.
 		 * @property {Particle} prev
@@ -663,6 +670,16 @@ if(!Array.prototype.random)
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
+				if (this.maxSpeed)
+				{
+					var currentSpeed = ParticleUtils.length(this.velocity);
+					//if we are going faster than we should, clamp at the max speed
+					//DO NOT recalculate vector length
+					if (currentSpeed > this.maxSpeed)
+					{
+						ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
+					}
+				}
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -712,7 +729,7 @@ if(!Array.prototype.random)
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
 			this.next = this.prev = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time.
@@ -746,10 +763,10 @@ if(!Array.prototype.random)
 				}
 			}
 		}
-		
+
 		return art;
 	};
-	
+
 	/**
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * Particle does nothing to the extra data.
@@ -849,6 +866,13 @@ if(!Array.prototype.random)
 		 * @default null
 		 */
 		this.acceleration = null;
+		/**
+		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+		 * will disable the maximum speed.
+		 * @property {Number} maxSpeed
+		 * @default NaN
+		 */
+		this.maxSpeed = NaN;
 		/**
 		 * The starting scale of all particles.
 		 * @property {Number} startScale
@@ -1144,7 +1168,7 @@ if(!Array.prototype.random)
 	var p = Emitter.prototype = {};
 
 	var helperPoint = new PIXI.Point();
-	
+
 	/**
 	 * Time between particle spawns in seconds. If this value is not a number greater than 0,
 	 * it will be set to 1 (particle per second) to prevent infinite loops.
@@ -1228,12 +1252,12 @@ if(!Array.prototype.random)
 			return;
 		//clean up any existing particles
 		this.cleanup();
-		
+
 		//store the original config and particle images, in case we need to re-initialize
 		//when the particle constructor is changed
 		this._origConfig = config;
 		this._origArt = art;
-		
+
 		//set up the array of data, also ensuring that it is an array
 		art = Array.isArray(art) ? art.slice() : [art];
 		//run the art through the particle class's parsing function
@@ -1268,6 +1292,7 @@ if(!Array.prototype.random)
 		{
 			this.endSpeed = this.startSpeed;
 			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
+			this.maxSpeed = config.maxSpeed || NaN;
 		}
 		else
 			this.acceleration = new PIXI.Point();
@@ -1598,7 +1623,7 @@ if(!Array.prototype.random)
 						{
 							p = new this.particleConstructor(this);
 						}
-												
+
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
@@ -1623,6 +1648,7 @@ if(!Array.prototype.random)
 						}
 						p.acceleration.x = this.acceleration.x;
 						p.acceleration.y = this.acceleration.y;
+						p.maxSpeed = this.maxSpeed;
 						if(this.minimumScaleMultiplier != 1)
 						{
 							rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
