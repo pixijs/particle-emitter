@@ -1,4 +1,4 @@
-/*! pixi-particles 1.7.0 */
+/*! pixi-particles 2.0.0 */
 /**
  * @module Pixi Particles
  * @namespace window
