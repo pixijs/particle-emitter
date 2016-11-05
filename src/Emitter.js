@@ -852,11 +852,14 @@
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
-						if(this.minimumSpeedMultiplier != 1) {
+						if(this.minimumSpeedMultiplier != 1)
+						{
 							rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
 							p.startSpeed = this.startSpeed * rand;
 							p.endSpeed = this.endSpeed * rand;
-                                                } else {
+						}
+						else
+						{
 							p.startSpeed = this.startSpeed;
 							p.endSpeed = this.endSpeed;
 						}
