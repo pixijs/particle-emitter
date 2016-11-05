@@ -1,4 +1,4 @@
-/*! pixi-particles 1.7.0 */
+/*! pixi-particles 2.0.0 */
 /**
  * @module Pixi Particles
  * @namespace window
@@ -94,7 +94,7 @@ if(!Array.prototype.random)
 (function(PIXI, undefined) {
 
 	"use strict";
-	
+
 	var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 	var Texture = PIXI.Texture;
 
@@ -106,34 +106,11 @@ if(!Array.prototype.random)
 	var ParticleUtils = {};
 
 	var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
-	
-	ParticleUtils.useAPI3 = false;
-	// avoid the string replacement of '"1.7.0"'
-	var version = PIXI["VER"+"SION"];// jshint ignore:line
-	if(version && parseInt(version.substring(0, version.indexOf("."))) >= 3)
-	{
-		ParticleUtils.useAPI3 = true;
-	}
-	
-	var empty = ParticleUtils.EMPTY_TEXTURE = null;
-	if(ParticleUtils.useAPI3)
-	{
-		empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
-		//prevent any events from being used on the empty texture, as well as destruction of it
-		//v4 of Pixi does this, but doing it again won't hurt
-		empty.on = empty.destroy = empty.once = empty.emit = function() {};
-	}
-	else
-	{
-		var canvas = document.createElement("canvas");
-		canvas.width = canvas.height = 1;
-		empty = ParticleUtils.EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
-		//have the particle not render, even though we have an empty canvas that would be
-		//safe to render
-		empty.baseTexture.hasLoaded = false;
-		//prevent any events from being used on the empty texture, as well as destruction of it
-		empty.on = empty.destroy = empty.once = empty.emit = function() {};
-	}
+
+	var empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
+	//prevent any events from being used on the empty texture, as well as destruction of it
+	//v4 of Pixi does this, but doing it again won't hurt
+	empty.on = empty.destroy = empty.once = empty.emit = function() {};
 
 	/**
 	 * Rotates a point by a given angle.
@@ -300,7 +277,6 @@ if(!Array.prototype.random)
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var useAPI3 = ParticleUtils.useAPI3;
 
 	/**
 	 * An individual particle image. You shouldn't have to deal with these.
@@ -313,14 +289,7 @@ if(!Array.prototype.random)
 		//start off the sprite with a blank texture, since we are going to replace it
 		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
 		//blank texture for us.
-		if(useAPI3)
-		{
-			Sprite.call(this);
-		}
-		else
-		{
-			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
-		}
+		Sprite.call(this);
 
 		/**
 		 * The emitter that controls this particle.
@@ -591,15 +560,7 @@ if(!Array.prototype.random)
 	 */
 	p.applyArt = function(art)
 	{
-		if (useAPI3)
-		{
-			//remove warning on PIXI 3
-			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
-		}
-		else
-		{
-			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
-		}
+		this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 	};
 
 	/**
@@ -1638,11 +1599,14 @@ if(!Array.prototype.random)
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
-						if(this.minimumSpeedMultiplier != 1) {
+						if(this.minimumSpeedMultiplier != 1)
+						{
 							rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
 							p.startSpeed = this.startSpeed * rand;
 							p.endSpeed = this.endSpeed * rand;
-                                                } else {
+						}
+						else
+						{
 							p.startSpeed = this.startSpeed;
 							p.endSpeed = this.endSpeed;
 						}
@@ -1927,70 +1891,466 @@ if(!Array.prototype.random)
 
 }(PIXI));
 
-(function(undefined){
-	
-	// Check for window, fallback to global
-	var global = typeof window !== 'undefined' ? window : GLOBAL;
-	
-	// Deprecate support for the cloudkid namespace
-	if (typeof cloudkid === "undefined")
-	{
-		global.cloudkid = {};
-	}
+/**
+*  @module Pixi Particles
+*  @namespace PIXI.particles
+*/
+(function(PIXI, undefined) {
 
-	//  Get classes from the PIXI.particles namespace
-	Object.defineProperties(global.cloudkid, 
+	"use strict";
+
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle;
+
+	/**
+	 * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
+	 * "5x + 3".
+	 * To use this class, the particle config must have a "path" string in the
+	 * "extraData" parameter. This string should have "x" in it to represent movement (from the
+	 * speed settings of the particle). It may have numbers, parentheses, the four basic
+	 * operations, and the following Math functions or properties (without the preceding "Math."):
+	 * "pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
+	 * "acos", "atan", "atan2", "log".
+	 * The overall movement of the particle and the expression value become x and y positions for
+	 * the particle, respectively. The final position is rotated by the spawn rotation/angle of
+	 * the particle.
+	*
+	 * Some example paths:
+	*
+	 * 	"sin(x/10) * 20" // A sine wave path.
+	 * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
+	 * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
+	*
+	 * @class PathParticle
+	 * @constructor
+	 * @param {Emitter} emitter The emitter that controls this PathParticle.
+	 */
+	var PathParticle = function(emitter)
 	{
-		AnimatedParticle: {
-			get: function()
+		Particle.call(this, emitter);
+		/**
+		 * The function representing the path the particle should take.
+		 * @property {Function} path
+		 */
+		this.path = null;
+		/**
+		 * The initial rotation in degrees of the particle, because the direction of the path
+		 * is based on that.
+		 * @property {Number} initialRotation
+		 */
+		this.initialRotation = 0;
+		/**
+		 * The initial position of the particle, as all path movement is added to that.
+		 * @property {PIXI.Point} initialPosition
+		 */
+		this.initialPosition = new PIXI.Point();
+		/**
+		 * Total single directional movement, due to speed.
+		 * @property {Number} movement
+		 */
+		this.movement = 0;
+	};
+
+	// Reference to the super class
+	var s = Particle.prototype;
+	// Reference to the prototype
+	var p = PathParticle.prototype = Object.create(s);
+
+	/**
+	 * A helper point for math things.
+	 * @property {Function} helperPoint
+	 * @private
+	 * @static
+	 */
+	var helperPoint = new PIXI.Point();
+
+	/**
+	 * Initializes the particle for use, based on the properties that have to
+	 * have been set already on the particle.
+	 * @method init
+	 */
+	p.init = function()
+	{
+		//get initial rotation before it is converted to radians
+		this.initialRotation = this.rotation;
+		//standard init
+		this.Particle_init();
+
+		//set the path for the particle
+		this.path = this.extraData.path;
+		//cancel the normal movement behavior
+		this._doNormalMovement = !this.path;
+		//reset movement
+		this.movement = 0;
+		//grab position
+		this.initialPosition.x = this.position.x;
+		this.initialPosition.y = this.position.y;
+	};
+
+	//a hand picked list of Math functions (and a couple properties) that are allowable.
+	//they should be used without the preceding "Math."
+	var MATH_FUNCS =
+	[
+		"pow",
+		"sqrt",
+		"abs",
+		"floor",
+		"round",
+		"ceil",
+		"E",
+		"PI",
+		"sin",
+		"cos",
+		"tan",
+		"asin",
+		"acos",
+		"atan",
+		"atan2",
+		"log"
+	];
+	//Allow the 4 basic operations, parentheses and all numbers/decimals, as well
+	//as 'x', for the variable usage.
+	var WHITELISTER = "[01234567890\\.\\*\\-\\+\\/\\(\\)x ,]";
+	//add the math functions to the regex string.
+	for(var index = MATH_FUNCS.length - 1; index >= 0; --index)
+	{
+		WHITELISTER += "|" + MATH_FUNCS[index];
+	}
+	//create an actual regular expression object from the string
+	WHITELISTER = new RegExp(WHITELISTER, "g");
+
+	/**
+	 * Parses a string into a function for path following.
+	 * This involves whitelisting the string for safety, inserting "Math." to math function
+	 * names, and using eval() to generate a function.
+	 * @method parsePath
+	 * @private
+	 * @static
+	 * @param {String} pathString The string to parse.
+	 * @return {Function} The path function - takes x, outputs y.
+	 */
+	var parsePath = function(pathString)
+	{
+		var rtn;
+		var matches = pathString.match(WHITELISTER);
+		for(var i = matches.length - 1; i >= 0; --i)
+		{
+			if(MATH_FUNCS.indexOf(matches[i]) >= 0)
+				matches[i] = "Math." + matches[i];
+		}
+		pathString = matches.join("");
+		eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
+		return rtn;
+	};
+
+	/**
+	 * Updates the particle.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 */
+	p.update = function(delta)
+	{
+		var lerp = this.Particle_update(delta);
+		//if the particle died during the update, then don't bother
+		if(lerp >= 0 && this.path)
+		{
+			//increase linear movement based on speed
+			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+			this.movement += speed * delta;
+			//set up the helper point for rotation
+			helperPoint.x = this.movement;
+			helperPoint.y = this.path(this.movement);
+			ParticleUtils.rotatePoint(this.initialRotation, helperPoint);
+			this.position.x = this.initialPosition.x + helperPoint.x;
+			this.position.y = this.initialPosition.y + helperPoint.y;
+		}
+	};
+
+	p.Particle_destroy = Particle.prototype.destroy;
+	/**
+	 * Destroys the particle, removing references and preventing future use.
+	 * @method destroy
+	 */
+	p.destroy = function()
+	{
+		this.Particle_destroy();
+		this.path = this.initialPosition = null;
+	};
+
+	/**
+	 * Checks over the art that was passed to the Emitter's init() function, to do any special
+	 * modifications to prepare it ahead of time. This just runs Particle.parseArt().
+	 * @method parseArt
+	 * @static
+	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
+	 *                     Any strings in the array will be converted to Textures via
+	 *                     Texture.fromImage().
+	 * @return {Array} The art, after any needed modifications.
+	 */
+	PathParticle.parseArt = function(art)
+	{
+		return Particle.parseArt(art);
+	};
+
+	/**
+	 * Parses extra emitter data to ensure it is set up for this particle class.
+	 * PathParticle checks for the existence of path data, and parses the path data for use
+	 * by particle instances.
+	 * @method parseData
+	 * @static
+	 * @param  {Object} extraData The extra data from the particle config.
+	 * @return {Object} The parsed extra data.
+	 */
+	PathParticle.parseData = function(extraData)
+	{
+		var output = {};
+		if(extraData && extraData.path)
+		{
+			try
 			{
-				if (true)
-				{
-					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
-				}
-				return PIXI.particles.AnimatedParticle;
+				output.path = parsePath(extraData.path);
 			}
-		},
-		Emitter: {
-			get: function()
+			catch(e)
 			{
-				if (true)
-				{
-					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
-				}
-				return PIXI.particles.Emitter;
-			}
-		},
-		Particle: {
-			get: function()
-			{
-				if (true)
-				{
-					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
-				}
-				return PIXI.particles.Particle;
-			}
-		},
-		ParticleUtils: {
-			get: function()
-			{
-				if (true)
-				{
-					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
-				}
-				return PIXI.particles.ParticleUtils;
-			}
-		},
-		PathParticle: {
-			get: function()
-			{
-				if (true)
-				{
-					console.warn("cloudkid namespace is deprecated, please use PIXI.particles");
-				}
-				return PIXI.particles.PathParticle;
+				if(true)
+					console.error("PathParticle: error in parsing path expression");
+				output.path = null;
 			}
 		}
-	});
+		else
+		{
+			if(true)
+				console.error("PathParticle requires a path string in extraData!");
+			output.path = null;
+		}
+		return output;
+	};
 
+	PIXI.particles.PathParticle = PathParticle;
+
+}(PIXI));
+/**
+*  @module Pixi Particles
+*  @namespace PIXI.particles
+*/
+(function(PIXI, undefined) {
+
+	"use strict";
+
+	var ParticleUtils = PIXI.particles.ParticleUtils,
+		Particle = PIXI.particles.Particle,
+		Texture = PIXI.Texture;
+
+	/**
+	 * An individual particle image with an animation. Art data passed to the emitter must be
+	 * formatted in a particular way for AnimatedParticle to be able to handle it:
+	 *
+	 *     {
+	 *         //framerate is required. It is the animation speed of the particle in frames per
+	 *         //second.
+	 *         //A value of "matchLife" causes the animation to match the lifetime of an individual
+	 *         //particle, instead of at a constant framerate. This causes the animation to play
+	 *         //through one time, completing when the particle expires.
+	 *         framerate: 6,
+	 *         //loop is optional, and defaults to false.
+	 *         loop: true,
+	 *         //textures is required, and can be an array of any (non-zero) length.
+	 *         textures: [
+	 *             //each entry represents a single texture that should be used for one or more
+	 *             //frames. Any strings will be converted to Textures with Texture.fromImage().
+	 *             //Instances of PIXI.Texture will be used directly.
+	 *             "animFrame1.png",
+	 *             //entries can be an object with a 'count' property, telling AnimatedParticle to
+	 *             //use that texture for 'count' frames sequentially.
+	 *             {
+	 *                 texture: "animFrame2.png",
+	 *                 count: 3
+	 *             },
+	 *             "animFrame3.png"
+	 *         ]
+	 *     }
+	 *
+	 * @class AnimatedParticle
+	 * @constructor
+	 * @param {Emitter} emitter The emitter that controls this AnimatedParticle.
+	 */
+	var AnimatedParticle = function(emitter)
+	{
+		Particle.call(this, emitter);
+
+		/**
+		 * Texture array used as each frame of animation, similarly to how MovieClip works.
+		 * @property {Array} textures
+		 * @private
+		 */
+		this.textures = null;
+
+		/**
+		 * Duration of the animation, in seconds.
+		 * @property {Number} duration
+		 * @private
+		 */
+		this.duration = 0;
+
+		/**
+		 * Animation framerate, in frames per second.
+		 * @property {Number} framerate
+		 * @private
+		 */
+		this.framerate = 0;
+
+		/**
+		 * Animation time elapsed, in seconds.
+		 * @property {Number} elapsed
+		 * @private
+		 */
+		this.elapsed = 0;
+
+		/**
+		 * If this particle animation should loop.
+		 * @property {Boolean} loop
+		 * @private
+		 */
+		this.loop = false;
+	};
+
+	// Reference to the super class
+	var s = Particle.prototype;
+	// Reference to the prototype
+	var p = AnimatedParticle.prototype = Object.create(s);
+
+	/**
+	 * Initializes the particle for use, based on the properties that have to
+	 * have been set already on the particle.
+	 * @method init
+	 */
+	p.init = function()
+	{
+		this.Particle_init();
+
+		this.elapsed = 0;
+
+		//if the animation needs to match the particle's life, then cacluate variables
+		if(this.framerate < 0)
+		{
+			this.duration = this.maxLife;
+			this.framerate = this.textures.length / this.duration;
+		}
+	};
+
+	/**
+	 * Sets the textures for the particle.
+	 * @method applyArt
+	 * @param {Array} art An array of PIXI.Texture objects for this animated particle.
+	 */
+	p.applyArt = function(art)
+	{
+		this.textures = art.textures;
+		this.framerate = art.framerate;
+		this.duration = art.duration;
+		this.loop = art.loop;
+	};
+
+	/**
+	 * Updates the particle.
+	 * @method update
+	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 */
+	p.update = function(delta)
+	{
+		//only animate the particle if it is still alive
+		if(this.Particle_update(delta) >= 0)
+		{
+			this.elapsed += delta;
+			if(this.elapsed > this.duration)
+			{
+				//loop elapsed back around
+				if(this.loop)
+					this.elapsed = this.elapsed % this.duration;
+				//subtract a small amount to prevent attempting to go past the end of the animation
+				else
+					this.elapsed = this.duration - 0.000001;
+			}
+			var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
+			this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
+		}
+	};
+
+	p.Particle_destroy = Particle.prototype.destroy;
+	/**
+	 * Destroys the particle, removing references and preventing future use.
+	 * @method destroy
+	 */
+	p.destroy = function()
+	{
+		this.Particle_destroy();
+		this.textures = null;
+	};
+
+	/**
+	 * Checks over the art that was passed to the Emitter's init() function, to do any special
+	 * modifications to prepare it ahead of time.
+	 * @method parseArt
+	 * @static
+	 * @param  {Array} art The array of art data, properly formatted for AnimatedParticle.
+	 * @return {Array} The art, after any needed modifications.
+	 */
+	AnimatedParticle.parseArt = function(art)
+	{
+		var i, data, output = [], j, textures, tex, outTextures;
+		for(i = 0; i < art.length; ++i)
+		{
+			data = art[i];
+			art[i] = output = {};
+			output.textures = outTextures = [];
+			textures = data.textures;
+			for(j = 0; j < textures.length; ++j)
+			{
+				tex = textures[j];
+				if(typeof tex == "string")
+					outTextures.push(Texture.fromImage(tex));
+				else if(tex instanceof Texture)
+					outTextures.push(tex);
+				//assume an object with extra data determining duplicate frame data
+				else
+				{
+					var dupe = tex.count || 1;
+					if(typeof tex.texture == "string")
+						tex = Texture.fromImage(tex.texture);
+					else// if(tex.texture instanceof Texture)
+						tex = tex.texture;
+					for(; dupe > 0; --dupe)
+					{
+						outTextures.push(tex);
+					}
+				}
+			}
+
+			//use these values to signify that the animation should match the particle life time.
+			if(data.framerate == "matchLife")
+			{
+				//-1 means that it should be calculated
+				output.framerate = -1;
+				output.duration = 0;
+				output.loop = false;
+			}
+			else
+			{
+				//determine if the animation should loop
+				output.loop = !!data.loop;
+				//get the framerate, default to 60
+				output.framerate = data.framerate > 0 ? data.framerate : 60;
+				//determine the duration
+				output.duration = outTextures.length / output.framerate;
+			}
+		}
+
+		return art;
+	};
+
+	PIXI.particles.AnimatedParticle = AnimatedParticle;
+
+}(PIXI));
+(function(undefined){
+	//Nothing to deprecate right now!
 }());

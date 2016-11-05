@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.7.0</b>
+                    API Docs for Version: <b>2.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Animated Particle", "modules/Path Particle", "modules/Pixi Particles"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Pixi Particles"]'>
         </form>
     </div>
 </div>
@@ -59,8 +59,6 @@
 	    
 	                <div class="tab-pane" id="modules">
 	                    <ul id="api-modules" class="nav nav-list">
-	                            <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
-	                            <li><a href="../modules/Path Particle.html">Path Particle</a></li>
 	                            <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
 	                    </ul>
 	                </div>
@@ -102,7 +100,7 @@
 <div class="file">
     <pre class="prettyprint linenums">
 /**
-*  @module Animated Particle
+*  @module Pixi Particles
 *  @namespace PIXI.particles
 */
 (function(PIXI, undefined) {
@@ -112,7 +110,6 @@
 	var ParticleUtils = PIXI.particles.ParticleUtils,
 		Particle = PIXI.particles.Particle,
 		Texture = PIXI.Texture;
-	var useAPI3 = ParticleUtils.useAPI3;
 
 	/**
 	 * An individual particle image with an animation. Art data passed to the emitter must be
@@ -157,28 +154,28 @@
 		 * @private
 		 */
 		this.textures = null;
-		
+
 		/**
 		 * Duration of the animation, in seconds.
 		 * @property {Number} duration
 		 * @private
 		 */
 		this.duration = 0;
-		
+
 		/**
 		 * Animation framerate, in frames per second.
 		 * @property {Number} framerate
 		 * @private
 		 */
 		this.framerate = 0;
-		
+
 		/**
 		 * Animation time elapsed, in seconds.
 		 * @property {Number} elapsed
 		 * @private
 		 */
 		this.elapsed = 0;
-		
+
 		/**
 		 * If this particle animation should loop.
 		 * @property {Boolean} loop
@@ -200,9 +197,9 @@
 	p.init = function()
 	{
 		this.Particle_init();
-		
+
 		this.elapsed = 0;
-		
+
 		//if the animation needs to match the particle&#x27;s life, then cacluate variables
 		if(this.framerate &lt; 0)
 		{
@@ -245,10 +242,7 @@
 					this.elapsed = this.duration - 0.000001;
 			}
 			var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
-			if(useAPI3)
-				this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
-			else
-				this.setTexture(this.textures[frame] || ParticleUtils.EMPTY_TEXTURE);
+			this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
 		}
 	};
 
@@ -262,7 +256,7 @@
 		this.Particle_destroy();
 		this.textures = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter&#x27;s init() function, to do any special
 	 * modifications to prepare it ahead of time.
@@ -301,7 +295,7 @@
 					}
 				}
 			}
-			
+
 			//use these values to signify that the animation should match the particle life time.
 			if(data.framerate == &quot;matchLife&quot;)
 			{
@@ -320,7 +314,7 @@
 				output.duration = outTextures.length / output.framerate;
 			}
 		}
-		
+
 		return art;
 	};
 

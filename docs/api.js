@@ -9,19 +9,9 @@ YUI.add("yuidoc-meta", function(Y) {
         "window.Array"
     ],
     "modules": [
-        "Animated Particle",
-        "Path Particle",
         "Pixi Particles"
     ],
     "allModules": [
-        {
-            "displayName": "Animated Particle",
-            "name": "Animated Particle"
-        },
-        {
-            "displayName": "Path Particle",
-            "name": "Path Particle"
-        },
         {
             "displayName": "Pixi Particles",
             "name": "Pixi Particles"

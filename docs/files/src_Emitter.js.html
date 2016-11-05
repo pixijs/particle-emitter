@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.7.0</b>
+                    API Docs for Version: <b>2.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Animated Particle", "modules/Path Particle", "modules/Pixi Particles"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Pixi Particles"]'>
         </form>
     </div>
 </div>
@@ -59,8 +59,6 @@
 	    
 	                <div class="tab-pane" id="modules">
 	                    <ul id="api-modules" class="nav nav-list">
-	                            <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
-	                            <li><a href="../modules/Path Particle.html">Path Particle</a></li>
 	                            <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
 	                    </ul>
 	                </div>
@@ -955,11 +953,14 @@
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
-						if(this.minimumSpeedMultiplier != 1) {
+						if(this.minimumSpeedMultiplier != 1)
+						{
 							rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
 							p.startSpeed = this.startSpeed * rand;
 							p.endSpeed = this.endSpeed * rand;
-                                                } else {
+						}
+						else
+						{
 							p.startSpeed = this.startSpeed;
 							p.endSpeed = this.endSpeed;
 						}

@@ -21,12 +21,12 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.7.0</b>
+                    API Docs for Version: <b>2.0.0</b>
                 </p>
             </li>
         </div>
         <form class="navbar-form pull-right" style="line-height: 40px; height: 40px;">
-            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Animated Particle", "modules/Path Particle", "modules/Pixi Particles"]'>
+            <input style="margin-top: 0;" type="text" class="search-query" placeholder="Search for classes/modules..." data-obj='["classes/PIXI.particles.AnimatedParticle", "classes/PIXI.particles.Emitter", "classes/PIXI.particles.Particle", "classes/PIXI.particles.ParticleUtils", "classes/PIXI.particles.PathParticle", "classes/window.Array", "modules/Pixi Particles"]'>
         </form>
     </div>
 </div>
@@ -59,8 +59,6 @@
 	    
 	                <div class="tab-pane" id="modules">
 	                    <ul id="api-modules" class="nav nav-list">
-	                            <li><a href="../modules/Animated Particle.html">Animated Particle</a></li>
-	                            <li><a href="../modules/Path Particle.html">Path Particle</a></li>
 	                            <li><a href="../modules/Pixi Particles.html">Pixi Particles</a></li>
 	                    </ul>
 	                </div>
@@ -111,7 +109,6 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var useAPI3 = ParticleUtils.useAPI3;
 
 	/**
 	 * An individual particle image. You shouldn&#x27;t have to deal with these.
@@ -124,14 +121,7 @@
 		//start off the sprite with a blank texture, since we are going to replace it
 		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
 		//blank texture for us.
-		if(useAPI3)
-		{
-			Sprite.call(this);
-		}
-		else
-		{
-			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
-		}
+		Sprite.call(this);
 
 		/**
 		 * The emitter that controls this particle.
@@ -402,15 +392,7 @@
 	 */
 	p.applyArt = function(art)
 	{
-		if (useAPI3)
-		{
-			//remove warning on PIXI 3
-			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
-		}
-		else
-		{
-			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
-		}
+		this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 	};
 
 	/**

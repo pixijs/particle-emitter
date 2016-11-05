@@ -2,7 +2,7 @@
     "project": {
         "name": "pixi-particles",
         "description": "Particle system for PixiJS",
-        "version": "1.7.0",
+        "version": "2.0.0",
         "url": "http://github.com/pixijs/pixi-particles",
         "logo": "https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png"
     },
@@ -10,7 +10,7 @@
         "src/AnimatedParticle.js": {
             "name": "src/AnimatedParticle.js",
             "modules": {
-                "Animated Particle": 1
+                "Pixi Particles": 1
             },
             "classes": {
                 "PIXI.particles.AnimatedParticle": 1
@@ -55,9 +55,7 @@
         },
         "src/PathParticle.js": {
             "name": "src/PathParticle.js",
-            "modules": {
-                "Path Particle": 1
-            },
+            "modules": {},
             "classes": {
                 "PIXI.particles.PathParticle": 1
             },
@@ -68,9 +66,7 @@
         },
         "src/main.js": {
             "name": "src/main.js",
-            "modules": {
-                "Pixi Particles": 1
-            },
+            "modules": {},
             "classes": {},
             "fors": {},
             "namespaces": {
@@ -90,27 +86,15 @@
         }
     },
     "modules": {
-        "Animated Particle": {
-            "name": "Animated Particle",
-            "submodules": {},
-            "classes": {
-                "PIXI.particles.AnimatedParticle": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "PIXI.particles": 1
-            },
-            "tag": "module",
-            "file": "src/AnimatedParticle.js",
-            "line": 14
-        },
         "Pixi Particles": {
             "name": "Pixi Particles",
             "submodules": {},
             "classes": {
+                "PIXI.particles.AnimatedParticle": 1,
                 "PIXI.particles.Emitter": 1,
                 "PIXI.particles.Particle": 1,
                 "PIXI.particles.ParticleUtils": 1,
+                "PIXI.particles.PathParticle": 1,
                 "window.Array": 1
             },
             "fors": {},
@@ -121,20 +105,6 @@
             "tag": "module",
             "file": "src/polyfills.js",
             "line": 5
-        },
-        "Path Particle": {
-            "name": "Path Particle",
-            "submodules": {},
-            "classes": {
-                "PIXI.particles.PathParticle": 1
-            },
-            "fors": {},
-            "namespaces": {
-                "PIXI.particles": 1
-            },
-            "tag": "module",
-            "file": "src/PathParticle.js",
-            "line": 12
         }
     },
     "classes": {
@@ -146,10 +116,10 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles",
             "file": "src/AnimatedParticle.js",
-            "line": 14,
+            "line": 13,
             "description": "An individual particle image with an animation. Art data passed to the emitter must be\nformatted in a particular way for AnimatedParticle to be able to handle it:\n\n    {\n        //framerate is required. It is the animation speed of the particle in frames per\n        //second.\n        //A value of \"matchLife\" causes the animation to match the lifetime of an individual\n        //particle, instead of at a constant framerate. This causes the animation to play\n        //through one time, completing when the particle expires.\n        framerate: 6,\n        //loop is optional, and defaults to false.\n        loop: true,\n        //textures is required, and can be an array of any (non-zero) length.\n        textures: [\n            //each entry represents a single texture that should be used for one or more\n            //frames. Any strings will be converted to Textures with Texture.fromImage().\n            //Instances of PIXI.Texture will be used directly.\n            \"animFrame1.png\",\n            //entries can be an object with a 'count' property, telling AnimatedParticle to\n            //use that texture for 'count' frames sequentially.\n            {\n                texture: \"animFrame2.png\",\n                count: 3\n            },\n            \"animFrame3.png\"\n        ]\n    }",
             "is_constructor": 1,
             "params": [
@@ -214,7 +184,7 @@
             "module": "Pixi Particles",
             "namespace": "PIXI.particles",
             "file": "src/Particle.js",
-            "line": 13,
+            "line": 12,
             "description": "An individual particle image. You shouldn't have to deal with these.",
             "is_constructor": 1,
             "params": [
@@ -248,7 +218,7 @@
             "extensions": [],
             "plugin_for": [],
             "extension_for": [],
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles",
             "file": "src/PathParticle.js",
             "line": 12,
@@ -280,7 +250,7 @@
     "classitems": [
         {
             "file": "src/AnimatedParticle.js",
-            "line": 51,
+            "line": 50,
             "description": "Texture array used as each frame of animation, similarly to how MovieClip works.",
             "itemtype": "property",
             "name": "textures",
@@ -288,12 +258,12 @@
             "access": "private",
             "tagname": "",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 58,
+            "line": 57,
             "description": "Duration of the animation, in seconds.",
             "itemtype": "property",
             "name": "duration",
@@ -301,12 +271,12 @@
             "access": "private",
             "tagname": "",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 65,
+            "line": 64,
             "description": "Animation framerate, in frames per second.",
             "itemtype": "property",
             "name": "framerate",
@@ -314,12 +284,12 @@
             "access": "private",
             "tagname": "",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 72,
+            "line": 71,
             "description": "Animation time elapsed, in seconds.",
             "itemtype": "property",
             "name": "elapsed",
@@ -327,12 +297,12 @@
             "access": "private",
             "tagname": "",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 79,
+            "line": 78,
             "description": "If this particle animation should loop.",
             "itemtype": "property",
             "name": "loop",
@@ -340,22 +310,22 @@
             "access": "private",
             "tagname": "",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 92,
+            "line": 91,
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 111,
+            "line": 110,
             "description": "Sets the textures for the particle.",
             "itemtype": "method",
             "name": "applyArt",
@@ -367,12 +337,12 @@
                 }
             ],
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 124,
+            "line": 123,
             "description": "Updates the particle.",
             "itemtype": "method",
             "name": "update",
@@ -384,22 +354,22 @@
                 }
             ],
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 153,
+            "line": 149,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 163,
+            "line": 159,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time.",
             "itemtype": "method",
             "name": "parseArt",
@@ -416,7 +386,7 @@
                 "type": "Array"
             },
             "class": "PIXI.particles.AnimatedParticle",
-            "module": "Animated Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -1217,7 +1187,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 955,
+            "line": 958,
             "description": "Positions a particle for a point type emitter.",
             "itemtype": "method",
             "name": "_spawnPoint",
@@ -1251,7 +1221,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 977,
+            "line": 980,
             "description": "Positions a particle for a rectangle type emitter.",
             "itemtype": "method",
             "name": "_spawnRect",
@@ -1285,7 +1255,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1003,
+            "line": 1006,
             "description": "Positions a particle for a circle type emitter.",
             "itemtype": "method",
             "name": "_spawnCircle",
@@ -1319,7 +1289,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1037,
+            "line": 1040,
             "description": "Positions a particle for a ring type emitter.",
             "itemtype": "method",
             "name": "_spawnRing",
@@ -1353,7 +1323,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1080,
+            "line": 1083,
             "description": "Positions a particle for a burst type emitter.",
             "itemtype": "method",
             "name": "_spawnBurst",
@@ -1387,7 +1357,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1102,
+            "line": 1105,
             "description": "Kills all active particles immediately.",
             "itemtype": "method",
             "name": "cleanup",
@@ -1397,7 +1367,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1120,
+            "line": 1123,
             "description": "Destroys the emitter and all of its particles.",
             "itemtype": "method",
             "name": "destroy",
@@ -1407,7 +1377,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 33,
+            "line": 25,
             "description": "The emitter that controls this particle.",
             "itemtype": "property",
             "name": "emitter",
@@ -1418,7 +1388,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 40,
+            "line": 32,
             "description": "The velocity of the particle. Speed may change, but the angle also\ncontained in velocity is constant.",
             "itemtype": "property",
             "name": "velocity",
@@ -1429,7 +1399,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 46,
+            "line": 38,
             "description": "The maximum lifetime of this particle, in seconds.",
             "itemtype": "property",
             "name": "maxLife",
@@ -1440,7 +1410,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 51,
+            "line": 43,
             "description": "The current age of the particle, in seconds.",
             "itemtype": "property",
             "name": "age",
@@ -1451,7 +1421,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 56,
+            "line": 48,
             "description": "A simple easing function to be applied to all properties that\nare being interpolated.",
             "itemtype": "property",
             "name": "ease",
@@ -1462,7 +1432,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 62,
+            "line": 54,
             "description": "Extra data that the emitter passes along for custom particles.",
             "itemtype": "property",
             "name": "extraData",
@@ -1473,7 +1443,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 67,
+            "line": 59,
             "description": "The alpha of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startAlpha",
@@ -1484,7 +1454,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 72,
+            "line": 64,
             "description": "The alpha of the particle at the end of its life.",
             "itemtype": "property",
             "name": "endAlpha",
@@ -1495,7 +1465,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 77,
+            "line": 69,
             "description": "The speed of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startSpeed",
@@ -1506,7 +1476,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 82,
+            "line": 74,
             "description": "The speed of the particle at the end of its life.",
             "itemtype": "property",
             "name": "endSpeed",
@@ -1517,7 +1487,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 87,
+            "line": 79,
             "description": "Acceleration to apply to the particle.",
             "itemtype": "property",
             "name": "accleration",
@@ -1528,7 +1498,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 92,
+            "line": 84,
             "description": "The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN\nwill disable the maximum speed.",
             "itemtype": "property",
             "name": "maxSpeed",
@@ -1540,7 +1510,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 99,
+            "line": 91,
             "description": "The scale of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startScale",
@@ -1551,7 +1521,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 104,
+            "line": 96,
             "description": "The scale of the particle at the start of its life.",
             "itemtype": "property",
             "name": "endScale",
@@ -1562,7 +1532,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 109,
+            "line": 101,
             "description": "The tint of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startColor",
@@ -1573,7 +1543,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 114,
+            "line": 106,
             "description": "The red tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sR",
@@ -1586,7 +1556,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 121,
+            "line": 113,
             "description": "The green tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sG",
@@ -1599,7 +1569,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 128,
+            "line": 120,
             "description": "The blue tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sB",
@@ -1612,7 +1582,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 135,
+            "line": 127,
             "description": "The tint of the particle at the start of its life.",
             "itemtype": "property",
             "name": "endColor",
@@ -1623,7 +1593,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 140,
+            "line": 132,
             "description": "The red tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_eR",
@@ -1636,7 +1606,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 147,
+            "line": 139,
             "description": "The green tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_sG",
@@ -1649,7 +1619,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 154,
+            "line": 146,
             "description": "The blue tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_sB",
@@ -1662,7 +1632,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 161,
+            "line": 153,
             "description": "If alpha should be interpolated at all.",
             "itemtype": "property",
             "name": "_doAlpha",
@@ -1675,7 +1645,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 167,
+            "line": 159,
             "description": "If scale should be interpolated at all.",
             "itemtype": "property",
             "name": "_doScale",
@@ -1688,7 +1658,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 173,
+            "line": 165,
             "description": "If speed should be interpolated at all.",
             "itemtype": "property",
             "name": "_doSpeed",
@@ -1701,7 +1671,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 179,
+            "line": 171,
             "description": "If acceleration should be handled at all. _doSpeed is mutually exclusive with this,\nand _doSpeed gets priority.",
             "itemtype": "property",
             "name": "_doAcceleration",
@@ -1714,7 +1684,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 186,
+            "line": 178,
             "description": "If color should be interpolated at all.",
             "itemtype": "property",
             "name": "_doColor",
@@ -1727,7 +1697,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 192,
+            "line": 184,
             "description": "If normal movement should be handled. Subclasses wishing to override movement\ncan set this to false in init().",
             "itemtype": "property",
             "name": "_doNormalMovement",
@@ -1740,7 +1710,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 199,
+            "line": 191,
             "description": "One divided by the max life of the particle, saved for slightly faster math.",
             "itemtype": "property",
             "name": "_oneOverLife",
@@ -1753,7 +1723,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 206,
+            "line": 198,
             "description": "Reference to the next particle in the list.",
             "itemtype": "property",
             "name": "next",
@@ -1766,7 +1736,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 213,
+            "line": 205,
             "description": "Reference to the previous particle in the list.",
             "itemtype": "property",
             "name": "prev",
@@ -1779,7 +1749,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 232,
+            "line": 224,
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
@@ -1789,7 +1759,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 237,
+            "line": 229,
             "description": "A reference to init, so that subclasses can access it without the penalty of Function.call()",
             "itemtype": "method",
             "name": "Particle_init",
@@ -1801,7 +1771,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 294,
+            "line": 286,
             "description": "Sets the texture for the particle. This can be overridden to allow\nfor an animated particle.",
             "itemtype": "method",
             "name": "applyArt",
@@ -1818,7 +1788,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 313,
+            "line": 297,
             "description": "Updates the particle.",
             "itemtype": "method",
             "name": "update",
@@ -1839,7 +1809,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 320,
+            "line": 304,
             "description": "A reference to update so that subclasses can access the original without the overhead\nof Function.call().",
             "itemtype": "method",
             "name": "Particle_update",
@@ -1862,7 +1832,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 416,
+            "line": 400,
             "description": "Kills the particle, removing it from the display list\nand telling the emitter to recycle it.",
             "itemtype": "method",
             "name": "kill",
@@ -1872,7 +1842,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 427,
+            "line": 411,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
@@ -1882,7 +1852,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 441,
+            "line": 425,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time.",
             "itemtype": "method",
             "name": "parseArt",
@@ -1904,7 +1874,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 478,
+            "line": 462,
             "description": "Parses extra emitter data to ensure it is set up for this particle class.\nParticle does nothing to the extra data.",
             "itemtype": "method",
             "name": "parseData",
@@ -1926,7 +1896,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 49,
+            "line": 26,
             "description": "Rotates a point by a given angle.",
             "itemtype": "method",
             "name": "rotatePoint",
@@ -1949,7 +1919,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 68,
+            "line": 45,
             "description": "Combines separate color components (0-255) into a single uint color.",
             "itemtype": "method",
             "name": "combineRGBComponents",
@@ -1981,7 +1951,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 82,
+            "line": 59,
             "description": "Reduces the point to a length of 1.",
             "itemtype": "method",
             "name": "normalize",
@@ -1999,7 +1969,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 95,
+            "line": 72,
             "description": "Multiplies the x and y values of this point by a value.",
             "itemtype": "method",
             "name": "scaleBy",
@@ -2022,7 +1992,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 108,
+            "line": 85,
             "description": "Returns the length (or magnitude) of this point.",
             "itemtype": "method",
             "name": "length",
@@ -2043,7 +2013,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 120,
+            "line": 97,
             "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\",\n\"AARRGGBB\", or \"RRGGBB\" to an array of ints of 0-255 or Numbers from 0-1, as\n[r, g, b, (a)].",
             "itemtype": "method",
             "name": "hexToRGB",
@@ -2069,7 +2039,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 154,
+            "line": 131,
             "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated\nby the related tool at http://www.greensock.com/customease/.",
             "itemtype": "method",
             "name": "generateEase",
@@ -2091,7 +2061,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 185,
+            "line": 162,
             "description": "Gets a blend mode, ensuring that it is valid.",
             "itemtype": "method",
             "name": "getBlendMode",
@@ -2119,7 +2089,7 @@
             "name": "path",
             "type": "Function",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2130,7 +2100,7 @@
             "name": "initialRotation",
             "type": "Number",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2141,7 +2111,7 @@
             "name": "initialPosition",
             "type": "PIXI.Point",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2152,7 +2122,7 @@
             "name": "movement",
             "type": "Number",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2166,7 +2136,7 @@
             "tagname": "",
             "static": 1,
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2176,7 +2146,7 @@
             "itemtype": "method",
             "name": "init",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2200,7 +2170,7 @@
                 "type": "Function"
             },
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2217,7 +2187,7 @@
                 }
             ],
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2227,7 +2197,7 @@
             "itemtype": "method",
             "name": "destroy",
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2249,7 +2219,7 @@
                 "type": "Array"
             },
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
@@ -2271,7 +2241,7 @@
                 "type": "Object"
             },
             "class": "PIXI.particles.PathParticle",
-            "module": "Path Particle",
+            "module": "Pixi Particles",
             "namespace": "PIXI.particles"
         },
         {
