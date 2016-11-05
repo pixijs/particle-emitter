@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.6.2</b>
+                    API Docs for Version: <b>1.7.0</b>
                 </p>
             </li>
         </div>
@@ -111,7 +111,7 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils,
 		Particle = PIXI.particles.Particle,
-		ParticleContainer = PIXI.ParticleContainer;
+		ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer;
 
 	/**
 	 * A particle emitter.
@@ -123,6 +123,8 @@
 	 *                                                     for the particles. Strings will be turned
 	 *                                                     into textures via Texture.fromImage().
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
+	 * @param {Boolean} [config.emit=true] If config.emit is explicitly passed as false, the Emitter
+	 *                                     will start disabled.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
 	{
@@ -164,6 +166,15 @@
 		 */
 		this.endSpeed = 0;
 		/**
+		 * A minimum multiplier for the speed of a particle at both start and
+		 * end. A value between minimumSpeedMultiplier and 1 is randomly generated
+		 * and multiplied with startSpeed and endSpeed to provide the actual
+		 * startSpeed and endSpeed for each particle.
+		 * @property {Number} minimumSpeedMultiplier
+		 * @default 1
+		 */
+		this.minimumSpeedMultiplier = 1;
+		/**
 		 * Acceleration to apply to particles. Using this disables
 		 * any interpolation of particle speed. If the particles do
 		 * not have a rotation speed, then they will be rotated to
@@ -172,6 +183,13 @@
 		 * @default null
 		 */
 		this.acceleration = null;
+		/**
+		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+		 * will disable the maximum speed.
+		 * @property {Number} maxSpeed
+		 * @default NaN
+		 */
+		this.maxSpeed = NaN;
 		/**
 		 * The starting scale of all particles.
 		 * @property {Number} startScale
@@ -226,14 +244,23 @@
 		 */
 		this.maxStartRotation = 0;
 		/**
+		 * If no particle rotation should occur. Starting rotation will still
+		 * affect the direction in which particles move. If the rotation speed
+		 * is set, then this will be ignored.
+		 * @property {Boolean} maxStartRotation
+		 */
+		this.noRotation = false;
+		/**
 		 * The minimum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} minRotationSpeed
 		 */
 		this.minRotationSpeed = 0;
 		/**
 		 * The maximum rotation speed for a particle, in degrees per second.
-		 * This only visually spins the particle, it does not change direction of movement.
+		 * This only visually spins the particle, it does not change direction
+		 * of movement.
 		 * @property {Number} maxRotationSpeed
 		 */
 		this.maxRotationSpeed = 0;
@@ -458,7 +485,7 @@
 	var p = Emitter.prototype = {};
 
 	var helperPoint = new PIXI.Point();
-	
+
 	/**
 	 * Time between particle spawns in seconds. If this value is not a number greater than 0,
 	 * it will be set to 1 (particle per second) to prevent infinite loops.
@@ -515,6 +542,15 @@
 		get: function() { return this._parent; },
 		set: function(value)
 		{
+			//if our previous parent was a ParticleContainer, then we need to remove
+			//pooled particles from it
+			if (this._parentIsPC) {
+				for (var particle = this._poolFirst; particle; particle = particle.next)
+				{
+					if(particle.parent)
+						particle.parent.removeChild(particle);
+				}
+			}
 			this.cleanup();
 			this._parent = value;
 			this._parentIsPC = ParticleContainer &amp;&amp; value &amp;&amp; value instanceof ParticleContainer;
@@ -533,12 +569,12 @@
 			return;
 		//clean up any existing particles
 		this.cleanup();
-		
+
 		//store the original config and particle images, in case we need to re-initialize
 		//when the particle constructor is changed
 		this._origConfig = config;
 		this._origArt = art;
-		
+
 		//set up the array of data, also ensuring that it is an array
 		art = Array.isArray(art) ? art.slice() : [art];
 		//run the art through the particle class&#x27;s parsing function
@@ -560,15 +596,20 @@
 		{
 			this.startSpeed = config.speed.start;
 			this.endSpeed = config.speed.end;
+			this.minimumSpeedMultiplier = config.speed.minimumSpeedMultiplier || 1;
 		}
 		else
+		{
+			this.minimumSpeedMultiplier = 1;
 			this.startSpeed = this.endSpeed = 0;
+		}
 		//set up acceleration
 		var acceleration = config.acceleration;
 		if(acceleration &amp;&amp; (acceleration.x || acceleration.y))
 		{
 			this.endSpeed = this.startSpeed;
 			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
+			this.maxSpeed = config.maxSpeed || NaN;
 		}
 		else
 			this.acceleration = new PIXI.Point();
@@ -601,6 +642,13 @@
 		}
 		else
 			this.minStartRotation = this.maxStartRotation = 0;
+		if (config.noRotation &amp;&amp;
+			(this.minStartRotation || this.maxStartRotation))
+		{
+			this.noRotation = !!config.noRotation;
+		}
+		else
+			this.noRotation = false;
 		//set up the rotation speed
 		if (config.rotationSpeed)
 		{
@@ -692,7 +740,7 @@
 		this._prevPosIsValid = false;
 		//start emitting
 		this._spawnTimer = 0;
-		this.emit = true;
+		this.emit = config.emit === undefined ? true : !!config.emit;
 	};
 
 	/**
@@ -806,6 +854,9 @@
 	 */
 	p.update = function(delta)
 	{
+		//if we don&#x27;t have a parent to add particles to, then don&#x27;t do anything.
+		//this also works as a isDestroyed check
+		if (!this._parent) return;
 		//update existing particles
 		var i, particle, next;
 		for (particle = this._activeParticlesFirst; particle; particle = next)
@@ -878,7 +929,7 @@
 					for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i &lt; len; ++i)
 					{
 						//create particle
-						var p;
+						var p, rand;
 						if(this._poolFirst)
 						{
 							p = this._poolFirst;
@@ -889,7 +940,7 @@
 						{
 							p = new this.particleConstructor(this);
 						}
-												
+
 						//set a random texture if we have more than one
 						if(this.particleImages.length &gt; 1)
 						{
@@ -904,13 +955,20 @@
 						//set up the start and end values
 						p.startAlpha = this.startAlpha;
 						p.endAlpha = this.endAlpha;
-						p.startSpeed = this.startSpeed;
-						p.endSpeed = this.endSpeed;
+						if(this.minimumSpeedMultiplier != 1) {
+							rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
+							p.startSpeed = this.startSpeed * rand;
+							p.endSpeed = this.endSpeed * rand;
+                                                } else {
+							p.startSpeed = this.startSpeed;
+							p.endSpeed = this.endSpeed;
+						}
 						p.acceleration.x = this.acceleration.x;
 						p.acceleration.y = this.acceleration.y;
+						p.maxSpeed = this.maxSpeed;
 						if(this.minimumScaleMultiplier != 1)
 						{
-							var rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
+							rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
 							p.startScale = this.startScale * rand;
 							p.endScale = this.endScale * rand;
 						}
@@ -926,6 +984,7 @@
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						p.noRotation = this.noRotation;
 						//set up the lifetime
 						p.maxLife = lifetime;
 						//set the blend mode
@@ -950,16 +1009,19 @@
 						}
 						else
 						{
+							//kind of hacky, but performance friendly
 							//shuffle children to correct place
 							var children = this._parent.children;
 							//avoid using splice if possible
-							var index = children.indexOf(p);
-							if(index &lt; 1)
+							if(children[0] == p)
 								children.shift();
-							else if(index == children.length - 1)
+							else if(children[children.length-1] == p)
 								children.pop();
 							else
+							{
+								var index = children.indexOf(p);
 								children.splice(index, 1);
+							}
 							if(this.addAtBack)
 								children.unshift(p);
 							else
@@ -1164,9 +1226,14 @@
 	 */
 	p.destroy = function()
 	{
+		//puts all active particles in the pool, and removes them from the particle parent
 		this.cleanup();
-		for (var particle = this._poolFirst; particle; particle = particle.next)
+		//wipe the pool clean
+		var next;
+		for (var particle = this._poolFirst; particle; particle = next)
 		{
+			//store next value so we don&#x27;t lose it in our destroy call
+			next = particle.next;
 			particle.destroy();
 		}
 		this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =

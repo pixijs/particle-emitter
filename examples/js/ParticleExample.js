@@ -38,13 +38,14 @@
 			updateId = requestAnimationFrame(update);
 
 			var now = Date.now();
-			emitter.update((now - elapsed) * 0.001);
+			if (emitter)
+				emitter.update((now - elapsed) * 0.001);
 			
 			framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
 			
 			elapsed = now;
 			
-			if(particleCount)
+			if(emitter && particleCount)
 				particleCount.innerHTML = emitter.particleCount;
 
 			// render the stage
@@ -138,12 +139,17 @@
 			// Start the update
 			update();
 			
+			//for testing and debugging
 			window.destroyEmitter = function()
 			{
 				emitter.destroy();
 				emitter = null;
 				window.destroyEmitter = null;
-				cancelAnimationFrame(updateId);
+				//cancelAnimationFrame(updateId);
+				
+				//reset SpriteRenderer's batching to fully release particles for GC
+				if (renderer.plugins && renderer.plugins.sprite && renderer.plugins.sprite.sprites)
+					renderer.plugins.sprite.sprites.length = 0;
 				
 				renderer.render(stage);
 			};

@@ -1,4 +1,4 @@
-/*! pixi-particles 1.6.2 */
+/*! pixi-particles 1.7.0 */
 /**
 *  @module Animated Particle
 *  @namespace PIXI.particles
@@ -144,19 +144,21 @@
 			}
 			var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
 			if(useAPI3)
-				this.texture = this.textures[frame];
+				this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
 			else
-				this.setTexture(this.textures[frame]);
+				this.setTexture(this.textures[frame] || ParticleUtils.EMPTY_TEXTURE);
 		}
 	};
 
+	p.Particle_destroy = Particle.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
-		s.destroy.call(this);
+		this.Particle_destroy();
+		this.textures = null;
 	};
 	
 	/**

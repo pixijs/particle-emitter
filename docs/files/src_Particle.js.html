@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.6.2</b>
+                    API Docs for Version: <b>1.7.0</b>
                 </p>
             </li>
         </div>
@@ -111,14 +111,7 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils;
 	var Sprite = PIXI.Sprite;
-	var EMPTY_TEXTURE;
 	var useAPI3 = ParticleUtils.useAPI3;
-	if(!useAPI3)
-	{
-		var canvas = document.createElement(&quot;canvas&quot;);
-		canvas.width = canvas.height = 1;
-		EMPTY_TEXTURE = PIXI.Texture.fromCanvas(canvas);
-	}
 
 	/**
 	 * An individual particle image. You shouldn&#x27;t have to deal with these.
@@ -132,9 +125,13 @@
 		//later when the particle is initialized. Pixi v2 requires a texture, v3 supplies a
 		//blank texture for us.
 		if(useAPI3)
+		{
 			Sprite.call(this);
+		}
 		else
-			Sprite.call(this, EMPTY_TEXTURE);
+		{
+			Sprite.call(this, ParticleUtils.EMPTY_TEXTURE);
+		}
 
 		/**
 		 * The emitter that controls this particle.
@@ -195,6 +192,13 @@
 		 * @property {PIXI.Point} accleration
 		 */
 		this.acceleration = new PIXI.Point();
+		/**
+		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+		 * will disable the maximum speed.
+		 * @property {Number} maxSpeed
+		 * @default NaN
+		 */
+		this.maxSpeed = NaN;
 		/**
 		 * The scale of the particle at the start of its life.
 		 * @property {Number} startScale
@@ -301,14 +305,14 @@
 		 * @private
 		 */
 		this._oneOverLife = 0;
-		
+
 		/**
 		 * Reference to the next particle in the list.
 		 * @property {Particle} next
 		 * @private
 		 */
 		this.next = null;
-		
+
 		/**
 		 * Reference to the previous particle in the list.
 		 * @property {Particle} prev
@@ -346,8 +350,15 @@
 		this.velocity.x = this.startSpeed;
 		this.velocity.y = 0;
 		ParticleUtils.rotatePoint(this.rotation, this.velocity);
-		//convert rotation to Radians from Degrees
-		this.rotation *= ParticleUtils.DEG_TO_RADS;
+		if (this.noRotation)
+		{
+			this.rotation = 0;
+		}
+		else
+		{
+			//convert rotation to Radians from Degrees
+			this.rotation *= ParticleUtils.DEG_TO_RADS;
+		}
 		//convert rotation speed to Radians from Degrees
 		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 		//set alpha to inital alpha
@@ -394,11 +405,11 @@
 		if (useAPI3)
 		{
 			//remove warning on PIXI 3
-			this.texture = art;
+			this.texture = art || ParticleUtils.EMPTY_TEXTURE;
 		}
 		else
 		{
-			this.setTexture(art);
+			this.setTexture(art || ParticleUtils.EMPTY_TEXTURE);
 		}
 	};
 
@@ -470,6 +481,16 @@
 			{
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
+				if (this.maxSpeed)
+				{
+					var currentSpeed = ParticleUtils.length(this.velocity);
+					//if we are going faster than we should, clamp at the max speed
+					//DO NOT recalculate vector length
+					if (currentSpeed &gt; this.maxSpeed)
+					{
+						ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
+					}
+				}
 			}
 			//adjust position based on velocity
 			this.position.x += this.velocity.x * delta;
@@ -488,7 +509,7 @@
 		{
 			this.rotation += this.rotationSpeed * delta;
 		}
-		else if(this.acceleration)
+		else if(this.acceleration &amp;&amp; !this.noRotation)
 		{
 			this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
 		}
@@ -505,16 +526,21 @@
 		this.emitter.recycle(this);
 	};
 
+	p.Sprite_Destroy = Sprite.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
+		if (this.parent)
+			this.parent.removeChild(this);
+		if (this.Sprite_Destroy)
+			this.Sprite_Destroy();
 		this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
 			this.next = this.prev = null;
 	};
-	
+
 	/**
 	 * Checks over the art that was passed to the Emitter&#x27;s init() function, to do any special
 	 * modifications to prepare it ahead of time.
@@ -548,10 +574,10 @@
 				}
 			}
 		}
-		
+
 		return art;
 	};
-	
+
 	/**
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * Particle does nothing to the extra data.

@@ -2,7 +2,7 @@
     "project": {
         "name": "pixi-particles",
         "description": "Particle system for PixiJS",
-        "version": "1.6.2",
+        "version": "1.7.0",
         "url": "http://github.com/pixijs/pixi-particles",
         "logo": "https://raw.githubusercontent.com/pixijs/pixi-particles-editor/master/deploy/assets/images/icon.png"
     },
@@ -190,7 +190,16 @@
                     "name": "config",
                     "description": "A configuration object containing settings for the emitter.",
                     "type": "Object",
-                    "optional": true
+                    "optional": true,
+                    "props": [
+                        {
+                            "name": "emit",
+                            "description": "If config.emit is explicitly passed as false, the Emitter\n                                    will start disabled.",
+                            "type": "Boolean",
+                            "optional": true,
+                            "optdefault": "true"
+                        }
+                    ]
                 }
             ]
         },
@@ -205,7 +214,7 @@
             "module": "Pixi Particles",
             "namespace": "PIXI.particles",
             "file": "src/Particle.js",
-            "line": 20,
+            "line": 13,
             "description": "An individual particle image. You shouldn't have to deal with these.",
             "is_constructor": 1,
             "params": [
@@ -227,7 +236,7 @@
             "module": "Pixi Particles",
             "namespace": "PIXI.particles",
             "file": "src/ParticleUtils.js",
-            "line": 11,
+            "line": 12,
             "description": "Contains helper functions for particles and emitters to use.",
             "static": 1
         },
@@ -380,7 +389,7 @@
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 152,
+            "line": 153,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
@@ -390,7 +399,7 @@
         },
         {
             "file": "src/AnimatedParticle.js",
-            "line": 161,
+            "line": 163,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time.",
             "itemtype": "method",
             "name": "parseArt",
@@ -412,7 +421,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 26,
+            "line": 28,
             "description": "The constructor used to create new particles. The default is\nthe built in particle class.",
             "itemtype": "property",
             "name": "_particleConstructor",
@@ -425,7 +434,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 34,
+            "line": 36,
             "description": "An array of PIXI Texture objects.",
             "itemtype": "property",
             "name": "particleImages",
@@ -436,7 +445,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 39,
+            "line": 41,
             "description": "The starting alpha of all particles.",
             "itemtype": "property",
             "name": "startAlpha",
@@ -448,7 +457,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 45,
+            "line": 47,
             "description": "The ending alpha of all particles.",
             "itemtype": "property",
             "name": "endAlpha",
@@ -460,7 +469,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 51,
+            "line": 53,
             "description": "The starting speed of all particles.",
             "itemtype": "property",
             "name": "startSpeed",
@@ -472,7 +481,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 57,
+            "line": 59,
             "description": "The ending speed of all particles.",
             "itemtype": "property",
             "name": "endSpeed",
@@ -484,7 +493,19 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 63,
+            "line": 65,
+            "description": "A minimum multiplier for the speed of a particle at both start and\nend. A value between minimumSpeedMultiplier and 1 is randomly generated\nand multiplied with startSpeed and endSpeed to provide the actual\nstartSpeed and endSpeed for each particle.",
+            "itemtype": "property",
+            "name": "minimumSpeedMultiplier",
+            "type": "Number",
+            "default": "1",
+            "class": "PIXI.particles.Emitter",
+            "module": "Pixi Particles",
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 74,
             "description": "Acceleration to apply to particles. Using this disables\nany interpolation of particle speed. If the particles do\nnot have a rotation speed, then they will be rotated to\nmatch the direction of travel.",
             "itemtype": "property",
             "name": "acceleration",
@@ -496,7 +517,19 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 72,
+            "line": 83,
+            "description": "The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN\nwill disable the maximum speed.",
+            "itemtype": "property",
+            "name": "maxSpeed",
+            "type": "Number",
+            "default": "NaN",
+            "class": "PIXI.particles.Emitter",
+            "module": "Pixi Particles",
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 90,
             "description": "The starting scale of all particles.",
             "itemtype": "property",
             "name": "startScale",
@@ -508,7 +541,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 78,
+            "line": 96,
             "description": "The ending scale of all particles.",
             "itemtype": "property",
             "name": "endScale",
@@ -520,7 +553,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 84,
+            "line": 102,
             "description": "A minimum multiplier for the scale of a particle at both start and\nend. A value between minimumScaleMultiplier and 1 is randomly generated\nand multiplied with startScale and endScale to provide the actual\nstartScale and endScale for each particle.",
             "itemtype": "property",
             "name": "minimumScaleMultiplier",
@@ -532,7 +565,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 93,
+            "line": 111,
             "description": "The starting color of all particles, as red, green, and blue uints from 0-255.",
             "itemtype": "property",
             "name": "startColor",
@@ -543,7 +576,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 98,
+            "line": 116,
             "description": "The ending color of all particles, as red, green, and blue uints from 0-255.",
             "itemtype": "property",
             "name": "endColor",
@@ -554,7 +587,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 103,
+            "line": 121,
             "description": "The minimum lifetime for a particle, in seconds.",
             "itemtype": "property",
             "name": "minLifetime",
@@ -565,7 +598,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 108,
+            "line": 126,
             "description": "The maximum lifetime for a particle, in seconds.",
             "itemtype": "property",
             "name": "maxLifetime",
@@ -576,7 +609,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 113,
+            "line": 131,
             "description": "The minimum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
             "itemtype": "property",
             "name": "minStartRotation",
@@ -587,7 +620,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 119,
+            "line": 137,
             "description": "The maximum start rotation for a particle, in degrees. This value\nis ignored if the spawn type is \"burst\" or \"arc\".",
             "itemtype": "property",
             "name": "maxStartRotation",
@@ -598,8 +631,19 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 125,
-            "description": "The minimum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
+            "line": 143,
+            "description": "If no particle rotation should occur. Starting rotation will still\naffect the direction in which particles move. If the rotation speed\nis set, then this will be ignored.",
+            "itemtype": "property",
+            "name": "maxStartRotation",
+            "type": "Boolean",
+            "class": "PIXI.particles.Emitter",
+            "module": "Pixi Particles",
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/Emitter.js",
+            "line": 150,
+            "description": "The minimum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction\nof movement.",
             "itemtype": "property",
             "name": "minRotationSpeed",
             "type": "Number",
@@ -609,8 +653,8 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 131,
-            "description": "The maximum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction of movement.",
+            "line": 157,
+            "description": "The maximum rotation speed for a particle, in degrees per second.\nThis only visually spins the particle, it does not change direction\nof movement.",
             "itemtype": "property",
             "name": "maxRotationSpeed",
             "type": "Number",
@@ -620,7 +664,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 137,
+            "line": 164,
             "description": "The blend mode for all particles, as named by PIXI.blendModes.",
             "itemtype": "property",
             "name": "particleBlendMode",
@@ -631,7 +675,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 142,
+            "line": 169,
             "description": "An easing function for nonlinear interpolation of values. Accepts a single\nparameter of time as a value from 0-1, inclusive. Expected outputs are values\nfrom 0-1, inclusive.",
             "itemtype": "property",
             "name": "customEase",
@@ -642,7 +686,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 149,
+            "line": 176,
             "description": "Extra data for use in custom particles. The emitter doesn't look inside, but\npasses it on to the particle to use in init().",
             "itemtype": "property",
             "name": "extraData",
@@ -653,7 +697,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 156,
+            "line": 183,
             "description": "Time between particle spawns in seconds.",
             "itemtype": "property",
             "name": "_frequency",
@@ -666,7 +710,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 162,
+            "line": 189,
             "description": "Maximum number of particles to keep alive at a time. If this limit\nis reached, no more particles will spawn until some have died.",
             "itemtype": "property",
             "name": "maxParticles",
@@ -678,7 +722,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 169,
+            "line": 196,
             "description": "The amount of time in seconds to emit for before setting emit to false.\nA value of -1 is an unlimited amount of time.",
             "itemtype": "property",
             "name": "emitterLifetime",
@@ -690,7 +734,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 176,
+            "line": 203,
             "description": "Position at which to spawn particles, relative to the emitter's owner's origin.\nFor example, the flames of a rocket travelling right might have a spawnPos\nof {x:-50, y:0}.\nto spawn at the rear of the rocket.\nTo change this, use updateSpawnPos().",
             "itemtype": "property",
             "name": "spawnPos",
@@ -702,7 +746,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 186,
+            "line": 213,
             "description": "How the particles will be spawned. Valid types are \"point\", \"rectangle\",\n\"circle\", \"burst\", \"ring\".",
             "itemtype": "property",
             "name": "spawnType",
@@ -714,7 +758,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 193,
+            "line": 220,
             "description": "A reference to the emitter function specific to the spawn type.",
             "itemtype": "property",
             "name": "_spawnFunc",
@@ -727,7 +771,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 199,
+            "line": 226,
             "description": "A rectangle relative to spawnPos to spawn particles inside if the spawn type is \"rect\".",
             "itemtype": "property",
             "name": "spawnRect",
@@ -738,7 +782,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 204,
+            "line": 231,
             "description": "A circle relative to spawnPos to spawn particles inside if the spawn type is \"circle\".",
             "itemtype": "property",
             "name": "spawnCircle",
@@ -749,7 +793,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 209,
+            "line": 236,
             "description": "Number of particles to spawn each wave in a burst.",
             "itemtype": "property",
             "name": "particlesPerWave",
@@ -761,7 +805,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 215,
+            "line": 242,
             "description": "Spacing between particles in a burst. 0 gives a random angle for each particle.",
             "itemtype": "property",
             "name": "particleSpacing",
@@ -773,7 +817,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 221,
+            "line": 248,
             "description": "Angle at which to start spawning particles in a burst.",
             "itemtype": "property",
             "name": "angleStart",
@@ -785,7 +829,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 227,
+            "line": 254,
             "description": "Rotation of the emitter or emitter's owner in degrees. This is added to\nthe calculated spawn angle.\nTo change this, use rotate().",
             "itemtype": "property",
             "name": "rotation",
@@ -798,7 +842,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 236,
+            "line": 263,
             "description": "The world position of the emitter's owner, to add spawnPos to when\nspawning particles. To change this, use updateOwnerPos().",
             "itemtype": "property",
             "name": "ownerPos",
@@ -811,7 +855,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 244,
+            "line": 271,
             "description": "The origin + spawnPos in the previous update, so that the spawn position\ncan be interpolated to space out particles better.",
             "itemtype": "property",
             "name": "_prevEmitterPos",
@@ -824,7 +868,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 251,
+            "line": 278,
             "description": "If _prevEmitterPos is valid, to prevent interpolation on the first update",
             "itemtype": "property",
             "name": "_prevPosIsValid",
@@ -838,7 +882,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 258,
+            "line": 285,
             "description": "If either ownerPos or spawnPos has changed since the previous update.",
             "itemtype": "property",
             "name": "_posChanged",
@@ -849,7 +893,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 263,
+            "line": 290,
             "description": "If the parent is a ParticleContainer from Pixi V3",
             "itemtype": "property",
             "name": "_parentIsPC",
@@ -862,7 +906,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 269,
+            "line": 296,
             "description": "The display object to add particles to.",
             "itemtype": "property",
             "name": "_parent",
@@ -875,7 +919,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 275,
+            "line": 302,
             "description": "If particles should be added at the back of the display list instead of the front.",
             "itemtype": "property",
             "name": "addAtBack",
@@ -886,7 +930,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 280,
+            "line": 307,
             "description": "The current number of active particles.",
             "itemtype": "property",
             "name": "particleCount",
@@ -898,7 +942,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 286,
+            "line": 313,
             "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
             "itemtype": "property",
             "name": "_emit",
@@ -911,7 +955,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 293,
+            "line": 320,
             "description": "The timer for when to spawn particles in seconds, where numbers less\nthan 0 mean that particles should be spawned.",
             "itemtype": "property",
             "name": "_spawnTimer",
@@ -924,7 +968,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 300,
+            "line": 327,
             "description": "The life of the emitter in seconds.",
             "itemtype": "property",
             "name": "_emitterLife",
@@ -937,7 +981,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 306,
+            "line": 333,
             "description": "The particles that are active and on the display list. This is the first particle in a\nlinked list.",
             "itemtype": "property",
             "name": "_activeParticlesFirst",
@@ -950,7 +994,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 313,
+            "line": 340,
             "description": "The particles that are active and on the display list. This is the last particle in a\nlinked list.",
             "itemtype": "property",
             "name": "_activeParticlesLast",
@@ -963,7 +1007,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 320,
+            "line": 347,
             "description": "The particles that are not currently being used. This is the first particle in a\nlinked list.",
             "itemtype": "property",
             "name": "_poolFirst",
@@ -976,7 +1020,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 327,
+            "line": 354,
             "description": "The original config object that this emitter was initialized with.",
             "itemtype": "property",
             "name": "_origConfig",
@@ -989,7 +1033,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 333,
+            "line": 360,
             "description": "The original particle image data that this emitter was initialized with.",
             "itemtype": "property",
             "name": "_origArt",
@@ -1002,7 +1046,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 359,
+            "line": 386,
             "description": "Time between particle spawns in seconds. If this value is not a number greater than 0,\nit will be set to 1 (particle per second) to prevent infinite loops.",
             "itemtype": "property",
             "name": "frequency",
@@ -1013,7 +1057,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 377,
+            "line": 404,
             "description": "The constructor used to create new particles. The default is\nthe built in Particle class. Setting this will dump any active or\npooled particles, if the emitter has already been used.",
             "itemtype": "property",
             "name": "particleConstructor",
@@ -1024,7 +1068,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 406,
+            "line": 433,
             "description": "The display object to add particles to. Settings this will dump any active particles.",
             "itemtype": "property",
             "name": "parent",
@@ -1035,7 +1079,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 421,
+            "line": 457,
             "description": "Sets up the emitter based on the config settings.",
             "itemtype": "method",
             "name": "init",
@@ -1057,7 +1101,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 595,
+            "line": 643,
             "description": "Recycles an individual particle.",
             "itemtype": "method",
             "name": "recycle",
@@ -1074,7 +1118,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 629,
+            "line": 677,
             "description": "Sets the rotation of the emitter to a new value.",
             "itemtype": "method",
             "name": "rotate",
@@ -1091,7 +1135,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 646,
+            "line": 694,
             "description": "Changes the spawn position of the emitter.",
             "itemtype": "method",
             "name": "updateSpawnPos",
@@ -1113,7 +1157,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 659,
+            "line": 707,
             "description": "Changes the position of the emitter's owner. You should call this if you are adding\nparticles to the world display object that your emitter's owner is moving around in.",
             "itemtype": "method",
             "name": "updateOwnerPos",
@@ -1135,7 +1179,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 673,
+            "line": 721,
             "description": "Prevents emitter position interpolation in the next update.\nThis should be used if you made a major position change of your emitter's owner\nthat was not normal movement.",
             "itemtype": "method",
             "name": "resetPositionTracking",
@@ -1145,7 +1189,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 684,
+            "line": 732,
             "description": "If particles should be emitted during update() calls. Setting this to false\nstops new particles from being created, but allows existing ones to die out.",
             "itemtype": "property",
             "name": "emit",
@@ -1156,7 +1200,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 699,
+            "line": 747,
             "description": "Updates all particles spawned by this emitter and emits new ones.",
             "itemtype": "method",
             "name": "update",
@@ -1173,7 +1217,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 893,
+            "line": 955,
             "description": "Positions a particle for a point type emitter.",
             "itemtype": "method",
             "name": "_spawnPoint",
@@ -1207,7 +1251,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 915,
+            "line": 977,
             "description": "Positions a particle for a rectangle type emitter.",
             "itemtype": "method",
             "name": "_spawnRect",
@@ -1241,7 +1285,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 941,
+            "line": 1003,
             "description": "Positions a particle for a circle type emitter.",
             "itemtype": "method",
             "name": "_spawnCircle",
@@ -1275,7 +1319,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 975,
+            "line": 1037,
             "description": "Positions a particle for a ring type emitter.",
             "itemtype": "method",
             "name": "_spawnRing",
@@ -1309,7 +1353,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1018,
+            "line": 1080,
             "description": "Positions a particle for a burst type emitter.",
             "itemtype": "method",
             "name": "_spawnBurst",
@@ -1343,7 +1387,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1040,
+            "line": 1102,
             "description": "Kills all active particles immediately.",
             "itemtype": "method",
             "name": "cleanup",
@@ -1353,7 +1397,7 @@
         },
         {
             "file": "src/Emitter.js",
-            "line": 1058,
+            "line": 1120,
             "description": "Destroys the emitter and all of its particles.",
             "itemtype": "method",
             "name": "destroy",
@@ -1363,7 +1407,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 36,
+            "line": 33,
             "description": "The emitter that controls this particle.",
             "itemtype": "property",
             "name": "emitter",
@@ -1374,7 +1418,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 43,
+            "line": 40,
             "description": "The velocity of the particle. Speed may change, but the angle also\ncontained in velocity is constant.",
             "itemtype": "property",
             "name": "velocity",
@@ -1385,7 +1429,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 49,
+            "line": 46,
             "description": "The maximum lifetime of this particle, in seconds.",
             "itemtype": "property",
             "name": "maxLife",
@@ -1396,7 +1440,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 54,
+            "line": 51,
             "description": "The current age of the particle, in seconds.",
             "itemtype": "property",
             "name": "age",
@@ -1407,7 +1451,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 59,
+            "line": 56,
             "description": "A simple easing function to be applied to all properties that\nare being interpolated.",
             "itemtype": "property",
             "name": "ease",
@@ -1418,7 +1462,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 65,
+            "line": 62,
             "description": "Extra data that the emitter passes along for custom particles.",
             "itemtype": "property",
             "name": "extraData",
@@ -1429,7 +1473,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 70,
+            "line": 67,
             "description": "The alpha of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startAlpha",
@@ -1440,7 +1484,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 75,
+            "line": 72,
             "description": "The alpha of the particle at the end of its life.",
             "itemtype": "property",
             "name": "endAlpha",
@@ -1451,7 +1495,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 80,
+            "line": 77,
             "description": "The speed of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startSpeed",
@@ -1462,7 +1506,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 85,
+            "line": 82,
             "description": "The speed of the particle at the end of its life.",
             "itemtype": "property",
             "name": "endSpeed",
@@ -1473,7 +1517,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 90,
+            "line": 87,
             "description": "Acceleration to apply to the particle.",
             "itemtype": "property",
             "name": "accleration",
@@ -1484,7 +1528,19 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 95,
+            "line": 92,
+            "description": "The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN\nwill disable the maximum speed.",
+            "itemtype": "property",
+            "name": "maxSpeed",
+            "type": "Number",
+            "default": "NaN",
+            "class": "PIXI.particles.Particle",
+            "module": "Pixi Particles",
+            "namespace": "PIXI.particles"
+        },
+        {
+            "file": "src/Particle.js",
+            "line": 99,
             "description": "The scale of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startScale",
@@ -1495,7 +1551,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 100,
+            "line": 104,
             "description": "The scale of the particle at the start of its life.",
             "itemtype": "property",
             "name": "endScale",
@@ -1506,7 +1562,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 105,
+            "line": 109,
             "description": "The tint of the particle at the start of its life.",
             "itemtype": "property",
             "name": "startColor",
@@ -1517,7 +1573,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 110,
+            "line": 114,
             "description": "The red tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sR",
@@ -1530,7 +1586,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 117,
+            "line": 121,
             "description": "The green tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sG",
@@ -1543,7 +1599,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 124,
+            "line": 128,
             "description": "The blue tint of the particle at the start of its life.\nThis is pulled from startColor in init().",
             "itemtype": "property",
             "name": "_sB",
@@ -1556,7 +1612,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 131,
+            "line": 135,
             "description": "The tint of the particle at the start of its life.",
             "itemtype": "property",
             "name": "endColor",
@@ -1567,7 +1623,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 136,
+            "line": 140,
             "description": "The red tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_eR",
@@ -1580,7 +1636,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 143,
+            "line": 147,
             "description": "The green tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_sG",
@@ -1593,7 +1649,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 150,
+            "line": 154,
             "description": "The blue tint of the particle at the end of its life.\nThis is pulled from endColor in init().",
             "itemtype": "property",
             "name": "_sB",
@@ -1606,7 +1662,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 157,
+            "line": 161,
             "description": "If alpha should be interpolated at all.",
             "itemtype": "property",
             "name": "_doAlpha",
@@ -1619,7 +1675,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 163,
+            "line": 167,
             "description": "If scale should be interpolated at all.",
             "itemtype": "property",
             "name": "_doScale",
@@ -1632,7 +1688,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 169,
+            "line": 173,
             "description": "If speed should be interpolated at all.",
             "itemtype": "property",
             "name": "_doSpeed",
@@ -1645,7 +1701,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 175,
+            "line": 179,
             "description": "If acceleration should be handled at all. _doSpeed is mutually exclusive with this,\nand _doSpeed gets priority.",
             "itemtype": "property",
             "name": "_doAcceleration",
@@ -1658,7 +1714,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 182,
+            "line": 186,
             "description": "If color should be interpolated at all.",
             "itemtype": "property",
             "name": "_doColor",
@@ -1671,7 +1727,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 188,
+            "line": 192,
             "description": "If normal movement should be handled. Subclasses wishing to override movement\ncan set this to false in init().",
             "itemtype": "property",
             "name": "_doNormalMovement",
@@ -1684,7 +1740,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 195,
+            "line": 199,
             "description": "One divided by the max life of the particle, saved for slightly faster math.",
             "itemtype": "property",
             "name": "_oneOverLife",
@@ -1697,7 +1753,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 202,
+            "line": 206,
             "description": "Reference to the next particle in the list.",
             "itemtype": "property",
             "name": "next",
@@ -1710,7 +1766,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 209,
+            "line": 213,
             "description": "Reference to the previous particle in the list.",
             "itemtype": "property",
             "name": "prev",
@@ -1723,7 +1779,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 228,
+            "line": 232,
             "description": "Initializes the particle for use, based on the properties that have to\nhave been set already on the particle.",
             "itemtype": "method",
             "name": "init",
@@ -1733,7 +1789,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 233,
+            "line": 237,
             "description": "A reference to init, so that subclasses can access it without the penalty of Function.call()",
             "itemtype": "method",
             "name": "Particle_init",
@@ -1745,7 +1801,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 283,
+            "line": 294,
             "description": "Sets the texture for the particle. This can be overridden to allow\nfor an animated particle.",
             "itemtype": "method",
             "name": "applyArt",
@@ -1762,7 +1818,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 302,
+            "line": 313,
             "description": "Updates the particle.",
             "itemtype": "method",
             "name": "update",
@@ -1783,7 +1839,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 309,
+            "line": 320,
             "description": "A reference to update so that subclasses can access the original without the overhead\nof Function.call().",
             "itemtype": "method",
             "name": "Particle_update",
@@ -1806,7 +1862,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 395,
+            "line": 416,
             "description": "Kills the particle, removing it from the display list\nand telling the emitter to recycle it.",
             "itemtype": "method",
             "name": "kill",
@@ -1816,7 +1872,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 405,
+            "line": 427,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
@@ -1826,7 +1882,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 415,
+            "line": 441,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time.",
             "itemtype": "method",
             "name": "parseArt",
@@ -1848,7 +1904,7 @@
         },
         {
             "file": "src/Particle.js",
-            "line": 452,
+            "line": 478,
             "description": "Parses extra emitter data to ensure it is set up for this particle class.\nParticle does nothing to the extra data.",
             "itemtype": "method",
             "name": "parseData",
@@ -1870,7 +1926,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 28,
+            "line": 49,
             "description": "Rotates a point by a given angle.",
             "itemtype": "method",
             "name": "rotatePoint",
@@ -1893,7 +1949,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 47,
+            "line": 68,
             "description": "Combines separate color components (0-255) into a single uint color.",
             "itemtype": "method",
             "name": "combineRGBComponents",
@@ -1925,7 +1981,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 61,
+            "line": 82,
             "description": "Reduces the point to a length of 1.",
             "itemtype": "method",
             "name": "normalize",
@@ -1943,7 +1999,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 74,
+            "line": 95,
             "description": "Multiplies the x and y values of this point by a value.",
             "itemtype": "method",
             "name": "scaleBy",
@@ -1966,7 +2022,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 87,
+            "line": 108,
             "description": "Returns the length (or magnitude) of this point.",
             "itemtype": "method",
             "name": "length",
@@ -1987,7 +2043,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 99,
+            "line": 120,
             "description": "Converts a hex string from \"#AARRGGBB\", \"#RRGGBB\", \"0xAARRGGBB\", \"0xRRGGBB\",\n\"AARRGGBB\", or \"RRGGBB\" to an array of ints of 0-255 or Numbers from 0-1, as\n[r, g, b, (a)].",
             "itemtype": "method",
             "name": "hexToRGB",
@@ -2013,7 +2069,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 133,
+            "line": 154,
             "description": "Generates a custom ease function, based on the GreenSock custom ease, as demonstrated\nby the related tool at http://www.greensock.com/customease/.",
             "itemtype": "method",
             "name": "generateEase",
@@ -2035,7 +2091,7 @@
         },
         {
             "file": "src/ParticleUtils.js",
-            "line": 164,
+            "line": 185,
             "description": "Gets a blend mode, ensuring that it is valid.",
             "itemtype": "method",
             "name": "getBlendMode",
@@ -2166,7 +2222,7 @@
         },
         {
             "file": "src/PathParticle.js",
-            "line": 176,
+            "line": 177,
             "description": "Destroys the particle, removing references and preventing future use.",
             "itemtype": "method",
             "name": "destroy",
@@ -2176,7 +2232,7 @@
         },
         {
             "file": "src/PathParticle.js",
-            "line": 185,
+            "line": 187,
             "description": "Checks over the art that was passed to the Emitter's init() function, to do any special\nmodifications to prepare it ahead of time. This just runs Particle.parseArt().",
             "itemtype": "method",
             "name": "parseArt",
@@ -2198,7 +2254,7 @@
         },
         {
             "file": "src/PathParticle.js",
-            "line": 200,
+            "line": 202,
             "description": "Parses extra emitter data to ensure it is set up for this particle class.\nPathParticle checks for the existence of path data, and parses the path data for use\nby particle instances.",
             "itemtype": "method",
             "name": "parseData",

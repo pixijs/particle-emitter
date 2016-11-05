@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.6.2</b>
+                    API Docs for Version: <b>1.7.0</b>
                 </p>
             </li>
         </div>
@@ -128,7 +128,7 @@
 		// Export the module
 		module.exports = particles;
 	}
-	// If we&#x27;re in the browser make sure PIXI is available 
+	// If we&#x27;re in the browser make sure PIXI is available
 	else if (typeof PIXI === &#x27;undefined&#x27;)
 	{
 		if (DEBUG)
@@ -142,7 +142,7 @@
 	}
 
 	// Assign to global namespace
-	global.PIXI.particles = particles;
+	global.PIXI.particles = global.PIXI.particles || particles;
 
 }());
     </pre>

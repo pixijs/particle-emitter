@@ -21,7 +21,7 @@
             <li class="divider-vertical"></li>
             <li>
                 <p class="navbar-text">
-                    API Docs for Version: <b>1.6.2</b>
+                    API Docs for Version: <b>1.7.0</b>
                 </p>
             </li>
         </div>
@@ -276,13 +276,15 @@
 		}
 	};
 
+	p.Particle_destroy = Particle.prototype.destroy;
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 * @method destroy
 	 */
 	p.destroy = function()
 	{
-		s.destroy.call(this);
+		this.Particle_destroy();
+		this.path = this.initialPosition = null;
 	};
 	
 	/**
