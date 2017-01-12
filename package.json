@@ -17,7 +17,20 @@
 		"grunt": "~0.4.5",
 		"library-grunt": "~0.6.0",
 		"grunt-file-creator": "^0.1.3",
-		"yuidoc-bootstrap-theme": "^1.0.6"
+		"yuidoc-bootstrap-theme": "^1.0.6",
+		"grunt-bower-install-simple": "",
+		"grunt-simple-version": "",
+		"grunt-text-replace": "",
+		"grunt-contrib-clean": "",
+		"grunt-contrib-concat": "",
+		"grunt-contrib-connect": "",
+		"grunt-contrib-jshint": "",
+		"grunt-contrib-less": "",
+		"grunt-contrib-qunit": "",
+		"grunt-contrib-uglify": "",
+		"grunt-contrib-watch": "",
+		"grunt-contrib-yuidoc": "",
+		"grunt-gh-pages": ""
 	},
 	"repository": {
 		"type": "git",
