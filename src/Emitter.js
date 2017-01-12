@@ -8,7 +8,8 @@
 
 	var ParticleUtils = PIXI.particles.ParticleUtils,
 		Particle = PIXI.particles.Particle,
-		ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer;
+		ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer,
+		ticker = PIXI.ticker.shared;
 
 	/**
 	 * A particle emitter.
@@ -22,6 +23,8 @@
 	 * @param {Object} [config] A configuration object containing settings for the emitter.
 	 * @param {Boolean} [config.emit=true] If config.emit is explicitly passed as false, the Emitter
 	 *                                     will start disabled.
+	 * @param {Boolean} [config.autoUpdate=false] If config.emit is explicitly passed as true, the Emitter
+	 *                                     will automatically call update via the PIXI shared ticker.
 	 */
 	var Emitter = function(particleParent, particleImages, config)
 	{
@@ -363,6 +366,13 @@
 		 * @private
 		 */
 		this._origArt = null;
+		/**
+		 * If the update function is called automatically from the shared ticker.
+		 * Setting this to false requires calling the update function manually.
+		 * @property {Boolean} _autoUpdate
+		 * @private
+		 */
+		this._autoUpdate = false;
 
 		//set the initial parent
 		this.parent = particleParent;
@@ -638,6 +648,7 @@
 		//start emitting
 		this._spawnTimer = 0;
 		this.emit = config.emit === undefined ? true : !!config.emit;
+		this.autoUpdate = config.autoUpdate === undefined ? false : !!config.autoUpdate;
 	};
 
 	/**
@@ -745,12 +756,39 @@
 	});
 
 	/**
+	 * If particles should be emitted during update() calls. Setting this to false
+	 * stops new particles from being created, but allows existing ones to die out.
+	 * @property {Boolean} emit
+	 */
+	Object.defineProperty(p, "autoUpdate",
+	{
+		get: function() { return this._autoUpdate; },
+		set: function(value)
+		{
+			if (this._autoUpdate && value === false)
+			{
+				ticker.remove(this.update, this);
+			}
+			else if (!this._autoUpdate && value === true)
+			{
+				ticker.add(this.update, this);
+			}
+			this._autoUpdate = !!value;
+		}
+	});
+
+	/**
 	 * Updates all particles spawned by this emitter and emits new ones.
 	 * @method update
 	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
 	 */
 	p.update = function(delta)
 	{
+		if (this._autoUpdate)
+		{
+			delta *= 0.01;
+		}
+
 		//if we don't have a parent to add particles to, then don't do anything.
 		//this also works as a isDestroyed check
 		if (!this._parent) return;
