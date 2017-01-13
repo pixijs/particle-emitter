@@ -758,7 +758,7 @@
 	/**
 	 * If the update function is called automatically from the shared ticker.
 	 * Setting this to false requires calling the update function manually.
-	 * @property {Boolean} emit
+	 * @property {Boolean} autoUpdate
 	 */
 	Object.defineProperty(p, "autoUpdate",
 	{
