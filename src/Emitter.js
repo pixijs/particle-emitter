@@ -756,8 +756,8 @@
 	});
 
 	/**
-	 * If particles should be emitted during update() calls. Setting this to false
-	 * stops new particles from being created, but allows existing ones to die out.
+	 * If the update function is called automatically from the shared ticker.
+	 * Setting this to false requires calling the update function manually.
 	 * @property {Boolean} emit
 	 */
 	Object.defineProperty(p, "autoUpdate",
@@ -765,11 +765,11 @@
 		get: function() { return this._autoUpdate; },
 		set: function(value)
 		{
-			if (this._autoUpdate && value === false)
+			if (this._autoUpdate && !value)
 			{
 				ticker.remove(this.update, this);
 			}
-			else if (!this._autoUpdate && value === true)
+			else if (!this._autoUpdate && value)
 			{
 				ticker.add(this.update, this);
 			}
@@ -786,7 +786,7 @@
 	{
 		if (this._autoUpdate)
 		{
-			delta *= 0.01;
+			delta = delta / ticker.speed / PIXI.settings.TARGET_FPMS / 1000;
 		}
 
 		//if we don't have a parent to add particles to, then don't do anything.
