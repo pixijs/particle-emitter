@@ -1,6 +1,6 @@
-var core = require('../../core');
-// @see https://github.com/substack/brfs/issues/25
-var fs = require('fs');
+import * as core from '../../core';
+import { readFileSync } from 'fs';
+import { join } from 'path';
 
 /**
  * @author Vico @vicocotea
@@ -11,28 +11,26 @@ var fs = require('fs');
  * A Noise effect filter.
  *
  * @class
- * @extends PIXI.AbstractFilter
+ * @extends PIXI.Filter
  * @memberof PIXI.filters
  */
-function NoiseFilter()
+export default class NoiseFilter extends core.Filter
 {
-    core.AbstractFilter.call(this,
-        // vertex shader
-        null,
-        // fragment shader
-        fs.readFileSync(__dirname + '/noise.frag', 'utf8'),
-        // custom uniforms
-        {
-            noise: { type: '1f', value: 0.5 }
-        }
-    );
-}
+    /**
+     *
+     */
+    constructor()
+    {
+        super(
+            // vertex shader
+            readFileSync(join(__dirname, '../fragments/default.vert'), 'utf8'),
+            // fragment shader
+            readFileSync(join(__dirname, './noise.frag'), 'utf8')
+        );
 
-NoiseFilter.prototype = Object.create(core.AbstractFilter.prototype);
-NoiseFilter.prototype.constructor = NoiseFilter;
-module.exports = NoiseFilter;
+        this.noise = 0.5;
+    }
 
-Object.defineProperties(NoiseFilter.prototype, {
     /**
      * The amount of noise to apply.
      *
@@ -40,14 +38,18 @@ Object.defineProperties(NoiseFilter.prototype, {
      * @memberof PIXI.filters.NoiseFilter#
      * @default 0.5
      */
-    noise: {
-        get: function ()
-        {
-            return this.uniforms.noise.value;
-        },
-        set: function (value)
-        {
-            this.uniforms.noise.value = value;
-        }
+    get noise()
+    {
+        return this.uniforms.noise;
     }
-});
+
+    /**
+     * Sets the amount of noise to apply.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set noise(value)
+    {
+        this.uniforms.noise = value;
+    }
+}

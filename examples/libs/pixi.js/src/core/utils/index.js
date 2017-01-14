@@ -1,275 +1,362 @@
-var CONST = require('../const');
+import { DATA_URI, URL_FILE_EXTENSION, SVG_SIZE, VERSION } from '../const';
+import settings from '../settings';
+import EventEmitter from 'eventemitter3';
+import pluginTarget from './pluginTarget';
+import * as isMobile from 'ismobilejs';
+
+let nextUid = 0;
+let saidHello = false;
 
 /**
  * @namespace PIXI.utils
  */
-var utils = module.exports = {
-    _uid: 0,
-    _saidHello: false,
-
-    EventEmitter:   require('eventemitter3'),
-    pluginTarget:   require('./pluginTarget'),
-    async:          require('async'),
-
+export {
     /**
-     * Gets the next unique identifier
+     * @see {@link https://github.com/kaimallea/isMobile}
      *
-     * @return {number} The next unique identifier to use.
+     * @memberof PIXI.utils
+     * @function isMobile
+     * @type {Object}
      */
-    uid: function ()
-    {
-        return ++utils._uid;
-    },
-
+    isMobile,
     /**
-     * Converts a hex color number to an [R, G, B] array
+     * @see {@link https://github.com/primus/eventemitter3}
      *
-     * @param hex {number}
-     * @param  {number[]} [out=[]]
-     * @return {number[]} An array representing the [R, G, B] of the color.
+     * @memberof PIXI.utils
+     * @class EventEmitter
+     * @type {EventEmitter}
      */
-    hex2rgb: function (hex, out)
-    {
-        out = out || [];
-
-        out[0] = (hex >> 16 & 0xFF) / 255;
-        out[1] = (hex >> 8 & 0xFF) / 255;
-        out[2] = (hex & 0xFF) / 255;
-
-        return out;
-    },
-
+    EventEmitter,
     /**
-     * Converts a hex color number to a string.
-     *
-     * @param hex {number}
-     * @return {string} The string color.
+     * @memberof PIXI.utils
+     * @function pluginTarget
+     * @type {mixin}
      */
-    hex2string: function (hex)
-    {
-        hex = hex.toString(16);
-        hex = '000000'.substr(0, 6 - hex.length) + hex;
-
-        return '#' + hex;
-    },
-
-    /**
-     * Converts a color as an [R, G, B] array to a hex number
-     *
-     * @param rgb {number[]}
-     * @return {number} The color number
-     */
-    rgb2hex: function (rgb)
-    {
-        return ((rgb[0]*255 << 16) + (rgb[1]*255 << 8) + rgb[2]*255);
-    },
-
-    /**
-     * Checks whether the Canvas BlendModes are supported by the current browser
-     *
-     * @return {boolean} whether they are supported
-     */
-    canUseNewCanvasBlendModes: function ()
-    {
-        if (typeof document === 'undefined')
-        {
-            return false;
-        }
-
-        var pngHead = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAQAAAABAQMAAADD8p2OAAAAA1BMVEX/';
-        var pngEnd = 'AAAACklEQVQI12NgAAAAAgAB4iG8MwAAAABJRU5ErkJggg==';
-
-        var magenta = new Image();
-        magenta.src = pngHead + 'AP804Oa6' + pngEnd;
-
-        var yellow = new Image();
-        yellow.src = pngHead + '/wCKxvRF' + pngEnd;
-
-        var canvas = document.createElement('canvas');
-        canvas.width = 6;
-        canvas.height = 1;
-
-        var context = canvas.getContext('2d');
-        context.globalCompositeOperation = 'multiply';
-        context.drawImage(magenta, 0, 0);
-        context.drawImage(yellow, 2, 0);
-
-        var data = context.getImageData(2,0,1,1).data;
-
-        return (data[0] === 255 && data[1] === 0 && data[2] === 0);
-    },
-
-    /**
-     * Given a number, this function returns the closest number that is a power of two
-     * this function is taken from Starling Framework as its pretty neat ;)
-     *
-     * @param number {number}
-     * @return {number} the closest number that is a power of two
-     */
-    getNextPowerOfTwo: function (number)
-    {
-        // see: http://en.wikipedia.org/wiki/Power_of_two#Fast_algorithm_to_check_if_a_positive_number_is_a_power_of_two
-        if (number > 0 && (number & (number - 1)) === 0)
-        {
-            return number;
-        }
-        else
-        {
-            var result = 1;
-
-            while (result < number)
-            {
-                result <<= 1;
-            }
-
-            return result;
-        }
-    },
-
-    /**
-     * checks if the given width and height make a power of two rectangle
-     *
-     * @param width {number}
-     * @param height {number}
-     * @return {boolean}
-     */
-    isPowerOfTwo: function (width, height)
-    {
-        return (width > 0 && (width & (width - 1)) === 0 && height > 0 && (height & (height - 1)) === 0);
-    },
-
-    /**
-     * get the resolution of an asset by looking for the prefix
-     * used by spritesheets and image urls
-     *
-     * @param url {string} the image path
-     * @return {number}
-     */
-    getResolutionOfUrl: function (url)
-    {
-        var resolution = CONST.RETINA_PREFIX.exec(url);
-
-        if (resolution)
-        {
-           return parseFloat(resolution[1]);
-        }
-
-        return 1;
-    },
-
-    /**
-     * Logs out the version and renderer information for this running instance of PIXI.
-     * If you don't want to see this message you can set `PIXI.utils._saidHello = true;`
-     * so the library thinks it already said it. Keep in mind that doing that will forever
-     * makes you a jerk face.
-     *
-     * @param {string} type - The string renderer type to log.
-     * @constant
-     * @static
-     */
-    sayHello: function (type)
-    {
-        if (utils._saidHello)
-        {
-            return;
-        }
-
-        if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1)
-        {
-            var args = [
-                '\n %c %c %c Pixi.js ' + CONST.VERSION + ' - ✰ ' + type + ' ✰  %c ' + ' %c ' + ' http://www.pixijs.com/  %c %c ♥%c♥%c♥ \n\n',
-                'background: #ff66a5; padding:5px 0;',
-                'background: #ff66a5; padding:5px 0;',
-                'color: #ff66a5; background: #030307; padding:5px 0;',
-                'background: #ff66a5; padding:5px 0;',
-                'background: #ffc3dc; padding:5px 0;',
-                'background: #ff66a5; padding:5px 0;',
-                'color: #ff2424; background: #fff; padding:5px 0;',
-                'color: #ff2424; background: #fff; padding:5px 0;',
-                'color: #ff2424; background: #fff; padding:5px 0;'
-            ];
-
-            window.console.log.apply(console, args); //jshint ignore:line
-        }
-        else if (window.console)
-        {
-            window.console.log('Pixi.js ' + CONST.VERSION + ' - ' + type + ' - http://www.pixijs.com/'); //jshint ignore:line
-        }
-
-        utils._saidHello = true;
-    },
-
-    /**
-     * Helper for checking for webgl support
-     *
-     * @return {boolean}
-     */
-    isWebGLSupported: function ()
-    {
-        var contextOptions = { stencil: true };
-        try
-        {
-            if (!window.WebGLRenderingContext)
-            {
-                return false;
-            }
-
-            var canvas = document.createElement('canvas'),
-                gl = canvas.getContext('webgl', contextOptions) || canvas.getContext('experimental-webgl', contextOptions);
-
-            return !!(gl && gl.getContextAttributes().stencil);
-        }
-        catch (e)
-        {
-            return false;
-        }
-    },
-
-    /**
-     * Returns sign of number
-     *
-     * @param n {number}
-     * @returns {number} 0 if n is 0, -1 if n is negative, 1 if n i positive
-     */
-    sign: function (n)
-    {
-        return n ? (n < 0 ? -1 : 1) : 0;
-    },
-
-    /**
-     * removeItems
-     *
-     * @param {array} arr The target array
-     * @param {number} startIdx The index to begin removing from (inclusive)
-     * @param {number} removeCount How many items to remove
-     */
-    removeItems: function (arr, startIdx, removeCount)
-    {
-        var length = arr.length;
-
-        if (startIdx >= length || removeCount === 0)
-        {
-            return;
-        }
-
-        removeCount = (startIdx+removeCount > length ? length-startIdx : removeCount);
-        for (var i = startIdx, len = length-removeCount; i < len; ++i)
-        {
-            arr[i] = arr[i + removeCount];
-        }
-
-        arr.length = len;
-    },
-
-    /**
-     * @todo Describe property usage
-     * @private
-     */
-    TextureCache: {},
-
-    /**
-     * @todo Describe property usage
-     * @private
-     */
-    BaseTextureCache: {}
+    pluginTarget,
 };
+
+/**
+ * Gets the next unique identifier
+ *
+ * @memberof PIXI.utils
+ * @function uid
+ * @return {number} The next unique identifier to use.
+ */
+export function uid()
+{
+    return ++nextUid;
+}
+
+/**
+ * Converts a hex color number to an [R, G, B] array
+ *
+ * @memberof PIXI.utils
+ * @function hex2rgb
+ * @param {number} hex - The number to convert
+ * @param  {number[]} [out=[]] If supplied, this array will be used rather than returning a new one
+ * @return {number[]} An array representing the [R, G, B] of the color.
+ */
+export function hex2rgb(hex, out)
+{
+    out = out || [];
+
+    out[0] = ((hex >> 16) & 0xFF) / 255;
+    out[1] = ((hex >> 8) & 0xFF) / 255;
+    out[2] = (hex & 0xFF) / 255;
+
+    return out;
+}
+
+/**
+ * Converts a hex color number to a string.
+ *
+ * @memberof PIXI.utils
+ * @function hex2string
+ * @param {number} hex - Number in hex
+ * @return {string} The string color.
+ */
+export function hex2string(hex)
+{
+    hex = hex.toString(16);
+    hex = '000000'.substr(0, 6 - hex.length) + hex;
+
+    return `#${hex}`;
+}
+
+/**
+ * Converts a color as an [R, G, B] array to a hex number
+ *
+ * @memberof PIXI.utils
+ * @function rgb2hex
+ * @param {number[]} rgb - rgb array
+ * @return {number} The color number
+ */
+export function rgb2hex(rgb)
+{
+    return (((rgb[0] * 255) << 16) + ((rgb[1] * 255) << 8) + (rgb[2] * 255));
+}
+
+/**
+ * get the resolution / device pixel ratio of an asset by looking for the prefix
+ * used by spritesheets and image urls
+ *
+ * @memberof PIXI.utils
+ * @function getResolutionOfUrl
+ * @param {string} url - the image path
+ * @param {number} [defaultValue=1] - the defaultValue if no filename prefix is set.
+ * @return {number} resolution / device pixel ratio of an asset
+ */
+export function getResolutionOfUrl(url, defaultValue)
+{
+    const resolution = settings.RETINA_PREFIX.exec(url);
+
+    if (resolution)
+    {
+        return parseFloat(resolution[1]);
+    }
+
+    return defaultValue !== undefined ? defaultValue : 1;
+}
+
+/**
+ * Typedef for decomposeDataUri return object.
+ *
+ * @typedef {object} DecomposedDataUri
+ * @property {mediaType} Media type, eg. `image`
+ * @property {subType} Sub type, eg. `png`
+ * @property {encoding} Data encoding, eg. `base64`
+ * @property {data} The actual data
+ */
+
+/**
+ * Split a data URI into components. Returns undefined if
+ * parameter `dataUri` is not a valid data URI.
+ *
+ * @memberof PIXI.utils
+ * @function decomposeDataUri
+ * @param {string} dataUri - the data URI to check
+ * @return {DecomposedDataUri|undefined} The decomposed data uri or undefined
+ */
+export function decomposeDataUri(dataUri)
+{
+    const dataUriMatch = DATA_URI.exec(dataUri);
+
+    if (dataUriMatch)
+    {
+        return {
+            mediaType: dataUriMatch[1] ? dataUriMatch[1].toLowerCase() : undefined,
+            subType: dataUriMatch[2] ? dataUriMatch[2].toLowerCase() : undefined,
+            encoding: dataUriMatch[3] ? dataUriMatch[3].toLowerCase() : undefined,
+            data: dataUriMatch[4],
+        };
+    }
+
+    return undefined;
+}
+
+/**
+ * Get type of the image by regexp for extension. Returns undefined for unknown extensions.
+ *
+ * @memberof PIXI.utils
+ * @function getUrlFileExtension
+ * @param {string} url - the image path
+ * @return {string|undefined} image extension
+ */
+export function getUrlFileExtension(url)
+{
+    const extension = URL_FILE_EXTENSION.exec(url);
+
+    if (extension)
+    {
+        return extension[1].toLowerCase();
+    }
+
+    return undefined;
+}
+
+/**
+ * Typedef for Size object.
+ *
+ * @typedef {object} Size
+ * @property {width} Width component
+ * @property {height} Height component
+ */
+
+/**
+ * Get size from an svg string using regexp.
+ *
+ * @memberof PIXI.utils
+ * @function getSvgSize
+ * @param {string} svgString - a serialized svg element
+ * @return {Size|undefined} image extension
+ */
+export function getSvgSize(svgString)
+{
+    const sizeMatch = SVG_SIZE.exec(svgString);
+    const size = {};
+
+    if (sizeMatch)
+    {
+        size[sizeMatch[1]] = Math.round(parseFloat(sizeMatch[3]));
+        size[sizeMatch[5]] = Math.round(parseFloat(sizeMatch[7]));
+    }
+
+    return size;
+}
+
+/**
+ * Skips the hello message of renderers that are created after this is run.
+ *
+ * @function skipHello
+ * @memberof PIXI.utils
+ */
+export function skipHello()
+{
+    saidHello = true;
+}
+
+/**
+ * Logs out the version and renderer information for this running instance of PIXI.
+ * If you don't want to see this message you can run `PIXI.utils.skipHello()` before
+ * creating your renderer. Keep in mind that doing that will forever makes you a jerk face.
+ *
+ * @static
+ * @function sayHello
+ * @memberof PIXI.utils
+ * @param {string} type - The string renderer type to log.
+ */
+export function sayHello(type)
+{
+    if (saidHello)
+    {
+        return;
+    }
+
+    if (navigator.userAgent.toLowerCase().indexOf('chrome') > -1)
+    {
+        const args = [
+            `\n %c %c %c Pixi.js ${VERSION} - ✰ ${type} ✰  %c  %c  http://www.pixijs.com/  %c %c ♥%c♥%c♥ \n\n`,
+            'background: #ff66a5; padding:5px 0;',
+            'background: #ff66a5; padding:5px 0;',
+            'color: #ff66a5; background: #030307; padding:5px 0;',
+            'background: #ff66a5; padding:5px 0;',
+            'background: #ffc3dc; padding:5px 0;',
+            'background: #ff66a5; padding:5px 0;',
+            'color: #ff2424; background: #fff; padding:5px 0;',
+            'color: #ff2424; background: #fff; padding:5px 0;',
+            'color: #ff2424; background: #fff; padding:5px 0;',
+        ];
+
+        window.console.log.apply(console, args);
+    }
+    else if (window.console)
+    {
+        window.console.log(`Pixi.js ${VERSION} - ${type} - http://www.pixijs.com/`);
+    }
+
+    saidHello = true;
+}
+
+/**
+ * Helper for checking for webgl support
+ *
+ * @memberof PIXI.utils
+ * @function isWebGLSupported
+ * @return {boolean} is webgl supported
+ */
+export function isWebGLSupported()
+{
+    const contextOptions = { stencil: true, failIfMajorPerformanceCaveat: true };
+
+    try
+    {
+        if (!window.WebGLRenderingContext)
+        {
+            return false;
+        }
+
+        const canvas = document.createElement('canvas');
+        let gl = canvas.getContext('webgl', contextOptions) || canvas.getContext('experimental-webgl', contextOptions);
+
+        const success = !!(gl && gl.getContextAttributes().stencil);
+
+        if (gl)
+        {
+            const loseContext = gl.getExtension('WEBGL_lose_context');
+
+            if (loseContext)
+            {
+                loseContext.loseContext();
+            }
+        }
+
+        gl = null;
+
+        return success;
+    }
+    catch (e)
+    {
+        return false;
+    }
+}
+
+/**
+ * Returns sign of number
+ *
+ * @memberof PIXI.utils
+ * @function sign
+ * @param {number} n - the number to check the sign of
+ * @returns {number} 0 if `n` is 0, -1 if `n` is negative, 1 if `n` is positive
+ */
+export function sign(n)
+{
+    if (n === 0) return 0;
+
+    return n < 0 ? -1 : 1;
+}
+
+/**
+ * Remove a range of items from an array
+ *
+ * @memberof PIXI.utils
+ * @function removeItems
+ * @param {Array<*>} arr The target array
+ * @param {number} startIdx The index to begin removing from (inclusive)
+ * @param {number} removeCount How many items to remove
+ */
+export function removeItems(arr, startIdx, removeCount)
+{
+    const length = arr.length;
+
+    if (startIdx >= length || removeCount === 0)
+    {
+        return;
+    }
+
+    removeCount = (startIdx + removeCount > length ? length - startIdx : removeCount);
+
+    const len = length - removeCount;
+
+    for (let i = startIdx; i < len; ++i)
+    {
+        arr[i] = arr[i + removeCount];
+    }
+
+    arr.length = len;
+}
+
+/**
+ * @todo Describe property usage
+ *
+ * @memberof PIXI.utils
+ * @private
+ */
+export const TextureCache = {};
+
+/**
+ * @todo Describe property usage
+ *
+ * @memberof PIXI.utils
+ * @private
+ */
+export const BaseTextureCache = {};
