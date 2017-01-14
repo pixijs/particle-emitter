@@ -1,3 +1,1 @@
-(function(undefined){
-	//Nothing to deprecate right now!
-}());
+//Nothing to deprecate right now!

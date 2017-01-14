@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Snow</title>
+		<meta name="description" content="snow emitter">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/Snow100.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 0.73,
+						"end": 0.46
+					},
+					"scale": {
+						"start": 0.15,
+						"end": 0.2,
+						"minimumScaleMultiplier":0.5
+					},
+					"color": {
+						"start": "ffffff",
+						"end": "ffffff"
+					},
+					"speed": {
+						"start": 200,
+						"end": 200
+					},
+					"startRotation": {
+						"min": 50,
+						"max": 70
+					},
+					"rotationSpeed": {
+						"min": 0,
+						"max": 200
+					},
+					"lifetime": {
+						"min": 4,
+						"max": 4
+					},
+					"blendMode": "normal",
+					"ease": [
+						{
+							"s": 0,
+							"cp": 0.379,
+							"e": 0.548
+						},
+						{
+							"s": 0.548,
+							"cp": 0.717,
+							"e": 0.676
+						},
+						{
+							"s": 0.676,
+							"cp": 0.635,
+							"e": 1
+						}
+					],
+					"frequency": 0.004,
+					"emitterLifetime": 0,
+					"maxParticles": 1000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "rect",
+					"spawnRect": {
+						"x": -500,
+						"y": -300,
+						"w": 900,
+						"h": 20
+					}
+				});
+		</script>
+	</body>
+</html>

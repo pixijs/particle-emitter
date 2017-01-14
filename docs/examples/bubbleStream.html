@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Bubble Stream</title>
+		<meta name="description" content="bubble stream">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/Bubbles99.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 1,
+						"end": 0.16
+					},
+					"scale": {
+						"start": 0.3,
+						"end": 0.6,
+						"minimumScaleMultiplier":0.5
+					},
+					"color": {
+						"start": "ffffff",
+						"end": "ffffff"
+					},
+					"speed": {
+						"start": 600,
+						"end": 200
+					},
+					"startRotation": {
+						"min": 267,
+						"max": 273
+					},
+					"rotationSpeed": {
+						"min": 0,
+						"max": 20
+					},
+					"lifetime": {
+						"min": 1.8,
+						"max": 2
+					},
+					"blendMode": "normal",
+					"frequency": 0.1,
+					"emitterLifetime": 0,
+					"maxParticles": 500,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "point"
+				});
+		</script>
+	</body>
+</html>

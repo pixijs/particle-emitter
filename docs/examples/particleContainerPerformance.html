@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Particle Container Performance Tester</title>
+		<meta name="description" content="smoke blast">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="particleCount"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/CartoonSmoke.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 1,
+						"end": 0
+					},
+					"scale": {
+						"start": 0.1,
+						"end": 1.5
+					},
+					"color": {
+						"start": "ffffff",
+						"end": "ffffff"
+					},
+					"speed": {
+						"start": 600,
+						"end": 200
+					},
+					"startRotation": {
+						"min": 0,
+						"max": 360
+					},
+					"rotationSpeed": {
+						"min": 0,
+						"max": 20
+					},
+					"lifetime": {
+						"min": 0.5,
+						"max": 0.7
+					},
+					"blendMode": "normal",
+					"frequency": 0.00008,
+					"emitterLifetime": -1,
+					"maxParticles": 50000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "point"
+				}, null, true);
+		</script>
+	</body>
+</html>
