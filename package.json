@@ -11,7 +11,7 @@
 		}
 	],
 	"scripts": {
-		"clean": "rimraf docs .publish",
+		"clean": "rimraf docs/docs docs/dist .publish",
 		"lint": "eslint src",
 		"prebuild": "npm run lint",
 		"build": "pixify --name pixi-particles -d dist --external false",
