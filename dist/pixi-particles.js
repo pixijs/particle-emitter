@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.0.0
- * Compiled Sat, 14 Jan 2017 22:39:18 UTC
+ * pixi-particles - v2.1.0
+ * Compiled Sun, 15 Jan 2017 02:03:29 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -876,6 +876,7 @@ p.init = function(art, config)
  * Recycles an individual particle.
  * @method recycle
  * @param {Particle} particle The particle to recycle.
+ * @private
  */
 p.recycle = function(particle)
 {
