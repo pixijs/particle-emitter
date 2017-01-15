@@ -139,6 +139,23 @@ npm install pixi-particles
 * [Animated Bubbles](https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html)
 * [Particle Container Performance](https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html)
 
+## Typescript
+You can use require to get the namespace for pixi-particles, or use a triple slash reference for using the PIXI.particles namespace.
+```typescript
+// Note: Must also include the pixi.js typings globally!
+import particles = require('pixi-particles');
+
+let myEmitter:particles.Emitter = new particles.Emitter(myContainer);
+```
+
+```typescript
+// Note: Must also include the pixi.js typings globally!
+/// <reference path="node_modules/pixi-particles/ambient.d.ts" />
+require('pixi-particles');
+
+let myEmitter:PIXI.particles.Emitter = new PIXI.particles.Emitter(myContainer);
+```
+
 ## Use in Haxe
 
 Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi)

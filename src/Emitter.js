@@ -651,6 +651,7 @@ p.init = function(art, config)
  * Recycles an individual particle.
  * @method recycle
  * @param {Particle} particle The particle to recycle.
+ * @private
  */
 p.recycle = function(particle)
 {

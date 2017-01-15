@@ -11,11 +11,10 @@
 		".bowerrc",
 		".editorconfig",
 		"package.json",
-		"tasks",
-		"Gruntfile.js",
-		"library.json",
-		"examples",
 		"docs",
-		"src"
+		"src",
+		"tsconfig.json",
+		"jsdoc.conf.json"
+		".eslintrc"
 	]
 }
