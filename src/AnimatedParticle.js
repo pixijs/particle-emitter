@@ -87,7 +87,7 @@ var p = AnimatedParticle.prototype = Object.create(s);
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.AnimatedParticle#init
  */
 p.init = function()
 {
@@ -105,7 +105,7 @@ p.init = function()
 
 /**
  * Sets the textures for the particle.
- * @method applyArt
+ * @method PIXI.particles.AnimatedParticle#applyArt
  * @param {Array} art An array of PIXI.Texture objects for this animated particle.
  */
 p.applyArt = function(art)
@@ -118,7 +118,7 @@ p.applyArt = function(art)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.AnimatedParticle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  */
 p.update = function(delta)
@@ -144,7 +144,7 @@ p.update = function(delta)
 p.Particle_destroy = Particle.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.AnimatedParticle#destroy
  */
 p.destroy = function()
 {
@@ -155,7 +155,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time.
- * @method parseArt
+ * @method PIXI.particles.AnimatedParticle.parseArt
  * @static
  * @param  {Array} art The array of art data, properly formatted for AnimatedParticle.
  * @return {Array} The art, after any needed modifications.

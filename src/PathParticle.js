@@ -70,7 +70,7 @@ var helperPoint = new PIXI.Point();
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.PathParticle#init
  */
 p.init = function()
 {
@@ -126,7 +126,7 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
  * Parses a string into a function for path following.
  * This involves whitelisting the string for safety, inserting "Math." to math function
  * names, and using eval() to generate a function.
- * @method parsePath
+ * @method PIXI.particles.PathParticle~parsePath
  * @private
  * @static
  * @param {String} pathString The string to parse.
@@ -148,7 +148,7 @@ var parsePath = function(pathString)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.PathParticle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  */
 p.update = function(delta)
@@ -172,7 +172,7 @@ p.update = function(delta)
 p.Particle_destroy = Particle.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.PathParticle#destroy
  */
 p.destroy = function()
 {
@@ -183,7 +183,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time. This just runs Particle.parseArt().
- * @method parseArt
+ * @method PIXI.particles.PathParticle.parseArt
  * @static
  * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
  *                     Any strings in the array will be converted to Textures via
@@ -199,7 +199,7 @@ PathParticle.parseArt = function(art)
  * Parses extra emitter data to ensure it is set up for this particle class.
  * PathParticle checks for the existence of path data, and parses the path data for use
  * by particle instances.
- * @method parseData
+ * @method PIXI.particles.PathParticle.parseData
  * @static
  * @param  {Object} extraData The extra data from the particle config.
  * @return {Object} The parsed extra data.

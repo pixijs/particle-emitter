@@ -217,12 +217,12 @@ var p = Particle.prototype = Object.create(Sprite.prototype);
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.Particle#init
  */
 /**
  * A reference to init, so that subclasses can access it without the penalty of Function.call()
- * @method Particle_init
- * @private
+ * @method PIXI.particles.Particle#Particle_init
+ * @protected
  */
 p.init = p.Particle_init = function()
 {
@@ -279,7 +279,7 @@ p.init = p.Particle_init = function()
 /**
  * Sets the texture for the particle. This can be overridden to allow
  * for an animated particle.
- * @method applyArt
+ * @method PIXI.particles.Particle#applyArt
  * @param {PIXI.Texture} art The texture to set.
  */
 p.applyArt = function(art)
@@ -289,7 +289,7 @@ p.applyArt = function(art)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.Particle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
  *                   properties. A value of -1 means the particle died of old age instead.
@@ -297,11 +297,11 @@ p.applyArt = function(art)
 /**
  * A reference to update so that subclasses can access the original without the overhead
  * of Function.call().
- * @method Particle_update
+ * @method PIXI.particles.Particle#Particle_update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
  *                   properties. A value of -1 means the particle died of old age instead.
- * @private
+ * @protected
  */
 p.update = p.Particle_update = function(delta)
 {
@@ -393,7 +393,7 @@ p.update = p.Particle_update = function(delta)
 /**
  * Kills the particle, removing it from the display list
  * and telling the emitter to recycle it.
- * @method kill
+ * @method PIXI.particles.Particle#kill
  */
 p.kill = function()
 {
@@ -403,7 +403,7 @@ p.kill = function()
 p.Sprite_Destroy = Sprite.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.Particle#destroy
  */
 p.destroy = function()
 {
@@ -418,7 +418,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time.
- * @method parseArt
+ * @method PIXI.particles.Particle.parseArt
  * @static
  * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
  *                     Any strings in the array will be converted to Textures via
@@ -455,7 +455,7 @@ Particle.parseArt = function(art)
 /**
  * Parses extra emitter data to ensure it is set up for this particle class.
  * Particle does nothing to the extra data.
- * @method parseData
+ * @method PIXI.particles.Particle.parseData
  * @static
  * @param  {Object} extraData The extra data from the particle config.
  * @return {Object} The parsed extra data.
