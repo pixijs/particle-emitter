@@ -1,465 +1,229 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <title>Source: Emitter.js</title>
-    
-    
-    
-    
-    
-    <meta property="og:title" content=""/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content=""/>
-    
-    <meta property="og:url" content=""/>
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <script src="scripts/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
-    
-    
-    <script>
-    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true},"applicationName":"PixiParticles","copyright":"Copyright © 2015 CloudKid, LLC.","disqus":"","googleAnalytics":"","openGraph":{"title":"","type":"website","image":"","site_name":"","url":""},"meta":{"title":"","description":"","keyword":""},"linenums":true};
-    </script>
-    
+/*!
+ * pixi-particles - v2.1.0
+ * Compiled Fri, 20 Jan 2017 00:11:32 UTC
+ *
+ * pixi-particles is licensed under the MIT License.
+ * http://www.opensource.org/licenses/mit-license
+ */
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.pixiParticles = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+"use strict";
 
-    
-</head>
-<body>
-<div id="wrap" class="clearfix">
-    
-<div class="navigation">
-    <h3 class="applicationName"><a href="index.html">PixiParticles</a></h3>
+var ParticleUtils = require("./ParticleUtils"),
+	Particle = require("./Particle"),
+	Texture = PIXI.Texture;
 
-    <div class="search">
-        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
-    </div>
-    <ul class="list">
-    
-        <li class="item" data-name="Array">
-            <span class="title">
-                <a href="Array.html">Array</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.AnimatedParticle">
-            <span class="title">
-                <a href="PIXI.particles.AnimatedParticle.html">PIXI.particles.AnimatedParticle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#acceleration"><a href="PIXI.particles.AnimatedParticle.html#acceleration">acceleration</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#age"><a href="PIXI.particles.AnimatedParticle.html#age">age</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#ease"><a href="PIXI.particles.AnimatedParticle.html#ease">ease</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#emitter"><a href="PIXI.particles.AnimatedParticle.html#emitter">emitter</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#endAlpha"><a href="PIXI.particles.AnimatedParticle.html#endAlpha">endAlpha</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#endColor"><a href="PIXI.particles.AnimatedParticle.html#endColor">endColor</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#endScale"><a href="PIXI.particles.AnimatedParticle.html#endScale">endScale</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#endSpeed"><a href="PIXI.particles.AnimatedParticle.html#endSpeed">endSpeed</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#extraData"><a href="PIXI.particles.AnimatedParticle.html#extraData">extraData</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#maxLife"><a href="PIXI.particles.AnimatedParticle.html#maxLife">maxLife</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#maxSpeed"><a href="PIXI.particles.AnimatedParticle.html#maxSpeed">maxSpeed</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#startAlpha"><a href="PIXI.particles.AnimatedParticle.html#startAlpha">startAlpha</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#startColor"><a href="PIXI.particles.AnimatedParticle.html#startColor">startColor</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#startScale"><a href="PIXI.particles.AnimatedParticle.html#startScale">startScale</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#startSpeed"><a href="PIXI.particles.AnimatedParticle.html#startSpeed">startSpeed</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#velocity"><a href="PIXI.particles.AnimatedParticle.html#velocity">velocity</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.AnimatedParticle.parseArt"><a href="PIXI.particles.AnimatedParticle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#applyArt"><a href="PIXI.particles.AnimatedParticle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#destroy"><a href="PIXI.particles.AnimatedParticle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#init"><a href="PIXI.particles.AnimatedParticle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#kill"><a href="PIXI.particles.AnimatedParticle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#Particle_init"><a href="PIXI.particles.AnimatedParticle.html#Particle_init">Particle_init</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#Particle_update"><a href="PIXI.particles.AnimatedParticle.html#Particle_update">Particle_update</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#update"><a href="PIXI.particles.AnimatedParticle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.Emitter">
-            <span class="title">
-                <a href="PIXI.particles.Emitter.html">PIXI.particles.Emitter</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.Emitter#acceleration"><a href="PIXI.particles.Emitter.html#acceleration">acceleration</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#addAtBack"><a href="PIXI.particles.Emitter.html#addAtBack">addAtBack</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#angleStart"><a href="PIXI.particles.Emitter.html#angleStart">angleStart</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#autoUpdate"><a href="PIXI.particles.Emitter.html#autoUpdate">autoUpdate</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#customEase"><a href="PIXI.particles.Emitter.html#customEase">customEase</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#emit"><a href="PIXI.particles.Emitter.html#emit">emit</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#emitterLifetime"><a href="PIXI.particles.Emitter.html#emitterLifetime">emitterLifetime</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#endAlpha"><a href="PIXI.particles.Emitter.html#endAlpha">endAlpha</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#endColor"><a href="PIXI.particles.Emitter.html#endColor">endColor</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#endScale"><a href="PIXI.particles.Emitter.html#endScale">endScale</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#endSpeed"><a href="PIXI.particles.Emitter.html#endSpeed">endSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#extraData"><a href="PIXI.particles.Emitter.html#extraData">extraData</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#frequency"><a href="PIXI.particles.Emitter.html#frequency">frequency</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#maxLifetime"><a href="PIXI.particles.Emitter.html#maxLifetime">maxLifetime</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#maxParticles"><a href="PIXI.particles.Emitter.html#maxParticles">maxParticles</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#maxRotationSpeed"><a href="PIXI.particles.Emitter.html#maxRotationSpeed">maxRotationSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#maxSpeed"><a href="PIXI.particles.Emitter.html#maxSpeed">maxSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#maxStartRotation"><a href="PIXI.particles.Emitter.html#maxStartRotation">maxStartRotation</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#minimumScaleMultiplier"><a href="PIXI.particles.Emitter.html#minimumScaleMultiplier">minimumScaleMultiplier</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#minimumSpeedMultiplier"><a href="PIXI.particles.Emitter.html#minimumSpeedMultiplier">minimumSpeedMultiplier</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#minLifetime"><a href="PIXI.particles.Emitter.html#minLifetime">minLifetime</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#minRotationSpeed"><a href="PIXI.particles.Emitter.html#minRotationSpeed">minRotationSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#minStartRotation"><a href="PIXI.particles.Emitter.html#minStartRotation">minStartRotation</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#noRotation"><a href="PIXI.particles.Emitter.html#noRotation">noRotation</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#ownerPos"><a href="PIXI.particles.Emitter.html#ownerPos">ownerPos</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#parent"><a href="PIXI.particles.Emitter.html#parent">parent</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleBlendMode"><a href="PIXI.particles.Emitter.html#particleBlendMode">particleBlendMode</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleConstructor"><a href="PIXI.particles.Emitter.html#particleConstructor">particleConstructor</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleCount"><a href="PIXI.particles.Emitter.html#particleCount">particleCount</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleImages"><a href="PIXI.particles.Emitter.html#particleImages">particleImages</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleSpacing"><a href="PIXI.particles.Emitter.html#particleSpacing">particleSpacing</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particlesPerWave"><a href="PIXI.particles.Emitter.html#particlesPerWave">particlesPerWave</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#rotation"><a href="PIXI.particles.Emitter.html#rotation">rotation</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#spawnCircle"><a href="PIXI.particles.Emitter.html#spawnCircle">spawnCircle</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#spawnPos"><a href="PIXI.particles.Emitter.html#spawnPos">spawnPos</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#spawnRect"><a href="PIXI.particles.Emitter.html#spawnRect">spawnRect</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#spawnType"><a href="PIXI.particles.Emitter.html#spawnType">spawnType</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#startAlpha"><a href="PIXI.particles.Emitter.html#startAlpha">startAlpha</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#startColor"><a href="PIXI.particles.Emitter.html#startColor">startColor</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#startScale"><a href="PIXI.particles.Emitter.html#startScale">startScale</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#startSpeed"><a href="PIXI.particles.Emitter.html#startSpeed">startSpeed</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.Emitter#cleanup"><a href="PIXI.particles.Emitter.html#cleanup">cleanup</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#destroy"><a href="PIXI.particles.Emitter.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#init"><a href="PIXI.particles.Emitter.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#resetPositionTracking"><a href="PIXI.particles.Emitter.html#resetPositionTracking">resetPositionTracking</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#rotate"><a href="PIXI.particles.Emitter.html#rotate">rotate</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#update"><a href="PIXI.particles.Emitter.html#update">update</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#updateOwnerPos"><a href="PIXI.particles.Emitter.html#updateOwnerPos">updateOwnerPos</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#updateSpawnPos"><a href="PIXI.particles.Emitter.html#updateSpawnPos">updateSpawnPos</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.Particle">
-            <span class="title">
-                <a href="PIXI.particles.Particle.html">PIXI.particles.Particle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.Particle#acceleration"><a href="PIXI.particles.Particle.html#acceleration">acceleration</a></li>
-            
-                <li data-name="PIXI.particles.Particle#age"><a href="PIXI.particles.Particle.html#age">age</a></li>
-            
-                <li data-name="PIXI.particles.Particle#ease"><a href="PIXI.particles.Particle.html#ease">ease</a></li>
-            
-                <li data-name="PIXI.particles.Particle#emitter"><a href="PIXI.particles.Particle.html#emitter">emitter</a></li>
-            
-                <li data-name="PIXI.particles.Particle#endAlpha"><a href="PIXI.particles.Particle.html#endAlpha">endAlpha</a></li>
-            
-                <li data-name="PIXI.particles.Particle#endColor"><a href="PIXI.particles.Particle.html#endColor">endColor</a></li>
-            
-                <li data-name="PIXI.particles.Particle#endScale"><a href="PIXI.particles.Particle.html#endScale">endScale</a></li>
-            
-                <li data-name="PIXI.particles.Particle#endSpeed"><a href="PIXI.particles.Particle.html#endSpeed">endSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Particle#extraData"><a href="PIXI.particles.Particle.html#extraData">extraData</a></li>
-            
-                <li data-name="PIXI.particles.Particle#maxLife"><a href="PIXI.particles.Particle.html#maxLife">maxLife</a></li>
-            
-                <li data-name="PIXI.particles.Particle#maxSpeed"><a href="PIXI.particles.Particle.html#maxSpeed">maxSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Particle#startAlpha"><a href="PIXI.particles.Particle.html#startAlpha">startAlpha</a></li>
-            
-                <li data-name="PIXI.particles.Particle#startColor"><a href="PIXI.particles.Particle.html#startColor">startColor</a></li>
-            
-                <li data-name="PIXI.particles.Particle#startScale"><a href="PIXI.particles.Particle.html#startScale">startScale</a></li>
-            
-                <li data-name="PIXI.particles.Particle#startSpeed"><a href="PIXI.particles.Particle.html#startSpeed">startSpeed</a></li>
-            
-                <li data-name="PIXI.particles.Particle#velocity"><a href="PIXI.particles.Particle.html#velocity">velocity</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.Particle.parseArt"><a href="PIXI.particles.Particle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.Particle.parseData"><a href="PIXI.particles.Particle.html#.parseData">parseData</a></li>
-            
-                <li data-name="PIXI.particles.Particle#applyArt"><a href="PIXI.particles.Particle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.Particle#destroy"><a href="PIXI.particles.Particle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.Particle#init"><a href="PIXI.particles.Particle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.Particle#kill"><a href="PIXI.particles.Particle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.Particle#Particle_init"><a href="PIXI.particles.Particle.html#Particle_init">Particle_init</a></li>
-            
-                <li data-name="PIXI.particles.Particle#Particle_update"><a href="PIXI.particles.Particle.html#Particle_update">Particle_update</a></li>
-            
-                <li data-name="PIXI.particles.Particle#update"><a href="PIXI.particles.Particle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.ParticleUtils">
-            <span class="title">
-                <a href="PIXI.particles.ParticleUtils.html">PIXI.particles.ParticleUtils</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.ParticleUtils.verbose"><a href="PIXI.particles.ParticleUtils.html#.verbose">verbose</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.ParticleUtils.combineRGBComponents"><a href="PIXI.particles.ParticleUtils.html#.combineRGBComponents">combineRGBComponents</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.generateEase"><a href="PIXI.particles.ParticleUtils.html#.generateEase">generateEase</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.getBlendMode"><a href="PIXI.particles.ParticleUtils.html#.getBlendMode">getBlendMode</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.hexToRGB"><a href="PIXI.particles.ParticleUtils.html#.hexToRGB">hexToRGB</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.length"><a href="PIXI.particles.ParticleUtils.html#.length">length</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.normalize"><a href="PIXI.particles.ParticleUtils.html#.normalize">normalize</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.rotatePoint"><a href="PIXI.particles.ParticleUtils.html#.rotatePoint">rotatePoint</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.scaleBy"><a href="PIXI.particles.ParticleUtils.html#.scaleBy">scaleBy</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.PathParticle">
-            <span class="title">
-                <a href="PIXI.particles.PathParticle.html">PIXI.particles.PathParticle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.PathParticle#acceleration"><a href="PIXI.particles.PathParticle.html#acceleration">acceleration</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#age"><a href="PIXI.particles.PathParticle.html#age">age</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#ease"><a href="PIXI.particles.PathParticle.html#ease">ease</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#emitter"><a href="PIXI.particles.PathParticle.html#emitter">emitter</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#endAlpha"><a href="PIXI.particles.PathParticle.html#endAlpha">endAlpha</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#endColor"><a href="PIXI.particles.PathParticle.html#endColor">endColor</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#endScale"><a href="PIXI.particles.PathParticle.html#endScale">endScale</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#endSpeed"><a href="PIXI.particles.PathParticle.html#endSpeed">endSpeed</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#extraData"><a href="PIXI.particles.PathParticle.html#extraData">extraData</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#initialPosition"><a href="PIXI.particles.PathParticle.html#initialPosition">initialPosition</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#initialRotation"><a href="PIXI.particles.PathParticle.html#initialRotation">initialRotation</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#maxLife"><a href="PIXI.particles.PathParticle.html#maxLife">maxLife</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#maxSpeed"><a href="PIXI.particles.PathParticle.html#maxSpeed">maxSpeed</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#movement"><a href="PIXI.particles.PathParticle.html#movement">movement</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#path"><a href="PIXI.particles.PathParticle.html#path">path</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#startAlpha"><a href="PIXI.particles.PathParticle.html#startAlpha">startAlpha</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#startColor"><a href="PIXI.particles.PathParticle.html#startColor">startColor</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#startScale"><a href="PIXI.particles.PathParticle.html#startScale">startScale</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#startSpeed"><a href="PIXI.particles.PathParticle.html#startSpeed">startSpeed</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#velocity"><a href="PIXI.particles.PathParticle.html#velocity">velocity</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.PathParticle.parseArt"><a href="PIXI.particles.PathParticle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle.parseData"><a href="PIXI.particles.PathParticle.html#.parseData">parseData</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#applyArt"><a href="PIXI.particles.PathParticle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#destroy"><a href="PIXI.particles.PathParticle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#init"><a href="PIXI.particles.PathParticle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#kill"><a href="PIXI.particles.PathParticle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#Particle_init"><a href="PIXI.particles.PathParticle.html#Particle_init">Particle_init</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#Particle_update"><a href="PIXI.particles.PathParticle.html#Particle_update">Particle_update</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#update"><a href="PIXI.particles.PathParticle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-    </ul>
-</div>
-    <div class="main">
-        <h1 class="page-title" data-filename="Emitter.js.html">Source: Emitter.js</h1>
-        
+/**
+ * An individual particle image with an animation. Art data passed to the emitter must be
+ * formatted in a particular way for AnimatedParticle to be able to handle it:
+ *
+ *     {
+ *         //framerate is required. It is the animation speed of the particle in frames per
+ *         //second.
+ *         //A value of "matchLife" causes the animation to match the lifetime of an individual
+ *         //particle, instead of at a constant framerate. This causes the animation to play
+ *         //through one time, completing when the particle expires.
+ *         framerate: 6,
+ *         //loop is optional, and defaults to false.
+ *         loop: true,
+ *         //textures is required, and can be an array of any (non-zero) length.
+ *         textures: [
+ *             //each entry represents a single texture that should be used for one or more
+ *             //frames. Any strings will be converted to Textures with Texture.fromImage().
+ *             //Instances of PIXI.Texture will be used directly.
+ *             "animFrame1.png",
+ *             //entries can be an object with a 'count' property, telling AnimatedParticle to
+ *             //use that texture for 'count' frames sequentially.
+ *             {
+ *                 texture: "animFrame2.png",
+ *                 count: 3
+ *             },
+ *             "animFrame3.png"
+ *         ]
+ *     }
+ *
+ * @memberof PIXI.particles
+ * @class AnimatedParticle
+ * @extends PIXI.particles.Particle
+ * @constructor
+ * @param {PIXI.particles.Emitter} emitter The emitter that controls this AnimatedParticle.
+ */
+var AnimatedParticle = function(emitter)
+{
+	Particle.call(this, emitter);
 
+	/**
+	 * Texture array used as each frame of animation, similarly to how MovieClip works.
+	 * @property {Array} textures
+	 * @private
+	 */
+	this.textures = null;
 
-    
-    <section>
-        <article>
-            <pre id="source-code" class="prettyprint source linenums"><code>"use strict";
+	/**
+	 * Duration of the animation, in seconds.
+	 * @property {Number} duration
+	 * @private
+	 */
+	this.duration = 0;
+
+	/**
+	 * Animation framerate, in frames per second.
+	 * @property {Number} framerate
+	 * @private
+	 */
+	this.framerate = 0;
+
+	/**
+	 * Animation time elapsed, in seconds.
+	 * @property {Number} elapsed
+	 * @private
+	 */
+	this.elapsed = 0;
+
+	/**
+	 * If this particle animation should loop.
+	 * @property {Boolean} loop
+	 * @private
+	 */
+	this.loop = false;
+};
+
+// Reference to the super class
+var s = Particle.prototype;
+// Reference to the prototype
+var p = AnimatedParticle.prototype = Object.create(s);
+
+/**
+ * Initializes the particle for use, based on the properties that have to
+ * have been set already on the particle.
+ * @method PIXI.particles.AnimatedParticle#init
+ */
+p.init = function()
+{
+	this.Particle_init();
+
+	this.elapsed = 0;
+
+	//if the animation needs to match the particle's life, then cacluate variables
+	if(this.framerate < 0)
+	{
+		this.duration = this.maxLife;
+		this.framerate = this.textures.length / this.duration;
+	}
+};
+
+/**
+ * Sets the textures for the particle.
+ * @method PIXI.particles.AnimatedParticle#applyArt
+ * @param {Array} art An array of PIXI.Texture objects for this animated particle.
+ */
+p.applyArt = function(art)
+{
+	this.textures = art.textures;
+	this.framerate = art.framerate;
+	this.duration = art.duration;
+	this.loop = art.loop;
+};
+
+/**
+ * Updates the particle.
+ * @method PIXI.particles.AnimatedParticle#update
+ * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+ */
+p.update = function(delta)
+{
+	//only animate the particle if it is still alive
+	if(this.Particle_update(delta) >= 0)
+	{
+		this.elapsed += delta;
+		if(this.elapsed > this.duration)
+		{
+			//loop elapsed back around
+			if(this.loop)
+				this.elapsed = this.elapsed % this.duration;
+			//subtract a small amount to prevent attempting to go past the end of the animation
+			else
+				this.elapsed = this.duration - 0.000001;
+		}
+		var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
+		this.texture = this.textures[frame] || ParticleUtils.EMPTY_TEXTURE;
+	}
+};
+
+p.Particle_destroy = Particle.prototype.destroy;
+/**
+ * Destroys the particle, removing references and preventing future use.
+ * @method PIXI.particles.AnimatedParticle#destroy
+ */
+p.destroy = function()
+{
+	this.Particle_destroy();
+	this.textures = null;
+};
+
+/**
+ * Checks over the art that was passed to the Emitter's init() function, to do any special
+ * modifications to prepare it ahead of time.
+ * @method PIXI.particles.AnimatedParticle.parseArt
+ * @static
+ * @param  {Array} art The array of art data, properly formatted for AnimatedParticle.
+ * @return {Array} The art, after any needed modifications.
+ */
+AnimatedParticle.parseArt = function(art)
+{
+	var i, data, output = [], j, textures, tex, outTextures;
+	for(i = 0; i < art.length; ++i)
+	{
+		data = art[i];
+		art[i] = output = {};
+		output.textures = outTextures = [];
+		textures = data.textures;
+		for(j = 0; j < textures.length; ++j)
+		{
+			tex = textures[j];
+			if(typeof tex == "string")
+				outTextures.push(Texture.fromImage(tex));
+			else if(tex instanceof Texture)
+				outTextures.push(tex);
+			//assume an object with extra data determining duplicate frame data
+			else
+			{
+				var dupe = tex.count || 1;
+				if(typeof tex.texture == "string")
+					tex = Texture.fromImage(tex.texture);
+				else// if(tex.texture instanceof Texture)
+					tex = tex.texture;
+				for(; dupe > 0; --dupe)
+				{
+					outTextures.push(tex);
+				}
+			}
+		}
+
+		//use these values to signify that the animation should match the particle life time.
+		if(data.framerate == "matchLife")
+		{
+			//-1 means that it should be calculated
+			output.framerate = -1;
+			output.duration = 0;
+			output.loop = false;
+		}
+		else
+		{
+			//determine if the animation should loop
+			output.loop = !!data.loop;
+			//get the framerate, default to 60
+			output.framerate = data.framerate > 0 ? data.framerate : 60;
+			//determine the duration
+			output.duration = outTextures.length / output.framerate;
+		}
+	}
+
+	return art;
+};
+
+module.exports = AnimatedParticle;
+},{"./Particle":3,"./ParticleUtils":4}],2:[function(require,module,exports){
+"use strict";
 
 var ParticleUtils = require("./ParticleUtils"),
 	Particle = require("./Particle"),
@@ -834,7 +598,7 @@ var Emitter = function(particleParent, particleImages, config)
 	//set the initial parent
 	this.parent = particleParent;
 
-	if(particleImages &amp;&amp; config)
+	if(particleImages && config)
 		this.init(particleImages, config);
 
 	//save often used functions on the instance instead of the prototype for better speed
@@ -861,7 +625,7 @@ Object.defineProperty(p, "frequency",
 	set: function(value)
 	{
 		//do some error checking to prevent infinite loops
-		if(typeof value == "number" &amp;&amp; value > 0)
+		if(typeof value == "number" && value > 0)
 			this._frequency = value;
 		else
 			this._frequency = 1;
@@ -891,7 +655,7 @@ Object.defineProperty(p, "particleConstructor",
 			}
 			this._poolFirst = null;
 			//re-initialize the emitter so that the new constructor can do anything it needs to
-			if(this._origConfig &amp;&amp; this._origArt)
+			if(this._origConfig && this._origArt)
 				this.init(this._origArt, this._origConfig);
 		}
 	}
@@ -917,7 +681,7 @@ Object.defineProperty(p, "parent",
 		}
 		this.cleanup();
 		this._parent = value;
-		this._parentIsPC = ParticleContainer &amp;&amp; value &amp;&amp; value instanceof ParticleContainer;
+		this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
 	}
 });
 
@@ -969,7 +733,7 @@ p.init = function(art, config)
 	}
 	//set up acceleration
 	var acceleration = config.acceleration;
-	if(acceleration &amp;&amp; (acceleration.x || acceleration.y))
+	if(acceleration && (acceleration.x || acceleration.y))
 	{
 		this.endSpeed = this.startSpeed;
 		this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
@@ -1006,7 +770,7 @@ p.init = function(art, config)
 	}
 	else
 		this.minStartRotation = this.maxStartRotation = 0;
-	if (config.noRotation &amp;&amp;
+	if (config.noRotation &&
 		(this.minStartRotation || this.maxStartRotation))
 	{
 		this.noRotation = !!config.noRotation;
@@ -1223,11 +987,11 @@ Object.defineProperty(p, "autoUpdate",
 	get: function() { return this._autoUpdate; },
 	set: function(value)
 	{
-		if (this._autoUpdate &amp;&amp; !value)
+		if (this._autoUpdate && !value)
 		{
 			ticker.remove(this.update, this);
 		}
-		else if (!this._autoUpdate &amp;&amp; value)
+		else if (!this._autoUpdate && value)
 		{
 			ticker.add(this.update, this);
 		}
@@ -1272,14 +1036,14 @@ p.update = function(delta)
 	{
 		//decrease spawn timer
 		this._spawnTimer -= delta;
-		//while _spawnTimer &lt; 0, we have particles to spawn
-		while(this._spawnTimer &lt;= 0)
+		//while _spawnTimer < 0, we have particles to spawn
+		while(this._spawnTimer <= 0)
 		{
 			//determine if the emitter should stop spawning
 			if(this._emitterLife > 0)
 			{
 				this._emitterLife -= this._frequency;
-				if(this._emitterLife &lt;= 0)
+				if(this._emitterLife <= 0)
 				{
 					this._spawnTimer = 0;
 					this._emitterLife = 0;
@@ -1300,12 +1064,12 @@ p.update = function(delta)
 			else
 				lifetime = Math.random() * (this.maxLifetime - this.minLifetime) + this.minLifetime;
 			//only make the particle if it wouldn't immediately destroy itself
-			if(-this._spawnTimer &lt; lifetime)
+			if(-this._spawnTimer < lifetime)
 			{
 				//If the position has changed and this isn't the first spawn,
 				//interpolate the spawn position
 				var emitPosX, emitPosY;
-				if (this._prevPosIsValid &amp;&amp; this._posChanged)
+				if (this._prevPosIsValid && this._posChanged)
 				{
 					//1 - _spawnTimer / delta, but _spawnTimer is negative
 					var lerp = 1 + this._spawnTimer / delta;
@@ -1319,7 +1083,7 @@ p.update = function(delta)
 				}
 				//create enough particles to fill the wave (non-burst types have a wave of 1)
 				i = 0;
-				for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i &lt; len; ++i)
+				for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i)
 				{
 					//create particle
 					var p, rand;
@@ -1636,23 +1400,981 @@ p.destroy = function()
 		this.startColor = this.endColor = this.customEase = null;
 };
 
-module.exports = Emitter;</code></pre>
-        </article>
-    </section>
+module.exports = Emitter;
+},{"./Particle":3,"./ParticleUtils":4}],3:[function(require,module,exports){
+var ParticleUtils = require("./ParticleUtils");
+var Sprite = PIXI.Sprite;
+
+/**
+ * An individual particle image. You shouldn't have to deal with these.
+ * @memberof PIXI.particles
+ * @class Particle
+ * @extends PIXI.Sprite
+ * @constructor
+ * @param {PIXI.particles.Emitter} emitter The emitter that controls this particle.
+ */
+var Particle = function(emitter)
+{
+	//start off the sprite with a blank texture, since we are going to replace it
+	//later when the particle is initialized.
+	Sprite.call(this);
+
+	/**
+	 * The emitter that controls this particle.
+	 * @property {Emitter} emitter
+	 */
+	this.emitter = emitter;
+	//particles should be centered
+	this.anchor.x = this.anchor.y = 0.5;
+	/**
+	 * The velocity of the particle. Speed may change, but the angle also
+	 * contained in velocity is constant.
+	 * @property {PIXI.Point} velocity
+	 */
+	this.velocity = new PIXI.Point();
+	/**
+	 * The maximum lifetime of this particle, in seconds.
+	 * @property {Number} maxLife
+	 */
+	this.maxLife = 0;
+	/**
+	 * The current age of the particle, in seconds.
+	 * @property {Number} age
+	 */
+	this.age = 0;
+	/**
+	 * A simple easing function to be applied to all properties that
+	 * are being interpolated.
+	 * @property {Function} ease
+	 */
+	this.ease = null;
+	/**
+	 * Extra data that the emitter passes along for custom particles.
+	 * @property {Object} extraData
+	 */
+	this.extraData = null;
+	/**
+	 * The alpha of the particle at the start of its life.
+	 * @property {Number} startAlpha
+	 */
+	this.startAlpha = 0;
+	/**
+	 * The alpha of the particle at the end of its life.
+	 * @property {Number} endAlpha
+	 */
+	this.endAlpha = 0;
+	/**
+	 * The speed of the particle at the start of its life.
+	 * @property {Number} startSpeed
+	 */
+	this.startSpeed = 0;
+	/**
+	 * The speed of the particle at the end of its life.
+	 * @property {Number} endSpeed
+	 */
+	this.endSpeed = 0;
+	/**
+	 * Acceleration to apply to the particle.
+	 * @property {PIXI.Point} accleration
+	 */
+	this.acceleration = new PIXI.Point();
+	/**
+	 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+	 * will disable the maximum speed.
+	 * @property {Number} maxSpeed
+	 * @default NaN
+	 */
+	this.maxSpeed = NaN;
+	/**
+	 * The scale of the particle at the start of its life.
+	 * @property {Number} startScale
+	 */
+	this.startScale = 0;
+	/**
+	 * The scale of the particle at the start of its life.
+	 * @property {Number} endScale
+	 */
+	this.endScale = 0;
+	/**
+	 * The tint of the particle at the start of its life.
+	 * @property {Array} startColor
+	 */
+	this.startColor = null;
+	/**
+	 * The red tint of the particle at the start of its life.
+	 * This is pulled from startColor in init().
+	 * @property {uint} _sR
+	 * @private
+	 */
+	this._sR = 0;
+	/**
+	 * The green tint of the particle at the start of its life.
+	 * This is pulled from startColor in init().
+	 * @property {uint} _sG
+	 * @private
+	 */
+	this._sG = 0;
+	/**
+	 * The blue tint of the particle at the start of its life.
+	 * This is pulled from startColor in init().
+	 * @property {uint} _sB
+	 * @private
+	 */
+	this._sB = 0;
+	/**
+	 * The tint of the particle at the start of its life.
+	 * @property {Array} endColor
+	 */
+	this.endColor = null;
+	/**
+	 * The red tint of the particle at the end of its life.
+	 * This is pulled from endColor in init().
+	 * @property {uint} _eR
+	 * @private
+	 */
+	this._eR = 0;
+	/**
+	 * The green tint of the particle at the end of its life.
+	 * This is pulled from endColor in init().
+	 * @property {uint} _sG
+	 * @private
+	 */
+	this._eG = 0;
+	/**
+	 * The blue tint of the particle at the end of its life.
+	 * This is pulled from endColor in init().
+	 * @property {uint} _sB
+	 * @private
+	 */
+	this._eB = 0;
+	/**
+	 * If alpha should be interpolated at all.
+	 * @property {Boolean} _doAlpha
+	 * @private
+	 */
+	this._doAlpha = false;
+	/**
+	 * If scale should be interpolated at all.
+	 * @property {Boolean} _doScale
+	 * @private
+	 */
+	this._doScale = false;
+	/**
+	 * If speed should be interpolated at all.
+	 * @property {Boolean} _doSpeed
+	 * @private
+	 */
+	this._doSpeed = false;
+	/**
+	 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
+	 * and _doSpeed gets priority.
+	 * @property {Boolean} _doAcceleration
+	 * @private
+	 */
+	this._doAcceleration = false;
+	/**
+	 * If color should be interpolated at all.
+	 * @property {Boolean} _doColor
+	 * @private
+	 */
+	this._doColor = false;
+	/**
+	 * If normal movement should be handled. Subclasses wishing to override movement
+	 * can set this to false in init().
+	 * @property {Boolean} _doNormalMovement
+	 * @private
+	 */
+	this._doNormalMovement = false;
+	/**
+	 * One divided by the max life of the particle, saved for slightly faster math.
+	 * @property {Number} _oneOverLife
+	 * @private
+	 */
+	this._oneOverLife = 0;
+
+	/**
+	 * Reference to the next particle in the list.
+	 * @property {Particle} next
+	 * @private
+	 */
+	this.next = null;
+
+	/**
+	 * Reference to the previous particle in the list.
+	 * @property {Particle} prev
+	 * @private
+	 */
+	this.prev = null;
+
+	//save often used functions on the instance instead of the prototype for better speed
+	this.init = this.init;
+	this.Particle_init = this.Particle_init;
+	this.update = this.update;
+	this.Particle_update = this.Particle_update;
+	this.applyArt = this.applyArt;
+	this.kill = this.kill;
+};
+
+// Reference to the prototype
+var p = Particle.prototype = Object.create(Sprite.prototype);
+
+/**
+ * Initializes the particle for use, based on the properties that have to
+ * have been set already on the particle.
+ * @method PIXI.particles.Particle#init
+ */
+/**
+ * A reference to init, so that subclasses can access it without the penalty of Function.call()
+ * @method PIXI.particles.Particle#Particle_init
+ * @protected
+ */
+p.init = p.Particle_init = function()
+{
+	//reset the age
+	this.age = 0;
+	//set up the velocity based on the start speed and rotation
+	this.velocity.x = this.startSpeed;
+	this.velocity.y = 0;
+	ParticleUtils.rotatePoint(this.rotation, this.velocity);
+	if (this.noRotation)
+	{
+		this.rotation = 0;
+	}
+	else
+	{
+		//convert rotation to Radians from Degrees
+		this.rotation *= ParticleUtils.DEG_TO_RADS;
+	}
+	//convert rotation speed to Radians from Degrees
+	this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
+	//set alpha to inital alpha
+	this.alpha = this.startAlpha;
+	//set scale to initial scale
+	this.scale.x = this.scale.y = this.startScale;
+	//determine start and end color values
+	if (this.startColor)
+	{
+		this._sR = this.startColor[0];
+		this._sG = this.startColor[1];
+		this._sB = this.startColor[2];
+		if(this.endColor)
+		{
+			this._eR = this.endColor[0];
+			this._eG = this.endColor[1];
+			this._eB = this.endColor[2];
+		}
+	}
+	//figure out what we need to interpolate
+	this._doAlpha = this.startAlpha != this.endAlpha;
+	this._doSpeed = this.startSpeed != this.endSpeed;
+	this._doScale = this.startScale != this.endScale;
+	this._doColor = !!this.endColor;
+	this._doAcceleration = this.acceleration.x !== 0 || this.acceleration.y !== 0;
+	//_doNormalMovement can be cancelled by subclasses
+	this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this._doAcceleration;
+	//save our lerp helper
+	this._oneOverLife = 1 / this.maxLife;
+	//set the inital color
+	this.tint = ParticleUtils.combineRGBComponents(this._sR, this._sG, this._sB);
+	//ensure visibility
+	this.visible = true;
+};
+
+/**
+ * Sets the texture for the particle. This can be overridden to allow
+ * for an animated particle.
+ * @method PIXI.particles.Particle#applyArt
+ * @param {PIXI.Texture} art The texture to set.
+ */
+p.applyArt = function(art)
+{
+	this.texture = art || ParticleUtils.EMPTY_TEXTURE;
+};
+
+/**
+ * Updates the particle.
+ * @method PIXI.particles.Particle#update
+ * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+ * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+ *                   properties. A value of -1 means the particle died of old age instead.
+ */
+/**
+ * A reference to update so that subclasses can access the original without the overhead
+ * of Function.call().
+ * @method PIXI.particles.Particle#Particle_update
+ * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+ * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+ *                   properties. A value of -1 means the particle died of old age instead.
+ * @protected
+ */
+p.update = p.Particle_update = function(delta)
+{
+	//increase age
+	this.age += delta;
+	//recycle particle if it is too old
+	if(this.age >= this.maxLife)
+	{
+		this.kill();
+		return -1;
+	}
+
+	//determine our interpolation value
+	var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
+	if (this.ease)
+	{
+		if(this.ease.length == 4)
+		{
+			//the t, b, c, d parameters that some tween libraries use
+			//(time, initial value, end value, duration)
+			lerp = this.ease(lerp, 0, 1, 1);
+		}
+		else
+		{
+			//the simplified version that we like that takes
+			//one parameter, time from 0-1. TweenJS eases provide this usage.
+			lerp = this.ease(lerp);
+		}
+	}
+
+	//interpolate alpha
+	if (this._doAlpha)
+		this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
+	//interpolate scale
+	if (this._doScale)
+	{
+		var scale = (this.endScale - this.startScale) * lerp + this.startScale;
+		this.scale.x = this.scale.y = scale;
+	}
+	//handle movement
+	if(this._doNormalMovement)
+	{
+		//interpolate speed
+		if (this._doSpeed)
+		{
+			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+			ParticleUtils.normalize(this.velocity);
+			ParticleUtils.scaleBy(this.velocity, speed);
+		}
+		else if(this._doAcceleration)
+		{
+			this.velocity.x += this.acceleration.x * delta;
+			this.velocity.y += this.acceleration.y * delta;
+			if (this.maxSpeed)
+			{
+				var currentSpeed = ParticleUtils.length(this.velocity);
+				//if we are going faster than we should, clamp at the max speed
+				//DO NOT recalculate vector length
+				if (currentSpeed > this.maxSpeed)
+				{
+					ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
+				}
+			}
+		}
+		//adjust position based on velocity
+		this.position.x += this.velocity.x * delta;
+		this.position.y += this.velocity.y * delta;
+	}
+	//interpolate color
+	if (this._doColor)
+	{
+		var r = (this._eR - this._sR) * lerp + this._sR;
+		var g = (this._eG - this._sG) * lerp + this._sG;
+		var b = (this._eB - this._sB) * lerp + this._sB;
+		this.tint = ParticleUtils.combineRGBComponents(r, g, b);
+	}
+	//update rotation
+	if(this.rotationSpeed !== 0)
+	{
+		this.rotation += this.rotationSpeed * delta;
+	}
+	else if(this.acceleration && !this.noRotation)
+	{
+		this.rotation = Math.atan2(this.velocity.y, this.velocity.x);// + Math.PI / 2;
+	}
+	return lerp;
+};
+
+/**
+ * Kills the particle, removing it from the display list
+ * and telling the emitter to recycle it.
+ * @method PIXI.particles.Particle#kill
+ */
+p.kill = function()
+{
+	this.emitter.recycle(this);
+};
+
+p.Sprite_Destroy = Sprite.prototype.destroy;
+/**
+ * Destroys the particle, removing references and preventing future use.
+ * @method PIXI.particles.Particle#destroy
+ */
+p.destroy = function()
+{
+	if (this.parent)
+		this.parent.removeChild(this);
+	if (this.Sprite_Destroy)
+		this.Sprite_Destroy();
+	this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
+		this.next = this.prev = null;
+};
+
+/**
+ * Checks over the art that was passed to the Emitter's init() function, to do any special
+ * modifications to prepare it ahead of time.
+ * @method PIXI.particles.Particle.parseArt
+ * @static
+ * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
+ *                     Any strings in the array will be converted to Textures via
+ *                     Texture.fromImage().
+ * @return {Array} The art, after any needed modifications.
+ */
+Particle.parseArt = function(art)
+{
+	//convert any strings to Textures.
+	var i;
+	for(i = art.length; i >= 0; --i)
+	{
+		if(typeof art[i] == "string")
+			art[i] = PIXI.Texture.fromImage(art[i]);
+	}
+	//particles from different base textures will be slower in WebGL than if they
+	//were from one spritesheet
+	if(ParticleUtils.verbose)
+	{
+		for(i = art.length - 1; i > 0; --i)
+		{
+			if(art[i].baseTexture != art[i - 1].baseTexture)
+			{
+				if (window.console)
+					console.warn("PixiParticles: using particle textures from different images may hinder performance in WebGL");
+				break;
+			}
+		}
+	}
+
+	return art;
+};
+
+/**
+ * Parses extra emitter data to ensure it is set up for this particle class.
+ * Particle does nothing to the extra data.
+ * @method PIXI.particles.Particle.parseData
+ * @static
+ * @param  {Object} extraData The extra data from the particle config.
+ * @return {Object} The parsed extra data.
+ */
+Particle.parseData = function(extraData)
+{
+	return extraData;
+};
+
+module.exports = Particle;
+},{"./ParticleUtils":4}],4:[function(require,module,exports){
+"use strict";
+
+var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
+var Texture = PIXI.Texture;
+
+/**
+ * Contains helper functions for particles and emitters to use.
+ * @memberof PIXI.particles
+ * @class ParticleUtils
+ * @static
+ */
+var ParticleUtils = {};
+
+/**
+ * If errors and warnings should be logged within the library.
+ * @name PIXI.particles.ParticleUtils.verbose
+ * @default false
+ * @static
+ */
+ParticleUtils.verbose = false;
+
+var DEG_TO_RADS = ParticleUtils.DEG_TO_RADS = Math.PI / 180;
+
+var empty = ParticleUtils.EMPTY_TEXTURE = Texture.EMPTY;
+//prevent any events from being used on the empty texture, as well as destruction of it
+//v4 of Pixi does this, but doing it again won't hurt
+empty.on = empty.destroy = empty.once = empty.emit = function() {};
+
+/**
+ * Rotates a point by a given angle.
+ * @method PIXI.particles.ParticleUtils.rotatePoint
+ * @param {Number} angle The angle to rotate by in degrees
+ * @param {PIXI.Point} p The point to rotate around 0,0.
+ * @static
+ */
+ParticleUtils.rotatePoint = function(angle, p)
+{
+	if(!angle) return;
+	angle *= DEG_TO_RADS;
+	var s = Math.sin(angle);
+	var c = Math.cos(angle);
+	var xnew = p.x * c - p.y * s;
+	var ynew = p.x * s + p.y * c;
+	p.x = xnew;
+	p.y = ynew;
+};
+
+/**
+ * Combines separate color components (0-255) into a single uint color.
+ * @method PIXI.particles.ParticleUtils.combineRGBComponents
+ * @param {uint} r The red value of the color
+ * @param {uint} g The green value of the color
+ * @param {uint} b The blue value of the color
+ * @return {uint} The color in the form of 0xRRGGBB
+ * @static
+ */
+ParticleUtils.combineRGBComponents = function(r, g, b/*, a*/)
+{
+	return /*a << 24 |*/ r << 16 | g << 8 | b;
+};
+
+/**
+ * Reduces the point to a length of 1.
+ * @method PIXI.particles.ParticleUtils.normalize
+ * @static
+ * @param {PIXI.Point} point The point to normalize
+ */
+ParticleUtils.normalize = function(point)
+{
+	var oneOverLen = 1 / ParticleUtils.length(point);
+	point.x *= oneOverLen;
+	point.y *= oneOverLen;
+};
+
+/**
+ * Multiplies the x and y values of this point by a value.
+ * @method PIXI.particles.ParticleUtils.scaleBy
+ * @static
+ * @param {PIXI.Point} point The point to scaleBy
+ * @param value {Number} The value to scale by.
+ */
+ParticleUtils.scaleBy = function(point, value)
+{
+	point.x *= value;
+	point.y *= value;
+};
+
+/**
+ * Returns the length (or magnitude) of this point.
+ * @method PIXI.particles.ParticleUtils.length
+ * @static
+ * @param {PIXI.Point} point The point to measure length
+ * @return The length of this point.
+ */
+ParticleUtils.length = function(point)
+{
+	return Math.sqrt(point.x * point.x + point.y * point.y);
+};
+
+/**
+ * Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
+ * "AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
+ * [r, g, b, (a)].
+ * @method PIXI.particles.ParticleUtils.hexToRGB
+ * @param {String} color The input color string.
+ * @param {Array} output An array to put the output in. If omitted, a new array is created.
+ * @return The array of numeric color values.
+ * @static
+ */
+ParticleUtils.hexToRGB = function(color, output)
+{
+	if (output)
+		output.length = 0;
+	else
+		output = [];
+	if (color.charAt(0) == "#")
+		color = color.substr(1);
+	else if (color.indexOf("0x") === 0)
+		color = color.substr(2);
+	var alpha;
+	if (color.length == 8)
+	{
+		alpha = color.substr(0, 2);
+		color = color.substr(2);
+	}
+	output.push(parseInt(color.substr(0, 2), 16));//Red
+	output.push(parseInt(color.substr(2, 2), 16));//Green
+	output.push(parseInt(color.substr(4, 2), 16));//Blue
+	if (alpha)
+		output.push(parseInt(alpha, 16));
+	return output;
+};
+
+/**
+ * Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
+ * by the related tool at http://www.greensock.com/customease/.
+ * @method PIXI.particles.ParticleUtils.generateEase
+ * @param {Array} segments An array of segments, as created by
+ * http://www.greensock.com/customease/.
+ * @return {Function} A function that calculates the percentage of change at
+ *                    a given point in time (0-1 inclusive).
+ * @static
+ */
+ParticleUtils.generateEase = function(segments)
+{
+	var qty = segments.length;
+	var oneOverQty = 1 / qty;
+	/*
+	 * Calculates the percentage of change at a given point in time (0-1 inclusive).
+	 * @param {Number} time The time of the ease, 0-1 inclusive.
+	 * @return {Number} The percentage of the change, 0-1 inclusive (unless your
+	 *                  ease goes outside those bounds).
+	 */
+	var simpleEase = function(time)
+	{
+		var t, s;
+		var i = (qty * time) | 0;//do a quick floor operation
+		t = (time - (i * oneOverQty)) * qty;
+		s = segments[i] || segments[qty - 1];
+		return (s.s + t * (2 * (1 - t) * (s.cp - s.s) + t * (s.e - s.s)));
+	};
+	return simpleEase;
+};
+
+/**
+ * Gets a blend mode, ensuring that it is valid.
+ * @method PIXI.particles.ParticleUtils.getBlendMode
+ * @param {String} name The name of the blend mode to get.
+ * @return {int} The blend mode as specified in the PIXI.blendModes enumeration.
+ * @static
+ */
+ParticleUtils.getBlendMode = function(name)
+{
+	if (!name) return BLEND_MODES.NORMAL;
+	name = name.toUpperCase();
+	while (name.indexOf(" ") >= 0)
+		name = name.replace(" ", "_");
+	return BLEND_MODES[name] || BLEND_MODES.NORMAL;
+};
+
+module.exports = ParticleUtils;
+},{}],5:[function(require,module,exports){
+"use strict";
+
+var ParticleUtils = require("./ParticleUtils"),
+	Particle = require("./Particle");
+
+/**
+ * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
+ * "5x + 3".
+ * To use this class, the particle config must have a "path" string in the
+ * "extraData" parameter. This string should have "x" in it to represent movement (from the
+ * speed settings of the particle). It may have numbers, parentheses, the four basic
+ * operations, and the following Math functions or properties (without the preceding "Math."):
+ * "pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
+ * "acos", "atan", "atan2", "log".
+ * The overall movement of the particle and the expression value become x and y positions for
+ * the particle, respectively. The final position is rotated by the spawn rotation/angle of
+ * the particle.
+ *
+ * Some example paths:
+ *
+ * 	"sin(x/10) * 20" // A sine wave path.
+ * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
+ * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
+ *
+ * @memberof PIXI.particles
+ * @class PathParticle
+ * @extends PIXI.particles.Particle
+ * @constructor
+ * @param {PIXI.particles.Emitter} emitter The emitter that controls this PathParticle.
+ */
+var PathParticle = function(emitter)
+{
+	Particle.call(this, emitter);
+	/**
+	 * The function representing the path the particle should take.
+	 * @property {Function} path
+	 */
+	this.path = null;
+	/**
+	 * The initial rotation in degrees of the particle, because the direction of the path
+	 * is based on that.
+	 * @property {Number} initialRotation
+	 */
+	this.initialRotation = 0;
+	/**
+	 * The initial position of the particle, as all path movement is added to that.
+	 * @property {PIXI.Point} initialPosition
+	 */
+	this.initialPosition = new PIXI.Point();
+	/**
+	 * Total single directional movement, due to speed.
+	 * @property {Number} movement
+	 */
+	this.movement = 0;
+};
+
+// Reference to the super class
+var s = Particle.prototype;
+// Reference to the prototype
+var p = PathParticle.prototype = Object.create(s);
+
+/**
+ * A helper point for math things.
+ * @property {Function} helperPoint
+ * @private
+ * @static
+ */
+var helperPoint = new PIXI.Point();
+
+/**
+ * Initializes the particle for use, based on the properties that have to
+ * have been set already on the particle.
+ * @method PIXI.particles.PathParticle#init
+ */
+p.init = function()
+{
+	//get initial rotation before it is converted to radians
+	this.initialRotation = this.rotation;
+	//standard init
+	this.Particle_init();
+
+	//set the path for the particle
+	this.path = this.extraData.path;
+	//cancel the normal movement behavior
+	this._doNormalMovement = !this.path;
+	//reset movement
+	this.movement = 0;
+	//grab position
+	this.initialPosition.x = this.position.x;
+	this.initialPosition.y = this.position.y;
+};
+
+//a hand picked list of Math functions (and a couple properties) that are allowable.
+//they should be used without the preceding "Math."
+var MATH_FUNCS =
+[
+	"pow",
+	"sqrt",
+	"abs",
+	"floor",
+	"round",
+	"ceil",
+	"E",
+	"PI",
+	"sin",
+	"cos",
+	"tan",
+	"asin",
+	"acos",
+	"atan",
+	"atan2",
+	"log"
+];
+//Allow the 4 basic operations, parentheses and all numbers/decimals, as well
+//as 'x', for the variable usage.
+var WHITELISTER = "[01234567890\\.\\*\\-\\+\\/\\(\\)x ,]";
+//add the math functions to the regex string.
+for(var index = MATH_FUNCS.length - 1; index >= 0; --index)
+{
+	WHITELISTER += "|" + MATH_FUNCS[index];
+}
+//create an actual regular expression object from the string
+WHITELISTER = new RegExp(WHITELISTER, "g");
+
+/**
+ * Parses a string into a function for path following.
+ * This involves whitelisting the string for safety, inserting "Math." to math function
+ * names, and using eval() to generate a function.
+ * @method PIXI.particles.PathParticle~parsePath
+ * @private
+ * @static
+ * @param {String} pathString The string to parse.
+ * @return {Function} The path function - takes x, outputs y.
+ */
+var parsePath = function(pathString)
+{
+	var rtn;
+	var matches = pathString.match(WHITELISTER);
+	for(var i = matches.length - 1; i >= 0; --i)
+	{
+		if(MATH_FUNCS.indexOf(matches[i]) >= 0)
+			matches[i] = "Math." + matches[i];
+	}
+	pathString = matches.join("");
+	eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
+	return rtn;
+};
+
+/**
+ * Updates the particle.
+ * @method PIXI.particles.PathParticle#update
+ * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+ */
+p.update = function(delta)
+{
+	var lerp = this.Particle_update(delta);
+	//if the particle died during the update, then don't bother
+	if(lerp >= 0 && this.path)
+	{
+		//increase linear movement based on speed
+		var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+		this.movement += speed * delta;
+		//set up the helper point for rotation
+		helperPoint.x = this.movement;
+		helperPoint.y = this.path(this.movement);
+		ParticleUtils.rotatePoint(this.initialRotation, helperPoint);
+		this.position.x = this.initialPosition.x + helperPoint.x;
+		this.position.y = this.initialPosition.y + helperPoint.y;
+	}
+};
+
+p.Particle_destroy = Particle.prototype.destroy;
+/**
+ * Destroys the particle, removing references and preventing future use.
+ * @method PIXI.particles.PathParticle#destroy
+ */
+p.destroy = function()
+{
+	this.Particle_destroy();
+	this.path = this.initialPosition = null;
+};
+
+/**
+ * Checks over the art that was passed to the Emitter's init() function, to do any special
+ * modifications to prepare it ahead of time. This just runs Particle.parseArt().
+ * @method PIXI.particles.PathParticle.parseArt
+ * @static
+ * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
+ *                     Any strings in the array will be converted to Textures via
+ *                     Texture.fromImage().
+ * @return {Array} The art, after any needed modifications.
+ */
+PathParticle.parseArt = function(art)
+{
+	return Particle.parseArt(art);
+};
+
+/**
+ * Parses extra emitter data to ensure it is set up for this particle class.
+ * PathParticle checks for the existence of path data, and parses the path data for use
+ * by particle instances.
+ * @method PIXI.particles.PathParticle.parseData
+ * @static
+ * @param  {Object} extraData The extra data from the particle config.
+ * @return {Object} The parsed extra data.
+ */
+PathParticle.parseData = function(extraData)
+{
+	var output = {};
+	if(extraData && extraData.path)
+	{
+		try
+		{
+			output.path = parsePath(extraData.path);
+		}
+		catch(e)
+		{
+			if(ParticleUtils.verbose)
+				console.error("PathParticle: error in parsing path expression");
+			output.path = null;
+		}
+	}
+	else
+	{
+		if(ParticleUtils.verbose)
+			console.error("PathParticle requires a path string in extraData!");
+		output.path = null;
+	}
+	return output;
+};
+
+module.exports = PathParticle;
+},{"./Particle":3,"./ParticleUtils":4}],6:[function(require,module,exports){
+//Nothing to deprecate right now!
+},{}],7:[function(require,module,exports){
+require("./polyfills.js");
+exports.ParticleUtils = require("./ParticleUtils.js");
+exports.Particle = require("./Particle.js");
+exports.Emitter = require("./Emitter.js");
+exports.PathParticle = require("./PathParticle.js");
+exports.AnimatedParticle = require("./AnimatedParticle.js");
+require("./deprecation.js");
+},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5,"./deprecation.js":6,"./polyfills.js":8}],8:[function(require,module,exports){
+/**
+ * Add methods to Array
+ * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
+ * @class Array
+ */
+
+/**
+ * Shuffles the array
+ * @method shuffle
+ * @return {Array} The array, for chaining calls.
+ */
+if(!Array.prototype.shuffle)
+{
+	// In EcmaScript 5 specs and browsers that support it you can use the Object.defineProperty
+	// to make it not enumerable set the enumerable property to false
+	Object.defineProperty(Array.prototype, 'shuffle', {
+		enumerable: false,
+		writable:false,
+		value: function() {
+			for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
+			return this;
+		}
+	});
+}
+
+/**
+ * Get a random item from an array
+ * @method random
+ * @return {*} The random item
+ */
+if(!Array.prototype.random)
+{
+	Object.defineProperty(Array.prototype, 'random', {
+		enumerable: false,
+		writable: false,
+		value: function() {
+			return this[Math.floor(Math.random() * this.length)];
+		}
+	});
+}
+},{}],9:[function(require,module,exports){
+"use strict";
+
+// Check for window, fallback to global
+var global = typeof window !== 'undefined' ? window : GLOBAL;
+
+//ensure that the particles namespace exist - PIXI 4 creates it itself, PIXI 3 does not
+if (!global.PIXI.particles) {
+	global.PIXI.particles = {};
+}
+
+// Export for Node-compatible environments like Electron
+if (typeof module !== 'undefined' && module.exports)
+{
+	// Attempt to require the pixi module
+	if (typeof PIXI === 'undefined')
+	{
+		// Include the Pixi.js module
+		require('pixi.js');
+	}
+
+	// Export the module
+	module.exports = global.PIXI.particles || particles;
+}
+// If we're in the browser make sure PIXI is available
+else if (typeof PIXI === 'undefined')
+{
+	throw "pixi-particles requires pixi.js to be loaded first";
+}
+
+// get the library itself
+var particles = require('./particles');
+
+// insert the lirbary into the particles namespace on PIXI
+for (var prop in particles) {
+	global.PIXI.particles[prop] = particles[prop];
+}
+},{"./particles":7,"pixi.js":undefined}]},{},[9])(9)
+});
 
 
-
-
-
-
-        
-
-        <footer>
-            Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.4.3</a> on Thu Jan 19 2017 19:11:34 GMT-0500 (EST)
-        </footer>
-    </div>
-</div>
-<script>prettyPrint();</script>
-<script src="scripts/jaguar.js"></script>
-</body>
-</html>
+//# sourceMappingURL=pixi-particles.js.map
