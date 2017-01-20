@@ -19,7 +19,7 @@
     "postbuild": "ncp dist docs/dist",
     "docs": "jsdoc -c jsdoc.conf.json -R README.md",
     "start": "npm run build -- --watch",
-    "predocs-live": "npm run docs && bower install",
+    "predocs-live": "npm run build && npm run docs && bower install",
     "docs-live": "gh-pages -d docs",
     "postversion": "npm run build",
     "publish:patch": "npm version patch && npm publish",
