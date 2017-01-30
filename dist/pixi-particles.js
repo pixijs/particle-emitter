@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.0
- * Compiled Sun, 15 Jan 2017 02:03:29 UTC
+ * pixi-particles - v2.1.1
+ * Compiled Mon, 30 Jan 2017 18:41:04 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -95,7 +95,7 @@ var p = AnimatedParticle.prototype = Object.create(s);
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.AnimatedParticle#init
  */
 p.init = function()
 {
@@ -113,7 +113,7 @@ p.init = function()
 
 /**
  * Sets the textures for the particle.
- * @method applyArt
+ * @method PIXI.particles.AnimatedParticle#applyArt
  * @param {Array} art An array of PIXI.Texture objects for this animated particle.
  */
 p.applyArt = function(art)
@@ -126,7 +126,7 @@ p.applyArt = function(art)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.AnimatedParticle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  */
 p.update = function(delta)
@@ -152,7 +152,7 @@ p.update = function(delta)
 p.Particle_destroy = Particle.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.AnimatedParticle#destroy
  */
 p.destroy = function()
 {
@@ -163,7 +163,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time.
- * @method parseArt
+ * @method PIXI.particles.AnimatedParticle.parseArt
  * @static
  * @param  {Array} art The array of art data, properly formatted for AnimatedParticle.
  * @return {Array} The art, after any needed modifications.
@@ -617,7 +617,7 @@ var helperPoint = new PIXI.Point();
 /**
  * Time between particle spawns in seconds. If this value is not a number greater than 0,
  * it will be set to 1 (particle per second) to prevent infinite loops.
- * @property {Number} frequency
+ * @member {Number} PIXI.particles.Emitter#frequency
  */
 Object.defineProperty(p, "frequency",
 {
@@ -636,7 +636,7 @@ Object.defineProperty(p, "frequency",
  * The constructor used to create new particles. The default is
  * the built in Particle class. Setting this will dump any active or
  * pooled particles, if the emitter has already been used.
- * @property {Function} particleConstructor
+ * @member {Function} PIXI.particles.Emitter#particleConstructor
  */
 Object.defineProperty(p, "particleConstructor",
 {
@@ -663,7 +663,7 @@ Object.defineProperty(p, "particleConstructor",
 
 /**
 * The display object to add particles to. Settings this will dump any active particles.
-* @property {PIXI.DisplayObjectContainer} parent
+* @member {PIXI.DisplayObjectContainer} PIXI.particles.Emitter#parent
 */
 Object.defineProperty(p, "parent",
 {
@@ -687,7 +687,7 @@ Object.defineProperty(p, "parent",
 
 /**
  * Sets up the emitter based on the config settings.
- * @method init
+ * @method PIXI.particles.Emitter#init
  * @param {Array|PIXI.Texture} art A texture or array of textures to use for the particles.
  * @param {Object} config A configuration object containing settings for the emitter.
  */
@@ -874,7 +874,7 @@ p.init = function(art, config)
 
 /**
  * Recycles an individual particle.
- * @method recycle
+ * @method PIXI.particles.Emitter#recycle
  * @param {Particle} particle The particle to recycle.
  * @private
  */
@@ -909,7 +909,7 @@ p.recycle = function(particle)
 
 /**
  * Sets the rotation of the emitter to a new value.
- * @method rotate
+ * @method PIXI.particles.Emitter#rotate
  * @param {Number} newRot The new rotation, in degrees.
  */
 p.rotate = function(newRot)
@@ -926,7 +926,7 @@ p.rotate = function(newRot)
 
 /**
  * Changes the spawn position of the emitter.
- * @method updateSpawnPos
+ * @method PIXI.particles.Emitter#updateSpawnPos
  * @param {Number} x The new x value of the spawn position for the emitter.
  * @param {Number} y The new y value of the spawn position for the emitter.
  */
@@ -940,7 +940,7 @@ p.updateSpawnPos = function(x, y)
 /**
  * Changes the position of the emitter's owner. You should call this if you are adding
  * particles to the world display object that your emitter's owner is moving around in.
- * @method updateOwnerPos
+ * @method PIXI.particles.Emitter#updateOwnerPos
  * @param {Number} x The new x value of the emitter's owner.
  * @param {Number} y The new y value of the emitter's owner.
  */
@@ -955,7 +955,7 @@ p.updateOwnerPos = function(x, y)
  * Prevents emitter position interpolation in the next update.
  * This should be used if you made a major position change of your emitter's owner
  * that was not normal movement.
- * @method resetPositionTracking
+ * @method PIXI.particles.Emitter#resetPositionTracking
  */
 p.resetPositionTracking = function()
 {
@@ -965,7 +965,7 @@ p.resetPositionTracking = function()
 /**
  * If particles should be emitted during update() calls. Setting this to false
  * stops new particles from being created, but allows existing ones to die out.
- * @property {Boolean} emit
+ * @member {Boolean} PIXI.particles.Emitter#emit
  */
 Object.defineProperty(p, "emit",
 {
@@ -980,7 +980,7 @@ Object.defineProperty(p, "emit",
 /**
  * If the update function is called automatically from the shared ticker.
  * Setting this to false requires calling the update function manually.
- * @property {Boolean} autoUpdate
+ * @member {Boolean} PIXI.particles.Emitter#autoUpdate
  */
 Object.defineProperty(p, "autoUpdate",
 {
@@ -1001,7 +1001,7 @@ Object.defineProperty(p, "autoUpdate",
 
 /**
  * Updates all particles spawned by this emitter and emits new ones.
- * @method update
+ * @method PIXI.particles.Emitter#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  */
 p.update = function(delta)
@@ -1217,7 +1217,7 @@ p.update = function(delta)
 
 /**
  * Positions a particle for a point type emitter.
- * @method _spawnPoint
+ * @method PIXI.particles.Emitter#_spawnPoint
  * @private
  * @param {Particle} p The particle to position and rotate.
  * @param {Number} emitPosX The emitter's x position
@@ -1239,7 +1239,7 @@ p._spawnPoint = function(p, emitPosX, emitPosY)
 
 /**
  * Positions a particle for a rectangle type emitter.
- * @method _spawnRect
+ * @method PIXI.particles.Emitter#_spawnRect
  * @private
  * @param {Particle} p The particle to position and rotate.
  * @param {Number} emitPosX The emitter's x position
@@ -1265,7 +1265,7 @@ p._spawnRect = function(p, emitPosX, emitPosY)
 
 /**
  * Positions a particle for a circle type emitter.
- * @method _spawnCircle
+ * @method PIXI.particles.Emitter#_spawnCircle
  * @private
  * @param {Particle} p The particle to position and rotate.
  * @param {Number} emitPosX The emitter's x position
@@ -1299,7 +1299,7 @@ p._spawnCircle = function(p, emitPosX, emitPosY)
 
 /**
  * Positions a particle for a ring type emitter.
- * @method _spawnRing
+ * @method PIXI.particles.Emitter#_spawnRing
  * @private
  * @param {Particle} p The particle to position and rotate.
  * @param {Number} emitPosX The emitter's x position
@@ -1342,7 +1342,7 @@ p._spawnRing = function(p, emitPosX, emitPosY)
 
 /**
  * Positions a particle for a burst type emitter.
- * @method _spawnBurst
+ * @method PIXI.particles.Emitter#_spawnBurst
  * @private
  * @param {Particle} p The particle to position and rotate.
  * @param {Number} emitPosX The emitter's x position
@@ -1364,7 +1364,7 @@ p._spawnBurst = function(p, emitPosX, emitPosY, i)
 
 /**
  * Kills all active particles immediately.
- * @method cleanup
+ * @method PIXI.particles.Emitter#cleanup
  */
 p.cleanup = function()
 {
@@ -1382,7 +1382,7 @@ p.cleanup = function()
 
 /**
  * Destroys the emitter and all of its particles.
- * @method destroy
+ * @method PIXI.particles.Emitter#destroy
  */
 p.destroy = function()
 {
@@ -1621,12 +1621,12 @@ var p = Particle.prototype = Object.create(Sprite.prototype);
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.Particle#init
  */
 /**
  * A reference to init, so that subclasses can access it without the penalty of Function.call()
- * @method Particle_init
- * @private
+ * @method PIXI.particles.Particle#Particle_init
+ * @protected
  */
 p.init = p.Particle_init = function()
 {
@@ -1683,7 +1683,7 @@ p.init = p.Particle_init = function()
 /**
  * Sets the texture for the particle. This can be overridden to allow
  * for an animated particle.
- * @method applyArt
+ * @method PIXI.particles.Particle#applyArt
  * @param {PIXI.Texture} art The texture to set.
  */
 p.applyArt = function(art)
@@ -1693,7 +1693,7 @@ p.applyArt = function(art)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.Particle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
  *                   properties. A value of -1 means the particle died of old age instead.
@@ -1701,11 +1701,11 @@ p.applyArt = function(art)
 /**
  * A reference to update so that subclasses can access the original without the overhead
  * of Function.call().
- * @method Particle_update
+ * @method PIXI.particles.Particle#Particle_update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
  *                   properties. A value of -1 means the particle died of old age instead.
- * @private
+ * @protected
  */
 p.update = p.Particle_update = function(delta)
 {
@@ -1797,7 +1797,7 @@ p.update = p.Particle_update = function(delta)
 /**
  * Kills the particle, removing it from the display list
  * and telling the emitter to recycle it.
- * @method kill
+ * @method PIXI.particles.Particle#kill
  */
 p.kill = function()
 {
@@ -1807,7 +1807,7 @@ p.kill = function()
 p.Sprite_Destroy = Sprite.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.Particle#destroy
  */
 p.destroy = function()
 {
@@ -1822,7 +1822,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time.
- * @method parseArt
+ * @method PIXI.particles.Particle.parseArt
  * @static
  * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
  *                     Any strings in the array will be converted to Textures via
@@ -1859,7 +1859,7 @@ Particle.parseArt = function(art)
 /**
  * Parses extra emitter data to ensure it is set up for this particle class.
  * Particle does nothing to the extra data.
- * @method parseData
+ * @method PIXI.particles.Particle.parseData
  * @static
  * @param  {Object} extraData The extra data from the particle config.
  * @return {Object} The parsed extra data.
@@ -2125,7 +2125,7 @@ var helperPoint = new PIXI.Point();
 /**
  * Initializes the particle for use, based on the properties that have to
  * have been set already on the particle.
- * @method init
+ * @method PIXI.particles.PathParticle#init
  */
 p.init = function()
 {
@@ -2181,7 +2181,7 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
  * Parses a string into a function for path following.
  * This involves whitelisting the string for safety, inserting "Math." to math function
  * names, and using eval() to generate a function.
- * @method parsePath
+ * @method PIXI.particles.PathParticle~parsePath
  * @private
  * @static
  * @param {String} pathString The string to parse.
@@ -2203,7 +2203,7 @@ var parsePath = function(pathString)
 
 /**
  * Updates the particle.
- * @method update
+ * @method PIXI.particles.PathParticle#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
  */
 p.update = function(delta)
@@ -2227,7 +2227,7 @@ p.update = function(delta)
 p.Particle_destroy = Particle.prototype.destroy;
 /**
  * Destroys the particle, removing references and preventing future use.
- * @method destroy
+ * @method PIXI.particles.PathParticle#destroy
  */
 p.destroy = function()
 {
@@ -2238,7 +2238,7 @@ p.destroy = function()
 /**
  * Checks over the art that was passed to the Emitter's init() function, to do any special
  * modifications to prepare it ahead of time. This just runs Particle.parseArt().
- * @method parseArt
+ * @method PIXI.particles.PathParticle.parseArt
  * @static
  * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
  *                     Any strings in the array will be converted to Textures via
@@ -2254,7 +2254,7 @@ PathParticle.parseArt = function(art)
  * Parses extra emitter data to ensure it is set up for this particle class.
  * PathParticle checks for the existence of path data, and parses the path data for use
  * by particle instances.
- * @method parseData
+ * @method PIXI.particles.PathParticle.parseData
  * @static
  * @param  {Object} extraData The extra data from the particle config.
  * @return {Object} The parsed extra data.
