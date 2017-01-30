@@ -3,6 +3,10 @@ declare namespace particles {
 	
 	type TexSrc = string|PIXI.Texture;
 	
+	export interface ParticleConstructor {
+		new (emitter:Emitter):Particle;
+	}
+	
 	export interface AnimatedParticleArt {
 		textures:(TexSrc|{count:number, texture:TexSrc})[];
 		framerate:number|"matchLife";
@@ -84,7 +88,7 @@ declare namespace particles {
 		public addAtBack:boolean;
 		public readonly particleCount:number;
 		public frequency:number;
-		public particleConstructor:(p:Particle, emitPosX:number, emitPosY:number, i:number)=>void;
+		public particleConstructor:ParticleConstructor;
 		public parent:PIXI.Container;
 		public emit:boolean;
 		public autoUpdate:boolean;

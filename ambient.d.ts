@@ -1,6 +1,10 @@
 // Typings for pixi-particles 2.1.0, requires Pixi.js typings
 declare namespace PIXI.particles {
 	type TexSrc = string|PIXI.Texture;
+
+	export interface ParticleConstructor {
+		new (emitter:Emitter):Particle;
+	}
 	
 	export interface AnimatedParticleArt {
 		textures:(TexSrc|{count:number, texture:TexSrc})[];
@@ -83,7 +87,7 @@ declare namespace PIXI.particles {
 		public addAtBack:boolean;
 		public readonly particleCount:number;
 		public frequency:number;
-		public particleConstructor:(p:Particle, emitPosX:number, emitPosY:number, i:number)=>void;
+		public particleConstructor:ParticleConstructor;
 		public parent:PIXI.Container;
 		public emit:boolean;
 		public autoUpdate:boolean;
