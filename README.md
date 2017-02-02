@@ -75,7 +75,7 @@ var elapsed = Date.now();
 var update = function(){
 			
 	// Update the next frame
-	requestAnimFrame(update);
+	requestAnimationFrame(update);
 
 	var now = Date.now();
 	
