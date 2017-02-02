@@ -62,8 +62,8 @@ declare namespace particles {
 		public startScale:number;
 		public endScale:number;
 		public minimumScaleMultiplier:number;
-		public startColor:[number, number, number];
-		public endColor:[number, number, number];
+		public startColor:number[];
+		public endColor:number[];
 		public minLifetime:number;
 		public maxLifetime:number;
 		public minStartRotation:number;
@@ -143,8 +143,8 @@ declare namespace particles {
 		public maxSpeed:number;
 		public startScale:number;
 		public endScale:number;
-		public startColor:[number, number, number];
-		public endColor:[number, number, number];
+		public startColor:number[];
+		public endColor:number[];
 		
 		/** Note that for Particle, the parameter is an array of strings or PIXI.Textures, and an array of Textures is returned. */
 		public static parseArt(art:any):any;
