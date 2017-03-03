@@ -1,6 +1,8 @@
 .DS_Store
 .grunt
-docs
+docs/dist
+docs/docs
+docs/examples/libs
 node_modules
-examples/libs
 assets
+npm-debug.log

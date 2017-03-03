@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Sparks</title>
+		<meta name="description" content="sparks emitter">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/Sparks.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 1,
+						"end": 0.31
+					},
+					"scale": {
+						"start": 0.5,
+						"end": 1
+					},
+					"color": {
+						"start": "ffffff",
+						"end": "9ff3ff"
+					},
+					"speed": {
+						"start": 1000,
+						"end": 200
+					},
+					"startRotation": {
+						"min": 225,
+						"max": 320
+					},
+					"rotationSpeed": {
+						"min": 0,
+						"max": 20
+					},
+					"lifetime": {
+						"min": 0.25,
+						"max": 0.5
+					},
+					"blendMode": "normal",
+					"frequency": 0.001,
+					"emitterLifetime": 0,
+					"maxParticles": 1000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "circle",
+					"spawnCircle": {
+						"x": 0,
+						"y": 0,
+						"r": 0
+					}
+				});
+		</script>
+	</body>
+</html>

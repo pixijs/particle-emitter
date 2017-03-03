@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Explosion 3</title>
+		<meta name="description" content="basic explosion">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/particle.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 0.74,
+						"end": 0
+					},
+					"scale": {
+						"start": 5,
+						"end": 1.2
+					},
+					"color": {
+						"start": "ffdfa0",
+						"end": "100f0c"
+					},
+					"speed": {
+						"start": 700,
+						"end": 0
+					},
+					"startRotation": {
+						"min": 0,
+						"max": 360
+					},
+					"rotationSpeed": {
+						"min": 0,
+						"max": 200
+					},
+					"lifetime": {
+						"min": 0.5,
+						"max": 1
+					},
+					"blendMode": "normal",
+					"ease": [
+						{
+							"s": 0,
+							"cp": 0.329,
+							"e": 0.548
+						},
+						{
+							"s": 0.548,
+							"cp": 0.767,
+							"e": 0.876
+						},
+						{
+							"s": 0.876,
+							"cp": 0.985,
+							"e": 1
+						}
+					],
+					"frequency": 0.001,
+					"emitterLifetime": 0.1,
+					"maxParticles": 100,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": true,
+					"spawnType": "point"
+				});
+		</script>
+	</body>
+</html>
