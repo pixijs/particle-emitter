@@ -121,9 +121,6 @@ export default class Sprite extends Container
         this._transformID = -1;
         this._textureID = -1;
 
-        this._transformTrimmedID = -1;
-        this._textureTrimmedID = -1;
-
         /**
          * Plugin that is responsible for rendering this element.
          * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
@@ -142,7 +139,6 @@ export default class Sprite extends Container
     _onTextureUpdate()
     {
         this._textureID = -1;
-        this._textureTrimmedID = -1;
 
         // so if _width is 0 then width was not set..
         if (this._width)
@@ -164,7 +160,6 @@ export default class Sprite extends Container
     _onAnchorUpdate()
     {
         this._transformID = -1;
-        this._transformTrimmedID = -1;
     }
 
     /**
@@ -246,13 +241,6 @@ export default class Sprite extends Container
         {
             this.vertexTrimmedData = new Float32Array(8);
         }
-        else if (this._transformTrimmedID === this.transform._worldID && this._textureTrimmedID === this._texture._updateID)
-        {
-            return;
-        }
-
-        this._transformTrimmedID = this.transform._worldID;
-        this._textureTrimmedID = this._texture._updateID;
 
         // lets do some special trim code!
         const texture = this._texture;
@@ -487,13 +475,19 @@ export default class Sprite extends Container
      * The width of the sprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Sprite#
      */
     get width()
     {
         return Math.abs(this.scale.x) * this._texture.orig.width;
     }
 
-    set width(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width of the sprite by modifying the scale.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set width(value)
     {
         const s = sign(this.scale.x) || 1;
 
@@ -505,13 +499,19 @@ export default class Sprite extends Container
      * The height of the sprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Sprite#
      */
     get height()
     {
         return Math.abs(this.scale.y) * this._texture.orig.height;
     }
 
-    set height(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the height of the sprite by modifying the scale.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set height(value)
     {
         const s = sign(this.scale.y) || 1;
 
@@ -526,13 +526,19 @@ export default class Sprite extends Container
      * Setting the anchor to 1,1 would mean the texture's origin point will be the bottom right corner
      *
      * @member {PIXI.ObservablePoint}
+     * @memberof PIXI.Sprite#
      */
     get anchor()
     {
         return this._anchor;
     }
 
-    set anchor(value) // eslint-disable-line require-jsdoc
+    /**
+     * Copies the anchor to the sprite.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set anchor(value)
     {
         this._anchor.copy(value);
     }
@@ -542,6 +548,7 @@ export default class Sprite extends Container
      * 0xFFFFFF will remove any tint effect.
      *
      * @member {number}
+     * @memberof PIXI.Sprite#
      * @default 0xFFFFFF
      */
     get tint()
@@ -549,7 +556,12 @@ export default class Sprite extends Container
         return this._tint;
     }
 
-    set tint(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the tint of the sprite.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set tint(value)
     {
         this._tint = value;
         this._tintRGB = (value >> 16) + (value & 0xff00) + ((value & 0xff) << 16);
@@ -559,13 +571,19 @@ export default class Sprite extends Container
      * The texture that the sprite is using
      *
      * @member {PIXI.Texture}
+     * @memberof PIXI.Sprite#
      */
     get texture()
     {
         return this._texture;
     }
 
-    set texture(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the texture of the sprite.
+     *
+     * @param {PIXI.Texture} value - The value to set to.
+     */
+    set texture(value)
     {
         if (this._texture === value)
         {
@@ -576,7 +594,6 @@ export default class Sprite extends Container
         this.cachedTint = 0xFFFFFF;
 
         this._textureID = -1;
-        this._textureTrimmedID = -1;
 
         if (value)
         {

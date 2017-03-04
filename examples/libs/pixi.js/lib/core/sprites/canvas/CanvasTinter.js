@@ -13,8 +13,7 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 /**
  * Utility methods for Sprite/Texture tinting.
  *
- * @class
- * @memberof PIXI
+ * @namespace PIXI.CanvasTinter
  */
 var CanvasTinter = {
     /**

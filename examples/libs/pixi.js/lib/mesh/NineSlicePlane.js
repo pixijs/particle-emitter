@@ -103,8 +103,6 @@ var NineSlicePlane = function (_Plane) {
          * The width of the left column (a)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         _this.leftWidth = typeof leftWidth !== 'undefined' ? leftWidth : DEFAULT_BORDER_SIZE;
 
@@ -112,8 +110,6 @@ var NineSlicePlane = function (_Plane) {
          * The width of the right column (b)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         _this.rightWidth = typeof rightWidth !== 'undefined' ? rightWidth : DEFAULT_BORDER_SIZE;
 
@@ -121,8 +117,6 @@ var NineSlicePlane = function (_Plane) {
          * The height of the top row (c)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         _this.topHeight = typeof topHeight !== 'undefined' ? topHeight : DEFAULT_BORDER_SIZE;
 
@@ -130,8 +124,6 @@ var NineSlicePlane = function (_Plane) {
          * The height of the bottom row (d)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         _this.bottomHeight = typeof bottomHeight !== 'undefined' ? bottomHeight : DEFAULT_BORDER_SIZE;
         return _this;
@@ -256,6 +248,7 @@ var NineSlicePlane = function (_Plane) {
      * The width of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
      *
      * @member {number}
+     * @memberof PIXI.NineSlicePlane#
      */
 
 
@@ -263,9 +256,15 @@ var NineSlicePlane = function (_Plane) {
         key: 'width',
         get: function get() {
             return this._width;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._width = value;
             this.updateVerticalVertices();
         }
@@ -274,15 +273,22 @@ var NineSlicePlane = function (_Plane) {
          * The height of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
          *
          * @member {number}
+         * @memberof PIXI.NineSlicePlane#
          */
 
     }, {
         key: 'height',
         get: function get() {
             return this._height;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the height.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._height = value;
             this.updateHorizontalVertices();
         }
@@ -297,9 +303,15 @@ var NineSlicePlane = function (_Plane) {
         key: 'leftWidth',
         get: function get() {
             return this._leftWidth;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width of the left column.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._leftWidth = value;
 
             var uvs = this.uvs;
@@ -321,9 +333,15 @@ var NineSlicePlane = function (_Plane) {
         key: 'rightWidth',
         get: function get() {
             return this._rightWidth;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width of the right column.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._rightWidth = value;
 
             var uvs = this.uvs;
@@ -345,9 +363,15 @@ var NineSlicePlane = function (_Plane) {
         key: 'topHeight',
         get: function get() {
             return this._topHeight;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the height of the top row.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._topHeight = value;
 
             var uvs = this.uvs;
@@ -369,9 +393,15 @@ var NineSlicePlane = function (_Plane) {
         key: 'bottomHeight',
         get: function get() {
             return this._bottomHeight;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the height of the bottom row.
+         *
+         * @param {number} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this._bottomHeight = value;
 
             var uvs = this.uvs;

@@ -564,6 +564,7 @@ export default class ColorMatrixFilter extends core.Filter
      * The matrix of the color matrix filter
      *
      * @member {number[]}
+     * @memberof PIXI.filters.ColorMatrixFilter#
      * @default [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]
      */
     get matrix()
@@ -571,7 +572,12 @@ export default class ColorMatrixFilter extends core.Filter
         return this.uniforms.m;
     }
 
-    set matrix(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the matrix directly.
+     *
+     * @param {number[]} value - the value to set to.
+     */
+    set matrix(value)
     {
         this.uniforms.m = value;
     }

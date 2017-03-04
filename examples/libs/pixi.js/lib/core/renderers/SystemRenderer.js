@@ -308,6 +308,7 @@ var SystemRenderer = function (_EventEmitter) {
    * The background color to fill if not transparent
    *
    * @member {number}
+   * @memberof PIXI.SystemRenderer#
    */
 
 
@@ -315,9 +316,15 @@ var SystemRenderer = function (_EventEmitter) {
     key: 'backgroundColor',
     get: function get() {
       return this._backgroundColor;
-    },
-    set: function set(value) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Sets the background color.
+     *
+     * @param {number} value - The value to set to.
+     */
+    ,
+    set: function set(value) {
       this._backgroundColor = value;
       this._backgroundColorString = (0, _utils.hex2string)(value);
       (0, _utils.hex2rgb)(value, this._backgroundColorRgba);

@@ -122,6 +122,7 @@ var BlurYFilter = function (_core$Filter) {
      * Sets the strength of both the blur.
      *
      * @member {number}
+     * @memberof PIXI.filters.BlurYFilter#
      * @default 2
      */
 
@@ -130,9 +131,15 @@ var BlurYFilter = function (_core$Filter) {
         key: 'blur',
         get: function get() {
             return this.strength;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the strength of the blur.
+         *
+         * @param {number} value - The value to set.
+         */
+        ,
+        set: function set(value) {
             this.padding = Math.abs(value) * 2;
             this.strength = value;
         }
@@ -142,6 +149,7 @@ var BlurYFilter = function (_core$Filter) {
          * quaility bluring but the lower the performance.
          *
          * @member {number}
+         * @memberof PIXI.filters.BlurXFilter#
          * @default 4
          */
 
@@ -149,9 +157,15 @@ var BlurYFilter = function (_core$Filter) {
         key: 'quality',
         get: function get() {
             return this._quality;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the quality of the blur.
+         *
+         * @param {number} value - The value to set.
+         */
+        ,
+        set: function set(value) {
             this._quality = value;
             this.passes = value;
         }

@@ -89,6 +89,7 @@ var CanvasRenderTarget = function () {
    * The width of the canvas buffer in pixels.
    *
    * @member {number}
+   * @memberof PIXI.CanvasRenderTarget#
    */
 
 
@@ -96,9 +97,15 @@ var CanvasRenderTarget = function () {
     key: 'width',
     get: function get() {
       return this.canvas.width;
-    },
-    set: function set(val) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Sets the width.
+     *
+     * @param {number} val - The value to set.
+     */
+    ,
+    set: function set(val) {
       this.canvas.width = val;
     }
 
@@ -106,15 +113,22 @@ var CanvasRenderTarget = function () {
      * The height of the canvas buffer in pixels.
      *
      * @member {number}
+     * @memberof PIXI.CanvasRenderTarget#
      */
 
   }, {
     key: 'height',
     get: function get() {
       return this.canvas.height;
-    },
-    set: function set(val) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Sets the height.
+     *
+     * @param {number} val - The value to set.
+     */
+    ,
+    set: function set(val) {
       this.canvas.height = val;
     }
   }]);

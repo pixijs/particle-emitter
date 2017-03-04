@@ -279,6 +279,7 @@ var VideoBaseTexture = function (_BaseTexture) {
      * Should the base texture automatically update itself, set to true by default
      *
      * @member {boolean}
+     * @memberof PIXI.VideoBaseTexture#
      */
 
 
@@ -286,9 +287,15 @@ var VideoBaseTexture = function (_BaseTexture) {
         key: 'autoUpdate',
         get: function get() {
             return this._autoUpdate;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets autoUpdate property.
+         *
+         * @param {number} value - enable auto update or not
+         */
+        ,
+        set: function set(value) {
             if (value !== this._autoUpdate) {
                 this._autoUpdate = value;
 

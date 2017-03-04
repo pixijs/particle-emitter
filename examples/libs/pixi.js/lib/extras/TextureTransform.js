@@ -65,6 +65,7 @@ var TextureTransform = function () {
     /**
      * texture property
      * @member {PIXI.Texture}
+     * @memberof PIXI.TextureTransform
      */
 
 
@@ -114,9 +115,14 @@ var TextureTransform = function () {
         key: 'texture',
         get: function get() {
             return this._texture;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * sets texture value
+         * @param {PIXI.Texture} value texture to be set
+         */
+        ,
+        set: function set(value) {
             this._texture = value;
             this._lastTextureID = -1;
         }

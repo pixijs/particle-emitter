@@ -31,44 +31,51 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @memberof PIXI.filters
  */
 var NoiseFilter = function (_core$Filter) {
-    _inherits(NoiseFilter, _core$Filter);
+  _inherits(NoiseFilter, _core$Filter);
 
-    /**
-     *
-     */
-    function NoiseFilter() {
-        _classCallCheck(this, NoiseFilter);
+  /**
+   *
+   */
+  function NoiseFilter() {
+    _classCallCheck(this, NoiseFilter);
 
-        var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
-        // vertex shader
-        'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n    vTextureCoord = aTextureCoord;\n}',
-        // fragment shader
-        'precision highp float;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\n\nuniform float noise;\nuniform sampler2D uSampler;\n\nfloat rand(vec2 co)\n{\n    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\nvoid main()\n{\n    vec4 color = texture2D(uSampler, vTextureCoord);\n\n    float diff = (rand(gl_FragCoord.xy) - 0.5) * noise;\n\n    color.r += diff;\n    color.g += diff;\n    color.b += diff;\n\n    gl_FragColor = color;\n}\n'));
+    var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
+    // vertex shader
+    'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n    vTextureCoord = aTextureCoord;\n}',
+    // fragment shader
+    'precision highp float;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\n\nuniform float noise;\nuniform sampler2D uSampler;\n\nfloat rand(vec2 co)\n{\n    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\nvoid main()\n{\n    vec4 color = texture2D(uSampler, vTextureCoord);\n\n    float diff = (rand(gl_FragCoord.xy) - 0.5) * noise;\n\n    color.r += diff;\n    color.g += diff;\n    color.b += diff;\n\n    gl_FragColor = color;\n}\n'));
 
-        _this.noise = 0.5;
-        return _this;
+    _this.noise = 0.5;
+    return _this;
+  }
+
+  /**
+   * The amount of noise to apply.
+   *
+   * @member {number}
+   * @memberof PIXI.filters.NoiseFilter#
+   * @default 0.5
+   */
+
+
+  _createClass(NoiseFilter, [{
+    key: 'noise',
+    get: function get() {
+      return this.uniforms.noise;
     }
 
     /**
-     * The amount of noise to apply.
+     * Sets the amount of noise to apply.
      *
-     * @member {number}
-     * @default 0.5
+     * @param {number} value - The value to set to.
      */
+    ,
+    set: function set(value) {
+      this.uniforms.noise = value;
+    }
+  }]);
 
-
-    _createClass(NoiseFilter, [{
-        key: 'noise',
-        get: function get() {
-            return this.uniforms.noise;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
-            this.uniforms.noise = value;
-        }
-    }]);
-
-    return NoiseFilter;
+  return NoiseFilter;
 }(core.Filter);
 
 exports.default = NoiseFilter;

@@ -88,6 +88,7 @@ var DisplacementFilter = function (_core$Filter) {
      * The texture used for the displacement map. Must be power of 2 sized texture.
      *
      * @member {PIXI.Texture}
+     * @memberof PIXI.filters.DisplacementFilter#
      */
 
 
@@ -95,9 +96,15 @@ var DisplacementFilter = function (_core$Filter) {
         key: 'map',
         get: function get() {
             return this.uniforms.mapSampler;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the texture to use for the displacement.
+         *
+         * @param {PIXI.Texture} value - The texture to set to.
+         */
+        ,
+        set: function set(value) {
             this.uniforms.mapSampler = value;
         }
     }]);

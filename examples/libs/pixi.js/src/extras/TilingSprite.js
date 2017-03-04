@@ -70,14 +70,6 @@ export default class TilingSprite extends core.Sprite
          * @default 'tilingSprite'
          */
         this.pluginName = 'tilingSprite';
-
-        /**
-         * Whether or not anchor affects uvs
-         *
-         * @member {boolean}
-         * @default false
-         */
-        this.uvRespectAnchor = false;
     }
     /**
      * Changes frame clamping in corresponding textureTransform, shortcut
@@ -85,13 +77,19 @@ export default class TilingSprite extends core.Sprite
      *
      * @default 0.5
      * @member {number}
+     * @memberof PIXI.TilingSprite
      */
     get clampMargin()
     {
         return this.uvTransform.clampMargin;
     }
 
-    set clampMargin(value) // eslint-disable-line require-jsdoc
+    /**
+     * setter for clampMargin
+     *
+     * @param {number} value assigned value
+     */
+    set clampMargin(value)
     {
         this.uvTransform.clampMargin = value;
         this.uvTransform.update(true);
@@ -101,13 +99,19 @@ export default class TilingSprite extends core.Sprite
      * The scaling of the image that is being tiled
      *
      * @member {PIXI.ObservablePoint}
+     * @memberof PIXI.DisplayObject#
      */
     get tileScale()
     {
         return this.tileTransform.scale;
     }
 
-    set tileScale(value) // eslint-disable-line require-jsdoc
+    /**
+     * Copies the point to the scale of the tiled image.
+     *
+     * @param {PIXI.Point|PIXI.ObservablePoint} value - The value to set to.
+     */
+    set tileScale(value)
     {
         this.tileTransform.scale.copy(value);
     }
@@ -116,13 +120,19 @@ export default class TilingSprite extends core.Sprite
      * The offset of the image that is being tiled
      *
      * @member {PIXI.ObservablePoint}
+     * @memberof PIXI.TilingSprite#
      */
     get tilePosition()
     {
         return this.tileTransform.position;
     }
 
-    set tilePosition(value) // eslint-disable-line require-jsdoc
+    /**
+     * Copies the point to the position of the tiled image.
+     *
+     * @param {PIXI.Point|PIXI.ObservablePoint} value - The value to set to.
+     */
+    set tilePosition(value)
     {
         this.tileTransform.position.copy(value);
     }
@@ -381,13 +391,19 @@ export default class TilingSprite extends core.Sprite
      * The width of the sprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.extras.TilingSprite#
      */
     get width()
     {
         return this._width;
     }
 
-    set width(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set width(value)
     {
         this._width = value;
     }
@@ -396,13 +412,19 @@ export default class TilingSprite extends core.Sprite
      * The height of the TilingSprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.extras.TilingSprite#
      */
     get height()
     {
         return this._height;
     }
 
-    set height(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set height(value)
     {
         this._height = value;
     }

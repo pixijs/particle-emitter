@@ -100,14 +100,6 @@ var TilingSprite = function (_core$Sprite) {
          * @default 'tilingSprite'
          */
         _this.pluginName = 'tilingSprite';
-
-        /**
-         * Whether or not anchor affects uvs
-         *
-         * @member {boolean}
-         * @default false
-         */
-        _this.uvRespectAnchor = false;
         return _this;
     }
     /**
@@ -116,6 +108,7 @@ var TilingSprite = function (_core$Sprite) {
      *
      * @default 0.5
      * @member {number}
+     * @memberof PIXI.TilingSprite
      */
 
 
@@ -356,6 +349,7 @@ var TilingSprite = function (_core$Sprite) {
      * The width of the sprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.extras.TilingSprite#
      */
 
 
@@ -363,9 +357,15 @@ var TilingSprite = function (_core$Sprite) {
         key: 'clampMargin',
         get: function get() {
             return this.uvTransform.clampMargin;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * setter for clampMargin
+         *
+         * @param {number} value assigned value
+         */
+        ,
+        set: function set(value) {
             this.uvTransform.clampMargin = value;
             this.uvTransform.update(true);
         }
@@ -374,15 +374,22 @@ var TilingSprite = function (_core$Sprite) {
          * The scaling of the image that is being tiled
          *
          * @member {PIXI.ObservablePoint}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'tileScale',
         get: function get() {
             return this.tileTransform.scale;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the scale of the tiled image.
+         *
+         * @param {PIXI.Point|PIXI.ObservablePoint} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.tileTransform.scale.copy(value);
         }
 
@@ -390,24 +397,37 @@ var TilingSprite = function (_core$Sprite) {
          * The offset of the image that is being tiled
          *
          * @member {PIXI.ObservablePoint}
+         * @memberof PIXI.TilingSprite#
          */
 
     }, {
         key: 'tilePosition',
         get: function get() {
             return this.tileTransform.position;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the position of the tiled image.
+         *
+         * @param {PIXI.Point|PIXI.ObservablePoint} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.tileTransform.position.copy(value);
         }
     }, {
         key: 'width',
         get: function get() {
             return this._width;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._width = value;
         }
 
@@ -415,15 +435,22 @@ var TilingSprite = function (_core$Sprite) {
          * The height of the TilingSprite, setting this will actually modify the scale to achieve the value set
          *
          * @member {number}
+         * @memberof PIXI.extras.TilingSprite#
          */
 
     }, {
         key: 'height',
         get: function get() {
             return this._height;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._height = value;
         }
     }]);

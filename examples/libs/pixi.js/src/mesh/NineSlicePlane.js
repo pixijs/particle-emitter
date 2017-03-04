@@ -84,8 +84,6 @@ export default class NineSlicePlane extends Plane
          * The width of the left column (a)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         this.leftWidth = typeof leftWidth !== 'undefined' ? leftWidth : DEFAULT_BORDER_SIZE;
 
@@ -93,8 +91,6 @@ export default class NineSlicePlane extends Plane
          * The width of the right column (b)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         this.rightWidth = typeof rightWidth !== 'undefined' ? rightWidth : DEFAULT_BORDER_SIZE;
 
@@ -102,8 +98,6 @@ export default class NineSlicePlane extends Plane
          * The height of the top row (c)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         this.topHeight = typeof topHeight !== 'undefined' ? topHeight : DEFAULT_BORDER_SIZE;
 
@@ -111,8 +105,6 @@ export default class NineSlicePlane extends Plane
          * The height of the bottom row (d)
          *
          * @member {number}
-         * @memberof PIXI.NineSlicePlane#
-         * @override
          */
         this.bottomHeight = typeof bottomHeight !== 'undefined' ? bottomHeight : DEFAULT_BORDER_SIZE;
     }
@@ -253,13 +245,19 @@ export default class NineSlicePlane extends Plane
      * The width of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
      *
      * @member {number}
+     * @memberof PIXI.NineSlicePlane#
      */
     get width()
     {
         return this._width;
     }
 
-    set width(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set width(value)
     {
         this._width = value;
         this.updateVerticalVertices();
@@ -269,13 +267,19 @@ export default class NineSlicePlane extends Plane
      * The height of the NineSlicePlane, setting this will actually modify the vertices and UV's of this plane
      *
      * @member {number}
+     * @memberof PIXI.NineSlicePlane#
      */
     get height()
     {
         return this._height;
     }
 
-    set height(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the height.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set height(value)
     {
         this._height = value;
         this.updateHorizontalVertices();
@@ -291,7 +295,12 @@ export default class NineSlicePlane extends Plane
         return this._leftWidth;
     }
 
-    set leftWidth(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width of the left column.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set leftWidth(value)
     {
         this._leftWidth = value;
 
@@ -314,7 +323,12 @@ export default class NineSlicePlane extends Plane
         return this._rightWidth;
     }
 
-    set rightWidth(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width of the right column.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set rightWidth(value)
     {
         this._rightWidth = value;
 
@@ -337,7 +351,12 @@ export default class NineSlicePlane extends Plane
         return this._topHeight;
     }
 
-    set topHeight(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the height of the top row.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set topHeight(value)
     {
         this._topHeight = value;
 
@@ -360,7 +379,12 @@ export default class NineSlicePlane extends Plane
         return this._bottomHeight;
     }
 
-    set bottomHeight(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the height of the bottom row.
+     *
+     * @param {number} value - the value to set to.
+     */
+    set bottomHeight(value)
     {
         this._bottomHeight = value;
 

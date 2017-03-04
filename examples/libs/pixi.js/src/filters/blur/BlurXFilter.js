@@ -98,6 +98,7 @@ export default class BlurXFilter extends core.Filter
      * Sets the strength of both the blur.
      *
      * @member {number}
+     * @memberof PIXI.filters.BlurXFilter#
      * @default 16
      */
     get blur()
@@ -105,7 +106,12 @@ export default class BlurXFilter extends core.Filter
         return this.strength;
     }
 
-    set blur(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the strength of the blur.
+     *
+     * @param {number} value - The value to set.
+     */
+    set blur(value)
     {
         this.padding = Math.abs(value) * 2;
         this.strength = value;
@@ -116,6 +122,7 @@ export default class BlurXFilter extends core.Filter
      * quaility bluring but the lower the performance.
      *
      * @member {number}
+     * @memberof PIXI.filters.BlurXFilter#
      * @default 4
      */
     get quality()
@@ -123,7 +130,12 @@ export default class BlurXFilter extends core.Filter
         return this._quality;
     }
 
-    set quality(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the quality of the blur.
+     *
+     * @param {number} value - The value to set.
+     */
+    set quality(value)
     {
         this._quality = value;
         this.passes = value;

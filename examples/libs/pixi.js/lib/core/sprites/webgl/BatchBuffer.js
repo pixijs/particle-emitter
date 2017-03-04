@@ -6,7 +6,6 @@ function _classCallCheck(instance, Constructor) { if (!(instance instanceof Cons
 
 /**
  * @class
- * @memberof PIXI
  */
 var Buffer = function () {
   /**

@@ -187,10 +187,12 @@ var Text = function (_Sprite) {
             width += style.dropShadowDistance;
         }
 
-        this.canvas.width = Math.ceil((width + style.padding * 2) * this.resolution);
+        width += style.padding * 2;
+
+        this.canvas.width = Math.ceil((width + this.context.lineWidth) * this.resolution);
 
         // calculate text height
-        var lineHeight = style.lineHeight || fontProperties.fontSize + style.strokeThickness;
+        var lineHeight = this.style.lineHeight || fontProperties.fontSize + style.strokeThickness;
 
         var height = Math.max(lineHeight, fontProperties.fontSize + style.strokeThickness) + (lines.length - 1) * lineHeight;
 
@@ -198,7 +200,7 @@ var Text = function (_Sprite) {
             height += style.dropShadowDistance;
         }
 
-        this.canvas.height = Math.ceil((height + style.padding * 2) * this.resolution);
+        this.canvas.height = Math.ceil((height + this._style.padding * 2) * this.resolution);
 
         this.context.scale(this.resolution, this.resolution);
 
@@ -404,9 +406,8 @@ var Text = function (_Sprite) {
         // Greedy wrapping algorithm that will wrap words as the line grows longer
         // than its horizontal bounds.
         var result = '';
-        var style = this._style;
         var lines = text.split('\n');
-        var wordWrapWidth = style.wordWrapWidth;
+        var wordWrapWidth = this._style.wordWrapWidth;
 
         for (var i = 0; i < lines.length; i++) {
             var spaceLeft = wordWrapWidth;
@@ -415,7 +416,7 @@ var Text = function (_Sprite) {
             for (var j = 0; j < words.length; j++) {
                 var wordWidth = this.context.measureText(words[j]).width;
 
-                if (style.breakWords && wordWidth > wordWrapWidth) {
+                if (this._style.breakWords && wordWidth > wordWrapWidth) {
                     // Word should be split in the middle
                     var characters = words[j].split('');
 
@@ -581,6 +582,7 @@ var Text = function (_Sprite) {
      * The width of the Text, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Text#
      */
 
 
@@ -722,9 +724,15 @@ var Text = function (_Sprite) {
             this.updateText(true);
 
             return Math.abs(this.scale.x) * this._texture.orig.width;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width of the text.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.updateText(true);
 
             var s = (0, _utils.sign)(this.scale.x) || 1;
@@ -737,6 +745,7 @@ var Text = function (_Sprite) {
          * The height of the Text, setting this will actually modify the scale to achieve the value set
          *
          * @member {number}
+         * @memberof PIXI.Text#
          */
 
     }, {
@@ -745,9 +754,15 @@ var Text = function (_Sprite) {
             this.updateText(true);
 
             return Math.abs(this.scale.y) * this._texture.orig.height;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the height of the text.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.updateText(true);
 
             var s = (0, _utils.sign)(this.scale.y) || 1;
@@ -761,15 +776,22 @@ var Text = function (_Sprite) {
          * object and mark the text as dirty.
          *
          * @member {object|PIXI.TextStyle}
+         * @memberof PIXI.Text#
          */
 
     }, {
         key: 'style',
         get: function get() {
             return this._style;
-        },
-        set: function set(style) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the style of the text.
+         *
+         * @param {object} style - The value to set to.
+         */
+        ,
+        set: function set(style) {
             style = style || {};
 
             if (style instanceof _TextStyle2.default) {
@@ -786,15 +808,22 @@ var Text = function (_Sprite) {
          * Set the copy for the text object. To split a line you can use '\n'.
          *
          * @member {string}
+         * @memberof PIXI.Text#
          */
 
     }, {
         key: 'text',
         get: function get() {
             return this._text;
-        },
-        set: function set(text) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the text.
+         *
+         * @param {string} text - The value to set to.
+         */
+        ,
+        set: function set(text) {
             text = String(text || ' ');
 
             if (this._text === text) {

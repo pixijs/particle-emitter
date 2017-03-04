@@ -43,17 +43,18 @@ var RESOLUTION = _settings2.default.RESOLUTION,
  * baseRenderTexture.render(sprite);
  * ```
  *
- * The Sprite in this case will be rendered using its local transform. To render this sprite at 0,0
- * you can clear the transform
+ * The Sprite in this case will be rendered to a position of 0,0. To render this sprite at its actual
+ * position a Container should be used:
  *
  * ```js
+ * let doc = new PIXI.Container();
  *
- * sprite.setTransform()
+ * doc.addChild(sprite);
  *
  * let baseRenderTexture = new PIXI.BaseRenderTexture(100, 100);
  * let renderTexture = new PIXI.RenderTexture(baseRenderTexture);
  *
- * renderer.render(sprite, renderTexture);  // Renders to center of RenderTexture
+ * renderer.render(doc, renderTexture);  // Renders to center of RenderTexture
  * ```
  *
  * @class

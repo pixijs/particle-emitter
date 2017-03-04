@@ -2,8 +2,9 @@
  * Default property values of accessible objects
  * used by {@link PIXI.accessibility.AccessibilityManager}.
  *
- * @function accessibleTarget
- * @memberof PIXI.accessibility
+ * @mixin
+ * @name accessibleTarget
+ * @memberof PIXI
  * @example
  *      function MyObject() {}
  *

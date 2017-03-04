@@ -436,6 +436,7 @@ var DisplayObject = function (_EventEmitter) {
      * An alias to position.x
      *
      * @member {number}
+     * @memberof PIXI.DisplayObject#
      */
 
 
@@ -452,9 +453,15 @@ var DisplayObject = function (_EventEmitter) {
         key: 'x',
         get: function get() {
             return this.position.x;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the X position of the object.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.position.x = value;
         }
 
@@ -463,15 +470,22 @@ var DisplayObject = function (_EventEmitter) {
          * An alias to position.y
          *
          * @member {number}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'y',
         get: function get() {
             return this.position.y;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the Y position of the object.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.position.y = value;
         }
 
@@ -479,6 +493,7 @@ var DisplayObject = function (_EventEmitter) {
          * Current transform of the object based on world (parent) factors
          *
          * @member {PIXI.Matrix}
+         * @memberof PIXI.DisplayObject#
          * @readonly
          */
 
@@ -492,6 +507,7 @@ var DisplayObject = function (_EventEmitter) {
          * Current transform of the object based on local factors: position, scale, other stuff
          *
          * @member {PIXI.Matrix}
+         * @memberof PIXI.DisplayObject#
          * @readonly
          */
 
@@ -506,15 +522,22 @@ var DisplayObject = function (_EventEmitter) {
          * Assignment by value since pixi-v4.
          *
          * @member {PIXI.Point|PIXI.ObservablePoint}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'position',
         get: function get() {
             return this.transform.position;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the position of the object.
+         *
+         * @param {PIXI.Point} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.position.copy(value);
         }
 
@@ -523,15 +546,22 @@ var DisplayObject = function (_EventEmitter) {
          * Assignment by value since pixi-v4.
          *
          * @member {PIXI.Point|PIXI.ObservablePoint}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'scale',
         get: function get() {
             return this.transform.scale;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the scale of the object.
+         *
+         * @param {PIXI.Point} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.scale.copy(value);
         }
 
@@ -540,15 +570,22 @@ var DisplayObject = function (_EventEmitter) {
          * Assignment by value since pixi-v4.
          *
          * @member {PIXI.Point|PIXI.ObservablePoint}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'pivot',
         get: function get() {
             return this.transform.pivot;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the pivot of the object.
+         *
+         * @param {PIXI.Point} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.pivot.copy(value);
         }
 
@@ -557,15 +594,22 @@ var DisplayObject = function (_EventEmitter) {
          * Assignment by value since pixi-v4.
          *
          * @member {PIXI.ObservablePoint}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'skew',
         get: function get() {
             return this.transform.skew;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the point to the skew of the object.
+         *
+         * @param {PIXI.Point} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.skew.copy(value);
         }
 
@@ -573,15 +617,22 @@ var DisplayObject = function (_EventEmitter) {
          * The rotation of the object in radians.
          *
          * @member {number}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'rotation',
         get: function get() {
             return this.transform.rotation;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the rotation of the object.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this.transform.rotation = value;
         }
 
@@ -589,6 +640,7 @@ var DisplayObject = function (_EventEmitter) {
          * Indicates if the object is globally visible.
          *
          * @member {boolean}
+         * @memberof PIXI.DisplayObject#
          * @readonly
          */
 
@@ -617,15 +669,22 @@ var DisplayObject = function (_EventEmitter) {
          * @todo For the moment, PIXI.CanvasRenderer doesn't support PIXI.Sprite as mask.
          *
          * @member {PIXI.Graphics|PIXI.Sprite}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'mask',
         get: function get() {
             return this._mask;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the mask.
+         *
+         * @param {PIXI.Graphics|PIXI.Sprite} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (this._mask) {
                 this._mask.renderable = true;
             }
@@ -643,15 +702,22 @@ var DisplayObject = function (_EventEmitter) {
          * To remove filters simply set this property to 'null'
          *
          * @member {PIXI.Filter[]}
+         * @memberof PIXI.DisplayObject#
          */
 
     }, {
         key: 'filters',
         get: function get() {
             return this._filters && this._filters.slice();
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Shallow copies the array to the filters of the object.
+         *
+         * @param {PIXI.Filter[]} value - The filters to set.
+         */
+        ,
+        set: function set(value) {
             this._filters = value && value.slice();
         }
     }]);

@@ -296,6 +296,8 @@ export default class Container extends DisplayObject
 
     /**
      * Updates the transform on all children of this container for rendering
+     *
+     * @private
      */
     updateTransform()
     {
@@ -521,10 +523,6 @@ export default class Container extends DisplayObject
      *  have been set to that value
      * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
      *  method called as well. 'options' will be passed on to those calls.
-     * @param {boolean} [options.texture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the texture of the child sprite
-     * @param {boolean} [options.baseTexture=false] - Only used for child Sprites if options.children is set to true
-     *  Should it destroy the base texture of the child sprite
      */
     destroy(options)
     {
@@ -547,13 +545,19 @@ export default class Container extends DisplayObject
      * The width of the Container, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Container#
      */
     get width()
     {
         return this.scale.x * this.getLocalBounds().width;
     }
 
-    set width(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the width of the container by modifying the scale.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set width(value)
     {
         const width = this.getLocalBounds().width;
 
@@ -573,13 +577,19 @@ export default class Container extends DisplayObject
      * The height of the Container, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Container#
      */
     get height()
     {
         return this.scale.y * this.getLocalBounds().height;
     }
 
-    set height(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the height of the container by modifying the scale.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set height(value)
     {
         const height = this.getLocalBounds().height;
 

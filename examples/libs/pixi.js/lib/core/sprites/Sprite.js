@@ -146,9 +146,6 @@ var Sprite = function (_Container) {
         _this._transformID = -1;
         _this._textureID = -1;
 
-        _this._transformTrimmedID = -1;
-        _this._textureTrimmedID = -1;
-
         /**
          * Plugin that is responsible for rendering this element.
          * Allows to customize the rendering process without overriding '_renderWebGL' & '_renderCanvas' methods.
@@ -169,7 +166,6 @@ var Sprite = function (_Container) {
 
     Sprite.prototype._onTextureUpdate = function _onTextureUpdate() {
         this._textureID = -1;
-        this._textureTrimmedID = -1;
 
         // so if _width is 0 then width was not set..
         if (this._width) {
@@ -190,7 +186,6 @@ var Sprite = function (_Container) {
 
     Sprite.prototype._onAnchorUpdate = function _onAnchorUpdate() {
         this._transformID = -1;
-        this._transformTrimmedID = -1;
     };
 
     /**
@@ -268,12 +263,7 @@ var Sprite = function (_Container) {
     Sprite.prototype.calculateTrimmedVertices = function calculateTrimmedVertices() {
         if (!this.vertexTrimmedData) {
             this.vertexTrimmedData = new Float32Array(8);
-        } else if (this._transformTrimmedID === this.transform._worldID && this._textureTrimmedID === this._texture._updateID) {
-            return;
         }
-
-        this._transformTrimmedID = this.transform._worldID;
-        this._textureTrimmedID = this._texture._updateID;
 
         // lets do some special trim code!
         var texture = this._texture;
@@ -507,6 +497,7 @@ var Sprite = function (_Container) {
      * The width of the sprite, setting this will actually modify the scale to achieve the value set
      *
      * @member {number}
+     * @memberof PIXI.Sprite#
      */
 
 
@@ -514,9 +505,15 @@ var Sprite = function (_Container) {
         key: 'width',
         get: function get() {
             return Math.abs(this.scale.x) * this._texture.orig.width;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the width of the sprite by modifying the scale.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             var s = (0, _utils.sign)(this.scale.x) || 1;
 
             this.scale.x = s * value / this._texture.orig.width;
@@ -527,15 +524,22 @@ var Sprite = function (_Container) {
          * The height of the sprite, setting this will actually modify the scale to achieve the value set
          *
          * @member {number}
+         * @memberof PIXI.Sprite#
          */
 
     }, {
         key: 'height',
         get: function get() {
             return Math.abs(this.scale.y) * this._texture.orig.height;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the height of the sprite by modifying the scale.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             var s = (0, _utils.sign)(this.scale.y) || 1;
 
             this.scale.y = s * value / this._texture.orig.height;
@@ -549,15 +553,22 @@ var Sprite = function (_Container) {
          * Setting the anchor to 1,1 would mean the texture's origin point will be the bottom right corner
          *
          * @member {PIXI.ObservablePoint}
+         * @memberof PIXI.Sprite#
          */
 
     }, {
         key: 'anchor',
         get: function get() {
             return this._anchor;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Copies the anchor to the sprite.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._anchor.copy(value);
         }
 
@@ -566,6 +577,7 @@ var Sprite = function (_Container) {
          * 0xFFFFFF will remove any tint effect.
          *
          * @member {number}
+         * @memberof PIXI.Sprite#
          * @default 0xFFFFFF
          */
 
@@ -573,9 +585,15 @@ var Sprite = function (_Container) {
         key: 'tint',
         get: function get() {
             return this._tint;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the tint of the sprite.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._tint = value;
             this._tintRGB = (value >> 16) + (value & 0xff00) + ((value & 0xff) << 16);
         }
@@ -584,15 +602,22 @@ var Sprite = function (_Container) {
          * The texture that the sprite is using
          *
          * @member {PIXI.Texture}
+         * @memberof PIXI.Sprite#
          */
 
     }, {
         key: 'texture',
         get: function get() {
             return this._texture;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the texture of the sprite.
+         *
+         * @param {PIXI.Texture} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (this._texture === value) {
                 return;
             }
@@ -601,7 +626,6 @@ var Sprite = function (_Container) {
             this.cachedTint = 0xFFFFFF;
 
             this._textureID = -1;
-            this._textureTrimmedID = -1;
 
             if (value) {
                 // wait for the texture to load

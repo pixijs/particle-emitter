@@ -459,6 +459,7 @@ var Texture = function (_EventEmitter) {
      * The frame specifies the region of the base texture that this texture uses.
      *
      * @member {PIXI.Rectangle}
+     * @memberof PIXI.Texture#
      */
 
 
@@ -466,9 +467,15 @@ var Texture = function (_EventEmitter) {
         key: 'frame',
         get: function get() {
             return this._frame;
-        },
-        set: function set(frame) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Set the frame.
+         *
+         * @param {Rectangle} frame - The new frame to set.
+         */
+        ,
+        set: function set(frame) {
             this._frame = frame;
 
             this.noFrame = false;
@@ -503,9 +510,15 @@ var Texture = function (_EventEmitter) {
         key: 'rotate',
         get: function get() {
             return this._rotate;
-        },
-        set: function set(rotate) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Set the rotation
+         *
+         * @param {number} rotate - The new rotation to set.
+         */
+        ,
+        set: function set(rotate) {
             this._rotate = rotate;
             if (this.valid) {
                 this._updateUvs();

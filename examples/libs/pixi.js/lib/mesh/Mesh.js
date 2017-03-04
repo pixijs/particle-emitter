@@ -124,6 +124,7 @@ var Mesh = function (_core$Container) {
      * tint effect.
      *
      * @member {number}
+     * @memberof PIXI.mesh.Mesh#
      */
     _this.tintRgb = new Float32Array([1, 1, 1]);
 
@@ -238,6 +239,7 @@ var Mesh = function (_core$Container) {
    * The texture that the mesh uses.
    *
    * @member {PIXI.Texture}
+   * @memberof PIXI.mesh.Mesh#
    */
 
 
@@ -245,9 +247,15 @@ var Mesh = function (_core$Container) {
     key: 'texture',
     get: function get() {
       return this._texture;
-    },
-    set: function set(value) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Sets the texture the mesh uses.
+     *
+     * @param {Texture} value - The value to set.
+     */
+    ,
+    set: function set(value) {
       if (this._texture === value) {
         return;
       }
@@ -268,6 +276,7 @@ var Mesh = function (_core$Container) {
      * The tint applied to the mesh. This is a hex value. A value of 0xFFFFFF will remove any tint effect.
      *
      * @member {number}
+     * @memberof PIXI.mesh.Mesh#
      * @default 0xFFFFFF
      */
 
@@ -275,9 +284,15 @@ var Mesh = function (_core$Container) {
     key: 'tint',
     get: function get() {
       return core.utils.rgb2hex(this.tintRgb);
-    },
-    set: function set(value) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Sets the tint the mesh uses.
+     *
+     * @param {number} value - The value to set.
+     */
+    ,
+    set: function set(value) {
       this.tintRgb = core.utils.hex2rgb(value, this.tintRgb);
     }
   }]);

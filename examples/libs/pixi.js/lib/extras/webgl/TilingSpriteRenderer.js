@@ -23,10 +23,6 @@ var tempArray = new Float32Array(4);
 
 /**
  * WebGL renderer plugin for tiling sprites
- *
- * @class
- * @memberof PIXI
- * @extends PIXI.ObjectRenderer
  */
 
 var TilingSpriteRenderer = function (_core$ObjectRenderer) {
@@ -86,15 +82,13 @@ var TilingSpriteRenderer = function (_core$ObjectRenderer) {
         vertices[2] = vertices[4] = ts._width * (1.0 - ts.anchor.x);
         vertices[5] = vertices[7] = ts._height * (1.0 - ts.anchor.y);
 
-        if (ts.uvRespectAnchor) {
-            vertices = quad.uvs;
+        vertices = quad.uvs;
 
-            vertices[0] = vertices[6] = -ts.anchor.x;
-            vertices[1] = vertices[3] = -ts.anchor.y;
+        vertices[0] = vertices[6] = -ts.anchor.x;
+        vertices[1] = vertices[3] = -ts.anchor.y;
 
-            vertices[2] = vertices[4] = 1.0 - ts.anchor.x;
-            vertices[5] = vertices[7] = 1.0 - ts.anchor.y;
-        }
+        vertices[2] = vertices[4] = 1.0 - ts.anchor.x;
+        vertices[5] = vertices[7] = 1.0 - ts.anchor.y;
 
         quad.upload();
 

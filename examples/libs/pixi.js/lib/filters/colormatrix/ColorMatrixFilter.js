@@ -501,6 +501,7 @@ var ColorMatrixFilter = function (_core$Filter) {
      * The matrix of the color matrix filter
      *
      * @member {number[]}
+     * @memberof PIXI.filters.ColorMatrixFilter#
      * @default [1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0]
      */
 
@@ -509,9 +510,15 @@ var ColorMatrixFilter = function (_core$Filter) {
         key: 'matrix',
         get: function get() {
             return this.uniforms.m;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the matrix directly.
+         *
+         * @param {number[]} value - the value to set to.
+         */
+        ,
+        set: function set(value) {
             this.uniforms.m = value;
         }
     }]);

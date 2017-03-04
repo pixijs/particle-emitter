@@ -331,6 +331,7 @@ var BitmapText = function (_core$Container) {
      * The tint of the BitmapText object
      *
      * @member {number}
+     * @memberof PIXI.extras.BitmapText#
      */
 
 
@@ -338,9 +339,15 @@ var BitmapText = function (_core$Container) {
         key: 'tint',
         get: function get() {
             return this._font.tint;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the tint.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._font.tint = typeof value === 'number' && value >= 0 ? value : 0xFFFFFF;
 
             this.dirty = true;
@@ -351,15 +358,22 @@ var BitmapText = function (_core$Container) {
          *
          * @member {string}
          * @default 'left'
+         * @memberof PIXI.extras.BitmapText#
          */
 
     }, {
         key: 'align',
         get: function get() {
             return this._font.align;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the alignment
+         *
+         * @param {string} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             this._font.align = value || 'left';
 
             this.dirty = true;
@@ -372,15 +386,22 @@ var BitmapText = function (_core$Container) {
          * Setting the anchor to 1,1 would mean the text's origin point will be the bottom right corner
          *
          * @member {PIXI.Point | number}
+         * @memberof PIXI.extras.BitmapText#
          */
 
     }, {
         key: 'anchor',
         get: function get() {
             return this._anchor;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the anchor.
+         *
+         * @param {PIXI.Point|number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (typeof value === 'number') {
                 this._anchor.set(value);
             } else {
@@ -392,15 +413,22 @@ var BitmapText = function (_core$Container) {
          * The font descriptor of the BitmapText object
          *
          * @member {string|object}
+         * @memberof PIXI.extras.BitmapText#
          */
 
     }, {
         key: 'font',
         get: function get() {
             return this._font;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the font.
+         *
+         * @param {string|object} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (!value) {
                 return;
             }
@@ -422,15 +450,22 @@ var BitmapText = function (_core$Container) {
          * The text of the BitmapText object
          *
          * @member {string}
+         * @memberof PIXI.extras.BitmapText#
          */
 
     }, {
         key: 'text',
         get: function get() {
             return this._text;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the text.
+         *
+         * @param {string} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             value = value.toString() || ' ';
             if (this._text === value) {
                 return;
@@ -444,6 +479,7 @@ var BitmapText = function (_core$Container) {
          * which is defined in the style object
          *
          * @member {number}
+         * @memberof PIXI.extras.BitmapText#
          * @readonly
          */
 
@@ -460,6 +496,7 @@ var BitmapText = function (_core$Container) {
          * which is defined in the style object
          *
          * @member {number}
+         * @memberof PIXI.extras.BitmapText#
          * @readonly
          */
 

@@ -69,6 +69,7 @@ var Rectangle = function () {
      * returns the left edge of the rectangle
      *
      * @member {number}
+     * @memberof PIXI.Rectangle#
      */
 
 
@@ -183,15 +184,19 @@ var Rectangle = function () {
     /**
      * Enlarges this rectangle to include the passed rectangle.
      *
-     * @param {PIXI.Rectangle} rectangle - The rectangle to include.
+     * @param {PIXI.Rectangle} rect - The rectangle to include.
      */
 
 
-    Rectangle.prototype.enlarge = function enlarge(rectangle) {
-        var x1 = Math.min(this.x, rectangle.x);
-        var x2 = Math.max(this.x + this.width, rectangle.x + rectangle.width);
-        var y1 = Math.min(this.y, rectangle.y);
-        var y2 = Math.max(this.y + this.height, rectangle.y + rectangle.height);
+    Rectangle.prototype.enlarge = function enlarge(rect) {
+        if (rect === Rectangle.EMPTY) {
+            return;
+        }
+
+        var x1 = Math.min(this.x, rect.x);
+        var x2 = Math.max(this.x + this.width, rect.x + rect.width);
+        var y1 = Math.min(this.y, rect.y);
+        var y2 = Math.max(this.y + this.height, rect.y + rect.height);
 
         this.x = x1;
         this.width = x2 - x1;
@@ -209,6 +214,7 @@ var Rectangle = function () {
          * returns the right edge of the rectangle
          *
          * @member {number}
+         * @memberof PIXI.Rectangle
          */
 
     }, {
@@ -221,6 +227,7 @@ var Rectangle = function () {
          * returns the top edge of the rectangle
          *
          * @member {number}
+         * @memberof PIXI.Rectangle
          */
 
     }, {
@@ -233,6 +240,7 @@ var Rectangle = function () {
          * returns the bottom edge of the rectangle
          *
          * @member {number}
+         * @memberof PIXI.Rectangle
          */
 
     }, {

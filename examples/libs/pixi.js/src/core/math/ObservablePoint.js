@@ -62,13 +62,19 @@ export default class ObservablePoint
      * The position of the displayObject on the x axis relative to the local coordinates of the parent.
      *
      * @member {number}
+     * @memberof PIXI.ObservablePoint#
      */
     get x()
     {
         return this._x;
     }
 
-    set x(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the X component.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set x(value)
     {
         if (this._x !== value)
         {
@@ -81,13 +87,19 @@ export default class ObservablePoint
      * The position of the displayObject on the x axis relative to the local coordinates of the parent.
      *
      * @member {number}
+     * @memberof PIXI.ObservablePoint#
      */
     get y()
     {
         return this._y;
     }
 
-    set y(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the Y component.
+     *
+     * @param {number} value - The value to set to.
+     */
+    set y(value)
     {
         if (this._y !== value)
         {

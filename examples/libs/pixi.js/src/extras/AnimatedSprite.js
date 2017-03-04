@@ -32,9 +32,8 @@ export default class AnimatedSprite extends core.Sprite
     /**
      * @param {PIXI.Texture[]|FrameObject[]} textures - an array of {@link PIXI.Texture} or frame
      *  objects that make up the animation
-     * @param {boolean} [autoUpdate=true] - Whether use PIXI.ticker.shared to auto update animation time.
      */
-    constructor(textures, autoUpdate)
+    constructor(textures)
     {
         super(textures[0] instanceof core.Texture ? textures[0] : textures[0].texture);
 
@@ -49,14 +48,6 @@ export default class AnimatedSprite extends core.Sprite
         this._durations = null;
 
         this.textures = textures;
-
-        /**
-         * `true` uses PIXI.ticker.shared to auto update animation time.
-         * @type {boolean}
-         * @default true
-         * @private
-         */
-        this._autoUpdate = autoUpdate !== false;
 
         /**
          * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
@@ -77,14 +68,16 @@ export default class AnimatedSprite extends core.Sprite
         /**
          * Function to call when a AnimatedSprite finishes playing
          *
-         * @member {Function}
+         * @method
+         * @memberof PIXI.extras.AnimatedSprite#
          */
         this.onComplete = null;
 
         /**
          * Function to call when a AnimatedSprite changes which texture is being rendered
          *
-         * @member {Function}
+         * @method
+         * @memberof PIXI.extras.AnimatedSprite#
          */
         this.onFrameChange = null;
 
@@ -117,10 +110,7 @@ export default class AnimatedSprite extends core.Sprite
         }
 
         this.playing = false;
-        if (this._autoUpdate)
-        {
-            core.ticker.shared.remove(this.update, this);
-        }
+        core.ticker.shared.remove(this.update, this);
     }
 
     /**
@@ -135,10 +125,7 @@ export default class AnimatedSprite extends core.Sprite
         }
 
         this.playing = true;
-        if (this._autoUpdate)
-        {
-            core.ticker.shared.add(this.update, this);
-        }
+        core.ticker.shared.add(this.update, this);
     }
 
     /**
@@ -313,6 +300,7 @@ export default class AnimatedSprite extends core.Sprite
      *
      * @readonly
      * @member {number}
+     * @memberof PIXI.extras.AnimatedSprite#
      * @default 0
      */
     get totalFrames()
@@ -324,13 +312,19 @@ export default class AnimatedSprite extends core.Sprite
      * The array of textures used for this AnimatedSprite
      *
      * @member {PIXI.Texture[]}
+     * @memberof PIXI.extras.AnimatedSprite#
      */
     get textures()
     {
         return this._textures;
     }
 
-    set textures(value) // eslint-disable-line require-jsdoc
+    /**
+     * Sets the textures.
+     *
+     * @param {PIXI.Texture[]} value - The texture to set.
+     */
+    set textures(value)
     {
         if (value[0] instanceof core.Texture)
         {
@@ -354,6 +348,7 @@ export default class AnimatedSprite extends core.Sprite
     * The AnimatedSprites current frame index
     *
     * @member {number}
+    * @memberof PIXI.extras.AnimatedSprite#
     * @readonly
     */
     get currentFrame()

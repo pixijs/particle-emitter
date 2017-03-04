@@ -158,6 +158,7 @@ var Transform = function (_TransformBase) {
    * The rotation of the object in radians.
    *
    * @member {number}
+   * @memberof PIXI.Transform#
    */
 
 
@@ -165,9 +166,15 @@ var Transform = function (_TransformBase) {
     key: 'rotation',
     get: function get() {
       return this._rotation;
-    },
-    set: function set(value) // eslint-disable-line require-jsdoc
-    {
+    }
+
+    /**
+     * Set the rotation of the transform.
+     *
+     * @param {number} value - The value to set to.
+     */
+    ,
+    set: function set(value) {
       this._rotation = value;
       this.updateSkew();
     }

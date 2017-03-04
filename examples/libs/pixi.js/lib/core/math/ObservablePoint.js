@@ -73,6 +73,7 @@ var ObservablePoint = function () {
      * The position of the displayObject on the x axis relative to the local coordinates of the parent.
      *
      * @member {number}
+     * @memberof PIXI.ObservablePoint#
      */
 
 
@@ -80,9 +81,15 @@ var ObservablePoint = function () {
         key: "x",
         get: function get() {
             return this._x;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the X component.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (this._x !== value) {
                 this._x = value;
                 this.cb.call(this.scope);
@@ -93,15 +100,22 @@ var ObservablePoint = function () {
          * The position of the displayObject on the x axis relative to the local coordinates of the parent.
          *
          * @member {number}
+         * @memberof PIXI.ObservablePoint#
          */
 
     }, {
         key: "y",
         get: function get() {
             return this._y;
-        },
-        set: function set(value) // eslint-disable-line require-jsdoc
-        {
+        }
+
+        /**
+         * Sets the Y component.
+         *
+         * @param {number} value - The value to set to.
+         */
+        ,
+        set: function set(value) {
             if (this._y !== value) {
                 this._y = value;
                 this.cb.call(this.scope);
