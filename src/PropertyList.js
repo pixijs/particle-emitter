@@ -28,12 +28,6 @@ var PropertyList = function(isColor)
 	 */
 	this.isColor = !!isColor;
 	/**
-	 * If the list is a simple list - only has a beginning and end, and thus does not need further
-	 * calculation of interpolation values.
-	 * @property {boolean} isSimple
-	 */
-	this.isSimple = false;
-	/**
 	 * Calculates the correct value for the current interpolation value. This method is set in
 	 * the reset() method.
 	 * @method interpolate
@@ -53,8 +47,8 @@ PropertyList.prototype.reset = function(first)
 {
 	this.current = first;
 	this.next = first.next;
-	this.isSimple = this.next && this.next.time >= 1;
-	if (this.isSimple)
+	var isSimple = this.next && this.next.time >= 1;
+	if (isSimple)
 	{
 		this.interpolate = this.isColor ? intColorSimple : intValueSimple;
 	}
