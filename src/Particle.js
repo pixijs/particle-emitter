@@ -345,8 +345,8 @@ p.destroy = function()
 		this.parent.removeChild(this);
 	if (this.Sprite_Destroy)
 		this.Sprite_Destroy();
-	this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
-		this.next = this.prev = null;
+	this.emitter = this.velocity = this.colorList = this.scaleList = this.alphaList =
+		this.speedList = this.ease = this.next = this.prev = null;
 };
 
 /**

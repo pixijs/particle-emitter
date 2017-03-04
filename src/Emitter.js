@@ -1128,7 +1128,8 @@ p.destroy = function()
 		particle.destroy();
 	}
 	this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =
-		this.startColor = this.endColor = this.customEase = null;
+		this.startColor = this.startScale = this.startAlpha = this.startSpeed =
+		this.customEase = null;
 };
 
 module.exports = Emitter;
