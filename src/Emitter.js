@@ -783,7 +783,7 @@ p.update = function(delta)
 {
 	if (this._autoUpdate)
 	{
-		delta = delta / ticker.speed / PIXI.settings.TARGET_FPMS / 1000;
+		delta = delta / PIXI.settings.TARGET_FPMS / 1000;
 	}
 
 	//if we don't have a parent to add particles to, then don't do anything.
