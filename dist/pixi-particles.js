@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.1
- * Compiled Mon, 30 Jan 2017 18:41:04 UTC
+ * pixi-particles - v2.1.3
+ * Compiled Sat, 04 Mar 2017 20:48:36 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1008,7 +1008,7 @@ p.update = function(delta)
 {
 	if (this._autoUpdate)
 	{
-		delta = delta / ticker.speed / PIXI.settings.TARGET_FPMS / 1000;
+		delta = delta / PIXI.settings.TARGET_FPMS / 1000;
 	}
 
 	//if we don't have a parent to add particles to, then don't do anything.
