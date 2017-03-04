@@ -1,6 +1,12 @@
 // Typings for pixi-particles 2.1.4, requires Pixi.js typings
 declare namespace PIXI.particles {
 	type TexSrc = string|PIXI.Texture;
+	type Color = {r:number, g:number, b:number};
+	
+	export interface ValueList {
+		list: {value:number|string, time:number}[],
+		isStepped?: boolean;
+	}
 
 	export interface ParticleConstructor {
 		new (emitter:Emitter):Particle;
@@ -51,18 +57,14 @@ declare namespace PIXI.particles {
 		private _autoUpdate:boolean;
 		
 		public particleImages:any[];
-		public startAlpha:number;
-		public endAlpha:number;
-		public startSpeed:number;
-		public endSpeed:number;
+		public startAlpha:PropertyNode;
+		public startSpeed:PropertyNode;
 		public minimumSpeedMultiplier:number;
 		public acceleration:PIXI.Point;
 		public maxSpeed:number;
-		public startScale:number;
-		public endScale:number;
+		public startScale:PropertyNode;
 		public minimumScaleMultiplier:number;
-		public startColor:[number, number, number];
-		public endColor:[number, number, number];
+		public startColor:PropertyNode;
 		public minLifetime:number;
 		public maxLifetime:number;
 		public minStartRotation:number;
@@ -112,12 +114,6 @@ declare namespace PIXI.particles {
 	}
 	
 	export class Particle extends PIXI.Sprite {
-		private _sR:number;
-		private _sG:number;
-		private _sB:number;
-		private _eR:number;
-		private _eG:number;
-		private _eB:number;
 		private _doAlpha:boolean;
 		private _doScale:boolean;
 		private _doSpeed:boolean;
@@ -134,16 +130,12 @@ declare namespace PIXI.particles {
 		public age:number;
 		public ease:(time:number)=>number;
 		public extraData:any;
-		public startAlpha:number;
-		public endAlpha:number;
-		public startSpeed:number;
-		public endSpeed:number;
+		public alphaList:PropertyList;
+		public speedList:PropertyList;
 		public acceleration:PIXI.Point;
 		public maxSpeed:number;
-		public startScale:number;
-		public endScale:number;
-		public startColor:number[];
-		public endColor:number[];
+		public scaleList:PropertyList;
+		public colorList:PropertyList;
 		
 		/** Note that for Particle, the parameter is an array of strings or PIXI.Textures, and an array of Textures is returned. */
 		public static parseArt(art:any):any;
@@ -188,5 +180,24 @@ declare namespace PIXI.particles {
 		
 		public static parseArt(art:TexSrc[]):PIXI.Texture[];
 		public static parseData(data:{path:string}):any;
+	}
+	
+	export class PropertyList {
+		public current: PropertyNode;
+		protected next: PropertyNode;
+		private isColor: boolean;
+		
+		constructor(isColor?:boolean);
+		public interpolate(lerp:number):number;
+		public reset(first:PropertyNode):void;
+	}
+	
+	export class PropertyNode {
+		public value: number|Color;
+		public time: number;
+		public next: PropertyNode;
+		public isStepped: boolean;
+		
+		public static createList(data:ValueList):PropertyNode;
 	}
 }
