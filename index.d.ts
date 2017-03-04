@@ -176,7 +176,7 @@ declare namespace particles {
 		public static normalize(p:PIXI.Point):void;
 		public static scaleBy(p:PIXI.Point, value:number):void;
 		public static length(p:PIXI.Point):number;
-		public static hexToRGB(color:string, output?:number[]):number[];
+		public static hexToRGB(color:string, output?:[number, number, number]):[number, number, number];
 		public static generateEase(segments:EaseSegment[]):(time:number)=>number;
 		public static getBlendMode(name:string):number;
 	}
