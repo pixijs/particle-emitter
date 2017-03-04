@@ -99,20 +99,18 @@ ParticleUtils.length = function(point)
 
 /**
  * Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
- * "AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
- * [r, g, b, (a)].
+ * "AARRGGBB", or "RRGGBB" to an object of ints of 0-255, as
+ * {r, g, b, (a)}.
  * @method PIXI.particles.ParticleUtils.hexToRGB
  * @param {String} color The input color string.
- * @param {Array} output An array to put the output in. If omitted, a new array is created.
- * @return The array of numeric color values.
+ * @param {Object} output An object to put the output in. If omitted, a new object is created.
+ * @return The object with r, g, and b properties, possibly with an a property.
  * @static
  */
 ParticleUtils.hexToRGB = function(color, output)
 {
-	if (output)
-		output.length = 0;
-	else
-		output = [];
+	if (!output)
+		output = {};
 	if (color.charAt(0) == "#")
 		color = color.substr(1);
 	else if (color.indexOf("0x") === 0)
@@ -123,11 +121,11 @@ ParticleUtils.hexToRGB = function(color, output)
 		alpha = color.substr(0, 2);
 		color = color.substr(2);
 	}
-	output.push(parseInt(color.substr(0, 2), 16));//Red
-	output.push(parseInt(color.substr(2, 2), 16));//Green
-	output.push(parseInt(color.substr(4, 2), 16));//Blue
+	output.r = parseInt(color.substr(0, 2), 16);//Red
+	output.g = parseInt(color.substr(2, 2), 16);//Green
+	output.b = parseInt(color.substr(4, 2), 16);//Blue
 	if (alpha)
-		output.push(parseInt(alpha, 16));
+		output.a = parseInt(alpha, 16);
 	return output;
 };
 
