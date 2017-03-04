@@ -115,7 +115,7 @@
 			else
 				emitterContainer = new PIXI.Container();
 			stage.addChild(emitterContainer);
-			emitter = new PIXI.particles.Emitter(
+			window.emitter = emitter = new PIXI.particles.Emitter(
 				emitterContainer,
 				art,
 				config

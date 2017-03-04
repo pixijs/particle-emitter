@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Flame and Smoke</title>
+		<meta name="description" content="flame smoke emitter">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/particle.png", "images/Fire.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"list": [
+							{"value":0.62, "time":0},
+							{"value":0, "time":0.6},
+							{"value":0, "time":0.7},
+							{"value":0.8, "time":0.71},
+							{"value":0, "time":1}
+						],
+						"isStepped": false
+					},
+					"scale": {
+						"list": [
+							{"value":0.25, "time":0},
+							{"value":0.75, "time":1}
+						],
+						"isStepped": false
+					},
+					"color": {
+						"list": [
+							{"value":"fff191", "time":0},
+							{"value":"ff622c", "time":0.6},
+							{"value":"111111", "time":0.7},
+							{"value":"333333", "time":1},
+						],
+						"isStepped": false
+					},
+					"speed": {
+						"list": [
+							{"value":500, "time":0},
+							{"value":450, "time":0.7},
+							{"value":450, "time":1},
+						],
+						"isStepped": true
+					},
+					"startRotation": {
+						"min": 265,
+						"max": 275
+					},
+					"rotationSpeed": {
+						"min": 50,
+						"max": 50
+					},
+					"lifetime": {
+						"min": 0.5,
+						"max": 0.7
+					},
+					"blendMode": "normal",
+					"frequency": 0.001,
+					"emitterLifetime": 0,
+					"maxParticles": 1000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "circle",
+					"spawnCircle": {
+						"x": 0,
+						"y": 0,
+						"r": 10
+					}
+				});
+		</script>
+	</body>
+</html>
