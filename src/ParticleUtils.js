@@ -2,6 +2,7 @@
 
 var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 var Texture = PIXI.Texture;
+var PropertyNode;
 
 /**
  * Contains helper functions for particles and emitters to use.
@@ -174,6 +175,52 @@ ParticleUtils.getBlendMode = function(name)
 	while (name.indexOf(" ") >= 0)
 		name = name.replace(" ", "_");
 	return BLEND_MODES[name] || BLEND_MODES.NORMAL;
+};
+
+/**
+ * Converts a list of {value, time} objects starting at time 0 and ending at time 1 into an evenly
+ * spaced stepped list of PropertyNodes for color values. This is primarily to handle conversion of
+ * linear gradients to fewer colors, allowing for some optimization for Canvas2d fallbacks.
+ * @method PIXI.particles.ParticleUtils.createSteppedGradient
+ * @param {Array} list The list of data to convert.
+ * @param {number} [numSteps=10] The number of steps to use.
+ * @return {PIXI.particles.PropertyNode} The blend mode as specified in the PIXI.blendModes enumeration.
+ * @static
+ */
+ParticleUtils.createSteppedGradient = function(list, numSteps) {
+	if (!PropertyNode)
+		PropertyNode = require('./PropertyNode');
+	if (typeof numSteps !== 'number' || numSteps <= 0)
+		numSteps = 10;
+	var first = new PropertyNode(list[0].value, list[0].time);
+	first.isStepped = true;
+	var currentNode = first;
+	var current = list[0];
+	var nextIndex = 1;
+	var next = list[nextIndex];
+	for (var i = 1; i < numSteps; ++i)
+	{
+		var lerp = i / numSteps;
+		//ensure we are on the right segment, if multiple
+		while (lerp > next.time)
+		{
+			current = next;
+			next = list[++nextIndex];
+		}
+		//convert the lerp value to the segment range
+		lerp = (lerp - current.time) / (next.time - current.time);
+		var curVal = ParticleUtils.hexToRGB(current.value);
+		var nextVal = ParticleUtils.hexToRGB(next.value);
+		var output = {};
+		output.r = (nextVal.r - curVal.r) * lerp + curVal.r;
+		output.g = (nextVal.g - curVal.g) * lerp + curVal.g;
+		output.b = (nextVal.b - curVal.b) * lerp + curVal.b;
+		currentNode.next = new PropertyNode(output, i / numSteps);
+		currentNode = currentNode.next;
+	}
+	//we don't need to have a PropertyNode for time of 1, because in a stepped version at that point
+	//the particle has died of old age
+	return first;
 };
 
 module.exports = ParticleUtils;

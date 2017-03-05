@@ -109,7 +109,7 @@ function intColorComplex(lerp)
 function intValueStepped(lerp)
 {
 	//make sure we are on the right segment
-	while (lerp > this.next.time)
+	while (this.next && lerp > this.next.time)
 	{
 		this.current = this.next;
 		this.next = this.next.next;
@@ -120,7 +120,7 @@ function intValueStepped(lerp)
 function intColorStepped(lerp)
 {
 	//make sure we are on the right segment
-	while (lerp > this.next.time)
+	while (this.next && lerp > this.next.time)
 	{
 		this.current = this.next;
 		this.next = this.next.next;

@@ -171,6 +171,7 @@ declare namespace particles {
 		public static hexToRGB(color:string, output?:[number, number, number]):[number, number, number];
 		public static generateEase(segments:EaseSegment[]):(time:number)=>number;
 		public static getBlendMode(name:string):number;
+		public static createSteppedGradient(list:{value:string, time:number}, numSteps?:number):PropertyNode;
 	}
 	
 	export class PathParticle extends Particle {
