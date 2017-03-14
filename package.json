@@ -1,6 +1,6 @@
 {
   "name": "pixi-particles",
-  "version": "2.1.4",
+  "version": "2.1.5",
   "main": "dist/pixi-particles.min.js",
   "typings": "index.d.ts",
   "description": "Particle emitter for Pixi.js",
