@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.1
- * Compiled Mon, 30 Jan 2017 18:41:04 UTC
+ * pixi-particles - v2.1.5
+ * Compiled Tue, 14 Mar 2017 22:08:59 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -594,6 +594,13 @@ var Emitter = function(particleParent, particleImages, config)
 	 * @private
 	 */
 	this._autoUpdate = false;
+	/**
+	 * If the emitter should destroy itself when all particles have died out. This is set by
+	 * playOnceAndDestroy();
+	 * @property {Boolean} _destroyWhenComplete
+	 * @private
+	 */
+	this._destroyWhenComplete = false;
 
 	//set the initial parent
 	this.parent = particleParent;
@@ -1000,6 +1007,18 @@ Object.defineProperty(p, "autoUpdate",
 });
 
 /**
+ * Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
+ * when particle emission is complete.
+ * @method PIXI.particles.Emitter#playOnceAndDestroy
+ */
+p.playOnceAndDestroy = function()
+{
+	this.autoUpdate = true;
+	this.emit = true;
+	this._destroyWhenComplete = true;
+};
+
+/**
  * Updates all particles spawned by this emitter and emits new ones.
  * @method PIXI.particles.Emitter#update
  * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
@@ -1008,7 +1027,7 @@ p.update = function(delta)
 {
 	if (this._autoUpdate)
 	{
-		delta = delta / ticker.speed / PIXI.settings.TARGET_FPMS / 1000;
+		delta = delta / PIXI.settings.TARGET_FPMS / 1000;
 	}
 
 	//if we don't have a parent to add particles to, then don't do anything.
@@ -1032,7 +1051,7 @@ p.update = function(delta)
 	var curX = this.ownerPos.x + this.spawnPos.x;
 	var curY = this.ownerPos.y + this.spawnPos.y;
 	//spawn new particles
-	if (this.emit)
+	if (this._emit)
 	{
 		//decrease spawn timer
 		this._spawnTimer -= delta;
@@ -1213,6 +1232,12 @@ p.update = function(delta)
 		this._prevPosIsValid = true;
 		this._posChanged = false;
 	}
+
+	//if we are all done and should destroy ourselves, take care of that
+	if (this._destroyWhenComplete && !this._emit && !this._activeParticlesFirst)
+	{
+		this.destroy();
+	}
 };
 
 /**
@@ -1386,6 +1411,8 @@ p.cleanup = function()
  */
 p.destroy = function()
 {
+	//make sure we aren't still listening to any tickers
+	this.autoUpdate = false;
 	//puts all active particles in the pool, and removes them from the particle parent
 	this.cleanup();
 	//wipe the pool clean

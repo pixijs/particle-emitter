@@ -1,4 +1,4 @@
-// Typings for pixi-particles 2.1.1, requires Pixi.js typings
+// Typings for pixi-particles 2.1.5, requires Pixi.js typings
 declare namespace particles {
 	
 	type TexSrc = string|PIXI.Texture;
@@ -176,7 +176,7 @@ declare namespace particles {
 		public static normalize(p:PIXI.Point):void;
 		public static scaleBy(p:PIXI.Point, value:number):void;
 		public static length(p:PIXI.Point):number;
-		public static hexToRGB(color:string, output?:number[]):number[];
+		public static hexToRGB(color:string, output?:[number, number, number]):[number, number, number];
 		public static generateEase(segments:EaseSegment[]):(time:number)=>number;
 		public static getBlendMode(name:string):number;
 	}
