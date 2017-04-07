@@ -10,7 +10,7 @@ var ParticleUtils = require("./ParticleUtils"),
  * @memberof PIXI.particles
  * @class Emitter
  * @constructor
- * @param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+ * @param {PIXI.Container} particleParent The container to add the
  *                                                     particles to.
  * @param {Array|PIXI.Texture|String} [particleImages] A texture or array of textures to use
  *                                                     for the particles. Strings will be turned
@@ -293,8 +293,8 @@ var Emitter = function(particleParent, particleImages, config)
 	 */
 	this._parentIsPC = false;
 	/**
-	 * The display object to add particles to.
-	 * @property {PIXI.DisplayObjectContainer} _parent
+	 * The container to add particles to.
+	 * @property {PIXI.Container} _parent
 	 * @private
 	 */
 	this._parent = null;
@@ -444,8 +444,8 @@ Object.defineProperty(p, "particleConstructor",
 });
 
 /**
-* The display object to add particles to. Settings this will dump any active particles.
-* @member {PIXI.DisplayObjectContainer} PIXI.particles.Emitter#parent
+* The container to add particles to. Settings this will dump any active particles.
+* @member {PIXI.Container} PIXI.particles.Emitter#parent
 */
 Object.defineProperty(p, "parent",
 {
@@ -721,7 +721,7 @@ p.updateSpawnPos = function(x, y)
 
 /**
  * Changes the position of the emitter's owner. You should call this if you are adding
- * particles to the world display object that your emitter's owner is moving around in.
+ * particles to the world container that your emitter's owner is moving around in.
  * @method PIXI.particles.Emitter#updateOwnerPos
  * @param {Number} x The new x value of the emitter's owner.
  * @param {Number} y The new y value of the emitter's owner.
