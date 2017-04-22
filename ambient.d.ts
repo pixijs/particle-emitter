@@ -61,8 +61,8 @@ declare namespace PIXI.particles {
 		public startScale:number;
 		public endScale:number;
 		public minimumScaleMultiplier:number;
-		public startColor:[number, number, number];
-		public endColor:[number, number, number];
+		public startColor:number[];
+		public endColor:number[];
 		public minLifetime:number;
 		public maxLifetime:number;
 		public minStartRotation:number;
