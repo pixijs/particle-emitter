@@ -1,4 +1,3 @@
-require("./polyfills.js");
 exports.ParticleUtils = require("./ParticleUtils.js");
 exports.Particle = require("./Particle.js");
 exports.Emitter = require("./Emitter.js");

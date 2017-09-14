@@ -895,7 +895,7 @@ p.update = function(delta)
 					//set a random texture if we have more than one
 					if(this.particleImages.length > 1)
 					{
-						p.applyArt(this.particleImages.random());
+						p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
 					}
 					else
 					{
