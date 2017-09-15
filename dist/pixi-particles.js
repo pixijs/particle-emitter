@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.5
- * Compiled Tue, 14 Mar 2017 22:09:25 UTC
+ * pixi-particles - v2.1.6
+ * Compiled Fri, 15 Sep 2017 02:33:23 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -235,7 +235,7 @@ var ParticleUtils = require("./ParticleUtils"),
  * @memberof PIXI.particles
  * @class Emitter
  * @constructor
- * @param {PIXI.DisplayObjectContainer} particleParent The display object to add the
+ * @param {PIXI.Container} particleParent The container to add the
  *                                                     particles to.
  * @param {Array|PIXI.Texture|String} [particleImages] A texture or array of textures to use
  *                                                     for the particles. Strings will be turned
@@ -518,8 +518,8 @@ var Emitter = function(particleParent, particleImages, config)
 	 */
 	this._parentIsPC = false;
 	/**
-	 * The display object to add particles to.
-	 * @property {PIXI.DisplayObjectContainer} _parent
+	 * The container to add particles to.
+	 * @property {PIXI.Container} _parent
 	 * @private
 	 */
 	this._parent = null;
@@ -669,8 +669,8 @@ Object.defineProperty(p, "particleConstructor",
 });
 
 /**
-* The display object to add particles to. Settings this will dump any active particles.
-* @member {PIXI.DisplayObjectContainer} PIXI.particles.Emitter#parent
+* The container to add particles to. Settings this will dump any active particles.
+* @member {PIXI.Container} PIXI.particles.Emitter#parent
 */
 Object.defineProperty(p, "parent",
 {
@@ -946,7 +946,7 @@ p.updateSpawnPos = function(x, y)
 
 /**
  * Changes the position of the emitter's owner. You should call this if you are adding
- * particles to the world display object that your emitter's owner is moving around in.
+ * particles to the world container that your emitter's owner is moving around in.
  * @method PIXI.particles.Emitter#updateOwnerPos
  * @param {Number} x The new x value of the emitter's owner.
  * @param {Number} y The new y value of the emitter's owner.
@@ -1120,7 +1120,7 @@ p.update = function(delta)
 					//set a random texture if we have more than one
 					if(this.particleImages.length > 1)
 					{
-						p.applyArt(this.particleImages.random());
+						p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
 					}
 					else
 					{
@@ -2315,55 +2315,13 @@ module.exports = PathParticle;
 },{"./Particle":3,"./ParticleUtils":4}],6:[function(require,module,exports){
 //Nothing to deprecate right now!
 },{}],7:[function(require,module,exports){
-require("./polyfills.js");
 exports.ParticleUtils = require("./ParticleUtils.js");
 exports.Particle = require("./Particle.js");
 exports.Emitter = require("./Emitter.js");
 exports.PathParticle = require("./PathParticle.js");
 exports.AnimatedParticle = require("./AnimatedParticle.js");
 require("./deprecation.js");
-},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5,"./deprecation.js":6,"./polyfills.js":8}],8:[function(require,module,exports){
-/**
- * Add methods to Array
- * See https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty
- * @class Array
- */
-
-/**
- * Shuffles the array
- * @method shuffle
- * @return {Array} The array, for chaining calls.
- */
-if(!Array.prototype.shuffle)
-{
-	// In EcmaScript 5 specs and browsers that support it you can use the Object.defineProperty
-	// to make it not enumerable set the enumerable property to false
-	Object.defineProperty(Array.prototype, 'shuffle', {
-		enumerable: false,
-		writable:false,
-		value: function() {
-			for(var j, x, i = this.length; i; j = Math.floor(Math.random() * i), x = this[--i], this[i] = this[j], this[j] = x);
-			return this;
-		}
-	});
-}
-
-/**
- * Get a random item from an array
- * @method random
- * @return {*} The random item
- */
-if(!Array.prototype.random)
-{
-	Object.defineProperty(Array.prototype, 'random', {
-		enumerable: false,
-		writable: false,
-		value: function() {
-			return this[Math.floor(Math.random() * this.length)];
-		}
-	});
-}
-},{}],9:[function(require,module,exports){
+},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5,"./deprecation.js":6}],8:[function(require,module,exports){
 "use strict";
 
 // Check for window, fallback to global
@@ -2400,7 +2358,7 @@ var particles = require('./particles');
 for (var prop in particles) {
 	global.PIXI.particles[prop] = particles[prop];
 }
-},{"./particles":7,"pixi.js":undefined}]},{},[9])(9)
+},{"./particles":7,"pixi.js":undefined}]},{},[8])(8)
 });
 
 
