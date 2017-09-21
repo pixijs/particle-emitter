@@ -49,6 +49,12 @@ var Emitter = function(particleParent, particleImages, config)
 	 */
 	this.endAlpha = 1;
 	/**
+	 * The alpha ease of all particles.
+	 * @property {Function} alphaEase
+	 * @default null
+	 */
+	this.alphaEase = null;
+	/**
 	 * The starting speed of all particles.
 	 * @property {Number} startSpeed
 	 * @default 0
@@ -498,6 +504,7 @@ p.init = function(art, config)
 	{
 		this.startAlpha = config.alpha.start;
 		this.endAlpha = config.alpha.end;
+		this.alphaEase = config.alpha.ease;
 	}
 	else
 		this.startAlpha = this.endAlpha = 1;
@@ -906,6 +913,7 @@ p.update = function(delta)
 					//set up the start and end values
 					p.startAlpha = this.startAlpha;
 					p.endAlpha = this.endAlpha;
+					p.alphaEase = this.alphaEase;
 					if(this.minimumSpeedMultiplier != 1)
 					{
 						rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
