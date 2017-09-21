@@ -60,6 +60,12 @@ var Particle = function(emitter)
 	 */
 	this.endAlpha = 0;
 	/**
+	 * The alpha ease of the particle.
+	 * @property {Function} alphaEase
+	 * @default null
+	 */
+	this.alphaEase = null;
+	/**
 	 * The speed of the particle at the start of its life.
 	 * @property {Number} startSpeed
 	 */
@@ -315,7 +321,8 @@ p.update = p.Particle_update = function(delta)
 	}
 
 	//determine our interpolation value
-	var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
+	var aLerp = this.age * this._oneOverLife;//lifetime / maxLife;
+	var lerp = aLerp;
 	if (this.ease)
 	{
 		if(this.ease.length == 4)
@@ -333,8 +340,13 @@ p.update = p.Particle_update = function(delta)
 	}
 
 	//interpolate alpha
-	if (this._doAlpha)
-		this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
+	if (this._doAlpha) {
+		var alphaLerp = lerp;
+		if (this.alphaEase) {
+			alphaLerp = this.alphaEase(aLerp);
+		}
+		this.alpha = (this.endAlpha - this.startAlpha) * alphaLerp + this.startAlpha;
+	}
 	//interpolate scale
 	if (this._doScale)
 	{

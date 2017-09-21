@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.6
- * Compiled Fri, 15 Sep 2017 02:32:32 UTC
+ * Compiled Thu, 21 Sep 2017 19:54:22 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -273,6 +273,12 @@ var Emitter = function(particleParent, particleImages, config)
 	 * @default 1
 	 */
 	this.endAlpha = 1;
+	/**
+	 * The alpha ease of all particles.
+	 * @property {Function} alphaEase
+	 * @default null
+	 */
+	this.alphaEase = null;
 	/**
 	 * The starting speed of all particles.
 	 * @property {Number} startSpeed
@@ -723,6 +729,7 @@ p.init = function(art, config)
 	{
 		this.startAlpha = config.alpha.start;
 		this.endAlpha = config.alpha.end;
+		this.alphaEase = config.alpha.ease;
 	}
 	else
 		this.startAlpha = this.endAlpha = 1;
@@ -1131,6 +1138,7 @@ p.update = function(delta)
 					//set up the start and end values
 					p.startAlpha = this.startAlpha;
 					p.endAlpha = this.endAlpha;
+					p.alphaEase = this.alphaEase;
 					if(this.minimumSpeedMultiplier != 1)
 					{
 						rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
@@ -1491,6 +1499,12 @@ var Particle = function(emitter)
 	 */
 	this.endAlpha = 0;
 	/**
+	 * The alpha ease of the particle.
+	 * @property {Function} alphaEase
+	 * @default null
+	 */
+	this.alphaEase = null;
+	/**
 	 * The speed of the particle at the start of its life.
 	 * @property {Number} startSpeed
 	 */
@@ -1746,7 +1760,8 @@ p.update = p.Particle_update = function(delta)
 	}
 
 	//determine our interpolation value
-	var lerp = this.age * this._oneOverLife;//lifetime / maxLife;
+	var aLerp = this.age * this._oneOverLife;//lifetime / maxLife;
+	var lerp = aLerp;
 	if (this.ease)
 	{
 		if(this.ease.length == 4)
@@ -1764,8 +1779,13 @@ p.update = p.Particle_update = function(delta)
 	}
 
 	//interpolate alpha
-	if (this._doAlpha)
-		this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
+	if (this._doAlpha) {
+		var alphaLerp = lerp;
+		if (this.alphaEase) {
+			alphaLerp = this.alphaEase(aLerp);
+		}
+		this.alpha = (this.endAlpha - this.startAlpha) * alphaLerp + this.startAlpha;
+	}
 	//interpolate scale
 	if (this._doScale)
 	{
