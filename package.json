@@ -21,6 +21,7 @@
     "start": "npm run build -- --watch",
     "predocs-live": "npm run build && npm run docs && bower install",
     "docs-live": "gh-pages -d docs",
+    "postdocs-live": "git checkout .",
     "version": "node build/version.js",
     "postversion": "npm run build && node build/commitAndTag.js",
     "publish:patch": "npm run version -- patch && npm publish",
