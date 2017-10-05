@@ -1,4 +1,4 @@
-// Typings for pixi-particles 2.1.6, requires Pixi.js typings
+// Typings for pixi-particles 2.1.7, requires Pixi.js typings
 declare namespace particles {
 	
 	type TexSrc = string|PIXI.Texture;
