@@ -1,15 +1,15 @@
 /*!
- * pixi-particles - v2.1.6
- * Compiled Fri, 15 Sep 2017 02:33:23 UTC
+ * pixi-particles - v2.1.7
+ * Compiled Thu, 05 Oct 2017 01:24:23 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.pixiParticles = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.pixiParticles = f()}})(function(){var define,module,exports;return (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(_dereq_,module,exports){
 "use strict";
 
-var ParticleUtils = require("./ParticleUtils"),
-	Particle = require("./Particle"),
+var ParticleUtils = _dereq_("./ParticleUtils"),
+	Particle = _dereq_("./Particle"),
 	Texture = PIXI.Texture;
 
 /**
@@ -222,11 +222,11 @@ AnimatedParticle.parseArt = function(art)
 };
 
 module.exports = AnimatedParticle;
-},{"./Particle":3,"./ParticleUtils":4}],2:[function(require,module,exports){
+},{"./Particle":3,"./ParticleUtils":4}],2:[function(_dereq_,module,exports){
 "use strict";
 
-var ParticleUtils = require("./ParticleUtils"),
-	Particle = require("./Particle"),
+var ParticleUtils = _dereq_("./ParticleUtils"),
+	Particle = _dereq_("./Particle"),
 	ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer,
 	ticker = PIXI.ticker.shared;
 
@@ -1428,8 +1428,8 @@ p.destroy = function()
 };
 
 module.exports = Emitter;
-},{"./Particle":3,"./ParticleUtils":4}],3:[function(require,module,exports){
-var ParticleUtils = require("./ParticleUtils");
+},{"./Particle":3,"./ParticleUtils":4}],3:[function(_dereq_,module,exports){
+var ParticleUtils = _dereq_("./ParticleUtils");
 var Sprite = PIXI.Sprite;
 
 /**
@@ -1897,7 +1897,7 @@ Particle.parseData = function(extraData)
 };
 
 module.exports = Particle;
-},{"./ParticleUtils":4}],4:[function(require,module,exports){
+},{"./ParticleUtils":4}],4:[function(_dereq_,module,exports){
 "use strict";
 
 var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
@@ -2079,11 +2079,11 @@ ParticleUtils.getBlendMode = function(name)
 };
 
 module.exports = ParticleUtils;
-},{}],5:[function(require,module,exports){
+},{}],5:[function(_dereq_,module,exports){
 "use strict";
 
-var ParticleUtils = require("./ParticleUtils"),
-	Particle = require("./Particle");
+var ParticleUtils = _dereq_("./ParticleUtils"),
+	Particle = _dereq_("./Particle");
 
 /**
  * An particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
@@ -2312,16 +2312,16 @@ PathParticle.parseData = function(extraData)
 };
 
 module.exports = PathParticle;
-},{"./Particle":3,"./ParticleUtils":4}],6:[function(require,module,exports){
+},{"./Particle":3,"./ParticleUtils":4}],6:[function(_dereq_,module,exports){
 //Nothing to deprecate right now!
-},{}],7:[function(require,module,exports){
-exports.ParticleUtils = require("./ParticleUtils.js");
-exports.Particle = require("./Particle.js");
-exports.Emitter = require("./Emitter.js");
-exports.PathParticle = require("./PathParticle.js");
-exports.AnimatedParticle = require("./AnimatedParticle.js");
-require("./deprecation.js");
-},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5,"./deprecation.js":6}],8:[function(require,module,exports){
+},{}],7:[function(_dereq_,module,exports){
+exports.ParticleUtils = _dereq_("./ParticleUtils.js");
+exports.Particle = _dereq_("./Particle.js");
+exports.Emitter = _dereq_("./Emitter.js");
+exports.PathParticle = _dereq_("./PathParticle.js");
+exports.AnimatedParticle = _dereq_("./AnimatedParticle.js");
+_dereq_("./deprecation.js");
+},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5,"./deprecation.js":6}],8:[function(_dereq_,module,exports){
 "use strict";
 
 // Check for window, fallback to global
@@ -2339,7 +2339,7 @@ if (typeof module !== 'undefined' && module.exports)
 	if (typeof PIXI === 'undefined')
 	{
 		// Include the Pixi.js module
-		require('pixi.js');
+		_dereq_('pixi.js');
 	}
 
 	// Export the module
@@ -2352,7 +2352,7 @@ else if (typeof PIXI === 'undefined')
 }
 
 // get the library itself
-var particles = require('./particles');
+var particles = _dereq_('./particles');
 
 // insert the lirbary into the particles namespace on PIXI
 for (var prop in particles) {
