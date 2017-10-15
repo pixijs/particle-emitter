@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.7
- * Compiled Thu, 05 Oct 2017 01:24:02 UTC
+ * pixi-particles - v2.1.8
+ * Compiled Sun, 15 Oct 2017 16:42:39 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -601,6 +601,13 @@ var Emitter = function(particleParent, particleImages, config)
 	 * @private
 	 */
 	this._destroyWhenComplete = false;
+	/**
+	 * A callback for when all particles have died out. This is set by
+	 * playOnceAndDestroy() or playOnce();
+	 * @property {Function} _completeCallback
+	 * @private
+	 */
+	this._completeCallback = null;
 
 	//set the initial parent
 	this.parent = particleParent;
@@ -1010,12 +1017,27 @@ Object.defineProperty(p, "autoUpdate",
  * Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
  * when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnceAndDestroy
+ * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
-p.playOnceAndDestroy = function()
+p.playOnceAndDestroy = function(callback)
 {
 	this.autoUpdate = true;
 	this.emit = true;
 	this._destroyWhenComplete = true;
+	this._completeCallback = callback;
+};
+
+/**
+ * Starts emitting particles, sets autoUpdate to true, and optionally calls a callback
+ * when particle emission is complete.
+ * @method PIXI.particles.Emitter#playOnce
+ * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
+ */
+p.playOnce = function(callback)
+{
+	this.autoUpdate = true;
+	this.emit = true;
+	this._completeCallback = callback;
 };
 
 /**
@@ -1234,9 +1256,16 @@ p.update = function(delta)
 	}
 
 	//if we are all done and should destroy ourselves, take care of that
-	if (this._destroyWhenComplete && !this._emit && !this._activeParticlesFirst)
+	if (!this._emit && !this._activeParticlesFirst)
 	{
-		this.destroy();
+		if (this._completeCallback)
+		{
+			this._completeCallback();
+		}
+		if (this._destroyWhenComplete)
+		{
+			this.destroy();
+		}
 	}
 };
 
@@ -1424,7 +1453,7 @@ p.destroy = function()
 		particle.destroy();
 	}
 	this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =
-		this.startColor = this.endColor = this.customEase = null;
+		this.startColor = this.endColor = this.customEase = this._completeCallback = null;
 };
 
 module.exports = Emitter;
