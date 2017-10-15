@@ -49,6 +49,8 @@ declare namespace PIXI.particles {
 		private _origConfig:any;
 		private _origArt:any;
 		private _autoUpdate:boolean;
+		private _destroyWhenComplete:boolean;
+		private _completeCallback:()=>void;
 		
 		public particleImages:any[];
 		public startAlpha:number;
@@ -107,6 +109,8 @@ declare namespace PIXI.particles {
 		public updateOwnerPos(x:number, y:number):void;
 		public resetPositionTracking():void;
 		public update(delta:number):void;
+		public playOnceAndDestroy(callback?:()=>void):void;
+		public playOnce(callback?:()=>void):void;
 		public cleanup():void;
 		public destroy():void;
 	}
