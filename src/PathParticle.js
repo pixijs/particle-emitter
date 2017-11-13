@@ -125,7 +125,7 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
 /**
  * Parses a string into a function for path following.
  * This involves whitelisting the string for safety, inserting "Math." to math function
- * names, and using eval() to generate a function.
+ * names, and using `new Function()` to generate a function.
  * @method PIXI.particles.PathParticle~parsePath
  * @private
  * @static
@@ -134,7 +134,6 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
  */
 var parsePath = function(pathString)
 {
-	var rtn;
 	var matches = pathString.match(WHITELISTER);
 	for(var i = matches.length - 1; i >= 0; --i)
 	{
@@ -142,8 +141,7 @@ var parsePath = function(pathString)
 			matches[i] = "Math." + matches[i];
 	}
 	pathString = matches.join("");
-	eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
-	return rtn;
+	return new Function("x", "return "+ pathString + ";");
 };
 
 /**
