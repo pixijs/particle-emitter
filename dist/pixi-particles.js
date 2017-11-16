@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v2.1.8
- * Compiled Sun, 15 Oct 2017 16:42:59 UTC
+ * pixi-particles - v2.1.9
+ * Compiled Thu, 16 Nov 2017 01:53:03 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -2236,7 +2236,7 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
 /**
  * Parses a string into a function for path following.
  * This involves whitelisting the string for safety, inserting "Math." to math function
- * names, and using eval() to generate a function.
+ * names, and using `new Function()` to generate a function.
  * @method PIXI.particles.PathParticle~parsePath
  * @private
  * @static
@@ -2245,7 +2245,6 @@ WHITELISTER = new RegExp(WHITELISTER, "g");
  */
 var parsePath = function(pathString)
 {
-	var rtn;
 	var matches = pathString.match(WHITELISTER);
 	for(var i = matches.length - 1; i >= 0; --i)
 	{
@@ -2253,8 +2252,7 @@ var parsePath = function(pathString)
 			matches[i] = "Math." + matches[i];
 	}
 	pathString = matches.join("");
-	eval("rtn = function(x){ return " + pathString + "; };");// jshint ignore:line
-	return rtn;
+	return new Function("x", "return "+ pathString + ";");
 };
 
 /**
