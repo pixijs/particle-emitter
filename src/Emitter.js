@@ -789,28 +789,26 @@ Object.defineProperty(p, "autoUpdate",
 });
 
 /**
- * Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
+ * Starts emitting particles, and sets up the Emitter to destroy itself
  * when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnceAndDestroy
  * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
 p.playOnceAndDestroy = function(callback)
 {
-	this.autoUpdate = true;
 	this.emit = true;
 	this._destroyWhenComplete = true;
 	this._completeCallback = callback;
 };
 
 /**
- * Starts emitting particles, sets autoUpdate to true, and optionally calls a callback
+ * Starts emitting particles, and optionally calls a callback
  * when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnce
  * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
 p.playOnce = function(callback)
 {
-	this.autoUpdate = true;
 	this.emit = true;
 	this._completeCallback = callback;
 };
