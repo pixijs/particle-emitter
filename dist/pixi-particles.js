@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.9
- * Compiled Thu, 16 Nov 2017 01:52:38 UTC
+ * Compiled Wed, 24 Jan 2018 13:17:36 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1014,28 +1014,26 @@ Object.defineProperty(p, "autoUpdate",
 });
 
 /**
- * Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
+ * Starts emitting particles, and sets up the Emitter to destroy itself
  * when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnceAndDestroy
  * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
 p.playOnceAndDestroy = function(callback)
 {
-	this.autoUpdate = true;
 	this.emit = true;
 	this._destroyWhenComplete = true;
 	this._completeCallback = callback;
 };
 
 /**
- * Starts emitting particles, sets autoUpdate to true, and optionally calls a callback
+ * Starts emitting particles, and optionally calls a callback
  * when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnce
  * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
 p.playOnce = function(callback)
 {
-	this.autoUpdate = true;
 	this.emit = true;
 	this._completeCallback = callback;
 };
