@@ -35,6 +35,13 @@ var PropertyList = function(isColor)
 	 * @return {number} Either the interpolated value. Colors are converted to the hex value.
 	 */
 	this.interpolate = null;
+	/**
+	 * A custom easing method for this list.
+	 * @method ease
+	 * @param {number} lerp The interpolation value from 0-1.
+	 * @return {number} The eased value, also from 0-1.
+	 */
+	this.ease = null;
 }
 
 /**
@@ -60,15 +67,20 @@ PropertyList.prototype.reset = function(first)
 	{
 		this.interpolate = this.isColor ? intColorComplex : intValueComplex;
 	}
+	this.ease = this.current.ease;
 }
 
 function intValueSimple(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	return (this.next.value - this.current.value) * lerp + this.current.value;
 }
 
 function intColorSimple(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	var curVal = this.current.value, nextVal = this.next.value;
 	var r = (nextVal.r - curVal.r) * lerp + curVal.r;
 	var g = (nextVal.g - curVal.g) * lerp + curVal.g;
@@ -78,6 +90,8 @@ function intColorSimple(lerp)
 
 function intValueComplex(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	//make sure we are on the right segment
 	while (lerp > this.next.time)
 	{
@@ -91,6 +105,8 @@ function intValueComplex(lerp)
 
 function intColorComplex(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	//make sure we are on the right segment
 	while (lerp > this.next.time)
 	{
@@ -108,6 +124,8 @@ function intColorComplex(lerp)
 
 function intValueStepped(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	//make sure we are on the right segment
 	while (this.next && lerp > this.next.time)
 	{
@@ -119,6 +137,8 @@ function intValueStepped(lerp)
 
 function intColorStepped(lerp)
 {
+	if (this.ease)
+		lerp = this.ease(lerp);
 	//make sure we are on the right segment
 	while (this.next && lerp > this.next.time)
 	{
