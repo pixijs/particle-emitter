@@ -4,6 +4,12 @@
 
 A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles.
 
+## Breaking changes from v2 to v3
+* On `Emitter`, `playOnce()` no longer sets `autoUpdate` to true. Set it manually before use.
+	`playOnceAndDestroy()` is unaffected.
+* On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have between
+	replaced by a singly linked list of `PropertyNode` objects.
+
 ## Sample Usage
 
 Please see the examples for various pre-made particle configurations.

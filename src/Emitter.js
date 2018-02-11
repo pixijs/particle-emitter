@@ -773,14 +773,12 @@ p.playOnceAndDestroy = function(callback)
 };
 
 /**
- * Starts emitting particles, sets autoUpdate to true, and optionally calls a callback
- * when particle emission is complete.
+ * Starts emitting particles and optionally calls a callback when particle emission is complete.
  * @method PIXI.particles.Emitter#playOnce
  * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
  */
 p.playOnce = function(callback)
 {
-	this.autoUpdate = true;
 	this.emit = true;
 	this._completeCallback = callback;
 };
