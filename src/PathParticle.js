@@ -156,7 +156,7 @@ p.update = function(delta)
 	if(lerp >= 0 && this.path)
 	{
 		//increase linear movement based on speed
-		var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+		var speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 		this.movement += speed * delta;
 		//set up the helper point for rotation
 		helperPoint.x = this.movement;

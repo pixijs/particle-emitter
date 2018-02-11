@@ -2,6 +2,7 @@
 
 var ParticleUtils = require("./ParticleUtils"),
 	Particle = require("./Particle"),
+	PropertyNode = require("./PropertyNode"),
 	ParticleContainer = PIXI.particles.ParticleContainer || PIXI.ParticleContainer,
 	ticker = PIXI.ticker.shared;
 
@@ -37,34 +38,18 @@ var Emitter = function(particleParent, particleImages, config)
 	 */
 	this.particleImages = null;
 	/**
-	 * The starting alpha of all particles.
-	 * @property {Number} startAlpha
-	 * @default 1
+	 * The first node in the list of alpha values for all particles.
+	 * @property {PIXI.particles.PropertyNode} startAlpha
 	 */
-	this.startAlpha = 1;
+	this.startAlpha = null;
 	/**
-	 * The ending alpha of all particles.
-	 * @property {Number} endAlpha
-	 * @default 1
-	 */
-	this.endAlpha = 1;
-	/**
-	 * The starting speed of all particles.
+	 * The first node in the list of speed values of all particles.
 	 * @property {Number} startSpeed
-	 * @default 0
 	 */
-	this.startSpeed = 0;
+	this.startSpeed = null;
 	/**
-	 * The ending speed of all particles.
-	 * @property {Number} endSpeed
-	 * @default 0
-	 */
-	this.endSpeed = 0;
-	/**
-	 * A minimum multiplier for the speed of a particle at both start and
-	 * end. A value between minimumSpeedMultiplier and 1 is randomly generated
-	 * and multiplied with startSpeed and endSpeed to provide the actual
-	 * startSpeed and endSpeed for each particle.
+	 * A minimum multiplier for the speed of a particle at all stages of its life. A value between
+	 * minimumSpeedMultiplier and 1 is randomly generated for each particle.
 	 * @property {Number} minimumSpeedMultiplier
 	 * @default 1
 	 */
@@ -86,36 +71,23 @@ var Emitter = function(particleParent, particleImages, config)
 	 */
 	this.maxSpeed = NaN;
 	/**
-	 * The starting scale of all particles.
-	 * @property {Number} startScale
-	 * @default 1
+	 * The first node in the list of scale values of all particles.
+	 * @property {PIXI.particles.PropertyNode} startScale
 	 */
-	this.startScale = 1;
+	this.startScale = null;
 	/**
-	 * The ending scale of all particles.
-	 * @property {Number} endScale
-	 * @default 1
-	 */
-	this.endScale = 1;
-	/**
-	 * A minimum multiplier for the scale of a particle at both start and
-	 * end. A value between minimumScaleMultiplier and 1 is randomly generated
-	 * and multiplied with startScale and endScale to provide the actual
-	 * startScale and endScale for each particle.
+	 * A minimum multiplier for the scale of a particle at all stages of its life. A value between
+	 * minimumScaleMultiplier and 1 is randomly generated for each particle.
 	 * @property {Number} minimumScaleMultiplier
 	 * @default 1
 	 */
 	this.minimumScaleMultiplier = 1;
 	/**
-	 * The starting color of all particles, as red, green, and blue uints from 0-255.
-	 * @property {Array} startColor
+	 * The first node in the list of  color values of all particles, as red, green, and blue
+	 * uints from 0-255.
+	 * @property {PIXI.particles.PropertyNode} startColor
 	 */
 	this.startColor = null;
-	/**
-	 * The ending color of all particles, as red, green, and blue uints from 0-255.
-	 * @property {Array} endColor
-	 */
-	this.endColor = null;
 	/**
 	 * The minimum lifetime for a particle, in seconds.
 	 * @property {Number} minLifetime
@@ -503,28 +475,27 @@ p.init = function(art, config)
 	//set up the alpha
 	if (config.alpha)
 	{
-		this.startAlpha = config.alpha.start;
-		this.endAlpha = config.alpha.end;
+		this.startAlpha = PropertyNode.createList(config.alpha);
 	}
 	else
-		this.startAlpha = this.endAlpha = 1;
+		this.startAlpha = new PropertyNode(1, 0);
 	//set up the speed
 	if (config.speed)
 	{
-		this.startSpeed = config.speed.start;
-		this.endSpeed = config.speed.end;
+		this.startSpeed = PropertyNode.createList(config.speed);
 		this.minimumSpeedMultiplier = config.speed.minimumSpeedMultiplier || 1;
 	}
 	else
 	{
 		this.minimumSpeedMultiplier = 1;
-		this.startSpeed = this.endSpeed = 0;
+		this.startSpeed = new PropertyNode(0, 0);
 	}
 	//set up acceleration
 	var acceleration = config.acceleration;
 	if(acceleration && (acceleration.x || acceleration.y))
 	{
-		this.endSpeed = this.startSpeed;
+		//make sure we disable speed interpolation
+		this.startSpeed.next = null;
 		this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
 		this.maxSpeed = config.maxSpeed || NaN;
 	}
@@ -533,23 +504,22 @@ p.init = function(art, config)
 	//set up the scale
 	if (config.scale)
 	{
-		this.startScale = config.scale.start;
-		this.endScale = config.scale.end;
+		this.startScale = PropertyNode.createList(config.scale);
 		this.minimumScaleMultiplier = config.scale.minimumScaleMultiplier || 1;
 	}
 	else
-		this.startScale = this.endScale = this.minimumScaleMultiplier = 1;
+	{
+		this.startScale = new PropertyNode(1, 0);
+		this.minimumScaleMultiplier = 1;
+	}
 	//set up the color
 	if (config.color)
 	{
-		this.startColor = ParticleUtils.hexToRGB(config.color.start);
-		//if it's just one color, only use the start color
-		if (config.color.start != config.color.end)
-		{
-			this.endColor = ParticleUtils.hexToRGB(config.color.end);
-		}
-		else
-			this.endColor = null;
+		this.startColor = PropertyNode.createList(config.color);
+	}
+	else
+	{
+		this.startColor = new PropertyNode({r:0xFF, g:0xFF, b:0xFF}, 0);
 	}
 	//set up the start rotation
 	if (config.startRotation)
@@ -902,7 +872,7 @@ p.update = function(delta)
 				for(var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i)
 				{
 					//create particle
-					var p, rand;
+					var p;
 					if(this._poolFirst)
 					{
 						p = this._poolFirst;
@@ -926,35 +896,21 @@ p.update = function(delta)
 						p.applyArt(this.particleImages[0]);
 					}
 					//set up the start and end values
-					p.startAlpha = this.startAlpha;
-					p.endAlpha = this.endAlpha;
+					p.alphaList.reset(this.startAlpha);
 					if(this.minimumSpeedMultiplier != 1)
 					{
-						rand = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
-						p.startSpeed = this.startSpeed * rand;
-						p.endSpeed = this.endSpeed * rand;
+						p.speedMultiplier = Math.random() * (1 - this.minimumSpeedMultiplier) + this.minimumSpeedMultiplier;
 					}
-					else
-					{
-						p.startSpeed = this.startSpeed;
-						p.endSpeed = this.endSpeed;
-					}
+					p.speedList.reset(this.startSpeed);
 					p.acceleration.x = this.acceleration.x;
 					p.acceleration.y = this.acceleration.y;
 					p.maxSpeed = this.maxSpeed;
 					if(this.minimumScaleMultiplier != 1)
 					{
-						rand = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
-						p.startScale = this.startScale * rand;
-						p.endScale = this.endScale * rand;
+						p.scaleMultiplier = Math.random() * (1 - this.minimumScaleMultiplier) + this.minimumScaleMultiplier;
 					}
-					else
-					{
-						p.startScale = this.startScale;
-						p.endScale = this.endScale;
-					}
-					p.startColor = this.startColor;
-					p.endColor = this.endColor;
+					p.scaleList.reset(this.startScale);
+					p.colorList.reset(this.startColor);
 					//randomize the rotation speed
 					if(this.minRotationSpeed == this.maxRotationSpeed)
 						p.rotationSpeed = this.minRotationSpeed;
@@ -1228,7 +1184,8 @@ p.destroy = function()
 		particle.destroy();
 	}
 	this._poolFirst = this._parent = this.particleImages = this.spawnPos = this.ownerPos =
-		this.startColor = this.endColor = this.customEase = this._completeCallback = null;
+		this.startColor = this.startScale = this.startAlpha = this.startSpeed =
+		this.customEase = this._completeCallback = null;
 };
 
 module.exports = Emitter;

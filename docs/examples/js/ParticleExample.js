@@ -6,8 +6,11 @@
 	*  @constructor
 	*  @param {String[]} imagePaths The local path to the image source
 	*  @param {Object} config The emitter configuration
+	*  @param {null|"path"|"anim"} [type=null] Particle type to create.
+	*  @param {boolean} [useParticleContainer=false] If a ParticleContainer should be used instead of a Container.
+	*  @param {boolean} [stepColors=false] If the color settings should be manually stepped.
 	*/
-	var ParticleExample = function(imagePaths, config, type, useParticleContainer)
+	var ParticleExample = function(imagePaths, config, type, useParticleContainer, stepColors)
 	{
 		var canvas = document.getElementById("stage");
 		// Basic PIXI Setup
@@ -22,13 +25,13 @@
 			emitter = null,
 			renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, rendererOptions),
 			bg = null;
-		
+
 		var framerate = document.getElementById("framerate");
 		var particleCount = document.getElementById("particleCount");
 
 		// Calculate the current time
 		var elapsed = Date.now();
-		
+
 		var updateId;
 
 		// Update function every frame
@@ -40,11 +43,11 @@
 			var now = Date.now();
 			if (emitter)
 				emitter.update((now - elapsed) * 0.001);
-			
+
 			framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
-			
+
 			elapsed = now;
-			
+
 			if(emitter && particleCount)
 				particleCount.innerHTML = emitter.particleCount;
 
@@ -115,11 +118,13 @@
 			else
 				emitterContainer = new PIXI.Container();
 			stage.addChild(emitterContainer);
-			emitter = new PIXI.particles.Emitter(
+			window.emitter = emitter = new PIXI.particles.Emitter(
 				emitterContainer,
 				art,
 				config
 			);
+			if (stepColors)
+				emitter.startColor = PIXI.particles.ParticleUtils.createSteppedGradient(config.color.list, stepColors);
 			if(type == "path")
 				emitter.particleConstructor = PIXI.particles.PathParticle;
 			else if(type == "anim")
@@ -138,7 +143,7 @@
 
 			// Start the update
 			update();
-			
+
 			//for testing and debugging
 			window.destroyEmitter = function()
 			{
@@ -146,11 +151,11 @@
 				emitter = null;
 				window.destroyEmitter = null;
 				//cancelAnimationFrame(updateId);
-				
+
 				//reset SpriteRenderer's batching to fully release particles for GC
 				if (renderer.plugins && renderer.plugins.sprite && renderer.plugins.sprite.sprites)
 					renderer.plugins.sprite.sprites.length = 0;
-				
+
 				renderer.render(stage);
 			};
 		});

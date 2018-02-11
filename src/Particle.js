@@ -1,4 +1,5 @@
 var ParticleUtils = require("./ParticleUtils");
+var PropertyList = require("./PropertyList");
 var Sprite = PIXI.Sprite;
 
 /**
@@ -50,25 +51,20 @@ var Particle = function(emitter)
 	 */
 	this.extraData = null;
 	/**
-	 * The alpha of the particle at the start of its life.
-	 * @property {Number} startAlpha
+	 * The alpha of the particle throughout its life.
+	 * @property {PIXI.particles.PropertyList} alphaList
 	 */
-	this.startAlpha = 0;
+	this.alphaList = new PropertyList();
 	/**
-	 * The alpha of the particle at the end of its life.
-	 * @property {Number} endAlpha
+	 * The speed of the particle throughout its life.
+	 * @property {PIXI.particles.PropertyList} speedList
 	 */
-	this.endAlpha = 0;
+	this.speedList = new PropertyList();
 	/**
-	 * The speed of the particle at the start of its life.
-	 * @property {Number} startSpeed
+	 * A multiplier from 0-1 applied to the speed of the particle at all times.
+	 * @property {number} speedMultiplier
 	 */
-	this.startSpeed = 0;
-	/**
-	 * The speed of the particle at the end of its life.
-	 * @property {Number} endSpeed
-	 */
-	this.endSpeed = 0;
+	this.speedMultiplier = 1;
 	/**
 	 * Acceleration to apply to the particle.
 	 * @property {PIXI.Point} accleration
@@ -82,67 +78,20 @@ var Particle = function(emitter)
 	 */
 	this.maxSpeed = NaN;
 	/**
-	 * The scale of the particle at the start of its life.
-	 * @property {Number} startScale
+	 * The scale of the particle throughout its life.
+	 * @property {PIXI.particles.PropertyList} scaleList
 	 */
-	this.startScale = 0;
+	this.scaleList = new PropertyList();
 	/**
-	 * The scale of the particle at the start of its life.
-	 * @property {Number} endScale
+	 * A multiplier from 0-1 applied to the scale of the particle at all times.
+	 * @property {number} scaleMultiplier
 	 */
-	this.endScale = 0;
+	this.scaleMultiplier = 1;
 	/**
-	 * The tint of the particle at the start of its life.
-	 * @property {Array} startColor
+	 * The tint of the particle throughout its life.
+	 * @property {PIXI.particles.PropertyList} colorList
 	 */
-	this.startColor = null;
-	/**
-	 * The red tint of the particle at the start of its life.
-	 * This is pulled from startColor in init().
-	 * @property {uint} _sR
-	 * @private
-	 */
-	this._sR = 0;
-	/**
-	 * The green tint of the particle at the start of its life.
-	 * This is pulled from startColor in init().
-	 * @property {uint} _sG
-	 * @private
-	 */
-	this._sG = 0;
-	/**
-	 * The blue tint of the particle at the start of its life.
-	 * This is pulled from startColor in init().
-	 * @property {uint} _sB
-	 * @private
-	 */
-	this._sB = 0;
-	/**
-	 * The tint of the particle at the start of its life.
-	 * @property {Array} endColor
-	 */
-	this.endColor = null;
-	/**
-	 * The red tint of the particle at the end of its life.
-	 * This is pulled from endColor in init().
-	 * @property {uint} _eR
-	 * @private
-	 */
-	this._eR = 0;
-	/**
-	 * The green tint of the particle at the end of its life.
-	 * This is pulled from endColor in init().
-	 * @property {uint} _sG
-	 * @private
-	 */
-	this._eG = 0;
-	/**
-	 * The blue tint of the particle at the end of its life.
-	 * This is pulled from endColor in init().
-	 * @property {uint} _sB
-	 * @private
-	 */
-	this._eB = 0;
+	this.colorList = new PropertyList(true);
 	/**
 	 * If alpha should be interpolated at all.
 	 * @property {Boolean} _doAlpha
@@ -229,7 +178,7 @@ p.init = p.Particle_init = function()
 	//reset the age
 	this.age = 0;
 	//set up the velocity based on the start speed and rotation
-	this.velocity.x = this.startSpeed;
+	this.velocity.x = this.speedList.current.value * this.speedMultiplier;
 	this.velocity.y = 0;
 	ParticleUtils.rotatePoint(this.rotation, this.velocity);
 	if (this.noRotation)
@@ -244,34 +193,22 @@ p.init = p.Particle_init = function()
 	//convert rotation speed to Radians from Degrees
 	this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
 	//set alpha to inital alpha
-	this.alpha = this.startAlpha;
+	this.alpha = this.alphaList.current.value;
 	//set scale to initial scale
-	this.scale.x = this.scale.y = this.startScale;
-	//determine start and end color values
-	if (this.startColor)
-	{
-		this._sR = this.startColor[0];
-		this._sG = this.startColor[1];
-		this._sB = this.startColor[2];
-		if(this.endColor)
-		{
-			this._eR = this.endColor[0];
-			this._eG = this.endColor[1];
-			this._eB = this.endColor[2];
-		}
-	}
+	this.scale.x = this.scale.y = this.scaleList.current.value;
 	//figure out what we need to interpolate
-	this._doAlpha = this.startAlpha != this.endAlpha;
-	this._doSpeed = this.startSpeed != this.endSpeed;
-	this._doScale = this.startScale != this.endScale;
-	this._doColor = !!this.endColor;
+	this._doAlpha = !!this.alphaList.current.next;
+	this._doSpeed = !!this.speedList.current.next;
+	this._doScale = !!this.scaleList.current.next;
+	this._doColor = !!this.colorList.current.next;
 	this._doAcceleration = this.acceleration.x !== 0 || this.acceleration.y !== 0;
 	//_doNormalMovement can be cancelled by subclasses
 	this._doNormalMovement = this._doSpeed || this.startSpeed !== 0 || this._doAcceleration;
 	//save our lerp helper
 	this._oneOverLife = 1 / this.maxLife;
 	//set the inital color
-	this.tint = ParticleUtils.combineRGBComponents(this._sR, this._sG, this._sB);
+	var color = this.colorList.current.value;
+	this.tint = ParticleUtils.combineRGBComponents(color.r, color.g, color.b);
 	//ensure visibility
 	this.visible = true;
 };
@@ -334,11 +271,11 @@ p.update = p.Particle_update = function(delta)
 
 	//interpolate alpha
 	if (this._doAlpha)
-		this.alpha = (this.endAlpha - this.startAlpha) * lerp + this.startAlpha;
+		this.alpha = this.alphaList.interpolate(lerp);
 	//interpolate scale
 	if (this._doScale)
 	{
-		var scale = (this.endScale - this.startScale) * lerp + this.startScale;
+		var scale = this.scaleList.interpolate(lerp) * this.scaleMultiplier;
 		this.scale.x = this.scale.y = scale;
 	}
 	//handle movement
@@ -347,7 +284,7 @@ p.update = p.Particle_update = function(delta)
 		//interpolate speed
 		if (this._doSpeed)
 		{
-			var speed = (this.endSpeed - this.startSpeed) * lerp + this.startSpeed;
+			var speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 			ParticleUtils.normalize(this.velocity);
 			ParticleUtils.scaleBy(this.velocity, speed);
 		}
@@ -373,10 +310,7 @@ p.update = p.Particle_update = function(delta)
 	//interpolate color
 	if (this._doColor)
 	{
-		var r = (this._eR - this._sR) * lerp + this._sR;
-		var g = (this._eG - this._sG) * lerp + this._sG;
-		var b = (this._eB - this._sB) * lerp + this._sB;
-		this.tint = ParticleUtils.combineRGBComponents(r, g, b);
+		this.tint = this.colorList.interpolate(lerp);
 	}
 	//update rotation
 	if(this.rotationSpeed !== 0)
@@ -411,8 +345,8 @@ p.destroy = function()
 		this.parent.removeChild(this);
 	if (this.Sprite_Destroy)
 		this.Sprite_Destroy();
-	this.emitter = this.velocity = this.startColor = this.endColor = this.ease =
-		this.next = this.prev = null;
+	this.emitter = this.velocity = this.colorList = this.scaleList = this.alphaList =
+		this.speedList = this.ease = this.next = this.prev = null;
 };
 
 /**

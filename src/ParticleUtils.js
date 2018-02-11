@@ -2,6 +2,7 @@
 
 var BLEND_MODES = PIXI.BLEND_MODES || PIXI.blendModes;
 var Texture = PIXI.Texture;
+var PropertyNode;
 
 /**
  * Contains helper functions for particles and emitters to use.
@@ -99,20 +100,18 @@ ParticleUtils.length = function(point)
 
 /**
  * Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
- * "AARRGGBB", or "RRGGBB" to an array of ints of 0-255 or Numbers from 0-1, as
- * [r, g, b, (a)].
+ * "AARRGGBB", or "RRGGBB" to an object of ints of 0-255, as
+ * {r, g, b, (a)}.
  * @method PIXI.particles.ParticleUtils.hexToRGB
  * @param {String} color The input color string.
- * @param {Array} output An array to put the output in. If omitted, a new array is created.
- * @return The array of numeric color values.
+ * @param {Object} output An object to put the output in. If omitted, a new object is created.
+ * @return The object with r, g, and b properties, possibly with an a property.
  * @static
  */
 ParticleUtils.hexToRGB = function(color, output)
 {
-	if (output)
-		output.length = 0;
-	else
-		output = [];
+	if (!output)
+		output = {};
 	if (color.charAt(0) == "#")
 		color = color.substr(1);
 	else if (color.indexOf("0x") === 0)
@@ -123,11 +122,11 @@ ParticleUtils.hexToRGB = function(color, output)
 		alpha = color.substr(0, 2);
 		color = color.substr(2);
 	}
-	output.push(parseInt(color.substr(0, 2), 16));//Red
-	output.push(parseInt(color.substr(2, 2), 16));//Green
-	output.push(parseInt(color.substr(4, 2), 16));//Blue
+	output.r = parseInt(color.substr(0, 2), 16);//Red
+	output.g = parseInt(color.substr(2, 2), 16);//Green
+	output.b = parseInt(color.substr(4, 2), 16);//Blue
 	if (alpha)
-		output.push(parseInt(alpha, 16));
+		output.a = parseInt(alpha, 16);
 	return output;
 };
 
@@ -176,6 +175,52 @@ ParticleUtils.getBlendMode = function(name)
 	while (name.indexOf(" ") >= 0)
 		name = name.replace(" ", "_");
 	return BLEND_MODES[name] || BLEND_MODES.NORMAL;
+};
+
+/**
+ * Converts a list of {value, time} objects starting at time 0 and ending at time 1 into an evenly
+ * spaced stepped list of PropertyNodes for color values. This is primarily to handle conversion of
+ * linear gradients to fewer colors, allowing for some optimization for Canvas2d fallbacks.
+ * @method PIXI.particles.ParticleUtils.createSteppedGradient
+ * @param {Array} list The list of data to convert.
+ * @param {number} [numSteps=10] The number of steps to use.
+ * @return {PIXI.particles.PropertyNode} The blend mode as specified in the PIXI.blendModes enumeration.
+ * @static
+ */
+ParticleUtils.createSteppedGradient = function(list, numSteps) {
+	if (!PropertyNode)
+		PropertyNode = require('./PropertyNode');
+	if (typeof numSteps !== 'number' || numSteps <= 0)
+		numSteps = 10;
+	var first = new PropertyNode(list[0].value, list[0].time);
+	first.isStepped = true;
+	var currentNode = first;
+	var current = list[0];
+	var nextIndex = 1;
+	var next = list[nextIndex];
+	for (var i = 1; i < numSteps; ++i)
+	{
+		var lerp = i / numSteps;
+		//ensure we are on the right segment, if multiple
+		while (lerp > next.time)
+		{
+			current = next;
+			next = list[++nextIndex];
+		}
+		//convert the lerp value to the segment range
+		lerp = (lerp - current.time) / (next.time - current.time);
+		var curVal = ParticleUtils.hexToRGB(current.value);
+		var nextVal = ParticleUtils.hexToRGB(next.value);
+		var output = {};
+		output.r = (nextVal.r - curVal.r) * lerp + curVal.r;
+		output.g = (nextVal.g - curVal.g) * lerp + curVal.g;
+		output.b = (nextVal.b - curVal.b) * lerp + curVal.b;
+		currentNode.next = new PropertyNode(output, i / numSteps);
+		currentNode = currentNode.next;
+	}
+	//we don't need to have a PropertyNode for time of 1, because in a stepped version at that point
+	//the particle has died of old age
+	return first;
 };
 
 module.exports = ParticleUtils;
