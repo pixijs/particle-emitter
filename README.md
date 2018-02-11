@@ -7,7 +7,7 @@ A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) li
 ## Breaking changes from v2 to v3
 * On `Emitter`, `playOnce()` no longer sets `autoUpdate` to true. Set it manually before use.
 	`playOnceAndDestroy()` is unaffected.
-* On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have between
+* On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have been
 	replaced by a singly linked list of `PropertyNode` objects.
 
 ## Sample Usage
@@ -30,20 +30,56 @@ var emitter = new PIXI.particles.Emitter(
 	// of the emitter
 	{
 		alpha: {
-			start: 0.8,
-			end: 0.1
+			list: [
+				{
+					value: 0.8,
+					time: 0
+				},
+				{
+					value: 0.1,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		scale: {
-			start: 1,
-			end: 0.3
+			list: [
+				{
+					value: 1,
+					time: 0
+				},
+				{
+					value: 0.3,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		color: {
-			start: "fb1010",
-			end: "f5b830"
+			list: [
+				{
+					value: "fb1010",
+					time: 0
+				},
+				{
+					value: "f5b830",
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		speed: {
-			start: 200,
-			end: 100
+			list: [
+				{
+					value: 200,
+					time: 0
+				},
+				{
+					value: 100,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		startRotation: {
 			min: 0,
