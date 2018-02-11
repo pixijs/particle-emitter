@@ -6,6 +6,7 @@ declare namespace PIXI.particles {
 	export interface ValueList {
 		list: {value:number|string, time:number}[],
 		isStepped?: boolean;
+		ease?: (lerp:number)=>number|EaseSegment[];
 	}
 
 	export interface ParticleConstructor {
@@ -191,6 +192,7 @@ declare namespace PIXI.particles {
 		public current: PropertyNode;
 		protected next: PropertyNode;
 		private isColor: boolean;
+		private ease: Function;
 		
 		constructor(isColor?:boolean);
 		public interpolate(lerp:number):number;
@@ -202,6 +204,8 @@ declare namespace PIXI.particles {
 		public time: number;
 		public next: PropertyNode;
 		public isStepped: boolean;
+		private interpolate: (lerp:number)=>number;
+		private ease: (lerp:number)=>number;
 		
 		public static createList(data:ValueList):PropertyNode;
 	}
