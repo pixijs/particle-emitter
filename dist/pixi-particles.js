@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.9
- * Compiled Sun, 11 Feb 2018 21:10:50 UTC
+ * Compiled Sun, 11 Feb 2018 22:05:25 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1121,11 +1121,11 @@ var Particle = /** @class */ (function (_super) {
         _this.prev = null;
         //save often used functions on the instance instead of the prototype for better speed
         _this.init = _this.init;
-        _this.Particle_init = _this.init;
+        _this.Particle_init = Particle.prototype.init;
         _this.update = _this.update;
-        _this.Particle_update = _this.Particle_update;
+        _this.Particle_update = Particle.prototype.update;
         _this.Sprite_destroy = _super.prototype.destroy;
-        _this.Particle_destroy = _this.destroy;
+        _this.Particle_destroy = Particle.prototype.destroy;
         _this.applyArt = _this.applyArt;
         _this.kill = _this.kill;
         return _this;
@@ -1865,7 +1865,7 @@ var PropertyNode = /** @class */ (function () {
             //only set up subsequent nodes if there are a bunch or the 2nd one is different from the first
             if (array.length > 2 || (array.length === 2 && array[1].value !== array[0].value)) {
                 for (var i = 1; i < array.length; ++i) {
-                    node.next = new PropertyNode(array[i].value, array[1].time);
+                    node.next = new PropertyNode(array[i].value, array[i].time);
                     node = node.next;
                 }
             }

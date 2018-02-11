@@ -278,11 +278,11 @@ export default class Particle extends Sprite
 
 		//save often used functions on the instance instead of the prototype for better speed
 		this.init = this.init;
-		this.Particle_init = this.init;
+		this.Particle_init = Particle.prototype.init;
 		this.update = this.update;
-		this.Particle_update = this.Particle_update;
+		this.Particle_update = Particle.prototype.update;
 		this.Sprite_destroy = super.destroy;
-		this.Particle_destroy = this.destroy;
+		this.Particle_destroy = Particle.prototype.destroy;
 		this.applyArt = this.applyArt;
 		this.kill = this.kill;
 	}

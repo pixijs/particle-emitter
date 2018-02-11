@@ -83,7 +83,7 @@ export default class PropertyNode<V>
 			{
 				for (let i = 1; i < array.length; ++i)
 				{
-					node.next = new PropertyNode(array[i].value, array[1].time);
+					node.next = new PropertyNode(array[i].value, array[i].time);
 					node = node.next;
 				}
 			}

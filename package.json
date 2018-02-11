@@ -17,6 +17,7 @@
     "prebuild": "npm run lint",
     "build": "tsc && pixify --name pixi-particles -s ts-dist -d dist --external false -p browserify-derequire",
     "postbuild": "ncp dist docs/dist",
+    "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
     "docs": "jsdoc -c jsdoc.conf.json -R README.md",
     "start": "npm run build -- --watch",
     "predocs-live": "npm run build && npm run docs && bower install",
@@ -27,7 +28,8 @@
     "publish:patch": "npm run version -- patch && npm publish",
     "publish:minor": "npm run version -- minor && npm publish",
     "publish:major": "npm run version -- major && npm publish",
-    "postpublish": "git push && git push --tags && npm run docs-live"
+    "postpublish": "git push && git push --tags && npm run docs-live",
+    "examples": "npm run predocs && http-server docs/"
   },
   "peerDependencies": {
     "pixi.js": "*"
@@ -40,6 +42,7 @@
     "jaguarjs-jsdoc": "^1.0.0",
     "js-md5": "^0.4.1",
     "jsdoc": "^3.4.0",
+    "http-server": "*",
     "ncp": "^2.0.0",
     "pixify": "^1.7.0",
     "pixi.js": "^4.2.2",
