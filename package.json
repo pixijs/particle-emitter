@@ -15,7 +15,7 @@
     "clean": "rimraf docs/docs docs/dist .publish",
     "lint": "eslint src",
     "prebuild": "npm run lint",
-    "build": "pixify --name pixi-particles -d dist --external false -p browserify-derequire",
+    "build": "tsc && pixify --name pixi-particles -s ts-dist -d dist --external false -p browserify-derequire",
     "postbuild": "ncp dist docs/dist",
     "docs": "jsdoc -c jsdoc.conf.json -R README.md",
     "start": "npm run build -- --watch",
@@ -33,17 +33,19 @@
     "pixi.js": "*"
   },
   "devDependencies": {
+    "@types/pixi.js": "^4.0.0",
     "browserify-derequire": "^0.9.4",
     "eslint": "^3.10.2",
     "gh-pages": "^0.11.0",
     "jaguarjs-jsdoc": "^1.0.0",
     "js-md5": "^0.4.1",
     "jsdoc": "^3.4.0",
-    "pixify": "^1.7.0",
-    "rimraf": "^2.5.4",
-    "pixi.js": "^4.2.2",
     "ncp": "^2.0.0",
-    "semver": "^5.3.0"
+    "pixify": "^1.7.0",
+    "pixi.js": "^4.2.2",
+    "rimraf": "^2.5.4",
+    "semver": "^5.3.0",
+    "typescript": "^2.7.0"
   },
   "repository": {
     "type": "git",
