@@ -271,12 +271,6 @@ export default class Emitter
 	 */
 	protected _posChanged: boolean;
 	/**
-	 * If the parent is a ParticleContainer from Pixi V3
-	 * @property {Boolean} _parentIsPC
-	 * @private
-	 */
-	protected _parentIsPC: boolean;
-	/**
 	 * The container to add particles to.
 	 * @property {PIXI.Container} _parent
 	 * @private
@@ -410,7 +404,6 @@ export default class Emitter
 		this._prevEmitterPos = null;
 		this._prevPosIsValid = false;
 		this._posChanged = false;
-		this._parentIsPC = false;
 		this._parent = null;
 		this.addAtBack = false;
 		this.particleCount = 0;
@@ -487,18 +480,8 @@ export default class Emitter
 	public get parent() { return this._parent; }
 	public set parent(value)
 	{
-		//if our previous parent was a ParticleContainer, then we need to remove
-		//pooled particles from it
-		if (this._parentIsPC) {
-			for (let particle = this._poolFirst; particle; particle = particle.next)
-			{
-				if(particle.parent)
-					particle.parent.removeChild(particle);
-			}
-		}
 		this.cleanup();
 		this._parent = value;
-		this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
 	}
 
 	/**
@@ -709,16 +692,8 @@ export default class Emitter
 		particle.next = this._poolFirst;
 		this._poolFirst = particle;
 		//remove child from display, or make it invisible if it is in a ParticleContainer
-		if(this._parentIsPC)
-		{
-			particle.alpha = 0;
-			particle.visible = false;
-		}
-		else
-		{
-			if(particle.parent)
-				particle.parent.removeChild(particle);
-		}
+		if(particle.parent)
+			particle.parent.removeChild(particle);
 		//decrease count
 		--this.particleCount;
 	}
@@ -984,7 +959,7 @@ export default class Emitter
 						//update the particle by the time passed, so the particles are spread out properly
 						p.update(-this._spawnTimer);//we want a positive delta, because a negative delta messes things up
 						//add the particle to the display list
-						if(!this._parentIsPC || !p.parent)
+						if(!p.parent)
 						{
 							if (this.addAtBack)
 								this._parent.addChildAt(p, 0);

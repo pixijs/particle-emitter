@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.9
- * Compiled Mon, 12 Feb 2018 01:36:51 UTC
+ * Compiled Mon, 12 Feb 2018 03:27:46 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -182,7 +182,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ParticleUtils_1 = _dereq_("./ParticleUtils");
 var Particle_1 = _dereq_("./Particle");
 var PropertyNode_1 = _dereq_("./PropertyNode");
-var ParticleContainer = PIXI.particles.ParticleContainer;
 var ticker = PIXI.ticker.shared;
 var helperPoint = new PIXI.Point();
 /**
@@ -243,7 +242,6 @@ var Emitter = /** @class */ (function () {
         this._prevEmitterPos = null;
         this._prevPosIsValid = false;
         this._posChanged = false;
-        this._parentIsPC = false;
         this._parent = null;
         this.addAtBack = false;
         this.particleCount = 0;
@@ -319,17 +317,8 @@ var Emitter = /** @class */ (function () {
         */
         get: function () { return this._parent; },
         set: function (value) {
-            //if our previous parent was a ParticleContainer, then we need to remove
-            //pooled particles from it
-            if (this._parentIsPC) {
-                for (var particle = this._poolFirst; particle; particle = particle.next) {
-                    if (particle.parent)
-                        particle.parent.removeChild(particle);
-                }
-            }
             this.cleanup();
             this._parent = value;
-            this._parentIsPC = ParticleContainer && value && value instanceof ParticleContainer;
         },
         enumerable: true,
         configurable: true
@@ -524,14 +513,8 @@ var Emitter = /** @class */ (function () {
         particle.next = this._poolFirst;
         this._poolFirst = particle;
         //remove child from display, or make it invisible if it is in a ParticleContainer
-        if (this._parentIsPC) {
-            particle.alpha = 0;
-            particle.visible = false;
-        }
-        else {
-            if (particle.parent)
-                particle.parent.removeChild(particle);
-        }
+        if (particle.parent)
+            particle.parent.removeChild(particle);
         //decrease count
         --this.particleCount;
     };
@@ -768,7 +751,7 @@ var Emitter = /** @class */ (function () {
                         //update the particle by the time passed, so the particles are spread out properly
                         p.update(-this._spawnTimer); //we want a positive delta, because a negative delta messes things up
                         //add the particle to the display list
-                        if (!this._parentIsPC || !p.parent) {
+                        if (!p.parent) {
                             if (this.addAtBack)
                                 this._parent.addChildAt(p, 0);
                             else
