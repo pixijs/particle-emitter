@@ -163,6 +163,12 @@ export default class Emitter
 	 */
 	protected _frequency: number;
 	/**
+	 * Chance that a particle will be spawned on each opportunity to spawn one.
+	 * 0 is 0%, 1 is 100%.
+	 * @property {Number} spawnChance
+	 */
+	public spawnChance: number;
+	/**
 	 * Maximum number of particles to keep alive at a time. If this limit
 	 * is reached, no more particles will spawn until some have died.
 	 * @property {int} maxParticles
@@ -387,6 +393,7 @@ export default class Emitter
 		this.extraData = null;
 		//properties for spawning particles
 		this._frequency = 1;
+		this.spawnChance = 1;
 		this.maxParticles = 1000;
 		this.emitterLifetime = -1;
 		this.spawnPos = null;
@@ -660,6 +667,7 @@ export default class Emitter
 		}
 		//set the spawning frequency
 		this.frequency = config.frequency;
+		this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0 ) ? config.spawnChance : 1;
 		//set the emitter lifetime
 		this.emitterLifetime = config.emitterLifetime || -1;
 		//set the max particles
@@ -911,6 +919,9 @@ export default class Emitter
 					i = 0;
 					for(let len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i)
 					{
+						//see if we actually spawn one
+						if (this.spawnChance < 1 && Math.random() >= this.spawnChance)
+							continue;
 						//create particle
 						let p;
 						if(this._poolFirst)

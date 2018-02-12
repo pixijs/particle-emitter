@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.9
- * Compiled Sun, 11 Feb 2018 22:05:25 UTC
+ * Compiled Mon, 12 Feb 2018 01:22:18 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -226,6 +226,7 @@ var Emitter = /** @class */ (function () {
         this.extraData = null;
         //properties for spawning particles
         this._frequency = 1;
+        this.spawnChance = 1;
         this.maxParticles = 1000;
         this.emitterLifetime = -1;
         this.spawnPos = null;
@@ -483,6 +484,7 @@ var Emitter = /** @class */ (function () {
         }
         //set the spawning frequency
         this.frequency = config.frequency;
+        this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
         //set the emitter lifetime
         this.emitterLifetime = config.emitterLifetime || -1;
         //set the max particles
@@ -708,6 +710,9 @@ var Emitter = /** @class */ (function () {
                     //create enough particles to fill the wave (non-burst types have a wave of 1)
                     i = 0;
                     for (var len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount); i < len; ++i) {
+                        //see if we actually spawn one
+                        if (this.spawnChance < 1 && Math.random() >= this.spawnChance)
+                            continue;
                         //create particle
                         var p = void 0;
                         if (this._poolFirst) {
