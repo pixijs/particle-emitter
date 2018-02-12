@@ -216,7 +216,7 @@ export default class Emitter
 	 */
 	public spawnCircle: PIXI.Circle & {minRadius: number};
 	/**
-	 * Number of particles to spawn each wave in a burst.
+	 * Number of particles to spawn time that the frequency allows for particles to spawn.
 	 * @property {int} particlesPerWave
 	 * @default 1
 	 */
@@ -624,6 +624,8 @@ export default class Emitter
 		//reset spawn type specific settings
 		this.spawnRect = this.spawnCircle = null;
 		this.particlesPerWave = 1;
+		if (config.particlesPerWave && config.particlesPerWave > 1)
+			this.particlesPerWave = config.particlesPerWave;
 		this.particleSpacing = 0;
 		this.angleStart = 0;
 		let spawnCircle;
@@ -652,7 +654,6 @@ export default class Emitter
 			case "burst":
 				this.spawnType = "burst";
 				this._spawnFunc = this._spawnBurst;
-				this.particlesPerWave = config.particlesPerWave;
 				this.particleSpacing = config.particleSpacing;
 				this.angleStart = config.angleStart ? config.angleStart : 0;
 				break;
@@ -667,7 +668,7 @@ export default class Emitter
 		}
 		//set the spawning frequency
 		this.frequency = config.frequency;
-		this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0 ) ? config.spawnChance : 1;
+		this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
 		//set the emitter lifetime
 		this.emitterLifetime = config.emitterLifetime || -1;
 		//set the max particles

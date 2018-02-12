@@ -97,6 +97,7 @@ var emitter = new PIXI.particles.Emitter(
 		},
 		frequency: 0.008,
 		spawnChance: 1,
+		particlesPerWave: 1,
 		emitterLifetime: 0.31,
 		maxParticles: 1000,
 		pos: {
