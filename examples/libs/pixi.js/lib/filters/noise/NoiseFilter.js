@@ -31,51 +31,65 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  * @memberof PIXI.filters
  */
 var NoiseFilter = function (_core$Filter) {
-  _inherits(NoiseFilter, _core$Filter);
+    _inherits(NoiseFilter, _core$Filter);
 
-  /**
-   *
-   */
-  function NoiseFilter() {
-    _classCallCheck(this, NoiseFilter);
+    /**
+     * @param {number} noise - The noise intensity, should be a normalized value in the range [0, 1].
+     * @param {number} seed - A random seed for the noise generation. Default is `Math.random()`.
+     */
+    function NoiseFilter() {
+        var noise = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0.5;
+        var seed = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : Math.random();
 
-    var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
-    // vertex shader
-    'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n    vTextureCoord = aTextureCoord;\n}',
-    // fragment shader
-    'precision highp float;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\n\nuniform float noise;\nuniform sampler2D uSampler;\n\nfloat rand(vec2 co)\n{\n    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\nvoid main()\n{\n    vec4 color = texture2D(uSampler, vTextureCoord);\n\n    float diff = (rand(gl_FragCoord.xy) - 0.5) * noise;\n\n    color.r += diff;\n    color.g += diff;\n    color.b += diff;\n\n    gl_FragColor = color;\n}\n'));
+        _classCallCheck(this, NoiseFilter);
 
-    _this.noise = 0.5;
-    return _this;
-  }
+        var _this = _possibleConstructorReturn(this, _core$Filter.call(this,
+        // vertex shader
+        'attribute vec2 aVertexPosition;\nattribute vec2 aTextureCoord;\n\nuniform mat3 projectionMatrix;\n\nvarying vec2 vTextureCoord;\n\nvoid main(void)\n{\n    gl_Position = vec4((projectionMatrix * vec3(aVertexPosition, 1.0)).xy, 0.0, 1.0);\n    vTextureCoord = aTextureCoord;\n}',
+        // fragment shader
+        'precision highp float;\n\nvarying vec2 vTextureCoord;\nvarying vec4 vColor;\n\nuniform float uNoise;\nuniform float uSeed;\nuniform sampler2D uSampler;\n\nfloat rand(vec2 co)\n{\n    return fract(sin(dot(co.xy, vec2(12.9898, 78.233))) * 43758.5453);\n}\n\nvoid main()\n{\n    vec4 color = texture2D(uSampler, vTextureCoord);\n    float randomValue = rand(gl_FragCoord.xy * uSeed);\n    float diff = (randomValue - 0.5) * uNoise;\n\n    // Un-premultiply alpha before applying the color matrix. See issue #3539.\n    if (color.a > 0.0) {\n        color.rgb /= color.a;\n    }\n\n    color.r += diff;\n    color.g += diff;\n    color.b += diff;\n\n    // Premultiply alpha again.\n    color.rgb *= color.a;\n\n    gl_FragColor = color;\n}\n'));
 
-  /**
-   * The amount of noise to apply.
-   *
-   * @member {number}
-   * @memberof PIXI.filters.NoiseFilter#
-   * @default 0.5
-   */
-
-
-  _createClass(NoiseFilter, [{
-    key: 'noise',
-    get: function get() {
-      return this.uniforms.noise;
+        _this.noise = noise;
+        _this.seed = seed;
+        return _this;
     }
 
     /**
-     * Sets the amount of noise to apply.
+     * The amount of noise to apply, this value should be in the range (0, 1].
      *
-     * @param {number} value - The value to set to.
+     * @member {number}
+     * @default 0.5
      */
-    ,
-    set: function set(value) {
-      this.uniforms.noise = value;
-    }
-  }]);
 
-  return NoiseFilter;
+
+    _createClass(NoiseFilter, [{
+        key: 'noise',
+        get: function get() {
+            return this.uniforms.uNoise;
+        },
+        set: function set(value) // eslint-disable-line require-jsdoc
+        {
+            this.uniforms.uNoise = value;
+        }
+
+        /**
+         * A seed value to apply to the random noise generation. `Math.random()` is a good value to use.
+         *
+         * @member {number}
+         */
+
+    }, {
+        key: 'seed',
+        get: function get() {
+            return this.uniforms.uSeed;
+        },
+        set: function set(value) // eslint-disable-line require-jsdoc
+        {
+            this.uniforms.uSeed = value;
+        }
+    }]);
+
+    return NoiseFilter;
 }(core.Filter);
 
 exports.default = NoiseFilter;

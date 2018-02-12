@@ -17,7 +17,7 @@ function _possibleConstructorReturn(self, call) { if (!self) { throw new Referen
 function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 
 /**
- * @typedef FrameObject
+ * @typedef PIXI.extras.AnimatedSprite~FrameObject
  * @type {object}
  * @property {PIXI.Texture} texture - The {@link PIXI.Texture} of the frame
  * @property {number} time - the duration of the frame in ms
@@ -47,10 +47,11 @@ var AnimatedSprite = function (_core$Sprite) {
     _inherits(AnimatedSprite, _core$Sprite);
 
     /**
-     * @param {PIXI.Texture[]|FrameObject[]} textures - an array of {@link PIXI.Texture} or frame
+     * @param {PIXI.Texture[]|PIXI.extras.AnimatedSprite~FrameObject[]} textures - an array of {@link PIXI.Texture} or frame
      *  objects that make up the animation
+     * @param {boolean} [autoUpdate=true] - Whether to use PIXI.ticker.shared to auto update animation time.
      */
-    function AnimatedSprite(textures) {
+    function AnimatedSprite(textures, autoUpdate) {
         _classCallCheck(this, AnimatedSprite);
 
         /**
@@ -66,6 +67,14 @@ var AnimatedSprite = function (_core$Sprite) {
         _this._durations = null;
 
         _this.textures = textures;
+
+        /**
+         * `true` uses PIXI.ticker.shared to auto update animation time.
+         * @type {boolean}
+         * @default true
+         * @private
+         */
+        _this._autoUpdate = autoUpdate !== false;
 
         /**
          * The speed that the AnimatedSprite will play at. Higher is faster, lower is slower
@@ -86,18 +95,23 @@ var AnimatedSprite = function (_core$Sprite) {
         /**
          * Function to call when a AnimatedSprite finishes playing
          *
-         * @method
-         * @memberof PIXI.extras.AnimatedSprite#
+         * @member {Function}
          */
         _this.onComplete = null;
 
         /**
          * Function to call when a AnimatedSprite changes which texture is being rendered
          *
-         * @method
-         * @memberof PIXI.extras.AnimatedSprite#
+         * @member {Function}
          */
         _this.onFrameChange = null;
+
+        /**
+        * Function to call when 'loop' is true, and an AnimatedSprite is played and loops around to start again
+        *
+        * @member {Function}
+        */
+        _this.onLoop = null;
 
         /**
          * Elapsed time since animation has been started, used internally to display current texture
@@ -129,7 +143,9 @@ var AnimatedSprite = function (_core$Sprite) {
         }
 
         this.playing = false;
-        core.ticker.shared.remove(this.update, this);
+        if (this._autoUpdate) {
+            core.ticker.shared.remove(this.update, this);
+        }
     };
 
     /**
@@ -144,7 +160,9 @@ var AnimatedSprite = function (_core$Sprite) {
         }
 
         this.playing = true;
-        core.ticker.shared.add(this.update, this);
+        if (this._autoUpdate) {
+            core.ticker.shared.add(this.update, this, core.UPDATE_PRIORITY.HIGH);
+        }
     };
 
     /**
@@ -234,6 +252,14 @@ var AnimatedSprite = function (_core$Sprite) {
                 this.onComplete();
             }
         } else if (previousFrame !== this.currentFrame) {
+            if (this.loop && this.onLoop) {
+                if (this.animationSpeed > 0 && this.currentFrame < previousFrame) {
+                    this.onLoop();
+                } else if (this.animationSpeed < 0 && this.currentFrame > previousFrame) {
+                    this.onLoop();
+                }
+            }
+
             this.updateTexture();
         }
     };
@@ -248,6 +274,7 @@ var AnimatedSprite = function (_core$Sprite) {
     AnimatedSprite.prototype.updateTexture = function updateTexture() {
         this._texture = this._textures[this.currentFrame];
         this._textureID = -1;
+        this.cachedTint = 0xFFFFFF;
 
         if (this.onFrameChange) {
             this.onFrameChange(this.currentFrame);
@@ -257,12 +284,18 @@ var AnimatedSprite = function (_core$Sprite) {
     /**
      * Stops the AnimatedSprite and destroys it
      *
+     * @param {object|boolean} [options] - Options parameter. A boolean will act as if all options
+     *  have been set to that value
+     * @param {boolean} [options.children=false] - if set to true, all the children will have their destroy
+     *      method called as well. 'options' will be passed on to those calls.
+     * @param {boolean} [options.texture=false] - Should it destroy the current texture of the sprite as well
+     * @param {boolean} [options.baseTexture=false] - Should it destroy the base texture of the sprite as well
      */
 
 
-    AnimatedSprite.prototype.destroy = function destroy() {
+    AnimatedSprite.prototype.destroy = function destroy(options) {
         this.stop();
-        _core$Sprite.prototype.destroy.call(this);
+        _core$Sprite.prototype.destroy.call(this, options);
     };
 
     /**
@@ -309,7 +342,6 @@ var AnimatedSprite = function (_core$Sprite) {
      *
      * @readonly
      * @member {number}
-     * @memberof PIXI.extras.AnimatedSprite#
      * @default 0
      */
 
@@ -324,22 +356,15 @@ var AnimatedSprite = function (_core$Sprite) {
          * The array of textures used for this AnimatedSprite
          *
          * @member {PIXI.Texture[]}
-         * @memberof PIXI.extras.AnimatedSprite#
          */
 
     }, {
         key: 'textures',
         get: function get() {
             return this._textures;
-        }
-
-        /**
-         * Sets the textures.
-         *
-         * @param {PIXI.Texture[]} value - The texture to set.
-         */
-        ,
-        set: function set(value) {
+        },
+        set: function set(value) // eslint-disable-line require-jsdoc
+        {
             if (value[0] instanceof core.Texture) {
                 this._textures = value;
                 this._durations = null;
@@ -352,13 +377,14 @@ var AnimatedSprite = function (_core$Sprite) {
                     this._durations.push(value[i].time);
                 }
             }
+            this.gotoAndStop(0);
+            this.updateTexture();
         }
 
         /**
         * The AnimatedSprites current frame index
         *
         * @member {number}
-        * @memberof PIXI.extras.AnimatedSprite#
         * @readonly
         */
 

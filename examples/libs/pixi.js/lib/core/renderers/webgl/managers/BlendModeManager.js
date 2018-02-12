@@ -40,7 +40,7 @@ var BlendModeManager = function (_WebGLManager) {
   /**
    * Sets-up the given blendMode from WebGL's point of view.
    *
-   * @param {number} blendMode - the blendMode, should be a Pixi const, such as
+   * @param {number} blendMode - the blendMode, should be a PixiJS const, such as
    *  `PIXI.BLEND_MODES.ADD`. See {@link PIXI.BLEND_MODES} for possible values.
    * @return {boolean} Returns if the blend mode was changed.
    */
