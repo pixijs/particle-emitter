@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v2.1.9
- * Compiled Mon, 12 Feb 2018 01:22:18 UTC
+ * Compiled Mon, 12 Feb 2018 01:36:51 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -442,6 +442,8 @@ var Emitter = /** @class */ (function () {
         //reset spawn type specific settings
         this.spawnRect = this.spawnCircle = null;
         this.particlesPerWave = 1;
+        if (config.particlesPerWave && config.particlesPerWave > 1)
+            this.particlesPerWave = config.particlesPerWave;
         this.particleSpacing = 0;
         this.angleStart = 0;
         var spawnCircle;
@@ -469,7 +471,6 @@ var Emitter = /** @class */ (function () {
             case "burst":
                 this.spawnType = "burst";
                 this._spawnFunc = this._spawnBurst;
-                this.particlesPerWave = config.particlesPerWave;
                 this.particleSpacing = config.particleSpacing;
                 this.angleStart = config.angleStart ? config.angleStart : 0;
                 break;
