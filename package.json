@@ -20,7 +20,7 @@
     "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
     "docs": "jsdoc -c jsdoc.conf.json -R README.md",
     "start": "npm run build -- --watch",
-    "predocs-live": "npm run build && npm run docs && bower install",
+    "predocs-live": "npm run build && npm run docs",
     "docs-live": "gh-pages -d docs",
     "postdocs-live": "git checkout .",
     "version": "node build/version.js",
