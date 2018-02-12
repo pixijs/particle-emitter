@@ -1,6 +1,5 @@
 // Typings for pixi-particles 2.1.9, requires Pixi.js typings
 declare namespace particles {
-	
 	type TexSrc = string|PIXI.Texture;
 	type Color = {r:number, g:number, b:number};
 	
@@ -46,7 +45,6 @@ declare namespace particles {
 		private _prevEmitterPos:PIXI.Point;
 		private _prevPosIsValid:boolean;
 		private _posChanged:boolean;
-		private _parentIsPC:boolean;
 		private _parent:PIXI.Container;
 		private _emit:boolean;
 		private _spawnTimer:number;
@@ -93,6 +91,7 @@ declare namespace particles {
 		public addAtBack:boolean;
 		public readonly particleCount:number;
 		public frequency:number;
+		public spawnChance:number;
 		public particleConstructor:ParticleConstructor;
 		public parent:PIXI.Container;
 		public emit:boolean;

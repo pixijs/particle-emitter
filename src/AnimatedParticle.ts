@@ -5,7 +5,7 @@ import Particle from "./Particle";
 import Emitter from "./Emitter";
 import Texture = PIXI.Texture;
 
-export interface AnimatedArtData
+export interface ParsedAnimatedParticleArt
 {
 	textures: PIXI.Texture[];
 	duration: number;
@@ -13,7 +13,7 @@ export interface AnimatedArtData
 	loop: boolean;
 }
 
-export interface AnimatedArtSource
+export interface AnimatedParticleArt
 {
 	framerate: "matchLife"|number;
 	loop?: boolean;
@@ -127,7 +127,7 @@ export default class AnimatedParticle extends Particle
 	 * @method PIXI.particles.AnimatedParticle#applyArt
 	 * @param {Array} art An array of PIXI.Texture objects for this animated particle.
 	 */
-	public applyArt(art: AnimatedArtData)
+	public applyArt(art: ParsedAnimatedParticleArt)
 	{
 		this.textures = art.textures;
 		this.framerate = art.framerate;
@@ -180,14 +180,14 @@ export default class AnimatedParticle extends Particle
 	 * @param  {Array} art The array of art data, properly formatted for AnimatedParticle.
 	 * @return {Array} The art, after any needed modifications.
 	 */
-	public static parseArt(art: AnimatedArtSource[])
+	public static parseArt(art: AnimatedParticleArt[])
 	{
 		let data, output: any, textures, tex, outTextures;
-		let outArr:AnimatedArtData[] = [];
+		let outArr:ParsedAnimatedParticleArt[] = [];
 		for(let i = 0; i < art.length; ++i)
 		{
 			data = art[i];
-			outArr[i] = output = {} as AnimatedArtData;
+			outArr[i] = output = {} as ParsedAnimatedParticleArt;
 			output.textures = outTextures = [];
 			textures = data.textures;
 			for(let j = 0; j < textures.length; ++j)

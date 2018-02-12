@@ -202,7 +202,7 @@ export default class PathParticle extends Particle
 	 * @param  {Object} extraData The extra data from the particle config.
 	 * @return {Object} The parsed extra data.
 	 */
-	public static parseData(extraData: any)
+	public static parseData(extraData: {path:string})
 	{
 		let output: any = {};
 		if(extraData && extraData.path)
