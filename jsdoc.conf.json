@@ -4,7 +4,7 @@
     },
     "source": {
         "include": [
-            "./src/"
+            "./ts-dist/"
         ],
         "includePattern": ".+\\.js(doc)?$",
         "excludePattern": "(^|\\/|\\\\)_"

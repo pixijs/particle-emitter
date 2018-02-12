@@ -4,6 +4,14 @@
 
 A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles.
 
+## Breaking changes in v3 from v2
+* On `Emitter`, `playOnce()` no longer sets `autoUpdate` to true. Set it manually before use.
+	`playOnceAndDestroy()` is unaffected.
+* On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have been
+	replaced by a singly linked list of `PropertyNode` objects.
+* Dropped support for PIXI v3. Please use v4.
+* The library is no longer exported as a node export, only adding itself to the global PIXI namespace.
+
 ## Sample Usage
 
 Please see the examples for various pre-made particle configurations.
@@ -24,20 +32,56 @@ var emitter = new PIXI.particles.Emitter(
 	// of the emitter
 	{
 		alpha: {
-			start: 0.8,
-			end: 0.1
+			list: [
+				{
+					value: 0.8,
+					time: 0
+				},
+				{
+					value: 0.1,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		scale: {
-			start: 1,
-			end: 0.3
+			list: [
+				{
+					value: 1,
+					time: 0
+				},
+				{
+					value: 0.3,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		color: {
-			start: "fb1010",
-			end: "f5b830"
+			list: [
+				{
+					value: "fb1010",
+					time: 0
+				},
+				{
+					value: "f5b830",
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		speed: {
-			start: 200,
-			end: 100
+			list: [
+				{
+					value: 200,
+					time: 0
+				},
+				{
+					value: 100,
+					time: 1
+				}
+			],
+			isStepped: false
 		},
 		startRotation: {
 			min: 0,
@@ -52,6 +96,8 @@ var emitter = new PIXI.particles.Emitter(
 			max: 0.5
 		},
 		frequency: 0.008,
+		spawnChance: 1,
+		particlesPerWave: 1,
 		emitterLifetime: 0.31,
 		maxParticles: 1000,
 		pos: {

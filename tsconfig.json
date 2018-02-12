@@ -1,7 +1,12 @@
 {
-	"files": [
-		"./pixi.js.d.ts",
-		"./index.d.ts",
-		"./ambient.d.ts"
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"outDir": "ts-dist",
+		"types": ["pixi.js"]
+	},
+	"include": [
+		"src/*.ts"
 	]
 }

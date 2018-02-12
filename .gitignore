@@ -6,3 +6,4 @@ docs/examples/libs
 node_modules
 assets
 npm-debug.log
+ts-dist
