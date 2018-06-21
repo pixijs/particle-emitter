@@ -27,6 +27,11 @@ export default class PropertyNode<V>
 	 */
 	public value: V;
 	/**
+	 * Hold multiple possible values for the node.
+	 * @property {Array<V>} value
+	 */
+	public arrayValue: Array<V>;
+	/**
 	 * Time value for the node. Between 0-1.
 	 * @property {number} value
 	 */
@@ -43,9 +48,17 @@ export default class PropertyNode<V>
 	public isStepped: boolean;
 	public ease: SimpleEase;
 	
-	constructor(value: V|string, time:number, ease?: SimpleEase|EaseSegment[])
+	constructor(value: V|string|Array<string>|Array<number>, time:number, ease?: SimpleEase|EaseSegment[])
 	{
-		this.value = typeof value == "string" ? ParticleUtils.hexToRGB(value) as any : value;
+		if(Array.isArray(value)) {
+			this.arrayValue = (value as any).map((v: string|number) => {
+				return typeof v == "string" ? ParticleUtils.hexToRGB(v) as any : v;
+			});
+			this.value = this.arrayValue[0] as any;
+		} else {
+			this.value = typeof value == "string" ? ParticleUtils.hexToRGB(value) as any : value;
+			this.arrayValue = null;
+		}
 		this.time = time;
 		this.next = null;
 		this.isStepped = false;

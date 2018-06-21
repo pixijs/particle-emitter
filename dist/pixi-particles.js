@@ -1,11 +1,11 @@
 /*!
  * pixi-particles - v3.0.0
- * Compiled Mon, 12 Feb 2018 04:21:37 UTC
+ * Compiled Thu, 21 Jun 2018 22:58:45 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
-(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.pixiParticles = f()}})(function(){var define,module,exports;return (function(){function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s}return e})()({1:[function(_dereq_,module,exports){
+(function(f){if(typeof exports==="object"&&typeof module!=="undefined"){module.exports=f()}else if(typeof define==="function"&&define.amd){define([],f)}else{var g;if(typeof window!=="undefined"){g=window}else if(typeof global!=="undefined"){g=global}else if(typeof self!=="undefined"){g=self}else{g=this}g.pixiParticles = f()}})(function(){var define,module,exports;return (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(_dereq_,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -105,6 +105,7 @@ var AnimatedParticle = /** @class */ (function (_super) {
                 //loop elapsed back around
                 if (this.loop)
                     this.elapsed = this.elapsed % this.duration;
+                //subtract a small amount to prevent attempting to go past the end of the animation
                 else
                     this.elapsed = this.duration - 0.000001;
             }
@@ -143,11 +144,12 @@ var AnimatedParticle = /** @class */ (function (_super) {
                     outTextures.push(Texture.fromImage(tex));
                 else if (tex instanceof Texture)
                     outTextures.push(tex);
+                //assume an object with extra data determining duplicate frame data
                 else {
                     var dupe = tex.count || 1;
                     if (typeof tex.texture == "string")
                         tex = Texture.fromImage(tex.texture);
-                    else
+                    else // if(tex.texture instanceof Texture)
                         tex = tex.texture;
                     for (; dupe > 0; --dupe) {
                         outTextures.push(tex);
@@ -687,7 +689,8 @@ var Emitter = /** @class */ (function () {
                         emitPosX = (curX - prevX) * lerp + prevX;
                         emitPosY = (curY - prevY) * lerp + prevY;
                     }
-                    else {
+                    else //otherwise just set to the spawn position
+                     {
                         emitPosX = curX;
                         emitPosY = curY;
                     }
@@ -1729,6 +1732,8 @@ var PropertyList = /** @class */ (function () {
     PropertyList.prototype.reset = function (first) {
         this.current = first;
         this.next = first.next;
+        randomize(this.current);
+        randomize(this.next);
         var isSimple = this.next && this.next.time >= 1;
         if (isSimple) {
             this.interpolate = this.isColor ? intColorSimple : intValueSimple;
@@ -1744,6 +1749,11 @@ var PropertyList = /** @class */ (function () {
     return PropertyList;
 }());
 exports.default = PropertyList;
+function randomize(node) {
+    if (node.arrayValue) {
+        node.value = node.arrayValue[~~(Math.random() * node.arrayValue.length)];
+    }
+}
 function intValueSimple(lerp) {
     if (this.ease)
         lerp = this.ease(lerp);
@@ -1823,7 +1833,16 @@ var ParticleUtils_1 = _dereq_("./ParticleUtils");
  */
 var PropertyNode = /** @class */ (function () {
     function PropertyNode(value, time, ease) {
-        this.value = typeof value == "string" ? ParticleUtils_1.default.hexToRGB(value) : value;
+        if (Array.isArray(value)) {
+            this.arrayValue = value.map(function (v) {
+                return typeof v == "string" ? ParticleUtils_1.default.hexToRGB(v) : v;
+            });
+            this.value = this.arrayValue[0];
+        }
+        else {
+            this.value = typeof value == "string" ? ParticleUtils_1.default.hexToRGB(value) : value;
+            this.arrayValue = null;
+        }
         this.time = time;
         this.next = null;
         this.isStepped = false;

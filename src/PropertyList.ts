@@ -63,6 +63,8 @@ export default class PropertyList<V>
 	{
 		this.current = first;
 		this.next = first.next;
+		randomize(this.current);
+		randomize(this.next);
 		const isSimple = this.next && this.next.time >= 1;
 		if (isSimple)
 		{
@@ -77,6 +79,12 @@ export default class PropertyList<V>
 			this.interpolate = this.isColor ? intColorComplex : intValueComplex;
 		}
 		this.ease = this.current.ease;
+	}
+}
+
+function randomize(node: any) {
+	if(node.arrayValue) {
+		node.value = node.arrayValue[~~(Math.random()*node.arrayValue.length)];
 	}
 }
 
