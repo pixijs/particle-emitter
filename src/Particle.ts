@@ -355,7 +355,7 @@ export default class Particle extends Sprite
 		//increase age
 		this.age += delta;
 		//recycle particle if it is too old
-		if(this.age >= this.maxLife)
+		if(this.age >= this.maxLife || this.age < 0)
 		{
 			this.kill();
 			return -1;
