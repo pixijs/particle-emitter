@@ -845,7 +845,7 @@ export default class Emitter
 		if (this._emit)
 		{
 			//decrease spawn timer
-			this._spawnTimer -=  Math.max(delta, 0);
+			this._spawnTimer -=  delta < 0 ? 0 : delta;
 			//while _spawnTimer < 0, we have particles to spawn
 			while(this._spawnTimer <= 0)
 			{
