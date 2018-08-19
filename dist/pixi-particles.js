@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v3.0.0
- * Compiled Mon, 12 Feb 2018 04:21:37 UTC
+ * pixi-particles - v3.0.1
+ * Compiled Sun, 19 Aug 2018 19:29:45 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -652,7 +652,7 @@ var Emitter = /** @class */ (function () {
         //spawn new particles
         if (this._emit) {
             //decrease spawn timer
-            this._spawnTimer -= delta;
+            this._spawnTimer -= delta < 0 ? 0 : delta;
             //while _spawnTimer < 0, we have particles to spawn
             while (this._spawnTimer <= 0) {
                 //determine if the emitter should stop spawning
@@ -903,7 +903,7 @@ var Emitter = /** @class */ (function () {
             p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
                 this.minStartRotation + this.rotation;
         //place the particle at a random radius in the ring
-        if (spawnCircle.minRadius == spawnCircle.radius) {
+        if (spawnCircle.minRadius !== spawnCircle.radius) {
             helperPoint.x = Math.random() * (spawnCircle.radius - spawnCircle.minRadius) +
                 spawnCircle.minRadius;
         }
@@ -1180,7 +1180,7 @@ var Particle = /** @class */ (function (_super) {
         //increase age
         this.age += delta;
         //recycle particle if it is too old
-        if (this.age >= this.maxLife) {
+        if (this.age >= this.maxLife || this.age < 0) {
             this.kill();
             return -1;
         }

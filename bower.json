@@ -1,6 +1,6 @@
 {
 	"name": "pixi-particles",
-	"version": "3.0.0",
+	"version": "3.0.1",
 	"main": "dist/pixi-particles.min.js",
 	"dependencies": {
 		"pixi.js": "*"
