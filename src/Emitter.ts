@@ -1129,7 +1129,7 @@ export default class Emitter
 			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
 						this.minStartRotation + this.rotation;
 		//place the particle at a random radius in the ring
-		if(spawnCircle.minRadius == spawnCircle.radius)
+		if(spawnCircle.minRadius !== spawnCircle.radius)
 		{
 			helperPoint.x = Math.random() * (spawnCircle.radius - spawnCircle.minRadius) +
 							spawnCircle.minRadius;
