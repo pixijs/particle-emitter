@@ -10,7 +10,6 @@ A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) li
 * On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have been
 	replaced by a singly linked list of `PropertyNode` objects.
 * Dropped support for PIXI v3. Please use v4.
-* The library is no longer exported as a node export, only adding itself to the global PIXI namespace.
 
 ## Sample Usage
 
@@ -169,6 +168,9 @@ npm install pixi-particles
 * [Megaman Death](https://pixijs.github.io/pixi-particles/examples/megamanDeath.html)
 * [Rain](https://pixijs.github.io/pixi-particles/examples/rain.html)
 * [Flame](https://pixijs.github.io/pixi-particles/examples/flame.html)
+* [Flame - Sputtering](https://pixijs.github.io/pixi-particles/examples/flameUneven.html)
+* [Flame with Smoke](https://pixijs.github.io/pixi-particles/examples/flameAndSmoke.html)
+* [Flame - Stepped Color](https://pixijs.github.io/pixi-particles/examples/flameStepped.html)
 * [Gas](https://pixijs.github.io/pixi-particles/examples/gas.html)
 * [Bubbles](https://pixijs.github.io/pixi-particles/examples/bubbles.html)
 * [Bubble Spray](https://pixijs.github.io/pixi-particles/examples/bubbleSpray.html)

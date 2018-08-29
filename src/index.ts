@@ -18,3 +18,9 @@ import * as particles from './particles';
 for (let prop in particles) {
 	(PIXI as any).particles[prop] = (particles as any)[prop];
 }
+
+// if in node, export as a node module
+declare var module: any;
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = particles;
+}

@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v3.0.1
- * Compiled Sun, 19 Aug 2018 19:29:45 UTC
+ * Compiled Wed, 29 Aug 2018 15:43:24 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1904,6 +1904,9 @@ var particles = _dereq_("./particles");
 // insert the library into the particles namespace on PIXI
 for (var prop in particles) {
     PIXI.particles[prop] = particles[prop];
+}
+if (typeof module !== "undefined" && module.exports) {
+    module.exports = particles;
 }
 
 },{"./particles":8}]},{},[9])(9)
