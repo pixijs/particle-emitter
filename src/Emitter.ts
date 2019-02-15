@@ -211,10 +211,10 @@ export default class Emitter
 	 */
 	public spawnRect: PIXI.Rectangle;
 	/**
-	 * A polygon relative to spawnPos to spawn particles on the polygonal if the spawn type is "polygonal".
+	 * A polygon relative to spawnPos to spawn particles on the chain if the spawn type is "polygonalChain".
 	 * @property {PIXI.Rectangle} spawnRect
 	 */
-	public spawnPolygonalChain: Array<{x: number, y: number}>;
+	public spawnPolygonalChain: {x: number, y: number}[];
 	/**
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
 	 * @property {PIXI.Circle} spawnCircle
@@ -400,6 +400,7 @@ export default class Emitter
 		this._spawnFunc = null;
 		this.spawnRect = null;
 		this.spawnCircle = null;
+		this.spawnPolygonalChain = null;
 		this.particlesPerWave = 1;
 		this.particleSpacing = 0;
 		this.angleStart = 0;
@@ -1169,14 +1170,14 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for polygonal chain.
-	 * @method PIXI.particles.Emitter#_spawnPolygonal
+	 * @method PIXI.particles.Emitter#_spawnPolygonalChain
 	 * @private
 	 * @param {Particle} p The particle to position and rotate.
 	 * @param {Number} emitPosX The emitter's x position
 	 * @param {Number} emitPosY The emitter's y position
 	 * @param {int} i The particle number in the current wave. Not used for this function.
 	 */
-	public _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
+	protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
 	{
 		let spawnPolygonalChain = this.spawnPolygonalChain;
 		//set the initial rotation/direction of the particle based on starting
