@@ -1176,7 +1176,6 @@ export default class Emitter
 	 * @param {Number} emitPosY The emitter's y position
 	 * @param {int} i The particle number in the current wave. Not used for this function.
 	 */
-	private aaa: Array<{x: number; y: number}> = [];
 	public _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
 	{
 		let spawnPolygonalChain = this.spawnPolygonalChain;
