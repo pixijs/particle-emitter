@@ -210,6 +210,11 @@ export default class Emitter
 	 * @property {PIXI.Rectangle} spawnRect
 	 */
 	public spawnRect: PIXI.Rectangle;
+    /**
+     * A polygon relative to spawnPos to spawn particles on the polygonal if the spawn type is "polygonal".
+     * @property {PIXI.Rectangle} spawnRect
+     */
+	public spawnPolygonalChain: Array<{x: number, y: number}>;
 	/**
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
 	 * @property {PIXI.Circle} spawnCircle
@@ -644,6 +649,16 @@ export default class Emitter
 				this.spawnType = "point";
 				this._spawnFunc = this._spawnPoint;
 				break;
+			case "polygonalChain":
+                this.spawnType = "polygonalChain";
+                this._spawnFunc = this._spawnPolygonalChain;
+                if (!config.spawnPolygon || !config.spawnPolygon.length) {
+                    config.spawnPolygon = [{x: 0, y: 0}]
+				}
+                this.spawnPolygonalChain = config.spawnPolygon.map((point: {x: number, y: number}) => {
+                	return {x: point.x || 0, y: point.y || 0}
+				});
+                break;
 			default:
 				this.spawnType = "point";
 				this._spawnFunc = this._spawnPoint;
@@ -1151,6 +1166,51 @@ export default class Emitter
 		p.position.x = emitPosX + helperPoint.x;
 		p.position.y = emitPosY + helperPoint.y;
 	}
+
+    /**
+     * Positions a particle for polygonal chain.
+     * @method PIXI.particles.Emitter#_spawnPolygonal
+     * @private
+     * @param {Particle} p The particle to position and rotate.
+     * @param {Number} emitPosX The emitter's x position
+     * @param {Number} emitPosY The emitter's y position
+     * @param {int} i The particle number in the current wave. Not used for this function.
+     */
+    private aaa: Array<{x: number; y: number}> = [];
+    public _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
+    {
+        let spawnPolygonalChain = this.spawnPolygonalChain;
+        //set the initial rotation/direction of the particle based on starting
+        //particle angle and rotation of emitter
+        if (this.minStartRotation == this.maxStartRotation)
+            p.rotation = this.minStartRotation + this.rotation;
+        else
+            p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
+                this.minStartRotation + this.rotation;
+
+        let partOfChain = ~~(1 + Math.random() * (spawnPolygonalChain.length - 1));
+
+        let pointer0 = partOfChain - 1;
+        let pointer1 = partOfChain > spawnPolygonalChain.length - 1 ?
+			spawnPolygonalChain.length - 1 :
+			partOfChain;
+
+        let point0 = spawnPolygonalChain[pointer0];
+        let point1 = spawnPolygonalChain[pointer1];
+
+        let helperX = point0.x;
+        let helperY = point0.y;
+
+        if (point1.x !== point0.x) {
+            helperX = (point0.x + Math.random() * (point1.x - point0.x));
+            helperY = (point0.y + (point1.y - point0.y)*(helperX - point0.x) / (point1.x - point0.x));
+		} else {
+            helperY = (point0.y + Math.random() * (point1.y - point0.y));
+		}
+
+        p.position.x = emitPosX + helperX;
+        p.position.y = emitPosY + helperY;
+    }
 
 	/**
 	 * Positions a particle for a burst type emitter.

@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v3.1.0
- * Compiled Wed, 29 Aug 2018 15:47:46 UTC
+ * Compiled Fri, 15 Feb 2019 10:42:05 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -202,6 +202,16 @@ var helperPoint = new PIXI.Point();
  */
 var Emitter = /** @class */ (function () {
     function Emitter(particleParent, particleImages, config) {
+        /**
+         * Positions a particle for polygonal chain.
+         * @method PIXI.particles.Emitter#_spawnPolygonal
+         * @private
+         * @param {Particle} p The particle to position and rotate.
+         * @param {Number} emitPosX The emitter's x position
+         * @param {Number} emitPosY The emitter's y position
+         * @param {int} i The particle number in the current wave. Not used for this function.
+         */
+        this.aaa = [];
         this._particleConstructor = Particle_1.default;
         //properties for individual particles
         this.particleImages = null;
@@ -466,6 +476,16 @@ var Emitter = /** @class */ (function () {
             case "point":
                 this.spawnType = "point";
                 this._spawnFunc = this._spawnPoint;
+                break;
+            case "polygonalChain":
+                this.spawnType = "polygonalChain";
+                this._spawnFunc = this._spawnPolygonalChain;
+                if (!config.spawnPolygon || !config.spawnPolygon.length) {
+                    config.spawnPolygon = [{ x: 0, y: 0 }];
+                }
+                this.spawnPolygonalChain = config.spawnPolygon.map(function (point) {
+                    return { x: point.x || 0, y: point.y || 0 };
+                });
                 break;
             default:
                 this.spawnType = "point";
@@ -923,6 +943,34 @@ var Emitter = /** @class */ (function () {
         //set the position, offset by the emitter's position
         p.position.x = emitPosX + helperPoint.x;
         p.position.y = emitPosY + helperPoint.y;
+    };
+    Emitter.prototype._spawnPolygonalChain = function (p, emitPosX, emitPosY) {
+        var spawnPolygonalChain = this.spawnPolygonalChain;
+        //set the initial rotation/direction of the particle based on starting
+        //particle angle and rotation of emitter
+        if (this.minStartRotation == this.maxStartRotation)
+            p.rotation = this.minStartRotation + this.rotation;
+        else
+            p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
+                this.minStartRotation + this.rotation;
+        var partOfChain = ~~(1 + Math.random() * (spawnPolygonalChain.length - 1));
+        var pointer0 = partOfChain - 1;
+        var pointer1 = partOfChain > spawnPolygonalChain.length - 1 ?
+            spawnPolygonalChain.length - 1 :
+            partOfChain;
+        var point0 = spawnPolygonalChain[pointer0];
+        var point1 = spawnPolygonalChain[pointer1];
+        var helperX = point0.x;
+        var helperY = point0.y;
+        if (point1.x !== point0.x) {
+            helperX = (point0.x + Math.random() * (point1.x - point0.x));
+            helperY = (point0.y + (point1.y - point0.y) * (helperX - point0.x) / (point1.x - point0.x));
+        }
+        else {
+            helperY = (point0.y + Math.random() * (point1.y - point0.y));
+        }
+        p.position.x = emitPosX + helperX;
+        p.position.y = emitPosY + helperY;
     };
     /**
      * Positions a particle for a burst type emitter.
