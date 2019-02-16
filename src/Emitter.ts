@@ -3,6 +3,7 @@
 import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
 import Particle from "./Particle";
 import PropertyNode from "./PropertyNode";
+import PolygonalChain from "./PolygonalChain";
 import ParticleContainer = PIXI.particles.ParticleContainer;
 import ticker = PIXI.ticker.shared;
 
@@ -212,9 +213,9 @@ export default class Emitter
 	public spawnRect: PIXI.Rectangle;
 	/**
 	 * A polygon relative to spawnPos to spawn particles on the chain if the spawn type is "polygonalChain".
-	 * @property {PIXI.Rectangle} spawnRect
+	 * @property {PIXI.particles.PolygonalChain} spawnPolygonalChain
 	 */
-	public spawnPolygonalChain: {x: number, y: number}[];
+	public spawnPolygonalChain: PolygonalChain;
 	/**
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
 	 * @property {PIXI.Circle} spawnCircle
@@ -653,12 +654,7 @@ export default class Emitter
 			case "polygonalChain":
 				this.spawnType = "polygonalChain";
 				this._spawnFunc = this._spawnPolygonalChain;
-				if (!config.spawnPolygon || !config.spawnPolygon.length) {
-					config.spawnPolygon = [{x: 0, y: 0}]
-				}
-				this.spawnPolygonalChain = config.spawnPolygon.map((point: {x: number, y: number}) => {
-					return {x: point.x || 0, y: point.y || 0}
-				});
+				this.spawnPolygonalChain = new PolygonalChain(config.spawnPolygon);
 				break;
 			default:
 				this.spawnType = "point";
@@ -1179,7 +1175,6 @@ export default class Emitter
 	 */
 	protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
 	{
-		let spawnPolygonalChain = this.spawnPolygonalChain;
 		//set the initial rotation/direction of the particle based on starting
 		//particle angle and rotation of emitter
 		if (this.minStartRotation == this.maxStartRotation)
@@ -1187,29 +1182,14 @@ export default class Emitter
 		else
 			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
 				this.minStartRotation + this.rotation;
-
-		let partOfChain = ~~(1 + Math.random() * (spawnPolygonalChain.length - 1));
-
-		let pointer0 = partOfChain - 1;
-		let pointer1 = partOfChain > spawnPolygonalChain.length - 1 ?
-			spawnPolygonalChain.length - 1 :
-			partOfChain;
-
-		let point0 = spawnPolygonalChain[pointer0];
-		let point1 = spawnPolygonalChain[pointer1];
-
-		let helperX = point0.x;
-		let helperY = point0.y;
-
-		if (point1.x !== point0.x) {
-			helperX = (point0.x + Math.random() * (point1.x - point0.x));
-			helperY = (point0.y + (point1.y - point0.y)*(helperX - point0.x) / (point1.x - point0.x));
-		} else {
-			helperY = (point0.y + Math.random() * (point1.y - point0.y));
-		}
-
-		p.position.x = emitPosX + helperX;
-		p.position.y = emitPosY + helperY;
+		// get random point on the polygon chain
+		this.spawnPolygonalChain.getRandomPoint(helperPoint);
+		//rotate the point by the emitter's rotation
+		if(this.rotation !== 0)
+			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		//set the position, offset by the emitter's position
+		p.position.x = emitPosX + helperPoint.x;
+		p.position.y = emitPosY + helperPoint.y;
 	}
 
 	/**

@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v3.1.0
- * Compiled Fri, 15 Feb 2019 10:42:05 UTC
+ * Compiled Sat, 16 Feb 2019 18:34:34 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -182,6 +182,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var ParticleUtils_1 = _dereq_("./ParticleUtils");
 var Particle_1 = _dereq_("./Particle");
 var PropertyNode_1 = _dereq_("./PropertyNode");
+var PolygonalChain_1 = _dereq_("./PolygonalChain");
 var ticker = PIXI.ticker.shared;
 var helperPoint = new PIXI.Point();
 /**
@@ -202,16 +203,6 @@ var helperPoint = new PIXI.Point();
  */
 var Emitter = /** @class */ (function () {
     function Emitter(particleParent, particleImages, config) {
-        /**
-         * Positions a particle for polygonal chain.
-         * @method PIXI.particles.Emitter#_spawnPolygonal
-         * @private
-         * @param {Particle} p The particle to position and rotate.
-         * @param {Number} emitPosX The emitter's x position
-         * @param {Number} emitPosY The emitter's y position
-         * @param {int} i The particle number in the current wave. Not used for this function.
-         */
-        this.aaa = [];
         this._particleConstructor = Particle_1.default;
         //properties for individual particles
         this.particleImages = null;
@@ -243,6 +234,7 @@ var Emitter = /** @class */ (function () {
         this._spawnFunc = null;
         this.spawnRect = null;
         this.spawnCircle = null;
+        this.spawnPolygonalChain = null;
         this.particlesPerWave = 1;
         this.particleSpacing = 0;
         this.angleStart = 0;
@@ -480,12 +472,7 @@ var Emitter = /** @class */ (function () {
             case "polygonalChain":
                 this.spawnType = "polygonalChain";
                 this._spawnFunc = this._spawnPolygonalChain;
-                if (!config.spawnPolygon || !config.spawnPolygon.length) {
-                    config.spawnPolygon = [{ x: 0, y: 0 }];
-                }
-                this.spawnPolygonalChain = config.spawnPolygon.map(function (point) {
-                    return { x: point.x || 0, y: point.y || 0 };
-                });
+                this.spawnPolygonalChain = new PolygonalChain_1.default(config.spawnPolygon);
                 break;
             default:
                 this.spawnType = "point";
@@ -944,8 +931,16 @@ var Emitter = /** @class */ (function () {
         p.position.x = emitPosX + helperPoint.x;
         p.position.y = emitPosY + helperPoint.y;
     };
+    /**
+     * Positions a particle for polygonal chain.
+     * @method PIXI.particles.Emitter#_spawnPolygonalChain
+     * @private
+     * @param {Particle} p The particle to position and rotate.
+     * @param {Number} emitPosX The emitter's x position
+     * @param {Number} emitPosY The emitter's y position
+     * @param {int} i The particle number in the current wave. Not used for this function.
+     */
     Emitter.prototype._spawnPolygonalChain = function (p, emitPosX, emitPosY) {
-        var spawnPolygonalChain = this.spawnPolygonalChain;
         //set the initial rotation/direction of the particle based on starting
         //particle angle and rotation of emitter
         if (this.minStartRotation == this.maxStartRotation)
@@ -953,24 +948,14 @@ var Emitter = /** @class */ (function () {
         else
             p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
                 this.minStartRotation + this.rotation;
-        var partOfChain = ~~(1 + Math.random() * (spawnPolygonalChain.length - 1));
-        var pointer0 = partOfChain - 1;
-        var pointer1 = partOfChain > spawnPolygonalChain.length - 1 ?
-            spawnPolygonalChain.length - 1 :
-            partOfChain;
-        var point0 = spawnPolygonalChain[pointer0];
-        var point1 = spawnPolygonalChain[pointer1];
-        var helperX = point0.x;
-        var helperY = point0.y;
-        if (point1.x !== point0.x) {
-            helperX = (point0.x + Math.random() * (point1.x - point0.x));
-            helperY = (point0.y + (point1.y - point0.y) * (helperX - point0.x) / (point1.x - point0.x));
-        }
-        else {
-            helperY = (point0.y + Math.random() * (point1.y - point0.y));
-        }
-        p.position.x = emitPosX + helperX;
-        p.position.y = emitPosY + helperY;
+        // get random point on the polygon chain
+        this.spawnPolygonalChain.getRandomPoint(helperPoint);
+        //rotate the point by the emitter's rotation
+        if (this.rotation !== 0)
+            ParticleUtils_1.default.rotatePoint(this.rotation, helperPoint);
+        //set the position, offset by the emitter's position
+        p.position.x = emitPosX + helperPoint.x;
+        p.position.y = emitPosY + helperPoint.y;
     };
     /**
      * Positions a particle for a burst type emitter.
@@ -1031,7 +1016,7 @@ var Emitter = /** @class */ (function () {
 }());
 exports.default = Emitter;
 
-},{"./Particle":3,"./ParticleUtils":4,"./PropertyNode":7}],3:[function(_dereq_,module,exports){
+},{"./Particle":3,"./ParticleUtils":4,"./PolygonalChain":6,"./PropertyNode":8}],3:[function(_dereq_,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1355,7 +1340,7 @@ var Particle = /** @class */ (function (_super) {
 }(Sprite));
 exports.default = Particle;
 
-},{"./ParticleUtils":4,"./PropertyList":6}],4:[function(_dereq_,module,exports){
+},{"./ParticleUtils":4,"./PropertyList":7}],4:[function(_dereq_,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var BLEND_MODES = PIXI.BLEND_MODES;
@@ -1553,7 +1538,7 @@ var ParticleUtils = {
 };
 exports.default = ParticleUtils;
 
-},{"./PropertyNode":7}],5:[function(_dereq_,module,exports){
+},{"./PropertyNode":8}],5:[function(_dereq_,module,exports){
 "use strict";
 var __extends = (this && this.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
@@ -1750,6 +1735,102 @@ exports.default = PathParticle;
 },{"./Particle":3,"./ParticleUtils":4}],6:[function(_dereq_,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+/**
+ * Chain of line segments for generating spawn positions.
+ * @memberof PIXI.particles
+ * @class PolygonalChain
+ * @constructor
+ * @param {{x:number,y:number}[]|{x:number,y:number}[]} data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
+ */
+var PolygonalChain = /** @class */ (function () {
+    function PolygonalChain(data) {
+        this.segments = [];
+        this.countingLengths = [];
+        this.totalLength = 0;
+        this.init(data);
+    }
+    PolygonalChain.prototype.init = function (data) {
+        // if data is not present, set up a segment of length 0
+        if (!data || !data.length) {
+            this.segments.push({ p1: { x: 0, y: 0 }, p2: { x: 0, y: 0 }, l: 0 });
+        }
+        else {
+            if (Array.isArray(data[0])) {
+                // list of segment chains, each defined as a list of points
+                for (var i = 0; i < data.length; ++i) {
+                    // loop through the chain, connecting points
+                    var chain = data[i];
+                    var prevPoint = chain[0];
+                    for (var j = 1; j < chain.length; ++j) {
+                        var second = chain[j];
+                        this.segments.push({ p1: prevPoint, p2: second, l: 0 });
+                        prevPoint = second;
+                    }
+                }
+            }
+            else {
+                var prevPoint = data[0];
+                // list of points
+                for (var i = 1; i < data.length; ++i) {
+                    var second = data[i];
+                    this.segments.push({ p1: prevPoint, p2: second, l: 0 });
+                    prevPoint = second;
+                }
+            }
+        }
+        // now go through our segments to calculate the lengths so that we
+        // can set up a nice weighted random distribution
+        for (var i = 0; i < this.segments.length; ++i) {
+            var _a = this.segments[i], p1 = _a.p1, p2 = _a.p2;
+            var segLength = Math.sqrt((p2.x - p1.x) * (p2.x - p1.x) + (p2.y - p1.y) * (p2.y - p1.y));
+            // save length so we can turn a random number into a 0-1 interpolation value later
+            this.segments[i].l = segLength;
+            this.totalLength += segLength;
+            // keep track of the length so far, counting up
+            this.countingLengths.push(this.totalLength);
+        }
+    };
+    /**
+     * Gets a random point in the chain.
+     * @method getRandomPoint
+     * @param {PIXI.Point} out The point to store the selected position in.
+     */
+    PolygonalChain.prototype.getRandomPoint = function (out) {
+        // select a random spot in the length of the chain
+        var rand = Math.random() * this.totalLength;
+        var chosenSeg;
+        var lerp;
+        // if only one segment, it wins
+        if (this.segments.length === 1) {
+            chosenSeg = this.segments[0];
+            lerp = rand;
+        }
+        else {
+            // otherwise, go through countingLengths until we have determined
+            // which segment we chose
+            for (var i = 0; i < this.countingLengths.length; ++i) {
+                if (rand < this.countingLengths[i]) {
+                    chosenSeg = this.segments[i];
+                    // set lerp equal to the length into that segment (i.e. the remainder after subtracting all the segments before it)
+                    lerp = i === 0 ? rand : rand - this.countingLengths[i - 1];
+                    break;
+                }
+            }
+        }
+        // divide lerp by the segment length, to result in a 0-1 number.
+        lerp /= chosenSeg.l || 1;
+        var p1 = chosenSeg.p1, p2 = chosenSeg.p2;
+        // now calculate the position in the segment that the lerp value represents
+        out.x = p1.x + lerp * (p2.x - p1.x);
+        out.y = p1.y + lerp * (p2.y - p1.y);
+    };
+    return PolygonalChain;
+}());
+exports.default = PolygonalChain;
+
+},{}],7:[function(_dereq_,module,exports){
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var ParticleUtils_1 = _dereq_("./ParticleUtils");
 /**
  * Singly linked list container for keeping track of interpolated properties for particles.
@@ -1856,7 +1937,7 @@ function intColorStepped(lerp) {
     return ParticleUtils_1.default.combineRGBComponents(curVal.r, curVal.g, curVal.b);
 }
 
-},{"./ParticleUtils":4}],7:[function(_dereq_,module,exports){
+},{"./ParticleUtils":4}],8:[function(_dereq_,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ParticleUtils_1 = _dereq_("./ParticleUtils");
@@ -1922,7 +2003,7 @@ var PropertyNode = /** @class */ (function () {
 }());
 exports.default = PropertyNode;
 
-},{"./ParticleUtils":4}],8:[function(_dereq_,module,exports){
+},{"./ParticleUtils":4}],9:[function(_dereq_,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 var ParticleUtils_js_1 = _dereq_("./ParticleUtils.js");
@@ -1936,7 +2017,7 @@ exports.PathParticle = PathParticle_js_1.default;
 var AnimatedParticle_js_1 = _dereq_("./AnimatedParticle.js");
 exports.AnimatedParticle = AnimatedParticle_js_1.default;
 
-},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5}],9:[function(_dereq_,module,exports){
+},{"./AnimatedParticle.js":1,"./Emitter.js":2,"./Particle.js":3,"./ParticleUtils.js":4,"./PathParticle.js":5}],10:[function(_dereq_,module,exports){
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 // If we're in the browser make sure PIXI is available
@@ -1957,7 +2038,7 @@ if (typeof module !== "undefined" && module.exports) {
     module.exports = particles;
 }
 
-},{"./particles":8}]},{},[9])(9)
+},{"./particles":9}]},{},[10])(10)
 });
 
 
