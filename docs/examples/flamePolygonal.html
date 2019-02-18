@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Flame - Polygonal Chain</title>
+		<meta name="description" content="flame emitter">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				["images/particle.png", "images/Fire.png"],
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 0.62,
+						"end": 0
+					},
+					"scale": {
+						"start": 0.25,
+						"end": 0.75
+					},
+					"color": {
+						"start": "fff191",
+						"end": "ff622c"
+					},
+					"speed": {
+						"start": 500,
+						"end": 500
+					},
+					"startRotation": {
+						"min": 265,
+						"max": 275
+					},
+					"rotationSpeed": {
+						"min": 50,
+						"max": 50
+					},
+					"lifetime": {
+						"min": 0.1,
+						"max": 0.75
+					},
+					"blendMode": "normal",
+					"frequency": 0.001,
+					"emitterLifetime": 0,
+					"maxParticles": 1000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					"spawnType": "polygonalChain",
+					"spawnPolygon": [
+						{x: -300, y: 0},
+						{x: -300, y: -300},
+						{x: 0, y: -500},
+						{x: 300, y: -300},
+						{x: 300, y: 0},
+						{x: -300, y: 0},
+					]
+				});
+		</script>
+	</body>
+</html>

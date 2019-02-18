@@ -3,6 +3,7 @@
 import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
 import Particle from "./Particle";
 import PropertyNode from "./PropertyNode";
+import PolygonalChain from "./PolygonalChain";
 import ParticleContainer = PIXI.particles.ParticleContainer;
 import ticker = PIXI.ticker.shared;
 
@@ -211,6 +212,11 @@ export default class Emitter
 	 */
 	public spawnRect: PIXI.Rectangle;
 	/**
+	 * A polygon relative to spawnPos to spawn particles on the chain if the spawn type is "polygonalChain".
+	 * @property {PIXI.particles.PolygonalChain} spawnPolygonalChain
+	 */
+	public spawnPolygonalChain: PolygonalChain;
+	/**
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
 	 * @property {PIXI.Circle} spawnCircle
 	 */
@@ -395,6 +401,7 @@ export default class Emitter
 		this._spawnFunc = null;
 		this.spawnRect = null;
 		this.spawnCircle = null;
+		this.spawnPolygonalChain = null;
 		this.particlesPerWave = 1;
 		this.particleSpacing = 0;
 		this.angleStart = 0;
@@ -643,6 +650,11 @@ export default class Emitter
 			case "point":
 				this.spawnType = "point";
 				this._spawnFunc = this._spawnPoint;
+				break;
+			case "polygonalChain":
+				this.spawnType = "polygonalChain";
+				this._spawnFunc = this._spawnPolygonalChain;
+				this.spawnPolygonalChain = new PolygonalChain(config.spawnPolygon);
 				break;
 			default:
 				this.spawnType = "point";
@@ -1144,6 +1156,34 @@ export default class Emitter
 		//offset by the circle's center
 		helperPoint.x += this.spawnCircle.x;
 		helperPoint.y += this.spawnCircle.y;
+		//rotate the point by the emitter's rotation
+		if(this.rotation !== 0)
+			ParticleUtils.rotatePoint(this.rotation, helperPoint);
+		//set the position, offset by the emitter's position
+		p.position.x = emitPosX + helperPoint.x;
+		p.position.y = emitPosY + helperPoint.y;
+	}
+
+	/**
+	 * Positions a particle for polygonal chain.
+	 * @method PIXI.particles.Emitter#_spawnPolygonalChain
+	 * @private
+	 * @param {Particle} p The particle to position and rotate.
+	 * @param {Number} emitPosX The emitter's x position
+	 * @param {Number} emitPosY The emitter's y position
+	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 */
+	protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
+	{
+		//set the initial rotation/direction of the particle based on starting
+		//particle angle and rotation of emitter
+		if (this.minStartRotation == this.maxStartRotation)
+			p.rotation = this.minStartRotation + this.rotation;
+		else
+			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
+				this.minStartRotation + this.rotation;
+		// get random point on the polygon chain
+		this.spawnPolygonalChain.getRandomPoint(helperPoint);
 		//rotate the point by the emitter's rotation
 		if(this.rotation !== 0)
 			ParticleUtils.rotatePoint(this.rotation, helperPoint);
