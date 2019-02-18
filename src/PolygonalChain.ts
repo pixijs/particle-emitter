@@ -16,7 +16,7 @@ interface Segment
  * @memberof PIXI.particles
  * @class PolygonalChain
  * @constructor
- * @param {{x:number,y:number}[]|{x:number,y:number}[]} data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
+ * @param {PIXI.PointLike[]|PIXI.PointLike[][]} data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
  */
 export default class PolygonalChain
 {
