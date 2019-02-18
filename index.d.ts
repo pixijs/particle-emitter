@@ -83,6 +83,7 @@ declare namespace particles {
 		public readonly spawnType:"point"|"rectangle"|"circle"|"burst"|"ring";
 		public spawnRect:PIXI.Rectangle;
 		public spawnCircle:PIXI.Circle;
+		public spawnPolygonalChain: PolygonalChain;
 		public particlesPerWave:number;
 		public particleSpacing:number;
 		public angleStart:number;
@@ -105,6 +106,7 @@ declare namespace particles {
 		private _spawnCircle(p:Particle, emitPosX:number, emitPosY:number, i:number):void;
 		private _spawnRing(p:Particle, emitPosX:number, emitPosY:number, i:number):void;
 		private _spawnBurst(p:Particle, emitPosX:number, emitPosY:number, i:number):void;
+		protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number):void
 		
 		public init(art:any, config:any):void;
 		public rotate(newRot:number):void;
@@ -208,6 +210,29 @@ declare namespace particles {
 		private ease: (lerp:number)=>number;
 		
 		public static createList(data:ValueList):PropertyNode;
+	}
+	
+	interface BasicPoint
+	{
+		x: number;
+		y: number;
+	}
+
+	interface Segment
+	{
+		p1: BasicPoint;
+		p2: BasicPoint;
+		l: number;
+	}
+	
+	class PolygonalChain
+	{
+		private segments:Segment[];
+		private totalLength:number;
+		private countingLengths:number[];
+		constructor(data:BasicPoint[]|BasicPoint[][])
+		private init(data:BasicPoint[]|BasicPoint[][]):void
+		public getRandomPoint(out:PIXI.Point):void
 	}
 }
 

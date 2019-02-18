@@ -1,4 +1,4 @@
-import ParticleUtils, {EaseSegment, SimpleEase, Color} from "./ParticleUtils";
+import ParticleUtils, {EaseSegment, SimpleEase} from "./ParticleUtils";
 
 export interface ValueStep {
 	value:number|string;
@@ -71,7 +71,7 @@ export default class PropertyNode<V>
 	 * @param  {Function|Array} [data.ease] Custom ease for this list.
 	 * @return {PIXI.particles.PropertyNode} The first node in the list
 	 */
-	public static createList(data: ValueList)
+	public static createList(data: ValueList):PropertyNode<any>
 	{
 		if (Array.isArray(data.list))
 		{

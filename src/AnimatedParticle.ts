@@ -1,6 +1,5 @@
 "use strict";
 
-import ParticleUtils from "./ParticleUtils";
 import Particle from "./Particle";
 import Emitter from "./Emitter";
 import Texture = PIXI.Texture;

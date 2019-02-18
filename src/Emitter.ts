@@ -4,7 +4,6 @@ import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
 import Particle from "./Particle";
 import PropertyNode from "./PropertyNode";
 import PolygonalChain from "./PolygonalChain";
-import ParticleContainer = PIXI.particles.ParticleContainer;
 import ticker = PIXI.ticker.shared;
 
 export interface ParticleConstructor {
