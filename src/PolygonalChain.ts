@@ -1,3 +1,5 @@
+import {Point} from 'pixi.js';
+
 interface BasicPoint
 {
 	x: number;
@@ -102,7 +104,7 @@ export default class PolygonalChain
 	 * @method getRandomPoint
 	 * @param {PIXI.Point} out The point to store the selected position in.
 	 */
-	public getRandomPoint(out:PIXI.Point)
+	public getRandomPoint(out:Point)
 	{
 		// select a random spot in the length of the chain
 		const rand = Math.random() * this.totalLength;

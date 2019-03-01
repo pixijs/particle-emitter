@@ -1,16 +1,15 @@
-"use strict";
-
 import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
 import Particle from "./Particle";
 import PropertyNode from "./PropertyNode";
 import PolygonalChain from "./PolygonalChain";
-import ticker = PIXI.ticker.shared;
+import {ticker as tickerN, Point, Circle, Rectangle, Container, settings} from 'pixi.js';
+import ticker = tickerN.shared;
 
 export interface ParticleConstructor {
 	new (emitter:Emitter):Particle;
 }
 
-const helperPoint = new PIXI.Point();
+const helperPoint = new Point();
 
 /**
  * A particle emitter.
@@ -68,7 +67,7 @@ export default class Emitter
 	 * @property {PIXI.Point} acceleration
 	 * @default null
 	 */
-	public acceleration: PIXI.Point;
+	public acceleration: Point;
 	/**
 	 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
 	 * will disable the maximum speed.
@@ -191,7 +190,7 @@ export default class Emitter
 	 * @property {PIXI.Point} spawnPos
 	 * @readOnly
 	 */
-	public spawnPos: PIXI.Point;
+	public spawnPos: Point;
 	/**
 	 * How the particles will be spawned. Valid types are "point", "rectangle",
 	 * "circle", "burst", "ring".
@@ -209,7 +208,7 @@ export default class Emitter
 	 * A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
 	 * @property {PIXI.Rectangle} spawnRect
 	 */
-	public spawnRect: PIXI.Rectangle;
+	public spawnRect: Rectangle;
 	/**
 	 * A polygon relative to spawnPos to spawn particles on the chain if the spawn type is "polygonalChain".
 	 * @property {PIXI.particles.PolygonalChain} spawnPolygonalChain
@@ -219,7 +218,7 @@ export default class Emitter
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
 	 * @property {PIXI.Circle} spawnCircle
 	 */
-	public spawnCircle: PIXI.Circle & {minRadius: number};
+	public spawnCircle: Circle & {minRadius: number};
 	/**
 	 * Number of particles to spawn time that the frequency allows for particles to spawn.
 	 * @property {int} particlesPerWave
@@ -254,14 +253,14 @@ export default class Emitter
 	 * @default {x:0, y:0}
 	 * @readOnly
 	 */
-	public ownerPos: PIXI.Point;
+	public ownerPos: Point;
 	/**
 	 * The origin + spawnPos in the previous update, so that the spawn position
 	 * can be interpolated to space out particles better.
 	 * @property {PIXI.Point} _prevEmitterPos
 	 * @private
 	 */
-	protected _prevEmitterPos: PIXI.Point;
+	protected _prevEmitterPos: Point;
 	/**
 	 * If _prevEmitterPos is valid, to prevent interpolation on the first update
 	 * @property {Boolean} _prevPosIsValid
@@ -280,7 +279,7 @@ export default class Emitter
 	 * @property {PIXI.Container} _parent
 	 * @private
 	 */
-	protected _parent: PIXI.Container;
+	protected _parent: Container;
 	/**
 	 * If particles should be added at the back of the display list instead of the front.
 	 * @property {Boolean} addAtBack
@@ -367,7 +366,7 @@ export default class Emitter
 	 */
 	protected _completeCallback: () => void;
 	
-	constructor(particleParent: PIXI.Container, particleImages: any, config: any)
+	constructor(particleParent: Container, particleImages: any, config: any)
 	{
 		this._particleConstructor = Particle;
 		//properties for individual particles
@@ -540,11 +539,11 @@ export default class Emitter
 		{
 			//make sure we disable speed interpolation
 			this.startSpeed.next = null;
-			this.acceleration = new PIXI.Point(acceleration.x, acceleration.y);
+			this.acceleration = new Point(acceleration.x, acceleration.y);
 			this.maxSpeed = config.maxSpeed || NaN;
 		}
 		else
-			this.acceleration = new PIXI.Point();
+			this.acceleration = new Point();
 		//set up the scale
 		if (config.scale)
 		{
@@ -625,19 +624,19 @@ export default class Emitter
 				this.spawnType = "rect";
 				this._spawnFunc = this._spawnRect;
 				let spawnRect = config.spawnRect;
-				this.spawnRect = new PIXI.Rectangle(spawnRect.x, spawnRect.y, spawnRect.w, spawnRect.h);
+				this.spawnRect = new Rectangle(spawnRect.x, spawnRect.y, spawnRect.w, spawnRect.h);
 				break;
 			case "circle":
 				this.spawnType = "circle";
 				this._spawnFunc = this._spawnCircle;
 				spawnCircle = config.spawnCircle;
-				this.spawnCircle = new PIXI.Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
+				this.spawnCircle = new Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
 				break;
 			case "ring":
 				this.spawnType = "ring";
 				this._spawnFunc = this._spawnRing;
 				spawnCircle = config.spawnCircle;
-				this.spawnCircle = new PIXI.Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
+				this.spawnCircle = new Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
 				this.spawnCircle.minRadius = spawnCircle.minR;
 				break;
 			case "burst":
@@ -671,8 +670,8 @@ export default class Emitter
 		this.addAtBack = !!config.addAtBack;
 		//reset the emitter position and rotation variables
 		this.rotation = 0;
-		this.ownerPos = new PIXI.Point();
-		this.spawnPos = new PIXI.Point(config.pos.x, config.pos.y);
+		this.ownerPos = new Point();
+		this.spawnPos = new Point(config.pos.x, config.pos.y);
 		this._prevEmitterPos = this.spawnPos.clone();
 		//previous emitter position is invalid and should not be used for interpolation
 		this._prevPosIsValid = false;
@@ -829,7 +828,7 @@ export default class Emitter
 	{
 		if (this._autoUpdate)
 		{
-			delta = delta / PIXI.settings.TARGET_FPMS / 1000;
+			delta = delta / settings.TARGET_FPMS / 1000;
 		}
 
 		//if we don't have a parent to add particles to, then don't do anything.

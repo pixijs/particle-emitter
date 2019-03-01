@@ -1,14 +1,13 @@
-"use strict";
-
 import ParticleUtils from "./ParticleUtils";
 import Particle from "./Particle";
 import Emitter from "./Emitter";
+import {Point} from 'pixi.js';
 
 /**
  * A helper point for math things.
  * @private
  */
-const helperPoint = new PIXI.Point();
+const helperPoint = new Point();
 
 //a hand picked list of Math functions (and a couple properties) that are allowable.
 //they should be used without the preceding "Math."
@@ -105,7 +104,7 @@ export default class PathParticle extends Particle
 	 * The initial position of the particle, as all path movement is added to that.
 	 * @property {PIXI.Point} initialPosition
 	 */
-	public initialPosition: PIXI.Point;
+	public initialPosition: Point;
 	/**
 	 * Total single directional movement, due to speed.
 	 * @property {Number} movement
@@ -117,7 +116,7 @@ export default class PathParticle extends Particle
 		super(emitter);
 		this.path = null;
 		this.initialRotation = 0;
-		this.initialPosition = new PIXI.Point();
+		this.initialPosition = new Point();
 		this.movement = 0;
 	}
 

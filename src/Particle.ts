@@ -1,7 +1,7 @@
 import Emitter from "./Emitter";
 import ParticleUtils, {SimpleEase, Color} from "./ParticleUtils";
 import PropertyList from "./PropertyList";
-import Sprite = PIXI.Sprite;
+import {Sprite, Point, Texture} from 'pixi.js';
 
 /**
  * An individual particle image. You shouldn't have to deal with these.
@@ -23,7 +23,7 @@ export default class Particle extends Sprite
 	 * contained in velocity is constant.
 	 * @property {PIXI.Point} velocity
 	 */
-	public velocity: PIXI.Point;
+	public velocity: Point;
 	/**
 	 * The maximum lifetime of this particle, in seconds.
 	 * @property {Number} maxLife
@@ -64,7 +64,7 @@ export default class Particle extends Sprite
 	 * Acceleration to apply to the particle.
 	 * @property {PIXI.Point} accleration
 	 */
-	public acceleration: PIXI.Point;
+	public acceleration: Point;
 	/**
 	 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
 	 * will disable the maximum speed.
@@ -182,7 +182,7 @@ export default class Particle extends Sprite
 		this.emitter = emitter;
 		//particles should be centered
 		this.anchor.x = this.anchor.y = 0.5;
-		this.velocity = new PIXI.Point();
+		this.velocity = new Point();
 		this.maxLife = 0;
 		this.age = 0;
 		this.ease = null;
@@ -194,7 +194,7 @@ export default class Particle extends Sprite
 		 * Acceleration to apply to the particle.
 		 * @property {PIXI.Point} accleration
 		 */
-		this.acceleration = new PIXI.Point();
+		this.acceleration = new Point();
 		/**
 		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
 		 * will disable the maximum speed.
@@ -340,7 +340,7 @@ export default class Particle extends Sprite
 	 */
 	public applyArt(art: any)
 	{
-		this.texture = art || PIXI.Texture.EMPTY;
+		this.texture = art || Texture.EMPTY;
 	}
 
 	/**
@@ -474,7 +474,7 @@ export default class Particle extends Sprite
 		for(i = art.length; i >= 0; --i)
 		{
 			if(typeof art[i] == "string")
-				art[i] = PIXI.Texture.fromImage(art[i]);
+				art[i] = Texture.fromImage(art[i]);
 		}
 		//particles from different base textures will be slower in WebGL than if they
 		//were from one spritesheet

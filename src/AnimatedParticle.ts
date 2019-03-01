@@ -1,12 +1,10 @@
-"use strict";
-
 import Particle from "./Particle";
 import Emitter from "./Emitter";
-import Texture = PIXI.Texture;
+import {Texture} from 'pixi.js';
 
 export interface ParsedAnimatedParticleArt
 {
-	textures: PIXI.Texture[];
+	textures: Texture[];
 	duration: number;
 	framerate: number;
 	loop: boolean;
@@ -16,7 +14,7 @@ export interface AnimatedParticleArt
 {
 	framerate: "matchLife"|number;
 	loop?: boolean;
-	textures: (string|PIXI.Texture|{texture:string|PIXI.Texture,count:number})[];
+	textures: (string|Texture|{texture:string|Texture,count:number})[];
 }
 
 /**
@@ -61,7 +59,7 @@ export default class AnimatedParticle extends Particle
 	 * @property {Array} textures
 	 * @private
 	 */
-	private textures: PIXI.Texture[];
+	private textures: Texture[];
 
 	/**
 	 * Duration of the animation, in seconds.
@@ -156,7 +154,7 @@ export default class AnimatedParticle extends Particle
 					this.elapsed = this.duration - 0.000001;
 			}
 			let frame = (this.elapsed * this.framerate + 0.0000001) | 0;
-			this.texture = this.textures[frame] || PIXI.Texture.EMPTY;
+			this.texture = this.textures[frame] || Texture.EMPTY;
 		}
 		return lerp;
 	}

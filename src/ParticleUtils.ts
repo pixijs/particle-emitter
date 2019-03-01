@@ -1,6 +1,4 @@
-"use strict";
-
-import BLEND_MODES = PIXI.BLEND_MODES;
+import {BLEND_MODES, Point} from 'pixi.js';
 import PropertyNode, {ValueStep} from './PropertyNode';
 
 export interface Color {
@@ -42,7 +40,7 @@ const ParticleUtils = {
 	 * @param {PIXI.Point} p The point to rotate around 0,0.
 	 * @static
 	 */
-	rotatePoint(angle:number, p:PIXI.Point): void
+	rotatePoint(angle:number, p:Point): void
 	{
 		if (!angle) return;
 		angle *= ParticleUtils.DEG_TO_RADS;
@@ -74,7 +72,7 @@ const ParticleUtils = {
 	 * @static
 	 * @param {PIXI.Point} point The point to normalize
 	 */
-	normalize(point:PIXI.Point): void
+	normalize(point:Point): void
 	{
 		let oneOverLen = 1 / ParticleUtils.length(point);
 		point.x *= oneOverLen;
@@ -88,7 +86,7 @@ const ParticleUtils = {
 	 * @param {PIXI.Point} point The point to scaleBy
 	 * @param {number} value The value to scale by.
 	 */
-	scaleBy(point:PIXI.Point, value:number): void
+	scaleBy(point:Point, value:number): void
 	{
 		point.x *= value;
 		point.y *= value;
@@ -101,7 +99,7 @@ const ParticleUtils = {
 	 * @param {PIXI.Point} point The point to measure length
 	 * @return The length of this point.
 	 */
-	length(point:PIXI.Point): number
+	length(point:Point): number
 	{
 		return Math.sqrt(point.x * point.x + point.y * point.y);
 	},

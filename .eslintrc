@@ -7,7 +7,7 @@
         "no-debugger": 1
     },
     "parserOptions": {
-        "ecmaVersion": 5,
+        "ecmaVersion": 8,
         "sourceType": "module"
     },
     "env": {
