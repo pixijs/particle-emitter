@@ -9,12 +9,8 @@ pkg.version = semver.inc(pkg.version, process.argv[2]);
 if (pkg.version)
 {
 	fs.writeFileSync(path.resolve('./package.json'), JSON.stringify(pkg, null, '  '));
-	//bower.json
-	var file = fs.readFileSync(path.resolve('./bower.json'), 'utf8');
-	file = file.replace(prevVersion, pkg.version);
-	fs.writeFileSync(path.resolve('./bower.json'), file);
 	//ambient.d.ts
-	file = fs.readFileSync(path.resolve('./ambient.d.ts'), 'utf8');
+	var file = fs.readFileSync(path.resolve('./ambient.d.ts'), 'utf8');
 	file = file.replace(prevVersion, pkg.version);
 	fs.writeFileSync(path.resolve('./ambient.d.ts'), file);
 	//index.d.ts
