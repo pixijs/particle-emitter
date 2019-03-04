@@ -2,10 +2,21 @@ import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
 import Particle from "./Particle";
 import PropertyNode from "./PropertyNode";
 import PolygonalChain from "./PolygonalChain";
-import {ticker as tickerN, Point, Circle, Rectangle, Container, settings} from 'pixi.js';
-import ticker = tickerN.shared;
+import {Point, Circle, Rectangle, Container, settings} from 'pixi.js';
+import * as pixi from 'pixi.js';
+// get the shared ticker, in V4 and V5 friendly methods
+let ticker: pixi.ticker.Ticker;
+if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5)
+{
+	ticker = pixi.ticker.shared;
+}
+else
+{
+	ticker = (pixi as any).Ticker.shared;
+}
 
-export interface ParticleConstructor {
+export interface ParticleConstructor
+{
 	new (emitter:Emitter):Particle;
 }
 

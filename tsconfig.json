@@ -3,8 +3,8 @@
 		"target": "ES5",
 		"module": "commonjs",
 		"noImplicitAny": true,
-		"outDir": "ts-dist",
-		"types": ["pixi.js"]
+		"types": ["pixi.js"],
+		"noEmit": true
 	},
 	"include": [
 		"src/*.ts"

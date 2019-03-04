@@ -35,11 +35,12 @@
     "examples": "npm run predocs && http-server docs/"
   },
   "peerDependencies": {
-    "pixi.js": "*"
+    "pixi.js": ">=3.0.0"
   },
   "devDependencies": {
     "@types/pixi.js": "^4.0.0",
     "browserify-derequire": "^0.9.4",
+    "electron": "^4.0.6",
     "eslint": "^3.10.2",
     "gh-pages": "^0.11.0",
     "http-server": "*",
@@ -81,5 +82,9 @@
     "pixi.js",
     "particles"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "workspaces": {
+    "packages": ["./", "test/pixi-v4-iife", "test/pixi-v4-module", "test/pixi-v5-iife", "test/pixi-v5-module"]
+  },
+  "private":true
 }

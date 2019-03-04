@@ -73,6 +73,7 @@ async function main()
 				freeze,
 				name: 'PIXI.particles',
 				sourcemap,
+				extend: true,
 				globals: {
 					'pixi.js': 'PIXI'
 				}
