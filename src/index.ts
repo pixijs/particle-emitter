@@ -1,5 +1,8 @@
-export {default as ParticleUtils} from "./ParticleUtils.js";
-export {default as Particle} from "./Particle.js";
-export {default as Emitter} from "./Emitter.js";
-export {default as PathParticle} from "./PathParticle.js";
-export {default as AnimatedParticle} from "./AnimatedParticle.js";
+export * from "./ParticleUtils";
+export * from "./Particle";
+export * from "./Emitter";
+export * from "./PathParticle";
+export * from "./AnimatedParticle";
+export * from "./PolygonalChain";
+export * from "./PropertyList";
+export * from "./PropertyNode";

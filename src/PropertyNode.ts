@@ -1,4 +1,4 @@
-import ParticleUtils, {EaseSegment, SimpleEase} from "./ParticleUtils";
+import {ParticleUtils, EaseSegment, SimpleEase} from "./ParticleUtils";
 
 export interface ValueStep {
 	value:number|string;
@@ -12,37 +12,32 @@ export interface ValueList {
 }
 /**
  * A single node in a PropertyList.
- * @memberof PIXI.particles
- * @class PropertyNode
- * @constructor
- * @param {number|string} value The value for this node
- * @param {number} time The time for this node, between 0-1
- * @param {Function|Array} [ease] Custom ease for this list. Only relevant for the first node.
  */
-export default class PropertyNode<V>
+export class PropertyNode<V>
 {
 	/**
 	 * Value for the node.
-	 * @property {number|Object} value
 	 */
 	public value: V;
 	/**
 	 * Time value for the node. Between 0-1.
-	 * @property {number} value
 	 */
 	public time: number;
 	/**
 	 * The next node in line.
-	 * @property {PIXI.particles.PropertyNode} next
 	 */
 	public next: PropertyNode<V>;
 	/**
 	 * If this is the first node in the list, controls if the entire list is stepped or not.
-	 * @property {boolean} isStepped
 	 */
 	public isStepped: boolean;
 	public ease: SimpleEase;
 	
+	/**
+	 * @param value The value for this node
+	 * @param time The time for this node, between 0-1
+	 * @param [ease] Custom ease for this list. Only relevant for the first node.
+	 */
 	constructor(value: V|string, time:number, ease?: SimpleEase|EaseSegment[])
 	{
 		this.value = typeof value == "string" ? ParticleUtils.hexToRGB(value) as any : value;
@@ -63,13 +58,11 @@ export default class PropertyNode<V>
 	 * Creates a list of property values from a data object {list, isStepped} with a list of objects in
 	 * the form {value, time}. Alternatively, the data object can be in the deprecated form of
 	 * {start, end}.
-	 * @method PIXI.particles.PropertyNode.createListFromArray
-	 * @static
-	 * @param  {Object} data The data for the list.
-	 * @param  {Array} data.list The array of value and time objects.
-	 * @param  {boolean} [data.isStepped] If the list is stepped rather than interpolated.
-	 * @param  {Function|Array} [data.ease] Custom ease for this list.
-	 * @return {PIXI.particles.PropertyNode} The first node in the list
+	 * @param data The data for the list.
+	 * @param data.list The array of value and time objects.
+	 * @param data.isStepped If the list is stepped rather than interpolated.
+	 * @param data.ease Custom ease for this list.
+	 * @return The first node in the list
 	 */
 	public static createList(data: ValueList):PropertyNode<any>
 	{

@@ -1,10 +1,13 @@
-import ParticleUtils, {Color, SimpleEase} from "./ParticleUtils";
-import Particle from "./Particle";
-import PropertyNode from "./PropertyNode";
-import PolygonalChain from "./PolygonalChain";
+import {ParticleUtils, Color, SimpleEase} from "./ParticleUtils";
+import {Particle} from "./Particle";
+import {PropertyNode} from "./PropertyNode";
+import {PolygonalChain} from "./PolygonalChain";
 import {Point, Circle, Rectangle, Container, settings} from 'pixi.js';
 import * as pixi from 'pixi.js';
 // get the shared ticker, in V4 and V5 friendly methods
+/**
+ * @hidden
+ */
 let ticker: pixi.ticker.Ticker;
 if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5)
 {
@@ -20,54 +23,37 @@ export interface ParticleConstructor
 	new (emitter:Emitter):Particle;
 }
 
+/**
+ * @hidden
+ */
 const helperPoint = new Point();
 
 /**
  * A particle emitter.
- * @memberof PIXI.particles
- * @class Emitter
- * @constructor
- * @param {PIXI.Container} particleParent The container to add the
- *                                                     particles to.
- * @param {Array|PIXI.Texture|String} [particleImages] A texture or array of textures to use
- *                                                     for the particles. Strings will be turned
- *                                                     into textures via Texture.fromImage().
- * @param {Object} [config] A configuration object containing settings for the emitter.
- * @param {Boolean} [config.emit=true] If config.emit is explicitly passed as false, the Emitter
- *                                     will start disabled.
- * @param {Boolean} [config.autoUpdate=false] If config.emit is explicitly passed as true, the Emitter
- *                                     will automatically call update via the PIXI shared ticker.
  */
-export default class Emitter
+export class Emitter
 {
 	/**
 	 * The constructor used to create new particles. The default is
 	 * the built in particle class.
-	 * @property {Function} _particleConstructor
-	 * @private
 	 */
 	protected _particleConstructor: typeof Particle;
 	//properties for individual particles
 	/**
 	 * An array of PIXI Texture objects.
-	 * @property {Array} particleImages
 	 */
 	public particleImages: any[];
 	/**
 	 * The first node in the list of alpha values for all particles.
-	 * @property {PIXI.particles.PropertyNode} startAlpha
 	 */
 	public startAlpha: PropertyNode<number>;
 	/**
 	 * The first node in the list of speed values of all particles.
-	 * @property {Number} startSpeed
 	 */
 	public startSpeed: PropertyNode<number>;
 	/**
 	 * A minimum multiplier for the speed of a particle at all stages of its life. A value between
 	 * minimumSpeedMultiplier and 1 is randomly generated for each particle.
-	 * @property {Number} minimumSpeedMultiplier
-	 * @default 1
 	 */
 	public minimumSpeedMultiplier: number;
 	/**
@@ -75,121 +61,96 @@ export default class Emitter
 	 * any interpolation of particle speed. If the particles do
 	 * not have a rotation speed, then they will be rotated to
 	 * match the direction of travel.
-	 * @property {PIXI.Point} acceleration
-	 * @default null
 	 */
 	public acceleration: Point;
 	/**
 	 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
 	 * will disable the maximum speed.
-	 * @property {Number} maxSpeed
-	 * @default NaN
 	 */
 	public maxSpeed: number;
 	/**
 	 * The first node in the list of scale values of all particles.
-	 * @property {PIXI.particles.PropertyNode} startScale
 	 */
 	public startScale: PropertyNode<number>;
 	/**
 	 * A minimum multiplier for the scale of a particle at all stages of its life. A value between
 	 * minimumScaleMultiplier and 1 is randomly generated for each particle.
-	 * @property {Number} minimumScaleMultiplier
-	 * @default 1
 	 */
 	public minimumScaleMultiplier: number;
 	/**
 	 * The first node in the list of  color values of all particles, as red, green, and blue
 	 * uints from 0-255.
-	 * @property {PIXI.particles.PropertyNode} startColor
 	 */
 	public startColor: PropertyNode<Color>;
 	/**
 	 * The minimum lifetime for a particle, in seconds.
-	 * @property {Number} minLifetime
 	 */
 	public minLifetime: number;
 	/**
 	 * The maximum lifetime for a particle, in seconds.
-	 * @property {Number} maxLifetime
 	 */
 	public maxLifetime: number;
 	/**
 	 * The minimum start rotation for a particle, in degrees. This value
 	 * is ignored if the spawn type is "burst" or "arc".
-	 * @property {Number} minStartRotation
 	 */
 	public minStartRotation: number;
 	/**
 	 * The maximum start rotation for a particle, in degrees. This value
 	 * is ignored if the spawn type is "burst" or "arc".
-	 * @property {Number} maxStartRotation
 	 */
 	public maxStartRotation: number;
 	/**
 	 * If no particle rotation should occur. Starting rotation will still
 	 * affect the direction in which particles move. If the rotation speed
 	 * is set, then this will be ignored.
-	 * @property {Boolean} maxStartRotation
 	 */
 	public noRotation: boolean;
 	/**
 	 * The minimum rotation speed for a particle, in degrees per second.
 	 * This only visually spins the particle, it does not change direction
 	 * of movement.
-	 * @property {Number} minRotationSpeed
 	 */
 	public minRotationSpeed: number;
 	/**
 	 * The maximum rotation speed for a particle, in degrees per second.
 	 * This only visually spins the particle, it does not change direction
 	 * of movement.
-	 * @property {Number} maxRotationSpeed
 	 */
 	public maxRotationSpeed: number;
 	/**
 	 * The blend mode for all particles, as named by PIXI.blendModes.
-	 * @property {int} particleBlendMode
 	 */
 	public particleBlendMode: number;
 	/**
 	 * An easing function for nonlinear interpolation of values. Accepts a single
 	 * parameter of time as a value from 0-1, inclusive. Expected outputs are values
 	 * from 0-1, inclusive.
-	 * @property {Function} customEase
 	 */
 	public customEase: SimpleEase;
 	/**
 	 *	Extra data for use in custom particles. The emitter doesn't look inside, but
 	 *	passes it on to the particle to use in init().
-	 *	@property {Object} extraData
 	 */
 	public extraData: any;
 	//properties for spawning particles
 	/**
 	 * Time between particle spawns in seconds.
-	 * @property {Number} _frequency
-	 * @private
 	 */
 	protected _frequency: number;
 	/**
 	 * Chance that a particle will be spawned on each opportunity to spawn one.
 	 * 0 is 0%, 1 is 100%.
-	 * @property {Number} spawnChance
 	 */
 	public spawnChance: number;
 	/**
 	 * Maximum number of particles to keep alive at a time. If this limit
 	 * is reached, no more particles will spawn until some have died.
-	 * @property {int} maxParticles
-	 * @default 1000
 	 */
 	public maxParticles: number;
 	/**
 	 * The amount of time in seconds to emit for before setting emit to false.
 	 * A value of -1 is an unlimited amount of time.
-	 * @property {Number} emitterLifetime
-	 * @default -1
 	 */
 	public emitterLifetime: number;
 	/**
@@ -198,185 +159,142 @@ export default class Emitter
 	 * of {x:-50, y:0}.
 	 * to spawn at the rear of the rocket.
 	 * To change this, use updateSpawnPos().
-	 * @property {PIXI.Point} spawnPos
-	 * @readOnly
 	 */
 	public spawnPos: Point;
 	/**
 	 * How the particles will be spawned. Valid types are "point", "rectangle",
 	 * "circle", "burst", "ring".
-	 * @property {String} spawnType
-	 * @readOnly
 	 */
 	public spawnType: string;
 	/**
 	 * A reference to the emitter function specific to the spawn type.
-	 * @property {Function} _spawnFunc
-	 * @private
 	 */
 	private _spawnFunc: (p: Particle, emitPosX: number, emitPosY: number, i?: number) => void;
 	/**
 	 * A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
-	 * @property {PIXI.Rectangle} spawnRect
 	 */
 	public spawnRect: Rectangle;
 	/**
 	 * A polygon relative to spawnPos to spawn particles on the chain if the spawn type is "polygonalChain".
-	 * @property {PIXI.particles.PolygonalChain} spawnPolygonalChain
 	 */
 	public spawnPolygonalChain: PolygonalChain;
 	/**
 	 * A circle relative to spawnPos to spawn particles inside if the spawn type is "circle".
-	 * @property {PIXI.Circle} spawnCircle
 	 */
 	public spawnCircle: Circle & {minRadius: number};
 	/**
 	 * Number of particles to spawn time that the frequency allows for particles to spawn.
-	 * @property {int} particlesPerWave
-	 * @default 1
 	 */
 	public particlesPerWave: number;
 	/**
 	 * Spacing between particles in a burst. 0 gives a random angle for each particle.
-	 * @property {Number} particleSpacing
-	 * @default 0
 	 */
 	public particleSpacing: number;
 	/**
 	 * Angle at which to start spawning particles in a burst.
-	 * @property {Number} angleStart
-	 * @default 0
 	 */
 	public angleStart: number;
 	/**
 	 * Rotation of the emitter or emitter's owner in degrees. This is added to
 	 * the calculated spawn angle.
 	 * To change this, use rotate().
-	 * @property {Number} rotation
-	 * @default 0
-	 * @readOnly
 	 */
-	public rotation: number;
+	protected rotation: number;
 	/**
 	 * The world position of the emitter's owner, to add spawnPos to when
 	 * spawning particles. To change this, use updateOwnerPos().
-	 * @property {PIXI.Point} ownerPos
-	 * @default {x:0, y:0}
-	 * @readOnly
 	 */
-	public ownerPos: Point;
+	protected ownerPos: Point;
 	/**
 	 * The origin + spawnPos in the previous update, so that the spawn position
 	 * can be interpolated to space out particles better.
-	 * @property {PIXI.Point} _prevEmitterPos
-	 * @private
 	 */
 	protected _prevEmitterPos: Point;
 	/**
 	 * If _prevEmitterPos is valid, to prevent interpolation on the first update
-	 * @property {Boolean} _prevPosIsValid
-	 * @private
-	 * @default false
 	 */
 	protected _prevPosIsValid: boolean;
 	/**
 	 * If either ownerPos or spawnPos has changed since the previous update.
-	 * @property {Boolean} _posChanged
-	 * @private
 	 */
 	protected _posChanged: boolean;
 	/**
 	 * The container to add particles to.
-	 * @property {PIXI.Container} _parent
-	 * @private
 	 */
 	protected _parent: Container;
 	/**
 	 * If particles should be added at the back of the display list instead of the front.
-	 * @property {Boolean} addAtBack
 	 */
 	public addAtBack: boolean;
 	/**
 	 * The current number of active particles.
-	 * @property {Number} particleCount
-	 * @readOnly
 	 */
 	public particleCount: number;
 	/**
 	 * If particles should be emitted during update() calls. Setting this to false
 	 * stops new particles from being created, but allows existing ones to die out.
-	 * @property {Boolean} _emit
-	 * @private
 	 */
 	protected _emit: boolean;
 	/**
 	 * The timer for when to spawn particles in seconds, where numbers less
 	 * than 0 mean that particles should be spawned.
-	 * @property {Number} _spawnTimer
-	 * @private
 	 */
 	protected _spawnTimer: number;
 	/**
 	 * The life of the emitter in seconds.
-	 * @property {Number} _emitterLife
-	 * @private
 	 */
 	protected _emitterLife: number;
 	/**
 	 * The particles that are active and on the display list. This is the first particle in a
 	 * linked list.
-	 * @property {Particle} _activeParticlesFirst
-	 * @private
 	 */
 	protected _activeParticlesFirst: Particle;
 	/**
 	 * The particles that are active and on the display list. This is the last particle in a
 	 * linked list.
-	 * @property {Particle} _activeParticlesLast
-	 * @private
 	 */
 	protected _activeParticlesLast: Particle;
 	/**
 	 * The particles that are not currently being used. This is the first particle in a
 	 * linked list.
-	 * @property {Particle} _poolFirst
-	 * @private
 	 */
 	protected _poolFirst: Particle;
 	/**
 	 * The original config object that this emitter was initialized with.
-	 * @property {Object} _origConfig
-	 * @private
 	 */
 	protected _origConfig: any;
 	/**
 	 * The original particle image data that this emitter was initialized with.
-	 * @property {PIXI.Texture|Array|String} _origArt
-	 * @private
 	 */
 	protected _origArt: any;
 	/**
 	 * If the update function is called automatically from the shared ticker.
 	 * Setting this to false requires calling the update function manually.
-	 * @property {Boolean} _autoUpdate
-	 * @private
 	 */
 	protected _autoUpdate: boolean;
 	/**
 	 * If the emitter should destroy itself when all particles have died out. This is set by
 	 * playOnceAndDestroy();
-	 * @property {Boolean} _destroyWhenComplete
-	 * @private
 	 */
 	protected _destroyWhenComplete: boolean;
 	/**
 	 * A callback for when all particles have died out. This is set by
 	 * playOnceAndDestroy() or playOnce();
-	 * @property {Function} _completeCallback
-	 * @private
 	 */
 	protected _completeCallback: () => void;
 	
+	/**
+	 * @param particleParent The container to add the particles to.
+	 * @param particleImages A texture or array of textures to use
+	 *                       for the particles. Strings will be turned
+	 *                       into textures via Texture.fromImage().
+	 * @param config A configuration object containing settings for the emitter.
+	 * @param config.emit If config.emit is explicitly passed as false, the
+	 *                    Emitter will start disabled.
+	 * @param config.autoUpdate If config.autoUpdate is explicitly passed as
+	 *                          true, the Emitter will automatically call
+	 *                          update via the PIXI shared ticker.
+	 */
 	constructor(particleParent: Container, particleImages: any, config: any)
 	{
 		this._particleConstructor = Particle;
@@ -452,7 +370,6 @@ export default class Emitter
 	/**
 	 * Time between particle spawns in seconds. If this value is not a number greater than 0,
 	 * it will be set to 1 (particle per second) to prevent infinite loops.
-	 * @member {Number} PIXI.particles.Emitter#frequency
 	 */
 	public get frequency() { return this._frequency; }
 	public set frequency(value)
@@ -467,7 +384,6 @@ export default class Emitter
 	 * The constructor used to create new particles. The default is
 	 * the built in Particle class. Setting this will dump any active or
 	 * pooled particles, if the emitter has already been used.
-	 * @member {Function} PIXI.particles.Emitter#particleConstructor
 	 */
 	public get particleConstructor() { return this._particleConstructor; }
 	public set particleConstructor(value)
@@ -491,7 +407,6 @@ export default class Emitter
 
 	/**
 	* The container to add particles to. Settings this will dump any active particles.
-	* @member {PIXI.Container} PIXI.particles.Emitter#parent
 	*/
 	public get parent() { return this._parent; }
 	public set parent(value)
@@ -502,9 +417,8 @@ export default class Emitter
 
 	/**
 	 * Sets up the emitter based on the config settings.
-	 * @method PIXI.particles.Emitter#init
-	 * @param {Array|PIXI.Texture} art A texture or array of textures to use for the particles.
-	 * @param {Object} config A configuration object containing settings for the emitter.
+	 * @param art A texture or array of textures to use for the particles.
+	 * @param config A configuration object containing settings for the emitter.
 	 */
 	public init(art: any, config: any)
 	{
@@ -607,8 +521,7 @@ export default class Emitter
 		if (config.ease)
 		{
 			this.customEase = typeof config.ease == "function" ?
-														config.ease :
-														ParticleUtils.generateEase(config.ease);
+				config.ease : ParticleUtils.generateEase(config.ease);
 		}
 		else
 			this.customEase = null;
@@ -693,10 +606,9 @@ export default class Emitter
 	}
 
 	/**
-	 * Recycles an individual particle.
-	 * @method PIXI.particles.Emitter#recycle
-	 * @param {Particle} particle The particle to recycle.
-	 * @private
+	 * Recycles an individual particle. For internal use only.
+	 * @param particle The particle to recycle.
+	 * @internal
 	 */
 	public recycle(particle: Particle)
 	{
@@ -721,8 +633,7 @@ export default class Emitter
 
 	/**
 	 * Sets the rotation of the emitter to a new value.
-	 * @method PIXI.particles.Emitter#rotate
-	 * @param {Number} newRot The new rotation, in degrees.
+	 * @param newRot The new rotation, in degrees.
 	 */
 	public rotate(newRot: number)
 	{
@@ -738,9 +649,8 @@ export default class Emitter
 
 	/**
 	 * Changes the spawn position of the emitter.
-	 * @method PIXI.particles.Emitter#updateSpawnPos
-	 * @param {Number} x The new x value of the spawn position for the emitter.
-	 * @param {Number} y The new y value of the spawn position for the emitter.
+	 * @param x The new x value of the spawn position for the emitter.
+	 * @param y The new y value of the spawn position for the emitter.
 	 */
 	public updateSpawnPos(x: number, y: number)
 	{
@@ -752,9 +662,8 @@ export default class Emitter
 	/**
 	 * Changes the position of the emitter's owner. You should call this if you are adding
 	 * particles to the world container that your emitter's owner is moving around in.
-	 * @method PIXI.particles.Emitter#updateOwnerPos
-	 * @param {Number} x The new x value of the emitter's owner.
-	 * @param {Number} y The new y value of the emitter's owner.
+	 * @param x The new x value of the emitter's owner.
+	 * @param y The new y value of the emitter's owner.
 	 */
 	public updateOwnerPos(x: number, y: number)
 	{
@@ -767,7 +676,6 @@ export default class Emitter
 	 * Prevents emitter position interpolation in the next update.
 	 * This should be used if you made a major position change of your emitter's owner
 	 * that was not normal movement.
-	 * @method PIXI.particles.Emitter#resetPositionTracking
 	 */
 	public resetPositionTracking()
 	{
@@ -777,7 +685,6 @@ export default class Emitter
 	/**
 	 * If particles should be emitted during update() calls. Setting this to false
 	 * stops new particles from being created, but allows existing ones to die out.
-	 * @member {Boolean} PIXI.particles.Emitter#emit
 	 */
 	public get emit() { return this._emit; };
 	public set emit(value)
@@ -789,7 +696,6 @@ export default class Emitter
 	/**
 	 * If the update function is called automatically from the shared ticker.
 	 * Setting this to false requires calling the update function manually.
-	 * @member {Boolean} PIXI.particles.Emitter#autoUpdate
 	 */
 	public get autoUpdate() { return this._autoUpdate; }
 	public set autoUpdate(value)
@@ -808,8 +714,7 @@ export default class Emitter
 	/**
 	 * Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
 	 * when particle emission is complete.
-	 * @method PIXI.particles.Emitter#playOnceAndDestroy
-	 * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
+	 * @param callback Callback for when emission is complete (all particles have died off)
 	 */
 	public playOnceAndDestroy(callback?: () => void)
 	{
@@ -821,8 +726,7 @@ export default class Emitter
 
 	/**
 	 * Starts emitting particles and optionally calls a callback when particle emission is complete.
-	 * @method PIXI.particles.Emitter#playOnce
-	 * @param {Function} [callback] Callback for when emission is complete (all particles have died off)
+	 * @param callback Callback for when emission is complete (all particles have died off)
 	 */
 	public playOnce(callback?: () => void)
 	{
@@ -832,8 +736,7 @@ export default class Emitter
 
 	/**
 	 * Updates all particles spawned by this emitter and emits new ones.
-	 * @method PIXI.particles.Emitter#update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 * @param delta Time elapsed since the previous frame, in __seconds__.
 	 */
 	public update(delta: number)
 	{
@@ -1050,12 +953,10 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for a point type emitter.
-	 * @method PIXI.particles.Emitter#_spawnPoint
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave. Not used for this function.
 	 */
 	protected _spawnPoint(p: Particle, emitPosX: number, emitPosY: number)
 	{
@@ -1072,12 +973,10 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for a rectangle type emitter.
-	 * @method PIXI.particles.Emitter#_spawnRect
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave. Not used for this function.
 	 */
 	protected _spawnRect(p: Particle, emitPosX: number, emitPosY: number)
 	{
@@ -1098,12 +997,10 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for a circle type emitter.
-	 * @method PIXI.particles.Emitter#_spawnCircle
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave. Not used for this function.
 	 */
 	protected _spawnCircle(p: Particle, emitPosX: number, emitPosY: number)
 	{
@@ -1132,12 +1029,10 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for a ring type emitter.
-	 * @method PIXI.particles.Emitter#_spawnRing
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave. Not used for this function.
 	 */
 	protected _spawnRing(p: Particle, emitPosX: number, emitPosY: number)
 	{
@@ -1175,12 +1070,10 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for polygonal chain.
-	 * @method PIXI.particles.Emitter#_spawnPolygonalChain
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave. Not used for this function.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave. Not used for this function.
 	 */
 	protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
 	{
@@ -1203,14 +1096,12 @@ export default class Emitter
 
 	/**
 	 * Positions a particle for a burst type emitter.
-	 * @method PIXI.particles.Emitter#_spawnBurst
-	 * @private
-	 * @param {Particle} p The particle to position and rotate.
-	 * @param {Number} emitPosX The emitter's x position
-	 * @param {Number} emitPosY The emitter's y position
-	 * @param {int} i The particle number in the current wave.
+	 * @param p The particle to position and rotate.
+	 * @param emitPosX The emitter's x position
+	 * @param emitPosY The emitter's y position
+	 * @param i The particle number in the current wave.
 	 */
-	public _spawnBurst(p: Particle, emitPosX: number, emitPosY: number, i: number)
+	protected _spawnBurst(p: Particle, emitPosX: number, emitPosY: number, i: number)
 	{
 		//set the initial rotation/direction of the particle based on spawn
 		//angle and rotation of emitter
@@ -1225,7 +1116,6 @@ export default class Emitter
 
 	/**
 	 * Kills all active particles immediately.
-	 * @method PIXI.particles.Emitter#cleanup
 	 */
 	public cleanup()
 	{
@@ -1243,7 +1133,6 @@ export default class Emitter
 
 	/**
 	 * Destroys the emitter and all of its particles.
-	 * @method PIXI.particles.Emitter#destroy
 	 */
 	public destroy()
 	{

@@ -1,179 +1,138 @@
-import Emitter from "./Emitter";
-import ParticleUtils, {SimpleEase, Color} from "./ParticleUtils";
-import PropertyList from "./PropertyList";
+import {Emitter} from "./Emitter";
+import {ParticleUtils, SimpleEase, Color} from "./ParticleUtils";
+import {PropertyList} from "./PropertyList";
 import {Sprite, Point, Texture} from 'pixi.js';
 
 /**
  * An individual particle image. You shouldn't have to deal with these.
- * @memberof PIXI.particles
- * @class Particle
- * @extends PIXI.Sprite
- * @constructor
- * @param {PIXI.particles.Emitter} emitter The emitter that controls this particle.
  */
-export default class Particle extends Sprite
+export class Particle extends Sprite
 {
 	/**
 	 * The emitter that controls this particle.
-	 * @property {Emitter} emitter
 	 */
 	public emitter: Emitter;
 	/**
 	 * The velocity of the particle. Speed may change, but the angle also
 	 * contained in velocity is constant.
-	 * @property {PIXI.Point} velocity
 	 */
 	public velocity: Point;
 	/**
 	 * The maximum lifetime of this particle, in seconds.
-	 * @property {Number} maxLife
 	 */
 	public maxLife: number;
 	/**
 	 * The current age of the particle, in seconds.
-	 * @property {Number} age
 	 */
 	public age: number;
 	/**
 	 * A simple easing function to be applied to all properties that
 	 * are being interpolated.
-	 * @property {Function} ease
 	 */
 	public ease: SimpleEase;
 	/**
 	 * Extra data that the emitter passes along for custom particles.
-	 * @property {Object} extraData
 	 */
 	public extraData: any;
 	/**
 	 * The alpha of the particle throughout its life.
-	 * @property {PIXI.particles.PropertyList} alphaList
 	 */
 	public alphaList: PropertyList<number>;
 	/**
 	 * The speed of the particle throughout its life.
-	 * @property {PIXI.particles.PropertyList} speedList
 	 */
 	public speedList: PropertyList<number>;
 	/**
 	 * A multiplier from 0-1 applied to the speed of the particle at all times.
-	 * @property {number} speedMultiplier
 	 */
 	public speedMultiplier: number;
 	/**
 	 * Acceleration to apply to the particle.
-	 * @property {PIXI.Point} accleration
 	 */
 	public acceleration: Point;
 	/**
 	 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
 	 * will disable the maximum speed.
-	 * @property {Number} maxSpeed
-	 * @default NaN
 	 */
 	public maxSpeed: number;
 	/**
 	 * Speed at which the particle rotates, in radians per second.
-	 * @property {Number} rotationSpeed
 	 */
 	public rotationSpeed: number;
 	/**
 	 * If particle rotation is locked, preventing rotation from occurring due
 	 * to directional changes.
-	 * @property {Number} noRotation
 	 */
 	public noRotation: boolean;
 	/**
 	 * The scale of the particle throughout its life.
-	 * @property {PIXI.particles.PropertyList} scaleList
 	 */
 	public scaleList: PropertyList<number>;
 	/**
 	 * A multiplier from 0-1 applied to the scale of the particle at all times.
-	 * @property {number} scaleMultiplier
 	 */
 	public scaleMultiplier: number;
 	/**
 	 * The tint of the particle throughout its life.
-	 * @property {PIXI.particles.PropertyList} colorList
 	 */
 	public colorList: PropertyList<Color>;
 	/**
 	 * A reference to init, so that subclasses can access it without the penalty of Function.call()
-	 * @method PIXI.particles.Particle#Particle_init
-	 * @protected
 	 */
-	protected Particle_init: () => void;
+	protected Particle_init: typeof Particle.prototype.init;
 	/**
 	 * A reference to update so that subclasses can access the original without the overhead
 	 * of Function.call().
-	 * @method PIXI.particles.Particle#Particle_update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	 * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
+	 * @param delta Time elapsed since the previous frame, in __seconds__.
+	 * @return The standard interpolation multiplier (0-1) used for all relevant particle
 	 *                   properties. A value of -1 means the particle died of old age instead.
-	 * @protected
 	 */
-	protected Particle_update: (delta: number) => number;
-	protected Particle_destroy: () => void;
-	protected Sprite_destroy: () => void;
+	protected Particle_update: typeof Particle.prototype.update;
+	protected Particle_destroy: typeof Particle.prototype.destroy;
+	protected Sprite_destroy: typeof Sprite.prototype.destroy;
 	/**
 	 * If alpha should be interpolated at all.
-	 * @property {Boolean} _doAlpha
-	 * @private
 	 */
 	protected _doAlpha: boolean;
 	/**
 	 * If scale should be interpolated at all.
-	 * @property {Boolean} _doScale
-	 * @private
 	 */
 	protected _doScale: boolean;
 	/**
 	 * If speed should be interpolated at all.
-	 * @property {Boolean} _doSpeed
-	 * @private
 	 */
 	protected _doSpeed: boolean;
 	/**
 	 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
 	 * and _doSpeed gets priority.
-	 * @property {Boolean} _doAcceleration
-	 * @private
 	 */
 	protected _doAcceleration: boolean;
 	/**
 	 * If color should be interpolated at all.
-	 * @property {Boolean} _doColor
-	 * @private
 	 */
 	protected _doColor: boolean;
 	/**
 	 * If normal movement should be handled. Subclasses wishing to override movement
 	 * can set this to false in init().
-	 * @property {Boolean} _doNormalMovement
-	 * @private
 	 */
 	protected _doNormalMovement: boolean;
 	/**
 	 * One divided by the max life of the particle, saved for slightly faster math.
-	 * @property {Number} _oneOverLife
-	 * @private
 	 */
 	private _oneOverLife: number;
 	/**
 	 * Reference to the next particle in the list.
-	 * @property {Particle} next
-	 * @private
 	 */
 	public next: Particle;
 
 	/**
 	 * Reference to the previous particle in the list.
-	 * @property {Particle} prev
-	 * @private
 	 */
 	public prev: Particle;
 	
+	/**
+	 * @param {PIXI.particles.Emitter} emitter The emitter that controls this particle.
+	 */
 	constructor(emitter: Emitter)
 	{
 		//start off the sprite with a blank texture, since we are going to replace it
@@ -190,90 +149,19 @@ export default class Particle extends Sprite
 		this.alphaList = new PropertyList();
 		this.speedList = new PropertyList();
 		this.speedMultiplier = 1;
-		/**
-		 * Acceleration to apply to the particle.
-		 * @property {PIXI.Point} accleration
-		 */
 		this.acceleration = new Point();
-		/**
-		 * The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
-		 * will disable the maximum speed.
-		 * @property {Number} maxSpeed
-		 * @default NaN
-		 */
 		this.maxSpeed = NaN;
-		/**
-		 * The scale of the particle throughout its life.
-		 * @property {PIXI.particles.PropertyList} scaleList
-		 */
 		this.scaleList = new PropertyList();
-		/**
-		 * A multiplier from 0-1 applied to the scale of the particle at all times.
-		 * @property {number} scaleMultiplier
-		 */
 		this.scaleMultiplier = 1;
-		/**
-		 * The tint of the particle throughout its life.
-		 * @property {PIXI.particles.PropertyList} colorList
-		 */
 		this.colorList = new PropertyList(true);
-		/**
-		 * If alpha should be interpolated at all.
-		 * @property {Boolean} _doAlpha
-		 * @private
-		 */
 		this._doAlpha = false;
-		/**
-		 * If scale should be interpolated at all.
-		 * @property {Boolean} _doScale
-		 * @private
-		 */
 		this._doScale = false;
-		/**
-		 * If speed should be interpolated at all.
-		 * @property {Boolean} _doSpeed
-		 * @private
-		 */
 		this._doSpeed = false;
-		/**
-		 * If acceleration should be handled at all. _doSpeed is mutually exclusive with this,
-		 * and _doSpeed gets priority.
-		 * @property {Boolean} _doAcceleration
-		 * @private
-		 */
 		this._doAcceleration = false;
-		/**
-		 * If color should be interpolated at all.
-		 * @property {Boolean} _doColor
-		 * @private
-		 */
 		this._doColor = false;
-		/**
-		 * If normal movement should be handled. Subclasses wishing to override movement
-		 * can set this to false in init().
-		 * @property {Boolean} _doNormalMovement
-		 * @private
-		 */
 		this._doNormalMovement = false;
-		/**
-		 * One divided by the max life of the particle, saved for slightly faster math.
-		 * @property {Number} _oneOverLife
-		 * @private
-		 */
 		this._oneOverLife = 0;
-
-		/**
-		 * Reference to the next particle in the list.
-		 * @property {Particle} next
-		 * @private
-		 */
 		this.next = null;
-
-		/**
-		 * Reference to the previous particle in the list.
-		 * @property {Particle} prev
-		 * @private
-		 */
 		this.prev = null;
 
 		//save often used functions on the instance instead of the prototype for better speed
@@ -290,7 +178,6 @@ export default class Particle extends Sprite
 	/**
 	 * Initializes the particle for use, based on the properties that have to
 	 * have been set already on the particle.
-	 * @method PIXI.particles.Particle#init
 	 */
 	public init()
 	{
@@ -335,8 +222,7 @@ export default class Particle extends Sprite
 	/**
 	 * Sets the texture for the particle. This can be overridden to allow
 	 * for an animated particle.
-	 * @method PIXI.particles.Particle#applyArt
-	 * @param {PIXI.Texture} art The texture to set.
+	 * @param art The texture to set.
 	 */
 	public applyArt(art: any)
 	{
@@ -345,10 +231,10 @@ export default class Particle extends Sprite
 
 	/**
 	 * Updates the particle.
-	 * @method PIXI.particles.Particle#update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
-	 * @return {Number} The standard interpolation multiplier (0-1) used for all relevant particle
-	 *                   properties. A value of -1 means the particle died of old age instead.
+	 * @param delta Time elapsed since the previous frame, in __seconds__.
+	 * @return The standard interpolation multiplier (0-1) used for all
+	 *         relevant particle properties. A value of -1 means the particle
+	 *         died of old age instead.
 	 */
 	public update(delta: number): number
 	{
@@ -437,7 +323,6 @@ export default class Particle extends Sprite
 	/**
 	 * Kills the particle, removing it from the display list
 	 * and telling the emitter to recycle it.
-	 * @method PIXI.particles.Particle#kill
 	 */
 	public kill()
 	{
@@ -446,7 +331,6 @@ export default class Particle extends Sprite
 
 	/**
 	 * Destroys the particle, removing references and preventing future use.
-	 * @method PIXI.particles.Particle#destroy
 	 */
 	public destroy()
 	{
@@ -460,12 +344,10 @@ export default class Particle extends Sprite
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time.
-	 * @method PIXI.particles.Particle.parseArt
-	 * @static
-	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
-	 *                     Any strings in the array will be converted to Textures via
-	 *                     Texture.fromImage().
-	 * @return {Array} The art, after any needed modifications.
+	 * @param art The array of art data. For Particle, it should be an array of
+	 *            Textures. Any strings in the array will be converted to
+	 *            Textures via Texture.from().
+	 * @return The art, after any needed modifications.
 	 */
 	public static parseArt(art:any[]): any[]
 	{
@@ -497,10 +379,8 @@ export default class Particle extends Sprite
 	/**
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * Particle does nothing to the extra data.
-	 * @method PIXI.particles.Particle.parseData
-	 * @static
-	 * @param  {Object} extraData The extra data from the particle config.
-	 * @return {Object} The parsed extra data.
+	 * @param extraData The extra data from the particle config.
+	 * @return The parsed extra data.
 	 */
 	public static parseData(extraData: any): any
 	{

@@ -1,0 +1,6 @@
+{
+	"out": "docs/docs",
+	"mode": "file",
+	"excludeExternals": true,
+	"excludeNotExported": true
+}

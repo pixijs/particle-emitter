@@ -1,5 +1,5 @@
 import {BLEND_MODES, Point} from 'pixi.js';
-import PropertyNode, {ValueStep} from './PropertyNode';
+import {PropertyNode, ValueStep} from './PropertyNode';
 
 export interface Color {
 	r: number,
@@ -18,29 +18,21 @@ export type SimpleEase = (time:number) => number;
 
 /**
  * Contains helper functions for particles and emitters to use.
- * @memberof PIXI.particles
- * @class ParticleUtils
- * @static
  */
-const ParticleUtils = {
+export namespace ParticleUtils {
 	/**
 	 * If errors and warnings should be logged within the library.
-	 * @name PIXI.particles.ParticleUtils.verbose
-	 * @default false
-	 * @static
 	 */
-	verbose: false,
+	export let verbose = false;
 
-	DEG_TO_RADS: Math.PI / 180,
+	export const DEG_TO_RADS = Math.PI / 180;
 
 	/**
 	 * Rotates a point by a given angle.
-	 * @method PIXI.particles.ParticleUtils.rotatePoint
-	 * @param {Number} angle The angle to rotate by in degrees
-	 * @param {PIXI.Point} p The point to rotate around 0,0.
-	 * @static
+	 * @param angle The angle to rotate by in degrees
+	 * @param p The point to rotate around 0,0.
 	 */
-	rotatePoint(angle:number, p:Point): void
+	export function rotatePoint(angle:number, p:Point)
 	{
 		if (!angle) return;
 		angle *= ParticleUtils.DEG_TO_RADS;
@@ -50,71 +42,61 @@ const ParticleUtils = {
 		const ynew = p.x * s + p.y * c;
 		p.x = xnew;
 		p.y = ynew;
-	},
+	}
 
 	/**
 	 * Combines separate color components (0-255) into a single uint color.
-	 * @method PIXI.particles.ParticleUtils.combineRGBComponents
-	 * @param {uint} r The red value of the color
-	 * @param {uint} g The green value of the color
-	 * @param {uint} b The blue value of the color
-	 * @return {uint} The color in the form of 0xRRGGBB
-	 * @static
+	 * @param r The red value of the color
+	 * @param g The green value of the color
+	 * @param b The blue value of the color
+	 * @return The color in the form of 0xRRGGBB
 	 */
-	combineRGBComponents(r:number, g:number, b:number/*, a*/): number
+	export function combineRGBComponents(r:number, g:number, b:number/*, a*/): number
 	{
 		return /*a << 24 |*/ r << 16 | g << 8 | b;
-	},
+	}
 
 	/**
 	 * Reduces the point to a length of 1.
-	 * @method PIXI.particles.ParticleUtils.normalize
-	 * @static
-	 * @param {PIXI.Point} point The point to normalize
+	 * @param point The point to normalize
 	 */
-	normalize(point:Point): void
+	export function normalize(point:Point): void
 	{
 		let oneOverLen = 1 / ParticleUtils.length(point);
 		point.x *= oneOverLen;
 		point.y *= oneOverLen;
-	},
+	}
 
 	/**
 	 * Multiplies the x and y values of this point by a value.
-	 * @method PIXI.particles.ParticleUtils.scaleBy
-	 * @static
-	 * @param {PIXI.Point} point The point to scaleBy
-	 * @param {number} value The value to scale by.
+	 * @param point The point to scaleBy
+	 * @param value The value to scale by.
 	 */
-	scaleBy(point:Point, value:number): void
+	export function scaleBy(point:Point, value:number): void
 	{
 		point.x *= value;
 		point.y *= value;
-	},
+	}
 
 	/**
 	 * Returns the length (or magnitude) of this point.
-	 * @method PIXI.particles.ParticleUtils.length
-	 * @static
-	 * @param {PIXI.Point} point The point to measure length
+	 * @param point The point to measure length
 	 * @return The length of this point.
 	 */
-	length(point:Point): number
+	export function length(point:Point): number
 	{
 		return Math.sqrt(point.x * point.x + point.y * point.y);
-	},
+	}
 
 	/**
 	 * Converts a hex string from "#AARRGGBB", "#RRGGBB", "0xAARRGGBB", "0xRRGGBB",
 	 * "AARRGGBB", or "RRGGBB" to an object of ints of 0-255, as
 	 * {r, g, b, (a)}.
-	 * @method PIXI.particles.ParticleUtils.hexToRGB
-	 * @param {string} color The input color string.
-	 * @param {Object} [output] An object to put the output in. If omitted, a new object is created.
+	 * @param color The input color string.
+	 * @param output An object to put the output in. If omitted, a new object is created.
 	 * @return The object with r, g, and b properties, possibly with an a property.
-	 * @static
 	 */
-	hexToRGB(color:string, output?:Color): Color
+	export function hexToRGB(color:string, output?:Color): Color
 	{
 		if (!output)
 			output = {} as Color;
@@ -134,19 +116,17 @@ const ParticleUtils = {
 		if (alpha)
 			output.a = parseInt(alpha, 16);
 		return output;
-	},
+	}
 
 	/**
 	 * Generates a custom ease function, based on the GreenSock custom ease, as demonstrated
 	 * by the related tool at http://www.greensock.com/customease/.
-	 * @method PIXI.particles.ParticleUtils.generateEase
-	 * @param {Array} segments An array of segments, as created by
+	 * @param segments An array of segments, as created by
 	 * http://www.greensock.com/customease/.
-	 * @return {Function} A function that calculates the percentage of change at
+	 * @return A function that calculates the percentage of change at
 	 *                    a given point in time (0-1 inclusive).
-	 * @static
 	 */
-	generateEase(segments:EaseSegment[]): SimpleEase
+	export function generateEase(segments:EaseSegment[]): SimpleEase
 	{
 		const qty = segments.length;
 		const oneOverQty = 1 / qty;
@@ -164,35 +144,31 @@ const ParticleUtils = {
 			s = segments[i] || segments[qty - 1];
 			return (s.s + t * (2 * (1 - t) * (s.cp - s.s) + t * (s.e - s.s)));
 		};
-	},
+	}
 
 	/**
 	 * Gets a blend mode, ensuring that it is valid.
-	 * @method PIXI.particles.ParticleUtils.getBlendMode
-	 * @param {string} name The name of the blend mode to get.
-	 * @return {int} The blend mode as specified in the PIXI.BLEND_MODES enumeration.
-	 * @static
+	 * @param name The name of the blend mode to get.
+	 * @return The blend mode as specified in the PIXI.BLEND_MODES enumeration.
 	 */
-	getBlendMode(name:string): number
+	export function getBlendMode(name:string): number
 	{
 		if (!name) return BLEND_MODES.NORMAL;
 		name = name.toUpperCase();
 		while (name.indexOf(" ") >= 0)
 			name = name.replace(" ", "_");
 		return (BLEND_MODES as any)[name] || BLEND_MODES.NORMAL;
-	},
+	}
 
 	/**
 	 * Converts a list of {value, time} objects starting at time 0 and ending at time 1 into an evenly
 	 * spaced stepped list of PropertyNodes for color values. This is primarily to handle conversion of
 	 * linear gradients to fewer colors, allowing for some optimization for Canvas2d fallbacks.
-	 * @method PIXI.particles.ParticleUtils.createSteppedGradient
-	 * @param {Array} list The list of data to convert.
-	 * @param {number} [numSteps=10] The number of steps to use.
-	 * @return {PIXI.particles.PropertyNode} The blend mode as specified in the PIXI.blendModes enumeration.
-	 * @static
+	 * @param list The list of data to convert.
+	 * @param [numSteps=10] The number of steps to use.
+	 * @return The blend mode as specified in the PIXI.blendModes enumeration.
 	 */
-	createSteppedGradient(list:ValueStep[], numSteps:number = 10) {
+	export function createSteppedGradient(list:ValueStep[], numSteps:number = 10) {
 		if (typeof numSteps !== 'number' || numSteps <= 0)
 			numSteps = 10;
 		let first = new PropertyNode<Color>(list[0].value as string, list[0].time);
@@ -225,6 +201,4 @@ const ParticleUtils = {
 		//the particle has died of old age
 		return first;
 	}
-};
-
-export default ParticleUtils;
+}

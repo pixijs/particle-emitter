@@ -21,7 +21,7 @@
     "build:min": "terser dist/pixi-particles.js -c -m -o dist/pixi-particles.min.js --source-map \"content='dist/pixi-particles.js.map',includeSources=true,filename='dist/pixi-particles.min.js.map',url='pixi-particles.min.js.map'\" --comments \"/pixi-particles.js - /\"",
     "postbuild": "ncp dist docs/dist",
     "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
-    "docs": "jsdoc -c jsdoc.conf.json -R README.md",
+    "docs": "typedoc",
     "start": "npm run build -- --watch",
     "predocs-live": "npm run build && npm run docs",
     "docs-live": "gh-pages -d docs",
@@ -35,7 +35,7 @@
     "examples": "npm run predocs && http-server docs/"
   },
   "peerDependencies": {
-    "pixi.js": ">=3.0.0"
+    "pixi.js": ">=4.0.0"
   },
   "devDependencies": {
     "@types/pixi.js": "^4.0.0",
@@ -44,8 +44,6 @@
     "eslint": "^3.10.2",
     "gh-pages": "^0.11.0",
     "http-server": "*",
-    "jaguarjs-jsdoc": "^1.0.0",
-    "jsdoc": "^3.4.0",
     "ncp": "^2.0.0",
     "pixi.js": "^4.2.2",
     "rimraf": "^2.5.4",
@@ -58,6 +56,7 @@
     "semver": "^5.3.0",
     "terser": "^3.16.1",
     "tslib": "^1.9.3",
+    "typedoc": "^0.14.2",
     "typescript": "^2.7.0"
   },
   "repository": {
@@ -84,7 +83,13 @@
   ],
   "license": "MIT",
   "workspaces": {
-    "packages": ["./", "test/pixi-v4-iife", "test/pixi-v4-module", "test/pixi-v5-iife", "test/pixi-v5-module"]
+    "packages": [
+      "./",
+      "test/pixi-v4-iife",
+      "test/pixi-v4-module",
+      "test/pixi-v5-iife",
+      "test/pixi-v5-module"
+    ]
   },
-  "private":true
+  "private": true
 }
