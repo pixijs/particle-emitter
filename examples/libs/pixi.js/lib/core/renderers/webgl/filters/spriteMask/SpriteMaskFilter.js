@@ -55,10 +55,11 @@ var SpriteMaskFilter = function (_Filter) {
      * @param {PIXI.FilterManager} filterManager - The renderer to retrieve the filter from
      * @param {PIXI.RenderTarget} input - The input render target.
      * @param {PIXI.RenderTarget} output - The target to output to.
+     * @param {boolean} clear - Should the output be cleared before rendering to it
      */
 
 
-    SpriteMaskFilter.prototype.apply = function apply(filterManager, input, output) {
+    SpriteMaskFilter.prototype.apply = function apply(filterManager, input, output, clear) {
         var maskSprite = this.maskSprite;
         var tex = this.maskSprite.texture;
 
@@ -77,7 +78,7 @@ var SpriteMaskFilter = function (_Filter) {
         this.uniforms.alpha = maskSprite.worldAlpha;
         this.uniforms.maskClamp = tex.transform.uClampFrame;
 
-        filterManager.applyFilter(this, input, output);
+        filterManager.applyFilter(this, input, output, clear);
     };
 
     return SpriteMaskFilter;

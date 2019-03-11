@@ -101,6 +101,8 @@ var ParticleBuffer = function () {
         this.dynamicData = null;
         this.dynamicDataUint32 = null;
 
+        this._updateID = 0;
+
         this.initBuffers();
     }
 

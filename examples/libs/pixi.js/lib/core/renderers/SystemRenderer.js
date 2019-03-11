@@ -272,7 +272,7 @@ var SystemRenderer = function (_EventEmitter) {
     tempMatrix.tx = -region.x;
     tempMatrix.ty = -region.y;
 
-    this.render(displayObject, renderTexture, false, tempMatrix, true);
+    this.render(displayObject, renderTexture, false, tempMatrix, !!displayObject.parent);
 
     return renderTexture;
   };

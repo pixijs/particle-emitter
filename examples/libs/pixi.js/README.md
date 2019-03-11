@@ -10,7 +10,7 @@ The aim of this project is to provide a fast lightweight 2D library that works
 across all devices. The PixiJS renderer allows everyone to enjoy the power of
 hardware acceleration without prior knowledge of WebGL. Also, it's fast. Really fast.
 
-If you want to keep up to date with the latest PixiJS news then feel free to follow us on twitter
+If you want to keep up to date with the latest PixiJS news then feel free to follow us on Twitter
 ([@doormat23](https://twitter.com/doormat23), [@rolnaaba](https://twitter.com/rolnaaba), [@bigtimebuddy](https://twitter.com/bigtimebuddy), [@ivanpopelyshev](https://twitter.com/ivanpopelyshev))
 and we will keep you posted! You can also check back on [our site](http://www.pixijs.com)
 as any breakthroughs will be posted up there too!
@@ -26,7 +26,7 @@ PixiJS has full [WebGL](https://en.wikipedia.org/wiki/WebGL) support and seamles
 **Boost your development and feel free to use your imagination!**
 
 ### Learn ###
-- Website: Find out more about PixiJS on the [offical website](http://www.pixijs.com/).
+- Website: Find out more about PixiJS on the [official website](http://www.pixijs.com/).
 - Getting started: Check out @kittykatattack's comprehensive [tutorial](https://github.com/kittykatattack/learningPixi).
 - Examples: Get stuck right in and play around with PixiJS code and features right [here](http://pixijs.github.io/examples/)!
 - Docs: Get to know the PixiJS API by checking out the [docs](https://pixijs.github.io/docs/).
@@ -49,22 +49,26 @@ _Note: After v4.5.0, support for the [Bower](https://bower.io) package manager h
 #### NPM Install
 
 ```sh
-$> npm install pixi.js
+npm install pixi.js
+```
+There is no default export. The correct way to import PixiJS is:
+
+```js
+import * as PIXI from 'pixi.js'
 ```
 
 #### CDN Install (via cdnjs)
 
 ```html
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.5.1/pixi.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/4.7.1/pixi.min.js"></script>
 ```
 
-_Note: `4.5.1` can be replaced by any [released](https://github.com/pixijs/pixi.js/releases) version._
+_Note: `4.7.1` can be replaced by any [released](https://github.com/pixijs/pixi.js/releases) version._
 
 ### Demos ###
 
 - [Filters Demo](http://pixijs.io/pixi-filters/tools/demo/)
 - [Run Pixie Run](http://work.goodboydigital.com/runpixierun/)
-- [Fight for Everyone](http://www.goodboydigital.com/casestudies/fightforeveryone)
 - [Flash vs HTML](http://flashvhtml.com)
 - [Bunny Demo](http://www.goodboydigital.com/pixijs/bunnymark)
 - [Storm Brewing](http://www.goodboydigital.com/pixijs/storm)
@@ -84,7 +88,7 @@ Want to be part of the PixiJS project? Great! All are welcome! We will get there
 together :) Whether you find a bug, have a great feature request or you fancy owning a task
 from the road map above feel free to get in touch.
 
-Make sure to read the [Contributing Guide](https://github.com/pixijs/pixi.js/blob/master/CONTRIBUTING.md)
+Make sure to read the [Contributing Guide](.github/CONTRIBUTING.md)
 before submitting changes.
 
 ### Current features ###
@@ -152,13 +156,13 @@ If you don't already have Node.js and NPM, go install them. Then, in the folder 
 the repository, install the build dependencies using npm:
 
 ```sh
-$> npm install
+npm install
 ```
 
 Then, to build the source, run:
 
 ```sh
-$> npm run dist
+npm run dist
 ```
 
 This will create a minified version at `dist/pixi.min.js` and a non-minified version at `dist/pixi.js`
@@ -167,13 +171,13 @@ with all the plugins in the PixiJS project.
 If there are specific plugins you don't want, say "interaction" or "extras", you can exclude those:
 
 ```sh
-$> npm run dist -- --exclude extras --exclude interaction
+npm run dist -- --exclude extras --exclude interaction
 ```
 
 You can also use the short-form `-e`:
 
 ```sh
-$> npm run dist -- -e extras -e interaction -e filters
+npm run dist -- -e extras -e interaction -e filters
 ```
 
 ### How to generate the documentation ###
@@ -181,7 +185,7 @@ $> npm run dist -- -e extras -e interaction -e filters
 The docs can be generated using npm:
 
 ```sh
-$> npm run docs
+npm run docs
 ```
 
 The documentation uses [Jaguar.js](https://github.com/pixijs/jaguarjs-jsdoc) and the jsdoc format, the configuration file can be found at [scripts/jsdoc.conf.json](scripts/jsdoc.conf.json)

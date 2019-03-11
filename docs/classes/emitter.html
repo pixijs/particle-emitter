@@ -1,0 +1,2318 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Emitter | pixi-particles</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.js" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">pixi-particles</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../globals.html">Globals</a>
+				</li>
+				<li>
+					<a href="emitter.html">Emitter</a>
+				</li>
+			</ul>
+			<h1>Class Emitter</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A particle emitter.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="target">Emitter</span>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section ">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class"><a href="emitter.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_activeparticlesfirst" class="tsd-kind-icon">_active<wbr>Particles<wbr>First</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_activeparticleslast" class="tsd-kind-icon">_active<wbr>Particles<wbr>Last</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_autoupdate" class="tsd-kind-icon">_auto<wbr>Update</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_completecallback" class="tsd-kind-icon">_complete<wbr>Callback</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_destroywhencomplete" class="tsd-kind-icon">_destroy<wbr>When<wbr>Complete</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_emit" class="tsd-kind-icon">_emit</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_emitterlife" class="tsd-kind-icon">_emitter<wbr>Life</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_frequency" class="tsd-kind-icon">_frequency</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_origart" class="tsd-kind-icon">_orig<wbr>Art</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_origconfig" class="tsd-kind-icon">_orig<wbr>Config</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_parent" class="tsd-kind-icon">_parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_particleconstructor" class="tsd-kind-icon">_particle<wbr>Constructor</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_poolfirst" class="tsd-kind-icon">_pool<wbr>First</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_poschanged" class="tsd-kind-icon">_pos<wbr>Changed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_prevemitterpos" class="tsd-kind-icon">_prev<wbr>Emitter<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_prevposisvalid" class="tsd-kind-icon">_prev<wbr>Pos<wbr>IsValid</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="emitter.html#_spawnfunc" class="tsd-kind-icon">_spawn<wbr>Func</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawntimer" class="tsd-kind-icon">_spawn<wbr>Timer</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#acceleration" class="tsd-kind-icon">acceleration</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#addatback" class="tsd-kind-icon">add<wbr>AtBack</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#anglestart" class="tsd-kind-icon">angle<wbr>Start</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#customease" class="tsd-kind-icon">custom<wbr>Ease</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#emitterlifetime" class="tsd-kind-icon">emitter<wbr>Lifetime</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#extradata" class="tsd-kind-icon">extra<wbr>Data</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#maxlifetime" class="tsd-kind-icon">max<wbr>Lifetime</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#maxparticles" class="tsd-kind-icon">max<wbr>Particles</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#maxrotationspeed" class="tsd-kind-icon">max<wbr>Rotation<wbr>Speed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#maxspeed" class="tsd-kind-icon">max<wbr>Speed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#maxstartrotation" class="tsd-kind-icon">max<wbr>Start<wbr>Rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#minlifetime" class="tsd-kind-icon">min<wbr>Lifetime</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#minrotationspeed" class="tsd-kind-icon">min<wbr>Rotation<wbr>Speed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#minstartrotation" class="tsd-kind-icon">min<wbr>Start<wbr>Rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#minimumscalemultiplier" class="tsd-kind-icon">minimum<wbr>Scale<wbr>Multiplier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#minimumspeedmultiplier" class="tsd-kind-icon">minimum<wbr>Speed<wbr>Multiplier</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#norotation" class="tsd-kind-icon">no<wbr>Rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#ownerpos" class="tsd-kind-icon">owner<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particleblendmode" class="tsd-kind-icon">particle<wbr>Blend<wbr>Mode</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particlecount" class="tsd-kind-icon">particle<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particleimages" class="tsd-kind-icon">particle<wbr>Images</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particlespacing" class="tsd-kind-icon">particle<wbr>Spacing</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particlesperwave" class="tsd-kind-icon">particles<wbr>Per<wbr>Wave</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnchance" class="tsd-kind-icon">spawn<wbr>Chance</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawncircle" class="tsd-kind-icon">spawn<wbr>Circle</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnpolygonalchain" class="tsd-kind-icon">spawn<wbr>Polygonal<wbr>Chain</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnpos" class="tsd-kind-icon">spawn<wbr>Pos</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnrect" class="tsd-kind-icon">spawn<wbr>Rect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawntype" class="tsd-kind-icon">spawn<wbr>Type</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#startalpha" class="tsd-kind-icon">start<wbr>Alpha</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#startcolor" class="tsd-kind-icon">start<wbr>Color</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#startscale" class="tsd-kind-icon">start<wbr>Scale</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#startspeed" class="tsd-kind-icon">start<wbr>Speed</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="emitter.html#autoupdate" class="tsd-kind-icon">auto<wbr>Update</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="emitter.html#emit" class="tsd-kind-icon">emit</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="emitter.html#frequency" class="tsd-kind-icon">frequency</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="emitter.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class"><a href="emitter.html#particleconstructor" class="tsd-kind-icon">particle<wbr>Constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawnburst" class="tsd-kind-icon">_spawn<wbr>Burst</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawncircle" class="tsd-kind-icon">_spawn<wbr>Circle</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawnpoint" class="tsd-kind-icon">_spawn<wbr>Point</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawnpolygonalchain" class="tsd-kind-icon">_spawn<wbr>Polygonal<wbr>Chain</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawnrect" class="tsd-kind-icon">_spawn<wbr>Rect</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#_spawnring" class="tsd-kind-icon">_spawn<wbr>Ring</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#cleanup" class="tsd-kind-icon">cleanup</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#init" class="tsd-kind-icon">init</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#playonce" class="tsd-kind-icon">play<wbr>Once</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#playonceanddestroy" class="tsd-kind-icon">play<wbr>Once<wbr>And<wbr>Destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#recycle" class="tsd-kind-icon">recycle</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#resetpositiontracking" class="tsd-kind-icon">reset<wbr>Position<wbr>Tracking</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#rotate" class="tsd-kind-icon">rotate</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#update" class="tsd-kind-icon">update</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#updateownerpos" class="tsd-kind-icon">update<wbr>Owner<wbr>Pos</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="emitter.html#updatespawnpos" class="tsd-kind-icon">update<wbr>Spawn<wbr>Pos</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Emitter<span class="tsd-signature-symbol">(</span>particleParent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span>, particleImages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="emitter.html" class="tsd-signature-type">Emitter</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L284">Emitter.ts:284</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>particleParent: <span class="tsd-signature-type">Container</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>The container to add the particles to.</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>particleImages: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>A texture or array of textures to use
+												for the particles. Strings will be turned
+											into textures via Texture.fromImage().</p>
+										</div>
+									</div>
+								</li>
+								<li>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<div class="lead">
+											<p>A configuration object containing settings for the emitter.</p>
+										</div>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="emitter.html" class="tsd-signature-type">Emitter</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_activeparticlesfirst" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _active<wbr>Particles<wbr>First</h3>
+					<div class="tsd-signature tsd-kind-icon">_active<wbr>Particles<wbr>First<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L251">Emitter.ts:251</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The particles that are active and on the display list. This is the first particle in a
+							linked list.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_activeparticleslast" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _active<wbr>Particles<wbr>Last</h3>
+					<div class="tsd-signature tsd-kind-icon">_active<wbr>Particles<wbr>Last<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L256">Emitter.ts:256</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The particles that are active and on the display list. This is the last particle in a
+							linked list.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_autoupdate" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _auto<wbr>Update</h3>
+					<div class="tsd-signature tsd-kind-icon">_auto<wbr>Update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L274">Emitter.ts:274</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the update function is called automatically from the shared ticker.
+							Setting this to false requires calling the update function manually.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_completecallback" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _complete<wbr>Callback</h3>
+					<div class="tsd-signature tsd-kind-icon">_complete<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L284">Emitter.ts:284</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A callback for when all particles have died out. This is set by
+							playOnceAndDestroy() or playOnce();</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_destroywhencomplete" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _destroy<wbr>When<wbr>Complete</h3>
+					<div class="tsd-signature tsd-kind-icon">_destroy<wbr>When<wbr>Complete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L279">Emitter.ts:279</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If the emitter should destroy itself when all particles have died out. This is set by
+							playOnceAndDestroy();</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_emit" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _emit</h3>
+					<div class="tsd-signature tsd-kind-icon">_emit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L237">Emitter.ts:237</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If particles should be emitted during update() calls. Setting this to false
+							stops new particles from being created, but allows existing ones to die out.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_emitterlife" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _emitter<wbr>Life</h3>
+					<div class="tsd-signature tsd-kind-icon">_emitter<wbr>Life<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L246">Emitter.ts:246</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The life of the emitter in seconds.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_frequency" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _frequency</h3>
+					<div class="tsd-signature tsd-kind-icon">_frequency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L140">Emitter.ts:140</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Time between particle spawns in seconds.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_origart" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _orig<wbr>Art</h3>
+					<div class="tsd-signature tsd-kind-icon">_orig<wbr>Art<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L269">Emitter.ts:269</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The original particle image data that this emitter was initialized with.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_origconfig" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _orig<wbr>Config</h3>
+					<div class="tsd-signature tsd-kind-icon">_orig<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L265">Emitter.ts:265</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The original config object that this emitter was initialized with.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_parent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _parent</h3>
+					<div class="tsd-signature tsd-kind-icon">_parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Container</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L224">Emitter.ts:224</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The container to add particles to.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_particleconstructor" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _particle<wbr>Constructor</h3>
+					<div class="tsd-signature tsd-kind-icon">_particle<wbr>Constructor<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L40">Emitter.ts:40</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The constructor used to create new particles. The default is
+							the built in particle class.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_poolfirst" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _pool<wbr>First</h3>
+					<div class="tsd-signature tsd-kind-icon">_pool<wbr>First<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L261">Emitter.ts:261</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The particles that are not currently being used. This is the first particle in a
+							linked list.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_poschanged" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _pos<wbr>Changed</h3>
+					<div class="tsd-signature tsd-kind-icon">_pos<wbr>Changed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L220">Emitter.ts:220</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If either ownerPos or spawnPos has changed since the previous update.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_prevemitterpos" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _prev<wbr>Emitter<wbr>Pos</h3>
+					<div class="tsd-signature tsd-kind-icon">_prev<wbr>Emitter<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L212">Emitter.ts:212</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The origin + spawnPos in the previous update, so that the spawn position
+							can be interpolated to space out particles better.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_prevposisvalid" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _prev<wbr>Pos<wbr>IsValid</h3>
+					<div class="tsd-signature tsd-kind-icon">_prev<wbr>Pos<wbr>IsValid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L216">Emitter.ts:216</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If _prevEmitterPos is valid, to prevent interpolation on the first update</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_spawnfunc" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _spawn<wbr>Func</h3>
+					<div class="tsd-signature tsd-kind-icon">_spawn<wbr>Func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L172">Emitter.ts:172</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A reference to the emitter function specific to the spawn type.</p>
+						</div>
+					</div>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-siganture">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-property tsd-is-not-exported">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-parameters-title">Parameters</h4>
+										<ul class="tsd-parameters">
+											<li>
+												<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+											</li>
+											<li>
+												<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+											</li>
+											<li>
+												<h5><span class="tsd-flag ts-flagOptional">Optional</span> i: <span class="tsd-signature-type">number</span></h5>
+											</li>
+										</ul>
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawntimer" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Timer</h3>
+					<div class="tsd-signature tsd-kind-icon">_spawn<wbr>Timer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L242">Emitter.ts:242</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The timer for when to spawn particles in seconds, where numbers less
+							than 0 mean that particles should be spawned.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="acceleration" class="tsd-anchor"></a>
+					<h3>acceleration</h3>
+					<div class="tsd-signature tsd-kind-icon">acceleration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L65">Emitter.ts:65</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Acceleration to apply to particles. Using this disables
+								any interpolation of particle speed. If the particles do
+								not have a rotation speed, then they will be rotated to
+							match the direction of travel.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="addatback" class="tsd-anchor"></a>
+					<h3>add<wbr>AtBack</h3>
+					<div class="tsd-signature tsd-kind-icon">add<wbr>AtBack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L228">Emitter.ts:228</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If particles should be added at the back of the display list instead of the front.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="anglestart" class="tsd-anchor"></a>
+					<h3>angle<wbr>Start</h3>
+					<div class="tsd-signature tsd-kind-icon">angle<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L196">Emitter.ts:196</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Angle at which to start spawning particles in a burst.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="customease" class="tsd-anchor"></a>
+					<h3>custom<wbr>Ease</h3>
+					<div class="tsd-signature tsd-kind-icon">custom<wbr>Ease<span class="tsd-signature-symbol">:</span> <a href="../globals.html#simpleease" class="tsd-signature-type">SimpleEase</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L130">Emitter.ts:130</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An easing function for nonlinear interpolation of values. Accepts a single
+								parameter of time as a value from 0-1, inclusive. Expected outputs are values
+							from 0-1, inclusive.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="emitterlifetime" class="tsd-anchor"></a>
+					<h3>emitter<wbr>Lifetime</h3>
+					<div class="tsd-signature tsd-kind-icon">emitter<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L155">Emitter.ts:155</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The amount of time in seconds to emit for before setting emit to false.
+							A value of -1 is an unlimited amount of time.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="extradata" class="tsd-anchor"></a>
+					<h3>extra<wbr>Data</h3>
+					<div class="tsd-signature tsd-kind-icon">extra<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L135">Emitter.ts:135</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<pre><code>Extra data <span class="hljs-keyword">for</span> use <span class="hljs-keyword">in</span> custom particles. The emitter doesn't look inside, <span class="hljs-keyword">but</span>
+passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span> <span class="hljs-keyword">to</span> <span class="hljs-keyword">the</span> particle <span class="hljs-keyword">to</span> use <span class="hljs-keyword">in</span> init().</code></pre>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxlifetime" class="tsd-anchor"></a>
+					<h3>max<wbr>Lifetime</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L92">Emitter.ts:92</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum lifetime for a particle, in seconds.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxparticles" class="tsd-anchor"></a>
+					<h3>max<wbr>Particles</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Particles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L150">Emitter.ts:150</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Maximum number of particles to keep alive at a time. If this limit
+							is reached, no more particles will spawn until some have died.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxrotationspeed" class="tsd-anchor"></a>
+					<h3>max<wbr>Rotation<wbr>Speed</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Rotation<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L120">Emitter.ts:120</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum rotation speed for a particle, in degrees per second.
+								This only visually spins the particle, it does not change direction
+							of movement.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxspeed" class="tsd-anchor"></a>
+					<h3>max<wbr>Speed</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L70">Emitter.ts:70</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum speed allowed for accelerating particles. Negative values, values of 0 or NaN
+							will disable the maximum speed.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="maxstartrotation" class="tsd-anchor"></a>
+					<h3>max<wbr>Start<wbr>Rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">max<wbr>Start<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L102">Emitter.ts:102</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The maximum start rotation for a particle, in degrees. This value
+							is ignored if the spawn type is &quot;burst&quot; or &quot;arc&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="minlifetime" class="tsd-anchor"></a>
+					<h3>min<wbr>Lifetime</h3>
+					<div class="tsd-signature tsd-kind-icon">min<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L88">Emitter.ts:88</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The minimum lifetime for a particle, in seconds.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="minrotationspeed" class="tsd-anchor"></a>
+					<h3>min<wbr>Rotation<wbr>Speed</h3>
+					<div class="tsd-signature tsd-kind-icon">min<wbr>Rotation<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L114">Emitter.ts:114</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The minimum rotation speed for a particle, in degrees per second.
+								This only visually spins the particle, it does not change direction
+							of movement.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="minstartrotation" class="tsd-anchor"></a>
+					<h3>min<wbr>Start<wbr>Rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">min<wbr>Start<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L97">Emitter.ts:97</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The minimum start rotation for a particle, in degrees. This value
+							is ignored if the spawn type is &quot;burst&quot; or &quot;arc&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="minimumscalemultiplier" class="tsd-anchor"></a>
+					<h3>minimum<wbr>Scale<wbr>Multiplier</h3>
+					<div class="tsd-signature tsd-kind-icon">minimum<wbr>Scale<wbr>Multiplier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L79">Emitter.ts:79</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A minimum multiplier for the scale of a particle at all stages of its life. A value between
+							minimumScaleMultiplier and 1 is randomly generated for each particle.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="minimumspeedmultiplier" class="tsd-anchor"></a>
+					<h3>minimum<wbr>Speed<wbr>Multiplier</h3>
+					<div class="tsd-signature tsd-kind-icon">minimum<wbr>Speed<wbr>Multiplier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L58">Emitter.ts:58</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A minimum multiplier for the speed of a particle at all stages of its life. A value between
+							minimumSpeedMultiplier and 1 is randomly generated for each particle.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="norotation" class="tsd-anchor"></a>
+					<h3>no<wbr>Rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">no<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L108">Emitter.ts:108</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>If no particle rotation should occur. Starting rotation will still
+								affect the direction in which particles move. If the rotation speed
+							is set, then this will be ignored.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="ownerpos" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> owner<wbr>Pos</h3>
+					<div class="tsd-signature tsd-kind-icon">owner<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L207">Emitter.ts:207</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The world position of the emitter&#39;s owner, to add spawnPos to when
+							spawning particles. To change this, use updateOwnerPos().</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="particleblendmode" class="tsd-anchor"></a>
+					<h3>particle<wbr>Blend<wbr>Mode</h3>
+					<div class="tsd-signature tsd-kind-icon">particle<wbr>Blend<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L124">Emitter.ts:124</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The blend mode for all particles, as named by PIXI.blendModes.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="particlecount" class="tsd-anchor"></a>
+					<h3>particle<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">particle<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L232">Emitter.ts:232</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The current number of active particles.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="particleimages" class="tsd-anchor"></a>
+					<h3>particle<wbr>Images</h3>
+					<div class="tsd-signature tsd-kind-icon">particle<wbr>Images<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L45">Emitter.ts:45</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>An array of PIXI Texture objects.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="particlespacing" class="tsd-anchor"></a>
+					<h3>particle<wbr>Spacing</h3>
+					<div class="tsd-signature tsd-kind-icon">particle<wbr>Spacing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L192">Emitter.ts:192</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Spacing between particles in a burst. 0 gives a random angle for each particle.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="particlesperwave" class="tsd-anchor"></a>
+					<h3>particles<wbr>Per<wbr>Wave</h3>
+					<div class="tsd-signature tsd-kind-icon">particles<wbr>Per<wbr>Wave<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L188">Emitter.ts:188</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Number of particles to spawn time that the frequency allows for particles to spawn.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+					<a name="rotation" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> rotation</h3>
+					<div class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L202">Emitter.ts:202</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Rotation of the emitter or emitter&#39;s owner in degrees. This is added to
+								the calculated spawn angle.
+							To change this, use rotate().</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawnchance" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Chance</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Chance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L145">Emitter.ts:145</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Chance that a particle will be spawned on each opportunity to spawn one.
+							0 is 0%, 1 is 100%.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawncircle" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Circle</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Circle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Circle</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L184">Emitter.ts:184</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A circle relative to spawnPos to spawn particles inside if the spawn type is &quot;circle&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawnpolygonalchain" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Polygonal<wbr>Chain</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Polygonal<wbr>Chain<span class="tsd-signature-symbol">:</span> <a href="polygonalchain.html" class="tsd-signature-type">PolygonalChain</a></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L180">Emitter.ts:180</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A polygon relative to spawnPos to spawn particles on the chain if the spawn type is &quot;polygonalChain&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawnpos" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Pos</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L163">Emitter.ts:163</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>Position at which to spawn particles, relative to the emitter&#39;s owner&#39;s origin.
+								For example, the flames of a rocket travelling right might have a spawnPos
+								of {x:-50, y:0}.
+								to spawn at the rear of the rocket.
+							To change this, use updateSpawnPos().</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawnrect" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Rect</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Rectangle</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L176">Emitter.ts:176</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>A rectangle relative to spawnPos to spawn particles inside if the spawn type is &quot;rect&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="spawntype" class="tsd-anchor"></a>
+					<h3>spawn<wbr>Type</h3>
+					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L168">Emitter.ts:168</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>How the particles will be spawned. Valid types are &quot;point&quot;, &quot;rectangle&quot;,
+							&quot;circle&quot;, &quot;burst&quot;, &quot;ring&quot;.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="startalpha" class="tsd-anchor"></a>
+					<h3>start<wbr>Alpha</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Alpha<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L49">Emitter.ts:49</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The first node in the list of alpha values for all particles.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="startcolor" class="tsd-anchor"></a>
+					<h3>start<wbr>Color</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Color<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/color.html" class="tsd-signature-type">Color</a><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L84">Emitter.ts:84</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The first node in the list of  color values of all particles, as red, green, and blue
+							uints from 0-255.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="startscale" class="tsd-anchor"></a>
+					<h3>start<wbr>Scale</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Scale<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L74">Emitter.ts:74</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The first node in the list of scale values of all particles.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="startspeed" class="tsd-anchor"></a>
+					<h3>start<wbr>Speed</h3>
+					<div class="tsd-signature tsd-kind-icon">start<wbr>Speed<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L53">Emitter.ts:53</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The first node in the list of speed values of all particles.</p>
+						</div>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="autoupdate" class="tsd-anchor"></a>
+					<h3>auto<wbr>Update</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> autoUpdate<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> autoUpdate<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L700">Emitter.ts:700</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>If the update function is called automatically from the shared ticker.
+									Setting this to false requires calling the update function manually.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L701">Emitter.ts:701</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>If the update function is called automatically from the shared ticker.
+									Setting this to false requires calling the update function manually.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="emit" class="tsd-anchor"></a>
+					<h3>emit</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> emit<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> emit<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L689">Emitter.ts:689</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>If particles should be emitted during update() calls. Setting this to false
+									stops new particles from being created, but allows existing ones to die out.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L690">Emitter.ts:690</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>If particles should be emitted during update() calls. Setting this to false
+									stops new particles from being created, but allows existing ones to die out.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="frequency" class="tsd-anchor"></a>
+					<h3>frequency</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> frequency<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> frequency<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L374">Emitter.ts:374</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Time between particle spawns in seconds. If this value is not a number greater than 0,
+									it will be set to 1 (particle per second) to prevent infinite loops.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L375">Emitter.ts:375</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Time between particle spawns in seconds. If this value is not a number greater than 0,
+									it will be set to 1 (particle per second) to prevent infinite loops.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> parent<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L411">Emitter.ts:411</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The container to add particles to. Settings this will dump any active particles.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Container</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L412">Emitter.ts:412</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The container to add particles to. Settings this will dump any active particles.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">Container</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class">
+					<a name="particleconstructor" class="tsd-anchor"></a>
+					<h3>particle<wbr>Constructor</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> particleConstructor<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> particleConstructor<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L388">Emitter.ts:388</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The constructor used to create new particles. The default is
+										the built in Particle class. Setting this will dump any active or
+									pooled particles, if the emitter has already been used.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <a href="particle.html" class="tsd-signature-type">Particle</a></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L389">Emitter.ts:389</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The constructor used to create new particles. The default is
+										the built in Particle class. Setting this will dump any active or
+									pooled particles, if the emitter has already been used.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawnburst" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Burst</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Burst<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, i<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1104">Emitter.ts:1104</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for a burst type emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+								<li>
+									<h5>i: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle number in the current wave.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawncircle" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Circle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Circle<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1005">Emitter.ts:1005</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for a circle type emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawnpoint" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Point</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Point<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L961">Emitter.ts:961</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for a point type emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawnpolygonalchain" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Polygonal<wbr>Chain</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Polygonal<wbr>Chain<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1078">Emitter.ts:1078</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for polygonal chain.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawnrect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Rect</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Rect<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L981">Emitter.ts:981</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for a rectangle type emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+					<a name="_spawnring" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _spawn<wbr>Ring</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">_spawn<wbr>Ring<span class="tsd-signature-symbol">(</span>p<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a>, emitPosX<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, emitPosY<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1037">Emitter.ts:1037</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Positions a particle for a ring type emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>p: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to position and rotate.</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosX: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s x position</p>
+									</div>
+								</li>
+								<li>
+									<h5>emitPosY: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The emitter&#39;s y position</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="cleanup" class="tsd-anchor"></a>
+					<h3>cleanup</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">cleanup<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1120">Emitter.ts:1120</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Kills all active particles immediately.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L1137">Emitter.ts:1137</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Destroys the emitter and all of its particles.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="init" class="tsd-anchor"></a>
+					<h3>init</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>art<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L423">Emitter.ts:423</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets up the emitter based on the config settings.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>art: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A texture or array of textures to use for the particles.</p>
+									</div>
+								</li>
+								<li>
+									<h5>config: <span class="tsd-signature-type">any</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>A configuration object containing settings for the emitter.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="playonce" class="tsd-anchor"></a>
+					<h3>play<wbr>Once</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">play<wbr>Once<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L731">Emitter.ts:731</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Starts emitting particles and optionally calls a callback when particle emission is complete.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback for when emission is complete (all particles have died off)</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="playonceanddestroy" class="tsd-anchor"></a>
+					<h3>play<wbr>Once<wbr>And<wbr>Destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">play<wbr>Once<wbr>And<wbr>Destroy<span class="tsd-signature-symbol">(</span>callback<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">function</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L719">Emitter.ts:719</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Starts emitting particles, sets autoUpdate to true, and sets up the Emitter to destroy itself
+									when particle emission is complete.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> callback: <span class="tsd-signature-type">function</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Callback for when emission is complete (all particles have died off)</p>
+									</div>
+									<ul class="tsd-parameters">
+										<li class="tsd-parameter-siganture">
+											<ul class="tsd-signatures tsd-kind-type-literal tsd-is-not-exported">
+												<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+											</ul>
+											<ul class="tsd-descriptions">
+												<li class="tsd-description">
+													<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+												</li>
+											</ul>
+										</li>
+									</ul>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="recycle" class="tsd-anchor"></a>
+					<h3>recycle</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">recycle<span class="tsd-signature-symbol">(</span>particle<span class="tsd-signature-symbol">: </span><a href="particle.html" class="tsd-signature-type">Particle</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L613">Emitter.ts:613</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recycles an individual particle. For internal use only.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>internal</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>particle: <a href="particle.html" class="tsd-signature-type">Particle</a></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The particle to recycle.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="resetpositiontracking" class="tsd-anchor"></a>
+					<h3>reset<wbr>Position<wbr>Tracking</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">reset<wbr>Position<wbr>Tracking<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L680">Emitter.ts:680</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Prevents emitter position interpolation in the next update.
+										This should be used if you made a major position change of your emitter&#39;s owner
+									that was not normal movement.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="rotate" class="tsd-anchor"></a>
+					<h3>rotate</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">rotate<span class="tsd-signature-symbol">(</span>newRot<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L638">Emitter.ts:638</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets the rotation of the emitter to a new value.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>newRot: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new rotation, in degrees.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="update" class="tsd-anchor"></a>
+					<h3>update</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<span class="tsd-signature-symbol">(</span>delta<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L741">Emitter.ts:741</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates all particles spawned by this emitter and emits new ones.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>delta: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Time elapsed since the previous frame, in <strong>seconds</strong>.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updateownerpos" class="tsd-anchor"></a>
+					<h3>update<wbr>Owner<wbr>Pos</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Owner<wbr>Pos<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L668">Emitter.ts:668</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the position of the emitter&#39;s owner. You should call this if you are adding
+									particles to the world container that your emitter&#39;s owner is moving around in.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new x value of the emitter&#39;s owner.</p>
+									</div>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new y value of the emitter&#39;s owner.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="updatespawnpos" class="tsd-anchor"></a>
+					<h3>update<wbr>Spawn<wbr>Pos</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Spawn<wbr>Pos<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/3627764/src/Emitter.ts#L655">Emitter.ts:655</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Changes the spawn position of the emitter.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>x: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new x value of the spawn position for the emitter.</p>
+									</div>
+								</li>
+								<li>
+									<h5>y: <span class="tsd-signature-type">number</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The new y value of the spawn position for the emitter.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="../globals.html"><em>Globals</em></a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="animatedparticle.html" class="tsd-kind-icon">Animated<wbr>Particle</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="emitter.html" class="tsd-kind-icon">Emitter</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class">
+								<a href="emitter.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_activeparticlesfirst" class="tsd-kind-icon">_active<wbr>Particles<wbr>First</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_activeparticleslast" class="tsd-kind-icon">_active<wbr>Particles<wbr>Last</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_autoupdate" class="tsd-kind-icon">_auto<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_completecallback" class="tsd-kind-icon">_complete<wbr>Callback</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_destroywhencomplete" class="tsd-kind-icon">_destroy<wbr>When<wbr>Complete</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_emit" class="tsd-kind-icon">_emit</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_emitterlife" class="tsd-kind-icon">_emitter<wbr>Life</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_frequency" class="tsd-kind-icon">_frequency</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_origart" class="tsd-kind-icon">_orig<wbr>Art</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_origconfig" class="tsd-kind-icon">_orig<wbr>Config</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_parent" class="tsd-kind-icon">_parent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_particleconstructor" class="tsd-kind-icon">_particle<wbr>Constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_poolfirst" class="tsd-kind-icon">_pool<wbr>First</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_poschanged" class="tsd-kind-icon">_pos<wbr>Changed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_prevemitterpos" class="tsd-kind-icon">_prev<wbr>Emitter<wbr>Pos</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_prevposisvalid" class="tsd-kind-icon">_prev<wbr>Pos<wbr>IsValid</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="emitter.html#_spawnfunc" class="tsd-kind-icon">_spawn<wbr>Func</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawntimer" class="tsd-kind-icon">_spawn<wbr>Timer</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#acceleration" class="tsd-kind-icon">acceleration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#addatback" class="tsd-kind-icon">add<wbr>AtBack</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#anglestart" class="tsd-kind-icon">angle<wbr>Start</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#customease" class="tsd-kind-icon">custom<wbr>Ease</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#emitterlifetime" class="tsd-kind-icon">emitter<wbr>Lifetime</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#extradata" class="tsd-kind-icon">extra<wbr>Data</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#maxlifetime" class="tsd-kind-icon">max<wbr>Lifetime</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#maxparticles" class="tsd-kind-icon">max<wbr>Particles</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#maxrotationspeed" class="tsd-kind-icon">max<wbr>Rotation<wbr>Speed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#maxspeed" class="tsd-kind-icon">max<wbr>Speed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#maxstartrotation" class="tsd-kind-icon">max<wbr>Start<wbr>Rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#minlifetime" class="tsd-kind-icon">min<wbr>Lifetime</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#minrotationspeed" class="tsd-kind-icon">min<wbr>Rotation<wbr>Speed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#minstartrotation" class="tsd-kind-icon">min<wbr>Start<wbr>Rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#minimumscalemultiplier" class="tsd-kind-icon">minimum<wbr>Scale<wbr>Multiplier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#minimumspeedmultiplier" class="tsd-kind-icon">minimum<wbr>Speed<wbr>Multiplier</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#norotation" class="tsd-kind-icon">no<wbr>Rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#ownerpos" class="tsd-kind-icon">owner<wbr>Pos</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#particleblendmode" class="tsd-kind-icon">particle<wbr>Blend<wbr>Mode</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#particlecount" class="tsd-kind-icon">particle<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#particleimages" class="tsd-kind-icon">particle<wbr>Images</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#particlespacing" class="tsd-kind-icon">particle<wbr>Spacing</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#particlesperwave" class="tsd-kind-icon">particles<wbr>Per<wbr>Wave</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#rotation" class="tsd-kind-icon">rotation</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawnchance" class="tsd-kind-icon">spawn<wbr>Chance</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawncircle" class="tsd-kind-icon">spawn<wbr>Circle</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawnpolygonalchain" class="tsd-kind-icon">spawn<wbr>Polygonal<wbr>Chain</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawnpos" class="tsd-kind-icon">spawn<wbr>Pos</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawnrect" class="tsd-kind-icon">spawn<wbr>Rect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#spawntype" class="tsd-kind-icon">spawn<wbr>Type</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#startalpha" class="tsd-kind-icon">start<wbr>Alpha</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#startcolor" class="tsd-kind-icon">start<wbr>Color</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#startscale" class="tsd-kind-icon">start<wbr>Scale</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#startspeed" class="tsd-kind-icon">start<wbr>Speed</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="emitter.html#autoupdate" class="tsd-kind-icon">auto<wbr>Update</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="emitter.html#emit" class="tsd-kind-icon">emit</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="emitter.html#frequency" class="tsd-kind-icon">frequency</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="emitter.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class">
+								<a href="emitter.html#particleconstructor" class="tsd-kind-icon">particle<wbr>Constructor</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawnburst" class="tsd-kind-icon">_spawn<wbr>Burst</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawncircle" class="tsd-kind-icon">_spawn<wbr>Circle</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawnpoint" class="tsd-kind-icon">_spawn<wbr>Point</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawnpolygonalchain" class="tsd-kind-icon">_spawn<wbr>Polygonal<wbr>Chain</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawnrect" class="tsd-kind-icon">_spawn<wbr>Rect</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-protected">
+								<a href="emitter.html#_spawnring" class="tsd-kind-icon">_spawn<wbr>Ring</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#cleanup" class="tsd-kind-icon">cleanup</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#init" class="tsd-kind-icon">init</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#playonce" class="tsd-kind-icon">play<wbr>Once</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#playonceanddestroy" class="tsd-kind-icon">play<wbr>Once<wbr>And<wbr>Destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#recycle" class="tsd-kind-icon">recycle</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#resetpositiontracking" class="tsd-kind-icon">reset<wbr>Position<wbr>Tracking</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#rotate" class="tsd-kind-icon">rotate</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#update" class="tsd-kind-icon">update</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#updateownerpos" class="tsd-kind-icon">update<wbr>Owner<wbr>Pos</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="emitter.html#updatespawnpos" class="tsd-kind-icon">update<wbr>Spawn<wbr>Pos</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="pathparticle.html" class="tsd-kind-icon">Path<wbr>Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="polygonalchain.html" class="tsd-kind-icon">Polygonal<wbr>Chain</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="propertylist.html" class="tsd-kind-icon">Property<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="propertynode.html" class="tsd-kind-icon">Property<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/animatedparticleart.html" class="tsd-kind-icon">Animated<wbr>Particle<wbr>Art</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/basicpoint.html" class="tsd-kind-icon">Basic<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/color.html" class="tsd-kind-icon">Color</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/easesegment.html" class="tsd-kind-icon">Ease<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/parsedanimatedparticleart.html" class="tsd-kind-icon">Parsed<wbr>Animated<wbr>Particle<wbr>Art</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/particleconstructor.html" class="tsd-kind-icon">Particle<wbr>Constructor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/segment.html" class="tsd-kind-icon">Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/valuelist.html" class="tsd-kind-icon">Value<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/valuestep.html" class="tsd-kind-icon">Value<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="../globals.html#simpleease" class="tsd-kind-icon">Simple<wbr>Ease</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="../assets/js/search.js"><' + '/script>');</script>
+</body>
+</html>

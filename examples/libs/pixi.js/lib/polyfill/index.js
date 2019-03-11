@@ -6,6 +6,8 @@ require('./requestAnimationFrame');
 
 require('./Math.sign');
 
+require('./Number.isInteger');
+
 if (!window.ArrayBuffer) {
     window.ArrayBuffer = Array;
 }

@@ -1,77 +1,79 @@
 {
-  "_args": [
-    [
-      "pixi.js@4.7.0",
-      "E:\\github\\pixi-particles"
-    ]
-  ],
-  "_development": true,
-  "_from": "pixi.js@4.7.0",
-  "_id": "pixi.js@4.7.0",
-  "_inBundle": false,
-  "_integrity": "sha1-K5SAdY7q3KqfFDRCrYWSSt9MyTI=",
-  "_location": "/pixi.js",
-  "_phantomChildren": {},
-  "_requested": {
-    "type": "version",
-    "registry": true,
-    "raw": "pixi.js@4.7.0",
-    "name": "pixi.js",
-    "escapedName": "pixi.js",
-    "rawSpec": "4.7.0",
-    "saveSpec": null,
-    "fetchSpec": "4.7.0"
-  },
-  "_requiredBy": [
-    "#DEV:/"
-  ],
-  "_resolved": "https://registry.npmjs.org/pixi.js/-/pixi.js-4.7.0.tgz",
-  "_spec": "4.7.0",
-  "_where": "E:\\github\\pixi-particles",
-  "author": {
-    "name": "Mat Groves"
-  },
-  "bugs": {
-    "url": "https://github.com/pixijs/pixi.js/issues"
-  },
+  "name": "pixi.js",
+  "version": "4.8.6",
+  "description": "The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.",
+  "author": "Mat Groves",
   "contributors": [
-    {
-      "name": "Ivan Popelyshev",
-      "email": "ivan.popelyshev@gmail.com"
-    },
-    {
-      "name": "Matt Karl",
-      "email": "matt@mattkarl.com"
-    },
-    {
-      "name": "Chad Engler",
-      "email": "chad@pantherdev.com"
-    },
-    {
-      "name": "Richard Davey",
-      "email": "rdavey@gmail.com"
-    }
+    "Ivan Popelyshev <ivan.popelyshev@gmail.com>",
+    "Matt Karl <matt@mattkarl.com>",
+    "Chad Engler <chad@pantherdev.com>",
+    "Richard Davey <rdavey@gmail.com>"
+  ],
+  "main": "./lib/index.js",
+  "homepage": "http://goodboydigital.com/",
+  "bugs": "https://github.com/pixijs/pixi.js/issues",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/pixijs/pixi.js.git"
+  },
+  "scripts": {
+    "clean": "rimraf dist lib && mkdirp dist && mkdir lib",
+    "prestart": "npm run clean",
+    "start": "parallelshell \"npm run watch\" \"npm run watch:lint\" \"npm run watch:lib\"",
+    "watch": "npm run dist -- --watch",
+    "watch:lib": "npm run lib -- --watch",
+    "watch:lint": "watch \"eslint scripts src test || exit 0\" src",
+    "test": "npm run lint && npm run dist && npm run coverage",
+    "unit-test": "floss --path test/index.js",
+    "unit-test:debug": "npm run unit-test -- --debug",
+    "prerenders": "npm --prefix scripts/renders i scripts/renders",
+    "renders": "electron scripts/renders",
+    "precoverage": "rimraf coverage",
+    "coverage": "npm run unit-test -- -c dist/pixi.js -s -h",
+    "lint": "eslint scripts src test --max-warnings 0",
+    "lintfix": "npm run lint --fix",
+    "prebuild": "npm run lint",
+    "build": "npm run dist",
+    "predist": "rimraf dist/**",
+    "dist": "pixify -d dist -n PIXI -o pixi -t babelify",
+    "prelib": "rimraf lib/**",
+    "lib": "babel src --out-dir lib -s",
+    "predocs": "rimraf docs/**",
+    "docs": "jsdoc -c scripts/jsdoc.conf.json -R README.md",
+    "publish:patch": "npm version patch && npm publish",
+    "publish:minor": "npm version minor && npm publish",
+    "publish:major": "npm version major && npm publish",
+    "postversion": "npm run clean && npm run build && npm run lib && npm run unit-test",
+    "postpublish": "git push && git push --tags"
+  },
+  "files": [
+    "dist/",
+    "lib/",
+    "CONTRIBUTING.md",
+    "LICENSE",
+    "package.json",
+    "README.md"
   ],
   "dependencies": {
     "bit-twiddle": "^1.0.2",
-    "earcut": "^2.0.7",
+    "earcut": "^2.1.4",
     "eventemitter3": "^2.0.0",
-    "ismobilejs": "^0.4.0",
+    "ismobilejs": "^0.5.1",
     "object-assign": "^4.0.1",
     "pixi-gl-core": "^1.1.4",
     "remove-array-items": "^1.0.0",
-    "resource-loader": "^2.1.1"
+    "resource-loader": "^2.2.3"
   },
-  "description": "The HTML5 Creation Engine: Create beautiful digital content with the fastest, most flexible 2D WebGL renderer.",
   "devDependencies": {
-    "@pixi/jsdoc-template": "^2.0.0",
+    "@pixi/jsdoc-template": "^2.4.1",
     "babel-cli": "^6.18.0",
     "babel-plugin-static-fs": "^1.1.0",
     "babel-plugin-version-inline": "^1.0.0",
     "babel-preset-es2015": "^6.14.0",
     "babelify": "^7.3.0",
     "del": "^2.2.0",
-    "electron": "^1.4.15",
+    "electron": "^1.8.8",
     "eslint": "^3.5.0",
     "floss": "^2.0.1",
     "js-md5": "^0.4.1",
@@ -82,52 +84,5 @@
     "pixify": "^1.7.0",
     "rimraf": "^2.5.3",
     "watch": "^0.19.1"
-  },
-  "files": [
-    "dist/",
-    "lib/",
-    "CONTRIBUTING.md",
-    "LICENSE",
-    "package.json",
-    "README.md"
-  ],
-  "homepage": "http://goodboydigital.com/",
-  "license": "MIT",
-  "main": "./lib/index.js",
-  "name": "pixi.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/pixijs/pixi.js.git"
-  },
-  "scripts": {
-    "build": "npm run dist",
-    "clean": "rimraf dist lib && mkdirp dist && mkdir lib",
-    "coverage": "npm run unit-test -- -c dist/pixi.js -s -h",
-    "dist": "pixify -d dist -n PIXI -o pixi -t babelify",
-    "docs": "jsdoc -c scripts/jsdoc.conf.json -R README.md",
-    "lib": "babel src --out-dir lib -s",
-    "lint": "eslint scripts src test --max-warnings 0",
-    "lintfix": "npm run lint --fix",
-    "postpublish": "git push && git push --tags",
-    "postversion": "npm run clean && npm run build && npm run lib && npm run unit-test",
-    "prebuild": "npm run lint",
-    "precoverage": "rimraf coverage",
-    "predist": "rimraf dist/**",
-    "predocs": "rimraf docs/**",
-    "prelib": "rimraf lib/**",
-    "prerenders": "npm --prefix scripts/renders i scripts/renders",
-    "prestart": "npm run clean",
-    "publish:major": "npm version major && npm publish",
-    "publish:minor": "npm version minor && npm publish",
-    "publish:patch": "npm version patch && npm publish",
-    "renders": "electron scripts/renders",
-    "start": "parallelshell \"npm run watch\" \"npm run watch:lint\" \"npm run watch:lib\"",
-    "test": "npm run lint && npm run dist && npm run coverage",
-    "unit-test": "floss --path test/index.js",
-    "unit-test:debug": "npm run unit-test -- --debug",
-    "watch": "npm run dist -- --watch",
-    "watch:lib": "npm run lib -- --watch",
-    "watch:lint": "watch \"eslint scripts src test || exit 0\" src"
-  },
-  "version": "4.7.0"
+  }
 }

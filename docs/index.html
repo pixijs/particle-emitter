@@ -1,542 +1,388 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html class="default no-js">
 <head>
-    <meta charset="utf-8">
-    <title>Index</title>
-    
-    
-    
-    
-    
-    <meta property="og:title" content=""/>
-    <meta property="og:type" content="website"/>
-    <meta property="og:image" content=""/>
-    
-    <meta property="og:url" content=""/>
-    
-    <script src="scripts/prettify/prettify.js"></script>
-    <script src="scripts/prettify/lang-css.js"></script>
-    <script src="scripts/jquery.min.js"></script>
-    <!--[if lt IE 9]>
-      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
-    <link type="text/css" rel="stylesheet" href="styles/bootstrap.min.css">
-    <link type="text/css" rel="stylesheet" href="styles/jaguar.css">
-    
-    
-    <script>
-    var config = {"monospaceLinks":false,"cleverLinks":false,"default":{"outputSourceFiles":true},"applicationName":"PixiParticles","copyright":"Copyright © 2015 CloudKid, LLC.","disqus":"","googleAnalytics":"","openGraph":{"title":"","type":"website","image":"","site_name":"","url":""},"meta":{"title":"","description":"","keyword":""},"linenums":true};
-    </script>
-    
-
-    
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>pixi-particles</title>
+	<meta name="description" content="">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="assets/css/main.css">
 </head>
 <body>
-<div id="wrap" class="clearfix">
-    
-<div class="navigation">
-    <h3 class="applicationName"><a href="index.html">PixiParticles</a></h3>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="index.html" class="title">pixi-particles</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="globals.html">Globals</a>
+				</li>
+			</ul>
+			<h1> pixi-particles</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<div class="tsd-panel tsd-typography">
+				<h1 id="pixi-particles">Pixi Particles</h1>
+				<p><a href="https://travis-ci.org/pixijs/pixi-particles"><img src="https://travis-ci.org/pixijs/pixi-particles.svg" alt="Build Status"></a> <a href="https://david-dm.org/pixijs/pixi-particles"><img src="https://david-dm.org/pixijs/pixi-particles.svg?style=flat" alt="Dependency Status"></a> <a href="https://github.com/pixijs/pixi-particles/releases/latest"><img src="https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg" alt="GitHub version"></a></p>
+				<p>A particle system library for the <a href="https://github.com/pixijs/pixi.js">PixiJS</a> library. Also, we created an <a href="http://pixijs.github.io/pixi-particles-editor/">interactive particle editor</a> to design and preview custom particle emitters which utilitze PixiParticles.</p>
+				<h2 id="breaking-changes-in-v3-from-v2">Breaking changes in v3 from v2</h2>
+				<ul>
+					<li>On <code>Emitter</code>, <code>playOnce()</code> no longer sets <code>autoUpdate</code> to true. Set it manually before use.
+					<code>playOnceAndDestroy()</code> is unaffected.</li>
+					<li>On <code>Emitter</code>, <code>start*</code> and <code>end*</code> properties for alpha, color, scale, and speed have been
+					replaced by a singly linked list of <code>PropertyNode</code> objects.</li>
+					<li>Dropped support for PIXI v3. Please use v4.</li>
+				</ul>
+				<h2 id="sample-usage">Sample Usage</h2>
+				<p>Please see the examples for various pre-made particle configurations.</p>
+				<pre><code class="language-js"><span class="hljs-comment">// Create a new emitter</span>
+<span class="hljs-keyword">var</span> emitter = <span class="hljs-keyword">new</span> PIXI.particles.Emitter(
 
-    <div class="search">
-        <input id="search" type="text" class="form-control input-sm" placeholder="Search Documentations">
-    </div>
-    <ul class="list">
-    
-        <li class="item" data-name="PIXI.particles.AnimatedParticle">
-            <span class="title">
-                <a href="PIXI.particles.AnimatedParticle.html">PIXI.particles.AnimatedParticle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.AnimatedParticle.parseArt"><a href="PIXI.particles.AnimatedParticle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#applyArt"><a href="PIXI.particles.AnimatedParticle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#destroy"><a href="PIXI.particles.AnimatedParticle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#init"><a href="PIXI.particles.AnimatedParticle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#kill"><a href="PIXI.particles.AnimatedParticle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.AnimatedParticle#update"><a href="PIXI.particles.AnimatedParticle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.Emitter">
-            <span class="title">
-                <a href="PIXI.particles.Emitter.html">PIXI.particles.Emitter</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.Emitter#autoUpdate"><a href="PIXI.particles.Emitter.html#autoUpdate">autoUpdate</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#emit"><a href="PIXI.particles.Emitter.html#emit">emit</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#frequency"><a href="PIXI.particles.Emitter.html#frequency">frequency</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#parent"><a href="PIXI.particles.Emitter.html#parent">parent</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#particleConstructor"><a href="PIXI.particles.Emitter.html#particleConstructor">particleConstructor</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.Emitter#cleanup"><a href="PIXI.particles.Emitter.html#cleanup">cleanup</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#destroy"><a href="PIXI.particles.Emitter.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#init"><a href="PIXI.particles.Emitter.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#playOnce"><a href="PIXI.particles.Emitter.html#playOnce">playOnce</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#playOnceAndDestroy"><a href="PIXI.particles.Emitter.html#playOnceAndDestroy">playOnceAndDestroy</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#resetPositionTracking"><a href="PIXI.particles.Emitter.html#resetPositionTracking">resetPositionTracking</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#rotate"><a href="PIXI.particles.Emitter.html#rotate">rotate</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#update"><a href="PIXI.particles.Emitter.html#update">update</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#updateOwnerPos"><a href="PIXI.particles.Emitter.html#updateOwnerPos">updateOwnerPos</a></li>
-            
-                <li data-name="PIXI.particles.Emitter#updateSpawnPos"><a href="PIXI.particles.Emitter.html#updateSpawnPos">updateSpawnPos</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.Particle">
-            <span class="title">
-                <a href="PIXI.particles.Particle.html">PIXI.particles.Particle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.Particle.parseArt"><a href="PIXI.particles.Particle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.Particle.parseData"><a href="PIXI.particles.Particle.html#.parseData">parseData</a></li>
-            
-                <li data-name="PIXI.particles.Particle#applyArt"><a href="PIXI.particles.Particle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.Particle#destroy"><a href="PIXI.particles.Particle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.Particle#init"><a href="PIXI.particles.Particle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.Particle#kill"><a href="PIXI.particles.Particle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.Particle#update"><a href="PIXI.particles.Particle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.ParticleUtils">
-            <span class="title">
-                <a href="PIXI.particles.ParticleUtils.html">PIXI.particles.ParticleUtils</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            <span class="subtitle">Members</span>
-            
-                <li data-name="PIXI.particles.ParticleUtils.verbose"><a href="PIXI.particles.ParticleUtils.html#.verbose">verbose</a></li>
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.ParticleUtils.combineRGBComponents"><a href="PIXI.particles.ParticleUtils.html#.combineRGBComponents">combineRGBComponents</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.createSteppedGradient"><a href="PIXI.particles.ParticleUtils.html#.createSteppedGradient">createSteppedGradient</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.generateEase"><a href="PIXI.particles.ParticleUtils.html#.generateEase">generateEase</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.getBlendMode"><a href="PIXI.particles.ParticleUtils.html#.getBlendMode">getBlendMode</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.hexToRGB"><a href="PIXI.particles.ParticleUtils.html#.hexToRGB">hexToRGB</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.length"><a href="PIXI.particles.ParticleUtils.html#.length">length</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.normalize"><a href="PIXI.particles.ParticleUtils.html#.normalize">normalize</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.rotatePoint"><a href="PIXI.particles.ParticleUtils.html#.rotatePoint">rotatePoint</a></li>
-            
-                <li data-name="PIXI.particles.ParticleUtils.scaleBy"><a href="PIXI.particles.ParticleUtils.html#.scaleBy">scaleBy</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.PathParticle">
-            <span class="title">
-                <a href="PIXI.particles.PathParticle.html">PIXI.particles.PathParticle</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.PathParticle.parseArt"><a href="PIXI.particles.PathParticle.html#.parseArt">parseArt</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle.parseData"><a href="PIXI.particles.PathParticle.html#.parseData">parseData</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#applyArt"><a href="PIXI.particles.PathParticle.html#applyArt">applyArt</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#destroy"><a href="PIXI.particles.PathParticle.html#destroy">destroy</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#init"><a href="PIXI.particles.PathParticle.html#init">init</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#kill"><a href="PIXI.particles.PathParticle.html#kill">kill</a></li>
-            
-                <li data-name="PIXI.particles.PathParticle#update"><a href="PIXI.particles.PathParticle.html#update">update</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.PolygonalChain">
-            <span class="title">
-                <a href="PIXI.particles.PolygonalChain.html">PIXI.particles.PolygonalChain</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.PropertyList">
-            <span class="title">
-                <a href="PIXI.particles.PropertyList.html">PIXI.particles.PropertyList</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-        <li class="item" data-name="PIXI.particles.PropertyNode">
-            <span class="title">
-                <a href="PIXI.particles.PropertyNode.html">PIXI.particles.PropertyNode</a>
-                
-            </span>
-            <ul class="members itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="typedefs itemMembers">
-            
-            </ul>
-            <ul class="methods itemMembers">
-            
-            <span class="subtitle">Methods</span>
-            
-                <li data-name="PIXI.particles.PropertyNode.createListFromArray"><a href="PIXI.particles.PropertyNode.html#.createListFromArray">createListFromArray</a></li>
-            
-            </ul>
-            <ul class="events itemMembers">
-            
-            </ul>
-        </li>
-    
-    </ul>
-</div>
-    <div class="main">
-        <h1 class="page-title" data-filename="index.html">Index</h1>
-        
-
-
-    
-
-
-    <h3> </h3>
-
-
-
-
-
-
-
-
-    
-
-
-
-
-    <section>
-        <article class="readme"><h1>Pixi Particles</h1><p><a target="_blank" href="https://travis-ci.org/pixijs/pixi-particles"><img src="https://travis-ci.org/pixijs/pixi-particles.svg" alt="Build Status"></a> <a target="_blank" href="https://david-dm.org/pixijs/pixi-particles"><img src="https://david-dm.org/pixijs/pixi-particles.svg?style=flat" alt="Dependency Status"></a> <a target="_blank" href="https://github.com/pixijs/pixi-particles/releases/latest"><img src="https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg" alt="GitHub version"></a></p>
-<p>A particle system library for the <a target="_blank" href="https://github.com/pixijs/pixi.js">PixiJS</a> library. Also, we created an <a target="_blank" href="http://pixijs.github.io/pixi-particles-editor/">interactive particle editor</a> to design and preview custom particle emitters which utilitze PixiParticles.</p>
-<h2>Breaking changes in v3 from v2</h2><ul>
-<li>On <code>Emitter</code>, <code>playOnce()</code> no longer sets <code>autoUpdate</code> to true. Set it manually before use.<br>  <code>playOnceAndDestroy()</code> is unaffected.</li>
-<li>On <code>Emitter</code>, <code>start*</code> and <code>end*</code> properties for alpha, color, scale, and speed have been<br>  replaced by a singly linked list of <code>PropertyNode</code> objects.</li>
-<li>Dropped support for PIXI v3. Please use v4.</li>
-</ul>
-<h2>Sample Usage</h2><p>Please see the examples for various pre-made particle configurations.</p>
-<pre class="prettyprint source lang-js"><code>// Create a new emitter
-var emitter = new PIXI.particles.Emitter(
-
-    // The PIXI.Container to put the emitter in
-    // if using blend modes, it's important to put this
-    // on top of a bitmap, and not use the root stage Container
+    <span class="hljs-comment">// The PIXI.Container to put the emitter in</span>
+    <span class="hljs-comment">// if using blend modes, it's important to put this</span>
+    <span class="hljs-comment">// on top of a bitmap, and not use the root stage Container</span>
     container,
 
-    // The collection of particle images to use
-    [PIXI.Texture.fromImage('image.jpg')],
+    <span class="hljs-comment">// The collection of particle images to use</span>
+    [PIXI.Texture.fromImage(<span class="hljs-string">'image.jpg'</span>)],
 
-    // Emitter configuration, edit this to change the look
-    // of the emitter
+    <span class="hljs-comment">// Emitter configuration, edit this to change the look</span>
+    <span class="hljs-comment">// of the emitter</span>
     {
-        alpha: {
-            list: [
+        <span class="hljs-attr">alpha</span>: {
+            <span class="hljs-attr">list</span>: [
                 {
-                    value: 0.8,
-                    time: 0
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">0.8</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">0</span>
                 },
                 {
-                    value: 0.1,
-                    time: 1
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">0.1</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">1</span>
                 }
             ],
-            isStepped: false
+            <span class="hljs-attr">isStepped</span>: <span class="hljs-literal">false</span>
         },
-        scale: {
-            list: [
+        <span class="hljs-attr">scale</span>: {
+            <span class="hljs-attr">list</span>: [
                 {
-                    value: 1,
-                    time: 0
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">1</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">0</span>
                 },
                 {
-                    value: 0.3,
-                    time: 1
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">0.3</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">1</span>
                 }
             ],
-            isStepped: false
+            <span class="hljs-attr">isStepped</span>: <span class="hljs-literal">false</span>
         },
-        color: {
-            list: [
+        <span class="hljs-attr">color</span>: {
+            <span class="hljs-attr">list</span>: [
                 {
-                    value: &quot;fb1010&quot;,
-                    time: 0
+                    <span class="hljs-attr">value</span>: <span class="hljs-string">"fb1010"</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">0</span>
                 },
                 {
-                    value: &quot;f5b830&quot;,
-                    time: 1
+                    <span class="hljs-attr">value</span>: <span class="hljs-string">"f5b830"</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">1</span>
                 }
             ],
-            isStepped: false
+            <span class="hljs-attr">isStepped</span>: <span class="hljs-literal">false</span>
         },
-        speed: {
-            list: [
+        <span class="hljs-attr">speed</span>: {
+            <span class="hljs-attr">list</span>: [
                 {
-                    value: 200,
-                    time: 0
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">200</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">0</span>
                 },
                 {
-                    value: 100,
-                    time: 1
+                    <span class="hljs-attr">value</span>: <span class="hljs-number">100</span>,
+                    <span class="hljs-attr">time</span>: <span class="hljs-number">1</span>
                 }
             ],
-            isStepped: false
+            <span class="hljs-attr">isStepped</span>: <span class="hljs-literal">false</span>
         },
-        startRotation: {
-            min: 0,
-            max: 360
+        <span class="hljs-attr">startRotation</span>: {
+            <span class="hljs-attr">min</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">max</span>: <span class="hljs-number">360</span>
         },
-        rotationSpeed: {
-            min: 0,
-            max: 0
+        <span class="hljs-attr">rotationSpeed</span>: {
+            <span class="hljs-attr">min</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">max</span>: <span class="hljs-number">0</span>
         },
-        lifetime: {
-            min: 0.5,
-            max: 0.5
+        <span class="hljs-attr">lifetime</span>: {
+            <span class="hljs-attr">min</span>: <span class="hljs-number">0.5</span>,
+            <span class="hljs-attr">max</span>: <span class="hljs-number">0.5</span>
         },
-        frequency: 0.008,
-        spawnChance: 1,
-        particlesPerWave: 1,
-        emitterLifetime: 0.31,
-        maxParticles: 1000,
-        pos: {
-            x: 0,
-            y: 0
+        <span class="hljs-attr">frequency</span>: <span class="hljs-number">0.008</span>,
+        <span class="hljs-attr">spawnChance</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">particlesPerWave</span>: <span class="hljs-number">1</span>,
+        <span class="hljs-attr">emitterLifetime</span>: <span class="hljs-number">0.31</span>,
+        <span class="hljs-attr">maxParticles</span>: <span class="hljs-number">1000</span>,
+        <span class="hljs-attr">pos</span>: {
+            <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>
         },
-        addAtBack: false,
-        spawnType: &quot;circle&quot;,
-        spawnCircle: {
-            x: 0,
-            y: 0,
-            r: 10
+        <span class="hljs-attr">addAtBack</span>: <span class="hljs-literal">false</span>,
+        <span class="hljs-attr">spawnType</span>: <span class="hljs-string">"circle"</span>,
+        <span class="hljs-attr">spawnCircle</span>: {
+            <span class="hljs-attr">x</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">y</span>: <span class="hljs-number">0</span>,
+            <span class="hljs-attr">r</span>: <span class="hljs-number">10</span>
         }
     }
 );
 
-// Calculate the current time
-var elapsed = Date.now();
+<span class="hljs-comment">// Calculate the current time</span>
+<span class="hljs-keyword">var</span> elapsed = <span class="hljs-built_in">Date</span>.now();
 
-// Update function every frame
-var update = function(){
+<span class="hljs-comment">// Update function every frame</span>
+<span class="hljs-keyword">var</span> update = <span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>)</span>{
 
-    // Update the next frame
+    <span class="hljs-comment">// Update the next frame</span>
     requestAnimationFrame(update);
 
-    var now = Date.now();
+    <span class="hljs-keyword">var</span> now = <span class="hljs-built_in">Date</span>.now();
 
-    // The emitter requires the elapsed
-    // number of seconds since the last update
-    emitter.update((now - elapsed) * 0.001);
+    <span class="hljs-comment">// The emitter requires the elapsed</span>
+    <span class="hljs-comment">// number of seconds since the last update</span>
+    emitter.update((now - elapsed) * <span class="hljs-number">0.001</span>);
     elapsed = now;
 
-    // Should re-render the PIXI Stage
-    // renderer.render(stage);
+    <span class="hljs-comment">// Should re-render the PIXI Stage</span>
+    <span class="hljs-comment">// renderer.render(stage);</span>
 };
 
-// Start emitting
-emitter.emit = true;
+<span class="hljs-comment">// Start emitting</span>
+emitter.emit = <span class="hljs-literal">true</span>;
 
-// Start the update
-update();</code></pre><h2>Note on Emitter Cleanup</h2><p>When using PixiJS 3+, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, <em>in WebGL only</em>, reset the SpriteRenderer's sprite batching with <code>yourRenderer.plugins.sprite.sprites.length = 0;</code></p>
-<h2>Documentation</h2><p>http://pixijs.github.io/pixi-particles/docs/</p>
-<h2>Installation</h2><p>PixiParticles can be installed using Bower or NPM.</p>
-<pre class="prettyprint source lang-bash"><code>bower install pixi-particles</code></pre><pre class="prettyprint source lang-bash"><code>npm install pixi-particles</code></pre><h2>Examples</h2><ul>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/explosion.html">Explosion 1</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/explosion2.html">Explosion 2</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/explosion3.html">Explosion 3</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/explosionRing.html">Explosion Ring</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/megamanDeath.html">Megaman Death</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/rain.html">Rain</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/flame.html">Flame</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/flameUneven.html">Flame - Sputtering</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/flameAndSmoke.html">Flame with Smoke</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/flameStepped.html">Flame - Stepped Color</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/gas.html">Gas</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/bubbles.html">Bubbles</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/bubbleSpray.html">Bubble Spray</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/bubbleStream.html">Bubble Stream</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/bubbleStreamPath.html">Bubble Stream - path following</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/bubblesVertical.html">Vertical Bubbles</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/cartoonSmoke.html">Cartoon Smoke</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/cartoonSmoke2.html">Cartoon Smoke Alt.</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/cartoonSmokeBlast.html">Cartoon Smoke Blast</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/snow.html">Snow</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/sparks.html">Sparks</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/fountain.html">Fountain</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/coins.html">Animated Coins</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html">Animated Bubbles</a></li>
-<li><a target="_blank" href="https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html">Particle Container Performance</a></li>
-</ul>
-<h2>Typescript</h2><p>You can use require to get the namespace for pixi-particles, or use a triple slash reference for using the PIXI.particles namespace.</p>
-<pre class="prettyprint source lang-typescript"><code>// Note: Must also include the pixi.js typings globally!
-import particles = require('pixi-particles');
+<span class="hljs-comment">// Start the update</span>
+update();</code></pre>
+				<h2 id="note-on-emitter-cleanup">Note on Emitter Cleanup</h2>
+				<p>When using PixiJS 3+, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, <em>in WebGL only</em>, reset the SpriteRenderer&#39;s sprite batching with <code>yourRenderer.plugins.sprite.sprites.length = 0;</code></p>
+				<h2 id="documentation">Documentation</h2>
+				<p><a href="http://pixijs.github.io/pixi-particles/docs/">http://pixijs.github.io/pixi-particles/docs/</a></p>
+				<h2 id="installation">Installation</h2>
+				<p>PixiParticles can be installed or NPM.</p>
+				<pre><code class="language-bash">npm install pixi-particles</code></pre>
+				<h2 id="examples">Examples</h2>
+				<ul>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosion.html">Explosion 1</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosion2.html">Explosion 2</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosion3.html">Explosion 3</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosionRing.html">Explosion Ring</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/megamanDeath.html">Megaman Death</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/rain.html">Rain</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/flame.html">Flame</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/flameUneven.html">Flame - Sputtering</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/flameAndSmoke.html">Flame with Smoke</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/flameStepped.html">Flame - Stepped Color</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/gas.html">Gas</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/bubbles.html">Bubbles</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/bubbleSpray.html">Bubble Spray</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/bubbleStream.html">Bubble Stream</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/bubbleStreamPath.html">Bubble Stream - path following</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/bubblesVertical.html">Vertical Bubbles</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/cartoonSmoke.html">Cartoon Smoke</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/cartoonSmoke2.html">Cartoon Smoke Alt.</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/cartoonSmokeBlast.html">Cartoon Smoke Blast</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/snow.html">Snow</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/sparks.html">Sparks</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/fountain.html">Fountain</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/coins.html">Animated Coins</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html">Animated Bubbles</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html">Particle Container Performance</a></li>
+				</ul>
+				<h2 id="typescript">Typescript</h2>
+				<p>You can use require to get the namespace for pixi-particles, or use a triple slash reference for using the PIXI.particles namespace.</p>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Note: Must also include the pixi.js typings globally!</span>
+<span class="hljs-keyword">import</span> particles = <span class="hljs-built_in">require</span>(<span class="hljs-string">'pixi-particles'</span>);
 
-let myEmitter:particles.Emitter = new particles.Emitter(myContainer);</code></pre><pre class="prettyprint source lang-typescript"><code>// Note: Must also include the pixi.js typings globally!
-/// &lt;reference path=&quot;node_modules/pixi-particles/ambient.d.ts&quot; />
-require('pixi-particles');
+<span class="hljs-keyword">let</span> myEmitter:particles.Emitter = <span class="hljs-keyword">new</span> particles.Emitter(myContainer);</code></pre>
+				<pre><code class="language-typescript"><span class="hljs-comment">// Note: Must also include the pixi.js typings globally!</span>
+<span class="hljs-comment">/// &lt;reference path="node_modules/pixi-particles/ambient.d.ts" /&gt;</span>
+<span class="hljs-built_in">require</span>(<span class="hljs-string">'pixi-particles'</span>);
 
-let myEmitter:PIXI.particles.Emitter = new PIXI.particles.Emitter(myContainer);</code></pre><h2>Use in Haxe</h2><p>Externs for Haxe have been added to <a target="_blank" href="https://github.com/adireddy/haxe-pixi">adireddy's Pixi externs</a></p>
-<h2>License</h2><p>Copyright (c) 2015 <a target="_blank" href="http://github.com/cloudkidstudio">CloudKid</a></p>
-<p>Released under the MIT License.</p></article>
-    </section>
-
-
-
-
-
-
-        
-
-        <footer>
-            Documentation generated by <a target="_blank" href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Mon Feb 18 2019 10:07:00 GMT-0500 (Eastern Standard Time)
-        </footer>
-    </div>
+<span class="hljs-keyword">let</span> myEmitter:PIXI.particles.Emitter = <span class="hljs-keyword">new</span> PIXI.particles.Emitter(myContainer);</code></pre>
+				<h2 id="use-in-haxe">Use in Haxe</h2>
+				<p>Externs for Haxe have been added to <a href="https://github.com/adireddy/haxe-pixi">adireddy&#39;s Pixi externs</a> - these are out of date but may be updated in a fork.</p>
+				<h2 id="contributer-note">Contributer Note</h2>
+				<p>This project uses <code>yarn</code> rather than <code>npm</code> to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.</p>
+				<h2 id="license">License</h2>
+				<p>Copyright (c) 2015 <a href="http://github.com/cloudkidstudio">CloudKid</a></p>
+				<p>Released under the MIT License.</p>
+			</div>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class="globals  ">
+						<a href="globals.html"><em>Globals</em></a>
+					</li>
+					<li class=" tsd-kind-module">
+						<a href="modules/particleutils.html">Particle<wbr>Utils</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="classes/animatedparticle.html" class="tsd-kind-icon">Animated<wbr>Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/emitter.html" class="tsd-kind-icon">Emitter</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/pathparticle.html" class="tsd-kind-icon">Path<wbr>Particle</a>
+					</li>
+					<li class=" tsd-kind-class">
+						<a href="classes/polygonalchain.html" class="tsd-kind-icon">Polygonal<wbr>Chain</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/propertylist.html" class="tsd-kind-icon">Property<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="classes/propertynode.html" class="tsd-kind-icon">Property<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/animatedparticleart.html" class="tsd-kind-icon">Animated<wbr>Particle<wbr>Art</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/basicpoint.html" class="tsd-kind-icon">Basic<wbr>Point</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/color.html" class="tsd-kind-icon">Color</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/easesegment.html" class="tsd-kind-icon">Ease<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/parsedanimatedparticleart.html" class="tsd-kind-icon">Parsed<wbr>Animated<wbr>Particle<wbr>Art</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/particleconstructor.html" class="tsd-kind-icon">Particle<wbr>Constructor</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/segment.html" class="tsd-kind-icon">Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/valuelist.html" class="tsd-kind-icon">Value<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/valuestep.html" class="tsd-kind-icon">Value<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-type-alias">
+						<a href="globals.html#simpleease" class="tsd-kind-icon">Simple<wbr>Ease</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
 </div>
-<script>prettyPrint();</script>
-<script src="scripts/jaguar.js"></script>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
+				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
+				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
+				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
+				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
+				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
+				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
+				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
+				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
+				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
+				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="assets/js/main.js"></script>
+<script>if (location.protocol == 'file:') document.write('<script src="assets/js/search.js"><' + '/script>');</script>
 </body>
 </html>

@@ -36,7 +36,20 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
  *      textureArray.push(texture);
  * };
  *
- * let mc = new PIXI.AnimatedSprite(textureArray);
+ * let animatedSprite = new PIXI.extras.AnimatedSprite(textureArray);
+ * ```
+ *
+ * The more efficient and simpler way to create an animated sprite is using a {@link PIXI.Spritesheet}
+ * containing the animation definitions:
+ *
+ * ```js
+ * PIXI.loader.add("assets/spritesheet.json").load(setup);
+ *
+ * function setup() {
+ *   let sheet = PIXI.loader.resources["assets/spritesheet.json"].spritesheet;
+ *   animatedSprite = new PIXI.extras.AnimatedSprite(sheet.animations["image_sequence"]);
+ *   ...
+ * }
  * ```
  *
  * @class
@@ -91,6 +104,20 @@ var AnimatedSprite = function (_core$Sprite) {
          * @default true
          */
         _this.loop = true;
+
+        /**
+         * Update anchor to [Texture's defaultAnchor]{@link PIXI.Texture#defaultAnchor} when frame changes.
+         *
+         * Useful with [sprite sheet animations]{@link PIXI.Spritesheet#animations} created with tools.
+         * Changing anchor for each frame allows to pin sprite origin to certain moving feature
+         * of the frame (e.g. left foot).
+         *
+         * Note: Enabling this will override any previously set `anchor` on each frame change.
+         *
+         * @member {boolean}
+         * @default false
+         */
+        _this.updateAnchor = false;
 
         /**
          * Function to call when a AnimatedSprite finishes playing
@@ -275,6 +302,10 @@ var AnimatedSprite = function (_core$Sprite) {
         this._texture = this._textures[this.currentFrame];
         this._textureID = -1;
         this.cachedTint = 0xFFFFFF;
+
+        if (this.updateAnchor) {
+            this._anchor.copy(this._texture.defaultAnchor);
+        }
 
         if (this.onFrameChange) {
             this.onFrameChange(this.currentFrame);
