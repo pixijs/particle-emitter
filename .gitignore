@@ -9,3 +9,4 @@ npm-debug.log
 ts-dist
 dist
 lib
+./*.d.ts
