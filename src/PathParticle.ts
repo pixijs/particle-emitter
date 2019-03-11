@@ -1,17 +1,19 @@
-"use strict";
-
-import ParticleUtils from "./ParticleUtils";
-import Particle from "./Particle";
-import Emitter from "./Emitter";
+import {ParticleUtils} from "./ParticleUtils";
+import {Particle} from "./Particle";
+import {Emitter} from "./Emitter";
+import {Point, Texture} from 'pixi.js';
 
 /**
  * A helper point for math things.
- * @private
+ * @hidden
  */
-const helperPoint = new PIXI.Point();
+const helperPoint = new Point();
 
-//a hand picked list of Math functions (and a couple properties) that are allowable.
-//they should be used without the preceding "Math."
+/**
+ * A hand picked list of Math functions (and a couple properties) that are
+ * allowable. They should be used without the preceding "Math."
+ * @hidden
+ */
 const MATH_FUNCS =
 [
 	"pow",
@@ -31,7 +33,10 @@ const MATH_FUNCS =
 	"atan2",
 	"log"
 ];
-//create an actual regular expression object from the string
+/**
+ * create an actual regular expression object from the string
+ * @hidden
+ */
 const WHITELISTER = new RegExp(
 	[
 		//Allow the 4 basic operations, parentheses and all numbers/decimals, as well
@@ -45,11 +50,9 @@ const WHITELISTER = new RegExp(
  * Parses a string into a function for path following.
  * This involves whitelisting the string for safety, inserting "Math." to math function
  * names, and using `new Function()` to generate a function.
- * @method PIXI.particles.PathParticle~parsePath
- * @private
- * @static
- * @param {String} pathString The string to parse.
- * @return {Function} The path function - takes x, outputs y.
+ * @hidden
+ * @param pathString The string to parse.
+ * @return The path function - takes x, outputs y.
  */
 const parsePath = function(pathString: string)
 {
@@ -81,50 +84,42 @@ const parsePath = function(pathString: string)
  * 	"sin(x/10) * 20" // A sine wave path.
  * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
  * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
- *
- * @memberof PIXI.particles
- * @class PathParticle
- * @extends PIXI.particles.Particle
- * @constructor
- * @param {PIXI.particles.Emitter} emitter The emitter that controls this PathParticle.
  */
 export default class PathParticle extends Particle
 {
 	/**
 	 * The function representing the path the particle should take.
-	 * @property {Function} path
 	 */
 	public path: Function;
 	/**
 	 * The initial rotation in degrees of the particle, because the direction of the path
 	 * is based on that.
-	 * @property {Number} initialRotation
 	 */
 	public initialRotation: number;
 	/**
 	 * The initial position of the particle, as all path movement is added to that.
-	 * @property {PIXI.Point} initialPosition
 	 */
-	public initialPosition: PIXI.Point;
+	public initialPosition: Point;
 	/**
 	 * Total single directional movement, due to speed.
-	 * @property {Number} movement
 	 */
 	public movement: number;
 	
+	/**
+	 * @param {PIXI.particles.Emitter} emitter The emitter that controls this PathParticle.
+	 */
 	constructor(emitter: Emitter)
 	{
 		super(emitter);
 		this.path = null;
 		this.initialRotation = 0;
-		this.initialPosition = new PIXI.Point();
+		this.initialPosition = new Point();
 		this.movement = 0;
 	}
 
 	/**
 	 * Initializes the particle for use, based on the properties that have to
 	 * have been set already on the particle.
-	 * @method PIXI.particles.PathParticle#init
 	 */
 	public init()
 	{
@@ -146,8 +141,7 @@ export default class PathParticle extends Particle
 
 	/**
 	 * Updates the particle.
-	 * @method PIXI.particles.PathParticle#update
-	 * @param {Number} delta Time elapsed since the previous frame, in __seconds__.
+	 * @param delta Time elapsed since the previous frame, in __seconds__.
 	 */
 	public update(delta: number): number
 	{
@@ -170,7 +164,6 @@ export default class PathParticle extends Particle
 	
 	/**
 	 * Destroys the particle, removing references and preventing future use.
-	 * @method PIXI.particles.PathParticle#destroy
 	 */
 	public destroy()
 	{
@@ -181,14 +174,12 @@ export default class PathParticle extends Particle
 	/**
 	 * Checks over the art that was passed to the Emitter's init() function, to do any special
 	 * modifications to prepare it ahead of time. This just runs Particle.parseArt().
-	 * @method PIXI.particles.PathParticle.parseArt
-	 * @static
-	 * @param  {Array} art The array of art data. For Particle, it should be an array of Textures.
-	 *                     Any strings in the array will be converted to Textures via
-	 *                     Texture.fromImage().
-	 * @return {Array} The art, after any needed modifications.
+	 * @param art The array of art data. For Particle, it should be an array of
+	 *            Textures. Any strings in the array will be converted to
+	 *            Textures via Texture.fromImage().
+	 * @return The art, after any needed modifications.
 	 */
-	public static parseArt(art: any[])
+	public static parseArt(art: (Texture|string)[]):Texture[]
 	{
 		return Particle.parseArt(art);
 	}
@@ -197,10 +188,8 @@ export default class PathParticle extends Particle
 	 * Parses extra emitter data to ensure it is set up for this particle class.
 	 * PathParticle checks for the existence of path data, and parses the path data for use
 	 * by particle instances.
-	 * @method PIXI.particles.PathParticle.parseData
-	 * @static
-	 * @param  {Object} extraData The extra data from the particle config.
-	 * @return {Object} The parsed extra data.
+	 * @param extraData The extra data from the particle config.
+	 * @return The parsed extra data.
 	 */
 	public static parseData(extraData: {path:string})
 	{

@@ -1,10 +1,12 @@
-interface BasicPoint
+import {Point} from 'pixi.js';
+
+export interface BasicPoint
 {
 	x: number;
 	y: number;
 }
 
-interface Segment
+export interface Segment
 {
 	p1: BasicPoint;
 	p2: BasicPoint;
@@ -13,32 +15,26 @@ interface Segment
 
 /**
  * Chain of line segments for generating spawn positions.
- * @memberof PIXI.particles
- * @class PolygonalChain
- * @constructor
- * @param {PIXI.PointLike[]|PIXI.PointLike[][]} data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
  */
-export default class PolygonalChain
+export class PolygonalChain
 {
 	/**
 	 * List of segment objects in the chain.
-	 * @property {object[]} segments
-	 * @private
 	 */
 	private segments:Segment[];
 	/**
 	 * Total length of all segments of the chain.
-	 * @property {number} totalLength
-	 * @private
 	 */
 	private totalLength:number;
 	/**
 	 * Total length of segments up to and including the segment of the same index.
 	 * Used for weighted random selection of segment.
-	 * @property {number[]} countingLengths
-	 * @private
 	 */
 	private countingLengths:number[];
+	
+	/**
+	 * @param data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
+	 */
 	constructor(data:BasicPoint[]|BasicPoint[][])
 	{
 		this.segments = [];
@@ -47,6 +43,9 @@ export default class PolygonalChain
 		this.init(data);
 	}
 	
+	/**
+	 * @param data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
+	 */
 	private init(data:BasicPoint[]|BasicPoint[][])
 	{
 		// if data is not present, set up a segment of length 0
@@ -99,10 +98,9 @@ export default class PolygonalChain
 	
 	/**
 	 * Gets a random point in the chain.
-	 * @method getRandomPoint
-	 * @param {PIXI.Point} out The point to store the selected position in.
+	 * @param out The point to store the selected position in.
 	 */
-	public getRandomPoint(out:PIXI.Point)
+	public getRandomPoint(out:Point)
 	{
 		// select a random spot in the length of the chain
 		const rand = Math.random() * this.totalLength;

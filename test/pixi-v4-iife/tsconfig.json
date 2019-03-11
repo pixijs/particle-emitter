@@ -3,10 +3,9 @@
 		"target": "ES5",
 		"module": "commonjs",
 		"noImplicitAny": true,
-		"types": ["pixi.js"],
-		"noEmit": true
+		"types": ["pixi.js"]
 	},
 	"include": [
-		"src/*.ts"
+		"renderer.ts"
 	]
 }

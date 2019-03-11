@@ -1,0 +1,22 @@
+{
+  "name": "pixi-v4-module",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "tsc && electron ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@types/pixi.js": "^4.8.6",
+    "@types/node": "^8.0.0",
+    "pixi.js": "^4.0.0",
+    "override-require": "^1.1.1",
+    "pixi-particles": "*",
+    "electron": "^4.0.0",
+    "typescript": "^3.3.0"
+  },
+  "workspaces": {
+    "nohoist": ["pixi.js", "pixi-particles"]
+  },
+  "private": true
+}

@@ -7,3 +7,7 @@ node_modules
 assets
 npm-debug.log
 ts-dist
+dist
+lib
+/*.d.ts
+test/*/renderer.js

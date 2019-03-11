@@ -2,11 +2,11 @@
 	"compilerOptions": {
 		"target": "ES5",
 		"module": "commonjs",
+		"moduleResolution": "node",
 		"noImplicitAny": true,
-		"types": ["pixi.js"],
-		"noEmit": true
+		"types": ["node"]
 	},
 	"include": [
-		"src/*.ts"
+		"renderer.ts"
 	]
 }

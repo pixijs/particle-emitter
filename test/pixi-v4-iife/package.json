@@ -1,0 +1,20 @@
+{
+  "name": "pixi-v4-iife",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "tsc && electron ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@types/pixi.js": "^4.8.6",
+    "pixi.js": "^4.0.0",
+    "pixi-particles": "*",
+    "electron": "^4.0.0",
+    "typescript": "^3.3.0"
+  },
+  "workspaces": {
+    "nohoist": ["pixi.js", "pixi-particles"]
+  },
+  "private": true
+}
