@@ -206,7 +206,10 @@ let myEmitter:PIXI.particles.Emitter = new PIXI.particles.Emitter(myContainer);
 
 ## Use in Haxe
 
-Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi)
+Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi) - these are out of date but may be updated in a fork.
+
+## Contributer Note
+This project uses `yarn` rather than `npm` to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.
 
 ## License
 
