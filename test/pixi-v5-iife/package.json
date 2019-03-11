@@ -3,13 +3,15 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
+    "build": "tsc",
     "test": "electron ."
   },
   "license": "ISC",
   "dependencies": {
     "pixi.js": "^5.0.0",
     "pixi-particles": "*",
-    "electron": "^4.0.0"
+    "electron": "^4.0.0",
+    "typescript": "^3.3.0"
   },
   "workspaces": {
     "nohoist": ["pixi.js", "pixi-particles"]

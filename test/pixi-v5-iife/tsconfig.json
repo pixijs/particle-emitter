@@ -1,0 +1,11 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"noImplicitAny": true,
+		"types": ["pixi.js"]
+	},
+	"include": [
+		"renderer.ts"
+	]
+}

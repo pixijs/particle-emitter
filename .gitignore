@@ -10,3 +10,4 @@ ts-dist
 dist
 lib
 /*.d.ts
+test/*/renderer.js

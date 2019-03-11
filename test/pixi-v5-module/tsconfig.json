@@ -1,0 +1,12 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"types": ["node"]
+	},
+	"include": [
+		"renderer.ts"
+	]
+}
