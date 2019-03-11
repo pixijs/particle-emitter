@@ -58,7 +58,7 @@
     "terser": "^3.16.1",
     "tslib": "^1.9.3",
     "typedoc": "^0.14.2",
-    "typescript": "^2.7.0"
+    "typescript": "^3.3.0"
   },
   "repository": {
     "type": "git",

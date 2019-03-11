@@ -149,11 +149,7 @@ http://pixijs.github.io/pixi-particles/docs/
 
 ## Installation
 
-PixiParticles can be installed using Bower or NPM.
-
-```bash
-bower install pixi-particles
-```
+PixiParticles can be installed or NPM.
 
 ```bash
 npm install pixi-particles

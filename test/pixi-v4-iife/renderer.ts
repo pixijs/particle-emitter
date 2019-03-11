@@ -1,3 +1,5 @@
+/// <reference path="node_modules/pixi-particles/ambient.d.ts" />
+
 const imagePaths = ["../../docs/examples/images/Sparks.png"];
 const config = {
 	"alpha": {
@@ -48,7 +50,7 @@ const config = {
 		"r": 0
 	}
 };
-const canvas = document.getElementById("stage");
+const canvas = document.getElementById("stage") as HTMLCanvasElement;
 // Basic PIXI Setup
 const rendererOptions =
 {
@@ -56,17 +58,19 @@ const rendererOptions =
 };
 const stage = new PIXI.Container(),
 	renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, rendererOptions);
-let emitter = null,
-	bg = null;
+let emitter:PIXI.particles.Emitter = null,
+	bg:PIXI.Sprite = null;
 
 // Calculate the current time
 let elapsed = Date.now();
+
+let updateId:number;
 
 // Update function every frame
 const update = function(){
 
 	// Update the next frame
-	window.updateId = requestAnimationFrame(update);
+	updateId = requestAnimationFrame(update);
 
 	const now = Date.now();
 	if (emitter)
@@ -90,7 +94,7 @@ window.onresize = function() {
 		bg.scale.y = canvas.height;
 	}
 };
-window.onresize();
+window.onresize(null);
 
 // Preload the particle images and create PIXI textures from it
 const urls = imagePaths.slice();
@@ -113,7 +117,7 @@ loader.load(function()
 	// Create the new emitter and attach it to the stage
 	const emitterContainer = new PIXI.Container();
 	stage.addChild(emitterContainer);
-	window.emitter = emitter = new PIXI.particles.Emitter(
+	(window as any).emitter = emitter = new PIXI.particles.Emitter(
 		emitterContainer,
 		art,
 		config
@@ -134,11 +138,11 @@ loader.load(function()
 	update();
 
 	//for testing and debugging
-	window.destroyEmitter = function()
+	(window as any).destroyEmitter = function()
 	{
 		emitter.destroy();
 		emitter = null;
-		window.destroyEmitter = null;
+		(window as any).destroyEmitter = null;
 		//cancelAnimationFrame(updateId);
 
 		//reset SpriteRenderer's batching to fully release particles for GC
