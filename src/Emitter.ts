@@ -9,13 +9,15 @@ import * as pixi from 'pixi.js';
  * @hidden
  */
 let ticker: pixi.ticker.Ticker;
+// to avoid Rollup transforming our import, save pixi namespace in a variable
+const pixiNS = pixi;
 if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5)
 {
-	ticker = pixi.ticker.shared;
+	ticker = pixiNS.ticker.shared;
 }
 else
 {
-	ticker = (pixi as any).Ticker.shared;
+	ticker = (pixiNS as any).Ticker.shared;
 }
 
 export interface ParticleConstructor
