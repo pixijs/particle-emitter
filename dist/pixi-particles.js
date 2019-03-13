@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.0.0
- * Compiled Mon, 11 Mar 2019 15:31:42 UTC
+ * pixi-particles - v4.0.1
+ * Compiled Wed, 13 Mar 2019 00:30:36 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -856,11 +856,13 @@ this.PIXI = this.PIXI || {};
 	 * @hidden
 	 */
 	var ticker;
+	// to avoid Rollup transforming our import, save pixi namespace in a variable
+	var pixiNS = pixi;
 	if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5) {
-	    ticker = pixi.ticker.shared;
+	    ticker = pixiNS.ticker.shared;
 	}
 	else {
-	    ticker = pixi.Ticker.shared;
+	    ticker = pixiNS.Ticker.shared;
 	}
 	/**
 	 * @hidden
