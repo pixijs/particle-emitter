@@ -3,7 +3,11 @@
 		"target": "ES5",
 		"module": "commonjs",
 		"noImplicitAny": true,
-		"types": ["pixi.js"]
+		"types": ["node"],
+		"baseUrl": ".",
+		"paths": {
+			"pixi.js": ["node_modules/pixi.js"]
+		}
 	},
 	"include": [
 		"renderer.ts"

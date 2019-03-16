@@ -3,8 +3,7 @@
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
-    "build": "tsc",
-    "test": "electron ."
+    "test": "tsc && electron ."
   },
   "license": "ISC",
   "dependencies": {
