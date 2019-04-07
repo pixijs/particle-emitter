@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.0.1
- * Compiled Wed, 13 Mar 2019 00:30:36 UTC
+ * pixi-particles - v4.0.2
+ * Compiled Sun, 07 Apr 2019 13:48:01 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1993,6 +1993,7 @@ this.PIXI = this.PIXI || {};
 
 	exports.Particle = Particle;
 	exports.Emitter = Emitter;
+	exports.PathParticle = PathParticle;
 	exports.AnimatedParticle = AnimatedParticle;
 	exports.PolygonalChain = PolygonalChain;
 	exports.PropertyList = PropertyList;
