@@ -85,7 +85,7 @@ const parsePath = function(pathString: string)
  * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
  * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
  */
-export default class PathParticle extends Particle
+export class PathParticle extends Particle
 {
 	/**
 	 * The function representing the path the particle should take.
