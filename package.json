@@ -1,6 +1,6 @@
 {
   "name": "pixi-particles",
-  "version": "4.0.1",
+  "version": "4.0.2",
   "main": "lib/pixi-particles.js",
   "module": "lib/pixi-particles.es.js",
   "bundle": "dist/pixi-particles.js",
