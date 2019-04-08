@@ -139,6 +139,8 @@ export class AnimatedParticle extends Particle
 				else
 					this.elapsed = this.duration - 0.000001;
 			}
+			// add a very small number to the frame and then floor it to avoid
+			// the frame being one short due to floating point errors.
 			let frame = (this.elapsed * this.framerate + 0.0000001) | 0;
 			this.texture = this.textures[frame] || Texture.EMPTY;
 		}
