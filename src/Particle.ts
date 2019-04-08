@@ -59,6 +59,12 @@ export class Particle extends Sprite
 	 * Speed at which the particle rotates, in radians per second.
 	 */
 	public rotationSpeed: number;
+
+	/**
+	 * Acceleration of rotation (angular acceleration) to apply to the particle.
+	 */
+	public rotationAcceleration: number;
+
 	/**
 	 * If particle rotation is locked, preventing rotation from occurring due
 	 * to directional changes.
@@ -129,7 +135,7 @@ export class Particle extends Sprite
 	 * Reference to the previous particle in the list.
 	 */
 	public prev: Particle;
-	
+
 	/**
 	 * @param {PIXI.particles.Emitter} emitter The emitter that controls this particle.
 	 */
@@ -198,6 +204,8 @@ export class Particle extends Sprite
 		}
 		//convert rotation speed to Radians from Degrees
 		this.rotationSpeed *= ParticleUtils.DEG_TO_RADS;
+		this.rotationAcceleration *= ParticleUtils.DEG_TO_RADS;
+
 		//set alpha to inital alpha
 		this.alpha = this.alphaList.current.value;
 		//set scale to initial scale
@@ -309,7 +317,13 @@ export class Particle extends Sprite
 			this.tint = this.colorList.interpolate(lerp);
 		}
 		//update rotation
-		if(this.rotationSpeed !== 0)
+		if (this.rotationAcceleration !== 0){
+			const newRotationSpeed = this.rotationSpeed + this.rotationAcceleration * delta;
+
+			this.rotation += (this.rotationSpeed + newRotationSpeed) / 2 * delta;
+			this.rotationSpeed = newRotationSpeed;
+		}
+		else if (this.rotationSpeed !== 0)
 		{
 			this.rotation += this.rotationSpeed * delta;
 		}
