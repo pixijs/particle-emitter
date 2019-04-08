@@ -317,7 +317,8 @@ export class Particle extends Sprite
 			this.tint = this.colorList.interpolate(lerp);
 		}
 		//update rotation
-		if (this.rotationAcceleration !== 0){
+		if (this.rotationAcceleration !== 0)
+		{
 			const newRotationSpeed = this.rotationSpeed + this.rotationAcceleration * delta;
 
 			this.rotation += (this.rotationSpeed + newRotationSpeed) / 2 * delta;
