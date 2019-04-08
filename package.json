@@ -31,7 +31,8 @@
     "publish:minor": "npm version minor && node build/publish.js",
     "publish:major": "npm version major && node build/publish.js",
     "postpublish": "git push && git push --tags && npm run docs-live",
-    "examples": "npm run predocs && http-server docs/"
+    "examples": "npm run predocs && http-server docs/",
+    "test": "echo done"
   },
   "peerDependencies": {
     "pixi.js": ">=4.0.0"
