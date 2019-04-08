@@ -148,6 +148,8 @@ export class Particle extends Sprite
 		//particles should be centered
 		this.anchor.x = this.anchor.y = 0.5;
 		this.velocity = new Point();
+		this.rotationSpeed = 0;
+		this.rotationAcceleration = 0;
 		this.maxLife = 0;
 		this.age = 0;
 		this.ease = null;
