@@ -17,6 +17,10 @@ Please see the examples for various pre-made particle configurations.
 
 ```js
 // Create a new emitter
+// note: if importing library like "import * as particles from 'pixi-particles'"
+// or "const particles = require('pixi-particles')", the PIXI namespace will
+// not be modified, and may not exist - use "new particles.Emitter()", or whatever
+// your imported namespace is
 var emitter = new PIXI.particles.Emitter(
 
 	// The PIXI.Container to put the emitter in
