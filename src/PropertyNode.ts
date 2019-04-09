@@ -1,12 +1,13 @@
-import {ParticleUtils, EaseSegment, SimpleEase} from "./ParticleUtils";
+import {ParticleUtils, EaseSegment, SimpleEase, Color} from "./ParticleUtils";
+import {BasicTweenable} from "./EmitterConfig";
 
-export interface ValueStep {
-	value:number|string;
+export interface ValueStep<T> {
+	value:T;
 	time:number;
 }
 
-export interface ValueList {
-	list: ValueStep[],
+export interface ValueList<T> {
+	list: ValueStep<T>[],
 	isStepped?: boolean;
 	ease?: SimpleEase|EaseSegment[];
 }
@@ -38,9 +39,9 @@ export class PropertyNode<V>
 	 * @param time The time for this node, between 0-1
 	 * @param [ease] Custom ease for this list. Only relevant for the first node.
 	 */
-	constructor(value: V|string, time:number, ease?: SimpleEase|EaseSegment[])
+	constructor(value: V, time:number, ease?: SimpleEase|EaseSegment[])
 	{
-		this.value = typeof value == "string" ? ParticleUtils.hexToRGB(value) as any : value;
+		this.value = value;
 		this.time = time;
 		this.next = null;
 		this.isStepped = false;
@@ -64,33 +65,35 @@ export class PropertyNode<V>
 	 * @param data.ease Custom ease for this list.
 	 * @return The first node in the list
 	 */
-	public static createList(data: ValueList):PropertyNode<any>
+	public static createList<T extends (string|number)>(data: ValueList<T>|BasicTweenable<T>):PropertyNode<T extends string ? Color : T>
 	{
-		if (Array.isArray(data.list))
+		if ("list" in data)
 		{
 			let array = data.list;
 			let node, first;
-			first = node = new PropertyNode(array[0].value, array[0].time, data.ease);
+			const {value, time} = array[0];
+			first = node = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time, data.ease);
 			//only set up subsequent nodes if there are a bunch or the 2nd one is different from the first
-			if (array.length > 2 || (array.length === 2 && array[1].value !== array[0].value))
+			if (array.length > 2 || (array.length === 2 && array[1].value !== value))
 			{
 				for (let i = 1; i < array.length; ++i)
 				{
-					node.next = new PropertyNode(array[i].value, array[i].time);
+					const {value, time} = array[i];
+					node.next = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time);
 					node = node.next;
 				}
 			}
 			first.isStepped = !!data.isStepped;
-			return first;
+			return first as PropertyNode<T extends string ? Color : T>;
 		}
 		else
 		{
 			//Handle deprecated version here
-			let start = new PropertyNode((data as any).start, 0);
+			let start = new PropertyNode(typeof data.start === 'string' ? ParticleUtils.hexToRGB(data.start) : data.start, 0);
 			//only set up a next value if it is different from the starting value
-			if ((data as any).end !== (data as any).start)
-				start.next = new PropertyNode((data as any).end, 1);
-			return start;
+			if (data.end !== data.start)
+				start.next = new PropertyNode(typeof data.end === 'string' ? ParticleUtils.hexToRGB(data.end) : data.end, 1);
+			return start as PropertyNode<T extends string ? Color : T>;
 		}
 	}
 }

@@ -168,10 +168,10 @@ export namespace ParticleUtils {
 	 * @param [numSteps=10] The number of steps to use.
 	 * @return The blend mode as specified in the PIXI.blendModes enumeration.
 	 */
-	export function createSteppedGradient(list:ValueStep[], numSteps:number = 10) {
+	export function createSteppedGradient(list:ValueStep<string>[], numSteps:number = 10) {
 		if (typeof numSteps !== 'number' || numSteps <= 0)
 			numSteps = 10;
-		let first = new PropertyNode<Color>(list[0].value as string, list[0].time);
+		let first = new PropertyNode<Color>(ParticleUtils.hexToRGB(list[0].value), list[0].time);
 		first.isStepped = true;
 		let currentNode = first;
 		let current = list[0];
@@ -188,12 +188,13 @@ export namespace ParticleUtils {
 			}
 			//convert the lerp value to the segment range
 			lerp = (lerp - current.time) / (next.time - current.time);
-			let curVal = ParticleUtils.hexToRGB(current.value as string);
-			let nextVal = ParticleUtils.hexToRGB(next.value as string);
-			let output:Color = {} as Color;
-			output.r = (nextVal.r - curVal.r) * lerp + curVal.r;
-			output.g = (nextVal.g - curVal.g) * lerp + curVal.g;
-			output.b = (nextVal.b - curVal.b) * lerp + curVal.b;
+			let curVal = ParticleUtils.hexToRGB(current.value);
+			let nextVal = ParticleUtils.hexToRGB(next.value);
+			let output:Color = {
+				r: (nextVal.r - curVal.r) * lerp + curVal.r,
+				g: (nextVal.g - curVal.g) * lerp + curVal.g,
+				b: (nextVal.b - curVal.b) * lerp + curVal.b,
+			};
 			currentNode.next = new PropertyNode(output, i / numSteps);
 			currentNode = currentNode.next;
 		}

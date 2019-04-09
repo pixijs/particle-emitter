@@ -2,8 +2,9 @@ import {ParticleUtils, Color, SimpleEase} from "./ParticleUtils";
 import {Particle} from "./Particle";
 import {PropertyNode} from "./PropertyNode";
 import {PolygonalChain} from "./PolygonalChain";
-import {Point, Circle, Rectangle, Container, settings} from 'pixi.js';
-import * as pixi from 'pixi.js';
+import {EmitterConfig, OldEmitterConfig} from "./EmitterConfig";
+import {Point, Circle, Rectangle, Container, settings} from "pixi.js";
+import * as pixi from "pixi.js";
 // get the shared ticker, in V4 and V5 friendly methods
 /**
  * @hidden
@@ -301,7 +302,7 @@ export class Emitter
 	 *                          true, the Emitter will automatically call
 	 *                          update via the PIXI shared ticker.
 	 */
-	constructor(particleParent: Container, particleImages: any, config: any)
+	constructor(particleParent: Container, particleImages: any, config: EmitterConfig|OldEmitterConfig)
 	{
 		this._particleConstructor = Particle;
 		//properties for individual particles
@@ -426,7 +427,7 @@ export class Emitter
 	 * @param art A texture or array of textures to use for the particles.
 	 * @param config A configuration object containing settings for the emitter.
 	 */
-	public init(art: any, config: any)
+	public init(art: any, config: EmitterConfig|OldEmitterConfig)
 	{
 		if(!art || !config)
 			return;
@@ -457,7 +458,7 @@ export class Emitter
 		if (config.speed)
 		{
 			this.startSpeed = PropertyNode.createList(config.speed);
-			this.minimumSpeedMultiplier = config.speed.minimumSpeedMultiplier || 1;
+			this.minimumSpeedMultiplier = ('minimumSpeedMultiplier' in config ? config.minimumSpeedMultiplier : (config.speed as any).minimumSpeedMultiplier) || 1;
 		}
 		else
 		{
@@ -479,7 +480,7 @@ export class Emitter
 		if (config.scale)
 		{
 			this.startScale = PropertyNode.createList(config.scale);
-			this.minimumScaleMultiplier = config.scale.minimumScaleMultiplier || 1;
+			this.minimumScaleMultiplier = ('minimumScaleMultiplier' in config ? config.minimumScaleMultiplier : (config.scale as any).minimumScaleMultiplier) || 1;
 		}
 		else
 		{
@@ -610,7 +611,7 @@ export class Emitter
 		//start emitting
 		this._spawnTimer = 0;
 		this.emit = config.emit === undefined ? true : !!config.emit;
-		this.autoUpdate = config.autoUpdate === undefined ? false : !!config.autoUpdate;
+		this.autoUpdate = !!config.autoUpdate;
 	}
 
 	/**
