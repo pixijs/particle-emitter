@@ -43,7 +43,7 @@
     "dts-bundle-generator": "^2.1.0",
     "electron": "^4.0.6",
     "eslint": "^3.10.2",
-    "gh-pages": "^0.11.0",
+    "gh-pages": "^2.0.0",
     "http-server": "*",
     "ncp": "^2.0.0",
     "pixi.js": "^4.2.2",
