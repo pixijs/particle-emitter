@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.0.2
- * Compiled Sun, 07 Apr 2019 13:52:58 UTC
+ * pixi-particles - v4.1.0
+ * Compiled Tue, 09 Apr 2019 13:12:43 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -19,7 +19,7 @@ this.PIXI = this.PIXI || {};
 	     * @param [ease] Custom ease for this list. Only relevant for the first node.
 	     */
 	    function PropertyNode(value, time, ease) {
-	        this.value = typeof value == "string" ? exports.ParticleUtils.hexToRGB(value) : value;
+	        this.value = value;
 	        this.time = time;
 	        this.next = null;
 	        this.isStepped = false;
@@ -41,14 +41,16 @@ this.PIXI = this.PIXI || {};
 	     * @return The first node in the list
 	     */
 	    PropertyNode.createList = function (data) {
-	        if (Array.isArray(data.list)) {
+	        if ("list" in data) {
 	            var array = data.list;
 	            var node = void 0, first = void 0;
-	            first = node = new PropertyNode(array[0].value, array[0].time, data.ease);
+	            var _a = array[0], value = _a.value, time = _a.time;
+	            first = node = new PropertyNode(typeof value === 'string' ? exports.ParticleUtils.hexToRGB(value) : value, time, data.ease);
 	            //only set up subsequent nodes if there are a bunch or the 2nd one is different from the first
-	            if (array.length > 2 || (array.length === 2 && array[1].value !== array[0].value)) {
+	            if (array.length > 2 || (array.length === 2 && array[1].value !== value)) {
 	                for (var i = 1; i < array.length; ++i) {
-	                    node.next = new PropertyNode(array[i].value, array[i].time);
+	                    var _b = array[i], value_1 = _b.value, time_1 = _b.time;
+	                    node.next = new PropertyNode(typeof value_1 === 'string' ? exports.ParticleUtils.hexToRGB(value_1) : value_1, time_1);
 	                    node = node.next;
 	                }
 	            }
@@ -57,10 +59,10 @@ this.PIXI = this.PIXI || {};
 	        }
 	        else {
 	            //Handle deprecated version here
-	            var start = new PropertyNode(data.start, 0);
+	            var start = new PropertyNode(typeof data.start === 'string' ? exports.ParticleUtils.hexToRGB(data.start) : data.start, 0);
 	            //only set up a next value if it is different from the starting value
 	            if (data.end !== data.start)
-	                start.next = new PropertyNode(data.end, 1);
+	                start.next = new PropertyNode(typeof data.end === 'string' ? exports.ParticleUtils.hexToRGB(data.end) : data.end, 1);
 	            return start;
 	        }
 	    };
@@ -210,7 +212,7 @@ this.PIXI = this.PIXI || {};
 	        if (numSteps === void 0) { numSteps = 10; }
 	        if (typeof numSteps !== 'number' || numSteps <= 0)
 	            numSteps = 10;
-	        var first = new PropertyNode(list[0].value, list[0].time);
+	        var first = new PropertyNode(ParticleUtils.hexToRGB(list[0].value), list[0].time);
 	        first.isStepped = true;
 	        var currentNode = first;
 	        var current = list[0];
@@ -227,10 +229,11 @@ this.PIXI = this.PIXI || {};
 	            lerp = (lerp - current.time) / (next.time - current.time);
 	            var curVal = ParticleUtils.hexToRGB(current.value);
 	            var nextVal = ParticleUtils.hexToRGB(next.value);
-	            var output = {};
-	            output.r = (nextVal.r - curVal.r) * lerp + curVal.r;
-	            output.g = (nextVal.g - curVal.g) * lerp + curVal.g;
-	            output.b = (nextVal.b - curVal.b) * lerp + curVal.b;
+	            var output = {
+	                r: (nextVal.r - curVal.r) * lerp + curVal.r,
+	                g: (nextVal.g - curVal.g) * lerp + curVal.g,
+	                b: (nextVal.b - curVal.b) * lerp + curVal.b,
+	            };
 	            currentNode.next = new PropertyNode(output, i / numSteps);
 	            currentNode = currentNode.next;
 	        }
@@ -547,6 +550,8 @@ this.PIXI = this.PIXI || {};
 	        //particles should be centered
 	        _this.anchor.x = _this.anchor.y = 0.5;
 	        _this.velocity = new pixi.Point();
+	        _this.rotationSpeed = 0;
+	        _this.rotationAcceleration = 0;
 	        _this.maxLife = 0;
 	        _this.age = 0;
 	        _this.ease = null;
@@ -599,6 +604,7 @@ this.PIXI = this.PIXI || {};
 	        }
 	        //convert rotation speed to Radians from Degrees
 	        this.rotationSpeed *= exports.ParticleUtils.DEG_TO_RADS;
+	        this.rotationAcceleration *= exports.ParticleUtils.DEG_TO_RADS;
 	        //set alpha to inital alpha
 	        this.alpha = this.alphaList.current.value;
 	        //set scale to initial scale
@@ -666,13 +672,19 @@ this.PIXI = this.PIXI || {};
 	        }
 	        //handle movement
 	        if (this._doNormalMovement) {
+	            var deltaX = void 0;
+	            var deltaY = void 0;
 	            //interpolate speed
 	            if (this._doSpeed) {
 	                var speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 	                exports.ParticleUtils.normalize(this.velocity);
 	                exports.ParticleUtils.scaleBy(this.velocity, speed);
+	                deltaX = this.velocity.x * delta;
+	                deltaY = this.velocity.y * delta;
 	            }
 	            else if (this._doAcceleration) {
+	                var oldVX = this.velocity.x;
+	                var oldVY = this.velocity.y;
 	                this.velocity.x += this.acceleration.x * delta;
 	                this.velocity.y += this.acceleration.y * delta;
 	                if (this.maxSpeed) {
@@ -683,17 +695,29 @@ this.PIXI = this.PIXI || {};
 	                        exports.ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
 	                    }
 	                }
+	                // calculate position delta by the midpoint between our old velocity and our new velocity
+	                deltaX = (oldVX + this.velocity.x) / 2 * delta;
+	                deltaY = (oldVY + this.velocity.y) / 2 * delta;
+	            }
+	            else {
+	                deltaX = this.velocity.x * delta;
+	                deltaY = this.velocity.y * delta;
 	            }
 	            //adjust position based on velocity
-	            this.position.x += this.velocity.x * delta;
-	            this.position.y += this.velocity.y * delta;
+	            this.position.x += deltaX;
+	            this.position.y += deltaY;
 	        }
 	        //interpolate color
 	        if (this._doColor) {
 	            this.tint = this.colorList.interpolate(lerp);
 	        }
 	        //update rotation
-	        if (this.rotationSpeed !== 0) {
+	        if (this.rotationAcceleration !== 0) {
+	            var newRotationSpeed = this.rotationSpeed + this.rotationAcceleration * delta;
+	            this.rotation += (this.rotationSpeed + newRotationSpeed) / 2 * delta;
+	            this.rotationSpeed = newRotationSpeed;
+	        }
+	        else if (this.rotationSpeed !== 0) {
 	            this.rotation += this.rotationSpeed * delta;
 	        }
 	        else if (this.acceleration && !this.noRotation) {
@@ -1035,7 +1059,7 @@ this.PIXI = this.PIXI || {};
 	        //set up the speed
 	        if (config.speed) {
 	            this.startSpeed = PropertyNode.createList(config.speed);
-	            this.minimumSpeedMultiplier = config.speed.minimumSpeedMultiplier || 1;
+	            this.minimumSpeedMultiplier = ('minimumSpeedMultiplier' in config ? config.minimumSpeedMultiplier : config.speed.minimumSpeedMultiplier) || 1;
 	        }
 	        else {
 	            this.minimumSpeedMultiplier = 1;
@@ -1054,7 +1078,7 @@ this.PIXI = this.PIXI || {};
 	        //set up the scale
 	        if (config.scale) {
 	            this.startScale = PropertyNode.createList(config.scale);
-	            this.minimumScaleMultiplier = config.scale.minimumScaleMultiplier || 1;
+	            this.minimumScaleMultiplier = ('minimumScaleMultiplier' in config ? config.minimumScaleMultiplier : config.scale.minimumScaleMultiplier) || 1;
 	        }
 	        else {
 	            this.startScale = new PropertyNode(1, 0);
@@ -1087,6 +1111,7 @@ this.PIXI = this.PIXI || {};
 	        }
 	        else
 	            this.minRotationSpeed = this.maxRotationSpeed = 0;
+	        this.rotationAcceleration = config.rotationAcceleration || 0;
 	        //set up the lifetime
 	        this.minLifetime = config.lifetime.min;
 	        this.maxLifetime = config.lifetime.max;
@@ -1175,7 +1200,7 @@ this.PIXI = this.PIXI || {};
 	        //start emitting
 	        this._spawnTimer = 0;
 	        this.emit = config.emit === undefined ? true : !!config.emit;
-	        this.autoUpdate = config.autoUpdate === undefined ? false : !!config.autoUpdate;
+	        this.autoUpdate = !!config.autoUpdate;
 	    };
 	    /**
 	     * Recycles an individual particle. For internal use only.
@@ -1410,6 +1435,7 @@ this.PIXI = this.PIXI || {};
 	                            p.rotationSpeed = this.minRotationSpeed;
 	                        else
 	                            p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+	                        p.rotationAcceleration = this.rotationAcceleration;
 	                        p.noRotation = this.noRotation;
 	                        //set up the lifetime
 	                        p.maxLife = lifetime;
@@ -1926,6 +1952,8 @@ this.PIXI = this.PIXI || {};
 	                else
 	                    this.elapsed = this.duration - 0.000001;
 	            }
+	            // add a very small number to the frame and then floor it to avoid
+	            // the frame being one short due to floating point errors.
 	            var frame = (this.elapsed * this.framerate + 0.0000001) | 0;
 	            this.texture = this.textures[frame] || pixi.Texture.EMPTY;
 	        }

@@ -55,13 +55,21 @@
 					<a href="valuelist.html">ValueList</a>
 				</li>
 			</ul>
-			<h1>Interface ValueList</h1>
+			<h1>Interface ValueList&lt;T&gt;</h1>
 		</div>
 	</div>
 </header>
 <div class="container container-main">
 	<div class="row">
 		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-type-parameters">
+				<h3>Type parameters</h3>
+				<ul class="tsd-type-parameters">
+					<li>
+						<h4>T</h4>
+					</li>
+				</ul>
+			</section>
 			<section class="tsd-panel tsd-hierarchy">
 				<h3>Hierarchy</h3>
 				<ul class="tsd-hierarchy">
@@ -93,7 +101,7 @@
 					<div class="tsd-signature tsd-kind-icon">ease<span class="tsd-signature-symbol">:</span> <a href="../globals.html#simpleease" class="tsd-signature-type">SimpleEase</a><span class="tsd-signature-symbol"> | </span><a href="easesegment.html" class="tsd-signature-type">EaseSegment</a><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/PropertyNode.ts#L11">PropertyNode.ts:11</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/PropertyNode.ts#L12">PropertyNode.ts:12</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -103,17 +111,17 @@
 					<div class="tsd-signature tsd-kind-icon">is<wbr>Stepped<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/PropertyNode.ts#L10">PropertyNode.ts:10</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/PropertyNode.ts#L11">PropertyNode.ts:11</a></li>
 						</ul>
 					</aside>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-interface">
 					<a name="list" class="tsd-anchor"></a>
 					<h3>list</h3>
-					<div class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">:</span> <a href="valuestep.html" class="tsd-signature-type">ValueStep</a><span class="tsd-signature-symbol">[]</span></div>
+					<div class="tsd-signature tsd-kind-icon">list<span class="tsd-signature-symbol">:</span> <a href="valuestep.html" class="tsd-signature-type">ValueStep</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/PropertyNode.ts#L9">PropertyNode.ts:9</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/PropertyNode.ts#L10">PropertyNode.ts:10</a></li>
 						</ul>
 					</aside>
 				</section>
@@ -156,11 +164,20 @@
 					<li class=" tsd-kind-interface">
 						<a href="basicpoint.html" class="tsd-kind-icon">Basic<wbr>Point</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="basictweenable.html" class="tsd-kind-icon">Basic<wbr>Tweenable</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="color.html" class="tsd-kind-icon">Color</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="easesegment.html" class="tsd-kind-icon">Ease<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="emitterconfig.html" class="tsd-kind-icon">Emitter<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="oldemitterconfig.html" class="tsd-kind-icon">Old<wbr>Emitter<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="parsedanimatedparticleart.html" class="tsd-kind-icon">Parsed<wbr>Animated<wbr>Particle<wbr>Art</a>
@@ -169,11 +186,14 @@
 						<a href="particleconstructor.html" class="tsd-kind-icon">Particle<wbr>Constructor</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="randnumber.html" class="tsd-kind-icon">Rand<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="segment.html" class="tsd-kind-icon">Segment</a>
 					</li>
 				</ul>
 				<ul class="current">
-					<li class="current tsd-kind-interface">
+					<li class="current tsd-kind-interface tsd-has-type-parameter">
 						<a href="valuelist.html" class="tsd-kind-icon">Value<wbr>List</a>
 						<ul>
 							<li class=" tsd-kind-property tsd-parent-kind-interface">
@@ -189,7 +209,7 @@
 					</li>
 				</ul>
 				<ul class="after-current">
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="valuestep.html" class="tsd-kind-icon">Value<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-type-alias">

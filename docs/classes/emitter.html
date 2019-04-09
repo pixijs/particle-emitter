@@ -132,6 +132,7 @@
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particlespacing" class="tsd-kind-icon">particle<wbr>Spacing</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#particlesperwave" class="tsd-kind-icon">particles<wbr>Per<wbr>Wave</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><a href="emitter.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#rotationacceleration" class="tsd-kind-icon">rotation<wbr>Acceleration</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnchance" class="tsd-kind-icon">spawn<wbr>Chance</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawncircle" class="tsd-kind-icon">spawn<wbr>Circle</a></li>
 								<li class="tsd-kind-property tsd-parent-kind-class"><a href="emitter.html#spawnpolygonalchain" class="tsd-kind-icon">spawn<wbr>Polygonal<wbr>Chain</a></li>
@@ -185,13 +186,13 @@
 					<a name="constructor" class="tsd-anchor"></a>
 					<h3>constructor</h3>
 					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">new <wbr>Emitter<span class="tsd-signature-symbol">(</span>particleParent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span>, particleImages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="emitter.html" class="tsd-signature-type">Emitter</a></li>
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Emitter<span class="tsd-signature-symbol">(</span>particleParent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span>, particleImages<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/emitterconfig.html" class="tsd-signature-type">EmitterConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/oldemitterconfig.html" class="tsd-signature-type">OldEmitterConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="emitter.html" class="tsd-signature-type">Emitter</a></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L286">Emitter.ts:286</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L291">Emitter.ts:291</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -217,7 +218,7 @@
 									</div>
 								</li>
 								<li>
-									<h5>config: <span class="tsd-signature-type">any</span></h5>
+									<h5>config: <a href="../interfaces/emitterconfig.html" class="tsd-signature-type">EmitterConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/oldemitterconfig.html" class="tsd-signature-type">OldEmitterConfig</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<div class="lead">
 											<p>A configuration object containing settings for the emitter.</p>
@@ -238,7 +239,7 @@
 					<div class="tsd-signature tsd-kind-icon">_active<wbr>Particles<wbr>First<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L253">Emitter.ts:253</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L258">Emitter.ts:258</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -254,7 +255,7 @@
 					<div class="tsd-signature tsd-kind-icon">_active<wbr>Particles<wbr>Last<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L258">Emitter.ts:258</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L263">Emitter.ts:263</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -270,7 +271,7 @@
 					<div class="tsd-signature tsd-kind-icon">_auto<wbr>Update<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L276">Emitter.ts:276</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L281">Emitter.ts:281</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -286,7 +287,7 @@
 					<div class="tsd-signature tsd-kind-icon">_complete<wbr>Callback<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L286">Emitter.ts:286</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L291">Emitter.ts:291</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -317,7 +318,7 @@
 					<div class="tsd-signature tsd-kind-icon">_destroy<wbr>When<wbr>Complete<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L281">Emitter.ts:281</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L286">Emitter.ts:286</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -333,7 +334,7 @@
 					<div class="tsd-signature tsd-kind-icon">_emit<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L239">Emitter.ts:239</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L244">Emitter.ts:244</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -349,7 +350,7 @@
 					<div class="tsd-signature tsd-kind-icon">_emitter<wbr>Life<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L248">Emitter.ts:248</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L253">Emitter.ts:253</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -364,7 +365,7 @@
 					<div class="tsd-signature tsd-kind-icon">_frequency<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L142">Emitter.ts:142</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L147">Emitter.ts:147</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -379,7 +380,7 @@
 					<div class="tsd-signature tsd-kind-icon">_orig<wbr>Art<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L271">Emitter.ts:271</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L276">Emitter.ts:276</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -394,7 +395,7 @@
 					<div class="tsd-signature tsd-kind-icon">_orig<wbr>Config<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L267">Emitter.ts:267</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L272">Emitter.ts:272</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -409,7 +410,7 @@
 					<div class="tsd-signature tsd-kind-icon">_parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Container</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L226">Emitter.ts:226</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L231">Emitter.ts:231</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -424,7 +425,7 @@
 					<div class="tsd-signature tsd-kind-icon">_particle<wbr>Constructor<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L42">Emitter.ts:42</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L43">Emitter.ts:43</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -440,7 +441,7 @@
 					<div class="tsd-signature tsd-kind-icon">_pool<wbr>First<span class="tsd-signature-symbol">:</span> <a href="particle.html" class="tsd-signature-type">Particle</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L263">Emitter.ts:263</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L268">Emitter.ts:268</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -456,7 +457,7 @@
 					<div class="tsd-signature tsd-kind-icon">_pos<wbr>Changed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L222">Emitter.ts:222</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L227">Emitter.ts:227</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -471,7 +472,7 @@
 					<div class="tsd-signature tsd-kind-icon">_prev<wbr>Emitter<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L214">Emitter.ts:214</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L219">Emitter.ts:219</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -487,7 +488,7 @@
 					<div class="tsd-signature tsd-kind-icon">_prev<wbr>Pos<wbr>IsValid<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L218">Emitter.ts:218</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L223">Emitter.ts:223</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -502,7 +503,7 @@
 					<div class="tsd-signature tsd-kind-icon">_spawn<wbr>Func<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">function</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L174">Emitter.ts:174</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L179">Emitter.ts:179</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -547,7 +548,7 @@
 					<div class="tsd-signature tsd-kind-icon">_spawn<wbr>Timer<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L244">Emitter.ts:244</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L249">Emitter.ts:249</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -563,7 +564,7 @@
 					<div class="tsd-signature tsd-kind-icon">acceleration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L67">Emitter.ts:67</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L68">Emitter.ts:68</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -581,7 +582,7 @@
 					<div class="tsd-signature tsd-kind-icon">add<wbr>AtBack<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L230">Emitter.ts:230</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L235">Emitter.ts:235</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -596,7 +597,7 @@
 					<div class="tsd-signature tsd-kind-icon">angle<wbr>Start<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L198">Emitter.ts:198</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L203">Emitter.ts:203</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -611,7 +612,7 @@
 					<div class="tsd-signature tsd-kind-icon">custom<wbr>Ease<span class="tsd-signature-symbol">:</span> <a href="../globals.html#simpleease" class="tsd-signature-type">SimpleEase</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L132">Emitter.ts:132</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L137">Emitter.ts:137</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -628,7 +629,7 @@
 					<div class="tsd-signature tsd-kind-icon">emitter<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L157">Emitter.ts:157</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L162">Emitter.ts:162</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -644,7 +645,7 @@
 					<div class="tsd-signature tsd-kind-icon">extra<wbr>Data<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L137">Emitter.ts:137</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L142">Emitter.ts:142</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -660,7 +661,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L94">Emitter.ts:94</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L95">Emitter.ts:95</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -675,7 +676,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Particles<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L152">Emitter.ts:152</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L157">Emitter.ts:157</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -691,7 +692,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Rotation<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L122">Emitter.ts:122</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L123">Emitter.ts:123</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -708,7 +709,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L72">Emitter.ts:72</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L73">Emitter.ts:73</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -724,7 +725,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">max<wbr>Start<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L104">Emitter.ts:104</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L105">Emitter.ts:105</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -740,7 +741,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">min<wbr>Lifetime<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L90">Emitter.ts:90</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L91">Emitter.ts:91</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -755,7 +756,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">min<wbr>Rotation<wbr>Speed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L116">Emitter.ts:116</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L117">Emitter.ts:117</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -772,7 +773,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">min<wbr>Start<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L99">Emitter.ts:99</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L100">Emitter.ts:100</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -788,7 +789,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">minimum<wbr>Scale<wbr>Multiplier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L81">Emitter.ts:81</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L82">Emitter.ts:82</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -804,7 +805,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">minimum<wbr>Speed<wbr>Multiplier<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L60">Emitter.ts:60</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L61">Emitter.ts:61</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -820,7 +821,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">no<wbr>Rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L110">Emitter.ts:110</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L111">Emitter.ts:111</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -837,7 +838,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">owner<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L209">Emitter.ts:209</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L214">Emitter.ts:214</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -853,7 +854,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">particle<wbr>Blend<wbr>Mode<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L126">Emitter.ts:126</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L131">Emitter.ts:131</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -868,7 +869,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">particle<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L234">Emitter.ts:234</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L239">Emitter.ts:239</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -883,7 +884,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">particle<wbr>Images<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L47">Emitter.ts:47</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L48">Emitter.ts:48</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -898,7 +899,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">particle<wbr>Spacing<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L194">Emitter.ts:194</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L199">Emitter.ts:199</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -913,7 +914,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">particles<wbr>Per<wbr>Wave<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L190">Emitter.ts:190</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L195">Emitter.ts:195</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -928,7 +929,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">rotation<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L204">Emitter.ts:204</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L209">Emitter.ts:209</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -940,12 +941,27 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					</div>
 				</section>
 				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
+					<a name="rotationacceleration" class="tsd-anchor"></a>
+					<h3>rotation<wbr>Acceleration</h3>
+					<div class="tsd-signature tsd-kind-icon">rotation<wbr>Acceleration<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L127">Emitter.ts:127</a></li>
+						</ul>
+					</aside>
+					<div class="tsd-comment tsd-typography">
+						<div class="lead">
+							<p>The Acceleration of rotation (angular acceleration) for a particle, in degrees per second.</p>
+						</div>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class">
 					<a name="spawnchance" class="tsd-anchor"></a>
 					<h3>spawn<wbr>Chance</h3>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Chance<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L147">Emitter.ts:147</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L152">Emitter.ts:152</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -961,7 +977,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Circle<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Circle</span><span class="tsd-signature-symbol"> &amp; </span><span class="tsd-signature-type">object</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L186">Emitter.ts:186</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L191">Emitter.ts:191</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -976,7 +992,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Polygonal<wbr>Chain<span class="tsd-signature-symbol">:</span> <a href="polygonalchain.html" class="tsd-signature-type">PolygonalChain</a></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L182">Emitter.ts:182</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L187">Emitter.ts:187</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -991,7 +1007,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Pos<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Point</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L165">Emitter.ts:165</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L170">Emitter.ts:170</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1010,7 +1026,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Rectangle</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L178">Emitter.ts:178</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L183">Emitter.ts:183</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1025,7 +1041,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">spawn<wbr>Type<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L170">Emitter.ts:170</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L175">Emitter.ts:175</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1041,7 +1057,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">start<wbr>Alpha<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L51">Emitter.ts:51</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L52">Emitter.ts:52</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1056,7 +1072,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">start<wbr>Color<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><a href="../interfaces/color.html" class="tsd-signature-type">Color</a><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L86">Emitter.ts:86</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L87">Emitter.ts:87</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1072,7 +1088,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">start<wbr>Scale<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L76">Emitter.ts:76</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L77">Emitter.ts:77</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1087,7 +1103,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<div class="tsd-signature tsd-kind-icon">start<wbr>Speed<span class="tsd-signature-symbol">:</span> <a href="propertynode.html" class="tsd-signature-type">PropertyNode</a><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">&gt;</span></div>
 					<aside class="tsd-sources">
 						<ul>
-							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L55">Emitter.ts:55</a></li>
+							<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L56">Emitter.ts:56</a></li>
 						</ul>
 					</aside>
 					<div class="tsd-comment tsd-typography">
@@ -1110,7 +1126,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L702">Emitter.ts:702</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L709">Emitter.ts:709</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1124,7 +1140,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L703">Emitter.ts:703</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L710">Emitter.ts:710</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1154,7 +1170,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L691">Emitter.ts:691</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L698">Emitter.ts:698</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1168,7 +1184,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L692">Emitter.ts:692</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L699">Emitter.ts:699</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1198,7 +1214,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L376">Emitter.ts:376</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L381">Emitter.ts:381</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1212,7 +1228,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L377">Emitter.ts:377</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L382">Emitter.ts:382</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1242,7 +1258,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L413">Emitter.ts:413</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L418">Emitter.ts:418</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1255,7 +1271,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L414">Emitter.ts:414</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L419">Emitter.ts:419</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1284,7 +1300,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L390">Emitter.ts:390</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L395">Emitter.ts:395</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1299,7 +1315,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L391">Emitter.ts:391</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L396">Emitter.ts:396</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1332,7 +1348,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1106">Emitter.ts:1106</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1114">Emitter.ts:1114</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1381,7 +1397,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1007">Emitter.ts:1007</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1015">Emitter.ts:1015</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1424,7 +1440,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L963">Emitter.ts:963</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L971">Emitter.ts:971</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1467,7 +1483,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1080">Emitter.ts:1080</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1088">Emitter.ts:1088</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1510,7 +1526,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L983">Emitter.ts:983</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L991">Emitter.ts:991</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1553,7 +1569,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1039">Emitter.ts:1039</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1047">Emitter.ts:1047</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1596,7 +1612,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1122">Emitter.ts:1122</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1130">Emitter.ts:1130</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1618,7 +1634,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L1139">Emitter.ts:1139</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L1147">Emitter.ts:1147</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1634,13 +1650,13 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<a name="init" class="tsd-anchor"></a>
 					<h3>init</h3>
 					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
-						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>art<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+						<li class="tsd-signature tsd-kind-icon">init<span class="tsd-signature-symbol">(</span>art<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span>, config<span class="tsd-signature-symbol">: </span><a href="../interfaces/emitterconfig.html" class="tsd-signature-type">EmitterConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/oldemitterconfig.html" class="tsd-signature-type">OldEmitterConfig</a><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
 					</ul>
 					<ul class="tsd-descriptions">
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L425">Emitter.ts:425</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L430">Emitter.ts:430</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1657,7 +1673,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 									</div>
 								</li>
 								<li>
-									<h5>config: <span class="tsd-signature-type">any</span></h5>
+									<h5>config: <a href="../interfaces/emitterconfig.html" class="tsd-signature-type">EmitterConfig</a><span class="tsd-signature-symbol"> | </span><a href="../interfaces/oldemitterconfig.html" class="tsd-signature-type">OldEmitterConfig</a></h5>
 									<div class="tsd-comment tsd-typography">
 										<p>A configuration object containing settings for the emitter.</p>
 									</div>
@@ -1677,7 +1693,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L733">Emitter.ts:733</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L740">Emitter.ts:740</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1720,7 +1736,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L721">Emitter.ts:721</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L728">Emitter.ts:728</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1764,7 +1780,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L615">Emitter.ts:615</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L622">Emitter.ts:622</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1799,7 +1815,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L682">Emitter.ts:682</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L689">Emitter.ts:689</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1823,7 +1839,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L640">Emitter.ts:640</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L647">Emitter.ts:647</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1854,7 +1870,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L743">Emitter.ts:743</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L750">Emitter.ts:750</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1885,7 +1901,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L670">Emitter.ts:670</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L677">Emitter.ts:677</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -1923,7 +1939,7 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<li class="tsd-description">
 							<aside class="tsd-sources">
 								<ul>
-									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/2ba4b9f/src/Emitter.ts#L657">Emitter.ts:657</a></li>
+									<li>Defined in <a href="https://github.com/pixijs/pixi-particles/blob/72add9f/src/Emitter.ts#L664">Emitter.ts:664</a></li>
 								</ul>
 							</aside>
 							<div class="tsd-comment tsd-typography">
@@ -2100,6 +2116,9 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 								<a href="emitter.html#rotation" class="tsd-kind-icon">rotation</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
+								<a href="emitter.html#rotationacceleration" class="tsd-kind-icon">rotation<wbr>Acceleration</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class">
 								<a href="emitter.html#spawnchance" class="tsd-kind-icon">spawn<wbr>Chance</a>
 							</li>
 							<li class=" tsd-kind-property tsd-parent-kind-class">
@@ -2220,11 +2239,20 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/basicpoint.html" class="tsd-kind-icon">Basic<wbr>Point</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/basictweenable.html" class="tsd-kind-icon">Basic<wbr>Tweenable</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/color.html" class="tsd-kind-icon">Color</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/easesegment.html" class="tsd-kind-icon">Ease<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/emitterconfig.html" class="tsd-kind-icon">Emitter<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/oldemitterconfig.html" class="tsd-kind-icon">Old<wbr>Emitter<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="../interfaces/parsedanimatedparticleart.html" class="tsd-kind-icon">Parsed<wbr>Animated<wbr>Particle<wbr>Art</a>
@@ -2233,12 +2261,15 @@ passes <span class="hljs-keyword">it</span> <span class="hljs-keyword">on</span>
 						<a href="../interfaces/particleconstructor.html" class="tsd-kind-icon">Particle<wbr>Constructor</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="../interfaces/randnumber.html" class="tsd-kind-icon">Rand<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="../interfaces/segment.html" class="tsd-kind-icon">Segment</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/valuelist.html" class="tsd-kind-icon">Value<wbr>List</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="../interfaces/valuestep.html" class="tsd-kind-icon">Value<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-type-alias">

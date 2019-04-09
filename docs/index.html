@@ -74,6 +74,10 @@
 				<h2 id="sample-usage">Sample Usage</h2>
 				<p>Please see the examples for various pre-made particle configurations.</p>
 				<pre><code class="language-js"><span class="hljs-comment">// Create a new emitter</span>
+<span class="hljs-comment">// note: if importing library like "import * as particles from 'pixi-particles'"</span>
+<span class="hljs-comment">// or "const particles = require('pixi-particles')", the PIXI namespace will</span>
+<span class="hljs-comment">// not be modified, and may not exist - use "new particles.Emitter()", or whatever</span>
+<span class="hljs-comment">// your imported namespace is</span>
 <span class="hljs-keyword">var</span> emitter = <span class="hljs-keyword">new</span> PIXI.particles.Emitter(
 
     <span class="hljs-comment">// The PIXI.Container to put the emitter in</span>
@@ -292,11 +296,20 @@ update();</code></pre>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/basicpoint.html" class="tsd-kind-icon">Basic<wbr>Point</a>
 					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="interfaces/basictweenable.html" class="tsd-kind-icon">Basic<wbr>Tweenable</a>
+					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/color.html" class="tsd-kind-icon">Color</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/easesegment.html" class="tsd-kind-icon">Ease<wbr>Segment</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/emitterconfig.html" class="tsd-kind-icon">Emitter<wbr>Config</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="interfaces/oldemitterconfig.html" class="tsd-kind-icon">Old<wbr>Emitter<wbr>Config</a>
 					</li>
 					<li class=" tsd-kind-interface">
 						<a href="interfaces/parsedanimatedparticleart.html" class="tsd-kind-icon">Parsed<wbr>Animated<wbr>Particle<wbr>Art</a>
@@ -305,12 +318,15 @@ update();</code></pre>
 						<a href="interfaces/particleconstructor.html" class="tsd-kind-icon">Particle<wbr>Constructor</a>
 					</li>
 					<li class=" tsd-kind-interface">
+						<a href="interfaces/randnumber.html" class="tsd-kind-icon">Rand<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface">
 						<a href="interfaces/segment.html" class="tsd-kind-icon">Segment</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/valuelist.html" class="tsd-kind-icon">Value<wbr>List</a>
 					</li>
-					<li class=" tsd-kind-interface">
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
 						<a href="interfaces/valuestep.html" class="tsd-kind-icon">Value<wbr>Step</a>
 					</li>
 					<li class=" tsd-kind-type-alias">
