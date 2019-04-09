@@ -121,6 +121,10 @@ export class Emitter
 	 */
 	public maxRotationSpeed: number;
 	/**
+	* The Acceleration of rotation (angular acceleration) for a particle, in degrees per second.
+	*/
+	public rotationAcceleration: number;
+	/**
 	 * The blend mode for all particles, as named by PIXI.blendModes.
 	 */
 	public particleBlendMode: number;
@@ -284,7 +288,7 @@ export class Emitter
 	 * playOnceAndDestroy() or playOnce();
 	 */
 	protected _completeCallback: () => void;
-	
+
 	/**
 	 * @param particleParent The container to add the particles to.
 	 * @param particleImages A texture or array of textures to use
@@ -514,6 +518,8 @@ export class Emitter
 		}
 		else
 			this.minRotationSpeed = this.maxRotationSpeed = 0;
+
+		this.rotationAcceleration = config.rotationAcceleration || 0;
 		//set up the lifetime
 		this.minLifetime = config.lifetime.min;
 		this.maxLifetime = config.lifetime.max;
@@ -869,6 +875,7 @@ export class Emitter
 							p.rotationSpeed = this.minRotationSpeed;
 						else
 							p.rotationSpeed = Math.random() * (this.maxRotationSpeed - this.minRotationSpeed) + this.minRotationSpeed;
+						p.rotationAcceleration = this.rotationAcceleration;
 						p.noRotation = this.noRotation;
 						//set up the lifetime
 						p.maxLife = lifetime;
