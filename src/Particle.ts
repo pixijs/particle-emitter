@@ -287,15 +287,21 @@ export class Particle extends Sprite
 		//handle movement
 		if(this._doNormalMovement)
 		{
+			let deltaX:number;
+			let deltaY:number;
 			//interpolate speed
 			if (this._doSpeed)
 			{
 				let speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 				ParticleUtils.normalize(this.velocity);
 				ParticleUtils.scaleBy(this.velocity, speed);
+				deltaX = this.velocity.x * delta;
+				deltaY = this.velocity.y * delta;
 			}
 			else if(this._doAcceleration)
 			{
+				const oldVX = this.velocity.x;
+				const oldVY = this.velocity.y;
 				this.velocity.x += this.acceleration.x * delta;
 				this.velocity.y += this.acceleration.y * delta;
 				if (this.maxSpeed)
@@ -308,10 +314,18 @@ export class Particle extends Sprite
 						ParticleUtils.scaleBy(this.velocity, this.maxSpeed / currentSpeed);
 					}
 				}
+				// calculate position delta by the midpoint between our old velocity and our new velocity
+				deltaX = (oldVX + this.velocity.x) / 2 * delta;
+				deltaY = (oldVY + this.velocity.y) / 2 * delta;
+			}
+			else
+			{
+				deltaX = this.velocity.x * delta;
+				deltaY = this.velocity.y * delta;
 			}
 			//adjust position based on velocity
-			this.position.x += this.velocity.x * delta;
-			this.position.y += this.velocity.y * delta;
+			this.position.x += deltaX;
+			this.position.y += deltaY;
 		}
 		//interpolate color
 		if (this._doColor)
