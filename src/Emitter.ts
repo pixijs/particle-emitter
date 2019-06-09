@@ -952,7 +952,9 @@ export class Emitter
 		{
 			if (this._completeCallback)
 			{
-				this._completeCallback();
+				const cb = this._completeCallback;
+				this._completeCallback = null;
+				cb();
 			}
 			if (this._destroyWhenComplete)
 			{
