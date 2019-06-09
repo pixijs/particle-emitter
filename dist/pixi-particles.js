@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.1.0
- * Compiled Tue, 09 Apr 2019 13:28:44 UTC
+ * pixi-particles - v4.1.1
+ * Compiled Sun, 09 Jun 2019 01:26:07 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1502,7 +1502,9 @@ this.PIXI = this.PIXI || {};
 	        //if we are all done and should destroy ourselves, take care of that
 	        if (!this._emit && !this._activeParticlesFirst) {
 	            if (this._completeCallback) {
-	                this._completeCallback();
+	                var cb = this._completeCallback;
+	                this._completeCallback = null;
+	                cb();
 	            }
 	            if (this._destroyWhenComplete) {
 	                this.destroy();
