@@ -12,7 +12,14 @@ exec('npm publish', {
 }, function(err, stdOut, stdErr) {
 	// restore private flag
 	pkg.private = true;
-	fs.writeFileSync(path.resolve('./package.json'), JSON.stringify(pkg, null, 2) + '\n');
+	try {
+		fs.writeFileSync(path.resolve('./package.json'), JSON.stringify(pkg, null, 2) + '\n');
+	}
+	catch (err) {
+		console.error(err);
+		process.exit(1);
+		return;
+	}
 	if (err)
 	{
 		console.error(stdErr);
