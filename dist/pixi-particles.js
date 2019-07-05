@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.1.1
- * Compiled Sun, 09 Jun 2019 01:26:07 UTC
+ * pixi-particles - v4.1.2
+ * Compiled Fri, 05 Jul 2019 15:33:53 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1139,8 +1139,45 @@ this.PIXI = this.PIXI || {};
 	            this.particlesPerWave = config.particlesPerWave;
 	        this.particleSpacing = 0;
 	        this.angleStart = 0;
-	        var spawnCircle;
 	        //determine the spawn function to use
+	        this.parseSpawnType(config);
+	        //set the spawning frequency
+	        this.frequency = config.frequency;
+	        this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
+	        //set the emitter lifetime
+	        this.emitterLifetime = config.emitterLifetime || -1;
+	        //set the max particles
+	        this.maxParticles = config.maxParticles > 0 ? config.maxParticles : 1000;
+	        //determine if we should add the particle at the back of the list or not
+	        this.addAtBack = !!config.addAtBack;
+	        //reset the emitter position and rotation variables
+	        this.rotation = 0;
+	        this.ownerPos = new pixi.Point();
+	        this.spawnPos = new pixi.Point(config.pos.x, config.pos.y);
+	        this.initAdditional(art, config);
+	        this._prevEmitterPos = this.spawnPos.clone();
+	        //previous emitter position is invalid and should not be used for interpolation
+	        this._prevPosIsValid = false;
+	        //start emitting
+	        this._spawnTimer = 0;
+	        this.emit = config.emit === undefined ? true : !!config.emit;
+	        this.autoUpdate = !!config.autoUpdate;
+	    };
+	    /**
+	     * Sets up additional parameters to the emitter from config settings.
+	     * Using for parsing additional parameters on classes that extend from Emitter
+	     * @param art A texture or array of textures to use for the particles.
+	     * @param config A configuration object containing settings for the emitter.
+	     */
+	    Emitter.prototype.initAdditional = function (art, config) {
+	    };
+	    /**
+	     * Parsing emitter spawn type from config settings.
+	     * Place for override and add new kind of spawn type
+	     * @param config A configuration object containing settings for the emitter.
+	     */
+	    Emitter.prototype.parseSpawnType = function (config) {
+	        var spawnCircle;
 	        switch (config.spawnType) {
 	            case "rect":
 	                this.spawnType = "rect";
@@ -1181,26 +1218,6 @@ this.PIXI = this.PIXI || {};
 	                this._spawnFunc = this._spawnPoint;
 	                break;
 	        }
-	        //set the spawning frequency
-	        this.frequency = config.frequency;
-	        this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
-	        //set the emitter lifetime
-	        this.emitterLifetime = config.emitterLifetime || -1;
-	        //set the max particles
-	        this.maxParticles = config.maxParticles > 0 ? config.maxParticles : 1000;
-	        //determine if we should add the particle at the back of the list or not
-	        this.addAtBack = !!config.addAtBack;
-	        //reset the emitter position and rotation variables
-	        this.rotation = 0;
-	        this.ownerPos = new pixi.Point();
-	        this.spawnPos = new pixi.Point(config.pos.x, config.pos.y);
-	        this._prevEmitterPos = this.spawnPos.clone();
-	        //previous emitter position is invalid and should not be used for interpolation
-	        this._prevPosIsValid = false;
-	        //start emitting
-	        this._spawnTimer = 0;
-	        this.emit = config.emit === undefined ? true : !!config.emit;
-	        this.autoUpdate = !!config.autoUpdate;
 	    };
 	    /**
 	     * Recycles an individual particle. For internal use only.
@@ -1445,6 +1462,8 @@ this.PIXI = this.PIXI || {};
 	                        p.ease = this.customEase;
 	                        //set the extra data, if any
 	                        p.extraData = this.extraData;
+	                        //set additional properties to particle
+	                        this.applyAdditionalProperties(p);
 	                        //call the proper function to handle rotation and position of particle
 	                        this._spawnFunc(p, emitPosX, emitPosY, i);
 	                        //initialize particle
@@ -1510,6 +1529,13 @@ this.PIXI = this.PIXI || {};
 	                this.destroy();
 	            }
 	        }
+	    };
+	    /**
+	     * Set additional properties to new particle.
+	     * Using on classes that extend from Emitter
+	     * @param p The particle
+	     */
+	    Emitter.prototype.applyAdditionalProperties = function (p) {
 	    };
 	    /**
 	     * Positions a particle for a point type emitter.
