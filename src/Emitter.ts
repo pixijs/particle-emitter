@@ -176,7 +176,7 @@ export class Emitter
 	/**
 	 * A reference to the emitter function specific to the spawn type.
 	 */
-	private _spawnFunc: (p: Particle, emitPosX: number, emitPosY: number, i?: number) => void;
+	protected _spawnFunc: (p: Particle, emitPosX: number, emitPosY: number, i?: number) => void;
 	/**
 	 * A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
 	 */
@@ -549,8 +549,51 @@ export class Emitter
 			this.particlesPerWave = config.particlesPerWave;
 		this.particleSpacing = 0;
 		this.angleStart = 0;
-		let spawnCircle;
 		//determine the spawn function to use
+		this.parseSpawnType(config);
+		//set the spawning frequency
+		this.frequency = config.frequency;
+		this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
+		//set the emitter lifetime
+		this.emitterLifetime = config.emitterLifetime || -1;
+		//set the max particles
+		this.maxParticles = config.maxParticles > 0 ? config.maxParticles : 1000;
+		//determine if we should add the particle at the back of the list or not
+		this.addAtBack = !!config.addAtBack;
+		//reset the emitter position and rotation variables
+		this.rotation = 0;
+		this.ownerPos = new Point();
+		this.spawnPos = new Point(config.pos.x, config.pos.y);
+
+		this.initAdditional(art, config);
+
+		this._prevEmitterPos = this.spawnPos.clone();
+		//previous emitter position is invalid and should not be used for interpolation
+		this._prevPosIsValid = false;
+		//start emitting
+		this._spawnTimer = 0;
+		this.emit = config.emit === undefined ? true : !!config.emit;
+		this.autoUpdate = !!config.autoUpdate;
+	}
+
+	/**
+	 * Sets up additional parameters to the emitter from config settings.
+	 * Using for parsing additional parameters on classes that extend from Emitter
+	 * @param art A texture or array of textures to use for the particles.
+	 * @param config A configuration object containing settings for the emitter.
+	 */
+	protected initAdditional(art: any, config: EmitterConfig|OldEmitterConfig)
+	{
+	}
+
+	/**
+	 * Parsing emitter spawn type from config settings.
+	 * Place for override and add new kind of spawn type
+	 * @param config A configuration object containing settings for the emitter.
+	 */
+	protected parseSpawnType(config: EmitterConfig|OldEmitterConfig) {
+		let spawnCircle;
+
 		switch(config.spawnType)
 		{
 			case "rect":
@@ -592,26 +635,6 @@ export class Emitter
 				this._spawnFunc = this._spawnPoint;
 				break;
 		}
-		//set the spawning frequency
-		this.frequency = config.frequency;
-		this.spawnChance = (typeof config.spawnChance === 'number' && config.spawnChance > 0) ? config.spawnChance : 1;
-		//set the emitter lifetime
-		this.emitterLifetime = config.emitterLifetime || -1;
-		//set the max particles
-		this.maxParticles = config.maxParticles > 0 ? config.maxParticles : 1000;
-		//determine if we should add the particle at the back of the list or not
-		this.addAtBack = !!config.addAtBack;
-		//reset the emitter position and rotation variables
-		this.rotation = 0;
-		this.ownerPos = new Point();
-		this.spawnPos = new Point(config.pos.x, config.pos.y);
-		this._prevEmitterPos = this.spawnPos.clone();
-		//previous emitter position is invalid and should not be used for interpolation
-		this._prevPosIsValid = false;
-		//start emitting
-		this._spawnTimer = 0;
-		this.emit = config.emit === undefined ? true : !!config.emit;
-		this.autoUpdate = !!config.autoUpdate;
 	}
 
 	/**
@@ -886,6 +909,8 @@ export class Emitter
 						p.ease = this.customEase;
 						//set the extra data, if any
 						p.extraData = this.extraData;
+						//set additional properties to particle
+						this.applyAdditionalProperties(p);
 						//call the proper function to handle rotation and position of particle
 						this._spawnFunc(p, emitPosX, emitPosY, i);
 						//initialize particle
@@ -961,6 +986,14 @@ export class Emitter
 				this.destroy();
 			}
 		}
+	}
+
+	/**
+	 * Set additional properties to new particle.
+	 * Using on classes that extend from Emitter
+	 * @param p The particle
+	 */
+	protected applyAdditionalProperties(p: Particle) {
 	}
 
 	/**
