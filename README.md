@@ -145,7 +145,7 @@ update();
 ```
 
 ## Note on Emitter Cleanup
-When using PixiJS 3+, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, _in WebGL only_, reset the SpriteRenderer's sprite batching with `yourRenderer.plugins.sprite.sprites.length = 0;`
+When using PixiJS 3 or 4, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, _in WebGL only_, reset the SpriteRenderer's sprite batching with `yourRenderer.plugins.sprite.sprites.length = 0;`. This is not needed in PixiJS 5.
 
 ## Documentation
 
