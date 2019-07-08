@@ -5,6 +5,7 @@ import {PolygonalChain} from "./PolygonalChain";
 import {EmitterConfig, OldEmitterConfig} from "./EmitterConfig";
 import {Point, Circle, Rectangle, Container, settings} from "pixi.js";
 import * as pixi from "pixi.js";
+import {ISpawnStrategy, SpawnFactory} from "./spawn/SpawnFactory";
 // get the shared ticker, in V4 and V5 friendly methods
 /**
  * @hidden
@@ -25,11 +26,6 @@ export interface ParticleConstructor
 {
 	new (emitter:Emitter):Particle;
 }
-
-/**
- * @hidden
- */
-const helperPoint = new Point();
 
 /**
  * A particle emitter.
@@ -174,9 +170,9 @@ export class Emitter
 	 */
 	public spawnType: string;
 	/**
-	 * A reference to the emitter function specific to the spawn type.
+	 * Emitter spawn behaviour specific to the spawn type.
 	 */
-	protected _spawnFunc: (p: Particle, emitPosX: number, emitPosY: number, i?: number) => void;
+	protected spawnStrategy: ISpawnStrategy;
 	/**
 	 * A rectangle relative to spawnPos to spawn particles inside if the spawn type is "rect".
 	 */
@@ -206,7 +202,7 @@ export class Emitter
 	 * the calculated spawn angle.
 	 * To change this, use rotate().
 	 */
-	protected rotation: number;
+    protected _rotation: number;
 	/**
 	 * The world position of the emitter's owner, to add spawnPos to when
 	 * spawning particles. To change this, use updateOwnerPos().
@@ -332,7 +328,7 @@ export class Emitter
 		this.emitterLifetime = -1;
 		this.spawnPos = null;
 		this.spawnType = null;
-		this._spawnFunc = null;
+		this.spawnStrategy = null;
 		this.spawnRect = null;
 		this.spawnCircle = null;
 		this.spawnPolygonalChain = null;
@@ -340,7 +336,7 @@ export class Emitter
 		this.particleSpacing = 0;
 		this.angleStart = 0;
 		//emitter properties
-		this.rotation = 0;
+		this._rotation = 0;
 		this.ownerPos = null;
 		this._prevEmitterPos = null;
 		this._prevPosIsValid = false;
@@ -561,7 +557,7 @@ export class Emitter
 		//determine if we should add the particle at the back of the list or not
 		this.addAtBack = !!config.addAtBack;
 		//reset the emitter position and rotation variables
-		this.rotation = 0;
+		this._rotation = 0;
 		this.ownerPos = new Point();
 		this.spawnPos = new Point(config.pos.x, config.pos.y);
 
@@ -592,50 +588,21 @@ export class Emitter
 	 * @param config A configuration object containing settings for the emitter.
 	 */
 	protected parseSpawnType(config: EmitterConfig|OldEmitterConfig) {
-		let spawnCircle;
+	    this.spawnStrategy = this.getSpawnFactory().getStrategy(config.spawnType);
+	    if ( !this.spawnStrategy) {
+	        this.spawnStrategy = this.getSpawnFactory().getStrategy("point");
+        }
 
-		switch(config.spawnType)
-		{
-			case "rect":
-				this.spawnType = "rect";
-				this._spawnFunc = this._spawnRect;
-				let spawnRect = config.spawnRect;
-				this.spawnRect = new Rectangle(spawnRect.x, spawnRect.y, spawnRect.w, spawnRect.h);
-				break;
-			case "circle":
-				this.spawnType = "circle";
-				this._spawnFunc = this._spawnCircle;
-				spawnCircle = config.spawnCircle;
-				this.spawnCircle = new Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
-				break;
-			case "ring":
-				this.spawnType = "ring";
-				this._spawnFunc = this._spawnRing;
-				spawnCircle = config.spawnCircle;
-				this.spawnCircle = new Circle(spawnCircle.x, spawnCircle.y, spawnCircle.r) as any;
-				this.spawnCircle.minRadius = spawnCircle.minR;
-				break;
-			case "burst":
-				this.spawnType = "burst";
-				this._spawnFunc = this._spawnBurst;
-				this.particleSpacing = config.particleSpacing;
-				this.angleStart = config.angleStart ? config.angleStart : 0;
-				break;
-			case "point":
-				this.spawnType = "point";
-				this._spawnFunc = this._spawnPoint;
-				break;
-			case "polygonalChain":
-				this.spawnType = "polygonalChain";
-				this._spawnFunc = this._spawnPolygonalChain;
-				this.spawnPolygonalChain = new PolygonalChain(config.spawnPolygon);
-				break;
-			default:
-				this.spawnType = "point";
-				this._spawnFunc = this._spawnPoint;
-				break;
-		}
+	    //add to emitter props depend on spawn type
+	    this.spawnStrategy.parseConfig(this, config);
 	}
+
+	/**
+	 * Spawn factory which return spawn strategy depend on spawn type
+	 */
+	protected getSpawnFactory():SpawnFactory {
+	    return SpawnFactory.instance;
+    }
 
 	/**
 	 * Recycles an individual particle. For internal use only.
@@ -669,15 +636,19 @@ export class Emitter
 	 */
 	public rotate(newRot: number)
 	{
-		if (this.rotation == newRot) return;
+		if (this._rotation == newRot) return;
 		//caclulate the difference in rotation for rotating spawnPos
-		let diff = newRot - this.rotation;
-		this.rotation = newRot;
+		let diff = newRot - this._rotation;
+		this._rotation = newRot;
 		//rotate spawnPos
 		ParticleUtils.rotatePoint(diff, this.spawnPos);
 		//mark the position as having changed
 		this._posChanged = true;
 	}
+
+    public get rotation(): number {
+        return this._rotation;
+    }
 
 	/**
 	 * Changes the spawn position of the emitter.
@@ -912,7 +883,7 @@ export class Emitter
 						//set additional properties to particle
 						this.applyAdditionalProperties(p);
 						//call the proper function to handle rotation and position of particle
-						this._spawnFunc(p, emitPosX, emitPosY, i);
+						this.spawnStrategy.spawn(p, emitPosX, emitPosY, i);
 						//initialize particle
 						p.init();
 						//update the particle by the time passed, so the particles are spread out properly
@@ -994,169 +965,6 @@ export class Emitter
 	 * @param p The particle
 	 */
 	protected applyAdditionalProperties(p: Particle) {
-	}
-
-	/**
-	 * Positions a particle for a point type emitter.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave. Not used for this function.
-	 */
-	protected _spawnPoint(p: Particle, emitPosX: number, emitPosY: number)
-	{
-		//set the initial rotation/direction of the particle based on
-		//starting particle angle and rotation of emitter
-		if (this.minStartRotation == this.maxStartRotation)
-			p.rotation = this.minStartRotation + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
-		//drop the particle at the emitter's position
-		p.position.x = emitPosX;
-		p.position.y = emitPosY;
-	}
-
-	/**
-	 * Positions a particle for a rectangle type emitter.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave. Not used for this function.
-	 */
-	protected _spawnRect(p: Particle, emitPosX: number, emitPosY: number)
-	{
-		//set the initial rotation/direction of the particle based on starting
-		//particle angle and rotation of emitter
-		if (this.minStartRotation == this.maxStartRotation)
-			p.rotation = this.minStartRotation + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) + this.minStartRotation + this.rotation;
-		//place the particle at a random point in the rectangle
-		helperPoint.x = Math.random() * this.spawnRect.width + this.spawnRect.x;
-		helperPoint.y = Math.random() * this.spawnRect.height + this.spawnRect.y;
-		if(this.rotation !== 0)
-			ParticleUtils.rotatePoint(this.rotation, helperPoint);
-		p.position.x = emitPosX + helperPoint.x;
-		p.position.y = emitPosY + helperPoint.y;
-	}
-
-	/**
-	 * Positions a particle for a circle type emitter.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave. Not used for this function.
-	 */
-	protected _spawnCircle(p: Particle, emitPosX: number, emitPosY: number)
-	{
-		//set the initial rotation/direction of the particle based on starting
-		//particle angle and rotation of emitter
-		if (this.minStartRotation == this.maxStartRotation)
-			p.rotation = this.minStartRotation + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
-						this.minStartRotation + this.rotation;
-		//place the particle at a random radius in the circle
-		helperPoint.x = Math.random() * this.spawnCircle.radius;
-		helperPoint.y = 0;
-		//rotate the point to a random angle in the circle
-		ParticleUtils.rotatePoint(Math.random() * 360, helperPoint);
-		//offset by the circle's center
-		helperPoint.x += this.spawnCircle.x;
-		helperPoint.y += this.spawnCircle.y;
-		//rotate the point by the emitter's rotation
-		if(this.rotation !== 0)
-			ParticleUtils.rotatePoint(this.rotation, helperPoint);
-		//set the position, offset by the emitter's position
-		p.position.x = emitPosX + helperPoint.x;
-		p.position.y = emitPosY + helperPoint.y;
-	}
-
-	/**
-	 * Positions a particle for a ring type emitter.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave. Not used for this function.
-	 */
-	protected _spawnRing(p: Particle, emitPosX: number, emitPosY: number)
-	{
-		let spawnCircle = this.spawnCircle;
-		//set the initial rotation/direction of the particle based on starting
-		//particle angle and rotation of emitter
-		if (this.minStartRotation == this.maxStartRotation)
-			p.rotation = this.minStartRotation + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
-						this.minStartRotation + this.rotation;
-		//place the particle at a random radius in the ring
-		if(spawnCircle.minRadius !== spawnCircle.radius)
-		{
-			helperPoint.x = Math.random() * (spawnCircle.radius - spawnCircle.minRadius) +
-							spawnCircle.minRadius;
-		}
-		else
-			helperPoint.x = spawnCircle.radius;
-		helperPoint.y = 0;
-		//rotate the point to a random angle in the circle
-		let angle = Math.random() * 360;
-		p.rotation += angle;
-		ParticleUtils.rotatePoint(angle, helperPoint);
-		//offset by the circle's center
-		helperPoint.x += this.spawnCircle.x;
-		helperPoint.y += this.spawnCircle.y;
-		//rotate the point by the emitter's rotation
-		if(this.rotation !== 0)
-			ParticleUtils.rotatePoint(this.rotation, helperPoint);
-		//set the position, offset by the emitter's position
-		p.position.x = emitPosX + helperPoint.x;
-		p.position.y = emitPosY + helperPoint.y;
-	}
-
-	/**
-	 * Positions a particle for polygonal chain.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave. Not used for this function.
-	 */
-	protected _spawnPolygonalChain(p: Particle, emitPosX: number, emitPosY: number)
-	{
-		//set the initial rotation/direction of the particle based on starting
-		//particle angle and rotation of emitter
-		if (this.minStartRotation == this.maxStartRotation)
-			p.rotation = this.minStartRotation + this.rotation;
-		else
-			p.rotation = Math.random() * (this.maxStartRotation - this.minStartRotation) +
-				this.minStartRotation + this.rotation;
-		// get random point on the polygon chain
-		this.spawnPolygonalChain.getRandomPoint(helperPoint);
-		//rotate the point by the emitter's rotation
-		if(this.rotation !== 0)
-			ParticleUtils.rotatePoint(this.rotation, helperPoint);
-		//set the position, offset by the emitter's position
-		p.position.x = emitPosX + helperPoint.x;
-		p.position.y = emitPosY + helperPoint.y;
-	}
-
-	/**
-	 * Positions a particle for a burst type emitter.
-	 * @param p The particle to position and rotate.
-	 * @param emitPosX The emitter's x position
-	 * @param emitPosY The emitter's y position
-	 * @param i The particle number in the current wave.
-	 */
-	protected _spawnBurst(p: Particle, emitPosX: number, emitPosY: number, i: number)
-	{
-		//set the initial rotation/direction of the particle based on spawn
-		//angle and rotation of emitter
-		if(this.particleSpacing === 0)
-			p.rotation = Math.random() * 360;
-		else
-			p.rotation = this.angleStart + (this.particleSpacing * i) + this.rotation;
-		//drop the particle at the emitter's position
-		p.position.x = emitPosX;
-		p.position.y = emitPosY;
 	}
 
 	/**

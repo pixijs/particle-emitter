@@ -6,3 +6,11 @@ export * from "./AnimatedParticle";
 export * from "./PolygonalChain";
 export * from "./PropertyList";
 export * from "./PropertyNode";
+export * from "./spawn/SpawnFactory"
+export * from "./spawn/strategy/SpawnPolygonStrategy"
+export * from "./spawn/strategy/SpawnPointStrategy"
+export * from "./spawn/strategy/SpawnRingStrategy"
+export * from "./spawn/strategy/SpawnCircleStrategy"
+export * from "./spawn/strategy/SpawnBurstStrategy"
+export * from "./spawn/strategy/SpawnRectStrategy"
+export * from "./utils/Temp"
