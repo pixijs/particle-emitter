@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.1.2
- * Compiled Fri, 05 Jul 2019 15:33:53 UTC
+ * pixi-particles - v4.1.3
+ * Compiled Wed, 09 Oct 2019 14:09:19 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -69,6 +69,22 @@ this.PIXI = this.PIXI || {};
 	    return PropertyNode;
 	}());
 
+	// get Texture.from()/Texture.fromImage(), in V4 and V5 friendly methods
+	/**
+	 * @hidden
+	 */
+	var TextureFromString;
+	// to avoid Rollup transforming our import, save pixi namespace in a variable
+	var pixiNS = pixi;
+	if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5) {
+	    TextureFromString = pixiNS.Texture.fromImage;
+	}
+	else {
+	    TextureFromString = pixiNS.Texture.from;
+	}
+	function GetTextureFromString(s) {
+	    return TextureFromString(s);
+	}
 	(function (ParticleUtils) {
 	    /**
 	     * If errors and warnings should be logged within the library.
@@ -755,7 +771,7 @@ this.PIXI = this.PIXI || {};
 	        var i;
 	        for (i = art.length; i >= 0; --i) {
 	            if (typeof art[i] == "string")
-	                art[i] = pixi.Texture.fromImage(art[i]);
+	                art[i] = GetTextureFromString(art[i]);
 	        }
 	        //particles from different base textures will be slower in WebGL than if they
 	        //were from one spritesheet
@@ -881,12 +897,12 @@ this.PIXI = this.PIXI || {};
 	 */
 	var ticker;
 	// to avoid Rollup transforming our import, save pixi namespace in a variable
-	var pixiNS = pixi;
+	var pixiNS$1 = pixi;
 	if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5) {
-	    ticker = pixiNS.ticker.shared;
+	    ticker = pixiNS$1.ticker.shared;
 	}
 	else {
-	    ticker = pixiNS.Ticker.shared;
+	    ticker = pixiNS$1.Ticker.shared;
 	}
 	/**
 	 * @hidden
@@ -1912,7 +1928,7 @@ this.PIXI = this.PIXI || {};
 	 *     //textures is required, and can be an array of any (non-zero) length.
 	 *     textures: [
 	 *         //each entry represents a single texture that should be used for one or more
-	 *         //frames. Any strings will be converted to Textures with Texture.fromImage().
+	 *         //frames. Any strings will be converted to Textures with Texture.from().
 	 *         //Instances of PIXI.Texture will be used directly.
 	 *         "animFrame1.png",
 	 *         //entries can be an object with a 'count' property, telling AnimatedParticle to
@@ -2011,14 +2027,14 @@ this.PIXI = this.PIXI || {};
 	            for (var j = 0; j < textures.length; ++j) {
 	                tex = textures[j];
 	                if (typeof tex == "string")
-	                    outTextures.push(pixi.Texture.fromImage(tex));
+	                    outTextures.push(GetTextureFromString(tex));
 	                else if (tex instanceof pixi.Texture)
 	                    outTextures.push(tex);
 	                //assume an object with extra data determining duplicate frame data
 	                else {
 	                    var dupe = tex.count || 1;
 	                    if (typeof tex.texture == "string")
-	                        tex = pixi.Texture.fromImage(tex.texture);
+	                        tex = GetTextureFromString(tex.texture);
 	                    else // if(tex.texture instanceof Texture)
 	                        tex = tex.texture;
 	                    for (; dupe > 0; --dupe) {
@@ -2047,6 +2063,7 @@ this.PIXI = this.PIXI || {};
 	    return AnimatedParticle;
 	}(Particle));
 
+	exports.GetTextureFromString = GetTextureFromString;
 	exports.Particle = Particle;
 	exports.Emitter = Emitter;
 	exports.PathParticle = PathParticle;
