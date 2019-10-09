@@ -9,7 +9,7 @@ A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) li
 	`playOnceAndDestroy()` is unaffected.
 * On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have been
 	replaced by a singly linked list of `PropertyNode` objects.
-* Dropped support for PIXI v3. Please use v4.
+* Dropped support for PIXI v3. Please use v4 or v5.
 
 ## Sample Usage
 
