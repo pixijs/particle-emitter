@@ -1,7 +1,7 @@
 import {Emitter} from "./Emitter";
-import {ParticleUtils, SimpleEase, Color} from "./ParticleUtils";
+import {ParticleUtils, SimpleEase, Color, GetTextureFromString} from "./ParticleUtils";
 import {PropertyList} from "./PropertyList";
-import {Sprite, Point, Texture} from 'pixi.js';
+import {Sprite, Point, Texture} from "pixi.js";
 
 /**
  * An individual particle image. You shouldn't have to deal with these.
@@ -387,7 +387,7 @@ export class Particle extends Sprite
 		for(i = art.length; i >= 0; --i)
 		{
 			if(typeof art[i] == "string")
-				art[i] = Texture.fromImage(art[i]);
+				art[i] = GetTextureFromString(art[i]);
 		}
 		//particles from different base textures will be slower in WebGL than if they
 		//were from one spritesheet

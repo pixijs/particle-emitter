@@ -1,6 +1,7 @@
 import {Particle} from "./Particle";
 import {Emitter} from "./Emitter";
-import {Texture} from 'pixi.js';
+import {GetTextureFromString} from "./ParticleUtils";
+import {Texture} from "pixi.js";
 
 export interface ParsedAnimatedParticleArt
 {
@@ -34,7 +35,7 @@ export interface AnimatedParticleArt
  *     //textures is required, and can be an array of any (non-zero) length.
  *     textures: [
  *         //each entry represents a single texture that should be used for one or more
- *         //frames. Any strings will be converted to Textures with Texture.fromImage().
+ *         //frames. Any strings will be converted to Textures with Texture.from().
  *         //Instances of PIXI.Texture will be used directly.
  *         "animFrame1.png",
  *         //entries can be an object with a 'count' property, telling AnimatedParticle to
@@ -176,7 +177,7 @@ export class AnimatedParticle extends Particle
 			{
 				tex = textures[j];
 				if(typeof tex == "string")
-					outTextures.push(Texture.fromImage(tex));
+					outTextures.push(GetTextureFromString(tex));
 				else if(tex instanceof Texture)
 					outTextures.push(tex);
 				//assume an object with extra data determining duplicate frame data
@@ -184,7 +185,7 @@ export class AnimatedParticle extends Particle
 				{
 					let dupe = tex.count || 1;
 					if(typeof tex.texture == "string")
-						tex = Texture.fromImage(tex.texture);
+						tex = GetTextureFromString(tex.texture);
 					else// if(tex.texture instanceof Texture)
 						tex = tex.texture;
 					for(; dupe > 0; --dupe)

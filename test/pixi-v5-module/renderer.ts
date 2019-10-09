@@ -102,7 +102,7 @@ window.onresize = function() {
 window.onresize(null);
 
 // Preload the particle images and create PIXI textures from it
-const urls = imagePaths.slice();
+const urls = [];// imagePaths.slice();
 urls.push("../../docs/examples/images/bg.png");
 const loader = pixi.Loader.shared;
 for(let i = 0; i < urls.length; ++i)
@@ -117,9 +117,9 @@ loader.load(function()
 	bg.tint = 0x000000;
 	stage.addChild(bg);
 	//collect the textures, now that they are all loaded
-	const art = [];
-	for(let i = 0; i < imagePaths.length; ++i)
-		art.push(pixi.Texture.from(imagePaths[i]));
+	const art = imagePaths;// [];
+	// for(let i = 0; i < imagePaths.length; ++i)
+	// 	art.push(pixi.Texture.from(imagePaths[i]));
 	// Create the new emitter and attach it to the stage
 	const emitterContainer = new pixi.Container();
 	stage.addChild(emitterContainer);

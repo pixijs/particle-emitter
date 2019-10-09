@@ -1,5 +1,25 @@
-import {BLEND_MODES, Point} from 'pixi.js';
-import {PropertyNode, ValueStep} from './PropertyNode';
+import {BLEND_MODES, Point, Texture} from "pixi.js";
+import {PropertyNode, ValueStep} from "./PropertyNode";
+import * as pixi from "pixi.js";
+// get Texture.from()/Texture.fromImage(), in V4 and V5 friendly methods
+/**
+ * @hidden
+ */
+let TextureFromString: (s:string) => pixi.Texture;
+// to avoid Rollup transforming our import, save pixi namespace in a variable
+const pixiNS = pixi;
+if (parseInt(/^(\d+)\./.exec(pixi.VERSION)[1]) < 5)
+{
+	TextureFromString = pixiNS.Texture.fromImage;
+}
+else
+{
+	TextureFromString = (pixiNS as any).Texture.from;
+}
+
+export function GetTextureFromString(s:string): Texture {
+	return TextureFromString(s);
+}
 
 export interface Color {
 	r: number,
