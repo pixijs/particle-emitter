@@ -11,3 +11,4 @@ dist
 lib
 /*.d.ts
 test/*/renderer.js
+.idea
