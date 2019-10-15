@@ -3,13 +3,15 @@ import {Emitter} from "../../Emitter";
 import {EmitterConfig, OldEmitterConfig} from "../../EmitterConfig";
 import {Particle} from "../../Particle";
 import {ParticleUtils} from "../../ParticleUtils";
-import {Temp} from "../../utils/Temp";
 import {PolygonalChain} from "../../PolygonalChain";
+import {Point} from "pixi.js";
 
 /**
  * A polygon spawn type strategy.
  */
 export class SpawnPolygonStrategy implements ISpawnStrategy {
+    protected helperPoint:Point = new Point();
+
     parseConfig(emitter: Emitter, config: EmitterConfig | OldEmitterConfig): void {
         emitter.spawnType = "polygonalChain";
         emitter.spawnPolygonalChain = new PolygonalChain(config.spawnPolygon);
@@ -32,12 +34,12 @@ export class SpawnPolygonStrategy implements ISpawnStrategy {
             p.rotation = Math.random() * (emitter.maxStartRotation - emitter.minStartRotation) +
                 emitter.minStartRotation + emitter.rotation;
         // get random point on the polygon chain
-        emitter.spawnPolygonalChain.getRandomPoint(Temp.point);
+        emitter.spawnPolygonalChain.getRandomPoint(this.helperPoint);
         //rotate the point by the emitter's rotation
         if (emitter.rotation !== 0)
-            ParticleUtils.rotatePoint(emitter.rotation, Temp.point);
+            ParticleUtils.rotatePoint(emitter.rotation, this.helperPoint);
         //set the position, offset by the emitter's position
-        p.position.x = emitPosX + Temp.point.x;
-        p.position.y = emitPosY + Temp.point.y;
+        p.position.x = emitPosX + this.helperPoint.x;
+        p.position.y = emitPosY + this.helperPoint.y;
     }
 }

@@ -1,15 +1,17 @@
 import {ISpawnStrategy} from "../SpawnFactory";
 import {Emitter} from "../../Emitter";
 import {EmitterConfig, OldEmitterConfig} from "../../EmitterConfig";
-import {Circle} from "pixi.js";
+import {Circle, Point} from "pixi.js";
 import {Particle} from "../../Particle";
 import {ParticleUtils} from "../../ParticleUtils";
-import {Temp} from "../../utils/Temp";
 
 /**
  * A circle spawn type strategy.
  */
 export class SpawnCircleStrategy implements ISpawnStrategy {
+
+    protected helperPoint:Point = new Point();
+
     public parseConfig(emitter: Emitter, config: EmitterConfig | OldEmitterConfig): void {
         emitter.spawnType = "circle";
         const spawnCircle = config.spawnCircle;
@@ -33,18 +35,18 @@ export class SpawnCircleStrategy implements ISpawnStrategy {
             p.rotation = Math.random() * (emitter.maxStartRotation - emitter.minStartRotation) +
                 emitter.minStartRotation + emitter.rotation;
         //place the particle at a random radius in the circle
-        Temp.point.x = Math.random() * emitter.spawnCircle.radius;
-        Temp.point.y = 0;
+        this.helperPoint.x = Math.random() * emitter.spawnCircle.radius;
+        this.helperPoint.y = 0;
         //rotate the point to a random angle in the circle
-        ParticleUtils.rotatePoint(Math.random() * 360, Temp.point);
+        ParticleUtils.rotatePoint(Math.random() * 360, this.helperPoint);
         //offset by the circle's center
-        Temp.point.x += emitter.spawnCircle.x;
-        Temp.point.y += emitter.spawnCircle.y;
+        this.helperPoint.x += emitter.spawnCircle.x;
+        this.helperPoint.y += emitter.spawnCircle.y;
         //rotate the point by the emitter's rotation
         if (emitter.rotation !== 0)
-            ParticleUtils.rotatePoint(emitter.rotation, Temp.point);
+            ParticleUtils.rotatePoint(emitter.rotation, this.helperPoint);
         //set the position, offset by the emitter's position
-        p.position.x = emitPosX + Temp.point.x;
-        p.position.y = emitPosY + Temp.point.y;
+        p.position.x = emitPosX + this.helperPoint.x;
+        p.position.y = emitPosY + this.helperPoint.y;
     }
 }

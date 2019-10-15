@@ -10,7 +10,9 @@ import {SpawnPolygonStrategy} from "./strategy/SpawnPolygonStrategy";
 
 /**
  * Spawn factory which return spawn strategy depend on spawn type
- * For add new strategies or change exists - extend from SpawnFactory and override getSpawnFactory() on Emitter
+ * 2 ways for add new strategies or change exists:
+ *   1) extend from SpawnFactory and override getSpawnFactory() on Emitter
+ *   2) use SpawnFactory.setStrategy()
  */
 export class SpawnFactory {
     protected static _instance: SpawnFactory;
