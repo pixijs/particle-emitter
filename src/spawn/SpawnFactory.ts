@@ -29,23 +29,36 @@ export class SpawnFactory {
     protected strategies: IStrategyStorage = {};
 
     protected constructor() {
-        this.strategies["rect"] = new SpawnRectStrategy();
-        this.strategies["circle"] = new SpawnCircleStrategy();
-        this.strategies["ring"] = new SpawnRingStrategy();
-        this.strategies["burst"] = new SpawnBurstStrategy();
-        this.strategies["point"] = new SpawnPointStrategy();
-        this.strategies["polygonalChain"] = new SpawnPolygonStrategy();
+        this.setStrategy("rect", new SpawnRectStrategy());
+        this.setStrategy("circle", new SpawnCircleStrategy());
+        this.setStrategy("ring", new SpawnRingStrategy());
+        this.setStrategy("burst", new SpawnBurstStrategy());
+        this.setStrategy("point", new SpawnPointStrategy());
+        this.setStrategy("polygonalChain", new SpawnPolygonStrategy());
     }
 
     /**
      * Return spawn strategy depend on spawn type
-     * @param spawnType
+     * @param spawnType Type of spawn
+     * @return instance of spawn strategy
      */
     public getStrategy(spawnType: string): ISpawnStrategy {
         if (this.strategies.hasOwnProperty(spawnType)) {
             return this.strategies[spawnType];
         }
         return null;
+    }
+
+    /**
+     * Set new or override exists spawn strategy
+     * @param spawnType Type of spawn.
+     * @param strategy Instance of spawn strategy
+     */
+    public setStrategy(spawnType: string, strategy: ISpawnStrategy): void {
+        if (this.strategies[spawnType]) {
+            console.log(`Particle spawn strategy overridden for type '${spawnType}'`);
+        }
+        this.strategies[spawnType] = strategy;
     }
 }
 
