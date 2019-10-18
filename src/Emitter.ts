@@ -138,8 +138,22 @@ export class Emitter
 	/**
 	 *	Extra data for use in custom particles. The emitter doesn't look inside, but
 	 *	passes it on to the particle to use in init().
+	 *  `extraData.inOrder: boolean` to ensure that your particles are emitted in order. 
+	 *  This is particularly useful for PathParticles, in case you need to emit a body in an order. 
+	 *  For example: dragon - [Head, body1, body2, ..., tail]
 	 */
 	public extraData: any;
+    /**
+	 * A number keeping index of currently applied image. Used to emit images in order.
+	 */
+	protected currentImageIndex: number = -1;
+	/**
+	 * Is the emitter emitting particles in an order?.
+	 * This is effective only when there is an array of textures.
+	 * If inOrder value is changed while the emitter is active, the emitter changes its inOrder behaviour only after completion a cycle through all textures.
+	 * @default [inOrder=false]
+	 */
+	public inOrder: boolean;
 	//properties for spawning particles
 	/**
 	 * Time between particle spawns in seconds.
@@ -325,6 +339,7 @@ export class Emitter
 		this.particleBlendMode = 0;
 		this.customEase = null;
 		this.extraData = null;
+		this.inOrder = false;
 		//properties for spawning particles
 		this._frequency = 1;
 		this.spawnChance = 1;
@@ -539,6 +554,7 @@ export class Emitter
 			this.extraData = partClass.parseData(config.extraData);
 		else
 			this.extraData = config.extraData || null;
+		this.inOrder = (this.extraData && this.extraData.inOrder) ? true : false;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -870,14 +886,26 @@ export class Emitter
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
-							p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
+							if (this.inOrder) {
+								this.currentImageIndex++;
+								if (this.currentImageIndex < 0) {
+									// set it to `this.currentImageIndex = this.particleImages.length` if ever emitting in reverse.
+									this.currentImageIndex = 0;
+								}
+								if (this.currentImageIndex >= this.particleImages.length) {
+									this.currentImageIndex = 0;
+								}
+							} else {
+								this.currentImageIndex = Math.floor(Math.random() * this.particleImages.length);
+							}
 						}
 						else
 						{
 							//if they are actually the same texture, a standard particle
 							//will quit early from the texture setting in setTexture().
-							p.applyArt(this.particleImages[0]);
+							this.currentImageIndex = 0;
 						}
+						p.applyArt(this.particleImages[this.currentImageIndex]);
 						//set up the start and end values
 						p.alphaList.reset(this.startAlpha);
 						if(this.minimumSpeedMultiplier != 1)
