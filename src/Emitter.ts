@@ -150,10 +150,16 @@ export class Emitter
 	/**
 	 * Is the emitter emitting particles in an order?.
 	 * This is effective only when there is an array of textures.
-	 * If inOrder value is changed while the emitter is active, the emitter changes its inOrder behaviour only after completion a cycle through all textures.
+	 * 
+	 * NOTE: If inOrder value is changed while the emitter is active, 
+	 * the emitter changes its inOrder behaviour only after completing a cycle through all textures.
 	 * @default [inOrder=false]
 	 */
 	public inOrder: boolean;
+	/**
+	 * A utility variable that enables changing of inOrder behaviour of this emitter.
+	 */
+	protected _pendingInOrder: boolean;
 	//properties for spawning particles
 	/**
 	 * Time between particle spawns in seconds.
@@ -340,6 +346,7 @@ export class Emitter
 		this.customEase = null;
 		this.extraData = null;
 		this.inOrder = false;
+		this._pendingInOrder = false;
 		//properties for spawning particles
 		this._frequency = 1;
 		this.spawnChance = 1;
@@ -555,6 +562,7 @@ export class Emitter
 		else
 			this.extraData = config.extraData || null;
 		this.inOrder = (this.extraData && this.extraData.inOrder) ? true : false;
+		this._pendingInOrder = this.inOrder;
 		//////////////////////////
 		// Emitter Properties   //
 		//////////////////////////
@@ -886,14 +894,16 @@ export class Emitter
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
-							if (this.inOrder) {
+							if (this._pendingInOrder) {
 								this.currentImageIndex++;
 								if (this.currentImageIndex < 0) {
-									// set it to `this.currentImageIndex = this.particleImages.length` if ever emitting in reverse.
-									this.currentImageIndex = 0;
+									// this condition will come only when emitting in reverse.
+									this.currentImageIndex = this.particleImages.length - 1;
+									this._pendingInOrder = this.inOrder;
 								}
-								if (this.currentImageIndex >= this.particleImages.length) {
+								else if (this.currentImageIndex >= this.particleImages.length) {
 									this.currentImageIndex = 0;
+									this._pendingInOrder = this.inOrder;
 								}
 							} else {
 								this.currentImageIndex = Math.floor(Math.random() * this.particleImages.length);
