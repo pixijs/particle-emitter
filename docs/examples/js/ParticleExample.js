@@ -160,6 +160,7 @@
 			};
 
 			window.emitter = emitter;
+			window.stage = stage;
 		});
 	};
 

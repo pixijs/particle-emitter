@@ -3,8 +3,8 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-		<title>Bubble Stream (custom path following)</title>
-		<meta name="description" content="bubble stream - custom path">
+		<title>Bubble Stream (2D path following)</title>
+		<meta name="description" content="bubble stream - 2D path">
 		<link rel="stylesheet" href="css/main.css">
 
 		<!-- Required dependencies -->
@@ -55,11 +55,11 @@
 						"max": 20
 					},
 					"lifetime": {
-						"min": 1.8,
-						"max": 2
+						"min": 2.5,
+						"max": 3
 					},
 					"blendMode": "normal",
-					"frequency": 0.1,
+					"frequency": 0.05,
 					"emitterLifetime": 0,
 					"maxParticles": 500,
 					"pos": {
@@ -70,7 +70,7 @@
 					"spawnType": "point",
 					"extraData":
 					{
-						"path": function (x) { return x; }
+						"path": figureOf8
 					}
 				},
 				//tell the particle example to use PIXI.particles.PathParticle
@@ -85,23 +85,30 @@
 				window.emitter.pathFunction = pathsArray[randInt];
 			});
 
-			var pathsArray = [easing_bounceIn, easing_bounceOut, easing_quarticOut];
-
-			function easing_bounceIn(k)	{ return 1 - easing_bounceOut(1- k);	}
-			function easing_bounceOut(k)
+			var pathsArray = [ArchimedeanSpiral, figureOf8, eye];
+			function ArchimedeanSpiral(t)
 			{
-				k /= 30;
-				if (k < (1 / 2.75)) {
-				    return 7.5625 * k * k;
-				} else if (k < (2 / 2.75)) {
-				    return 7.5625 * (k -= (1.5 / 2.75)) * k + 0.75;
-				} else if (k < (2.5 / 2.75)) {
-				    return 7.5625 * (k -= (2.25 / 2.75)) * k + 0.9375;
-				} else {
-				    return 7.5625 * (k -= (2.625 / 2.75)) * k + 0.984375;
-				}
+				t /= 10;
+				var velocity = 5, angularVel = 0.3;
+				var x = velocity * t * Math.cos(angularVel * t);
+				var y = velocity * t * Math.sin(angularVel * t);
+				return {x, y};
 			}
-			function easing_quarticOut(k) {	k /= 30; return 1 - (--k * k * k * k); }
+			function figureOf8(t)
+			{
+				t /= 25;
+				var parameter = 120;
+				var x = parameter * Math.sin(t);
+				var y = x * Math.cos(t);
+				return {x, y};
+			}
+			function eye(t)
+			{
+				t /= 50;
+				var x = 100 * Math.pow(Math.sin(t), 3) + 200;
+				var y = 200 * Math.cos(t) - 5 * Math.cos(2*t) - 2*Math.cos(3*t) - Math.cos(4*t) + 20;
+				return {x,y};
+			}
 		</script>
 	</body>
 </html>

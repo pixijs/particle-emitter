@@ -158,8 +158,24 @@ export class PathParticle extends Particle
 			const speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 			this.movement += speed * delta;
 			//set up the helper point for rotation
-			helperPoint.x = this.movement;
-			helperPoint.y = this.path(this.movement);
+			let calculatedValue = this.path(this.movement);
+			if (calculatedValue && typeof calculatedValue.x === "number" && typeof calculatedValue.y === "number")
+			{
+				helperPoint.x = calculatedValue.x;
+				helperPoint.y = calculatedValue.y;
+			}
+			else if (typeof calculatedValue === "number") 
+			{
+				helperPoint.x = this.movement;
+				helperPoint.y = calculatedValue;
+			}
+			else
+			{
+				if(ParticleUtils.verbose)
+					console.error("PathParticle: error in parsing path expression.");
+				helperPoint.x = this.movement;
+				helperPoint.y = this.movement;
+			}
 			ParticleUtils.rotatePoint(this.initialRotation, helperPoint);
 			this.position.x = this.initialPosition.x + helperPoint.x;
 			this.position.y = this.initialPosition.y + helperPoint.y;
