@@ -280,6 +280,17 @@ export class Emitter
 	 */
 	protected _autoUpdate: boolean;
 	/**
+	 * If the emmitter is emitting arts in order as provided in `particleImages`.
+	 * Effective only when `particleImages` has multiple arts.
+	 * This is particularly useful for PathParticles, in case you need to emit a body in an order. 
+	 * For example: dragon - [Head, body1, body2, ..., tail]
+	 */
+	public orderedArt: boolean;
+    /**
+	 * A number keeping index of currently applied image. Used to emit arts in order.
+	 */
+	protected _currentImageIndex: number = -1;
+	/**
 	 * If the emitter should destroy itself when all particles have died out. This is set by
 	 * playOnceAndDestroy();
 	 */
@@ -357,6 +368,8 @@ export class Emitter
 		this._origConfig = null;
 		this._origArt = null;
 		this._autoUpdate = false;
+		this.orderedArt = false;
+		this._currentImageIndex = -1;
 		this._destroyWhenComplete = false;
 		this._completeCallback = null;
 
@@ -574,6 +587,7 @@ export class Emitter
 		this._spawnTimer = 0;
 		this.emit = config.emit === undefined ? true : !!config.emit;
 		this.autoUpdate = !!config.autoUpdate;
+		this.orderedArt = !!config.orderedArt;
 	}
 
 	/**
@@ -870,7 +884,19 @@ export class Emitter
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
-							p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
+							if(this.orderedArt)
+							{
+								this._currentImageIndex++;
+								if(this._currentImageIndex < 0 || this._currentImageIndex >= this.particleImages.length)
+								{
+									this._currentImageIndex = 0;	
+								}
+							}
+							else
+							{
+								this._currentImageIndex = Math.floor(Math.random() * this.particleImages.length);
+							}
+							p.applyArt(this.particleImages[this._currentImageIndex]);
 						}
 						else
 						{

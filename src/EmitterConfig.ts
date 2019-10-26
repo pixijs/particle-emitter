@@ -38,6 +38,7 @@ export interface EmitterConfig {
 	pos: {x:number, y:number};
 	emit?: boolean;
 	autoUpdate?: boolean;
+	orderedArt?:boolean;
 }
 
 export interface RandNumber {
@@ -84,4 +85,5 @@ export interface OldEmitterConfig {
 	pos: {x:number, y:number};
 	emit?: boolean;
 	autoUpdate?: boolean;
+	orderedArt?:boolean;
 }
