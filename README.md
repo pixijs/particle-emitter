@@ -27,10 +27,10 @@ var emitter = new PIXI.particles.Emitter(
 	// if using blend modes, it's important to put this
 	// on top of a bitmap, and not use the root stage Container
 	container,
-  
+
 	// The collection of particle images to use
 	[PIXI.Texture.fromImage('image.jpg')],
-  
+
 	// Emitter configuration, edit this to change the look
 	// of the emitter
 	{
@@ -119,20 +119,20 @@ var emitter = new PIXI.particles.Emitter(
 
 // Calculate the current time
 var elapsed = Date.now();
-		
+
 // Update function every frame
 var update = function(){
-			
+
 	// Update the next frame
 	requestAnimationFrame(update);
 
 	var now = Date.now();
-	
+
 	// The emitter requires the elapsed
 	// number of seconds since the last update
 	emitter.update((now - elapsed) * 0.001);
 	elapsed = now;
-	
+
 	// Should re-render the PIXI Stage
 	// renderer.render(stage);
 };
@@ -187,6 +187,7 @@ npm install pixi-particles
 * [Fountain](https://pixijs.github.io/pixi-particles/examples/fountain.html)
 * [Animated Coins](https://pixijs.github.io/pixi-particles/examples/coins.html)
 * [Animated Bubbles](https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html)
+* [Spaceship Destruction - Ordered Art](https://pixijs.github.io/pixi-particles/examples/spaceshipDestruction.html)
 * [Particle Container Performance](https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html)
 
 ## Typescript
