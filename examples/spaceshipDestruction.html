@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js">
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+		<title>Spaceship Destruction</title>
+		<meta name="description" content="Spaceship Destruction">
+		<link rel="stylesheet" href="css/main.css">
+
+		<!-- Required dependencies -->
+		<script src="libs/pixi.js/dist/pixi.js"></script>
+		<script src="../dist/pixi-particles.js"></script>
+
+		<!-- Example scaffolding -->
+		<script src="js/ParticleExample.js"></script>
+
+	</head>
+	<body>
+		<div id="framerate"></div>
+		<div id="instructions">Click Anywhere</div>
+		<canvas id="stage" width="400" height="400"></canvas>
+		<script>
+
+			// See js/ParticleExample.js for actual setup
+			new ParticleExample(
+				// The image to use
+				{
+					spritesheet: "images/spaceship.json",
+					art: [
+						"weaponPod",
+						"leftWing",
+						"rightEngine",
+						"hullFront",
+						"weaponPod",
+						"rightWing",
+						"hullRear",
+						"leftEngine"
+					]
+				},
+
+				// Emitter configuration, edit this to change the look
+				// of the emitter
+				{
+					"alpha": {
+						"start": 1,
+						"end": 1
+					},
+					"scale": {
+						"start": 1,
+						"end": 1
+					},
+					"color": {
+						"start": "ffffff",
+						"end": "666666"
+					},
+					"speed": {
+						"start": 100,
+						"end": 50
+					},
+					"startRotation": {
+						"min": 0,
+						"max": 360
+					},
+					"rotationSpeed": {
+						"min": 30,
+						"max": 360
+					},
+					"lifetime": {
+						"min": 2,
+						"max": 2
+					},
+					// long enough for one burst
+					"frequency": 0.05,
+					"emitterLifetime": 0.06,
+					"maxParticles": 1000,
+					"pos": {
+						"x": 0,
+						"y": 0
+					},
+					"addAtBack": false,
+					// bursts happen in waves
+					"spawnType": "burst",
+					// enough particles per wave to handle all ship parts
+					"particlesPerWave": 8,
+					"particleSpacing": 0,
+					"angleStart": 0,
+					// The important part here - use each image/art object once instead of random selections
+					"orderedArt": true
+				}
+			);
+		</script>
+	</body>
+</html>

@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.1.3
- * Compiled Wed, 09 Oct 2019 14:09:19 UTC
+ * pixi-particles - v4.2.0
+ * Compiled Sat, 26 Oct 2019 14:41:00 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -925,6 +925,10 @@ this.PIXI = this.PIXI || {};
 	     *                          update via the PIXI shared ticker.
 	     */
 	    function Emitter(particleParent, particleImages, config) {
+	        /**
+	         * A number keeping index of currently applied image. Used to emit arts in order.
+	         */
+	        this._currentImageIndex = -1;
 	        this._particleConstructor = Particle;
 	        //properties for individual particles
 	        this.particleImages = null;
@@ -978,6 +982,7 @@ this.PIXI = this.PIXI || {};
 	        this._origConfig = null;
 	        this._origArt = null;
 	        this._autoUpdate = false;
+	        this._currentImageIndex = -1;
 	        this._destroyWhenComplete = false;
 	        this._completeCallback = null;
 	        //set the initial parent
@@ -991,6 +996,20 @@ this.PIXI = this.PIXI || {};
 	        this.updateSpawnPos = this.updateSpawnPos;
 	        this.updateOwnerPos = this.updateOwnerPos;
 	    }
+	    Object.defineProperty(Emitter.prototype, "orderedArt", {
+	        /**
+	         * If the emitter is using particle art in order as provided in `particleImages`.
+	         * Effective only when `particleImages` has multiple art options.
+	         * This is particularly useful ensuring that each art shows up once, in case you need to emit a body in an order.
+	         * For example: dragon - [Head, body1, body2, ..., tail]
+	         */
+	        get: function () { return this._currentImageIndex !== -1; },
+	        set: function (value) {
+	            this._currentImageIndex = value ? 0 : -1;
+	        },
+	        enumerable: true,
+	        configurable: true
+	    });
 	    Object.defineProperty(Emitter.prototype, "frequency", {
 	        /**
 	         * Time between particle spawns in seconds. If this value is not a number greater than 0,
@@ -1178,6 +1197,7 @@ this.PIXI = this.PIXI || {};
 	        this._spawnTimer = 0;
 	        this.emit = config.emit === undefined ? true : !!config.emit;
 	        this.autoUpdate = !!config.autoUpdate;
+	        this.orderedArt = !!config.orderedArt;
 	    };
 	    /**
 	     * Sets up additional parameters to the emitter from config settings.
@@ -1442,7 +1462,19 @@ this.PIXI = this.PIXI || {};
 	                        }
 	                        //set a random texture if we have more than one
 	                        if (this.particleImages.length > 1) {
-	                            p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
+	                            // if using ordered art
+	                            if (this._currentImageIndex !== -1) {
+	                                // get current art index, then increment for the next particle
+	                                p.applyArt(this.particleImages[this._currentImageIndex++]);
+	                                // loop around if needed
+	                                if (this._currentImageIndex < 0 || this._currentImageIndex >= this.particleImages.length) {
+	                                    this._currentImageIndex = 0;
+	                                }
+	                            }
+	                            // otherwise grab a random one
+	                            else {
+	                                p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
+	                            }
 	                        }
 	                        else {
 	                            //if they are actually the same texture, a standard particle
