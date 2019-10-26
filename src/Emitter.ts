@@ -5,6 +5,7 @@ import {PolygonalChain} from "./PolygonalChain";
 import {EmitterConfig, OldEmitterConfig} from "./EmitterConfig";
 import {Point, Circle, Rectangle, Container, settings} from "pixi.js";
 import * as pixi from "pixi.js";
+import { IPathFunction, PathParticle } from "./PathParticle";
 // get the shared ticker, in V4 and V5 friendly methods
 /**
  * @hidden
@@ -758,6 +759,28 @@ export class Emitter
 			ticker.add(this.update, this);
 		}
 		this._autoUpdate = !!value;
+	}
+
+	/**
+	 * Gets or sets the path function.
+	 * This is only applicable for Path particles. Otherwise returns `null`.
+	 * @example
+	 * ```ts
+	 * emitter.pathFunction = function(x){ return x * 10; }
+	 * ```
+	 */
+	public get pathFunction(): IPathFunction
+	{
+		if (this._particleConstructor == PathParticle) 
+		{
+			return (this.extraData && this.extraData.path) ? this.extraData.path : null;
+		}
+		return null;
+	}
+	public set pathFunction(customFunc: IPathFunction)
+	{
+		this.extraData = this.extraData || {};
+		this.extraData.path = customFunc;
 	}
 
 	/**

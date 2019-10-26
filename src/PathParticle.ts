@@ -8,6 +8,11 @@ import {Point, Texture} from "pixi.js";
  * @hidden
  */
 const helperPoint = new Point();
+/**
+ * The signature (type) of Custom path function.
+ * It takes a numbers `x`, and returns either corresponding `y` or `{x,y}`;
+ */
+export type IPathFunction = (x: number) => number | { x: number, y: number };
 
 /**
  * A hand picked list of Math functions (and a couple properties) that are
@@ -191,14 +196,17 @@ export class PathParticle extends Particle
 	 * @param extraData The extra data from the particle config.
 	 * @return The parsed extra data.
 	 */
-	public static parseData(extraData: {path:string})
+	public static parseData(extraData: {path:string | IPathFunction})
 	{
 		let output: any = {};
 		if(extraData && extraData.path)
 		{
 			try
 			{
-				output.path = parsePath(extraData.path);
+				if(typeof extraData.path === "function")
+					output.path = extraData.path;
+				else
+					output.path = parsePath(extraData.path as string);	
 			}
 			catch(e)
 			{
