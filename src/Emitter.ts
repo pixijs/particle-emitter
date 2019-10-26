@@ -279,13 +279,6 @@ export class Emitter
 	 * Setting this to false requires calling the update function manually.
 	 */
 	protected _autoUpdate: boolean;
-	/**
-	 * If the emmitter is emitting arts in order as provided in `particleImages`.
-	 * Effective only when `particleImages` has multiple arts.
-	 * This is particularly useful for PathParticles, in case you need to emit a body in an order. 
-	 * For example: dragon - [Head, body1, body2, ..., tail]
-	 */
-	public orderedArt: boolean;
     /**
 	 * A number keeping index of currently applied image. Used to emit arts in order.
 	 */
@@ -368,7 +361,6 @@ export class Emitter
 		this._origConfig = null;
 		this._origArt = null;
 		this._autoUpdate = false;
-		this.orderedArt = false;
 		this._currentImageIndex = -1;
 		this._destroyWhenComplete = false;
 		this._completeCallback = null;
@@ -385,6 +377,17 @@ export class Emitter
 		this.rotate = this.rotate;
 		this.updateSpawnPos = this.updateSpawnPos;
 		this.updateOwnerPos = this.updateOwnerPos;
+	}
+
+	/**
+	 * If the emitter is using particle art in order as provided in `particleImages`.
+	 * Effective only when `particleImages` has multiple art options.
+	 * This is particularly useful ensuring that each art shows up once, in case you need to emit a body in an order.
+	 * For example: dragon - [Head, body1, body2, ..., tail]
+	 */
+	public get orderedArt() { return this._currentImageIndex !== -1; }
+	public set orderedArt(value) {
+		this._currentImageIndex = value ? 0 : -1;
 	}
 
 	/**
@@ -884,19 +887,23 @@ export class Emitter
 						//set a random texture if we have more than one
 						if(this.particleImages.length > 1)
 						{
-							if(this.orderedArt)
+							// if using ordered art
+							if(this._currentImageIndex !== -1)
 							{
-								this._currentImageIndex++;
+								// get current art index, then increment for the next particle
+								p.applyArt(this.particleImages[this._currentImageIndex++]);
+								// loop around if needed
 								if(this._currentImageIndex < 0 || this._currentImageIndex >= this.particleImages.length)
 								{
-									this._currentImageIndex = 0;	
+									this._currentImageIndex = 0;
 								}
 							}
+							// otherwise grab a random one
 							else
 							{
-								this._currentImageIndex = Math.floor(Math.random() * this.particleImages.length);
+								p.applyArt(this.particleImages[Math.floor(Math.random() * this.particleImages.length)]);
 							}
-							p.applyArt(this.particleImages[this._currentImageIndex]);
+
 						}
 						else
 						{
