@@ -104,7 +104,7 @@ export class PathParticle extends Particle
 	 * Total single directional movement, due to speed.
 	 */
 	public movement: number;
-	
+
 	/**
 	 * @param {PIXI.particles.Emitter} emitter The emitter that controls this PathParticle.
 	 */
@@ -150,8 +150,13 @@ export class PathParticle extends Particle
 		if(lerp >= 0 && this.path)
 		{
 			//increase linear movement based on speed
-			const speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
-			this.movement += speed * delta;
+			if(this._doSpeed) {
+				const speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
+				this.movement += speed * delta;
+			} else {
+				const speed = ParticleUtils.length(this.velocity);
+				this.movement += speed * delta;
+			}
 			//set up the helper point for rotation
 			helperPoint.x = this.movement;
 			helperPoint.y = this.path(this.movement);
@@ -161,7 +166,7 @@ export class PathParticle extends Particle
 		}
 		return lerp;
 	}
-	
+
 	/**
 	 * Destroys the particle, removing references and preventing future use.
 	 */
