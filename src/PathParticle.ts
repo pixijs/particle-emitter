@@ -154,7 +154,7 @@ export class PathParticle extends Particle
 				const speed = this.speedList.interpolate(lerp) * this.speedMultiplier;
 				this.movement += speed * delta;
 			} else {
-				const speed = ParticleUtils.length(this.velocity);
+				const speed = this.speedList.current.value * this.speedMultiplier;
 				this.movement += speed * delta;
 			}
 			//set up the helper point for rotation
