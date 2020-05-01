@@ -10,8 +10,8 @@
     "@types/pixi.js": "^4.8.6",
     "pixi.js": "^4.0.0",
     "pixi-particles": "*",
-    "electron": "^4.0.0",
-    "typescript": "^3.3.0"
+    "electron": "^7.0.0",
+    "typescript": "^3.8.0"
   },
   "workspaces": {
     "nohoist": ["pixi.js", "pixi-particles"]
