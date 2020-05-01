@@ -823,7 +823,7 @@ export class Emitter
 			while(this._spawnTimer <= 0)
 			{
 				//determine if the emitter should stop spawning
-				if(this._emitterLife > 0)
+				if(this._emitterLife >= 0)
 				{
 					this._emitterLife -= this._frequency;
 					if(this._emitterLife <= 0)
