@@ -948,8 +948,6 @@ export class Emitter
 						this._spawnFunc(p, emitPosX, emitPosY, i);
 						//initialize particle
 						p.init();
-						//update the particle by the time passed, so the particles are spread out properly
-						p.update(-this._spawnTimer);//we want a positive delta, because a negative delta messes things up
 						//add the particle to the display list
 						if(!p.parent)
 						{
@@ -990,6 +988,8 @@ export class Emitter
 							this._activeParticlesLast = this._activeParticlesFirst = p;
 						}
 						++this.particleCount;
+						//update the particle by the time passed, so the particles are spread out properly
+						p.update(-this._spawnTimer);//we want a positive delta, because a negative delta messes things up
 					}
 				}
 				//increase timer and continue on to any other particles that need to be created
