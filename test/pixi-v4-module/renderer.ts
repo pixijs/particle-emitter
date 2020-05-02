@@ -134,7 +134,7 @@ loader.load(function()
 		if(!emitter) return;
 		emitter.emit = true;
 		emitter.resetPositionTracking();
-		emitter.updateOwnerPos(e.offsetX || e.layerX, e.offsetY || e.layerY);
+		emitter.updateOwnerPos(e.offsetX, e.offsetY);
 	});
 
 	// Start the update

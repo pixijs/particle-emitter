@@ -15,7 +15,7 @@
   ],
   "scripts": {
     "clean": "rimraf docs/docs docs/dist .publish",
-    "lint": "eslint src",
+    "lint": "eslint --ext .ts src",
     "prebuild": "npm run lint",
     "build": "tsc && rollup -c && npm run build:min && npm run build:dts",
     "build:min": "terser dist/pixi-particles.js -c -m -o dist/pixi-particles.min.js --source-map \"content='dist/pixi-particles.js.map',includeSources=true,filename='dist/pixi-particles.min.js.map',url='pixi-particles.min.js.map'\" --comments \"/pixi-particles.js - /\"",
@@ -38,8 +38,9 @@
     "pixi.js": ">=4.0.0"
   },
   "devDependencies": {
+    "@pixi/eslint-config": "^1.0.1",
     "@types/pixi.js": "^4.0.0",
-    "dts-bundle-generator": "^2.1.0",
+    "dts-bundle-generator": "^4.3.0",
     "electron": "^7.0.0",
     "eslint": "^6.5.0",
     "gh-pages": "^2.0.0",
@@ -55,7 +56,6 @@
     "rollup-plugin-typescript": "^1.0.0",
     "semver": "^5.3.0",
     "terser": "^3.16.1",
-    "tslib": "^1.9.3",
     "typedoc": "^0.17.5",
     "typescript": "^3.8.0"
   },

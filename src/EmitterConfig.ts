@@ -1,13 +1,13 @@
-import {EaseSegment, SimpleEase} from "./ParticleUtils";
-import {ValueList} from "./PropertyNode";
-import {BasicPoint} from "./PolygonalChain";
+import { EaseSegment, SimpleEase } from './ParticleUtils';
+import { ValueList } from './PropertyNode';
+import { BasicPoint } from './PolygonalChain';
 
 export interface EmitterConfig {
 	alpha?: ValueList<number>;
 	speed?: ValueList<number>;
 	minimumSpeedMultiplier?: number;
 	maxSpeed?: number;
-	acceleration?: {x:number, y:number};
+	acceleration?: {x: number; y: number};
 	scale?: ValueList<number>;
 	minimumScaleMultiplier?: number;
 	color?: ValueList<string>;
@@ -25,8 +25,8 @@ export interface EmitterConfig {
 	 * tends to be too strict for random object creation.
 	 */
 	spawnType?: string;
-	spawnRect?: {x:number, y:number, w:number, h:number};
-	spawnCircle?: {x:number, y:number, r:number, minR?:number};
+	spawnRect?: {x: number; y: number; w: number; h: number};
+	spawnCircle?: {x: number; y: number; r: number; minR?: number};
 	particleSpacing?: number;
 	angleStart?: number;
 	spawnPolygon?: BasicPoint[] | BasicPoint[][];
@@ -35,10 +35,10 @@ export interface EmitterConfig {
 	emitterLifetime?: number;
 	maxParticles?: number;
 	addAtBack?: boolean;
-	pos: {x:number, y:number};
+	pos: {x: number; y: number};
 	emit?: boolean;
 	autoUpdate?: boolean;
-	orderedArt?:boolean;
+	orderedArt?: boolean;
 }
 
 export interface RandNumber {
@@ -47,15 +47,15 @@ export interface RandNumber {
 }
 
 export interface BasicTweenable<T> {
-	start: T,
-	end: T
+	start: T;
+	end: T;
 }
 
 export interface OldEmitterConfig {
 	alpha?: BasicTweenable<number>;
-	speed?: BasicTweenable<number> & {minimumSpeedMultiplier?:number};
+	speed?: BasicTweenable<number> & {minimumSpeedMultiplier?: number};
 	maxSpeed?: number;
-	acceleration?: {x:number, y:number};
+	acceleration?: {x: number; y: number};
 	scale?: BasicTweenable<number> & {minimumScaleMultiplier?: number};
 	color?: BasicTweenable<string>;
 	startRotation?: RandNumber;
@@ -72,8 +72,8 @@ export interface OldEmitterConfig {
 	 * tends to be too strict for random object creation.
 	 */
 	spawnType?: string;
-	spawnRect?: {x:number, y:number, w:number, h:number};
-	spawnCircle?: {x:number, y:number, r:number, minR?:number};
+	spawnRect?: {x: number; y: number; w: number; h: number};
+	spawnCircle?: {x: number; y: number; r: number; minR?: number};
 	particleSpacing?: number;
 	angleStart?: number;
 	spawnPolygon?: BasicPoint[] | BasicPoint[][];
@@ -82,8 +82,8 @@ export interface OldEmitterConfig {
 	emitterLifetime?: number;
 	maxParticles?: number;
 	addAtBack?: boolean;
-	pos: {x:number, y:number};
+	pos: {x: number; y: number};
 	emit?: boolean;
 	autoUpdate?: boolean;
-	orderedArt?:boolean;
+	orderedArt?: boolean;
 }
