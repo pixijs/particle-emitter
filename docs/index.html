@@ -4,7 +4,7 @@
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>pixi-particles</title>
-	<meta name="description" content="">
+	<meta name="description" content="Documentation for pixi-particles">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="stylesheet" href="assets/css/main.css">
 </head>
@@ -13,7 +13,7 @@
 	<div class="tsd-page-toolbar">
 		<div class="container">
 			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.js" data-base=".">
+				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
 					<div class="field">
 						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
 						<input id="tsd-search-field" type="text" />
@@ -52,7 +52,7 @@
 					<a href="globals.html">Globals</a>
 				</li>
 			</ul>
-			<h1> pixi-particles</h1>
+			<h1>pixi-particles</h1>
 		</div>
 	</div>
 </header>
@@ -60,10 +60,14 @@
 	<div class="row">
 		<div class="col-8 col-content">
 			<div class="tsd-panel tsd-typography">
-				<h1 id="pixi-particles">Pixi Particles</h1>
+				<a href="#pixi-particles" id="pixi-particles" style="color: inherit; text-decoration: none;">
+					<h1>Pixi Particles</h1>
+				</a>
 				<p><a href="https://travis-ci.org/pixijs/pixi-particles"><img src="https://travis-ci.org/pixijs/pixi-particles.svg" alt="Build Status"></a> <a href="https://david-dm.org/pixijs/pixi-particles"><img src="https://david-dm.org/pixijs/pixi-particles.svg?style=flat" alt="Dependency Status"></a> <a href="https://github.com/pixijs/pixi-particles/releases/latest"><img src="https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg" alt="GitHub version"></a></p>
 				<p>A particle system library for the <a href="https://github.com/pixijs/pixi.js">PixiJS</a> library. Also, we created an <a href="http://pixijs.github.io/pixi-particles-editor/">interactive particle editor</a> to design and preview custom particle emitters which utilitze PixiParticles.</p>
-				<h2 id="breaking-changes-in-v3-from-v2">Breaking changes in v3 from v2</h2>
+				<a href="#breaking-changes-in-v3-from-v2" id="breaking-changes-in-v3-from-v2" style="color: inherit; text-decoration: none;">
+					<h2>Breaking changes in v3 from v2</h2>
+				</a>
 				<ul>
 					<li>On <code>Emitter</code>, <code>playOnce()</code> no longer sets <code>autoUpdate</code> to true. Set it manually before use.
 					<code>playOnceAndDestroy()</code> is unaffected.</li>
@@ -71,7 +75,9 @@
 					replaced by a singly linked list of <code>PropertyNode</code> objects.</li>
 					<li>Dropped support for PIXI v3. Please use v4 or v5.</li>
 				</ul>
-				<h2 id="sample-usage">Sample Usage</h2>
+				<a href="#sample-usage" id="sample-usage" style="color: inherit; text-decoration: none;">
+					<h2>Sample Usage</h2>
+				</a>
 				<p>Please see the examples for various pre-made particle configurations.</p>
 				<pre><code class="language-js"><span class="hljs-comment">// Create a new emitter</span>
 <span class="hljs-comment">// note: if importing library like "import * as particles from 'pixi-particles'"</span>
@@ -199,14 +205,22 @@ emitter.emit = <span class="hljs-literal">true</span>;
 
 <span class="hljs-comment">// Start the update</span>
 update();</code></pre>
-				<h2 id="note-on-emitter-cleanup">Note on Emitter Cleanup</h2>
-				<p>When using PixiJS 3 or 4, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, <em>in WebGL only</em>, reset the SpriteRenderer&#39;s sprite batching with <code>yourRenderer.plugins.sprite.sprites.length = 0;</code>. This is not needed in PixiJS 5.</p>
-				<h2 id="documentation">Documentation</h2>
+				<a href="#note-on-emitter-cleanup" id="note-on-emitter-cleanup" style="color: inherit; text-decoration: none;">
+					<h2>Note on Emitter Cleanup</h2>
+				</a>
+				<p>When using PixiJS 3 or 4, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, _in WebGL only_, reset the SpriteRenderer&#39;s sprite batching with <code>yourRenderer.plugins.sprite.sprites.length = 0;</code>. This is not needed in PixiJS 5.</p>
+				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+					<h2>Documentation</h2>
+				</a>
 				<p><a href="http://pixijs.github.io/pixi-particles/docs/">http://pixijs.github.io/pixi-particles/docs/</a></p>
-				<h2 id="installation">Installation</h2>
+				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+					<h2>Installation</h2>
+				</a>
 				<p>PixiParticles can be installed or NPM.</p>
 				<pre><code class="language-bash">npm install pixi-particles</code></pre>
-				<h2 id="examples">Examples</h2>
+				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+					<h2>Examples</h2>
+				</a>
 				<ul>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosion.html">Explosion 1</a></li>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/explosion2.html">Explosion 2</a></li>
@@ -234,9 +248,12 @@ update();</code></pre>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/fountain.html">Fountain</a></li>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/coins.html">Animated Coins</a></li>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html">Animated Bubbles</a></li>
+					<li><a href="https://pixijs.github.io/pixi-particles/examples/spaceshipDestruction.html">Spaceship Destruction - Ordered Art</a></li>
 					<li><a href="https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html">Particle Container Performance</a></li>
 				</ul>
-				<h2 id="typescript">Typescript</h2>
+				<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+					<h2>Typescript</h2>
+				</a>
 				<p>You can use require to get the namespace for pixi-particles, or use a triple slash reference for using the PIXI.particles namespace.</p>
 				<pre><code class="language-typescript"><span class="hljs-comment">// Note: Must also include the pixi.js typings globally!</span>
 <span class="hljs-keyword">import</span> particles = <span class="hljs-built_in">require</span>(<span class="hljs-string">'pixi-particles'</span>);
@@ -247,11 +264,17 @@ update();</code></pre>
 <span class="hljs-built_in">require</span>(<span class="hljs-string">'pixi-particles'</span>);
 
 <span class="hljs-keyword">let</span> myEmitter:PIXI.particles.Emitter = <span class="hljs-keyword">new</span> PIXI.particles.Emitter(myContainer);</code></pre>
-				<h2 id="use-in-haxe">Use in Haxe</h2>
+				<a href="#use-in-haxe" id="use-in-haxe" style="color: inherit; text-decoration: none;">
+					<h2>Use in Haxe</h2>
+				</a>
 				<p>Externs for Haxe have been added to <a href="https://github.com/adireddy/haxe-pixi">adireddy&#39;s Pixi externs</a> - these are out of date but may be updated in a fork.</p>
-				<h2 id="contributer-note">Contributer Note</h2>
+				<a href="#contributer-note" id="contributer-note" style="color: inherit; text-decoration: none;">
+					<h2>Contributer Note</h2>
+				</a>
 				<p>This project uses <code>yarn</code> rather than <code>npm</code> to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.</p>
-				<h2 id="license">License</h2>
+				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+					<h2>License</h2>
+				</a>
 				<p>Copyright (c) 2015 <a href="http://github.com/cloudkidstudio">CloudKid</a></p>
 				<p>Released under the MIT License.</p>
 			</div>
@@ -262,7 +285,7 @@ update();</code></pre>
 					<li class="globals  ">
 						<a href="globals.html"><em>Globals</em></a>
 					</li>
-					<li class=" tsd-kind-module">
+					<li class=" tsd-kind-namespace">
 						<a href="modules/particleutils.html">Particle<wbr>Utils</a>
 					</li>
 				</ul>
@@ -332,8 +355,29 @@ update();</code></pre>
 					<li class=" tsd-kind-type-alias">
 						<a href="globals.html#simpleease" class="tsd-kind-icon">Simple<wbr>Ease</a>
 					</li>
+					<li class=" tsd-kind-variable">
+						<a href="globals.html#pixins" class="tsd-kind-icon">pixiNS</a>
+					</li>
 					<li class=" tsd-kind-function">
 						<a href="globals.html#gettexturefromstring" class="tsd-kind-icon">Get<wbr>Texture<wbr>From<wbr>String</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intcolorcomplex" class="tsd-kind-icon">int<wbr>Color<wbr>Complex</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intcolorsimple" class="tsd-kind-icon">int<wbr>Color<wbr>Simple</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intcolorstepped" class="tsd-kind-icon">int<wbr>Color<wbr>Stepped</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intvaluecomplex" class="tsd-kind-icon">int<wbr>Value<wbr>Complex</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intvaluesimple" class="tsd-kind-icon">int<wbr>Value<wbr>Simple</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="globals.html#intvaluestepped" class="tsd-kind-icon">int<wbr>Value<wbr>Stepped</a>
 					</li>
 				</ul>
 			</nav>
@@ -345,62 +389,35 @@ update();</code></pre>
 		<h2>Legend</h2>
 		<div class="tsd-legend-group">
 			<ul class="tsd-legend">
-				<li class="tsd-kind-module"><span class="tsd-kind-icon">Module</span></li>
-				<li class="tsd-kind-object-literal"><span class="tsd-kind-icon">Object literal</span></li>
-				<li class="tsd-kind-variable"><span class="tsd-kind-icon">Variable</span></li>
-				<li class="tsd-kind-function"><span class="tsd-kind-icon">Function</span></li>
-				<li class="tsd-kind-function tsd-has-type-parameter"><span class="tsd-kind-icon">Function with type parameter</span></li>
-				<li class="tsd-kind-index-signature"><span class="tsd-kind-icon">Index signature</span></li>
-				<li class="tsd-kind-type-alias"><span class="tsd-kind-icon">Type alias</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-enum"><span class="tsd-kind-icon">Enumeration</span></li>
-				<li class="tsd-kind-enum-member"><span class="tsd-kind-icon">Enumeration member</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-enum"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-enum"><span class="tsd-kind-icon">Method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-interface"><span class="tsd-kind-icon">Interface</span></li>
-				<li class="tsd-kind-interface tsd-has-type-parameter"><span class="tsd-kind-icon">Interface with type parameter</span></li>
-				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-interface"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-interface"><span class="tsd-kind-icon">Index signature</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-class"><span class="tsd-kind-icon">Class</span></li>
-				<li class="tsd-kind-class tsd-has-type-parameter"><span class="tsd-kind-icon">Class with type parameter</span></li>
 				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
 				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
 				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-				<li class="tsd-kind-index-signature tsd-parent-kind-class"><span class="tsd-kind-icon">Index signature</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+				<li class="tsd-kind-constructor tsd-parent-kind-interface"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
 				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
 				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private accessor</span></li>
 			</ul>
 			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static property</span></li>
-				<li class="tsd-kind-call-signature tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
 			</ul>
 		</div>
 	</div>
 </footer>
 <div class="container tsd-generator">
-	<p>Generated using <a href="http://typedoc.org/" target="_blank">TypeDoc</a></p>
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
 </div>
 <div class="overlay"></div>
 <script src="assets/js/main.js"></script>
