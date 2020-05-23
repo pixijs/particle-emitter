@@ -6,3 +6,4 @@ export * from './AnimatedParticle';
 export * from './PolygonalChain';
 export * from './PropertyList';
 export * from './PropertyNode';
+export * from './LinkedListContainer';
