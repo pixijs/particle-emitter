@@ -4,7 +4,11 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"noImplicitAny": true,
-		"types": ["node"]
+		"types": ["node", "@types/pixi.js"],
+		"baseUrl": ".",
+		"paths": {
+			"pixi.js": ["node_modules/pixi.js"]
+		}
 	},
 	"include": [
 		"renderer.ts"
