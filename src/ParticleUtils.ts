@@ -12,11 +12,11 @@ const pixiNS = pixi;
 
 if (parseInt((/^(\d+)\./).exec(pixi.VERSION)[1], 10) < 5)
 {
-    TextureFromString = pixiNS.Texture.fromImage;
+    TextureFromString = (pixiNS.Texture as any).fromImage;
 }
 else
 {
-    TextureFromString = (pixiNS as any).Texture.from;
+    TextureFromString = pixiNS.Texture.from;
 }
 
 export function GetTextureFromString(s: string): Texture

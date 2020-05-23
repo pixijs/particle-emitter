@@ -10,17 +10,17 @@ import * as pixi from 'pixi.js';
 /**
  * @hidden
  */
-let ticker: pixi.ticker.Ticker;
+let ticker: pixi.Ticker;
 // to avoid Rollup transforming our import, save pixi namespace in a variable
 const pixiNS = pixi;
 
 if (parseInt((/^(\d+)\./).exec(pixi.VERSION)[1], 10) < 5)
 {
-    ticker = pixiNS.ticker.shared;
+    ticker = (pixiNS as any).ticker.shared;
 }
 else
 {
-    ticker = (pixiNS as any).Ticker.shared;
+    ticker = pixiNS.Ticker.shared;
 }
 
 export interface ParticleConstructor
@@ -1022,46 +1022,13 @@ export class Emitter
                         // initialize particle
                         p.init();
                         // add the particle to the display list
-                        if (!p.parent)
+                        if (this.addAtBack)
                         {
-                            if (this.addAtBack)
-                            {
-                                this._parent.addChildAt(p, 0);
-                            }
-                            else
-                            {
-                                this._parent.addChild(p);
-                            }
+                            this._parent.addChildAt(p, 0);
                         }
                         else
                         {
-                            // kind of hacky, but performance friendly
-                            // shuffle children to correct place
-                            const children = this._parent.children;
-                            // avoid using splice if possible
-
-                            if (children[0] === p)
-                            {
-                                children.shift();
-                            }
-                            else if (children[children.length - 1] === p)
-                            {
-                                children.pop();
-                            }
-                            else
-                            {
-                                const index = children.indexOf(p);
-
-                                children.splice(index, 1);
-                            }
-                            if (this.addAtBack)
-                            {
-                                children.unshift(p);
-                            }
-                            else
-                            {
-                                children.push(p);
-                            }
+                            this._parent.addChild(p);
                         }
                         // add particle to list of active particles
                         if (this._activeParticlesLast)

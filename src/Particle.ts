@@ -1,12 +1,13 @@
 import { Emitter } from './Emitter';
 import { ParticleUtils, SimpleEase, Color, GetTextureFromString } from './ParticleUtils';
 import { PropertyList } from './PropertyList';
+import { LinkedListChild } from './LinkedListContainer';
 import { Sprite, Point, Texture } from 'pixi.js';
 
 /**
  * An individual particle image. You shouldn't have to deal with these.
  */
-export class Particle extends Sprite
+export class Particle extends Sprite implements LinkedListChild
 {
     /**
      * The emitter that controls this particle.
@@ -136,6 +137,9 @@ export class Particle extends Sprite
      */
     public prev: Particle;
 
+    public prevChild: LinkedListChild;
+    public nextChild: LinkedListChild;
+
     /**
      * @param {PIXI.particles.Emitter} emitter The emitter that controls this particle.
      */
@@ -144,6 +148,9 @@ export class Particle extends Sprite
         // start off the sprite with a blank texture, since we are going to replace it
         // later when the particle is initialized.
         super();
+        // initialize LinkedListChild props so they are included in underlying JS class definition
+        this.prevChild = this.nextChild = null;
+
         this.emitter = emitter;
         // particles should be centered
         this.anchor.x = this.anchor.y = 0.5;
