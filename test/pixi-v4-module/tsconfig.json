@@ -4,11 +4,12 @@
 		"module": "commonjs",
 		"moduleResolution": "node",
 		"noImplicitAny": true,
-		"types": ["node", "@types/pixi.js"],
+		"types": ["node"],
 		"baseUrl": ".",
 		"paths": {
 			"pixi.js": ["node_modules/pixi.js"]
-		}
+		},
+		"skipLibCheck": true
 	},
 	"include": [
 		"renderer.ts"
