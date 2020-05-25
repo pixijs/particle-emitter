@@ -14,7 +14,7 @@
     "typescript": "^3.8.0"
   },
   "workspaces": {
-    "nohoist": ["pixi.js", "pixi-particles"]
+    "nohoist": ["pixi.js", "pixi-particles", "@types/pixi.js"]
   },
   "private": true
 }
