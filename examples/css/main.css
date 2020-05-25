@@ -28,6 +28,20 @@ body {
     position:absolute;
 }
 
+#containerType {
+    font-size:75%;
+    padding:4px;
+    top: 40px;
+    position:absolute;
+}
+
+#emitRate {
+    font-size:75%;
+    padding:4px;
+    top: 60px;
+    position:absolute;
+}
+
 #instructions {
     color:#fff;
     text-align:center;

@@ -1,6 +1,6 @@
 /*!
  * pixi-particles - v4.2.1
- * Compiled Sat, 02 May 2020 01:26:14 UTC
+ * Compiled Mon, 25 May 2020 04:28:10 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -604,6 +604,8 @@ this.PIXI = this.PIXI || {};
             // start off the sprite with a blank texture, since we are going to replace it
             // later when the particle is initialized.
             _super.call(this) || this;
+            // initialize LinkedListChild props so they are included in underlying JS class definition
+            _this.prevChild = _this.nextChild = null;
             _this.emitter = emitter;
             // particles should be centered
             _this.anchor.x = _this.anchor.y = 0.5;
@@ -1597,35 +1599,11 @@ this.PIXI = this.PIXI || {};
                             // initialize particle
                             p.init();
                             // add the particle to the display list
-                            if (!p.parent) {
-                                if (this.addAtBack) {
-                                    this._parent.addChildAt(p, 0);
-                                }
-                                else {
-                                    this._parent.addChild(p);
-                                }
+                            if (this.addAtBack) {
+                                this._parent.addChildAt(p, 0);
                             }
                             else {
-                                // kind of hacky, but performance friendly
-                                // shuffle children to correct place
-                                var children = this._parent.children;
-                                // avoid using splice if possible
-                                if (children[0] === p) {
-                                    children.shift();
-                                }
-                                else if (children[children.length - 1] === p) {
-                                    children.pop();
-                                }
-                                else {
-                                    var index = children.indexOf(p);
-                                    children.splice(index, 1);
-                                }
-                                if (this.addAtBack) {
-                                    children.unshift(p);
-                                }
-                                else {
-                                    children.push(p);
-                                }
+                                this._parent.addChild(p);
                             }
                             // add particle to list of active particles
                             if (this._activeParticlesLast) {
@@ -2220,9 +2198,679 @@ this.PIXI = this.PIXI || {};
         return AnimatedParticle;
     }(Particle));
 
+    var LinkedListContainer = /** @class */ (function (_super) {
+        __extends(LinkedListContainer, _super);
+        function LinkedListContainer() {
+            var _this = _super !== null && _super.apply(this, arguments) || this;
+            _this._firstChild = null;
+            _this._lastChild = null;
+            _this._childCount = 0;
+            return _this;
+        }
+        Object.defineProperty(LinkedListContainer.prototype, "firstChild", {
+            get: function () {
+                return this._firstChild;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(LinkedListContainer.prototype, "lastChild", {
+            get: function () {
+                return this._lastChild;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(LinkedListContainer.prototype, "childCount", {
+            get: function () {
+                return this._childCount;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        LinkedListContainer.prototype.addChild = function () {
+            var children = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                children[_i] = arguments[_i];
+            }
+            // if there is only one argument we can bypass looping through the them
+            if (children.length > 1) {
+                // loop through the array and add all children
+                for (var i = 0; i < children.length; i++) {
+                    // eslint-disable-next-line prefer-rest-params
+                    this.addChild(children[i]);
+                }
+            }
+            else {
+                var child = children[0];
+                // if the child has a parent then lets remove it as PixiJS objects can only exist in one place
+                if (child.parent) {
+                    child.parent.removeChild(child);
+                }
+                child.parent = this;
+                this.sortDirty = true;
+                // ensure child transform will be recalculated
+                child.transform._parentID = -1;
+                // add to list if we have a list
+                if (this._lastChild) {
+                    this._lastChild.nextChild = child;
+                    child.prevChild = this._lastChild;
+                    this._lastChild = child;
+                }
+                // otherwise initialize the list
+                else {
+                    this._firstChild = this._lastChild = child;
+                }
+                // update child count
+                ++this._childCount;
+                // ensure bounds will be recalculated
+                this._boundsID++;
+                // TODO - lets either do all callbacks or all events.. not both!
+                this.onChildrenChange();
+                this.emit('childAdded', child, this, this._childCount);
+                child.emit('added', this);
+            }
+            return children[0];
+        };
+        LinkedListContainer.prototype.addChildAt = function (child, index) {
+            if (index < 0 || index > this._childCount) {
+                throw new Error("addChildAt: The index " + index + " supplied is out of bounds " + this._childCount);
+            }
+            if (child.parent) {
+                child.parent.removeChild(child);
+            }
+            child.parent = this;
+            this.sortDirty = true;
+            // ensure child transform will be recalculated
+            child.transform._parentID = -1;
+            var c = child;
+            // if no children, do basic initialization
+            if (!this._firstChild) {
+                this._firstChild = this._lastChild = c;
+            }
+            // add at beginning (back)
+            else if (index === 0) {
+                this._firstChild.prevChild = c;
+                c.nextChild = this._firstChild;
+                this._firstChild = c;
+            }
+            // add at end (front)
+            else if (index === this._childCount) {
+                this._lastChild.nextChild = c;
+                c.prevChild = this._lastChild;
+                this._lastChild = c;
+            }
+            // otherwise we have to start counting through the children to find the right one
+            // - SLOW, only provided to fully support the possibility of use
+            else {
+                var i = 0;
+                var target = this._firstChild;
+                while (i < index) {
+                    target = target.nextChild;
+                    ++i;
+                }
+                // insert before the target that we found at the specified index
+                target.prevChild.nextChild = c;
+                c.prevChild = target.prevChild;
+                c.nextChild = target;
+                target.prevChild = c;
+            }
+            // update child count
+            ++this._childCount;
+            // ensure bounds will be recalculated
+            this._boundsID++;
+            // TODO - lets either do all callbacks or all events.. not both!
+            this.onChildrenChange(index); // the PixiJS types say this has no arguments
+            child.emit('added', this);
+            this.emit('childAdded', child, this, index);
+            return child;
+        };
+        /**
+         * Adds a child to the container to be rendered below another child.
+         *
+         * @param child The child to add
+         * @param relative - The current child to add the new child relative to.
+         * @return The child that was added.
+         */
+        LinkedListContainer.prototype.addChildBelow = function (child, relative) {
+            if (relative.parent !== this) {
+                throw new Error("addChildBelow: The relative target must be a child of this parent");
+            }
+            if (child.parent) {
+                child.parent.removeChild(child);
+            }
+            child.parent = this;
+            this.sortDirty = true;
+            // ensure child transform will be recalculated
+            child.transform._parentID = -1;
+            // insert before the target that we were given
+            relative.prevChild.nextChild = child;
+            child.prevChild = relative.prevChild;
+            child.nextChild = relative;
+            relative.prevChild = child;
+            if (this._firstChild === relative) {
+                this._firstChild = child;
+            }
+            // update child count
+            ++this._childCount;
+            // ensure bounds will be recalculated
+            this._boundsID++;
+            // TODO - lets either do all callbacks or all events.. not both!
+            this.onChildrenChange();
+            this.emit('childAdded', child, this, this._childCount);
+            child.emit('added', this);
+            return child;
+        };
+        /**
+         * Adds a child to the container to be rendered above another child.
+         *
+         * @param child The child to add
+         * @param relative - The current child to add the new child relative to.
+         * @return The child that was added.
+         */
+        LinkedListContainer.prototype.addChildAbove = function (child, relative) {
+            if (relative.parent !== this) {
+                throw new Error("addChildBelow: The relative target must be a child of this parent");
+            }
+            if (child.parent) {
+                child.parent.removeChild(child);
+            }
+            child.parent = this;
+            this.sortDirty = true;
+            // ensure child transform will be recalculated
+            child.transform._parentID = -1;
+            // insert after the target that we were given
+            relative.nextChild.prevChild = child;
+            child.nextChild = relative.nextChild;
+            child.prevChild = relative;
+            relative.nextChild = child;
+            if (this._lastChild === relative) {
+                this._lastChild = child;
+            }
+            // update child count
+            ++this._childCount;
+            // ensure bounds will be recalculated
+            this._boundsID++;
+            // TODO - lets either do all callbacks or all events.. not both!
+            this.onChildrenChange();
+            this.emit('childAdded', child, this, this._childCount);
+            child.emit('added', this);
+            return child;
+        };
+        LinkedListContainer.prototype.swapChildren = function (child, child2) {
+            if (child === child2 || child.parent !== this || child2.parent !== this) {
+                return;
+            }
+            var _a = child, prevChild = _a.prevChild, nextChild = _a.nextChild;
+            child.prevChild = child2.prevChild;
+            child.nextChild = child2.nextChild;
+            child2.prevChild = prevChild;
+            child2.nextChild = nextChild;
+            if (this._firstChild === child) {
+                this._firstChild = child2;
+            }
+            else if (this._firstChild === child2) {
+                this._firstChild = child;
+            }
+            if (this._lastChild === child) {
+                this._lastChild = child2;
+            }
+            else if (this._lastChild === child2) {
+                this._lastChild = child;
+            }
+            this.onChildrenChange();
+        };
+        LinkedListContainer.prototype.getChildIndex = function (child) {
+            var index = 0;
+            var test = this._firstChild;
+            while (test) {
+                if (test === child) {
+                    break;
+                }
+                test = test.nextChild;
+                ++index;
+            }
+            if (!test) {
+                throw new Error('The supplied DisplayObject must be a child of the caller');
+            }
+            return index;
+        };
+        LinkedListContainer.prototype.setChildIndex = function (child, index) {
+            if (index < 0 || index >= this._childCount) {
+                throw new Error("The index " + index + " supplied is out of bounds " + this._childCount);
+            }
+            if (child.parent !== this) {
+                throw new Error('The supplied DisplayObject must be a child of the caller');
+            }
+            // remove child
+            if (child.nextChild) {
+                child.nextChild.prevChild = child.prevChild;
+            }
+            if (child.prevChild) {
+                child.prevChild.nextChild = child.nextChild;
+            }
+            if (this._firstChild === child) {
+                this._firstChild = child.nextChild;
+            }
+            if (this._lastChild === child) {
+                this._lastChild = child.prevChild;
+            }
+            child.nextChild = null;
+            child.prevChild = null;
+            // do addChildAt
+            if (!this._firstChild) {
+                this._firstChild = this._lastChild = child;
+            }
+            else if (index === 0) {
+                this._firstChild.prevChild = child;
+                child.nextChild = this._firstChild;
+                this._firstChild = child;
+            }
+            else if (index === this._childCount) {
+                this._lastChild.nextChild = child;
+                child.prevChild = this._lastChild;
+                this._lastChild = child;
+            }
+            else {
+                var i = 0;
+                var target = this._firstChild;
+                while (i < index) {
+                    target = target.nextChild;
+                    ++i;
+                }
+                target.prevChild.nextChild = child;
+                child.prevChild = target.prevChild;
+                child.nextChild = target;
+                target.prevChild = child;
+            }
+            this.onChildrenChange(index);
+        };
+        LinkedListContainer.prototype.removeChild = function () {
+            var children = [];
+            for (var _i = 0; _i < arguments.length; _i++) {
+                children[_i] = arguments[_i];
+            }
+            // if there is only one argument we can bypass looping through the them
+            if (children.length > 1) {
+                // loop through the arguments property and remove all children
+                for (var i = 0; i < children.length; i++) {
+                    this.removeChild(children[i]);
+                }
+            }
+            else {
+                var child = children[0];
+                // bail if not actually our child
+                if (child.parent !== this)
+                    return null;
+                child.parent = null;
+                // ensure child transform will be recalculated
+                child.transform._parentID = -1;
+                // swap out child references
+                if (child.nextChild) {
+                    child.nextChild.prevChild = child.prevChild;
+                }
+                if (child.prevChild) {
+                    child.prevChild.nextChild = child.nextChild;
+                }
+                if (this._firstChild === child) {
+                    this._firstChild = child.nextChild;
+                }
+                if (this._lastChild === child) {
+                    this._lastChild = child.prevChild;
+                }
+                // clear sibling references
+                child.nextChild = null;
+                child.prevChild = null;
+                // update child count
+                --this._childCount;
+                // ensure bounds will be recalculated
+                this._boundsID++;
+                // TODO - lets either do all callbacks or all events.. not both!
+                this.onChildrenChange();
+                child.emit('removed', this);
+                this.emit('childRemoved', child, this);
+            }
+            return children[0];
+        };
+        LinkedListContainer.prototype.getChildAt = function (index) {
+            if (index < 0 || index >= this._childCount) {
+                throw new Error("getChildAt: Index (" + index + ") does not exist.");
+            }
+            if (index === 0) {
+                return this._firstChild;
+            }
+            // add at end (front)
+            else if (index === this._childCount) {
+                return this._lastChild;
+            }
+            // otherwise we have to start counting through the children to find the right one
+            // - SLOW, only provided to fully support the possibility of use
+            var i = 0;
+            var target = this._firstChild;
+            while (i < index) {
+                target = target.nextChild;
+                ++i;
+            }
+            return target;
+        };
+        LinkedListContainer.prototype.removeChildAt = function (index) {
+            var child = this.getChildAt(index);
+            // ensure child transform will be recalculated..
+            child.parent = null;
+            child.transform._parentID = -1;
+            // swap out child references
+            if (child.nextChild) {
+                child.nextChild.prevChild = child.prevChild;
+            }
+            if (child.prevChild) {
+                child.prevChild.nextChild = child.nextChild;
+            }
+            if (this._firstChild === child) {
+                this._firstChild = child.nextChild;
+            }
+            if (this._lastChild === child) {
+                this._lastChild = child.prevChild;
+            }
+            // clear sibling references
+            child.nextChild = null;
+            child.prevChild = null;
+            // update child count
+            --this._childCount;
+            // ensure bounds will be recalculated
+            this._boundsID++;
+            // TODO - lets either do all callbacks or all events.. not both!
+            this.onChildrenChange(index); // the PixiJS types say this has no arguments
+            child.emit('removed', this);
+            this.emit('childRemoved', child, this, index);
+            return child;
+        };
+        LinkedListContainer.prototype.removeChildren = function (beginIndex, endIndex) {
+            if (beginIndex === void 0) { beginIndex = 0; }
+            if (endIndex === void 0) { endIndex = this._childCount; }
+            var begin = beginIndex;
+            var end = endIndex;
+            var range = end - begin;
+            if (range > 0 && range <= end) {
+                var removed = [];
+                var child = this._firstChild;
+                for (var i = 0; i <= end && child; ++i, child = child.nextChild) {
+                    if (i >= begin) {
+                        removed.push(child);
+                    }
+                }
+                // child before removed section
+                var prevChild = removed[0].prevChild;
+                // child after removed section
+                var nextChild = removed[removed.length - 1].nextChild;
+                if (!nextChild) {
+                    // if we removed the last child, then the new last child is the one before
+                    // the removed section
+                    this._lastChild = prevChild;
+                }
+                else {
+                    // otherwise, stitch the child before the section to the child after
+                    nextChild.prevChild = prevChild;
+                }
+                if (!prevChild) {
+                    // if we removed the first child, then the new first child is the one after
+                    // the removed section
+                    this._firstChild = nextChild;
+                }
+                else {
+                    // otherwise stich the child after the section to the one before
+                    prevChild.nextChild = nextChild;
+                }
+                for (var i = 0; i < removed.length; ++i) {
+                    // clear parenting and sibling references for all removed children
+                    removed[i].parent = null;
+                    if (removed[i].transform) {
+                        removed[i].transform._parentID = -1;
+                    }
+                    removed[i].nextChild = null;
+                    removed[i].prevChild = null;
+                }
+                this._boundsID++;
+                this.onChildrenChange(beginIndex);
+                for (var i = 0; i < removed.length; ++i) {
+                    removed[i].emit('removed', this);
+                    this.emit('childRemoved', removed[i], this, i);
+                }
+                return removed;
+            }
+            else if (range === 0 && this._childCount === 0) {
+                return [];
+            }
+            throw new RangeError('removeChildren: numeric values are outside the acceptable range.');
+        };
+        /**
+         * Updates the transform on all children of this container for rendering.
+         * Copied from and overrides PixiJS v5 method (v4 method is identical)
+         */
+        LinkedListContainer.prototype.updateTransform = function () {
+            this._boundsID++;
+            this.transform.updateTransform(this.parent.transform);
+            // TODO: check render flags, how to process stuff here
+            this.worldAlpha = this.alpha * this.parent.worldAlpha;
+            var child;
+            var next;
+            for (child = this._firstChild; child; child = next) {
+                next = child.nextChild;
+                if (child.visible) {
+                    child.updateTransform();
+                }
+            }
+        };
+        /**
+         * Recalculates the bounds of the container.
+         * Copied from and overrides PixiJS v5 method (v4 method is identical)
+         */
+        LinkedListContainer.prototype.calculateBounds = function () {
+            this._bounds.clear();
+            this._calculateBounds();
+            var child;
+            var next;
+            for (child = this._firstChild; child; child = next) {
+                next = child.nextChild;
+                if (!child.visible || !child.renderable) {
+                    continue;
+                }
+                child.calculateBounds();
+                // TODO: filter+mask, need to mask both somehow
+                if (child._mask) {
+                    var maskObject = (child._mask.maskObject || child._mask);
+                    maskObject.calculateBounds();
+                    this._bounds.addBoundsMask(child._bounds, maskObject._bounds);
+                }
+                else if (child.filterArea) {
+                    this._bounds.addBoundsArea(child._bounds, child.filterArea);
+                }
+                else {
+                    this._bounds.addBounds(child._bounds);
+                }
+            }
+            this._bounds.updateID = this._boundsID;
+        };
+        /**
+         * Retrieves the local bounds of the displayObject as a rectangle object. Copied from and overrides PixiJS v5 method
+         */
+        LinkedListContainer.prototype.getLocalBounds = function (rect, skipChildrenUpdate) {
+            if (skipChildrenUpdate === void 0) { skipChildrenUpdate = false; }
+            // skip Container's getLocalBounds, go directly to DisplayObject
+            var result = pixi.DisplayObject.prototype.getLocalBounds.call(this, rect);
+            if (!skipChildrenUpdate) {
+                var child = void 0;
+                var next = void 0;
+                for (child = this._firstChild; child; child = next) {
+                    next = child.nextChild;
+                    if (child.visible) {
+                        child.updateTransform();
+                    }
+                }
+            }
+            return result;
+        };
+        /**
+         * Renders the object using the WebGL renderer. Copied from and overrides PixiJS v5 method
+         */
+        LinkedListContainer.prototype.render = function (renderer) {
+            // if the object is not visible or the alpha is 0 then no need to render this element
+            if (!this.visible || this.worldAlpha <= 0 || !this.renderable) {
+                return;
+            }
+            // do a quick check to see if this element has a mask or a filter.
+            if (this._mask || (this.filters && this.filters.length)) {
+                this.renderAdvanced(renderer);
+            }
+            else {
+                this._render(renderer);
+                var child = void 0;
+                var next = void 0;
+                // simple render children!
+                for (child = this._firstChild; child; child = next) {
+                    next = child.nextChild;
+                    child.render(renderer);
+                }
+            }
+        };
+        /**
+         * Render the object using the WebGL renderer and advanced features. Copied from and overrides PixiJS v5 method
+         */
+        LinkedListContainer.prototype.renderAdvanced = function (renderer) {
+            renderer.batch.flush();
+            var filters = this.filters;
+            var mask = this._mask;
+            // _enabledFilters note: As of development, _enabledFilters is not documented in pixi.js
+            // types but is in code of current release (5.2.4).
+            // push filter first as we need to ensure the stencil buffer is correct for any masking
+            if (filters) {
+                if (!this._enabledFilters) {
+                    this._enabledFilters = [];
+                }
+                this._enabledFilters.length = 0;
+                for (var i = 0; i < filters.length; i++) {
+                    if (filters[i].enabled) {
+                        this._enabledFilters.push(filters[i]);
+                    }
+                }
+                if (this._enabledFilters.length) {
+                    renderer.filter.push(this, this._enabledFilters);
+                }
+            }
+            if (mask) {
+                renderer.mask.push(this, this._mask);
+            }
+            // add this object to the batch, only rendered if it has a texture.
+            this._render(renderer);
+            var child;
+            var next;
+            // now loop through the children and make sure they get rendered
+            for (child = this._firstChild; child; child = next) {
+                next = child.nextChild;
+                child.render(renderer);
+            }
+            renderer.batch.flush();
+            if (mask) {
+                renderer.mask.pop(this);
+            }
+            if (filters && this._enabledFilters && this._enabledFilters.length) {
+                renderer.filter.pop();
+            }
+        };
+        /**
+         * Renders the object using the WebGL renderer. Copied from and overrides PixiJS V4 method.
+         */
+        LinkedListContainer.prototype.renderWebGL = function (renderer) {
+            // if the object is not visible or the alpha is 0 then no need to render this element
+            if (!this.visible || this.worldAlpha <= 0 || !this.renderable) {
+                return;
+            }
+            // do a quick check to see if this element has a mask or a filter.
+            if (this._mask || (this.filters && this.filters.length)) {
+                this.renderAdvancedWebGL(renderer);
+            }
+            else {
+                this._renderWebGL(renderer);
+                var child = void 0;
+                var next = void 0;
+                // simple render children!
+                for (child = this._firstChild; child; child = next) {
+                    next = child.nextChild;
+                    child.renderWebGL(renderer);
+                }
+            }
+        };
+        /**
+         * Render the object using the WebGL renderer and advanced features. Copied from and overrides PixiJS V4 method.
+         */
+        LinkedListContainer.prototype.renderAdvancedWebGL = function (renderer) {
+            renderer.flush();
+            // _filters is a v4 specific property
+            var filters = this._filters;
+            var mask = this._mask;
+            // push filter first as we need to ensure the stencil buffer is correct for any masking
+            if (filters) {
+                if (!this._enabledFilters) {
+                    this._enabledFilters = [];
+                }
+                this._enabledFilters.length = 0;
+                for (var i = 0; i < filters.length; i++) {
+                    if (filters[i].enabled) {
+                        this._enabledFilters.push(filters[i]);
+                    }
+                }
+                if (this._enabledFilters.length) {
+                    renderer.filterManager.pushFilter(this, this._enabledFilters);
+                }
+            }
+            if (mask) {
+                renderer.maskManager.pushMask(this, this._mask);
+            }
+            // add this object to the batch, only rendered if it has a texture.
+            this._renderWebGL(renderer);
+            var child;
+            var next;
+            // now loop through the children and make sure they get rendered
+            for (child = this._firstChild; child; child = next) {
+                next = child.nextChild;
+                child.renderWebGL(renderer);
+            }
+            renderer.flush();
+            if (mask) {
+                renderer.maskManager.popMask(this, this._mask);
+            }
+            if (filters && this._enabledFilters && this._enabledFilters.length) {
+                renderer.filterManager.popFilter();
+            }
+        };
+        /**
+         * Renders the object using the Canvas renderer. Copied from and overrides PixiJS V4 method or Canvas mixin in V5.
+         */
+        LinkedListContainer.prototype.renderCanvas = function (renderer) {
+            // if not visible or the alpha is 0 then no need to render this
+            if (!this.visible || this.worldAlpha <= 0 || !this.renderable) {
+                return;
+            }
+            if (this._mask) {
+                renderer.maskManager.pushMask(this._mask);
+            }
+            this._renderCanvas(renderer);
+            var child;
+            var next;
+            for (child = this._firstChild; child; child = next) {
+                next = child.nextChild;
+                child.renderCanvas(renderer);
+            }
+            if (this._mask) {
+                renderer.maskManager.popMask(renderer);
+            }
+        };
+        return LinkedListContainer;
+    }(pixi.Container));
+
     exports.AnimatedParticle = AnimatedParticle;
     exports.Emitter = Emitter;
     exports.GetTextureFromString = GetTextureFromString;
+    exports.LinkedListContainer = LinkedListContainer;
     exports.Particle = Particle;
     exports.PathParticle = PathParticle;
     exports.PolygonalChain = PolygonalChain;

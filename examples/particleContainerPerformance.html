@@ -18,12 +18,14 @@
 	<body>
 		<div id="framerate"></div>
 		<div id="particleCount"></div>
-		<div id="instructions">Click Anywhere</div>
+		<div id="containerType"></div>
+		<div id="emitRate"></div>
+		<div id="instructions">Right click to change container type</div>
 		<canvas id="stage" width="400" height="400"></canvas>
 		<script>
-
+			const STARTING_FREQUENCY = 0.0001;
 			// See js/ParticleExample.js for actual setup
-			new ParticleExample(
+			const example = new ParticleExample(
 				// The image to use
 				["images/CartoonSmoke.png"],
 
@@ -40,7 +42,7 @@
 					},
 					"color": {
 						"start": "ffffff",
-						"end": "ffffff"
+						"end": "ff9999"
 					},
 					"speed": {
 						"start": 600,
@@ -59,9 +61,9 @@
 						"max": 0.7
 					},
 					"blendMode": "normal",
-					"frequency": 0.00008,
+					"frequency": STARTING_FREQUENCY,
 					"emitterLifetime": -1,
-					"maxParticles": 50000,
+					"maxParticles": 100000,
 					"pos": {
 						"x": 0,
 						"y": 0
@@ -69,6 +71,39 @@
 					"addAtBack": false,
 					"spawnType": "point"
 				}, null, true);
+
+			const emitRate = document.getElementById('emitRate');
+
+			let totalElapsed = 0;
+			let frameTimes = [];
+			example.updateHook = (elapsed) => {
+				if (!example.emitter) return;
+
+				frameTimes.push(elapsed);
+				totalElapsed += elapsed;
+				if (totalElapsed > 1000)
+				{
+					const avg = frameTimes.reduce((s, v) => s + v / frameTimes.length, 0);
+					totalElapsed = 0;
+					frameTimes.length = 0;
+					// if framerate is still high, increase frequency
+					if (1000 / avg >= 30)
+					{
+						example.emitter.frequency *= 0.75;
+						emitRate.innerHTML = `Emitting ${Math.round(1 / example.emitter.frequency)} particles per second (lifetime ${example.emitter.minLifetime} - ${example.emitter.maxLifetime} seconds)`;
+					}
+				}
+			};
+
+			// reset settings on container change
+			example.containerHook = () => {
+				if (!example.emitter) return;
+
+				totalElapsed = 0;
+				frameTimes.length = 0;
+				example.emitter.frequency = STARTING_FREQUENCY;
+				emitRate.innerHTML = `Emitting ${Math.round(1 / example.emitter.frequency)} particles per second (lifetime ${example.emitter.minLifetime} - ${example.emitter.maxLifetime} seconds)`;
+			};
 		</script>
 	</body>
 </html>
