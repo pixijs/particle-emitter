@@ -9,12 +9,12 @@
     *  @param {String[]} imagePaths The local path to the image source
     *  @param {Object} config The emitter configuration
     *  @param {null|'path'|'anim'} [type=null] Particle type to create.
-    *  @param {boolean} [useParticleContainer=false] If a ParticleContainer should be used instead of a Container.
+    *  @param {boolean} [testContainers=false] If changing containers should be enabled.
     *  @param {boolean} [stepColors=false] If the color settings should be manually stepped.
     */
     class ParticleExample
     {
-        constructor(imagePaths, config, type, useParticleContainer, stepColors)
+        constructor(imagePaths, config, type, testContainers, stepColors)
         {
             const canvas = document.getElementById('stage');
             // Basic PIXI Setup
@@ -30,6 +30,8 @@
             this.emitter = null;
             this.renderer = new PIXI.Renderer(rendererOptions);
             this.bg = null;
+            this.updateHook = null;
+            this.containerHook = null;
 
             const framerate = document.getElementById('framerate');
             const particleCount = document.getElementById('particleCount');
@@ -48,16 +50,23 @@
                 const now = Date.now();
                 if (this.emitter)
                 {
+                    // update emitter (convert to seconds)
                     this.emitter.update((now - elapsed) * 0.001);
                 }
 
-                framerate.innerHTML = (1000 / (now - elapsed)).toFixed(2);
+                // call update hook for specialist examples
+                if (this.updateHook)
+                {
+                    this.updateHook(now - elapsed);
+                }
+
+                framerate.innerHTML = `${(1000 / (now - elapsed)).toFixed(2)} fps`;
 
                 elapsed = now;
 
                 if (this.emitter && particleCount)
                 {
-                    particleCount.innerHTML = this.emitter.particleCount;
+                    particleCount.innerHTML = `${this.emitter.particleCount} particles`;
                 }
 
                 // render the stage
@@ -124,7 +133,7 @@
                     art = imagePaths.art;
                 }
                 // Create the new emitter and attach it to the stage
-                let parentType = useParticleContainer ? 1 : 0;
+                let parentType = 0;
                 function getContainer()
                 {
                     switch (parentType)
@@ -182,14 +191,22 @@
                     // right click (or anything but left click)
                     if (e.button)
                     {
-                        if (++parentType >= 3) parentType = 0;
-                        const oldParent = emitterContainer;
-                        [emitterContainer, containerName] = getContainer();
-                        if (containerType) containerType.innerHTML = containerName;
-                        this.stage.addChild(emitterContainer);
-                        this.emitter.parent = emitterContainer;
-                        this.stage.removeChild(oldParent);
-                        oldParent.destroy();
+                        if (testContainers)
+                        {
+                            if (++parentType >= 3) parentType = 0;
+                            const oldParent = emitterContainer;
+                            [emitterContainer, containerName] = getContainer();
+                            if (containerType) containerType.innerHTML = containerName;
+                            this.stage.addChild(emitterContainer);
+                            this.emitter.parent = emitterContainer;
+                            this.stage.removeChild(oldParent);
+                            oldParent.destroy();
+
+                            if (this.containerHook)
+                            {
+                                this.containerHook();
+                            }
+                        }
                     }
                     else
                     {
