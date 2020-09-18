@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.2.1
- * Compiled Mon, 25 May 2020 04:28:10 UTC
+ * pixi-particles - v4.3.0
+ * Compiled Fri, 18 Sep 2020 13:48:45 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -2198,6 +2198,13 @@ this.PIXI = this.PIXI || {};
         return AnimatedParticle;
     }(Particle));
 
+    /**
+     * A semi-experimental Container that uses a doubly linked list to manage children instead of an
+     * array. This means that adding/removing children often is not the same performance hit that
+     * it would to be continually pushing/splicing.
+     * However, this is primarily intended to be used for heavy particle usage, and may not handle
+     * edge cases well if used as a complete Container replacement.
+     */
     var LinkedListContainer = /** @class */ (function (_super) {
         __extends(LinkedListContainer, _super);
         function LinkedListContainer() {
