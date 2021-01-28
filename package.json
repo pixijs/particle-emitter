@@ -40,7 +40,7 @@
   "devDependencies": {
     "@pixi/eslint-config": "^1.0.1",
     "dts-bundle-generator": "^4.3.0",
-    "electron": "^7.0.0",
+    "electron": "^9.4.0",
     "eslint": "^6.5.0",
     "gh-pages": "^2.0.0",
     "http-server": "^0.12.3",
