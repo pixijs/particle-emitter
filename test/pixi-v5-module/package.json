@@ -8,7 +8,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/node": "^8.0.0",
-    "electron": "^7.0.0",
+    "electron": "^9.4.0",
     "override-require": "^1.1.1",
     "pixi-particles": "*",
     "pixi.js": "^5.1.0",

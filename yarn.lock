@@ -1163,10 +1163,10 @@ ecstatic@^3.3.2:
     minimist "^1.1.0"
     url-join "^2.0.5"
 
-electron@^7.0.0:
-  version "7.2.4"
-  resolved "https://registry.npmjs.org/electron/-/electron-7.2.4.tgz#9fc0446dae23ead897af8742470cb18da55c6ce9"
-  integrity sha512-Z+R692uTzXgP8AHrabE+kkrMlQJ6pnAYoINenwj9QSqaD2YbO8IuXU9DMCcUY0+VpA91ee09wFZJNUKYPMnCKg==
+electron@^9.4.0:
+  version "9.4.0"
+  resolved "https://registry.npmjs.org/electron/-/electron-9.4.0.tgz#c3c607e3598226ddbaaff8babcdffa8bb2210936"
+  integrity sha512-hOC4q0jkb+UDYZRy8vrZ1IANnq+jznZnbkD62OEo06nU+hIbp2IrwDRBNuSLmQ3cwZMVir0WSIA1qEVK0PkzGA==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
@@ -2181,6 +2181,11 @@ pixi-gl-core@^1.1.4:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/pixi-gl-core/-/pixi-gl-core-1.1.4.tgz#8b4b5c433b31e419bc379dc565ce1b835a91b372"
   integrity sha1-i0tcQzsx5Bm8N53FZc4bg1qRs3I=
+
+pixi-particles@*:
+  version "4.3.0"
+  resolved "https://registry.npmjs.org/pixi-particles/-/pixi-particles-4.3.0.tgz#bd27f54c3af480e0cab5ea50573bb06200137a5e"
+  integrity sha512-3G66vSFMbp+LnD3P6SYIxOo3f1X3yxkPbP1Tr2o+o18ZkkT6mePpCvsPUrM8s+xCW7oK816/wDYZXMtKzJ61CQ==
 
 pixi.js@^4.0.0:
   version "4.8.6"
