@@ -35,17 +35,30 @@
     "test": "echo done"
   },
   "peerDependencies": {
-    "pixi.js": ">=4.0.0"
+    "@pixi/constants": "^6.0.4",
+    "@pixi/core": "^6.0.4",
+    "@pixi/display": "^6.0.4",
+    "@pixi/math": "^6.0.4",
+    "@pixi/settings": "^6.0.4",
+    "@pixi/sprite": "^6.0.4",
+    "@pixi/ticker": "^6.0.4"
   },
   "devDependencies": {
+    "@pixi/constants": "^6.0.4",
+    "@pixi/core": "^6.0.4",
+    "@pixi/display": "^6.0.4",
     "@pixi/eslint-config": "^1.0.1",
-    "dts-bundle-generator": "^4.3.0",
+    "@pixi/math": "^6.0.4",
+    "@pixi/settings": "^6.0.4",
+    "@pixi/sprite": "^6.0.4",
+    "@pixi/ticker": "^6.0.4",
+    "dts-bundle-generator": "^5.9.0",
     "electron": "^9.4.0",
     "eslint": "^6.5.0",
     "gh-pages": "^2.0.0",
     "http-server": "^0.12.3",
     "ncp": "^2.0.0",
-    "pixi.js": "^5.0.0",
+    "pixi.js": "^6.0.4",
     "rimraf": "^2.5.4",
     "rollup": "^2.7.0",
     "rollup-plugin-commonjs": "^9.2.1",

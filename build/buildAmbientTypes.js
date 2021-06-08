@@ -3,15 +3,16 @@ const path = require('path');
 
 const moduleTypes = fs.readFileSync(path.resolve('./index.d.ts'), 'utf8');
 
-const importStatement = /import {([^}]*)} from 'pixi.js';/.exec(moduleTypes);
+const pixiImports = moduleTypes.match(/(?<=^import {).*(?=} from '@pixi\/.*';$)/gm);
+const pixiImportTypes = pixiImports.join(',').split(',').map(token => token.trim());
 
-let ambientTypes = moduleTypes.replace(importStatement[0], 'declare namespace PIXI.particles {') + '\n}';
+let ambientTypes = moduleTypes.replace(/^import .*$/m, 'declare namespace PIXI.particles {') + '\n}';
+ambientTypes = ambientTypes.replace(/^import .*\n/gm, '');
 
-const importedTypes = importStatement[1].trim().split(', ');
-for (let i = 0; i < importedTypes.length; ++i) {
-	const classImport = importedTypes[i];
+for (const classImport of pixiImportTypes) {
 	ambientTypes = ambientTypes.replace(new RegExp(`\\b${classImport}\\b`, 'g'), 'PIXI.' + classImport);
 }
+
 ambientTypes = ambientTypes.replace(/export declare/g, 'export');
 
 fs.writeFileSync(path.resolve('./ambient.d.ts'), ambientTypes);

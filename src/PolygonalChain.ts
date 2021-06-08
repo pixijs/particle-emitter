@@ -1,4 +1,4 @@
-import { Point } from 'pixi.js';
+import { Point } from '@pixi/math';
 
 export interface BasicPoint
 {

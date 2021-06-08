@@ -1,23 +1,12 @@
-import { BLEND_MODES, Point, Texture } from 'pixi.js';
+import { Texture } from '@pixi/core';
+import { Point } from '@pixi/math';
+import { BLEND_MODES } from '@pixi/constants';
 import { PropertyNode, ValueStep } from './PropertyNode';
-// eslint-disable-next-line no-duplicate-imports
-import * as pixi from 'pixi.js';
-// get Texture.from()/Texture.fromImage(), in V4 and V5 friendly methods
+// get Texture.from(), only supports V5 and V6 with individual packages
 /**
  * @hidden
  */
-let TextureFromString: (s: string) => pixi.Texture;
-// to avoid Rollup transforming our import, save pixi namespace in a variable
-const pixiNS = pixi;
-
-if (parseInt((/^(\d+)\./).exec(pixi.VERSION)[1], 10) < 5)
-{
-    TextureFromString = (pixiNS.Texture as any).fromImage;
-}
-else
-{
-    TextureFromString = pixiNS.Texture.from;
-}
+const TextureFromString = Texture.from;
 
 export function GetTextureFromString(s: string): Texture
 {
