@@ -1,6 +1,6 @@
 /*!
- * pixi-particles - v4.3.0
- * Compiled Fri, 18 Sep 2020 13:48:45 UTC
+ * pixi-particles - v4.3.1
+ * Compiled Wed, 09 Jun 2021 13:13:31 UTC
  *
  * pixi-particles is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -2117,7 +2117,7 @@ this.PIXI = this.PIXI || {};
             // only animate the particle if it is still alive
             if (lerp >= 0) {
                 this.elapsed += delta;
-                if (this.elapsed > this.duration) {
+                if (this.elapsed >= this.duration) {
                     // loop elapsed back around
                     if (this.loop) {
                         this.elapsed = this.elapsed % this.duration;
@@ -2130,7 +2130,8 @@ this.PIXI = this.PIXI || {};
                 // add a very small number to the frame and then floor it to avoid
                 // the frame being one short due to floating point errors.
                 var frame = ((this.elapsed * this.framerate) + 0.0000001) | 0;
-                this.texture = this.textures[frame] || pixi.Texture.EMPTY;
+                // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
+                this.texture = this.textures[frame] || this.textures[this.textures.length - 1] || pixi.Texture.EMPTY;
             }
             return lerp;
         };
