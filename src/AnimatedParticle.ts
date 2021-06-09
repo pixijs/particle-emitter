@@ -127,12 +127,12 @@ export class AnimatedParticle extends Particle
     public update(delta: number): number
     {
         const lerp = this.Particle_update(delta);
-        // only animate the particle if it is still alive
 
+        // only animate the particle if it is still alive
         if (lerp >= 0)
         {
             this.elapsed += delta;
-            if (this.elapsed > this.duration)
+            if (this.elapsed >= this.duration)
             {
                 // loop elapsed back around
                 if (this.loop)
@@ -149,7 +149,8 @@ export class AnimatedParticle extends Particle
             // the frame being one short due to floating point errors.
             const frame = ((this.elapsed * this.framerate) + 0.0000001) | 0;
 
-            this.texture = this.textures[frame] || Texture.EMPTY;
+            // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
+            this.texture = this.textures[frame] || this.textures[this.textures.length - 1] || Texture.EMPTY;
         }
 
         return lerp;
