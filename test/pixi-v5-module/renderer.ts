@@ -124,7 +124,7 @@ loader.load(function()
 	const emitterContainer = new pixi.Container();
 	stage.addChild(emitterContainer);
 	(window as any).emitter = emitter = new particles.Emitter(
-		emitterContainer,
+		emitterContainer as any, // "as any" cast workaround for V5 type incompatibility with V6
 		art,
 		config
 	);

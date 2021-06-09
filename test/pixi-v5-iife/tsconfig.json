@@ -7,7 +7,8 @@
 		"baseUrl": ".",
 		"paths": {
 			"pixi.js": ["node_modules/pixi.js"]
-		}
+		},
+		"esModuleInterop": true
 	},
 	"include": [
 		"renderer.ts"

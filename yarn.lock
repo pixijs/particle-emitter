@@ -748,11 +748,6 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.43.tgz#8d3281a33c92a56038b05d9460a65bc1dcd5735b"
   integrity sha512-5m5W13HR2k3cu88mpzlnPBBv5+GyMHtj4F0P83RG4mqoC0AYVYHVMHfF3SgwKNtqEZiZQASMxU92QsLEekKcnw==
 
-"@types/pixi.js@^4.8.6":
-  version "4.8.6"
-  resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.8.6.tgz#c9bb6844cf581024f6bee07feb1538b37c0429ba"
-  integrity sha512-70PcmzoHG723nMLx7OzMM7xoH8EnJfVVQmh1WQgXGaXdU9ygq3VlsXLRt/g6Z124abKDvmzg3hfRpA8CvBp2eA==
-
 "@typescript-eslint/eslint-plugin@^2.22.0":
   version "2.30.0"
   resolved "https://registry.npmjs.org/@typescript-eslint/eslint-plugin/-/eslint-plugin-2.30.0.tgz#312a37e80542a764d96e8ad88a105316cdcd7b05"
@@ -893,11 +888,6 @@ basic-auth@^1.0.3:
   version "1.1.0"
   resolved "https://registry.npmjs.org/basic-auth/-/basic-auth-1.1.0.tgz#45221ee429f7ee1e5035be3f51533f1cdfd29884"
   integrity sha1-RSIe5Cn37h5QNb4/UVM/HN/SmIQ=
-
-bit-twiddle@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/bit-twiddle/-/bit-twiddle-1.0.2.tgz#0c6c1fabe2b23d17173d9a61b7b7093eb9e1769e"
-  integrity sha1-DGwfq+KyPRcXPZpht7cJPrnhdp4=
 
 boolean@^3.0.0:
   version "3.0.1"
@@ -1168,11 +1158,6 @@ duplexer3@^0.1.4:
   resolved "https://registry.npmjs.org/duplexer3/-/duplexer3-0.1.4.tgz#ee01dd1cac0ed3cbc7fdbea37dc0a8f1ce002ce2"
   integrity sha1-7gHdHKwO08vH/b6jfcCo8c4ALOI=
 
-earcut@^2.1.4:
-  version "2.1.5"
-  resolved "https://registry.yarnpkg.com/earcut/-/earcut-2.1.5.tgz#829280a9a3a0f5fee0529f0a47c3e4eff09b21e4"
-  integrity sha512-QFWC7ywTVLtvRAJTVp8ugsuuGQ5mVqNmJ1cRYeLrSHgP3nycr2RHTJob9OtM0v8ujuoKN0NY1a93J/omeTL1PA==
-
 earcut@^2.1.5:
   version "2.2.1"
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.1.tgz#3bae0b1b6fec41853b56b126f03a42a34b28f1d5"
@@ -1376,11 +1361,6 @@ esutils@^2.0.2:
   version "2.0.3"
   resolved "https://registry.npmjs.org/esutils/-/esutils-2.0.3.tgz#74d2eb4de0b8da1293711910d50775b9b710ef64"
   integrity sha512-kVscqXk4OCp68SZ0dkgEKVi6/8ij300KBWTJq32P/dYeWTSwK41WyTxalN1eRmA5Z9UU/LX9D7FWSmV9SAYx6g==
-
-eventemitter3@^2.0.0:
-  version "2.0.3"
-  resolved "https://registry.yarnpkg.com/eventemitter3/-/eventemitter3-2.0.3.tgz#b5e1079b59fb5e1ba2771c0a993be060a58c99ba"
-  integrity sha1-teEHm1n7XhuidxwKmTvgYKWMmbo=
 
 eventemitter3@^3.1.0:
   version "3.1.0"
@@ -1986,7 +1966,7 @@ mimic-response@^1.0.0, mimic-response@^1.0.1:
   resolved "https://registry.npmjs.org/mimic-response/-/mimic-response-1.0.1.tgz#4923538878eef42063cb8a3e3b0798781487ab1b"
   integrity sha512-j5EctnkH7amfV/q5Hgmoal1g2QHFJRraOtmx0JpIqkxhBhI/lJSl1nMpQ45hVarwNETOoWEimndZ4QK0RHxuxQ==
 
-mini-signals@^1.1.1, mini-signals@^1.2.0:
+mini-signals@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/mini-signals/-/mini-signals-1.2.0.tgz#45b08013c5fae51a24aa1a935cd317c9ed721d74"
   integrity sha1-RbCAE8X65RokqhqTXNMXye1yHXQ=
@@ -2116,7 +2096,7 @@ os-tmpdir@~1.0.2:
 
 override-require@^1.1.1:
   version "1.1.1"
-  resolved "https://registry.yarnpkg.com/override-require/-/override-require-1.1.1.tgz#6ae22fadeb1f850ffb0cf4c20ff7b87e5eb650df"
+  resolved "https://registry.npmjs.org/override-require/-/override-require-1.1.1.tgz#6ae22fadeb1f850ffb0cf4c20ff7b87e5eb650df"
   integrity sha1-auIvresfhQ/7DPTCD/e4fl62UN8=
 
 p-cancelable@^1.0.0:
@@ -2206,25 +2186,6 @@ pinkie@^2.0.0:
   version "2.0.4"
   resolved "https://registry.npmjs.org/pinkie/-/pinkie-2.0.4.tgz#72556b80cfa0d48a974e80e77248e80ed4f7f870"
   integrity sha1-clVrgM+g1IqXToDnckjoDtT3+HA=
-
-pixi-gl-core@^1.1.4:
-  version "1.1.4"
-  resolved "https://registry.yarnpkg.com/pixi-gl-core/-/pixi-gl-core-1.1.4.tgz#8b4b5c433b31e419bc379dc565ce1b835a91b372"
-  integrity sha1-i0tcQzsx5Bm8N53FZc4bg1qRs3I=
-
-pixi.js@^4.0.0:
-  version "4.8.6"
-  resolved "https://registry.yarnpkg.com/pixi.js/-/pixi.js-4.8.6.tgz#de15053a17674133a48fd3fe0138a4019a2f7bf1"
-  integrity sha512-+p6njU8rPfCN+e/KVYYQlbA8smKSauWfoBeqCskZmax9FqYYLyQwMsXnF8f6h/++xSbrIe5LxgxX7Wl8jHVvkQ==
-  dependencies:
-    bit-twiddle "^1.0.2"
-    earcut "^2.1.4"
-    eventemitter3 "^2.0.0"
-    ismobilejs "^0.5.1"
-    object-assign "^4.0.1"
-    pixi-gl-core "^1.1.4"
-    remove-array-items "^1.0.0"
-    resource-loader "^2.2.3"
 
 pixi.js@^5.1.0:
   version "5.1.5"
@@ -2417,11 +2378,6 @@ regexpp@^3.0.0:
   resolved "https://registry.npmjs.org/regexpp/-/regexpp-3.1.0.tgz#206d0ad0a5648cffbdb8ae46438f3dc51c9f78e2"
   integrity sha512-ZOIzd8yVsQQA7j8GCSlPGXwg5PfmA1mrq0JP4nGhh54LaKN3xdai/vHUDu74pKwV8OxseMS65u2NImosQcSD0Q==
 
-remove-array-items@^1.0.0:
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/remove-array-items/-/remove-array-items-1.1.1.tgz#fd745ff73d0822e561ea910bf1b401fc7843e693"
-  integrity sha512-MXW/jtHyl5F1PZI7NbpS8SOtympdLuF20aoWJT5lELR1p/HJDd5nqW8Eu9uLh/hCRY3FgvrIT5AwDCgBODklcA==
-
 require-directory@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/require-directory/-/require-directory-2.1.1.tgz#8c64ad5fd30dab1c976e2344ffe7f792a6a6df42"
@@ -2453,14 +2409,6 @@ resolve@^1.1.6, resolve@^1.10.0:
   integrity sha512-B/dOmuoAik5bKcD6s6nXDCjzUKnaDvdkRyAk6rsmsKLipWj4797iothd7jmmUhWTfinVMU+wc56rYKsit2Qy4w==
   dependencies:
     path-parse "^1.0.6"
-
-resource-loader@^2.2.3:
-  version "2.2.3"
-  resolved "https://registry.yarnpkg.com/resource-loader/-/resource-loader-2.2.3.tgz#2c8b075b7b9328a2e72fba6f51b4dff274870000"
-  integrity sha512-SsxilncV7gxwr12clSq0E2HZh8QjcosVVSEAnZ3VF9VtBNNtO3UFxxXT9pJgkVEJUHAlXg26MkkTOMjyz1kDdw==
-  dependencies:
-    mini-signals "^1.1.1"
-    parse-uri "^1.0.0"
 
 resource-loader@^3.0.1:
   version "3.0.1"

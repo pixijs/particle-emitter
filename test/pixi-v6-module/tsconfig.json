@@ -7,7 +7,11 @@
 		"types": ["node"],
 		"baseUrl": ".",
 		"paths": {
-			"pixi.js": ["node_modules/pixi.js"]
+			"pixi.js": ["node_modules/pixi.js"],
+			"mini-signals": [
+				// https://github.com/Hypercubed/mini-signals/issues/20
+				"../../node_modules/resource-loader/typings/mini-signals.d.ts"
+			]
 		},
 		"esModuleInterop": true
 	},

@@ -1,4 +1,8 @@
-/// <reference path="node_modules/pixi-particles/ambient.d.ts" />
+import * as pixi from "pixi.js";
+// override requires so that the local pixi-particles gets the pixi.js
+// from this test project, not from the top level
+require('override-require')((request:any) => request === 'pixi.js', () =>  pixi);
+import * as particles from "pixi-particles";
 
 const imagePaths = ["../../docs/examples/images/Sparks.png"];
 const config = {
@@ -54,18 +58,19 @@ const canvas = document.getElementById("stage") as HTMLCanvasElement;
 // Basic PIXI Setup
 const rendererOptions =
 {
+	width: canvas.width,
+	height: canvas.height,
 	view: canvas,
 };
-const stage = new PIXI.Container(),
-	renderer = PIXI.autoDetectRenderer(canvas.width, canvas.height, rendererOptions);
-let emitter:PIXI.particles.Emitter = null,
-	bg:PIXI.Sprite = null;
+const stage = new pixi.Container(),
+	renderer = new pixi.Renderer(rendererOptions);
+let emitter:particles.Emitter = null,
+	bg:pixi.Sprite = null;
 
 // Calculate the current time
 let elapsed = Date.now();
 
 let updateId:number;
-
 // Update function every frame
 const update = function(){
 
@@ -99,12 +104,13 @@ window.onresize(null);
 // Preload the particle images and create PIXI textures from it
 const urls = [];// imagePaths.slice();
 urls.push("../../docs/examples/images/bg.png");
-const loader = PIXI.loader;
+const loader = pixi.Loader.shared;
 for(let i = 0; i < urls.length; ++i)
 	loader.add("img" + i, urls[i]);
 loader.load(function()
 {
-	bg = new PIXI.Sprite(PIXI.Texture.fromImage("../../docs/examples/images/bg.png"));
+	debugger;
+	bg = new pixi.Sprite(pixi.Texture.from("../../docs/examples/images/bg.png"));
 	//bg is a 1px by 1px image
 	bg.scale.x = canvas.width;
 	bg.scale.y = canvas.height;
@@ -113,11 +119,11 @@ loader.load(function()
 	//collect the textures, now that they are all loaded
 	const art = imagePaths;// [];
 	// for(let i = 0; i < imagePaths.length; ++i)
-	// 	art.push(PIXI.Texture.fromImage(imagePaths[i]));
+	// 	art.push(pixi.Texture.from(imagePaths[i]));
 	// Create the new emitter and attach it to the stage
-	const emitterContainer = new PIXI.Container();
+	const emitterContainer = new pixi.Container();
 	stage.addChild(emitterContainer);
-	(window as any).emitter = emitter = new PIXI.particles.Emitter(
+	(window as any).emitter = emitter = new particles.Emitter(
 		emitterContainer,
 		art,
 		config
@@ -145,9 +151,10 @@ loader.load(function()
 		(window as any).destroyEmitter = null;
 		//cancelAnimationFrame(updateId);
 
+		// V4 code - dunno what it would be in V5, or if it is needed
 		//reset SpriteRenderer's batching to fully release particles for GC
-		if (renderer.plugins && renderer.plugins.sprite && renderer.plugins.sprite.sprites)
-			renderer.plugins.sprite.sprites.length = 0;
+		// if (renderer.plugins && renderer.plugins.sprite && renderer.plugins.sprite.sprites)
+		// 	renderer.plugins.sprite.sprites.length = 0;
 
 		renderer.render(stage);
 	};

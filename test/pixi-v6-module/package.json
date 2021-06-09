@@ -1,5 +1,5 @@
 {
-  "name": "pixi-v4-iife",
+  "name": "pixi-v6-module",
   "version": "1.0.0",
   "main": "main.js",
   "scripts": {
@@ -7,14 +7,18 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@types/pixi.js": "^4.8.6",
-    "pixi.js": "^4.0.0",
-    "pixi-particles": "*",
+    "@types/node": "^8.0.0",
     "electron": "^9.4.0",
+    "override-require": "^1.1.1",
+    "pixi-particles": "*",
+    "pixi.js": "^6.0.4",
     "typescript": "^3.8.0"
   },
   "workspaces": {
-    "nohoist": ["pixi.js", "pixi-particles", "@types/pixi.js"]
+    "nohoist": [
+      "pixi.js",
+      "pixi-particles"
+    ]
   },
   "private": true
 }
