@@ -198,7 +198,7 @@
     "@pixi/ticker" "6.0.4"
     "@pixi/utils" "6.0.4"
 
-"@pixi/loaders@6.0.4":
+"@pixi/loaders@6.0.4", "@pixi/loaders@^6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/loaders/-/loaders-6.0.4.tgz#1d7dc1aa762627396e63d0bc1276e134d12c2ef3"
   integrity sha512-cw8QSkn8l8P06fINfwCZW+vUdhtOJ5G+T2qQm3HIDgI/J1tAsiRj3ufHop8xkHwYXrUeTf1LTqw+QdlZEVpJfg==
@@ -295,7 +295,7 @@
     "@pixi/text" "6.0.4"
     "@pixi/ticker" "6.0.4"
 
-"@pixi/runner@6.0.4":
+"@pixi/runner@6.0.4", "@pixi/runner@^6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/runner/-/runner-6.0.4.tgz#74d595169c2e42f10235be75dbeb0213bcd3f039"
   integrity sha512-ta6r36r2vC+fPB27URpSacPGQDtbJbdUoeGCJWAEwX+QI4vx4C9NYAcB0bIg8TLXiigCfA6by/RMnJ0dBiemFA==
@@ -382,7 +382,7 @@
   dependencies:
     "@pixi/settings" "6.0.4"
 
-"@pixi/utils@6.0.4":
+"@pixi/utils@6.0.4", "@pixi/utils@^6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/utils/-/utils-6.0.4.tgz#374f642195d6aef66fe67c78918a73a09a76dfe6"
   integrity sha512-35JTWsAJ8Va0vvtUSQvyOr3kGedGKVuJnHDO89B8C8tSFtMpJYrR44vp1b1p1vOjNak+ulGehZc8LzlCqymViQ==
@@ -2043,7 +2043,7 @@ resolve@^1.1.6, resolve@^1.10.0:
   dependencies:
     path-parse "^1.0.6"
 
-resource-loader@^3.0.1:
+resource-loader@3, resource-loader@^3.0.1:
   version "3.0.1"
   resolved "https://registry.npmjs.org/resource-loader/-/resource-loader-3.0.1.tgz#33355bb5421e2994f59454bbc7f6dbff8df06d47"
   integrity sha512-fBuCRbEHdLCI1eglzQhUv9Rrdcmqkydr1r6uHE2cYHvRBrcLXeSmbE/qI/urFt8rPr/IGxir3BUwM5kUK8XoyA==

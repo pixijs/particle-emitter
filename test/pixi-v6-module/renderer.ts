@@ -1,8 +1,40 @@
-import * as pixi from "pixi.js";
-// override requires so that the local pixi-particles gets the pixi.js
-// from this test project, not from the top level
-require('override-require')((request:any) => request === 'pixi.js', () =>  pixi);
-import * as particles from "pixi-particles";
+// Override requires so that the local pixi-particles gets the @pixi packages
+// from this test project, not from the top level.
+import * as PIXIConstants from '@pixi/constants';
+import * as PIXICore from '@pixi/core';
+import * as PIXIDisplay from '@pixi/display';
+import * as PIXIMath from '@pixi/math';
+import * as PIXISettings from '@pixi/settings';
+import * as PIXISprite from '@pixi/sprite';
+import * as PIXITicker from '@pixi/ticker';
+
+const isOverride = (request: string) => {
+	return resolveRequest(request) ? true : false;
+};
+
+const resolveRequest = (request: string) => {
+	switch (request) {
+		case '@pixi/constants': return PIXIConstants;
+		case '@pixi/core': return PIXICore;
+		case '@pixi/display': return PIXIDisplay;
+		case '@pixi/math': return PIXIMath;
+		case '@pixi/settings': return PIXISettings;
+		case '@pixi/sprite': return PIXISprite;
+		case '@pixi/ticker': return PIXITicker;
+		default: return undefined;
+	}
+};
+
+require('override-require')(isOverride, resolveRequest);
+
+// Direct dependencies used by the test.
+import { Container } from '@pixi/display';
+import { Renderer, BatchRenderer, Texture } from '@pixi/core';
+import { Sprite } from '@pixi/sprite';
+import { Loader } from '@pixi/loaders';
+import { Emitter } from "pixi-particles";
+
+Renderer.registerPlugin('batch', BatchRenderer);
 
 const imagePaths = ["../../docs/examples/images/Sparks.png"];
 const config = {
@@ -62,10 +94,10 @@ const rendererOptions =
 	height: canvas.height,
 	view: canvas,
 };
-const stage = new pixi.Container(),
-	renderer = new pixi.Renderer(rendererOptions);
-let emitter:particles.Emitter = null,
-	bg:pixi.Sprite = null;
+const stage = new Container(),
+	renderer = new Renderer(rendererOptions);
+let emitter:Emitter = null,
+	bg:Sprite = null;
 
 // Calculate the current time
 let elapsed = Date.now();
@@ -104,13 +136,13 @@ window.onresize(null);
 // Preload the particle images and create PIXI textures from it
 const urls = [];// imagePaths.slice();
 urls.push("../../docs/examples/images/bg.png");
-const loader = pixi.Loader.shared;
+const loader = Loader.shared;
 for(let i = 0; i < urls.length; ++i)
 	loader.add("img" + i, urls[i]);
 loader.load(function()
 {
 	debugger;
-	bg = new pixi.Sprite(pixi.Texture.from("../../docs/examples/images/bg.png"));
+	bg = new Sprite(Texture.from("../../docs/examples/images/bg.png"));
 	//bg is a 1px by 1px image
 	bg.scale.x = canvas.width;
 	bg.scale.y = canvas.height;
@@ -121,9 +153,9 @@ loader.load(function()
 	// for(let i = 0; i < imagePaths.length; ++i)
 	// 	art.push(pixi.Texture.from(imagePaths[i]));
 	// Create the new emitter and attach it to the stage
-	const emitterContainer = new pixi.Container();
+	const emitterContainer = new Container();
 	stage.addChild(emitterContainer);
-	(window as any).emitter = emitter = new particles.Emitter(
+	(window as any).emitter = emitter = new Emitter(
 		emitterContainer,
 		art,
 		config
