@@ -98,8 +98,6 @@
   "workspaces": {
     "packages": [
       "./",
-      "test/pixi-v5-iife",
-      "test/pixi-v5-module",
       "test/pixi-v6-iife",
       "test/pixi-v6-module"
     ]
