@@ -19,7 +19,7 @@
     "prebuild": "npm run lint",
     "build": "tsc && rollup -c && npm run build:min && npm run build:dts",
     "build:min": "terser dist/pixi-particles.js -c -m -o dist/pixi-particles.min.js --source-map \"content='dist/pixi-particles.js.map',includeSources=true,filename='dist/pixi-particles.min.js.map',url='pixi-particles.min.js.map'\" --comments \"/pixi-particles.js - /\"",
-    "build:dts": "dts-bundle-generator -o index.d.ts src/index.ts && node build/buildAmbientTypes.js",
+    "build:dts": "dts-bundle-generator -o index.d.ts src/index.ts",
     "postbuild": "ncp dist docs/dist",
     "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
     "docs": "typedoc",
@@ -85,8 +85,7 @@
     "LICENSE",
     "package.json",
     "README.md",
-    "index.d.ts",
-    "ambient.d.ts"
+    "index.d.ts"
   ],
   "keywords": [
     "webgl",
