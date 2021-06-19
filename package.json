@@ -58,6 +58,7 @@
     "gh-pages": "^2.0.0",
     "http-server": "^0.12.3",
     "ncp": "^2.0.0",
+    "pixi.js": "^6.0.4",
     "rimraf": "^2.5.4",
     "rollup": "^2.7.0",
     "rollup-plugin-commonjs": "^9.2.1",
