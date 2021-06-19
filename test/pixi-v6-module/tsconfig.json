@@ -8,13 +8,13 @@
 		"baseUrl": ".",
 		"paths": {
 			"@pixi/constants": ["node_modules/@pixi/constants"],
-    		"@pixi/core": ["node_modules/@pixi/core"],
-    		"@pixi/display": ["node_modules/@pixi/display"],
-    		"@pixi/loaders": ["node_modules/@pixi/loaders"],
+			"@pixi/core": ["node_modules/@pixi/core"],
+			"@pixi/display": ["node_modules/@pixi/display"],
+			"@pixi/loaders": ["node_modules/@pixi/loaders"],
 			"@pixi/math": ["node_modules/@pixi/math"],
 			"@pixi/runner": ["node_modules/@pixi/runner"],
 			"@pixi/settings": ["node_modules/@pixi/settings"],
-    		"@pixi/sprite": ["node_modules/@pixi/sprite"],
+			"@pixi/sprite": ["node_modules/@pixi/sprite"],
 			"@pixi/ticker": ["node_modules/@pixi/ticker"],
 			"@pixi/utils": ["node_modules/@pixi/utils"],
 			"mini-signals": [
