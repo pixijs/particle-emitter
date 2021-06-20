@@ -21,7 +21,8 @@
     "electron": "^9.4.0",
     "override-require": "^1.1.1",
     "pixi-particles": "*",
-    "resource-loader": "3"
+    "resource-loader": "3",
+    "typescript": "^4.3.4"
   },
   "workspaces": {
     "nohoist": [
