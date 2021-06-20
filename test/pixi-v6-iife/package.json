@@ -7,13 +7,16 @@
   },
   "license": "ISC",
   "dependencies": {
-    "pixi.js": "^6.0.4",
-    "pixi-particles": "*",
     "electron": "^9.4.0",
-    "typescript": "^3.8.0"
+    "pixi-particles": "*",
+    "pixi.js": "^6.0.4",
+    "typescript": "^4.3.4"
   },
   "workspaces": {
-    "nohoist": ["pixi.js", "pixi-particles"]
+    "nohoist": [
+      "pixi.js",
+      "pixi-particles"
+    ]
   },
   "private": true
 }
