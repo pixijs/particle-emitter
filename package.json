@@ -1,5 +1,5 @@
 {
-  "name": "pixi-particles",
+  "name": "@pixi/particle-emitter",
   "version": "4.3.1",
   "main": "lib/pixi-particles.js",
   "module": "lib/pixi-particles.es.js",
