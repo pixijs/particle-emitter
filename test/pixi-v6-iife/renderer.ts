@@ -1,5 +1,5 @@
-/// <reference path="node_modules/pixi-particles/ambient.d.ts" />
-/// <reference path="node_modules/pixi.js/pixi.js.d.ts" />
+// PIXI v6 doesn't have ambient types anymore
+declare const PIXI: any;
 
 const imagePaths = ["../../docs/examples/images/Sparks.png"];
 const config = {
@@ -61,8 +61,8 @@ const rendererOptions =
 };
 const stage = new PIXI.Container(),
 	renderer = new PIXI.Renderer(rendererOptions);
-let emitter:PIXI.particles.Emitter = null,
-	bg:PIXI.Sprite = null;
+let emitter:any = null,
+	bg:any = null;
 
 // Calculate the current time
 let elapsed = Date.now();

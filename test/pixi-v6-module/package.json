@@ -1,0 +1,35 @@
+{
+  "name": "pixi-v6-module",
+  "version": "1.0.0",
+  "main": "main.js",
+  "scripts": {
+    "test": "tsc && electron ."
+  },
+  "license": "ISC",
+  "dependencies": {
+    "@pixi/constants": "^6.0.4",
+    "@pixi/core": "^6.0.4",
+    "@pixi/display": "^6.0.4",
+    "@pixi/loaders": "^6.0.4",
+    "@pixi/math": "^6.0.4",
+    "@pixi/runner": "^6.0.4",
+    "@pixi/settings": "^6.0.4",
+    "@pixi/sprite": "^6.0.4",
+    "@pixi/ticker": "^6.0.4",
+    "@pixi/utils": "^6.0.4",
+    "@types/node": "^8.0.0",
+    "electron": "^9.4.0",
+    "override-require": "^1.1.1",
+    "pixi-particles": "*",
+    "resource-loader": "3",
+    "typescript": "^4.3.4"
+  },
+  "workspaces": {
+    "nohoist": [
+      "pixi-particles",
+      "@pixi/*",
+      "resource-loader"
+    ]
+  },
+  "private": true
+}

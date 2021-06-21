@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"target": "ES5",
+		"module": "commonjs",
+		"moduleResolution": "node",
+		"noImplicitAny": true,
+		"types": ["node"],
+		"baseUrl": ".",
+		"paths": {
+			"@pixi/constants": ["node_modules/@pixi/constants"],
+			"@pixi/core": ["node_modules/@pixi/core"],
+			"@pixi/display": ["node_modules/@pixi/display"],
+			"@pixi/loaders": ["node_modules/@pixi/loaders"],
+			"@pixi/math": ["node_modules/@pixi/math"],
+			"@pixi/runner": ["node_modules/@pixi/runner"],
+			"@pixi/settings": ["node_modules/@pixi/settings"],
+			"@pixi/sprite": ["node_modules/@pixi/sprite"],
+			"@pixi/ticker": ["node_modules/@pixi/ticker"],
+			"@pixi/utils": ["node_modules/@pixi/utils"],
+			"mini-signals": [
+				// https://github.com/Hypercubed/mini-signals/issues/20
+				"node_modules/resource-loader/typings/mini-signals.d.ts"
+			]
+		},
+		"esModuleInterop": true
+	},
+	"include": [
+		"renderer.ts"
+	]
+}

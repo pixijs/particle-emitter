@@ -3,25 +3,15 @@ import { Particle } from './Particle';
 import { PropertyNode } from './PropertyNode';
 import { PolygonalChain } from './PolygonalChain';
 import { EmitterConfig, OldEmitterConfig } from './EmitterConfig';
-import { Point, Circle, Rectangle, Container, settings } from 'pixi.js';
-// eslint-disable-next-line no-duplicate-imports
-import * as pixi from 'pixi.js';
-// get the shared ticker, in V4 and V5 friendly methods
+import { Container } from '@pixi/display';
+import { settings } from '@pixi/settings';
+import { Point, Circle, Rectangle } from '@pixi/math';
+import { Ticker } from '@pixi/ticker';
+// get the shared ticker, only supports V5 and V6 with individual packages
 /**
  * @hidden
  */
-let ticker: pixi.Ticker;
-// to avoid Rollup transforming our import, save pixi namespace in a variable
-const pixiNS = pixi;
-
-if (parseInt((/^(\d+)\./).exec(pixi.VERSION)[1], 10) < 5)
-{
-    ticker = (pixiNS as any).ticker.shared;
-}
-else
-{
-    ticker = pixiNS.Ticker.shared;
-}
+const ticker = Ticker.shared;
 
 export interface ParticleConstructor
 {

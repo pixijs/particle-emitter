@@ -1,7 +1,7 @@
 import { Particle } from './Particle';
 import { Emitter } from './Emitter';
 import { GetTextureFromString } from './ParticleUtils';
-import { Texture } from 'pixi.js';
+import { Texture } from '@pixi/core';
 
 export interface ParsedAnimatedParticleArt
 {

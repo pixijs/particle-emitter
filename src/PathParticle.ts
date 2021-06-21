@@ -1,7 +1,8 @@
 import { ParticleUtils } from './ParticleUtils';
 import { Particle } from './Particle';
 import { Emitter } from './Emitter';
-import { Point, Texture } from 'pixi.js';
+import { Texture } from '@pixi/core';
+import { Point } from '@pixi/math';
 
 /**
  * A helper point for math things.

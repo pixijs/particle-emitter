@@ -2,7 +2,9 @@ import { Emitter } from './Emitter';
 import { ParticleUtils, SimpleEase, Color, GetTextureFromString } from './ParticleUtils';
 import { PropertyList } from './PropertyList';
 import { LinkedListChild } from './LinkedListContainer';
-import { Sprite, Point, Texture } from 'pixi.js';
+import { Texture } from '@pixi/core';
+import { Point } from '@pixi/math';
+import { Sprite } from '@pixi/sprite';
 
 /**
  * An individual particle image. You shouldn't have to deal with these.
