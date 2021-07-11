@@ -14,7 +14,7 @@ jobs:
       uses: actions/setup-node@v1
       with:
         node-version: 12
-    - name: Install npm
+    - name: Install Dependencies
       uses: borales/actions-yarn@v2.3.0
       with:
         cmd: install
