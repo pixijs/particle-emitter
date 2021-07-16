@@ -1,5 +1,5 @@
 import { Texture } from '@pixi/core';
-import { Point } from '@pixi/math';
+import { IPointData } from '@pixi/math';
 import { BLEND_MODES } from '@pixi/constants';
 import { PropertyNode, ValueStep } from './PropertyNode';
 // get Texture.from(), only supports V5 and V6 with individual packages
@@ -41,13 +41,13 @@ export namespace ParticleUtils {
 
     /**
      * Rotates a point by a given angle.
-     * @param angle The angle to rotate by in degrees
+     * @param angle The angle to rotate by in radians
      * @param p The point to rotate around 0,0.
      */
-    export function rotatePoint(angle: number, p: Point): void
+    export function rotatePoint(angle: number, p: IPointData): void
     {
         if (!angle) return;
-        angle *= ParticleUtils.DEG_TO_RADS;
+
         const s = Math.sin(angle);
         const c = Math.cos(angle);
         const xnew = (p.x * c) - (p.y * s);
@@ -73,7 +73,7 @@ export namespace ParticleUtils {
      * Reduces the point to a length of 1.
      * @param point The point to normalize
      */
-    export function normalize(point: Point): void
+    export function normalize(point: IPointData): void
     {
         const oneOverLen = 1 / ParticleUtils.length(point);
 
@@ -86,7 +86,7 @@ export namespace ParticleUtils {
      * @param point The point to scaleBy
      * @param value The value to scale by.
      */
-    export function scaleBy(point: Point, value: number): void
+    export function scaleBy(point: IPointData, value: number): void
     {
         point.x *= value;
         point.y *= value;
@@ -97,7 +97,7 @@ export namespace ParticleUtils {
      * @param point The point to measure length
      * @return The length of this point.
      */
-    export function length(point: Point): number
+    export function length(point: IPointData): number
     {
         return Math.sqrt((point.x * point.x) + (point.y * point.y));
     }

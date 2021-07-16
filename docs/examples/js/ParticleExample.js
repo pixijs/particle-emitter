@@ -161,23 +161,16 @@
 
                 window.emitter = this.emitter = new PIXI.particles.Emitter(
                     emitterContainer,
-                    art,
-                    config,
+                    PIXI.particles.upgradeConfig(config, art),
                 );
                 if (stepColors)
                 {
-                    this.emitter.startColor = PIXI.particles.ParticleUtils.createSteppedGradient(
-                        config.color.list,
-                        stepColors
+                    this.emitter.getBehavior('color').list.reset(
+                        PIXI.particles.ParticleUtils.createSteppedGradient(
+                            config.color.list,
+                            stepColors,
+                        ),
                     );
-                }
-                if (type === 'path')
-                {
-                    this.emitter.particleConstructor = PIXI.particles.PathParticle;
-                }
-                else if (type === 'anim')
-                {
-                    this.emitter.particleConstructor = PIXI.particles.AnimatedParticle;
                 }
 
                 // Center on the stage

@@ -1,9 +1,34 @@
+import { Emitter } from './Emitter';
+import * as behaviors from './behaviors';
+
+Emitter.registerShape(behaviors.AccelerationBehavior);
+Emitter.registerShape(behaviors.AlphaBehavior);
+Emitter.registerShape(behaviors.StaticAlphaBehavior);
+Emitter.registerShape(behaviors.RandomAnimatedTextureBehavior);
+Emitter.registerShape(behaviors.SingleAnimatedTextureBehavior);
+Emitter.registerShape(behaviors.BlendModeBehavior);
+Emitter.registerShape(behaviors.BurstSpawn);
+Emitter.registerShape(behaviors.ColorBehavior);
+Emitter.registerShape(behaviors.StaticColorBehavior);
+Emitter.registerShape(behaviors.OrderedTextureBehavior);
+Emitter.registerShape(behaviors.PathBehavior);
+Emitter.registerShape(behaviors.PointSpawn);
+Emitter.registerShape(behaviors.RandomTextureBehavior);
+Emitter.registerShape(behaviors.RotationBehavior);
+Emitter.registerShape(behaviors.StaticRotationBehavior);
+Emitter.registerShape(behaviors.NoRotationBehavior);
+Emitter.registerShape(behaviors.ScaleBehavior);
+Emitter.registerShape(behaviors.StaticScaleBehavior);
+Emitter.registerShape(behaviors.ShapeSpawn);
+Emitter.registerShape(behaviors.SingleTextureBehavior);
+Emitter.registerShape(behaviors.SpeedBehavior);
+Emitter.registerShape(behaviors.StaticSpeedBehavior);
+
+export * as behaviors from './behaviors';
 export * from './ParticleUtils';
 export * from './Particle';
 export * from './Emitter';
-export * from './PathParticle';
-export * from './AnimatedParticle';
-export * from './PolygonalChain';
+export * from './EmitterConfig';
 export * from './PropertyList';
 export * from './PropertyNode';
 export * from './LinkedListContainer';

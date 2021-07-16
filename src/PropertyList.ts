@@ -3,18 +3,17 @@ import { PropertyNode } from './PropertyNode';
 
 function intValueSimple(this: PropertyList<number>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
+    if (this.ease) lerp = this.ease(lerp);
 
-    return ((this.next.value - this.current.value) * lerp) + this.current.value;
+    return ((this.first.next.value - this.first.value) * lerp) + this.first.value;
 }
 
 function intColorSimple(this: PropertyList<Color>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
-    const curVal = this.current.value; const
-        nextVal = this.next.value;
+    if (this.ease) lerp = this.ease(lerp);
+
+    const curVal = this.first.value;
+    const nextVal = this.first.next.value;
     const r = ((nextVal.r - curVal.r) * lerp) + curVal.r;
     const g = ((nextVal.g - curVal.g) * lerp) + curVal.g;
     const b = ((nextVal.b - curVal.b) * lerp) + curVal.b;
@@ -24,34 +23,40 @@ function intColorSimple(this: PropertyList<Color>, lerp: number): number
 
 function intValueComplex(this: PropertyList<number>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
+    if (this.ease) lerp = this.ease(lerp);
+
     // make sure we are on the right segment
-    while (lerp > this.next.time)
+    let current = this.first;
+    let next = current.next;
+
+    while (lerp > next.time)
     {
-        this.current = this.next;
-        this.next = this.next.next;
+        current = next;
+        next = next.next;
     }
     // convert the lerp value to the segment range
-    lerp = (lerp - this.current.time) / (this.next.time - this.current.time);
+    lerp = (lerp - current.time) / (next.time - current.time);
 
-    return ((this.next.value - this.current.value) * lerp) + this.current.value;
+    return ((next.value - current.value) * lerp) + current.value;
 }
 
 function intColorComplex(this: PropertyList<Color>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
+    if (this.ease) lerp = this.ease(lerp);
+
     // make sure we are on the right segment
-    while (lerp > this.next.time)
+    let current = this.first;
+    let next = current.next;
+
+    while (lerp > next.time)
     {
-        this.current = this.next;
-        this.next = this.next.next;
+        current = next;
+        next = next.next;
     }
     // convert the lerp value to the segment range
-    lerp = (lerp - this.current.time) / (this.next.time - this.current.time);
-    const curVal = this.current.value; const
-        nextVal = this.next.value;
+    lerp = (lerp - current.time) / (next.time - current.time);
+    const curVal = current.value;
+    const nextVal = next.value;
     const r = ((nextVal.r - curVal.r) * lerp) + curVal.r;
     const g = ((nextVal.g - curVal.g) * lerp) + curVal.g;
     const b = ((nextVal.b - curVal.b) * lerp) + curVal.b;
@@ -61,29 +66,31 @@ function intColorComplex(this: PropertyList<Color>, lerp: number): number
 
 function intValueStepped(this: PropertyList<number>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
+    if (this.ease) lerp = this.ease(lerp);
+
     // make sure we are on the right segment
-    while (this.next && lerp > this.next.time)
+    let current = this.first;
+
+    while (current.next && lerp > current.next.time)
     {
-        this.current = this.next;
-        this.next = this.next.next;
+        current = current.next;
     }
 
-    return this.current.value;
+    return current.value;
 }
 
 function intColorStepped(this: PropertyList<Color>, lerp: number): number
 {
-    if (this.ease)
-    { lerp = this.ease(lerp); }
+    if (this.ease) lerp = this.ease(lerp);
+
     // make sure we are on the right segment
-    while (this.next && lerp > this.next.time)
+    let current = this.first;
+
+    while (current.next && lerp > current.next.time)
     {
-        this.current = this.next;
-        this.next = this.next.next;
+        current = current.next;
     }
-    const curVal = this.current.value;
+    const curVal = current.value;
 
     return ParticleUtils.combineRGBComponents(curVal.r, curVal.g, curVal.b);
 }
@@ -95,14 +102,9 @@ function intColorStepped(this: PropertyList<Color>, lerp: number): number
 export class PropertyList<V>
 {
     /**
-     * The current property node in the linked list.
+     * The first property node in the linked list.
      */
-    public current: PropertyNode<V>;
-    /**
-     * The next property node in the linked list. Stored separately for slightly less variable
-     * access.
-     */
-    public next: PropertyNode<V>;
+    public first: PropertyNode<V>;
     /**
      * Calculates the correct value for the current interpolation value. This method is set in
      * the reset() method.
@@ -126,8 +128,7 @@ export class PropertyList<V>
      */
     constructor(isColor = false)
     {
-        this.current = null;
-        this.next = null;
+        this.first = null;
         this.isColor = !!isColor;
         this.interpolate = null;
         this.ease = null;
@@ -140,9 +141,8 @@ export class PropertyList<V>
      */
     public reset(first: PropertyNode<V>): void
     {
-        this.current = first;
-        this.next = first.next;
-        const isSimple = this.next && this.next.time >= 1;
+        this.first = first;
+        const isSimple = first.next && first.next.time >= 1;
 
         if (isSimple)
         {
@@ -156,6 +156,6 @@ export class PropertyList<V>
         {
             this.interpolate = this.isColor ? intColorComplex : intValueComplex;
         }
-        this.ease = this.current.ease;
+        this.ease = this.first.ease;
     }
 }
