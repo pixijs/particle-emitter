@@ -132,7 +132,7 @@ export class PathBehavior implements IEmitterBehavior
          * Title: Path
          * Description: Algebraic expression describing the movement of the particle.
          */
-        path: string;
+        path: string|((x: number) => number);
         /**
          * Property: speed
          * Type: ValueList<number>
@@ -156,17 +156,24 @@ export class PathBehavior implements IEmitterBehavior
     {
         if (config.path)
         {
-            try
+            if (typeof config.path === 'function')
             {
-                this.path = parsePath(config.path);
+                this.path = config.path;
             }
-            catch (e)
+            else
             {
-                if (ParticleUtils.verbose)
+                try
                 {
-                    console.error('PathParticle: error in parsing path expression');
+                    this.path = parsePath(config.path);
                 }
-                this.path = null;
+                catch (e)
+                {
+                    if (ParticleUtils.verbose)
+                    {
+                        console.error('PathParticle: error in parsing path expression');
+                    }
+                    this.path = null;
+                }
             }
         }
         else
