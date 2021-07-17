@@ -29,46 +29,96 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.8,
-						"end": 0.1
-					},
-					"scale": {
-						"start": 1,
-						"end": 0.3
-					},
-					"color": {
-						"start": "fd1111",
-						"end": "f7a134"
-					},
-					"speed": {
-						"start": 200,
-						"end": 200
-					},
-					"startRotation": {
-						"min": 0,
-						"max": 0
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 0
-					},
 					"lifetime": {
 						"min": 0.5,
 						"max": 0.5
 					},
+					"particlesPerWave": 10,
 					"frequency": 0.1,
 					"emitterLifetime": 0.31,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "burst",
-					"particlesPerWave": 10,
-					"particleSpacing": 0,
-					"angleStart": 0
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.8
+										},
+										{
+											"time": 1,
+											"value": 0.1
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 200,
+								"max": 200
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 1
+										},
+										{
+											"time": 1,
+											"value": 0.3
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "fd1111"
+										},
+										{
+											"time": 1,
+											"value": "f7a134"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/particle.png"
+								]
+							}
+						},
+						{
+							"type": "spawnBurst",
+							"config": {
+								"start": 0,
+								"spacing": 0,
+								"distance": 0
+							}
+						}
+					]
 				});
 		</script>
 	</body>

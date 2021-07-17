@@ -29,36 +29,10 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.73,
-						"end": 0.46
-					},
-					"scale": {
-						"start": 0.15,
-						"end": 0.2,
-						"minimumScaleMultiplier":0.5
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 200,
-						"end": 200
-					},
-					"startRotation": {
-						"min": 50,
-						"max": 70
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 200
-					},
 					"lifetime": {
 						"min": 4,
 						"max": 4
 					},
-					"blendMode": "normal",
 					"ease": [
 						{
 							"s": 0,
@@ -79,18 +53,85 @@
 					"frequency": 0.004,
 					"emitterLifetime": 0,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "rect",
-					"spawnRect": {
-						"x": -500,
-						"y": -300,
-						"w": 900,
-						"h": 20
-					}
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.73
+										},
+										{
+											"time": 1,
+											"value": 0.46
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 200,
+								"max": 200
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.15
+										},
+										{
+											"time": 1,
+											"value": 0.2
+										}
+									]
+								},
+								"minMult": 0.5
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 0,
+								"maxSpeed": 200,
+								"minStart": 50,
+								"maxStart": 70
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/Snow100.png"
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "rect",
+								"data": {
+									"x": -500,
+									"y": -300,
+									"w": 900,
+									"h": 20
+								}
+							}
+						}
+					]
 				});
 		</script>
 	</body>

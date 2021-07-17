@@ -29,51 +29,129 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.62,
-						"end": 0
-					},
-					"scale": {
-						"start": 0.25,
-						"end": 0.75
-					},
-					"color": {
-						"start": "fff191",
-						"end": "ff622c"
-					},
-					"speed": {
-						"start": 500,
-						"end": 500
-					},
-					"startRotation": {
-						"min": 265,
-						"max": 275
-					},
-					"rotationSpeed": {
-						"min": 50,
-						"max": 50
-					},
 					"lifetime": {
 						"min": 0.1,
 						"max": 0.75
 					},
-					"blendMode": "normal",
 					"frequency": 0.001,
 					"emitterLifetime": 0,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "polygonalChain",
-					"spawnPolygon": [
-						{x: -300, y: 0},
-						{x: -300, y: -300},
-						{x: 0, y: -500},
-						{x: 300, y: -300},
-						{x: 300, y: 0},
-						{x: -300, y: 0},
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.62
+										},
+										{
+											"time": 1,
+											"value": 0
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 500,
+								"max": 500
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.25
+										},
+										{
+											"time": 1,
+											"value": 0.75
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "fff191"
+										},
+										{
+											"time": 1,
+											"value": "ff622c"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 50,
+								"maxSpeed": 50,
+								"minStart": 265,
+								"maxStart": 275
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/particle.png",
+									"images/Fire.png"
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "polygonalChain",
+								"data": [
+									{
+										"x": -300,
+										"y": 0
+									},
+									{
+										"x": -300,
+										"y": -300
+									},
+									{
+										"x": 0,
+										"y": -500
+									},
+									{
+										"x": 300,
+										"y": -300
+									},
+									{
+										"x": 300,
+										"y": 0
+									},
+									{
+										"x": -300,
+										"y": 0
+									}
+								]
+							}
+						}
 					]
 				});
 		</script>

@@ -29,88 +29,207 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.62,
-						"end": 0
-					},
-					"scale": {
-						"start": 0.05,
-						"end": 0.150
-					},
-					"color": {
-						"start": "fff191",
-						"end": "ff622c"
-					},
-					"speed": {
-						"start": 50,
-						"end": 50
-					},
-					"startRotation": {
-						"min": 265,
-						"max": 275
-					},
-					"rotationSpeed": {
-						"min": 50,
-						"max": 50
-					},
 					"lifetime": {
 						"min": 0.1,
 						"max": 0.75
 					},
-					"blendMode": "normal",
 					"frequency": 0.001,
 					"emitterLifetime": 0,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "polygonalChain",
-					"spawnPolygon": [
-						// F
-						[
-							{x: -300, y: 100},
-							{x: -300, y: -100},
-						],
-						[
-							{x: -300, y: -100},
-							{x: -250, y: -100},
-						],
-						[
-							{x: -300, y: -0},
-							{x: -250, y: -0},
-						],
-						// I
-						[
-							{x: -200, y: 100},
-							{x: -200, y: -100},
-						],
-						// R
-						[
-							{x: -100, y: 100},
-							{x: -100, y: -100},
-							{x: -50, y: -50},
-							{x: -100, y: 0},
-							{x: -50, y: 100},
-						],
-						// E
-						[
-							{x: 0, y: 100},
-							{x: 0, y: -100},
-						],
-						[
-							{x: 0, y: -100},
-							{x: 50, y: -100},
-						],
-						[
-							{x: 0, y: -0},
-							{x: 50, y: -0},
-						],
-						[
-							{x: 0, y: 100},
-							{x: 50, y: 100},
-						],
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.62
+										},
+										{
+											"time": 1,
+											"value": 0
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 50,
+								"max": 50
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.05
+										},
+										{
+											"time": 1,
+											"value": 0.15
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "fff191"
+										},
+										{
+											"time": 1,
+											"value": "ff622c"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 50,
+								"maxSpeed": 50,
+								"minStart": 265,
+								"maxStart": 275
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/particle.png",
+									"images/Fire.png"
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "polygonalChain",
+								"data": [
+									[
+										{
+											"x": -300,
+											"y": 100
+										},
+										{
+											"x": -300,
+											"y": -100
+										}
+									],
+									[
+										{
+											"x": -300,
+											"y": -100
+										},
+										{
+											"x": -250,
+											"y": -100
+										}
+									],
+									[
+										{
+											"x": -300,
+											"y": 0
+										},
+										{
+											"x": -250,
+											"y": 0
+										}
+									],
+									[
+										{
+											"x": -200,
+											"y": 100
+										},
+										{
+											"x": -200,
+											"y": -100
+										}
+									],
+									[
+										{
+											"x": -100,
+											"y": 100
+										},
+										{
+											"x": -100,
+											"y": -100
+										},
+										{
+											"x": -50,
+											"y": -50
+										},
+										{
+											"x": -100,
+											"y": 0
+										},
+										{
+											"x": -50,
+											"y": 100
+										}
+									],
+									[
+										{
+											"x": 0,
+											"y": 100
+										},
+										{
+											"x": 0,
+											"y": -100
+										}
+									],
+									[
+										{
+											"x": 0,
+											"y": -100
+										},
+										{
+											"x": 50,
+											"y": -100
+										}
+									],
+									[
+										{
+											"x": 0,
+											"y": 0
+										},
+										{
+											"x": 50,
+											"y": 0
+										}
+									],
+									[
+										{
+											"x": 0,
+											"y": 100
+										},
+										{
+											"x": 50,
+											"y": 100
+										}
+									]
+								]
+							}
+						}
 					]
 				});
 		</script>

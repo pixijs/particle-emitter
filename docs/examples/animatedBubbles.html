@@ -26,79 +26,99 @@
 				// The image to use
 				{
 					spritesheet: "images/pop_anim.json",
-					art: {
-							framerate: "matchLife",
-							textures: [
-								{
-									texture: "Bubbles99.png",
-									count: 40,
-								},
-								{
-									texture: "Pop1.png",
-									count: 1,
-								},
-								{
-									texture: "Pop2.png",
-									count: 1,
-								},
-								{
-									texture: "Pop3.png",
-									count: 1,
-								}
-							]
-						}
 				},
 
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 1,
-						"end": 1
-					},
-					"scale": {
-						"start": 0.25,
-						"end": 0.5,
-						"minimumScaleMultiplier":0.5
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 150,
-						"end": 150
-					},
-					"startRotation": {
-						"min": 260,
-						"max": 280
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 50
-					},
 					"lifetime": {
 						"min": 2,
 						"max": 3
 					},
-					"blendMode": "normal",
 					"frequency": 0.016,
 					"emitterLifetime": 0,
 					"maxParticles": 500,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "rect",
-					"spawnRect": {
-						"x": -450,
-						"y": 200,
-						"w": 900,
-						"h": 0
-					}
-				},
-				"anim");
+					"behaviors": [
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 150,
+								"max": 150
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.25
+										},
+										{
+											"time": 1,
+											"value": 0.5
+										}
+									]
+								},
+								"minMult": 0.5
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 0,
+								"maxSpeed": 50,
+								"minStart": 260,
+								"maxStart": 280
+							}
+						},
+						{
+							"type": "animatedSingle",
+							"config": {
+								"anim": {
+									"framerate": "matchLife",
+									"textures": [
+										{
+											"texture": "Bubbles99.png",
+											"count": 40
+										},
+										{
+											"texture": "Pop1.png",
+											"count": 1
+										},
+										{
+											"texture": "Pop2.png",
+											"count": 1
+										},
+										{
+											"texture": "Pop3.png",
+											"count": 1
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "rect",
+								"data": {
+									"x": -450,
+									"y": 200,
+									"w": 900,
+									"h": 0
+								}
+							}
+						}
+					]
+				});
 		</script>
 	</body>
 </html>
