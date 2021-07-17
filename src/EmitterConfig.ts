@@ -59,10 +59,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
         {
             if (config.alpha.start === config.alpha.end)
             {
-                out.behaviors.push({
-                    type: 'alphaStatic',
-                    config: { alpha: config.alpha.start },
-                });
+                if (config.alpha.start !== 1)
+                {
+                    out.behaviors.push({
+                        type: 'alphaStatic',
+                        config: { alpha: config.alpha.start },
+                    });
+                }
             }
             else
             {
@@ -81,10 +84,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
         }
         else if (config.alpha.list.length === 1)
         {
-            out.behaviors.push({
-                type: 'alphaStatic',
-                config: { alpha: config.alpha.list[0].value },
-            });
+            if (config.alpha.list[0].value !== 1)
+            {
+                out.behaviors.push({
+                    type: 'alphaStatic',
+                    config: { alpha: config.alpha.list[0].value },
+                });
+            }
         }
         else
         {
@@ -270,10 +276,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
         {
             if (config.color.start === config.color.end)
             {
-                out.behaviors.push({
-                    type: 'colorStatic',
-                    config: { color: config.color.start },
-                });
+                if (config.color.start !== 'ffffff')
+                {
+                    out.behaviors.push({
+                        type: 'colorStatic',
+                        config: { color: config.color.start },
+                    });
+                }
             }
             else
             {
@@ -292,10 +301,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
         }
         else if (config.color.list.length === 1)
         {
-            out.behaviors.push({
-                type: 'colorStatic',
-                config: { color: config.color.list[0].value },
-            });
+            if (config.color.list[0].value !== 'ffffff')
+            {
+                out.behaviors.push({
+                    type: 'colorStatic',
+                    config: { color: config.color.list[0].value },
+                });
+            }
         }
         else
         {
@@ -339,7 +351,7 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     }
 
     // blend mode
-    if (config.blendMode)
+    if (config.blendMode && config.blendMode !== 'normal')
     {
         out.behaviors.push({
             type: 'blendMode',
