@@ -375,9 +375,28 @@ export class Emitter
         this.recycleBehaviors = behaviors.filter((b) => b !== PositionParticle && b.recycleParticle) as IEmitterBehavior[];
     }
 
+    /**
+     * Gets the instantiated behavior of the specified type, if any.
+     * @param type The behavior type to find.
+     */
     public getBehavior(type: string): IEmitterBehavior|null
     {
         return this.initBehaviors.find((b) => b instanceof Emitter.knownBehaviors[type]) as IEmitterBehavior || null;
+    }
+
+    /**
+     * Fills the pool with the specified number of particles, so that they don't have to be instantiated later.
+     * @param count The number of particles to create.
+     */
+    public fillPool(count: number): void
+    {
+        for (; count > 0; --count)
+        {
+            const p = new Particle(this);
+
+            p.next = this._poolFirst;
+            this._poolFirst = p;
+        }
     }
 
     /**
@@ -588,8 +607,8 @@ export class Emitter
             }
         }
 
-        let prevX;
-        let prevY;
+        let prevX: number;
+        let prevY: number;
 
         // if the previous position is valid, store these for later interpolation
         if (this._prevPosIsValid)
@@ -627,168 +646,169 @@ export class Emitter
                     this._spawnTimer += this._frequency;
                     continue;
                 }
-                // determine the particle lifetime
-                let lifetime;
+                let emitPosX: number;
+                let emitPosY: number;
 
-                if (this.minLifetime === this.maxLifetime)
+                // If the position has changed and this isn't the first spawn,
+                // interpolate the spawn position
+                if (this._prevPosIsValid && this._posChanged)
                 {
-                    lifetime = this.minLifetime;
+                    // 1 - _spawnTimer / delta, but _spawnTimer is negative
+                    const lerp = 1 + (this._spawnTimer / delta);
+
+                    emitPosX = ((curX - prevX) * lerp) + prevX;
+                    emitPosY = ((curY - prevY) * lerp) + prevY;
                 }
+                // otherwise just set to the spawn position
                 else
                 {
-                    lifetime = (Math.random() * (this.maxLifetime - this.minLifetime)) + this.minLifetime;
+                    emitPosX = curX;
+                    emitPosY = curY;
                 }
-                // only make the particle if it wouldn't immediately destroy itself
-                if (-this._spawnTimer < lifetime)
+
+                let waveFirst: Particle = null;
+                let waveLast: Particle = null;
+
+                // create enough particles to fill the wave
+                for (let len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount), i = 0; i < len; ++i)
                 {
-                    let emitPosX: number;
-                    let emitPosY: number;
-
-                    // If the position has changed and this isn't the first spawn,
-                    // interpolate the spawn position
-                    if (this._prevPosIsValid && this._posChanged)
+                    // see if we actually spawn one
+                    if (this.spawnChance < 1 && Math.random() >= this.spawnChance)
                     {
-                        // 1 - _spawnTimer / delta, but _spawnTimer is negative
-                        const lerp = 1 + (this._spawnTimer / delta);
-
-                        emitPosX = ((curX - prevX) * lerp) + prevX;
-                        emitPosY = ((curY - prevY) * lerp) + prevY;
+                        continue;
                     }
-                    // otherwise just set to the spawn position
+                    // determine the particle lifetime
+                    let lifetime;
+
+                    if (this.minLifetime === this.maxLifetime)
+                    {
+                        lifetime = this.minLifetime;
+                    }
                     else
                     {
-                        emitPosX = curX;
-                        emitPosY = curY;
+                        lifetime = (Math.random() * (this.maxLifetime - this.minLifetime)) + this.minLifetime;
                     }
-
-                    let waveFirst: Particle = null;
-                    let waveLast: Particle = null;
-
-                    // create enough particles to fill the wave
-                    for (let len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount), i = 0; i < len; ++i)
+                    // only make the particle if it wouldn't immediately destroy itself
+                    if (-this._spawnTimer >= lifetime)
                     {
-                        // see if we actually spawn one
-                        if (this.spawnChance < 1 && Math.random() >= this.spawnChance)
-                        {
-                            continue;
-                        }
-                        // create particle
-                        let p: Particle;
+                        continue;
+                    }
+                    // create particle
+                    let p: Particle;
 
-                        if (this._poolFirst)
-                        {
-                            p = this._poolFirst;
-                            this._poolFirst = this._poolFirst.next;
-                            p.next = null;
-                        }
-                        else
-                        {
-                            p = new Particle(this);
-                        }
-
-                        // initialize particle
-                        p.init(lifetime);
-                        // add the particle to the display list
-                        if (this.addAtBack)
-                        {
-                            this._parent.addChildAt(p, 0);
-                        }
-                        else
-                        {
-                            this._parent.addChild(p);
-                        }
-                        // add particles to list of ones in this wave
-                        if (waveFirst)
-                        {
-                            waveLast.next = p;
-                            p.prev = waveLast;
-                            waveLast = p;
-                        }
-                        else
-                        {
-                            waveLast = waveFirst = p;
-                        }
-                        // increase our particle count
-                        ++this.particleCount;
+                    if (this._poolFirst)
+                    {
+                        p = this._poolFirst;
+                        this._poolFirst = this._poolFirst.next;
+                        p.next = null;
+                    }
+                    else
+                    {
+                        p = new Particle(this);
                     }
 
+                    // initialize particle
+                    p.init(lifetime);
+                    // add the particle to the display list
+                    if (this.addAtBack)
+                    {
+                        this._parent.addChildAt(p, 0);
+                    }
+                    else
+                    {
+                        this._parent.addChild(p);
+                    }
+                    // add particles to list of ones in this wave
                     if (waveFirst)
                     {
-                        // add particle to list of active particles
-                        if (this._activeParticlesLast)
+                        waveLast.next = p;
+                        p.prev = waveLast;
+                        waveLast = p;
+                    }
+                    else
+                    {
+                        waveLast = waveFirst = p;
+                    }
+                    // increase our particle count
+                    ++this.particleCount;
+                }
+
+                if (waveFirst)
+                {
+                    // add particle to list of active particles
+                    if (this._activeParticlesLast)
+                    {
+                        this._activeParticlesLast.next = waveFirst;
+                        waveFirst.prev = this._activeParticlesLast;
+                        this._activeParticlesLast = waveLast;
+                    }
+                    else
+                    {
+                        this._activeParticlesFirst = waveFirst;
+                        this._activeParticlesLast = waveLast;
+                    }
+                    // run behavior init on particles
+                    for (let i = 0; i < this.initBehaviors.length; ++i)
+                    {
+                        const behavior = this.initBehaviors[i];
+
+                        // if we hit our special key, interrupt behaviors to apply
+                        // emitter position/rotation
+                        if (behavior === PositionParticle)
                         {
-                            this._activeParticlesLast.next = waveFirst;
-                            waveFirst.prev = this._activeParticlesLast;
-                            this._activeParticlesLast = waveLast;
+                            for (let particle = waveFirst, next; particle; particle = next)
+                            {
+                                // save next particle in case we recycle this one
+                                next = particle.next;
+                                // rotate the particle's position by the emitter's rotation
+                                if (this.rotation !== 0)
+                                {
+                                    ParticleUtils.rotatePoint(this.rotation, particle.position);
+                                    particle.rotation += this.rotation;
+                                }
+                                // offset by the emitter's position
+                                particle.position.x += emitPosX;
+                                particle.position.y += emitPosY;
+
+                                // also, just update the particle's age properties while we are looping through
+                                particle.age += delta;
+                                // determine our interpolation value
+                                let lerp = particle.age * particle.oneOverLife;// lifetime / maxLife;
+
+                                // global ease affects all interpolation calculations
+                                if (this.customEase)
+                                {
+                                    if (this.customEase.length === 4)
+                                    {
+                                        // the t, b, c, d parameters that some tween libraries use
+                                        // (time, initial value, end value, duration)
+                                        lerp = (this.customEase as any)(lerp, 0, 1, 1);
+                                    }
+                                    else
+                                    {
+                                        // the simplified version that we like that takes
+                                        // one parameter, time from 0-1. TweenJS eases provide this usage.
+                                        lerp = this.customEase(lerp);
+                                    }
+                                }
+                                // set age percent for all interpolation calculations
+                                particle.agePercent = lerp;
+                            }
                         }
                         else
                         {
-                            this._activeParticlesFirst = waveFirst;
-                            this._activeParticlesLast = waveLast;
+                            behavior.initParticles(waveFirst);
                         }
-                        // run behavior init on particles
-                        for (let i = 0; i < this.initBehaviors.length; ++i)
+                    }
+                    for (let particle = waveFirst, next; particle; particle = next)
+                    {
+                        // save next particle in case we recycle this one
+                        next = particle.next;
+                        // now update the particles by the time passed, so the particles are spread out properly
+                        for (let i = 0; i < this.updateBehaviors.length; ++i)
                         {
-                            const behavior = this.initBehaviors[i];
-
-                            // if we hit our special key, interrupt behaviors to apply
-                            // emitter position/rotation
-                            if (behavior === PositionParticle)
-                            {
-                                for (let particle = waveFirst, next; particle; particle = next)
-                                {
-                                    // save next particle in case we recycle this one
-                                    next = particle.next;
-                                    // rotate the particle's position by the emitter's rotation
-                                    if (this.rotation !== 0)
-                                    {
-                                        ParticleUtils.rotatePoint(this.rotation, particle.position);
-                                        particle.rotation += this.rotation;
-                                    }
-                                    // offset by the emitter's position
-                                    particle.position.x += emitPosX;
-                                    particle.position.y += emitPosY;
-
-                                    // also, just update the particle's age properties while we are looping through
-                                    particle.age += delta;
-                                    // determine our interpolation value
-                                    let lerp = particle.age * particle.oneOverLife;// lifetime / maxLife;
-
-                                    // global ease affects all interpolation calculations
-                                    if (this.customEase)
-                                    {
-                                        if (this.customEase.length === 4)
-                                        {
-                                            // the t, b, c, d parameters that some tween libraries use
-                                            // (time, initial value, end value, duration)
-                                            lerp = (this.customEase as any)(lerp, 0, 1, 1);
-                                        }
-                                        else
-                                        {
-                                            // the simplified version that we like that takes
-                                            // one parameter, time from 0-1. TweenJS eases provide this usage.
-                                            lerp = this.customEase(lerp);
-                                        }
-                                    }
-                                    // set age percent for all interpolation calculations
-                                    particle.agePercent = lerp;
-                                }
-                            }
-                            else
-                            {
-                                behavior.initParticles(waveFirst);
-                            }
-                        }
-                        for (let particle = waveFirst, next; particle; particle = next)
-                        {
-                            // save next particle in case we recycle this one
-                            next = particle.next;
-                            // now update the particles by the time passed, so the particles are spread out properly
-                            for (let i = 0; i < this.updateBehaviors.length; ++i)
-                            {
-                                // we want a positive delta, because a negative delta messes things up
-                                this.updateBehaviors[i].updateParticle(particle, -this._spawnTimer);
-                            }
+                            // we want a positive delta, because a negative delta messes things up
+                            this.updateBehaviors[i].updateParticle(particle, -this._spawnTimer);
                         }
                     }
                 }
@@ -818,6 +838,122 @@ export class Emitter
             if (this._destroyWhenComplete)
             {
                 this.destroy();
+            }
+        }
+    }
+
+    /**
+     * Emits a single wave of particles, using standard spawnChance & particlesPerWave settings. Does not affect
+     * regular spawning through the frequency, and ignores the emit property.
+     */
+    public emitNow(): void
+    {
+        const emitPosX = this.ownerPos.x + this.spawnPos.x;
+        const emitPosY = this.ownerPos.y + this.spawnPos.y;
+
+        let waveFirst: Particle = null;
+        let waveLast: Particle = null;
+
+        // create enough particles to fill the wave
+        for (let len = Math.min(this.particlesPerWave, this.maxParticles - this.particleCount), i = 0; i < len; ++i)
+        {
+            // see if we actually spawn one
+            if (this.spawnChance < 1 && Math.random() >= this.spawnChance)
+            {
+                continue;
+            }
+            // create particle
+            let p: Particle;
+
+            if (this._poolFirst)
+            {
+                p = this._poolFirst;
+                this._poolFirst = this._poolFirst.next;
+                p.next = null;
+            }
+            else
+            {
+                p = new Particle(this);
+            }
+
+            let lifetime: number;
+
+            if (this.minLifetime === this.maxLifetime)
+            {
+                lifetime = this.minLifetime;
+            }
+            else
+            {
+                lifetime = (Math.random() * (this.maxLifetime - this.minLifetime)) + this.minLifetime;
+            }
+            // initialize particle
+            p.init(lifetime);
+            // add the particle to the display list
+            if (this.addAtBack)
+            {
+                this._parent.addChildAt(p, 0);
+            }
+            else
+            {
+                this._parent.addChild(p);
+            }
+            // add particles to list of ones in this wave
+            if (waveFirst)
+            {
+                waveLast.next = p;
+                p.prev = waveLast;
+                waveLast = p;
+            }
+            else
+            {
+                waveLast = waveFirst = p;
+            }
+            // increase our particle count
+            ++this.particleCount;
+        }
+
+        if (waveFirst)
+        {
+            // add particle to list of active particles
+            if (this._activeParticlesLast)
+            {
+                this._activeParticlesLast.next = waveFirst;
+                waveFirst.prev = this._activeParticlesLast;
+                this._activeParticlesLast = waveLast;
+            }
+            else
+            {
+                this._activeParticlesFirst = waveFirst;
+                this._activeParticlesLast = waveLast;
+            }
+            // run behavior init on particles
+            for (let i = 0; i < this.initBehaviors.length; ++i)
+            {
+                const behavior = this.initBehaviors[i];
+
+                // if we hit our special key, interrupt behaviors to apply
+                // emitter position/rotation
+                if (behavior === PositionParticle)
+                {
+                    for (let particle = waveFirst, next; particle; particle = next)
+                    {
+                        // save next particle in case we recycle this one
+                        next = particle.next;
+                        // rotate the particle's position by the emitter's rotation
+                        if (this.rotation !== 0)
+                        {
+                            ParticleUtils.rotatePoint(this.rotation, particle.position);
+                            particle.rotation += this.rotation;
+                        }
+                        // offset by the emitter's position
+                        particle.position.x += emitPosX;
+                        particle.position.y += emitPosY;
+                    }
+                }
+                else
+                {
+                    behavior.initParticles(waveFirst);
+                }
             }
         }
     }
