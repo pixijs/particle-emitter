@@ -1,55 +1,113 @@
 // PIXI v6 doesn't have ambient types anymore
 declare const PIXI: any;
 
-const imagePaths = ["../../docs/examples/images/Sparks.png"];
 const config = {
-	"alpha": {
-		"start": 1,
-		"end": 0.31
-	},
-	"scale": {
-		"start": 0.5,
-		"end": 1
-	},
-	"color": {
-		"start": "ffffff",
-		"end": "9ff3ff"
-	},
-	"speed": {
-		"start": 600,
-		"end": 200
-	},
-	"acceleration": {
-		"x":0,
-		"y": 2000
-	},
-	"startRotation": {
-		"min": 260,
-		"max": 280
-	},
-	"rotationSpeed": {
-		"min": 0,
-		"max": 0
-	},
 	"lifetime": {
 		"min": 0.25,
 		"max": 0.5
 	},
-	"blendMode": "normal",
 	"frequency": 0.001,
 	"emitterLifetime": 0,
 	"maxParticles": 1000,
+	"addAtBack": false,
 	"pos": {
 		"x": 0,
 		"y": 0
 	},
-	"addAtBack": false,
-	"spawnType": "circle",
-	"spawnCircle": {
-		"x": 0,
-		"y": 0,
-		"r": 0
-	}
+	"behaviors": [
+		{
+			"type": "alpha",
+			"config": {
+				"alpha": {
+					"list": [
+						{
+							"time": 0,
+							"value": 1
+						},
+						{
+							"time": 1,
+							"value": 0.31
+						}
+					]
+				}
+			}
+		},
+		{
+			"type": "moveAcceleration",
+			"config": {
+				"accel": {
+					"x": 0,
+					"y": 2000
+				},
+				"minStart": 600,
+				"maxStart": 600,
+				"rotate": true
+			}
+		},
+		{
+			"type": "scale",
+			"config": {
+				"scale": {
+					"list": [
+						{
+							"time": 0,
+							"value": 0.5
+						},
+						{
+							"time": 1,
+							"value": 1
+						}
+					]
+				},
+				"minMult": 1
+			}
+		},
+		{
+			"type": "color",
+			"config": {
+				"color": {
+					"list": [
+						{
+							"time": 0,
+							"value": "ffffff"
+						},
+						{
+							"time": 1,
+							"value": "9ff3ff"
+						}
+					]
+				}
+			}
+		},
+		{
+			"type": "rotationStatic",
+			"config": {
+				"min": 260,
+				"max": 280
+			}
+		},
+		{
+			"type": "textureRandom",
+			"config": {
+				"textures": [
+					"../../docs/examples/images/Sparks.png"
+				]
+			}
+		},
+		{
+			"type": "spawnShape",
+			"config": {
+				"type": "torus",
+				"data": {
+					"x": 0,
+					"y": 0,
+					"radius": 0,
+					"innerRadius": 0,
+					"affectRotation": false
+				}
+			}
+		}
+	]
 };
 const canvas = document.getElementById("stage") as HTMLCanvasElement;
 // Basic PIXI Setup
@@ -98,60 +156,40 @@ window.onresize = function() {
 };
 window.onresize(null);
 
-// Preload the particle images and create PIXI textures from it
-const urls = [];// imagePaths.slice();
-urls.push("../../docs/examples/images/bg.png");
-const loader = PIXI.Loader.shared;
-for(let i = 0; i < urls.length; ++i)
-	loader.add("img" + i, urls[i]);
-loader.load(function()
-{
-	bg = new PIXI.Sprite(PIXI.Texture.from("../../docs/examples/images/bg.png"));
-	//bg is a 1px by 1px image
-	bg.scale.x = canvas.width;
-	bg.scale.y = canvas.height;
-	bg.tint = 0x000000;
-	stage.addChild(bg);
-	//collect the textures, now that they are all loaded
-	const art = imagePaths;// [];
-	// for(let i = 0; i < imagePaths.length; ++i)
-	// 	art.push(PIXI.Texture.from(imagePaths[i]));
-	// Create the new emitter and attach it to the stage
-	const emitterContainer = new PIXI.Container();
-	stage.addChild(emitterContainer);
-	(window as any).emitter = emitter = new PIXI.particles.Emitter(
-		emitterContainer,
-		art,
-		config
-	);
+bg = new PIXI.Sprite(PIXI.Texture.WHITE);
+//bg is a 1px by 1px image
+bg.scale.x = canvas.width;
+bg.scale.y = canvas.height;
+bg.tint = 0x000000;
+stage.addChild(bg);
+// Create the new emitter and attach it to the stage
+const emitterContainer = new PIXI.Container();
+stage.addChild(emitterContainer);
+(window as any).emitter = emitter = new PIXI.particles.Emitter(
+	emitterContainer,
+	config
+);
 
-	// Center on the stage
-	emitter.updateOwnerPos(window.innerWidth / 2, window.innerHeight / 2);
+// Center on the stage
+emitter.updateOwnerPos(window.innerWidth / 2, window.innerHeight / 2);
 
-	// Click on the canvas to trigger
-	canvas.addEventListener('mouseup', function(e){
-		if(!emitter) return;
-		emitter.emit = true;
-		emitter.resetPositionTracking();
-		emitter.updateOwnerPos(e.offsetX, e.offsetY);
-	});
-
-	// Start the update
-	update();
-
-	//for testing and debugging
-	(window as any).destroyEmitter = function()
-	{
-		emitter.destroy();
-		emitter = null;
-		(window as any).destroyEmitter = null;
-		//cancelAnimationFrame(updateId);
-
-		// V4 code - dunno what it would be in V5, or if it is needed
-		//reset SpriteRenderer's batching to fully release particles for GC
-		// if (renderer.plugins && renderer.plugins..sprite && renderer.plugins.sprite.sprites)
-		// 	renderer.plugins.sprite.sprites.length = 0;
-
-		renderer.render(stage);
-	};
+// Click on the canvas to trigger
+canvas.addEventListener('mouseup', function(e){
+	if(!emitter) return;
+	emitter.emit = true;
+	emitter.resetPositionTracking();
+	emitter.updateOwnerPos(e.offsetX, e.offsetY);
 });
+
+// Start the update
+update();
+
+//for testing and debugging
+(window as any).destroyEmitter = function()
+{
+	emitter.destroy();
+	emitter = null;
+	(window as any).destroyEmitter = null;
+
+	renderer.render(stage);
+};
