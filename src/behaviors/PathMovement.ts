@@ -139,7 +139,7 @@ export class PathBehavior implements IEmitterBehavior
          * Title: Speed
          * Description: Speed of the particles, with a minimum value of 0. this affects the x value in the path.
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         speed: ValueList<number>;
         /**
@@ -149,7 +149,7 @@ export class PathBehavior implements IEmitterBehavior
          * Description: A value between minimum speed multipler and 1 is randomly generated and multiplied with each speed value to generate the actual speed for each particle.
          * Min: 0
          * Max: 1
-         * Default: 1
+         * EditorDefault: 1
          */
         minMult: number;
     })

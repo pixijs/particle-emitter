@@ -19,7 +19,7 @@ export class SpeedBehavior implements IEmitterBehavior
          * Title: Speed
          * Description: Speed of the particles, with a minimum value of 0
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         speed: ValueList<number>;
         /**
@@ -29,7 +29,7 @@ export class SpeedBehavior implements IEmitterBehavior
          * Description: A value between minimum speed multipler and 1 is randomly generated and multiplied with each speed value to generate the actual speed for each particle.
          * Min: 0
          * Max: 1
-         * Default: 1
+         * EditorDefault: 1
          */
         minMult: number;
     })
@@ -89,7 +89,7 @@ export class StaticSpeedBehavior implements IEmitterBehavior
          * Title: Minimum Start Speed
          * Description: Minimum speed when initializing the particle.
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         min: number;
         /**
@@ -98,7 +98,7 @@ export class StaticSpeedBehavior implements IEmitterBehavior
          * Title: Maximum Start Speed
          * Description: Maximum speed when initializing the particle.
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         max: number;
     })

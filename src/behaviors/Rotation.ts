@@ -18,7 +18,7 @@ export class RotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Minimum Starting Rotation
          * Description: Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * Default: 0
+         * EditorDefault: 0
          */
         minStart: number;
         /**
@@ -26,7 +26,7 @@ export class RotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Maximum Starting Rotation
          * Description: Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * Default: 0
+         * EditorDefault: 0
          */
         maxStart: number;
         /**
@@ -34,7 +34,7 @@ export class RotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Minimum Rotation Speed
          * Description: Minimum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
-         * Default: 0
+         * EditorDefault: 0
          */
         minSpeed: number;
         /**
@@ -42,7 +42,7 @@ export class RotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Maximum Rotation Speed
          * Description: Maximum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
-         * Default: 0
+         * EditorDefault: 0
          */
         maxSpeed: number;
         /**
@@ -50,7 +50,7 @@ export class RotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Rotation Acceleration
          * Description: Constant rotational acceleration of the particles, in degrees/second/second.
-         * Default: 0
+         * EditorDefault: 0
          */
         accel: number;
     })
@@ -111,7 +111,7 @@ export class StaticRotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Minimum Rotation
          * Description: Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * Default: 0
+         * EditorDefault: 0
          */
         min: number;
         /**
@@ -119,7 +119,7 @@ export class StaticRotationBehavior implements IEmitterBehavior
          * Type: number
          * Title: Maximum Rotation
          * Description: Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * Default: 0
+         * EditorDefault: 0
          */
         max: number;
     })

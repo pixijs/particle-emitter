@@ -16,7 +16,7 @@ export class ColorBehavior implements IEmitterBehavior
          * Type: ValueList<Color>
          * Title: Color
          * Description: Color of the particles as 6 digit hex codes.
-         * Default: #ffffff
+         * EditorDefault: #ffffff
          */
         color: ValueList<string>;
     })
@@ -56,7 +56,7 @@ export class StaticColorBehavior implements IEmitterBehavior
          * Type: Color
          * Title: Color
          * Description: Color of the particles as 6 digit hex codes.
-         * Default: #ffffff
+         * EditorDefault: #ffffff
          */
         color: string;
     })

@@ -14,7 +14,7 @@ export class BlendModeBehavior implements IEmitterBehavior
          * Type: string
          * Title: Blend Mode
          * Description: Blend mode of all particles.
-         * Default: "normal"
+         * EditorDefault: "normal"
          */
         blendMode: string;
     })

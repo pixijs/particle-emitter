@@ -22,7 +22,7 @@ export class AccelerationBehavior implements IEmitterBehavior
          * Title: Minimum Start Speed
          * Description: Minimum speed when initializing the particle.
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         minStart: number;
         /**
@@ -31,7 +31,7 @@ export class AccelerationBehavior implements IEmitterBehavior
          * Title: Maximum Start Speed
          * Description: Maximum speed when initializing the particle.
          * Min: 0
-         * Default: 100
+         * EditorDefault: 100
          */
         maxStart: number;
         /**
@@ -39,7 +39,7 @@ export class AccelerationBehavior implements IEmitterBehavior
          * Type: Point
          * Title: Acceleration
          * Description: Constant acceleration, in the coordinate space of the particle parent.
-         * Default: {x: 50, y: 50}
+         * EditorDefault: {x: 50, y: 50}
          */
         accel: {x: number; y: number};
         /**
@@ -47,7 +47,7 @@ export class AccelerationBehavior implements IEmitterBehavior
          * Type: boolean
          * Title: Rotate with Movement
          * Description: Rotate the particle with its direction of movement. While initial movement direction reacts to rotation settings, this overrides any dynamic rotation.
-         * Default: true
+         * EditorDefault: true
          */
         rotate: boolean;
         /**
@@ -56,7 +56,7 @@ export class AccelerationBehavior implements IEmitterBehavior
          * Title: Maximum Speed
          * Description: Maximum linear speed. 0 is unlimited.
          * Min: 0
-         * Default: 0
+         * EditorDefault: 0
          */
         maxSpeed: number;
     })

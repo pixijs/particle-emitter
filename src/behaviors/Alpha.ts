@@ -17,7 +17,7 @@ export class AlphaBehavior implements IEmitterBehavior
          * Description: Transparency of the particles from 0 (transparent) to 1 (opaque)
          * Min: 0
          * Max: 1
-         * Default: 1
+         * EditorDefault: 1
          */
         alpha: ValueList<number>;
     })
@@ -57,7 +57,7 @@ export class StaticAlphaBehavior implements IEmitterBehavior
          * Description: Transparency of the particles from 0 (transparent) to 1 (opaque)
          * Min: 0
          * Max: 1
-         * Default: 1
+         * EditorDefault: 1
          */
         alpha: number;
     })
