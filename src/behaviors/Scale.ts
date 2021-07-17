@@ -52,15 +52,9 @@ export class ScaleBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle): void
+    updateParticle(particle: Particle): void
     {
-        let next = first;
-
-        while (next)
-        {
-            next.scale.x = next.scale.y = this.list.interpolate(next.agePercent) * next.config.scaleMult;
-            next = next.next;
-        }
+        particle.scale.x = particle.scale.y = this.list.interpolate(particle.agePercent) * particle.config.scaleMult;
     }
 }
 

@@ -63,22 +63,15 @@ export class SpeedBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
+        const speed = this.list.interpolate(particle.agePercent) * particle.config.speedMult;
+        const vel = particle.config.velocity;
 
-        while (next)
-        {
-            const speed = this.list.interpolate(next.agePercent) * next.config.speedMult;
-            const vel = next.config.velocity;
-
-            ParticleUtils.normalize(vel);
-            ParticleUtils.scaleBy(vel, speed);
-            next.x += vel.x * deltaSec;
-            next.y += vel.y * deltaSec;
-
-            next = next.next;
-        }
+        ParticleUtils.normalize(vel);
+        ParticleUtils.scaleBy(vel, speed);
+        particle.x += vel.x * deltaSec;
+        particle.y += vel.y * deltaSec;
     }
 }
 
@@ -137,18 +130,11 @@ export class StaticSpeedBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
+        const velocity = particle.config.velocity;
 
-        while (next)
-        {
-            const velocity = next.config.velocity;
-
-            next.x += velocity.x * deltaSec;
-            next.y += velocity.y * deltaSec;
-
-            next = next.next;
-        }
+        particle.x += velocity.x * deltaSec;
+        particle.y += velocity.y * deltaSec;
     }
 }

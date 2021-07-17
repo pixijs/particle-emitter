@@ -215,24 +215,17 @@ export class PathBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
+        // increase linear movement based on speed
+        const speed = this.list.interpolate(particle.agePercent) * particle.config.speedMult;
 
-        while (next)
-        {
-            // increase linear movement based on speed
-            const speed = this.list.interpolate(next.agePercent) * next.config.speedMult;
-
-            next.config.movement += speed * deltaSec;
-            // set up the helper point for rotation
-            helperPoint.x = next.config.movement;
-            helperPoint.y = this.path(helperPoint.x);
-            ParticleUtils.rotatePoint(next.config.initRotation, helperPoint);
-            next.position.x = next.config.initPosition.x + helperPoint.x;
-            next.position.y = next.config.initPosition.y + helperPoint.y;
-
-            next = next.next;
-        }
+        particle.config.movement += speed * deltaSec;
+        // set up the helper point for rotation
+        helperPoint.x = particle.config.movement;
+        helperPoint.y = this.path(helperPoint.x);
+        ParticleUtils.rotatePoint(particle.config.initRotation, helperPoint);
+        particle.position.x = particle.config.initPosition.x + helperPoint.x;
+        particle.position.y = particle.config.initPosition.y + helperPoint.y;
     }
 }

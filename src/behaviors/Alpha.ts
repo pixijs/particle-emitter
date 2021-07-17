@@ -37,15 +37,9 @@ export class AlphaBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle): void
+    updateParticle(particle: Particle): void
     {
-        let next = first;
-
-        while (next)
-        {
-            next.alpha = this.list.interpolate(next.agePercent);
-            next = next.next;
-        }
+        particle.alpha = this.list.interpolate(particle.agePercent);
     }
 }
 

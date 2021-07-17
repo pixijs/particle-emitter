@@ -91,38 +91,31 @@ export class AccelerationBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
+        const vel = particle.config.velocity;
+        const oldVX = vel.x;
+        const oldVY = vel.y;
 
-        while (next)
+        vel.x += this.accel.x * deltaSec;
+        vel.y += this.accel.y * deltaSec;
+        if (this.maxSpeed)
         {
-            const vel = next.config.velocity;
-            const oldVX = vel.x;
-            const oldVY = vel.y;
+            const currentSpeed = ParticleUtils.length(vel);
+            // if we are going faster than we should, clamp at the max speed
+            // DO NOT recalculate vector length
 
-            vel.x += this.accel.x * deltaSec;
-            vel.y += this.accel.y * deltaSec;
-            if (this.maxSpeed)
+            if (currentSpeed > this.maxSpeed)
             {
-                const currentSpeed = ParticleUtils.length(vel);
-                // if we are going faster than we should, clamp at the max speed
-                // DO NOT recalculate vector length
-
-                if (currentSpeed > this.maxSpeed)
-                {
-                    ParticleUtils.scaleBy(vel, this.maxSpeed / currentSpeed);
-                }
+                ParticleUtils.scaleBy(vel, this.maxSpeed / currentSpeed);
             }
-            // calculate position delta by the midpoint between our old velocity and our new velocity
-            next.x += (oldVX + vel.x) / 2 * deltaSec;
-            next.y += (oldVY + vel.y) / 2 * deltaSec;
-            if (this.rotate)
-            {
-                next.rotation = Math.atan2(vel.y, vel.x);
-            }
-
-            next = next.next;
+        }
+        // calculate position delta by the midpoint between our old velocity and our new velocity
+        particle.x += (oldVX + vel.x) / 2 * deltaSec;
+        particle.y += (oldVY + vel.y) / 2 * deltaSec;
+        if (this.rotate)
+        {
+            particle.rotation = Math.atan2(vel.y, vel.x);
         }
     }
 }

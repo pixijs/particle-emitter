@@ -38,15 +38,9 @@ export class ColorBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle): void
+    updateParticle(particle: Particle): void
     {
-        let next = first;
-
-        while (next)
-        {
-            next.tint = this.list.interpolate(next.agePercent);
-            next = next.next;
-        }
+        particle.tint = this.list.interpolate(particle.agePercent);
     }
 }
 

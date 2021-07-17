@@ -118,38 +118,31 @@ export class RandomAnimatedTextureBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
+        const config = particle.config;
+        const anim = config.anim;
 
-        while (next)
+        config.animElapsed += deltaSec;
+        if (config.animElapsed >= config.animDuration)
         {
-            const config = next.config;
-            const anim = config.anim;
-
-            config.animElapsed += deltaSec;
-            if (config.animElapsed >= config.animDuration)
+            // loop elapsed back around
+            if (config.anim.loop)
             {
-                // loop elapsed back around
-                if (config.anim.loop)
-                {
-                    config.animElapsed = config.animElapsed % config.animDuration;
-                }
-                // subtract a small amount to prevent attempting to go past the end of the animation
-                else
-                {
-                    config.animElapsed = config.animDuration - 0.000001;
-                }
+                config.animElapsed = config.animElapsed % config.animDuration;
             }
-            // add a very small number to the frame and then floor it to avoid
-            // the frame being one short due to floating point errors.
-            const frame = ((config.animElapsed * config.animFramerate) + 0.0000001) | 0;
-
-            // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
-            next.texture = anim.textures[frame] || anim.textures[anim.textures.length - 1] || Texture.EMPTY;
-
-            next = next.next;
+            // subtract a small amount to prevent attempting to go past the end of the animation
+            else
+            {
+                config.animElapsed = config.animDuration - 0.000001;
+            }
         }
+        // add a very small number to the frame and then floor it to avoid
+        // the frame being one short due to floating point errors.
+        const frame = ((config.animElapsed * config.animFramerate) + 0.0000001) | 0;
+
+        // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
+        particle.texture = anim.textures[frame] || anim.textures[anim.textures.length - 1] || Texture.EMPTY;
     }
 }
 
@@ -207,37 +200,30 @@ export class SingleAnimatedTextureBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
         const anim = this.anim;
-        let next = first;
+        const config = particle.config;
 
-        while (next)
+        config.animElapsed += deltaSec;
+        if (config.animElapsed >= config.animDuration)
         {
-            const config = next.config;
-
-            config.animElapsed += deltaSec;
-            if (config.animElapsed >= config.animDuration)
+            // loop elapsed back around
+            if (config.anim.loop)
             {
-                // loop elapsed back around
-                if (config.anim.loop)
-                {
-                    config.animElapsed = config.animElapsed % config.animDuration;
-                }
-                // subtract a small amount to prevent attempting to go past the end of the animation
-                else
-                {
-                    config.animElapsed = config.animDuration - 0.000001;
-                }
+                config.animElapsed = config.animElapsed % config.animDuration;
             }
-            // add a very small number to the frame and then floor it to avoid
-            // the frame being one short due to floating point errors.
-            const frame = ((config.animElapsed * config.animFramerate) + 0.0000001) | 0;
-
-            // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
-            next.texture = anim.textures[frame] || anim.textures[anim.textures.length - 1] || Texture.EMPTY;
-
-            next = next.next;
+            // subtract a small amount to prevent attempting to go past the end of the animation
+            else
+            {
+                config.animElapsed = config.animDuration - 0.000001;
+            }
         }
+        // add a very small number to the frame and then floor it to avoid
+        // the frame being one short due to floating point errors.
+        const frame = ((config.animElapsed * config.animFramerate) + 0.0000001) | 0;
+
+        // in the very rare case that framerate * elapsed math ends up going past the end, use the last texture
+        particle.texture = anim.textures[frame] || anim.textures[anim.textures.length - 1] || Texture.EMPTY;
     }
 }

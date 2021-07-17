@@ -4,7 +4,7 @@ export interface IEmitterBehavior
 {
     order: number;
     initParticles(first: Particle): void;
-    updateParticles?(first: Particle, deltaSec: number): void|boolean;
+    updateParticle?(particle: Particle, deltaSec: number): void|boolean;
     recycleParticle?(particle: Particle, natural: boolean): void;
 }
 export interface IEmitterBehaviorClass

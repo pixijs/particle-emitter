@@ -82,25 +82,18 @@ export class RotationBehavior implements IEmitterBehavior
         }
     }
 
-    updateParticles(first: Particle, deltaSec: number): void
+    updateParticle(particle: Particle, deltaSec: number): void
     {
-        let next = first;
-
-        while (next)
+        if (this.accel)
         {
-            if (this.accel)
-            {
-                const oldSpeed = next.config.rotSpeed;
+            const oldSpeed = particle.config.rotSpeed;
 
-                next.config.rotSpeed += this.accel * deltaSec;
-                next.rotation += (next.config.rotSpeed + oldSpeed) / 2 * deltaSec;
-            }
-            else
-            {
-                next.rotation += next.config.rotSpeed * deltaSec;
-            }
-
-            next = next.next;
+            particle.config.rotSpeed += this.accel * deltaSec;
+            particle.rotation += (particle.config.rotSpeed + oldSpeed) / 2 * deltaSec;
+        }
+        else
+        {
+            particle.rotation += particle.config.rotSpeed * deltaSec;
         }
     }
 }

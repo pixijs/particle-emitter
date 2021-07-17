@@ -371,7 +371,7 @@ export class Emitter
             return (a as IEmitterBehavior).order - (b as IEmitterBehavior).order;
         });
         this.initBehaviors = behaviors.slice();
-        this.updateBehaviors = behaviors.filter((b) => b !== PositionParticle && b.updateParticles) as IEmitterBehavior[];
+        this.updateBehaviors = behaviors.filter((b) => b !== PositionParticle && b.updateParticle) as IEmitterBehavior[];
         this.recycleBehaviors = behaviors.filter((b) => b !== PositionParticle && b.recycleParticle) as IEmitterBehavior[];
     }
 
@@ -579,13 +579,15 @@ export class Emitter
 
                 // set age percent for all interpolation calculations
                 particle.agePercent = lerp;
+
+                // let each behavior run wild on the active particles
+                for (let i = 0; i < this.updateBehaviors.length; ++i)
+                {
+                    this.updateBehaviors[i].updateParticle(particle, delta);
+                }
             }
         }
-        // let each behavior run wild on the active particles
-        for (let i = 0; i < this.updateBehaviors.length; ++i)
-        {
-            this.updateBehaviors[i].updateParticles(this._activeParticlesFirst, delta);
-        }
+
         let prevX;
         let prevY;
 
@@ -777,11 +779,16 @@ export class Emitter
                                 behavior.initParticles(waveFirst);
                             }
                         }
-                        // now update the particles by the time passed, so the particles are spread out properly
-                        for (let i = 0; i < this.updateBehaviors.length; ++i)
+                        for (let particle = waveFirst, next; particle; particle = next)
                         {
-                            // we want a positive delta, because a negative delta messes things up
-                            this.updateBehaviors[i].updateParticles(waveFirst, -this._spawnTimer);
+                            // save next particle in case we recycle this one
+                            next = particle.next;
+                            // now update the particles by the time passed, so the particles are spread out properly
+                            for (let i = 0; i < this.updateBehaviors.length; ++i)
+                            {
+                                // we want a positive delta, because a negative delta messes things up
+                                this.updateBehaviors[i].updateParticle(particle, -this._spawnTimer);
+                            }
                         }
                     }
                 }
