@@ -25,7 +25,7 @@ export class Emitter
 {
     private static knownBehaviors: {[key: string]: IEmitterBehaviorClass} = {};
 
-    public static registerShape(constructor: IEmitterBehaviorClass): void
+    public static registerBehavior(constructor: IEmitterBehaviorClass): void
     {
         Emitter.knownBehaviors[constructor.type] = constructor;
     }
