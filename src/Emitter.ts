@@ -243,7 +243,7 @@ export class Emitter
      * it will be set to 1 (particle per second) to prevent infinite loops.
      */
     public get frequency(): number { return this._frequency; }
-    public set frequency(value)
+    public set frequency(value: number)
     {
         // do some error checking to prevent infinite loops
         if (typeof value === 'number' && value > 0)
@@ -260,7 +260,7 @@ export class Emitter
     * The container to add particles to. Settings this will dump any active particles.
     */
     public get parent(): Container { return this._parent; }
-    public set parent(value)
+    public set parent(value: Container)
     {
         this.cleanup();
         this._parent = value;
@@ -498,7 +498,7 @@ export class Emitter
      * stops new particles from being created, but allows existing ones to die out.
      */
     public get emit(): boolean { return this._emit; }
-    public set emit(value)
+    public set emit(value: boolean)
     {
         this._emit = !!value;
         this._emitterLife = this.emitterLifetime;
@@ -509,7 +509,7 @@ export class Emitter
      * Setting this to false requires calling the update function manually.
      */
     public get autoUpdate(): boolean { return this._autoUpdate; }
-    public set autoUpdate(value)
+    public set autoUpdate(value: boolean)
     {
         if (this._autoUpdate && !value)
         {

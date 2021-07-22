@@ -29,6 +29,7 @@ export interface RandNumber
     min: number;
 }
 
+// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
 export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any): EmitterConfigV3
 {
     // just ensure we aren't given any V3 config data

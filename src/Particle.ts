@@ -45,8 +45,6 @@ export class Particle extends Sprite implements LinkedListChild
      */
     public config: {[key: string]: any};
 
-    protected Sprite_destroy: typeof Sprite.prototype.destroy;
-
     /**
      * @param emitter The emitter that controls this particle.
      */
@@ -71,7 +69,6 @@ export class Particle extends Sprite implements LinkedListChild
 
         // save often used functions on the instance instead of the prototype for better speed
         this.init = this.init;
-        this.Sprite_destroy = super.destroy;
         this.kill = this.kill;
     }
 
@@ -115,7 +112,7 @@ export class Particle extends Sprite implements LinkedListChild
         {
             this.parent.removeChild(this);
         }
-        this.Sprite_destroy();
         this.emitter = this.next = this.prev = null;
+        super.destroy();
     }
 }
