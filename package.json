@@ -22,7 +22,7 @@
     "build:dts": "tsc --noEmit false --declaration --emitDeclarationOnly --declarationDir lib",
     "postbuild": "ncp dist docs/dist",
     "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
-    "docs": "typedoc",
+    "docs": "typedoc src/index.ts",
     "predocs-live": "npm run build && npm run docs",
     "docs-live": "gh-pages -d docs",
     "postdocs-live": "git checkout .",
@@ -68,7 +68,7 @@
     "semver": "^5.3.0",
     "terser": "^3.16.1",
     "tslib": "^1.11.1",
-    "typedoc": "^0.17.5",
+    "typedoc": "^0.21.4",
     "typescript": "^4.3.4"
   },
   "repository": {
