@@ -2,13 +2,33 @@ import { Particle } from '../../Particle';
 import { ParticleUtils } from '../../ParticleUtils';
 import { SpawnShape } from './SpawnShape';
 
+/**
+ * A class for spawning particles in a circle or ring.
+ * Can optionally apply rotation to particles so that they are aimed away from the center of the circle.
+ */
 export class Torus implements SpawnShape
 {
+    /**
+     * X position of the center of the shape.
+     */
     public x: number;
+    /**
+     * Y position of the center of the shape.
+     */
     public y: number;
+    /**
+     * Radius of circle, or outer radius of a ring.
+     */
     public radius: number;
+    /**
+     * Inner radius of a ring. Use 0 to have a circle.
+     */
     public innerRadius: number;
+    /**
+     * If rotation should be applied to particles.
+     */
     public rotation: boolean;
+
     constructor(config: {radius: number; x: number; y: number; innerRadius?: number; affectRotation?: boolean})
     {
         this.x = config.x || 0;

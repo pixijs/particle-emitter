@@ -1,12 +1,28 @@
 import { Particle } from '../../Particle';
 import { SpawnShape } from './SpawnShape';
 
+/**
+ * A rectangle for generating spawn positions.
+ */
 export class Rectangle implements SpawnShape
 {
+    /**
+     * X (left) position of the rectangle.
+     */
     public x: number;
+    /**
+     * Y (top) position of the rectangle.
+     */
     public y: number;
+    /**
+     * Width of the rectangle.
+     */
     public w: number;
+    /**
+     * Height of the rectangle.
+     */
     public h: number;
+
     constructor(config: {x: number; y: number; w: number; h: number})
     {
         this.x = config.x;
