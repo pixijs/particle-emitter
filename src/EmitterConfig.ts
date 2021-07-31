@@ -365,6 +365,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     // animated
     if (Array.isArray(art) && typeof art[0] !== 'string' && 'framerate' in art[0])
     {
+        for (let i = 0; i < art.length; ++i)
+        {
+            if (art[i].framerate === 'matchLife')
+            {
+                art[i].framerate = -1;
+            }
+        }
         out.behaviors.push({
             type: 'animatedRandom',
             config: {
@@ -374,6 +381,10 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     }
     else if (typeof art !== 'string' && 'framerate' in art)
     {
+        if (art.framerate === 'matchLife')
+        {
+            art.framerate = -1;
+        }
         out.behaviors.push({
             type: 'animatedSingle',
             config: {

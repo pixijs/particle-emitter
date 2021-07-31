@@ -5,7 +5,7 @@ import { GetTextureFromString } from '../ParticleUtils';
 
 export interface AnimatedParticleArt
 {
-    framerate: 'matchLife'|number;
+    framerate: -1|number;
     loop?: boolean;
     textures: (string|Texture|{texture: string|Texture; count: number})[];
 }
@@ -79,7 +79,7 @@ export class RandomAnimatedTextureBehavior implements IEmitterBehavior
             const anim = config.anims[i];
             const textures = getTextures(anim.textures);
             // eslint-disable-next-line no-nested-ternary
-            const framerate = anim.framerate === 'matchLife' ? -1 : (anim.framerate > 0 ? anim.framerate : 60);
+            const framerate = anim.framerate < 0 ? -1 : (anim.framerate > 0 ? anim.framerate : 60);
             const parsedAnim: ParsedAnimatedParticleArt = {
                 textures,
                 duration: framerate > 0 ? textures.length / framerate : 0,
@@ -165,7 +165,7 @@ export class SingleAnimatedTextureBehavior implements IEmitterBehavior
         const anim = config.anim;
         const textures = getTextures(anim.textures);
         // eslint-disable-next-line no-nested-ternary
-        const framerate = anim.framerate === 'matchLife' ? -1 : (anim.framerate > 0 ? anim.framerate : 60);
+        const framerate = anim.framerate < 0 ? -1 : (anim.framerate > 0 ? anim.framerate : 60);
 
         this.anim = {
             textures,
