@@ -2,6 +2,7 @@ import { Texture } from '@pixi/core';
 import { Particle } from '../Particle';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { GetTextureFromString } from '../ParticleUtils';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export interface AnimatedParticleArt
 {
@@ -60,6 +61,7 @@ function getTextures(textures: (string|Texture|{texture: string|Texture; count: 
 export class RandomAnimatedTextureBehavior implements IEmitterBehavior
 {
     public static type = 'animatedRandom';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private anims: ParsedAnimatedParticleArt[];
@@ -149,6 +151,7 @@ export class RandomAnimatedTextureBehavior implements IEmitterBehavior
 export class SingleAnimatedTextureBehavior implements IEmitterBehavior
 {
     public static type = 'animatedSingle';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private anim: ParsedAnimatedParticleArt;

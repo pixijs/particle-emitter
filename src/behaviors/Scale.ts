@@ -2,10 +2,12 @@ import { Particle } from '../Particle';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class ScaleBehavior implements IEmitterBehavior
 {
     public static type = 'scale';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private list: PropertyList<number>;
@@ -61,6 +63,7 @@ export class ScaleBehavior implements IEmitterBehavior
 export class StaticScaleBehavior implements IEmitterBehavior
 {
     public static type = 'scaleStatic';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private min: number;

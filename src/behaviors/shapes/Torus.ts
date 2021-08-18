@@ -1,5 +1,6 @@
 import { Particle } from '../../Particle';
 import { ParticleUtils } from '../../ParticleUtils';
+import { ObjectProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
 /**
@@ -8,6 +9,8 @@ import { SpawnShape } from './SpawnShape';
  */
 export class Torus implements SpawnShape
 {
+    public static type = 'torus';
+    public static editorConfig: ObjectProperty = null;
     /**
      * X position of the center of the shape.
      */

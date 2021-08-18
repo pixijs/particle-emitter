@@ -3,10 +3,12 @@ import { Color, ParticleUtils } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class ColorBehavior implements IEmitterBehavior
 {
     public static type = 'color';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private list: PropertyList<Color>;
@@ -47,6 +49,7 @@ export class ColorBehavior implements IEmitterBehavior
 export class StaticColorBehavior implements IEmitterBehavior
 {
     public static type = 'colorStatic';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private value: number;

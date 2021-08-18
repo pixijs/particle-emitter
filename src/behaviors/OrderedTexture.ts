@@ -2,10 +2,12 @@ import { Texture } from '@pixi/core';
 import { Particle } from '../Particle';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { GetTextureFromString } from '../ParticleUtils';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class OrderedTextureBehavior implements IEmitterBehavior
 {
     public static type = 'textureOrdered';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private textures: Texture[];

@@ -4,6 +4,7 @@ import { ParticleUtils } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 /**
  * A helper point for math things.
@@ -116,6 +117,7 @@ function parsePath(pathString: string): (x: number) => number
 export class PathBehavior implements IEmitterBehavior
 {
     public static type = 'movePath';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     // *MUST* happen after other behaviors do initialization so that we can read initial transformations
     public order = BehaviorOrder.Late;

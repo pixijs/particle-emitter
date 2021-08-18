@@ -1,4 +1,5 @@
 import { IPointData } from '@pixi/math';
+import { ListProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
 export interface Segment
@@ -13,6 +14,8 @@ export interface Segment
  */
 export class PolygonalChain implements SpawnShape
 {
+    public static type = 'polygonalChain';
+    public static editorConfig: ListProperty = null;
     /**
      * List of segment objects in the chain.
      */

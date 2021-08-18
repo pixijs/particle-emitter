@@ -1,19 +1,29 @@
 import { Particle } from '../Particle';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
-import { SpawnShape } from './shapes/SpawnShape';
+import { SpawnShape, SpawnShapeClass } from './shapes/SpawnShape';
 import { PolygonalChain } from './shapes/PolygonalChain';
 import { Rectangle } from './shapes/Rectangle';
 import { Torus } from './shapes/Torus';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class ShapeSpawn implements IEmitterBehavior
 {
     public static type = 'spawnShape';
+    public static editorConfig: BehaviorEditorConfig = null;
 
-    private static shapes: {[key: string]: {new (data: any): SpawnShape}} = {};
+    /**
+     * Dictionary of all registered shape classes.
+     */
+    private static shapes: {[key: string]: SpawnShapeClass} = {};
 
-    public static registerShape(key: string, constructor: {new (data: any): SpawnShape}): void
+    /**
+     * Registers a shape to be used by the ShapeSpawn behavior.
+     * @param constructor The shape class constructor to use, with a static `type` property to reference it by.
+     * @param typeOverride An optional type override, primarily for registering a shape under multiple names.
+     */
+    public static registerShape(constructor: SpawnShapeClass, typeOverride?: string): void
     {
-        ShapeSpawn.shapes[key] = constructor;
+        ShapeSpawn.shapes[typeOverride || constructor.type] = constructor;
     }
 
     order = BehaviorOrder.Spawn;
@@ -21,17 +31,11 @@ export class ShapeSpawn implements IEmitterBehavior
 
     constructor(config: {
         /**
-         * Property: type
-         * Type: string
-         * Title: Shape Type
-         * Description: Type of the shape to spawn
+         * Type of the shape to spawn
          */
         type: string;
         /**
-         * Property: data
-         * Type: SpawnShape
-         * Title: Shape Data
-         * Description: Data for the spawn shape.
+         * Configuration data for the spawn shape.
          */
         data: any;
     })
@@ -57,7 +61,7 @@ export class ShapeSpawn implements IEmitterBehavior
     }
 }
 
-ShapeSpawn.registerShape('polygonalChain', PolygonalChain);
-ShapeSpawn.registerShape('rect', Rectangle);
-ShapeSpawn.registerShape('torus', Torus);
-ShapeSpawn.registerShape('circle', Torus);
+ShapeSpawn.registerShape(PolygonalChain);
+ShapeSpawn.registerShape(Rectangle);
+ShapeSpawn.registerShape(Torus);
+ShapeSpawn.registerShape(Torus, 'circle');

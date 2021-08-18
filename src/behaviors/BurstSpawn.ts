@@ -1,10 +1,12 @@
 import { Particle } from '../Particle';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { ParticleUtils } from '../ParticleUtils';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class BurstSpawn implements IEmitterBehavior
 {
     public static type = 'spawnBurst';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     order = BehaviorOrder.Spawn;
     private spacing: number;

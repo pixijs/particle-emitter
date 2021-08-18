@@ -1,10 +1,12 @@
 import { Particle } from '../Particle';
 import { ParticleUtils } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class BlendModeBehavior implements IEmitterBehavior
 {
     public static type = 'blendMode';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private value: string;

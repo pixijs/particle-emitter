@@ -1,4 +1,5 @@
 import { Particle } from '../../Particle';
+import type { ObjectProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
 /**
@@ -6,6 +7,8 @@ import { SpawnShape } from './SpawnShape';
  */
 export class Rectangle implements SpawnShape
 {
+    public static type = 'rect';
+    public static editorConfig: ObjectProperty = null;
     /**
      * X (left) position of the rectangle.
      */

@@ -2,22 +2,18 @@ import { Particle } from '../Particle';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class AlphaBehavior implements IEmitterBehavior
 {
     public static type = 'alpha';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private list: PropertyList<number>;
     constructor(config: {
         /**
-         * Property: alpha
-         * Type: ValueList<number>
-         * Title: Alpha
-         * Description: Transparency of the particles from 0 (transparent) to 1 (opaque)
-         * Min: 0
-         * Max: 1
-         * EditorDefault: 1
+         * Transparency of the particles from 0 (transparent) to 1 (opaque)
          */
         alpha: ValueList<number>;
     })
@@ -46,18 +42,13 @@ export class AlphaBehavior implements IEmitterBehavior
 export class StaticAlphaBehavior implements IEmitterBehavior
 {
     public static type = 'alphaStatic';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Normal;
     private value: number;
     constructor(config: {
         /**
-         * Property: alpha
-         * Type: number
-         * Title: Alpha
-         * Description: Transparency of the particles from 0 (transparent) to 1 (opaque)
-         * Min: 0
-         * Max: 1
-         * EditorDefault: 1
+         * Transparency of the particles from 0 (transparent) to 1 (opaque)
          */
         alpha: number;
     })

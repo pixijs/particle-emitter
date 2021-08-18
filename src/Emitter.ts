@@ -602,7 +602,11 @@ export class Emitter
                 // let each behavior run wild on the active particles
                 for (let i = 0; i < this.updateBehaviors.length; ++i)
                 {
-                    this.updateBehaviors[i].updateParticle(particle, delta);
+                    if (this.updateBehaviors[i].updateParticle(particle, delta))
+                    {
+                        this.recycle(particle);
+                        break;
+                    }
                 }
             }
         }
@@ -808,7 +812,12 @@ export class Emitter
                         for (let i = 0; i < this.updateBehaviors.length; ++i)
                         {
                             // we want a positive delta, because a negative delta messes things up
-                            this.updateBehaviors[i].updateParticle(particle, -this._spawnTimer);
+                            if (this.updateBehaviors[i].updateParticle(particle, -this._spawnTimer))
+                            {
+                                // bail if the particle got reycled
+                                this.recycle(particle);
+                                break;
+                            }
                         }
                     }
                 }

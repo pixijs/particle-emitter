@@ -2,10 +2,12 @@ import { Point } from '@pixi/math';
 import { Particle } from '../Particle';
 import { ParticleUtils } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class AccelerationBehavior implements IEmitterBehavior
 {
     public static type = 'moveAcceleration';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     // doesn't _really_ need to be late, but doing so ensures that we can override any
     // rotation behavior that is mistakenly added
@@ -17,46 +19,24 @@ export class AccelerationBehavior implements IEmitterBehavior
     private maxSpeed: number;
     constructor(config: {
         /**
-         * Property: minStart
-         * Type: number
-         * Title: Minimum Start Speed
-         * Description: Minimum speed when initializing the particle.
-         * Min: 0
-         * EditorDefault: 100
+         * Minimum speed when initializing the particle.
          */
         minStart: number;
         /**
-         * Property: maxStart
-         * Type: number
-         * Title: Maximum Start Speed
-         * Description: Maximum speed when initializing the particle.
-         * Min: 0
-         * EditorDefault: 100
+         * Maximum speed when initializing the particle.
          */
         maxStart: number;
         /**
-         * Property: accel
-         * Type: Point
-         * Title: Acceleration
-         * Description: Constant acceleration, in the coordinate space of the particle parent.
-         * EditorDefault: {x: 50, y: 50}
+         * Constant acceleration, in the coordinate space of the particle parent.
          */
         accel: {x: number; y: number};
         /**
-         * Property: rotate
-         * Type: boolean
-         * Title: Rotate with Movement
-         * Description: Rotate the particle with its direction of movement. While initial movement direction reacts to rotation settings, this overrides any dynamic rotation.
-         * EditorDefault: true
+         * Rotate the particle with its direction of movement.
+         * While initial movement direction reacts to rotation settings, this overrides any dynamic rotation.
          */
         rotate: boolean;
         /**
-         * Property: maxSpeed
-         * Type: number
-         * Title: Maximum Speed
-         * Description: Maximum linear speed. 0 is unlimited.
-         * Min: 0
-         * EditorDefault: 0
+         * Maximum linear speed. 0 is unlimited.
          */
         maxSpeed: number;
     })

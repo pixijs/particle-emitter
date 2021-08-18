@@ -4,10 +4,12 @@ import { ParticleUtils } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
+import { BehaviorEditorConfig } from './editor/Types';
 
 export class SpeedBehavior implements IEmitterBehavior
 {
     public static type = 'moveSpeed';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Late;
     private list: PropertyList<number>;
@@ -78,6 +80,7 @@ export class SpeedBehavior implements IEmitterBehavior
 export class StaticSpeedBehavior implements IEmitterBehavior
 {
     public static type = 'moveSpeedStatic';
+    public static editorConfig: BehaviorEditorConfig = null;
 
     public order = BehaviorOrder.Late;
     private min: number;
