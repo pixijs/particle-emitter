@@ -13,10 +13,7 @@ export class SingleTextureBehavior implements IEmitterBehavior
     private texture: Texture;
     constructor(config: {
         /**
-         * Property: texture
-         * Type: Image
-         * Title: Particle Texture
-         * Description: Image to use for each particle.
+         * Image to use for each particle.
          */
         texture: Texture|string;
     })

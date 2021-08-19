@@ -15,28 +15,15 @@ export class BurstSpawn implements IEmitterBehavior
 
     constructor(config: {
         /**
-         * Property: spacing
-         * Type: number
-         * Title: Particle Spacing
          * Description: Spacing between each particle spawned in a wave, in degrees.
-         * EditorDefault: 0
          */
         spacing: number;
         /**
-         * Property: start
-         * Type: number
-         * Title: Start Angle
          * Description: Angle to start placing particles at, in degrees. 0 is facing right, 90 is facing upwards.
-         * EditorDefault: 0
          */
         start: number;
         /**
-         * Property: distance
-         * Type: number
-         * Title: Distance
          * Description: Distance from the emitter to spawn particles, forming a ring/arc.
-         * Min: 0
-         * EditorDefault: 0
          */
         distance: number;
     })

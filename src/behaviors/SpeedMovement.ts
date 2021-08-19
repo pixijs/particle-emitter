@@ -16,22 +16,12 @@ export class SpeedBehavior implements IEmitterBehavior
     private minMult: number;
     constructor(config: {
         /**
-         * Property: speed
-         * Type: ValueList<number>
-         * Title: Speed
-         * Description: Speed of the particles, with a minimum value of 0
-         * Min: 0
-         * EditorDefault: 100
+         * Speed of the particles, with a minimum value of 0
          */
         speed: ValueList<number>;
         /**
-         * Property: minMult
-         * Type: number
-         * Title: Minimum Speed Multiplier
-         * Description: A value between minimum speed multipler and 1 is randomly generated and multiplied with each speed value to generate the actual speed for each particle.
-         * Min: 0
-         * Max: 1
-         * EditorDefault: 1
+         * A value between minimum speed multipler and 1 is randomly
+         * generated and multiplied with each speed value to generate the actual speed for each particle.
          */
         minMult: number;
     })
@@ -87,21 +77,11 @@ export class StaticSpeedBehavior implements IEmitterBehavior
     private max: number;
     constructor(config: {
         /**
-         * Property: min
-         * Type: number
-         * Title: Minimum Start Speed
-         * Description: Minimum speed when initializing the particle.
-         * Min: 0
-         * EditorDefault: 100
+         * Minimum speed when initializing the particle.
          */
         min: number;
         /**
-         * Property: max
-         * Type: number
-         * Title: Maximum Start Speed
-         * Description: Maximum speed when initializing the particle.
-         * Min: 0
-         * EditorDefault: 100
+         * Maximum speed when initializing the particle.
          */
         max: number;
     })

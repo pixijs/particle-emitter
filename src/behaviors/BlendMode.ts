@@ -12,11 +12,7 @@ export class BlendModeBehavior implements IEmitterBehavior
     private value: string;
     constructor(config: {
         /**
-         * Property: blendMode
-         * Type: string
-         * Title: Blend Mode
-         * Description: Blend mode of all particles.
-         * EditorDefault: "normal"
+         * Blend mode of all particles.
          */
         blendMode: string;
     })

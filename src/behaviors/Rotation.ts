@@ -16,43 +16,23 @@ export class RotationBehavior implements IEmitterBehavior
     private accel: number;
     constructor(config: {
         /**
-         * Property: minStart
-         * Type: number
-         * Title: Minimum Starting Rotation
-         * Description: Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * EditorDefault: 0
+         * Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
          */
         minStart: number;
         /**
-         * Property: maxStart
-         * Type: number
-         * Title: Maximum Starting Rotation
-         * Description: Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * EditorDefault: 0
+         * Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
          */
         maxStart: number;
         /**
-         * Property: minSpeed
-         * Type: number
-         * Title: Minimum Rotation Speed
-         * Description: Minimum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
-         * EditorDefault: 0
+         * Minimum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
          */
         minSpeed: number;
         /**
-         * Property: maxSpeed
-         * Type: number
-         * Title: Maximum Rotation Speed
-         * Description: Maximum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
-         * EditorDefault: 0
+         * Maximum rotation speed of the particles, in degrees/second. Positive is counter-clockwise.
          */
         maxSpeed: number;
         /**
-         * Property: accel
-         * Type: number
-         * Title: Rotation Acceleration
-         * Description: Constant rotational acceleration of the particles, in degrees/second/second.
-         * EditorDefault: 0
+         * Constant rotational acceleration of the particles, in degrees/second/second.
          */
         accel: number;
     })
@@ -110,19 +90,11 @@ export class StaticRotationBehavior implements IEmitterBehavior
     private max: number;
     constructor(config: {
         /**
-         * Property: min
-         * Type: number
-         * Title: Minimum Rotation
-         * Description: Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * EditorDefault: 0
+         * Minimum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
          */
         min: number;
         /**
-         * Property: max
-         * Type: number
-         * Title: Maximum Rotation
-         * Description: Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
-         * EditorDefault: 0
+         * Maximum starting rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
          */
         max: number;
     })

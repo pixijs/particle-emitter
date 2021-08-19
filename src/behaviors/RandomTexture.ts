@@ -13,10 +13,7 @@ export class RandomTextureBehavior implements IEmitterBehavior
     private textures: Texture[];
     constructor(config: {
         /**
-         * Property: textures
-         * Type: Image[]
-         * Title: Particle Textures
-         * Description: Images to use for each particle, randomly chosen from the list.
+         * Images to use for each particle, randomly chosen from the list.
          */
         textures: (Texture|string)[];
     })

@@ -129,29 +129,16 @@ export class PathBehavior implements IEmitterBehavior
     private minMult: number;
     constructor(config: {
         /**
-         * Property: path
-         * Type: string
-         * Title: Path
-         * Description: Algebraic expression describing the movement of the particle.
+         * Algebraic expression describing the movement of the particle.
          */
         path: string|((x: number) => number);
         /**
-         * Property: speed
-         * Type: ValueList<number>
-         * Title: Speed
-         * Description: Speed of the particles, with a minimum value of 0. this affects the x value in the path.
-         * Min: 0
-         * EditorDefault: 100
+         * Speed of the particles, with a minimum value of 0. this affects the x value in the path.
          */
         speed: ValueList<number>;
         /**
-         * Property: minMult
-         * Type: number
-         * Title: Minimum Speed Multiplier
-         * Description: A value between minimum speed multipler and 1 is randomly generated and multiplied with each speed value to generate the actual speed for each particle.
-         * Min: 0
-         * Max: 1
-         * EditorDefault: 1
+         * A value between minimum speed multipler and 1 is randomly generated and multiplied
+         * with each speed value to generate the actual speed for each particle.
          */
         minMult: number;
     })

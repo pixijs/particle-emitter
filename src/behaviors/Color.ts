@@ -14,11 +14,7 @@ export class ColorBehavior implements IEmitterBehavior
     private list: PropertyList<Color>;
     constructor(config: {
         /**
-         * Property: color
-         * Type: ValueList<Color>
-         * Title: Color
-         * Description: Color of the particles as 6 digit hex codes.
-         * EditorDefault: #ffffff
+         * Color of the particles as 6 digit hex codes.
          */
         color: ValueList<string>;
     })
@@ -55,11 +51,7 @@ export class StaticColorBehavior implements IEmitterBehavior
     private value: number;
     constructor(config: {
         /**
-         * Property: color
-         * Type: Color
-         * Title: Color
-         * Description: Color of the particles as 6 digit hex codes.
-         * EditorDefault: #ffffff
+         * Color of the particles as 6 digit hex codes.
          */
         color: string;
     })

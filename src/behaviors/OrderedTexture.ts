@@ -14,10 +14,7 @@ export class OrderedTextureBehavior implements IEmitterBehavior
     private index: number;
     constructor(config: {
         /**
-         * Property: textures
-         * Type: Image[]
-         * Title: Particle Textures
-         * Description: Images to use for each particle, used in order before looping around
+         * Images to use for each particle, used in order before looping around
          */
         textures: Texture[];
     })

@@ -14,22 +14,12 @@ export class ScaleBehavior implements IEmitterBehavior
     private minMult: number;
     constructor(config: {
         /**
-         * Property: scale
-         * Type: ValueList<number>
-         * Title: Scale
-         * Description: Scale of the particles, with a minimum value of 0
-         * Min: 0
-         * EditorDefault: 1
+         * Scale of the particles, with a minimum value of 0
          */
         scale: ValueList<number>;
         /**
-         * Property: minMult
-         * Type: number
-         * Title: Minimum Scale Multiplier
-         * Description: A value between minimum scale multipler and 1 is randomly generated and multiplied with each scale value to provide the actual scale for each particle.
-         * Min: 0
-         * Max: 1
-         * EditorDefault: 1
+         * A value between minimum scale multipler and 1 is randomly
+         * generated and multiplied with each scale value to provide the actual scale for each particle.
          */
         minMult: number;
     })
@@ -70,21 +60,11 @@ export class StaticScaleBehavior implements IEmitterBehavior
     private max: number;
     constructor(config: {
         /**
-         * Property: min
-         * Type: number
-         * Title: Minimum Scale
-         * Description: Minimum scale of the particles, with a minimum value of 0
-         * Min: 0
-         * EditorDefault: 1
+         * Minimum scale of the particles, with a minimum value of 0
          */
         min: number;
         /**
-         * Property: max
-         * Type: number
-         * Title: Maximum Scale
-         * Description: Maximum scale of the particles, with a minimum value of 0
-         * Min: 0
-         * EditorDefault: 1
+         * Maximum scale of the particles, with a minimum value of 0
          */
         max: number;
     })

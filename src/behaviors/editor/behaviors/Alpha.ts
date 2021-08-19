@@ -2,7 +2,7 @@ import { AlphaBehavior, StaticAlphaBehavior } from '../../Alpha';
 
 AlphaBehavior.editorConfig = {
     category: 'alpha',
-    title: 'Alpha (interpolated)',
+    title: 'Interpolated Alpha',
     props: [
         {
             type: 'numberList',
@@ -18,7 +18,7 @@ AlphaBehavior.editorConfig = {
 
 StaticAlphaBehavior.editorConfig = {
     category: 'alpha',
-    title: 'Alpha (static)',
+    title: 'Static Alpha',
     props: [
         {
             type: 'number',

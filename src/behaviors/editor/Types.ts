@@ -97,7 +97,8 @@ export interface SelectProperty
     name: string;
     title: string;
     description: string;
-    options: string[];
+    options: {label: string, value: string}[];
+    default: string;
 }
 
 export interface SelectSubConfigProperty
@@ -117,7 +118,7 @@ export type Property = NumberProperty | ColorProperty | BooleanProperty | TextPr
 
 export interface BehaviorEditorConfig
 {
-    category: 'art'|'color'|'alpha'|'movement'|'rotation'|'blend'|'spawn'|'other';
+    category: 'art'|'color'|'alpha'|'scale'|'movement'|'rotation'|'blend'|'spawn'|'other';
     title: string;
     props: Property[];
 }
