@@ -1,6 +1,6 @@
 import { Point } from '@pixi/math';
 import { Particle } from '../Particle';
-import { ParticleUtils } from '../ParticleUtils';
+import { rotatePoint, scaleBy, length } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
@@ -65,7 +65,7 @@ export class AccelerationBehavior implements IEmitterBehavior
                 (next.config.velocity as Point).set(speed, 0);
             }
 
-            ParticleUtils.rotatePoint(next.rotation, next.config.velocity);
+            rotatePoint(next.rotation, next.config.velocity);
 
             next = next.next;
         }
@@ -81,13 +81,13 @@ export class AccelerationBehavior implements IEmitterBehavior
         vel.y += this.accel.y * deltaSec;
         if (this.maxSpeed)
         {
-            const currentSpeed = ParticleUtils.length(vel);
+            const currentSpeed = length(vel);
             // if we are going faster than we should, clamp at the max speed
             // DO NOT recalculate vector length
 
             if (currentSpeed > this.maxSpeed)
             {
-                ParticleUtils.scaleBy(vel, this.maxSpeed / currentSpeed);
+                scaleBy(vel, this.maxSpeed / currentSpeed);
             }
         }
         // calculate position delta by the midpoint between our old velocity and our new velocity

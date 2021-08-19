@@ -1,6 +1,6 @@
 import { Point } from '@pixi/math';
 import { Particle } from '../Particle';
-import { ParticleUtils } from '../ParticleUtils';
+import { rotatePoint, normalize, scaleBy } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
@@ -49,7 +49,7 @@ export class SpeedBehavior implements IEmitterBehavior
                 (next.config.velocity as Point).set(this.list.first.value * mult, 0);
             }
 
-            ParticleUtils.rotatePoint(next.rotation, next.config.velocity);
+            rotatePoint(next.rotation, next.config.velocity);
 
             next = next.next;
         }
@@ -60,8 +60,8 @@ export class SpeedBehavior implements IEmitterBehavior
         const speed = this.list.interpolate(particle.agePercent) * particle.config.speedMult;
         const vel = particle.config.velocity;
 
-        ParticleUtils.normalize(vel);
-        ParticleUtils.scaleBy(vel, speed);
+        normalize(vel);
+        scaleBy(vel, speed);
         particle.x += vel.x * deltaSec;
         particle.y += vel.y * deltaSec;
     }
@@ -107,7 +107,7 @@ export class StaticSpeedBehavior implements IEmitterBehavior
                 (next.config.velocity as Point).set(speed, 0);
             }
 
-            ParticleUtils.rotatePoint(next.rotation, next.config.velocity);
+            rotatePoint(next.rotation, next.config.velocity);
 
             next = next.next;
         }

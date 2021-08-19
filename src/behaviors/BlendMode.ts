@@ -1,5 +1,5 @@
 import { Particle } from '../Particle';
-import { ParticleUtils } from '../ParticleUtils';
+import { getBlendMode } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
@@ -26,7 +26,7 @@ export class BlendModeBehavior implements IEmitterBehavior
 
         while (next)
         {
-            next.blendMode = ParticleUtils.getBlendMode(this.value);
+            next.blendMode = getBlendMode(this.value);
             next = next.next;
         }
     }

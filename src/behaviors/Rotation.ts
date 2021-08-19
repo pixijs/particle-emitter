@@ -1,5 +1,5 @@
 import { Particle } from '../Particle';
-import { ParticleUtils } from '../ParticleUtils';
+import { DEG_TO_RADS } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
@@ -37,11 +37,11 @@ export class RotationBehavior implements IEmitterBehavior
         accel: number;
     })
     {
-        this.minStart = config.minStart * ParticleUtils.DEG_TO_RADS;
-        this.maxStart = config.maxStart * ParticleUtils.DEG_TO_RADS;
-        this.minSpeed = config.minSpeed * ParticleUtils.DEG_TO_RADS;
-        this.maxSpeed = config.maxSpeed * ParticleUtils.DEG_TO_RADS;
-        this.accel = config.accel * ParticleUtils.DEG_TO_RADS;
+        this.minStart = config.minStart * DEG_TO_RADS;
+        this.maxStart = config.maxStart * DEG_TO_RADS;
+        this.minSpeed = config.minSpeed * DEG_TO_RADS;
+        this.maxSpeed = config.maxSpeed * DEG_TO_RADS;
+        this.accel = config.accel * DEG_TO_RADS;
     }
 
     initParticles(first: Particle): void
@@ -99,8 +99,8 @@ export class StaticRotationBehavior implements IEmitterBehavior
         max: number;
     })
     {
-        this.min = config.min * ParticleUtils.DEG_TO_RADS;
-        this.max = config.max * ParticleUtils.DEG_TO_RADS;
+        this.min = config.min * DEG_TO_RADS;
+        this.max = config.max * DEG_TO_RADS;
     }
 
     initParticles(first: Particle): void

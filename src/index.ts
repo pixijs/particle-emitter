@@ -25,7 +25,7 @@ Emitter.registerBehavior(behaviors.SpeedBehavior);
 Emitter.registerBehavior(behaviors.StaticSpeedBehavior);
 
 export * as behaviors from './behaviors';
-export * from './ParticleUtils';
+export * as ParticleUtils from './ParticleUtils';
 export * from './Particle';
 export * from './Emitter';
 export * from './EmitterConfig';

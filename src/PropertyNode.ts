@@ -1,4 +1,4 @@
-import { ParticleUtils, EaseSegment, SimpleEase, Color } from './ParticleUtils';
+import { generateEase, hexToRGB, EaseSegment, SimpleEase, Color } from './ParticleUtils';
 import { BasicTweenable } from './EmitterConfig';
 
 export interface ValueStep<T> {
@@ -47,7 +47,7 @@ export class PropertyNode<V>
         this.isStepped = false;
         if (ease)
         {
-            this.ease = typeof ease === 'function' ? ease : ParticleUtils.generateEase(ease);
+            this.ease = typeof ease === 'function' ? ease : generateEase(ease);
         }
         else
         {
@@ -75,7 +75,7 @@ export class PropertyNode<V>
             const { value, time } = array[0];
 
             // eslint-disable-next-line max-len
-            const first = node = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time, data.ease);
+            const first = node = new PropertyNode(typeof value === 'string' ? hexToRGB(value) : value, time, data.ease);
 
             // only set up subsequent nodes if there are a bunch or the 2nd one is different from the first
             if (array.length > 2 || (array.length === 2 && array[1].value !== value))
@@ -84,7 +84,7 @@ export class PropertyNode<V>
                 {
                     const { value, time } = array[i];
 
-                    node.next = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time);
+                    node.next = new PropertyNode(typeof value === 'string' ? hexToRGB(value) : value, time);
                     node = node.next;
                 }
             }
@@ -94,12 +94,12 @@ export class PropertyNode<V>
         }
 
         // Handle deprecated version here
-        const start = new PropertyNode(typeof data.start === 'string' ? ParticleUtils.hexToRGB(data.start) : data.start, 0);
+        const start = new PropertyNode(typeof data.start === 'string' ? hexToRGB(data.start) : data.start, 0);
         // only set up a next value if it is different from the starting value
 
         if (data.end !== data.start)
         {
-            start.next = new PropertyNode(typeof data.end === 'string' ? ParticleUtils.hexToRGB(data.end) : data.end, 1);
+            start.next = new PropertyNode(typeof data.end === 'string' ? hexToRGB(data.end) : data.end, 1);
         }
 
         return start as PropertyNode<T extends string ? Color : T>;

@@ -4,10 +4,23 @@ import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { GetTextureFromString } from '../ParticleUtils';
 import { BehaviorEditorConfig } from './editor/Types';
 
+/**
+ * The format of an animation to be used on a particle.
+ */
 export interface AnimatedParticleArt
 {
+    /**
+     * Framerate for the animation (in frames per second). A value of -1 will tie the framerate to
+     * the particle's lifetime so that the animation lasts exactly as long as the particle.
+     */
     framerate: -1|number;
+    /**
+     * If the animation should loop.
+     */
     loop?: boolean;
+    /**
+     * A list of textures or frame descriptions for duplicated frames.
+     */
     textures: (string|Texture|{texture: string|Texture; count: number})[];
 }
 
@@ -67,10 +80,7 @@ export class RandomAnimatedTextureBehavior implements IEmitterBehavior
     private anims: ParsedAnimatedParticleArt[];
     constructor(config: {
         /**
-         * Property: anims
-         * Type: AnimatedParticleArt[]
-         * Title: Particle Animations
-         * Description: Animation configuration to use for each particle, randomly chosen from the list.
+         * Animation configuration to use for each particle, randomly chosen from the list.
          */
         anims: AnimatedParticleArt[];
     })
@@ -157,10 +167,7 @@ export class SingleAnimatedTextureBehavior implements IEmitterBehavior
     private anim: ParsedAnimatedParticleArt;
     constructor(config: {
         /**
-         * Property: anim
-         * Type: AnimatedParticleArt
-         * Title: Particle Animations
-         * Description: Animation configuration to use for each particle.
+         * Animation configuration to use for each particle.
          */
         anim: AnimatedParticleArt;
     })

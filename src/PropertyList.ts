@@ -1,4 +1,4 @@
-import { ParticleUtils, SimpleEase, Color } from './ParticleUtils';
+import { combineRGBComponents, SimpleEase, Color } from './ParticleUtils';
 import { PropertyNode } from './PropertyNode';
 
 function intValueSimple(this: PropertyList<number>, lerp: number): number
@@ -18,7 +18,7 @@ function intColorSimple(this: PropertyList<Color>, lerp: number): number
     const g = ((nextVal.g - curVal.g) * lerp) + curVal.g;
     const b = ((nextVal.b - curVal.b) * lerp) + curVal.b;
 
-    return ParticleUtils.combineRGBComponents(r, g, b);
+    return combineRGBComponents(r, g, b);
 }
 
 function intValueComplex(this: PropertyList<number>, lerp: number): number
@@ -61,7 +61,7 @@ function intColorComplex(this: PropertyList<Color>, lerp: number): number
     const g = ((nextVal.g - curVal.g) * lerp) + curVal.g;
     const b = ((nextVal.b - curVal.b) * lerp) + curVal.b;
 
-    return ParticleUtils.combineRGBComponents(r, g, b);
+    return combineRGBComponents(r, g, b);
 }
 
 function intValueStepped(this: PropertyList<number>, lerp: number): number
@@ -92,7 +92,7 @@ function intColorStepped(this: PropertyList<Color>, lerp: number): number
     }
     const curVal = current.value;
 
-    return ParticleUtils.combineRGBComponents(curVal.r, curVal.g, curVal.b);
+    return combineRGBComponents(curVal.r, curVal.g, curVal.b);
 }
 
 /**

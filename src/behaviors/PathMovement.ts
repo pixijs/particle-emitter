@@ -1,6 +1,6 @@
 import { Point } from '@pixi/math';
 import { Particle } from '../Particle';
-import { ParticleUtils } from '../ParticleUtils';
+import { rotatePoint, verbose } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
@@ -98,21 +98,23 @@ function parsePath(pathString: string): (x: number) => number
 /**
  * A particle that follows a path defined by an algebraic expression, e.g. "sin(x)" or
  * "5x + 3".
- * To use this class, the particle config must have a "path" string in the
- * "extraData" parameter. This string should have "x" in it to represent movement (from the
- * speed settings of the particle). It may have numbers, parentheses, the four basic
- * operations, and the following Math functions or properties (without the preceding "Math."):
- * "pow", "sqrt", "abs", "floor", "round", "ceil", "E", "PI", "sin", "cos", "tan", "asin",
- * "acos", "atan", "atan2", "log".
+ * To use this class, the behavior config must have a "path" string or function.
+ *
+ * A string should have "x" in it to represent movement (from the
+ * speed settings of the behavior). It may have numbers, parentheses, the four basic
+ * operations, and any Math functions or properties (without the preceding "Math.").
  * The overall movement of the particle and the expression value become x and y positions for
  * the particle, respectively. The final position is rotated by the spawn rotation/angle of
  * the particle.
+ *
+ * A function merely needs to accept the "x" value and output the a corresponding "y" value.
  *
  * Some example paths:
  *
  * 	"sin(x/10) * 20" // A sine wave path.
  * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
  * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
+ * 	(x) => Math.floor(x) * 3 // Supplying an existing function should look like this
  */
 export class PathBehavior implements IEmitterBehavior
 {
@@ -157,9 +159,9 @@ export class PathBehavior implements IEmitterBehavior
                 }
                 catch (e)
                 {
-                    if (ParticleUtils.verbose)
+                    if (verbose)
                     {
-                        console.error('PathParticle: error in parsing path expression');
+                        console.error('PathParticle: error in parsing path expression', e);
                     }
                     this.path = null;
                 }
@@ -167,9 +169,9 @@ export class PathBehavior implements IEmitterBehavior
         }
         else
         {
-            if (ParticleUtils.verbose)
+            if (verbose)
             {
-                console.error('PathParticle requires a path string in extraData!');
+                console.error('PathParticle requires a path value in its config!');
             }
             // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
             this.path = (x) => x;
@@ -220,7 +222,7 @@ export class PathBehavior implements IEmitterBehavior
         // set up the helper point for rotation
         helperPoint.x = particle.config.movement;
         helperPoint.y = this.path(helperPoint.x);
-        ParticleUtils.rotatePoint(particle.config.initRotation, helperPoint);
+        rotatePoint(particle.config.initRotation, helperPoint);
         particle.position.x = particle.config.initPosition.x + helperPoint.x;
         particle.position.y = particle.config.initPosition.y + helperPoint.y;
     }

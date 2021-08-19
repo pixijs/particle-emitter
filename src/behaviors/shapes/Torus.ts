@@ -1,5 +1,5 @@
 import { Particle } from '../../Particle';
-import { ParticleUtils } from '../../ParticleUtils';
+import { rotatePoint } from '../../ParticleUtils';
 import { ObjectProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
@@ -60,7 +60,7 @@ export class Torus implements SpawnShape
         {
             particle.rotation += angle;
         }
-        ParticleUtils.rotatePoint(angle, particle.position);
+        rotatePoint(angle, particle.position);
         // now add in the center of the torus
         particle.position.x += this.x;
         particle.position.y += this.y;

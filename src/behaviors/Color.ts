@@ -1,5 +1,5 @@
 import { Particle } from '../Particle';
-import { Color, ParticleUtils } from '../ParticleUtils';
+import { Color, combineRGBComponents } from '../ParticleUtils';
 import { PropertyList } from '../PropertyList';
 import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
@@ -27,7 +27,7 @@ export class ColorBehavior implements IEmitterBehavior
     {
         let next = first;
         const color = this.list.first.value;
-        const tint = ParticleUtils.combineRGBComponents(color.r, color.g, color.b);
+        const tint = combineRGBComponents(color.r, color.g, color.b);
 
         while (next)
         {

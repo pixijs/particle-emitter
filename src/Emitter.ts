@@ -1,4 +1,4 @@
-import { ParticleUtils, SimpleEase } from './ParticleUtils';
+import { generateEase, rotatePoint, SimpleEase } from './ParticleUtils';
 import { Particle } from './Particle';
 import { EmitterConfigV3 } from './EmitterConfig';
 import { Container } from '@pixi/display';
@@ -294,7 +294,7 @@ export class Emitter
         if (config.ease)
         {
             this.customEase = typeof config.ease === 'function'
-                ? config.ease : ParticleUtils.generateEase(config.ease);
+                ? config.ease : generateEase(config.ease);
         }
         else
         {
@@ -453,7 +453,7 @@ export class Emitter
 
         this.rotation = newRot;
         // rotate spawnPos
-        ParticleUtils.rotatePoint(diff, this.spawnPos);
+        rotatePoint(diff, this.spawnPos);
         // mark the position as having changed
         this._posChanged = true;
     }
@@ -767,7 +767,7 @@ export class Emitter
                                 // rotate the particle's position by the emitter's rotation
                                 if (this.rotation !== 0)
                                 {
-                                    ParticleUtils.rotatePoint(this.rotation, particle.position);
+                                    rotatePoint(this.rotation, particle.position);
                                     particle.rotation += this.rotation;
                                 }
                                 // offset by the emitter's position
@@ -951,7 +951,7 @@ export class Emitter
                         // rotate the particle's position by the emitter's rotation
                         if (this.rotation !== 0)
                         {
-                            ParticleUtils.rotatePoint(this.rotation, particle.position);
+                            rotatePoint(this.rotation, particle.position);
                             particle.rotation += this.rotation;
                         }
                         // offset by the emitter's position

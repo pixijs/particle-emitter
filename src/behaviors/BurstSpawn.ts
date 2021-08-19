@@ -1,6 +1,6 @@
 import { Particle } from '../Particle';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
-import { ParticleUtils } from '../ParticleUtils';
+import { DEG_TO_RADS, rotatePoint } from '../ParticleUtils';
 import { BehaviorEditorConfig } from './editor/Types';
 
 export class BurstSpawn implements IEmitterBehavior
@@ -28,8 +28,8 @@ export class BurstSpawn implements IEmitterBehavior
         distance: number;
     })
     {
-        this.spacing = config.spacing * ParticleUtils.DEG_TO_RADS;
-        this.start = config.start * ParticleUtils.DEG_TO_RADS;
+        this.spacing = config.spacing * DEG_TO_RADS;
+        this.start = config.start * DEG_TO_RADS;
         this.distance = config.distance;
     }
 
@@ -55,7 +55,7 @@ export class BurstSpawn implements IEmitterBehavior
             if (this.distance)
             {
                 next.position.x = this.distance;
-                ParticleUtils.rotatePoint(angle, next.position);
+                rotatePoint(angle, next.position);
             }
             next = next.next;
             ++count;
