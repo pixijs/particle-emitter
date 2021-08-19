@@ -1,6 +1,6 @@
 # Pixi Particles
 
-[![Build Status](https://travis-ci.org/pixijs/pixi-particles.svg)](https://travis-ci.org/pixijs/pixi-particles) [![Dependency Status](https://david-dm.org/pixijs/pixi-particles.svg?style=flat)](https://david-dm.org/pixijs/pixi-particles) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg)](https://github.com/pixijs/pixi-particles/releases/latest)
+[![Build Status](https://github.com/pixijs/pixi-particles/workflows/Build/badge.svg)](https://github.com/pixijs/pixi-particles/actions?query=workflow%3A%22Build%22) [![Dependency Status](https://david-dm.org/pixijs/pixi-particles.svg?style=flat)](https://david-dm.org/pixijs/pixi-particles) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fpixi-particles.svg)](https://github.com/pixijs/pixi-particles/releases/latest)
 
 A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles.
 
