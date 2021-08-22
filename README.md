@@ -4,12 +4,10 @@
 
 A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiParticles.
 
-## Breaking changes in v3 from v2
-* On `Emitter`, `playOnce()` no longer sets `autoUpdate` to true. Set it manually before use.
-	`playOnceAndDestroy()` is unaffected.
-* On `Emitter`, `start*` and `end*` properties for alpha, color, scale, and speed have been
-	replaced by a singly linked list of `PropertyNode` objects.
-* Dropped support for PIXI v3. Please use v4 or v5.
+## Breaking changes in v5 from v4
+* On `Emitter`, configuration format has drastically changed. Use [`upgradeConfig()`](https://pixijs.github.io/pixi-particles/docs/modules.html#upgradeConfig) to convert old configuration objects automatically.
+* Dropped support for PixiJS v4. Please use v6 - while v5 may work, Typescript definitions won't work and will cause you a headache.
+* The library now outputs ES6 code - if you need it in ES5 code, you'll need to make sure your build process transpiles it.
 
 ## Sample Usage
 
@@ -27,73 +25,9 @@ var emitter = new PIXI.particles.Emitter(
 	// if using blend modes, it's important to put this
 	// on top of a bitmap, and not use the root stage Container
 	container,
-
-	// The collection of particle images to use
-	[PIXI.Texture.fromImage('image.jpg')],
-
 	// Emitter configuration, edit this to change the look
 	// of the emitter
 	{
-		alpha: {
-			list: [
-				{
-					value: 0.8,
-					time: 0
-				},
-				{
-					value: 0.1,
-					time: 1
-				}
-			],
-			isStepped: false
-		},
-		scale: {
-			list: [
-				{
-					value: 1,
-					time: 0
-				},
-				{
-					value: 0.3,
-					time: 1
-				}
-			],
-			isStepped: false
-		},
-		color: {
-			list: [
-				{
-					value: "fb1010",
-					time: 0
-				},
-				{
-					value: "f5b830",
-					time: 1
-				}
-			],
-			isStepped: false
-		},
-		speed: {
-			list: [
-				{
-					value: 200,
-					time: 0
-				},
-				{
-					value: 100,
-					time: 1
-				}
-			],
-			isStepped: false
-		},
-		startRotation: {
-			min: 0,
-			max: 360
-		},
-		rotationSpeed: {
-			min: 0,
-			max: 0
-		},
 		lifetime: {
 			min: 0.5,
 			max: 0.5
@@ -108,12 +42,101 @@ var emitter = new PIXI.particles.Emitter(
 			y: 0
 		},
 		addAtBack: false,
-		spawnType: "circle",
-		spawnCircle: {
-			x: 0,
-			y: 0,
-			r: 10
-		}
+		behaviors: [
+			{
+				type: 'alpha',
+				config: {
+					alpha: {
+						list: [
+							{
+								value: 0.8,
+								time: 0
+							},
+							{
+								value: 0.1,
+								time: 1
+							}
+						],
+					},
+				}
+			},
+			{
+				type: 'scale',
+				config: {
+					scale: {
+						list: [
+							{
+								value: 1,
+								time: 0
+							},
+							{
+								value: 0.3,
+								time: 1
+							}
+						],
+					},
+				}
+			},
+			{
+				type: 'color',
+				config: {
+					color: {
+						list: [
+							{
+								value: "fb1010",
+								time: 0
+							},
+							{
+								value: "f5b830",
+								time: 1
+							}
+						],
+					},
+				}
+			},
+			{
+				type: 'moveSpeed',
+				config: {
+					speed: {
+						list: [
+							{
+								value: 200,
+								time: 0
+							},
+							{
+								value: 100,
+								time: 1
+							}
+						],
+						isStepped: false
+					},
+				}
+			},
+			{
+				type: 'rotationStatic',
+				config: {
+					min: 0,
+					max: 360
+				}
+			},
+			{
+				type: 'spawnShape',
+				config: {
+					type: 'torus',
+					data: {
+						x: 0,
+						y: 0,
+						r: 10
+					}
+				}
+			},
+			{
+				type: 'textureSingle',
+				config: {
+					texture: PIXI.Texture.fromImage('image.jpg')
+				}
+			}
+		],
 	}
 );
 
@@ -132,9 +155,6 @@ var update = function(){
 	// number of seconds since the last update
 	emitter.update((now - elapsed) * 0.001);
 	elapsed = now;
-
-	// Should re-render the PIXI Stage
-	// renderer.render(stage);
 };
 
 // Start emitting
@@ -144,16 +164,13 @@ emitter.emit = true;
 update();
 ```
 
-## Note on Emitter Cleanup
-When using PixiJS 3 or 4, the SpriteRenderer in WebGL may keep a reference to your particles after you have destroyed your emitter. To ensure that they are garbage collected, _in WebGL only_, reset the SpriteRenderer's sprite batching with `yourRenderer.plugins.sprite.sprites.length = 0;`. This is not needed in PixiJS 5.
-
 ## Documentation
 
 http://pixijs.github.io/pixi-particles/docs/
 
 ## Installation
 
-PixiParticles can be installed or NPM.
+PixiParticles can be installed with NPM or other package managers.
 
 ```bash
 npm install pixi-particles
@@ -189,27 +206,6 @@ npm install pixi-particles
 * [Animated Bubbles](https://pixijs.github.io/pixi-particles/examples/animatedBubbles.html)
 * [Spaceship Destruction - Ordered Art](https://pixijs.github.io/pixi-particles/examples/spaceshipDestruction.html)
 * [Particle Container Performance](https://pixijs.github.io/pixi-particles/examples/particleContainerPerformance.html)
-
-## Typescript
-You can use require to get the namespace for pixi-particles, or use a triple slash reference for using the PIXI.particles namespace.
-```typescript
-// Note: Must also include the pixi.js typings globally!
-import particles = require('pixi-particles');
-
-let myEmitter:particles.Emitter = new particles.Emitter(myContainer);
-```
-
-```typescript
-// Note: Must also include the pixi.js typings globally!
-/// <reference path="node_modules/pixi-particles/ambient.d.ts" />
-require('pixi-particles');
-
-let myEmitter:PIXI.particles.Emitter = new PIXI.particles.Emitter(myContainer);
-```
-
-## Use in Haxe
-
-Externs for Haxe have been added to [adireddy's Pixi externs](https://github.com/adireddy/haxe-pixi) - these are out of date but may be updated in a fork.
 
 ## Contributer Note
 This project uses `yarn` rather than `npm` to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.
