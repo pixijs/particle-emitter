@@ -26,61 +26,11 @@
 				// The image to use
 				{
 					spritesheet: "images/gold_anim.json",
-					art: [
-						{
-							framerate: 20,
-							loop: true,
-							textures: [
-								"gold_1.png",
-								"gold_2.png",
-								"gold_3.png",
-								"gold_4.png",
-								"gold_5.png",
-								"gold_6.png"
-							]
-						},
-						{
-							framerate: 20,
-							loop: true,
-							textures: [
-								"gold_6.png",
-								"gold_5.png",
-								"gold_4.png",
-								"gold_3.png",
-								"gold_2.png",
-								"gold_1.png"
-							]
-						}
-					]
 				},
 
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 1,
-						"end": 0.8
-					},
-					"scale": {
-						"start": 0.5,
-						"end": 0.5
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 200,
-						"end": 100
-					},
-					"startRotation": {
-						"min": 0,
-						"max": 0
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 0
-					},
 					"lifetime": {
 						"min": 0.5,
 						"max": 0.7
@@ -88,21 +38,99 @@
 					"frequency": 0.05,
 					"emitterLifetime": 0.31,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "ring",
-					"spawnCircle": {
-						"x": 0,
-						"y": 0,
-						"r": 40,
-						"minR": 39
-					}
-				},
-				//tell the particle example to use AnimatedParticle
-				"anim"
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 1
+										},
+										{
+											"time": 1,
+											"value": 0.8
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeed",
+							"config": {
+								"speed": {
+									"list": [
+										{
+											"time": 0,
+											"value": 200
+										},
+										{
+											"time": 1,
+											"value": 100
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "scaleStatic",
+							"config": {
+								"min": 0.5,
+								"max": 0.5
+							}
+						},
+						{
+							"type": "animatedRandom",
+							"config": {
+								"anims": [
+									{
+										"framerate": 20,
+										"loop": true,
+										"textures": [
+											"gold_1.png",
+											"gold_2.png",
+											"gold_3.png",
+											"gold_4.png",
+											"gold_5.png",
+											"gold_6.png"
+										]
+									},
+									{
+										"framerate": 20,
+										"loop": true,
+										"textures": [
+											"gold_6.png",
+											"gold_5.png",
+											"gold_4.png",
+											"gold_3.png",
+											"gold_2.png",
+											"gold_1.png"
+										]
+									}
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "torus",
+								"data": {
+									"x": 0,
+									"y": 0,
+									"radius": 40,
+									"innerRadius": 39,
+									"affectRotation": true
+								}
+							}
+						}
+					]
+				}
 			);
 		</script>
 	</body>

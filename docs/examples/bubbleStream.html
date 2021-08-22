@@ -29,45 +29,94 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 1,
-						"end": 0.16
-					},
-					"scale": {
-						"start": 0.3,
-						"end": 0.6,
-						"minimumScaleMultiplier":0.5
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 600,
-						"end": 200
-					},
-					"startRotation": {
-						"min": 267,
-						"max": 273
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 20
-					},
 					"lifetime": {
 						"min": 1.8,
 						"max": 2
 					},
-					"blendMode": "normal",
 					"frequency": 0.1,
 					"emitterLifetime": 0,
 					"maxParticles": 500,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "point"
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 1
+										},
+										{
+											"time": 1,
+											"value": 0.16
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeed",
+							"config": {
+								"speed": {
+									"list": [
+										{
+											"time": 0,
+											"value": 600
+										},
+										{
+											"time": 1,
+											"value": 200
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.3
+										},
+										{
+											"time": 1,
+											"value": 0.6
+										}
+									]
+								},
+								"minMult": 0.5
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 0,
+								"maxSpeed": 20,
+								"minStart": 267,
+								"maxStart": 273
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/Bubbles99.png"
+								]
+							}
+						},
+						{
+							"type": "spawnPoint",
+							"config": {}
+						}
+					]
 				});
 		</script>
 	</body>

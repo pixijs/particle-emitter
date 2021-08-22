@@ -797,6 +797,7 @@ export class LinkedListContainer extends Container
     /**
      * Renders the object using the Canvas renderer. Copied from and overrides PixiJS Canvas mixin in V5 and V6.
      */
+    // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     renderCanvas(renderer: any): void
     {
         // if not visible or the alpha is 0 then no need to render this

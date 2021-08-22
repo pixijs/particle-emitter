@@ -32,45 +32,112 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 1,
-						"end": 0
-					},
-					"scale": {
-						"start": 0.1,
-						"end": 1.5
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ff9999"
-					},
-					"speed": {
-						"start": 600,
-						"end": 200
-					},
-					"startRotation": {
-						"min": 0,
-						"max": 360
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 20
-					},
 					"lifetime": {
 						"min": 0.5,
 						"max": 0.7
 					},
-					"blendMode": "normal",
-					"frequency": STARTING_FREQUENCY,
+					"frequency": 0.0001,
 					"emitterLifetime": -1,
 					"maxParticles": 100000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "point"
-				}, null, true);
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 1
+										},
+										{
+											"time": 1,
+											"value": 0
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeed",
+							"config": {
+								"speed": {
+									"list": [
+										{
+											"time": 0,
+											"value": 600
+										},
+										{
+											"time": 1,
+											"value": 200
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.1
+										},
+										{
+											"time": 1,
+											"value": 1.5
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "ffffff"
+										},
+										{
+											"time": 1,
+											"value": "ff9999"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 0,
+								"maxSpeed": 20,
+								"minStart": 0,
+								"maxStart": 360
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/CartoonSmoke.png"
+								]
+							}
+						},
+						{
+							"type": "spawnPoint",
+							"config": {}
+						}
+					]
+				}, true);
 
 			const emitRate = document.getElementById('emitRate');
 

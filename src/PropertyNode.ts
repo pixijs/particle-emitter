@@ -1,14 +1,37 @@
-import { ParticleUtils, EaseSegment, SimpleEase, Color } from './ParticleUtils';
+import { generateEase, hexToRGB, EaseSegment, SimpleEase, Color } from './ParticleUtils';
 import { BasicTweenable } from './EmitterConfig';
 
+/**
+ * A single step of a ValueList.
+ */
 export interface ValueStep<T> {
+    /**
+     * The color or number to use at this step.
+     */
     value: T;
+    /**
+     * The percentage time of the particle's lifespan that this step happens at.
+     * Values are between 0 and 1, inclusive.
+     */
     time: number;
 }
 
+/**
+ * Configuration for an interpolated or stepped list of numeric or color particle values.
+ */
 export interface ValueList<T> {
+    /**
+     * The ordered list of values.
+     */
     list: ValueStep<T>[];
+    /**
+     * If the list is stepped. Stepped lists don't determine any in-between values, instead sticking with each value
+     * until its time runs out.
+     */
     isStepped?: boolean;
+    /**
+     * Easing that should be applied to this list, in order to alter how quickly the steps progress.
+     */
     ease?: SimpleEase|EaseSegment[];
 }
 /**
@@ -47,7 +70,7 @@ export class PropertyNode<V>
         this.isStepped = false;
         if (ease)
         {
-            this.ease = typeof ease === 'function' ? ease : ParticleUtils.generateEase(ease);
+            this.ease = typeof ease === 'function' ? ease : generateEase(ease);
         }
         else
         {
@@ -75,7 +98,7 @@ export class PropertyNode<V>
             const { value, time } = array[0];
 
             // eslint-disable-next-line max-len
-            const first = node = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time, data.ease);
+            const first = node = new PropertyNode(typeof value === 'string' ? hexToRGB(value) : value, time, data.ease);
 
             // only set up subsequent nodes if there are a bunch or the 2nd one is different from the first
             if (array.length > 2 || (array.length === 2 && array[1].value !== value))
@@ -84,7 +107,7 @@ export class PropertyNode<V>
                 {
                     const { value, time } = array[i];
 
-                    node.next = new PropertyNode(typeof value === 'string' ? ParticleUtils.hexToRGB(value) : value, time);
+                    node.next = new PropertyNode(typeof value === 'string' ? hexToRGB(value) : value, time);
                     node = node.next;
                 }
             }
@@ -94,12 +117,12 @@ export class PropertyNode<V>
         }
 
         // Handle deprecated version here
-        const start = new PropertyNode(typeof data.start === 'string' ? ParticleUtils.hexToRGB(data.start) : data.start, 0);
+        const start = new PropertyNode(typeof data.start === 'string' ? hexToRGB(data.start) : data.start, 0);
         // only set up a next value if it is different from the starting value
 
         if (data.end !== data.start)
         {
-            start.next = new PropertyNode(typeof data.end === 'string' ? ParticleUtils.hexToRGB(data.end) : data.end, 1);
+            start.next = new PropertyNode(typeof data.end === 'string' ? hexToRGB(data.end) : data.end, 1);
         }
 
         return start as PropertyNode<T extends string ? Color : T>;

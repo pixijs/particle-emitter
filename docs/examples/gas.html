@@ -29,49 +29,114 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.4,
-						"end": 0
-					},
-					"scale": {
-						"start": 2,
-						"end": 0.4
-					},
-					"color": {
-						"start": "6bff61",
-						"end": "d8ff4a"
-					},
-					"speed": {
-						"start": 10,
-						"end": 10
-					},
-					"startRotation": {
-						"min": 0,
-						"max": 360
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 0
-					},
 					"lifetime": {
 						"min": 2,
 						"max": 1.8
 					},
-					"blendMode": "screen",
 					"frequency": 0.01,
 					"emitterLifetime": 0,
 					"maxParticles": 1000,
+					"addAtBack": true,
 					"pos": {
 						"x": 0.5,
 						"y": 0.5
 					},
-					"addAtBack": true,
-					"spawnType": "circle",
-					"spawnCircle": {
-						"x": 0,
-						"y": 0,
-						"r": 150
-					}
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.4
+										},
+										{
+											"time": 1,
+											"value": 0
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 10,
+								"max": 10
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 2
+										},
+										{
+											"time": 1,
+											"value": 0.4
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "6bff61"
+										},
+										{
+											"time": 1,
+											"value": "d8ff4a"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "rotationStatic",
+							"config": {
+								"min": 0,
+								"max": 360
+							}
+						},
+						{
+							"type": "blendMode",
+							"config": {
+								"blendMode": "screen"
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/smokeparticle.png",
+									"images/particle.png"
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "torus",
+								"data": {
+									"x": 0,
+									"y": 0,
+									"radius": 150,
+									"innerRadius": 0,
+									"affectRotation": false
+								}
+							}
+						}
+					]
 				});
 		</script>
 	</body>

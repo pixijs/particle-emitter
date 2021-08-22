@@ -29,44 +29,111 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 1,
-						"end": 0.18
-					},
-					"scale": {
-						"start": 0.1,
-						"end": 1.2
-					},
-					"color": {
-						"start": "fffefe",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 700,
-						"end": 50
-					},
-					"startRotation": {
-						"min": 0,
-						"max": 360
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 200
-					},
 					"lifetime": {
 						"min": 0.4,
 						"max": 0.7
 					},
-					"blendMode": "normal",
 					"frequency": 0.001,
 					"emitterLifetime": 0.1,
 					"maxParticles": 100,
+					"addAtBack": true,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": true,
-					"spawnType": "point"
+					"behaviors": [
+						{
+							"type": "alpha",
+							"config": {
+								"alpha": {
+									"list": [
+										{
+											"time": 0,
+											"value": 1
+										},
+										{
+											"time": 1,
+											"value": 0.18
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "moveSpeed",
+							"config": {
+								"speed": {
+									"list": [
+										{
+											"time": 0,
+											"value": 700
+										},
+										{
+											"time": 1,
+											"value": 50
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "scale",
+							"config": {
+								"scale": {
+									"list": [
+										{
+											"time": 0,
+											"value": 0.1
+										},
+										{
+											"time": 1,
+											"value": 1.2
+										}
+									]
+								},
+								"minMult": 1
+							}
+						},
+						{
+							"type": "color",
+							"config": {
+								"color": {
+									"list": [
+										{
+											"time": 0,
+											"value": "fffefe"
+										},
+										{
+											"time": 1,
+											"value": "ffffff"
+										}
+									]
+								}
+							}
+						},
+						{
+							"type": "rotation",
+							"config": {
+								"accel": 0,
+								"minSpeed": 0,
+								"maxSpeed": 200,
+								"minStart": 0,
+								"maxStart": 360
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/CartoonSmoke.png"
+								]
+							}
+						},
+						{
+							"type": "spawnPoint",
+							"config": {}
+						}
+					]
 				});
 		</script>
 	</body>

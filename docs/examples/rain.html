@@ -29,50 +29,67 @@
 				// Emitter configuration, edit this to change the look
 				// of the emitter
 				{
-					"alpha": {
-						"start": 0.5,
-						"end": 0.5
-					},
-					"scale": {
-						"start": 1,
-						"end": 1
-					},
-					"color": {
-						"start": "ffffff",
-						"end": "ffffff"
-					},
-					"speed": {
-						"start": 3000,
-						"end": 3000
-					},
-					"startRotation": {
-						"min": 65,
-						"max": 65
-					},
-					"rotationSpeed": {
-						"min": 0,
-						"max": 0
-					},
 					"lifetime": {
 						"min": 0.81,
 						"max": 0.81
 					},
-					"blendMode": "normal",
 					"frequency": 0.004,
 					"emitterLifetime": 0,
 					"maxParticles": 1000,
+					"addAtBack": false,
 					"pos": {
 						"x": 0,
 						"y": 0
 					},
-					"addAtBack": false,
-					"spawnType": "rect",
-					"spawnRect": {
-						"x": -600,
-						"y": -460,
-						"w": 900,
-						"h": 20
-					}
+					"behaviors": [
+						{
+							"type": "alphaStatic",
+							"config": {
+								"alpha": 0.5
+							}
+						},
+						{
+							"type": "moveSpeedStatic",
+							"config": {
+								"min": 3000,
+								"max": 3000
+							}
+						},
+						{
+							"type": "scaleStatic",
+							"config": {
+								"min": 1,
+								"max": 1
+							}
+						},
+						{
+							"type": "rotationStatic",
+							"config": {
+								"min": 65,
+								"max": 65
+							}
+						},
+						{
+							"type": "textureRandom",
+							"config": {
+								"textures": [
+									"images/HardRain.png"
+								]
+							}
+						},
+						{
+							"type": "spawnShape",
+							"config": {
+								"type": "rect",
+								"data": {
+									"x": -600,
+									"y": -460,
+									"w": 900,
+									"h": 20
+								}
+							}
+						}
+					]
 				});
 		</script>
 	</body>

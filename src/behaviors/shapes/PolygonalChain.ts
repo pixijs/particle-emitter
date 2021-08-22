@@ -1,23 +1,33 @@
-import { Point } from '@pixi/math';
+import { IPointData } from '@pixi/math';
+import { ListProperty } from '../editor/Types';
+import { SpawnShape } from './SpawnShape';
 
-export interface BasicPoint
+interface Segment
 {
-    x: number;
-    y: number;
-}
-
-export interface Segment
-{
-    p1: BasicPoint;
-    p2: BasicPoint;
+    p1: IPointData;
+    p2: IPointData;
     l: number;
 }
 
 /**
- * Chain of line segments for generating spawn positions.
+ * A spawn shape that picks a random position along a series of line segments. If those
+ * line segments form a polygon, particles will only be placed on the perimeter of that polygon.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *      type: 'polygonalChain',
+ *      data: [
+ *          [{x: 0, y: 0}, {x: 10, y: 10}, {x: 20, y: 0}],
+ *          [{x: 0, y, -10}, {x: 10, y: 0}, {x: 20, y: -10}]
+ *      ]
+ * }
+ * ```
  */
-export class PolygonalChain
+export class PolygonalChain implements SpawnShape
 {
+    public static type = 'polygonalChain';
+    public static editorConfig: ListProperty = null;
     /**
      * List of segment objects in the chain.
      */
@@ -35,7 +45,7 @@ export class PolygonalChain
     /**
      * @param data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
      */
-    constructor(data: BasicPoint[]|BasicPoint[][])
+    constructor(data: IPointData[]|IPointData[][])
     {
         this.segments = [];
         this.countingLengths = [];
@@ -46,7 +56,7 @@ export class PolygonalChain
     /**
      * @param data Point data for polygon chains. Either a list of points for a single chain, or a list of chains.
      */
-    private init(data: BasicPoint[]|BasicPoint[][]): void
+    private init(data: IPointData[]|IPointData[][]): void
     {
         // if data is not present, set up a segment of length 0
         if (!data || !data.length)
@@ -59,12 +69,12 @@ export class PolygonalChain
             for (let i = 0; i < data.length; ++i)
             {
                 // loop through the chain, connecting points
-                const chain = data[i] as BasicPoint[];
-                let prevPoint = chain[0] as BasicPoint;
+                const chain = data[i] as IPointData[];
+                let prevPoint = chain[0] as IPointData;
 
                 for (let j = 1; j < chain.length; ++j)
                 {
-                    const second = chain[j] as BasicPoint;
+                    const second = chain[j] as IPointData;
 
                     this.segments.push({ p1: prevPoint, p2: second, l: 0 });
                     prevPoint = second;
@@ -73,12 +83,12 @@ export class PolygonalChain
         }
         else
         {
-            let prevPoint = data[0] as BasicPoint;
+            let prevPoint = data[0] as IPointData;
             // list of points
 
             for (let i = 1; i < data.length; ++i)
             {
-                const second = data[i] as BasicPoint;
+                const second = data[i] as IPointData;
 
                 this.segments.push({ p1: prevPoint, p2: second, l: 0 });
                 prevPoint = second;
@@ -103,7 +113,7 @@ export class PolygonalChain
      * Gets a random point in the chain.
      * @param out The point to store the selected position in.
      */
-    public getRandomPoint(out: Point): void
+    public getRandPos(out: IPointData): void
     {
         // select a random spot in the length of the chain
         const rand = Math.random() * this.totalLength;

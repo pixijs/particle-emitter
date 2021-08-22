@@ -8,13 +8,12 @@
     *  @constructor
     *  @param {String[]} imagePaths The local path to the image source
     *  @param {Object} config The emitter configuration
-    *  @param {null|'path'|'anim'} [type=null] Particle type to create.
     *  @param {boolean} [testContainers=false] If changing containers should be enabled.
     *  @param {boolean} [stepColors=false] If the color settings should be manually stepped.
     */
     class ParticleExample
     {
-        constructor(imagePaths, config, type, testContainers, stepColors)
+        constructor(imagePaths, config, testContainers, stepColors)
         {
             const canvas = document.getElementById('stage');
             // Basic PIXI Setup
@@ -90,7 +89,6 @@
 
             // Preload the particle images and create PIXI textures from it
             let urls;
-            let makeTextures = false;
             if (imagePaths.spritesheet)
             {
                 urls = [imagePaths.spritesheet];
@@ -102,9 +100,7 @@
             else
             {
                 urls = imagePaths.slice();
-                makeTextures = true;
             }
-            urls.push('images/bg.png');
             const loader = PIXI.Loader.shared;
             for (let i = 0; i < urls.length; ++i)
             {
@@ -112,26 +108,12 @@
             }
             loader.load(() =>
             {
-                this.bg = new PIXI.Sprite(PIXI.Texture.from('images/bg.png'));
+                this.bg = new PIXI.Sprite(PIXI.Texture.WHITE);
                 // bg is a 1px by 1px image
                 this.bg.scale.x = canvas.width;
                 this.bg.scale.y = canvas.height;
                 this.bg.tint = 0x000000;
                 this.stage.addChild(this.bg);
-                // collect the textures, now that they are all loaded
-                let art;
-                if (makeTextures)
-                {
-                    art = [];
-                    for (let i = 0; i < imagePaths.length; ++i)
-                    {
-                        art.push(PIXI.Texture.from(imagePaths[i]));
-                    }
-                }
-                else
-                {
-                    art = imagePaths.art;
-                }
                 // Create the new emitter and attach it to the stage
                 let parentType = 0;
                 function getContainer()
@@ -161,23 +143,16 @@
 
                 window.emitter = this.emitter = new PIXI.particles.Emitter(
                     emitterContainer,
-                    art,
                     config,
                 );
                 if (stepColors)
                 {
-                    this.emitter.startColor = PIXI.particles.ParticleUtils.createSteppedGradient(
-                        config.color.list,
-                        stepColors
+                    this.emitter.getBehavior('color').list.reset(
+                        PIXI.particles.ParticleUtils.createSteppedGradient(
+                            config.color.list,
+                            stepColors,
+                        ),
                     );
-                }
-                if (type === 'path')
-                {
-                    this.emitter.particleConstructor = PIXI.particles.PathParticle;
-                }
-                else if (type === 'anim')
-                {
-                    this.emitter.particleConstructor = PIXI.particles.AnimatedParticle;
                 }
 
                 // Center on the stage
