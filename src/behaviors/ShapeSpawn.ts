@@ -6,7 +6,33 @@ import { Rectangle } from './shapes/Rectangle';
 import { Torus } from './shapes/Torus';
 import { BehaviorEditorConfig } from './editor/Types';
 
-export class ShapeSpawn implements IEmitterBehavior
+/**
+ * A Spawn behavior that places (and optionally rotates) particles according to a
+ * specified shape. Additional shapes can be registered with {@link registerShape | SpawnShape.registerShape()}.
+ * Additional shapes must implement the {@link SpawnShape} interface, and their class must match the
+ * {@link SpawnShapeClass} interface.
+ * Shapes included by default are:
+ * * {@link Rectangle}
+ * * {@link Torus}
+ * * {@link PolygonalChain}
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'spawnShape',
+ *     config: {
+ *          type: 'rect',
+ *          data: {
+ *              x: 0,
+ *              y: 0,
+ *              width: 20,
+ *              height: 300,
+ *          }
+ *     }
+ * }
+ * ```
+ */
+export class ShapeSpawnBehavior implements IEmitterBehavior
 {
     public static type = 'spawnShape';
     public static editorConfig: BehaviorEditorConfig = null;
@@ -23,7 +49,7 @@ export class ShapeSpawn implements IEmitterBehavior
      */
     public static registerShape(constructor: SpawnShapeClass, typeOverride?: string): void
     {
-        ShapeSpawn.shapes[typeOverride || constructor.type] = constructor;
+        ShapeSpawnBehavior.shapes[typeOverride || constructor.type] = constructor;
     }
 
     order = BehaviorOrder.Spawn;
@@ -40,7 +66,7 @@ export class ShapeSpawn implements IEmitterBehavior
         data: any;
     })
     {
-        const ShapeClass = ShapeSpawn.shapes[config.type];
+        const ShapeClass = ShapeSpawnBehavior.shapes[config.type];
 
         if (!ShapeClass)
         {
@@ -61,7 +87,7 @@ export class ShapeSpawn implements IEmitterBehavior
     }
 }
 
-ShapeSpawn.registerShape(PolygonalChain);
-ShapeSpawn.registerShape(Rectangle);
-ShapeSpawn.registerShape(Torus);
-ShapeSpawn.registerShape(Torus, 'circle');
+ShapeSpawnBehavior.registerShape(PolygonalChain);
+ShapeSpawnBehavior.registerShape(Rectangle);
+ShapeSpawnBehavior.registerShape(Torus);
+ShapeSpawnBehavior.registerShape(Torus, 'circle');

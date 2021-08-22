@@ -6,6 +6,23 @@ import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
+/**
+ * A Movement behavior that uses an interpolated or stepped list of values for a particles speed at any given moment.
+ * Movement direction is controlled by the particle's starting rotation.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'moveSpeed',
+ *     config: {
+ *          speed: {
+ *              list: [{value: 10, time: 0}, {value: 100, time: 0.25}, {value: 0, time: 1}],
+ *          },
+ *          minMult: 0.8
+ *     }
+ * }
+ * ```
+ */
 export class SpeedBehavior implements IEmitterBehavior
 {
     public static type = 'moveSpeed';
@@ -16,7 +33,7 @@ export class SpeedBehavior implements IEmitterBehavior
     private minMult: number;
     constructor(config: {
         /**
-         * Speed of the particles, with a minimum value of 0
+         * Speed of the particles in world units/second, with a minimum value of 0
          */
         speed: ValueList<number>;
         /**
@@ -67,6 +84,21 @@ export class SpeedBehavior implements IEmitterBehavior
     }
 }
 
+/**
+ * A Movement behavior that uses a randomly picked constant speed throughout a particle's lifetime.
+ * Movement direction is controlled by the particle's starting rotation.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'moveSpeedStatic',
+ *     config: {
+ *          min: 100,
+ *          max: 150
+ *     }
+ * }
+ * ```
+ */
 export class StaticSpeedBehavior implements IEmitterBehavior
 {
     public static type = 'moveSpeedStatic';

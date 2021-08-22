@@ -6,6 +6,20 @@ import { SpawnShape } from './SpawnShape';
 /**
  * A class for spawning particles in a circle or ring.
  * Can optionally apply rotation to particles so that they are aimed away from the center of the circle.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'torus',
+ *     data: {
+ *          radius: 30,
+ *          x: 0,
+ *          y: 0,
+ *          innerRadius: 10,
+ *          rotation: true
+ *     }
+ * }
+ * ```
  */
 export class Torus implements SpawnShape
 {
@@ -32,7 +46,29 @@ export class Torus implements SpawnShape
      */
     public rotation: boolean;
 
-    constructor(config: {radius: number; x: number; y: number; innerRadius?: number; affectRotation?: boolean})
+    constructor(config: {
+        /**
+         * Radius of circle, or outer radius of a ring.
+         */
+        radius: number;
+        /**
+         * X position of the center of the shape.
+         */
+        x: number;
+        /**
+         * Y position of the center of the shape.
+         */
+        y: number;
+        /**
+         * Inner radius of a ring. Omit, or use 0, to have a circle.
+         */
+        innerRadius?: number;
+        /**
+         * If rotation should be applied to particles, pointing them away from the center of the torus.
+         * Defaults to false.
+         */
+        affectRotation?: boolean
+    })
     {
         this.x = config.x || 0;
         this.y = config.y || 0;

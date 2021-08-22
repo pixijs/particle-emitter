@@ -4,6 +4,21 @@ import { PropertyNode, ValueList } from '../PropertyNode';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
+/**
+ * An Alpha behavior that applies an interpolated or stepped list of values to the particle's opacity.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'alpha',
+ *     config: {
+ *         alpha: {
+ *              list: [{value: 0, time: 0}, {value: 1, time: 0.25}, {value: 0, time: 1}]
+ *         },
+ *     }
+ * }
+ * ```
+ */
 export class AlphaBehavior implements IEmitterBehavior
 {
     public static type = 'alpha';
@@ -39,6 +54,19 @@ export class AlphaBehavior implements IEmitterBehavior
     }
 }
 
+/**
+ * An Alpha behavior that applies a static value to the particle's opacity at particle initialization.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'alphaStatic',
+ *     config: {
+ *         alpha: 0.75,
+ *     }
+ * }
+ * ```
+ */
 export class StaticAlphaBehavior implements IEmitterBehavior
 {
     public static type = 'alphaStatic';

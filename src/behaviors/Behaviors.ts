@@ -2,7 +2,9 @@ import { Particle } from '../Particle';
 import { BehaviorEditorConfig } from './editor/Types';
 
 /**
- * All behaviors must match this specification.
+ * All behaviors instances must implement this interface, and the class must match the
+ * {@link IEmitterBehaviorClass} interface. All behaviors must have an order property and
+ * `initParticles` method. Implementing the `updateParticle` or `recycleParticle` methods is optional.
  */
 export interface IEmitterBehavior
 {
@@ -31,7 +33,7 @@ export interface IEmitterBehavior
 }
 
 /**
- * A class for an emitter behavior.
+ * All behavior classes must match this interface. The instances need to implement the {@link IEmitterBehavior} interface.
  */
 export interface IEmitterBehaviorClass
 {

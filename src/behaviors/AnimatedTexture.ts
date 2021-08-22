@@ -5,7 +5,7 @@ import { GetTextureFromString } from '../ParticleUtils';
 import { BehaviorEditorConfig } from './editor/Types';
 
 /**
- * The format of an animation to be used on a particle.
+ * The format of a single animation to be used on a particle.
  */
 export interface AnimatedParticleArt
 {
@@ -15,11 +15,16 @@ export interface AnimatedParticleArt
      */
     framerate: -1|number;
     /**
-     * If the animation should loop.
+     * If the animation should loop. Defaults to false.
      */
     loop?: boolean;
     /**
      * A list of textures or frame descriptions for duplicated frames.
+     * String values will be converted to textures with {@link ParticleUtils.GetTextureFromString}.
+     * Example of a texture repeated for 5 frames, followed by a second texture for one frame:
+     * ```javascript
+     * [{texture: 'myFirstTex', count: 5}, 'mySecondTex']
+     * ```
      */
     textures: (string|Texture|{texture: string|Texture; count: number})[];
 }
@@ -71,6 +76,31 @@ function getTextures(textures: (string|Texture|{texture: string|Texture; count: 
     return outTextures;
 }
 
+/**
+ * A Texture behavior that picks a random animation for each particle to play.
+ * See {@link AnimatedParticleArt} for detailed configuration info.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'animatedRandom',
+ *     config: {
+ *         anims: [
+ *              {
+ *                  framerate: 25,
+ *                  loop: true,
+ *                  textures: ['frame1', 'frame2', 'frame3']
+ *              },
+ *              {
+ *                  framerate: 25,
+ *                  loop: true,
+ *                  textures: ['frame3', 'frame2', 'frame1']
+ *              }
+ *         ],
+ *     }
+ * }
+ * ```
+ */
 export class RandomAnimatedTextureBehavior implements IEmitterBehavior
 {
     public static type = 'animatedRandom';
@@ -158,6 +188,24 @@ export class RandomAnimatedTextureBehavior implements IEmitterBehavior
     }
 }
 
+/**
+ * A Texture behavior that uses a single animation for each particle to play.
+ * See {@link AnimatedParticleArt} for detailed configuration info.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'animatedSingle',
+ *     config: {
+ *         anim: {
+ *              framerate: 25,
+ *              loop: true,
+ *              textures: ['frame1', 'frame2', 'frame3']
+ *         }
+ *     }
+ * }
+ * ```
+ */
 export class SingleAnimatedTextureBehavior implements IEmitterBehavior
 {
     public static type = 'animatedSingle';

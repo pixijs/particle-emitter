@@ -10,6 +10,9 @@ import { PropertyNode, ValueStep } from './PropertyNode';
 // eslint-disable-next-line prefer-const
 export let GetTextureFromString:(d:string) => Texture = Texture.from;
 
+/**
+ * A color value, split apart for interpolation.
+ */
 export interface Color {
     r: number;
     g: number;
@@ -23,6 +26,10 @@ export interface EaseSegment {
     e: number;
 }
 
+/**
+ * The basic easing function used. Takes in a value between 0-1, and outputs another value between 0-1.
+ * For example, a basic quadratic in ease would be `(time) => time * time`
+ */
 export type SimpleEase = (time: number) => number;
 
 /**

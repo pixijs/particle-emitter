@@ -3,7 +3,23 @@ import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { DEG_TO_RADS, rotatePoint } from '../ParticleUtils';
 import { BehaviorEditorConfig } from './editor/Types';
 
-export class BurstSpawn implements IEmitterBehavior
+/**
+ * A Spawn behavior that sends particles out from a single point or ring, and is capable of evenly spacing
+ * the particle's starting angles.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'spawnBurst',
+ *     config: {
+ *          spacing: 90,
+ *          start: 0,
+ *          distance: 40,
+ *     }
+ * }
+ * ```
+ */
+export class BurstSpawnBehavior implements IEmitterBehavior
 {
     public static type = 'spawnBurst';
     public static editorConfig: BehaviorEditorConfig = null;

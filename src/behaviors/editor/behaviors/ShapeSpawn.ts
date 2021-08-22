@@ -1,6 +1,6 @@
-import { ShapeSpawn } from '../../ShapeSpawn';
+import { ShapeSpawnBehavior } from '../../ShapeSpawn';
 
-ShapeSpawn.editorConfig = {
+ShapeSpawnBehavior.editorConfig = {
     category: 'spawn',
     title: 'Shape',
     props: [

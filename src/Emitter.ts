@@ -25,6 +25,12 @@ export class Emitter
 {
     private static knownBehaviors: {[key: string]: IEmitterBehaviorClass} = {};
 
+    /**
+     * Registers a new behavior, so that it will be recognized when initializing emitters.
+     * Behaviors registered later with duplicate types will override older ones, although there is no limit on
+     * the allowed types.
+     * @param constructor The behavior class to register.
+     */
     public static registerBehavior(constructor: IEmitterBehaviorClass): void
     {
         Emitter.knownBehaviors[constructor.type] = constructor;
@@ -376,11 +382,15 @@ export class Emitter
     }
 
     /**
-     * Gets the instantiated behavior of the specified type, if any.
+     * Gets the instantiated behavior of the specified type, if it is present on this emitter.
      * @param type The behavior type to find.
      */
     public getBehavior(type: string): IEmitterBehavior|null
     {
+        // bail if we don't know about such an emitter
+        if (!Emitter.knownBehaviors[type]) return null;
+
+        // find one that is an instance of the specified type
         return this.initBehaviors.find((b) => b instanceof Emitter.knownBehaviors[type]) as IEmitterBehavior || null;
     }
 
@@ -853,7 +863,8 @@ export class Emitter
 
     /**
      * Emits a single wave of particles, using standard spawnChance & particlesPerWave settings. Does not affect
-     * regular spawning through the frequency, and ignores the emit property.
+     * regular spawning through the frequency, and ignores the emit property. The max particle count is respected, however,
+     * so if there are already too many particles then nothing will happen.
      */
     public emitNow(): void
     {

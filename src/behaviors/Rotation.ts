@@ -3,6 +3,23 @@ import { DEG_TO_RADS } from '../ParticleUtils';
 import { IEmitterBehavior, BehaviorOrder } from './Behaviors';
 import { BehaviorEditorConfig } from './editor/Types';
 
+/**
+ * A Rotation behavior that handles starting rotation, rotation speed, and rotational acceleration.
+ *
+ * Example configuration:
+ * ```javascript
+ * {
+ *     "type": "rotation",
+ *     "config": {
+ *          "minStart": 0,
+ *          "maxStart": 180,
+ *          "minSpeed": 30,
+ *          "maxSpeed": 45,
+ *          "accel": 20
+ *     }
+ *}
+ * ```
+ */
 export class RotationBehavior implements IEmitterBehavior
 {
     public static type = 'rotation';
@@ -80,6 +97,20 @@ export class RotationBehavior implements IEmitterBehavior
     }
 }
 
+/**
+ * A Rotation behavior that handles starting rotation.
+ *
+ * Example configuration:
+ * ```javascript
+ * {
+ *     "type": "rotationStatic",
+ *     "config": {
+ *          "min": 0,
+ *          "max": 180,
+ *     }
+ *}
+ * ```
+ */
 export class StaticRotationBehavior implements IEmitterBehavior
 {
     public static type = 'rotationStatic';
@@ -123,6 +154,20 @@ export class StaticRotationBehavior implements IEmitterBehavior
     }
 }
 
+/**
+ * A Rotation behavior that blocks all rotation caused by spawn settings,
+ * by resetting it to the specified rotation (or 0).
+ *
+ * Example configuration:
+ * ```javascript
+ * {
+ *     "type": "noRotation",
+ *     "config": {
+ *          "rotation": 0
+ *     }
+ *}
+ * ```
+ */
 export class NoRotationBehavior implements IEmitterBehavior
 {
     public static type = 'noRotation';
@@ -130,13 +175,24 @@ export class NoRotationBehavior implements IEmitterBehavior
 
     public order = BehaviorOrder.Late + 1;
 
+    private rotation: number;
+    constructor(config: {
+        /**
+         * Locked rotation of the particles, in degrees. 0 is facing right, 90 is upwards.
+         */
+        rotation?: number;
+    })
+    {
+        this.rotation = (config.rotation || 0) * DEG_TO_RADS;
+    }
+
     initParticles(first: Particle): void
     {
         let next = first;
 
         while (next)
         {
-            next.rotation = 0;
+            next.rotation = this.rotation;
 
             next = next.next;
         }

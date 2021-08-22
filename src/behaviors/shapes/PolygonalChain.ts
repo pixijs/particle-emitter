@@ -2,7 +2,7 @@ import { IPointData } from '@pixi/math';
 import { ListProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
-export interface Segment
+interface Segment
 {
     p1: IPointData;
     p2: IPointData;
@@ -10,7 +10,19 @@ export interface Segment
 }
 
 /**
- * Chain of line segments for generating spawn positions.
+ * A spawn shape that picks a random position along a series of line segments. If those
+ * line segments form a polygon, particles will only be placed on the perimeter of that polygon.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *      type: 'polygonalChain',
+ *      data: [
+ *          [{x: 0, y: 0}, {x: 10, y: 10}, {x: 20, y: 0}],
+ *          [{x: 0, y, -10}, {x: 10, y: 0}, {x: 20, y: -10}]
+ *      ]
+ * }
+ * ```
  */
 export class PolygonalChain implements SpawnShape
 {

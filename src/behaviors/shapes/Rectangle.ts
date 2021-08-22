@@ -3,7 +3,20 @@ import type { ObjectProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
 /**
- * A rectangle for generating spawn positions.
+ * A SpawnShape that randomly picks locations inside a rectangle.
+ *
+ * Example config:
+ * ```javascript
+ * {
+ *     type: 'rect',
+ *     data: {
+ *          x: 0,
+ *          y: 0,
+ *          w: 10,
+ *          h: 100
+ *     }
+ * }
+ * ```
  */
 export class Rectangle implements SpawnShape
 {
@@ -26,7 +39,24 @@ export class Rectangle implements SpawnShape
      */
     public h: number;
 
-    constructor(config: {x: number; y: number; w: number; h: number})
+    constructor(config: {
+        /**
+         * X (left) position of the rectangle.
+         */
+        x: number;
+        /**
+         * Y (top) position of the rectangle.
+         */
+        y: number;
+        /**
+         * Width of the rectangle.
+         */
+        w: number;
+        /**
+         * Height of the rectangle.
+         */
+        h: number;
+    })
     {
         this.x = config.x;
         this.y = config.y;

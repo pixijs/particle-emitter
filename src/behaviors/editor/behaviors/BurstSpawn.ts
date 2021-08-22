@@ -1,6 +1,6 @@
-import { BurstSpawn } from '../../BurstSpawn';
+import { BurstSpawnBehavior } from '../../BurstSpawn';
 
-BurstSpawn.editorConfig = {
+BurstSpawnBehavior.editorConfig = {
     category: 'spawn',
     title: 'Burst',
     props: [

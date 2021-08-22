@@ -107,14 +107,27 @@ function parsePath(pathString: string): (x: number) => number
  * the particle, respectively. The final position is rotated by the spawn rotation/angle of
  * the particle.
  *
- * A function merely needs to accept the "x" value and output the a corresponding "y" value.
+ * A function merely needs to accept the "x" argument and output the a corresponding "y" value.
  *
  * Some example paths:
  *
- * 	"sin(x/10) * 20" // A sine wave path.
- * 	"cos(x/100) * 30" // Particles curve counterclockwise (for medium speed/low lifetime particles)
- * 	"pow(x/10, 2) / 2" // Particles curve clockwise (remember, +y is down).
- * 	(x) => Math.floor(x) * 3 // Supplying an existing function should look like this
+ * * `"sin(x/10) * 20"` A sine wave path.
+ * * `"cos(x/100) * 30"` Particles curve counterclockwise (for medium speed/low lifetime particles)
+ * * `"pow(x/10, 2) / 2"` Particles curve clockwise (remember, +y is down).
+ * * `(x) => Math.floor(x) * 3` Supplying an existing function should look like this
+ *
+ * Example configuration:
+ * ```javascript
+ * {
+ *     "type": "movePath",
+ *     "config": {
+ *          "path": "round(sin(x) * 2",
+ *          "speed": {
+ *              "list": [{value: 10, time: 0}, {value: 100, time: 0.25}, {value: 0, time: 1}],
+ *          },
+ *          "minMult": 0.8
+ *     }
+ *}
  */
 export class PathBehavior implements IEmitterBehavior
 {
@@ -135,7 +148,8 @@ export class PathBehavior implements IEmitterBehavior
          */
         path: string|((x: number) => number);
         /**
-         * Speed of the particles, with a minimum value of 0. this affects the x value in the path.
+         * Speed of the particles in world units/second. This affects the x value in the path.
+         * Unlike normal speed movement, this can have negative values.
          */
         speed: ValueList<number>;
         /**
