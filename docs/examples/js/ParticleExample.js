@@ -147,9 +147,10 @@
                 );
                 if (stepColors)
                 {
+                    // override the initialized list with our auto-stepped one
                     this.emitter.getBehavior('color').list.reset(
                         PIXI.particles.ParticleUtils.createSteppedGradient(
-                            config.color.list,
+                            config.behaviors.find((b) => b.type === 'color').config.color.list,
                             stepColors,
                         ),
                     );

@@ -15,7 +15,7 @@
   "workspaces": {
     "nohoist": [
       "pixi.js",
-      "pixi-particles"
+      "@pixi/particle-emitter"
     ]
   },
   "private": true

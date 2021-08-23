@@ -31,7 +31,7 @@ require('override-require')(isOverride, resolveRequest);
 import { Container } from '@pixi/display';
 import { Renderer, BatchRenderer, Texture } from '@pixi/core';
 import { Sprite } from '@pixi/sprite';
-import { Emitter } from "pixi-particles";
+import { Emitter } from "@pixi/particle-emitter";
 
 Renderer.registerPlugin('batch', BatchRenderer);
 

@@ -1,9 +1,9 @@
 {
   "name": "@pixi/particle-emitter",
   "version": "4.3.1",
-  "main": "lib/pixi-particles.js",
-  "module": "lib/pixi-particles.es.js",
-  "bundle": "dist/pixi-particles.js",
+  "main": "lib/particle-emitter.js",
+  "module": "lib/particle-emitter.es.js",
+  "bundle": "dist/particle-emitter.js",
   "typings": "lib/index.d.ts",
   "description": "Particle emitter for Pixi.js",
   "author": "Andrew Start <start.andrew@gmail.com>",
@@ -18,7 +18,7 @@
     "lint": "eslint --ext .ts src",
     "prebuild": "npm run lint",
     "build": "tsc && rollup -c && npm run build:min && npm run build:dts",
-    "build:min": "terser dist/pixi-particles.js -c -m -o dist/pixi-particles.min.js --source-map \"content='dist/pixi-particles.js.map',includeSources=true,filename='dist/pixi-particles.min.js.map',url='pixi-particles.min.js.map'\" --comments \"/pixi-particles.js - /\"",
+    "build:min": "terser dist/particle-emitter.js -c -m -o dist/particle-emitter.min.js --source-map \"content='dist/particle-emitter.js.map',includeSources=true,filename='dist/particle-emitter.min.js.map',url='particle-emitter.min.js.map'\" --comments \"/particle-emitter.js - /\"",
     "build:dts": "tsc --noEmit false --declaration --emitDeclarationOnly --declarationDir lib",
     "postbuild": "ncp dist docs/dist",
     "predocs": "ncp node_modules/pixi.js docs/examples/libs/pixi.js",
@@ -73,10 +73,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/pixijs/pixi-particles"
+    "url": "https://github.com/pixijs/particle-emitter"
   },
   "bugs": {
-    "url": "https://github.com/pixijs/pixi-particles/issues"
+    "url": "https://github.com/pixijs/particle-emitter/issues"
   },
   "files": [
     "dist/",
