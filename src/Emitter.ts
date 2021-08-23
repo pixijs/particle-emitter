@@ -996,6 +996,15 @@ export class Emitter
     }
 
     /**
+     * If this emitter has been destroyed. Note that a destroyed emitter can still be reused, after
+     * having a new parent set and being reinitialized.
+     */
+    public get destroyed(): boolean
+    {
+        return !(this._parent && this.initBehaviors.length);
+    }
+
+    /**
      * Destroys the emitter and all of its particles.
      */
     public destroy(): void
@@ -1015,5 +1024,7 @@ export class Emitter
         }
         this._poolFirst = this._parent = this.spawnPos = this.ownerPos
             = this.customEase = this._completeCallback = null;
+
+        this.initBehaviors.length = this.updateBehaviors.length = this.recycleBehaviors.length = 0;
     }
 }
