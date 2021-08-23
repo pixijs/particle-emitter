@@ -31,7 +31,6 @@
     "publish:minor": "npm version minor && node build/publish.js",
     "publish:major": "npm version major && node build/publish.js",
     "postpublish": "git push && git push --tags && npm run docs-live",
-    "examples": "npm run predocs && http-server docs/",
     "test": "echo done"
   },
   "peerDependencies": {
@@ -55,7 +54,6 @@
     "electron": "^9.4.0",
     "eslint": "^7.2.0",
     "gh-pages": "^2.0.0",
-    "http-server": "^0.12.3",
     "ncp": "^2.0.0",
     "pixi.js": "^6.0.4",
     "rimraf": "^2.5.4",
