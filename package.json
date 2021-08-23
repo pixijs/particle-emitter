@@ -1,6 +1,6 @@
 {
   "name": "@pixi/particle-emitter",
-  "version": "4.3.1",
+  "version": "5.0.0",
   "main": "lib/particle-emitter.js",
   "module": "lib/particle-emitter.es.js",
   "bundle": "dist/particle-emitter.js",
