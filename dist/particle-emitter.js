@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.0
- * Compiled Mon, 23 Aug 2021 01:34:39 UTC
+ * @pixi/particle-emitter - v5.0.1
+ * Compiled Mon, 23 Aug 2021 02:25:57 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -1016,6 +1016,13 @@ this.PIXI = this.PIXI || {};
             this.particleCount = 0;
         }
         /**
+         * If this emitter has been destroyed. Note that a destroyed emitter can still be reused, after
+         * having a new parent set and being reinitialized.
+         */
+        get destroyed() {
+            return !(this._parent && this.initBehaviors.length);
+        }
+        /**
          * Destroys the emitter and all of its particles.
          */
         destroy() {
@@ -1032,6 +1039,7 @@ this.PIXI = this.PIXI || {};
             }
             this._poolFirst = this._parent = this.spawnPos = this.ownerPos
                 = this.customEase = this._completeCallback = null;
+            this.initBehaviors.length = this.updateBehaviors.length = this.recycleBehaviors.length = 0;
         }
     }
     Emitter.knownBehaviors = {};
