@@ -1,0 +1,3066 @@
+<!doctype html>
+<html class="default no-js">
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>LinkedListContainer | @pixi/particle-emitter</title>
+	<meta name="description" content="Documentation for @pixi/particle-emitter">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="../assets/css/main.css">
+	<script async src="../assets/js/search.js" id="search-script"></script>
+</head>
+<body>
+<header>
+	<div class="tsd-page-toolbar">
+		<div class="container">
+			<div class="table-wrap">
+				<div class="table-cell" id="tsd-search" data-index="../assets/js/search.json" data-base="..">
+					<div class="field">
+						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
+						<input id="tsd-search-field" type="text" />
+					</div>
+					<ul class="results">
+						<li class="state loading">Preparing search index...</li>
+						<li class="state failure">The search index is not available</li>
+					</ul>
+					<a href="../index.html" class="title">@pixi/particle-emitter</a>
+				</div>
+				<div class="table-cell" id="tsd-widgets">
+					<div id="tsd-filter">
+						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
+						<div class="tsd-filter-group">
+							<div class="tsd-select" id="tsd-filter-visibility">
+								<span class="tsd-select-label">All</span>
+								<ul class="tsd-select-list">
+									<li data-value="public">Public</li>
+									<li data-value="protected">Public/Protected</li>
+									<li data-value="private" class="selected">All</li>
+								</ul>
+							</div>
+							<input type="checkbox" id="tsd-filter-inherited" checked />
+							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
+							<input type="checkbox" id="tsd-filter-externals" checked />
+							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
+						</div>
+					</div>
+					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="tsd-page-title">
+		<div class="container">
+			<ul class="tsd-breadcrumb">
+				<li>
+					<a href="../modules.html">@pixi/particle-emitter</a>
+				</li>
+				<li>
+					<a href="LinkedListContainer.html">LinkedListContainer</a>
+				</li>
+			</ul>
+			<h1>Class LinkedListContainer</h1>
+		</div>
+	</div>
+</header>
+<div class="container container-main">
+	<div class="row">
+		<div class="col-8 col-content">
+			<section class="tsd-panel tsd-comment">
+				<div class="tsd-comment tsd-typography">
+					<div class="lead">
+						<p>A semi-experimental Container that uses a doubly linked list to manage children instead of an
+							array. This means that adding/removing children often is not the same performance hit that
+							it would to be continually pushing/splicing.
+							However, this is primarily intended to be used for heavy particle usage, and may not handle
+						edge cases well if used as a complete Container replacement.</p>
+					</div>
+				</div>
+			</section>
+			<section class="tsd-panel tsd-hierarchy">
+				<h3>Hierarchy</h3>
+				<ul class="tsd-hierarchy">
+					<li>
+						<span class="tsd-signature-type">Container</span>
+						<ul class="tsd-hierarchy">
+							<li>
+								<span class="target">LinkedListContainer</span>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</section>
+			<section class="tsd-panel-group tsd-index-group">
+				<h2>Index</h2>
+				<section class="tsd-panel tsd-index-panel">
+					<div class="tsd-index-content">
+						<section class="tsd-index-section tsd-is-inherited">
+							<h3>Constructors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><a href="LinkedListContainer.html#constructor" class="tsd-kind-icon">constructor</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Properties</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#_bounds" class="tsd-kind-icon">_bounds</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_boundsID" class="tsd-kind-icon">_boundsID</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_boundsRect" class="tsd-kind-icon">_bounds<wbr>Rect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="LinkedListContainer.html#_childCount" class="tsd-kind-icon">_child<wbr>Count</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_destroyed" class="tsd-kind-icon">_destroyed</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_enabledFilters" class="tsd-kind-icon">_enabled<wbr>Filters</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="LinkedListContainer.html#_firstChild" class="tsd-kind-icon">_first<wbr>Child</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_height" class="tsd-kind-icon">_height</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><a href="LinkedListContainer.html#_lastChild" class="tsd-kind-icon">_last<wbr>Child</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#_lastSortedIndex" class="tsd-kind-icon">_last<wbr>Sorted<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#_localBounds" class="tsd-kind-icon">_local<wbr>Bounds</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_localBoundsRect" class="tsd-kind-icon">_local<wbr>Bounds<wbr>Rect</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#_mask" class="tsd-kind-icon">_mask</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_width" class="tsd-kind-icon">_width</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_zIndex" class="tsd-kind-icon">_z<wbr>Index</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#alpha" class="tsd-kind-icon">alpha</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#children" class="tsd-kind-icon">children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#containerUpdateTransform" class="tsd-kind-icon">container<wbr>Update<wbr>Transform</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#displayObjectUpdateTransform" class="tsd-kind-icon">display<wbr>Object<wbr>Update<wbr>Transform</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#filterArea" class="tsd-kind-icon">filter<wbr>Area</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#filters" class="tsd-kind-icon">filters</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#isMask" class="tsd-kind-icon">is<wbr>Mask</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#isSprite" class="tsd-kind-icon">is<wbr>Sprite</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#parent" class="tsd-kind-icon">parent</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#renderable" class="tsd-kind-icon">renderable</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#sortDirty" class="tsd-kind-icon">sort<wbr>Dirty</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#sortableChildren" class="tsd-kind-icon">sortable<wbr>Children</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#transform" class="tsd-kind-icon">transform</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#visible" class="tsd-kind-icon">visible</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#worldAlpha" class="tsd-kind-icon">world<wbr>Alpha</a></li>
+								<li class="tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="LinkedListContainer.html#prefixed" class="tsd-kind-icon">prefixed</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Accessors</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_tempDisplayObjectParent" class="tsd-kind-icon">_temp<wbr>Display<wbr>Object<wbr>Parent</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#angle" class="tsd-kind-icon">angle</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="LinkedListContainer.html#childCount" class="tsd-kind-icon">child<wbr>Count</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="LinkedListContainer.html#firstChild" class="tsd-kind-icon">first<wbr>Child</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#height" class="tsd-kind-icon">height</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class"><a href="LinkedListContainer.html#lastChild" class="tsd-kind-icon">last<wbr>Child</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#localTransform" class="tsd-kind-icon">local<wbr>Transform</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#mask" class="tsd-kind-icon">mask</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#pivot" class="tsd-kind-icon">pivot</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#position" class="tsd-kind-icon">position</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#rotation" class="tsd-kind-icon">rotation</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#scale" class="tsd-kind-icon">scale</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#skew" class="tsd-kind-icon">skew</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#width" class="tsd-kind-icon">width</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#worldTransform" class="tsd-kind-icon">world<wbr>Transform</a></li>
+								<li class="tsd-kind-get-signature tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#worldVisible" class="tsd-kind-icon">world<wbr>Visible</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#x" class="tsd-kind-icon">x</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#y" class="tsd-kind-icon">y</a></li>
+								<li class="tsd-kind-accessor tsd-parent-kind-class tsd-is-external"><a href="LinkedListContainer.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a></li>
+							</ul>
+						</section>
+						<section class="tsd-index-section ">
+							<h3>Methods</h3>
+							<ul class="tsd-index-list">
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_calculateBounds" class="tsd-kind-icon">_calculate<wbr>Bounds</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_recursivePostUpdateTransform" class="tsd-kind-icon">_recursive<wbr>Post<wbr>Update<wbr>Transform</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#_render" class="tsd-kind-icon">_render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="LinkedListContainer.html#addChild" class="tsd-kind-icon">add<wbr>Child</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="LinkedListContainer.html#addChildAbove" class="tsd-kind-icon">add<wbr>Child<wbr>Above</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="LinkedListContainer.html#addChildAt" class="tsd-kind-icon">add<wbr>Child<wbr>At</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter"><a href="LinkedListContainer.html#addChildBelow" class="tsd-kind-icon">add<wbr>Child<wbr>Below</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#addListener" class="tsd-kind-icon">add<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#calculateBounds" class="tsd-kind-icon">calculate<wbr>Bounds</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#destroy" class="tsd-kind-icon">destroy</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#disableTempParent" class="tsd-kind-icon">disable<wbr>Temp<wbr>Parent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#emit" class="tsd-kind-icon">emit</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#enableTempParent" class="tsd-kind-icon">enable<wbr>Temp<wbr>Parent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#eventNames" class="tsd-kind-icon">event<wbr>Names</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#getBounds" class="tsd-kind-icon">get<wbr>Bounds</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#getChildAt" class="tsd-kind-icon">get<wbr>Child<wbr>At</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#getChildIndex" class="tsd-kind-icon">get<wbr>Child<wbr>Index</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#getLocalBounds" class="tsd-kind-icon">get<wbr>Local<wbr>Bounds</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#listenerCount" class="tsd-kind-icon">listener<wbr>Count</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#listeners" class="tsd-kind-icon">listeners</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#off" class="tsd-kind-icon">off</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#on" class="tsd-kind-icon">on</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external"><a href="LinkedListContainer.html#onChildrenChange" class="tsd-kind-icon">on<wbr>Children<wbr>Change</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#once" class="tsd-kind-icon">once</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#removeAllListeners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite"><a href="LinkedListContainer.html#removeChild" class="tsd-kind-icon">remove<wbr>Child</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#removeChildAt" class="tsd-kind-icon">remove<wbr>Child<wbr>At</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#removeChildren" class="tsd-kind-icon">remove<wbr>Children</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#removeListener" class="tsd-kind-icon">remove<wbr>Listener</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#render" class="tsd-kind-icon">render</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected"><a href="LinkedListContainer.html#renderAdvanced" class="tsd-kind-icon">render<wbr>Advanced</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class"><a href="LinkedListContainer.html#renderCanvas" class="tsd-kind-icon">render<wbr>Canvas</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#setChildIndex" class="tsd-kind-icon">set<wbr>Child<wbr>Index</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#setParent" class="tsd-kind-icon">set<wbr>Parent</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#setTransform" class="tsd-kind-icon">set<wbr>Transform</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#sortChildren" class="tsd-kind-icon">sort<wbr>Children</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#swapChildren" class="tsd-kind-icon">swap<wbr>Children</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#toGlobal" class="tsd-kind-icon">to<wbr>Global</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external"><a href="LinkedListContainer.html#toLocal" class="tsd-kind-icon">to<wbr>Local</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-overwrite"><a href="LinkedListContainer.html#updateTransform" class="tsd-kind-icon">update<wbr>Transform</a></li>
+								<li class="tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external"><a href="LinkedListContainer.html#mixin" class="tsd-kind-icon">mixin</a></li>
+							</ul>
+						</section>
+					</div>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group tsd-is-inherited">
+				<h2>Constructors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+					<a name="constructor" class="tsd-anchor"></a>
+					<h3>constructor</h3>
+					<ul class="tsd-signatures tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+						<li class="tsd-signature tsd-kind-icon">new <wbr>Linked<wbr>List<wbr>Container<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.constructor</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:214</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Properties</h2>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="_bounds" class="tsd-anchor"></a>
+					<h3>_bounds</h3>
+					<div class="tsd-signature tsd-kind-icon">_bounds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Bounds</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._bounds</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:594</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_boundsID" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _boundsID</h3>
+					<div class="tsd-signature tsd-kind-icon">_boundsID<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._boundsID</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:598</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_boundsRect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _bounds<wbr>Rect</h3>
+					<div class="tsd-signature tsd-kind-icon">_bounds<wbr>Rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Rectangle</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._boundsRect</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:599</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_childCount" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _child<wbr>Count</h3>
+					<div class="tsd-signature tsd-kind-icon">_child<wbr>Count<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L23">src/LinkedListContainer.ts:23</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_destroyed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _destroyed</h3>
+					<div class="tsd-signature tsd-kind-icon">_destroyed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._destroyed</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:601</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_enabledFilters" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _enabled<wbr>Filters</h3>
+					<div class="tsd-signature tsd-kind-icon">_enabled<wbr>Filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Filter</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._enabledFilters</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:597</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_firstChild" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _first<wbr>Child</h3>
+					<div class="tsd-signature tsd-kind-icon">_first<wbr>Child<span class="tsd-signature-symbol">:</span> <a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a><span class="tsd-signature-symbol"> = null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L21">src/LinkedListContainer.ts:21</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_height" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _height</h3>
+					<div class="tsd-signature tsd-kind-icon">_height<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._height</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:213</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-private">
+					<a name="_lastChild" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagPrivate">Private</span> _last<wbr>Child</h3>
+					<div class="tsd-signature tsd-kind-icon">_last<wbr>Child<span class="tsd-signature-symbol">:</span> <a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a><span class="tsd-signature-symbol"> = null</span></div>
+					<aside class="tsd-sources">
+						<ul>
+							<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L22">src/LinkedListContainer.ts:22</a></li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="_lastSortedIndex" class="tsd-anchor"></a>
+					<h3>_last<wbr>Sorted<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">_last<wbr>Sorted<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._lastSortedIndex</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:592</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="_localBounds" class="tsd-anchor"></a>
+					<h3>_local<wbr>Bounds</h3>
+					<div class="tsd-signature tsd-kind-icon">_local<wbr>Bounds<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Bounds</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._localBounds</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:595</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_localBoundsRect" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _local<wbr>Bounds<wbr>Rect</h3>
+					<div class="tsd-signature tsd-kind-icon">_local<wbr>Bounds<wbr>Rect<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Rectangle</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._localBoundsRect</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:600</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="_mask" class="tsd-anchor"></a>
+					<h3>_mask</h3>
+					<div class="tsd-signature tsd-kind-icon">_mask<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MaskData</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._mask</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:593</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_width" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _width</h3>
+					<div class="tsd-signature tsd-kind-icon">_width<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._width</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:212</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_zIndex" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _z<wbr>Index</h3>
+					<div class="tsd-signature tsd-kind-icon">_z<wbr>Index<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container._zIndex</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:596</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="alpha" class="tsd-anchor"></a>
+					<h3>alpha</h3>
+					<div class="tsd-signature tsd-kind-icon">alpha<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.alpha</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:585</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="children" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagReadonly">Readonly</span> children</h3>
+					<div class="tsd-signature tsd-kind-icon">children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.children</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:207</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="containerUpdateTransform" class="tsd-anchor"></a>
+					<h3>container<wbr>Update<wbr>Transform</h3>
+					<div class="tsd-signature tsd-kind-icon">container<wbr>Update<wbr>Transform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.containerUpdateTransform</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:211</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="displayObjectUpdateTransform" class="tsd-anchor"></a>
+					<h3>display<wbr>Object<wbr>Update<wbr>Transform</h3>
+					<div class="tsd-signature tsd-kind-icon">display<wbr>Object<wbr>Update<wbr>Transform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol"> =&gt; </span><span class="tsd-signature-type">void</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.displayObjectUpdateTransform</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:603</li>
+						</ul>
+					</aside>
+					<div class="tsd-type-declaration">
+						<h4>Type declaration</h4>
+						<ul class="tsd-parameters">
+							<li class="tsd-parameter-signature">
+								<ul class="tsd-signatures tsd-kind-type-literal tsd-parent-kind-class">
+									<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+								</ul>
+								<ul class="tsd-descriptions">
+									<li class="tsd-description">
+										<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+									</li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="filterArea" class="tsd-anchor"></a>
+					<h3>filter<wbr>Area</h3>
+					<div class="tsd-signature tsd-kind-icon">filter<wbr>Area<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Rectangle</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.filterArea</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:588</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="filters" class="tsd-anchor"></a>
+					<h3>filters</h3>
+					<div class="tsd-signature tsd-kind-icon">filters<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Filter</span><span class="tsd-signature-symbol">[]</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.filters</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:589</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="isMask" class="tsd-anchor"></a>
+					<h3>is<wbr>Mask</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Mask<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.isMask</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:591</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="isSprite" class="tsd-anchor"></a>
+					<h3>is<wbr>Sprite</h3>
+					<div class="tsd-signature tsd-kind-icon">is<wbr>Sprite<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.isSprite</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:590</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="parent" class="tsd-anchor"></a>
+					<h3>parent</h3>
+					<div class="tsd-signature tsd-kind-icon">parent<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Container</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.parent</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:210</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="renderable" class="tsd-anchor"></a>
+					<h3>renderable</h3>
+					<div class="tsd-signature tsd-kind-icon">renderable<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.renderable</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:587</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="sortDirty" class="tsd-anchor"></a>
+					<h3>sort<wbr>Dirty</h3>
+					<div class="tsd-signature tsd-kind-icon">sort<wbr>Dirty<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.sortDirty</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:209</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="sortableChildren" class="tsd-anchor"></a>
+					<h3>sortable<wbr>Children</h3>
+					<div class="tsd-signature tsd-kind-icon">sortable<wbr>Children<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.sortableChildren</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:208</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="transform" class="tsd-anchor"></a>
+					<h3>transform</h3>
+					<div class="tsd-signature tsd-kind-icon">transform<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">Transform</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.transform</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:584</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="visible" class="tsd-anchor"></a>
+					<h3>visible</h3>
+					<div class="tsd-signature tsd-kind-icon">visible<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.visible</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:586</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="worldAlpha" class="tsd-anchor"></a>
+					<h3>world<wbr>Alpha</h3>
+					<div class="tsd-signature tsd-kind-icon">world<wbr>Alpha<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">number</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.worldAlpha</p>
+						<ul>
+							<li>Defined in node_modules/@pixi/display/index.d.ts:583</li>
+						</ul>
+					</aside>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="prefixed" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> prefixed</h3>
+					<div class="tsd-signature tsd-kind-icon">prefixed<span class="tsd-signature-symbol">:</span> <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">boolean</span></div>
+					<aside class="tsd-sources">
+						<p>Inherited from Container.prefixed</p>
+						<ul>
+							<li>Defined in node_modules/eventemitter3/index.d.ts:6</li>
+						</ul>
+					</aside>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Accessors</h2>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-protected tsd-is-external">
+					<a name="_tempDisplayObjectParent" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _temp<wbr>Display<wbr>Object<wbr>Parent</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> _tempDisplayObjectParent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">TemporaryDisplayObject</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:745</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{PIXI.Container}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">TemporaryDisplayObject</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="angle" class="tsd-anchor"></a>
+					<h3>angle</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> angle<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> angle<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:845</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The angle of the object in degrees.
+									&#39;rotation&#39; and &#39;angle&#39; have the same effect on a display object; rotation is in radians, angle is in degrees.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:846</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The angle of the object in degrees.
+									&#39;rotation&#39; and &#39;angle&#39; have the same effect on a display object; rotation is in radians, angle is in degrees.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="childCount" class="tsd-anchor"></a>
+					<h3>child<wbr>Count</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> childCount<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L35">src/LinkedListContainer.ts:35</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="firstChild" class="tsd-anchor"></a>
+					<h3>first<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> firstChild<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L25">src/LinkedListContainer.ts:25</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="height" class="tsd-anchor"></a>
+					<h3>height</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> height<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> height<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:385</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The height of the Container, setting this will actually modify the scale to achieve the value set</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:386</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The height of the Container, setting this will actually modify the scale to achieve the value set</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class">
+					<a name="lastChild" class="tsd-anchor"></a>
+					<h3>last<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> lastChild<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L30">src/LinkedListContainer.ts:30</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-returns-title">Returns <a href="../interfaces/LinkedListChild.html" class="tsd-signature-type" data-tsd-kind="Interface">LinkedListChild</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+					<a name="localTransform" class="tsd-anchor"></a>
+					<h3>local<wbr>Transform</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> localTransform<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Matrix</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:793</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Current transform of the object based on local factors: position, scale, other stuff.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{PIXI.Matrix}</p>
+									</dd>
+									<dt>readonly</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Matrix</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="mask" class="tsd-anchor"></a>
+					<h3>mask</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> mask<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MaskData</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> mask<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MaskData</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:886</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets a mask for the displayObject. A mask is an object that limits the visibility of an
+										object to the shape of the mask applied to it. In PixiJS a regular mask must be a
+										{@link PIXI.Graphics} or a {@link PIXI.Sprite} object. This allows for much faster masking in canvas as it
+									utilities shape clipping. To remove a mask, set this property to <code>null</code>.</p>
+								</div>
+								<p>For sprite mask both alpha and red channel are used. Black mask is the same as transparent mask.</p>
+								<dl class="tsd-comment-tags">
+									<dt>example</dt>
+									<dd><p>const graphics = new PIXI.Graphics();
+											graphics.beginFill(0xFF3300);
+											graphics.drawRect(50, 250, 100, 100);
+										graphics.endFill();</p>
+										<p>const sprite = new PIXI.Sprite(texture);
+										sprite.mask = graphics;</p>
+									</dd>
+									<dt>todo</dt>
+									<dd><p>At the moment, PIXI.CanvasRenderer doesn&#39;t support PIXI.Sprite as mask.</p>
+									</dd>
+									<dt>member</dt>
+									<dd><p>{PIXI.Container|PIXI.MaskData|null}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MaskData</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:887</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sets a mask for the displayObject. A mask is an object that limits the visibility of an
+										object to the shape of the mask applied to it. In PixiJS a regular mask must be a
+										{@link PIXI.Graphics} or a {@link PIXI.Sprite} object. This allows for much faster masking in canvas as it
+									utilities shape clipping. To remove a mask, set this property to <code>null</code>.</p>
+								</div>
+								<p>For sprite mask both alpha and red channel are used. Black mask is the same as transparent mask.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">MaskData</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="pivot" class="tsd-anchor"></a>
+					<h3>pivot</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> pivot<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> pivot<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:821</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The center of rotation, scaling, and skewing for this display object in its local space. The <code>position</code>
+									is the projection of <code>pivot</code> in the parent&#39;s local space.</p>
+								</div>
+								<p>By default, the pivot is the origin (0, 0).</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>PixiJS 4</p>
+									</dd>
+									<dt>member</dt>
+									<dd><p>{PIXI.ObservablePoint}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:822</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The center of rotation, scaling, and skewing for this display object in its local space. The <code>position</code>
+									is the projection of <code>pivot</code> in the parent&#39;s local space.</p>
+								</div>
+								<p>By default, the pivot is the origin (0, 0).</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="position" class="tsd-anchor"></a>
+					<h3>position</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> position<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> position<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:800</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The coordinate of the object relative to the local coordinates of the parent.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>PixiJS 4</p>
+									</dd>
+									<dt>member</dt>
+									<dd><p>{PIXI.ObservablePoint}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:801</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The coordinate of the object relative to the local coordinates of the parent.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="rotation" class="tsd-anchor"></a>
+					<h3>rotation</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> rotation<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> rotation<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:837</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The rotation of the object in radians.
+									&#39;rotation&#39; and &#39;angle&#39; have the same effect on a display object; rotation is in radians, angle is in degrees.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:838</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The rotation of the object in radians.
+									&#39;rotation&#39; and &#39;angle&#39; have the same effect on a display object; rotation is in radians, angle is in degrees.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="scale" class="tsd-anchor"></a>
+					<h3>scale</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> scale<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> scale<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:810</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The scale factors of this object along the local coordinate axes.</p>
+								</div>
+								<p>The default scale is (1, 1).</p>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>PixiJS 4</p>
+									</dd>
+									<dt>member</dt>
+									<dd><p>{PIXI.ObservablePoint}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:811</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The scale factors of this object along the local coordinate axes.</p>
+								</div>
+								<p>The default scale is (1, 1).</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="skew" class="tsd-anchor"></a>
+					<h3>skew</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> skew<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> skew<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:829</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The skew factor for the object in radians.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>since</dt>
+									<dd><p>PixiJS 4</p>
+									</dd>
+									<dt>member</dt>
+									<dd><p>{PIXI.ObservablePoint}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:830</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The skew factor for the object in radians.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">ObservablePoint</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="width" class="tsd-anchor"></a>
+					<h3>width</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> width<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> width<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:378</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The width of the Container, setting this will actually modify the scale to achieve the value set</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:379</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The width of the Container, setting this will actually modify the scale to achieve the value set</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+					<a name="worldTransform" class="tsd-anchor"></a>
+					<h3>world<wbr>Transform</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> worldTransform<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Matrix</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:786</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Current transform of the object based on world (parent) factors.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{PIXI.Matrix}</p>
+									</dd>
+									<dt>readonly</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Matrix</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+					<a name="worldVisible" class="tsd-anchor"></a>
+					<h3>world<wbr>Visible</h3>
+					<ul class="tsd-signatures tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> worldVisible<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:865</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Indicates if the object is globally visible.</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{boolean}</p>
+									</dd>
+									<dt>readonly</dt>
+									<dd></dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="x" class="tsd-anchor"></a>
+					<h3>x</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> x<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> x<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:770</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the displayObject on the x axis relative to the local coordinates of the parent.
+									An alias to position.x</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:771</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the displayObject on the x axis relative to the local coordinates of the parent.
+									An alias to position.x</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="y" class="tsd-anchor"></a>
+					<h3>y</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> y<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> y<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:778</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the displayObject on the y axis relative to the local coordinates of the parent.
+									An alias to position.y</p>
+								</div>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:779</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The position of the displayObject on the y axis relative to the local coordinates of the parent.
+									An alias to position.y</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+					<a name="zIndex" class="tsd-anchor"></a>
+					<h3>z<wbr>Index</h3>
+					<ul class="tsd-signatures tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">get</span> zIndex<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+						<li class="tsd-signature tsd-kind-icon"><span class="tsd-signature-symbol">set</span> zIndex<span class="tsd-signature-symbol">(</span>value<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:857</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The zIndex of the displayObject.</p>
+								</div>
+								<p>If a container has the sortableChildren property set to true, children will be automatically
+									sorted by zIndex value; a higher value will mean it will be moved towards the end of the array,
+								and thus rendered on top of other display objects within the same container.</p>
+								<dl class="tsd-comment-tags">
+									<dt>member</dt>
+									<dd><p>{number}</p>
+									</dd>
+									<dt>see</dt>
+									<dd><p>PIXI.Container#sortableChildren</p>
+									</dd>
+								</dl>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:858</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>The zIndex of the displayObject.</p>
+								</div>
+								<p>If a container has the sortableChildren property set to true, children will be automatically
+									sorted by zIndex value; a higher value will mean it will be moved towards the end of the array,
+								and thus rendered on top of other display objects within the same container.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>value: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+			<section class="tsd-panel-group tsd-member-group ">
+				<h2>Methods</h2>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_calculateBounds" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _calculate<wbr>Bounds</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_calculate<wbr>Bounds<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container._calculateBounds</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:321</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recalculates the content bounds of this object. This should be overriden to
+									calculate the bounds of this specific object (not including children).</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_recursivePostUpdateTransform" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _recursive<wbr>Post<wbr>Update<wbr>Transform</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_recursive<wbr>Post<wbr>Update<wbr>Transform<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container._recursivePostUpdateTransform</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:640</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recursively updates transform of all objects from the root to this one
+									internal function for toLocal()</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="_render" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> _render</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">_render<span class="tsd-signature-symbol">(</span>_renderer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container._render</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:358</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>To be overridden by the subclasses.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>_renderer: <span class="tsd-signature-type">Renderer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+					<a name="addChild" class="tsd-anchor"></a>
+					<h3>add<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Child&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>children<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol">]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.addChild</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L40">src/LinkedListContainer.ts:40</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">[]</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>children: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol">]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="addChildAbove" class="tsd-anchor"></a>
+					<h3>add<wbr>Child<wbr>Above</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Child<wbr>Above&lt;T&gt;<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, relative<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L224">src/LinkedListContainer.ts:224</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds a child to the container to be rendered above another child.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">T</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The child to add</p>
+									</div>
+								</li>
+								<li>
+									<h5>relative: <span class="tsd-signature-type">DisplayObject</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The current child to add the new child relative to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+							<p>The child that was added.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+					<a name="addChildAt" class="tsd-anchor"></a>
+					<h3>add<wbr>Child<wbr>At</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Child<wbr>At&lt;T&gt;<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.addChildAt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L96">src/LinkedListContainer.ts:96</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">T</span></h5>
+								</li>
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+					<a name="addChildBelow" class="tsd-anchor"></a>
+					<h3>add<wbr>Child<wbr>Below</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Child<wbr>Below&lt;T&gt;<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span>, relative<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L175">src/LinkedListContainer.ts:175</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Adds a child to the container to be rendered below another child.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">&gt;</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">T</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The child to add</p>
+									</div>
+								</li>
+								<li>
+									<h5>relative: <span class="tsd-signature-type">DisplayObject</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The current child to add the new child relative to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span></h4>
+							<p>The child that was added.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="addListener" class="tsd-anchor"></a>
+					<h3>add<wbr>Listener</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">add<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.addListener</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:33</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-type">ListenerFn</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="calculateBounds" class="tsd-anchor"></a>
+					<h3>calculate<wbr>Bounds</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">calculate<wbr>Bounds<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.calculateBounds</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L629">src/LinkedListContainer.ts:629</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Recalculates the bounds of the container.
+									Copied from and overrides PixiJS v5 method (v4 method is identical)</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="destroy" class="tsd-anchor"></a>
+					<h3>destroy</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">destroy<span class="tsd-signature-symbol">(</span>options<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IDestroyOptions</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.destroy</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:372</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Removes all internal references and listeners as well as removes children from the display list.
+									Do not use a Container after calling <code>destroy</code>.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> options: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">IDestroyOptions</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="disableTempParent" class="tsd-anchor"></a>
+					<h3>disable<wbr>Temp<wbr>Parent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">disable<wbr>Temp<wbr>Parent<span class="tsd-signature-symbol">(</span>cacheParent<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.disableTempParent</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:763</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Pair method for <code>enableTempParent</code></p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>cacheParent: <span class="tsd-signature-type">DisplayObject</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>Actual parent of element</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="emit" class="tsd-anchor"></a>
+					<h3>emit</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">emit<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, <span class="tsd-signature-symbol">...</span>args<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">boolean</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.emit</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:27</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calls each of the listeners registered for a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>args: <span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">[]</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">boolean</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="enableTempParent" class="tsd-anchor"></a>
+					<h3>enable<wbr>Temp<wbr>Parent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">enable<wbr>Temp<wbr>Parent<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.enableTempParent</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:757</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Used in Renderer, cacheAsBitmap and other places where you call an <code>updateTransform</code> on root</p>
+								</div>
+								<pre><code><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">cacheParent</span><span style="color: #000000"> = </span><span style="color: #001080">elem</span><span style="color: #000000">.</span><span style="color: #795E26">enableTempParent</span><span style="color: #000000">();</span>
+<span style="color: #001080">elem</span><span style="color: #000000">.</span><span style="color: #795E26">updateTransform</span><span style="color: #000000">();</span>
+<span style="color: #001080">elem</span><span style="color: #000000">.</span><span style="color: #795E26">disableTempParent</span><span style="color: #000000">(</span><span style="color: #001080">cacheParent</span><span style="color: #000000">);</span>
+</code></pre>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DisplayObject</span></h4>
+							<p>current parent</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="eventNames" class="tsd-anchor"></a>
+					<h3>event<wbr>Names</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">event<wbr>Names<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.eventNames</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:12</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return an array listing the events for which the emitter has registered
+									listeners.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-symbol">(</span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="getBounds" class="tsd-anchor"></a>
+					<h3>get<wbr>Bounds</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Bounds<span class="tsd-signature-symbol">(</span>skipUpdate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span>, rect<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Rectangle</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Rectangle</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.getBounds</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:682</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculates and returns the (world) bounds of the display object as a [Rectangle]{@link PIXI.Rectangle}.</p>
+								</div>
+								<p>This method is expensive on containers with a large subtree (like the stage). This is because the bounds
+									of a container depend on its children&#39;s bounds, which recursively causes all bounds in the subtree to
+									be recalculated. The upside, however, is that calling <code>getBounds</code> once on a container will indeed update
+									the bounds of all children (the whole subtree, in fact). This side effect should be exploited by using
+									<code>displayObject._bounds.getRectangle()</code> when traversing through all the bounds in a scene graph. Otherwise,
+									calling <code>getBounds</code> on each object in a subtree will cause the total cost to increase quadratically as
+								its height increases.</p>
+								<ul>
+									<li>The transforms of all objects in a container&#39;s <strong>subtree</strong> and of all <strong>ancestors</strong> are updated.</li>
+									<li>The world bounds of all display objects in a container&#39;s <strong>subtree</strong> will also be recalculated.</li>
+								</ul>
+								<p>The <code>_bounds</code> object stores the last calculation of the bounds. You can use to entirely skip bounds
+								calculation if needed.</p>
+								<pre><code class="language-js"><span style="color: #0000FF">const</span><span style="color: #000000"> </span><span style="color: #0070C1">lastCalculatedBounds</span><span style="color: #000000"> = </span><span style="color: #001080">displayObject</span><span style="color: #000000">.</span><span style="color: #001080">_bounds</span><span style="color: #000000">.</span><span style="color: #795E26">getRectangle</span><span style="color: #000000">(</span><span style="color: #001080">optionalRect</span><span style="color: #000000">);</span>
+</code></pre>
+								<p>Do know that usage of <code>getLocalBounds</code> can corrupt the <code>_bounds</code> of children (the whole subtree, actually). This
+									is a known issue that has not been solved. See [getLocalBounds]{@link PIXI.DisplayObject#getLocalBounds} for more
+								details.</p>
+								<p><code>getBounds</code> should be called with <code>skipUpdate</code> equal to <code>true</code> in a render() call. This is because the transforms
+									are guaranteed to be update-to-date. In fact, recalculating inside a render() call may cause corruption in certain
+								cases.</p>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skipUpdate: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rect: <span class="tsd-signature-type">Rectangle</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Rectangle</span></h4>
+							<p>The minimum axis-aligned rectangle in world space that fits around this object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getChildAt" class="tsd-anchor"></a>
+					<h3>get<wbr>Child<wbr>At</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Child<wbr>At<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.getChildAt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L447">src/LinkedListContainer.ts:447</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DisplayObject</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getChildIndex" class="tsd-anchor"></a>
+					<h3>get<wbr>Child<wbr>Index</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Child<wbr>Index<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.getChildIndex</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L300">src/LinkedListContainer.ts:300</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="getLocalBounds" class="tsd-anchor"></a>
+					<h3>get<wbr>Local<wbr>Bounds</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">get<wbr>Local<wbr>Bounds<span class="tsd-signature-symbol">(</span>rect<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">Rectangle</span>, skipChildrenUpdate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Rectangle</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.getLocalBounds</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L673">src/LinkedListContainer.ts:673</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Retrieves the local bounds of the displayObject as a rectangle object. Copied from and overrides PixiJS v5 method</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rect: <span class="tsd-signature-type">Rectangle</span></h5>
+								</li>
+								<li>
+									<h5>skipChildrenUpdate: <span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol"> = false</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Rectangle</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="listenerCount" class="tsd-anchor"></a>
+					<h3>listener<wbr>Count</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">listener<wbr>Count<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.listenerCount</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:22</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the number of listeners listening to a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">number</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="listeners" class="tsd-anchor"></a>
+					<h3>listeners</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">listeners<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.listeners</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:17</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Return the listeners registered for a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">ListenerFn</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="off" class="tsd-anchor"></a>
+					<h3>off</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">off<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, fn<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ListenerFn</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, once<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.off</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:44</li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fn: <span class="tsd-signature-type">ListenerFn</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> once: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="on" class="tsd-anchor"></a>
+					<h3>on</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.on</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:32</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add a listener for a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-type">ListenerFn</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+					<a name="onChildrenChange" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> on<wbr>Children<wbr>Change</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">on<wbr>Children<wbr>Change<span class="tsd-signature-symbol">(</span>_length<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.onChildrenChange</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:220</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Overridable method that can be used by Container subclasses whenever the children array is modified</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> _length: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="once" class="tsd-anchor"></a>
+					<h3>once</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">once<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, fn<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">ListenerFn</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.once</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:38</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Add a one-time listener for a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5>fn: <span class="tsd-signature-type">ListenerFn</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="removeAllListeners" class="tsd-anchor"></a>
+					<h3>remove<wbr>All<wbr>Listeners</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>All<wbr>Listeners<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.removeAllListeners</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:49</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove all listeners, or those of the specified event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+					<a name="removeChild" class="tsd-anchor"></a>
+					<h3>remove<wbr>Child</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Child&lt;T&gt;<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">...</span>children<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol">]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.removeChild</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L389">src/LinkedListContainer.ts:389</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>T<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">[]</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagRest">Rest</span> <span class="tsd-signature-symbol">...</span>children: <span class="tsd-signature-type">T</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">T</span><span class="tsd-signature-symbol">[</span><span class="tsd-signature-type">0</span><span class="tsd-signature-symbol">]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="removeChildAt" class="tsd-anchor"></a>
+					<h3>remove<wbr>Child<wbr>At</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Child<wbr>At<span class="tsd-signature-symbol">(</span>index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.removeChildAt</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L477">src/LinkedListContainer.ts:477</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DisplayObject</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="removeChildren" class="tsd-anchor"></a>
+					<h3>remove<wbr>Children</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Children<span class="tsd-signature-symbol">(</span>beginIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, endIndex<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">[]</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.removeChildren</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L519">src/LinkedListContainer.ts:519</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>beginIndex: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = 0</span></h5>
+								</li>
+								<li>
+									<h5>endIndex: <span class="tsd-signature-type">number</span><span class="tsd-signature-symbol"> = ...</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">[]</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="removeListener" class="tsd-anchor"></a>
+					<h3>remove<wbr>Listener</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">remove<wbr>Listener<span class="tsd-signature-symbol">(</span>event<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span>, fn<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">ListenerFn</span>, context<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">any</span>, once<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.removeListener</p>
+								<ul>
+									<li>Defined in node_modules/eventemitter3/index.d.ts:43</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Remove the listeners of a given event.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>event: <span class="tsd-signature-type">string</span><span class="tsd-signature-symbol"> | </span><span class="tsd-signature-type">symbol</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> fn: <span class="tsd-signature-type">ListenerFn</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> context: <span class="tsd-signature-type">any</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> once: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="render" class="tsd-anchor"></a>
+					<h3>render</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">render<span class="tsd-signature-symbol">(</span>renderer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.render</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L700">src/LinkedListContainer.ts:700</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Renders the object using the WebGL renderer. Copied from and overrides PixiJS v5 method</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>renderer: <span class="tsd-signature-type">Renderer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+					<a name="renderAdvanced" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagProtected">Protected</span> render<wbr>Advanced</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Advanced<span class="tsd-signature-symbol">(</span>renderer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Renderer</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.renderAdvanced</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L732">src/LinkedListContainer.ts:732</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Render the object using the WebGL renderer and advanced features. Copied from and overrides PixiJS v5 method</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>renderer: <span class="tsd-signature-type">Renderer</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class">
+					<a name="renderCanvas" class="tsd-anchor"></a>
+					<h3>render<wbr>Canvas</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class">
+						<li class="tsd-signature tsd-kind-icon">render<wbr>Canvas<span class="tsd-signature-symbol">(</span>renderer<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L801">src/LinkedListContainer.ts:801</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Renders the object using the Canvas renderer. Copied from and overrides PixiJS Canvas mixin in V5 and V6.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>renderer: <span class="tsd-signature-type">any</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="setChildIndex" class="tsd-anchor"></a>
+					<h3>set<wbr>Child<wbr>Index</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Child<wbr>Index<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span>, index<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.setChildIndex</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L322">src/LinkedListContainer.ts:322</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+								<li>
+									<h5>index: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="setParent" class="tsd-anchor"></a>
+					<h3>set<wbr>Parent</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Parent<span class="tsd-signature-symbol">(</span>container<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Container</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.setParent</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:717</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Set the parent Container of this DisplayObject.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>container: <span class="tsd-signature-type">Container</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The Container to add this DisplayObject to.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">Container</span></h4>
+							<p>The Container that this DisplayObject was added to.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="setTransform" class="tsd-anchor"></a>
+					<h3>set<wbr>Transform</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">set<wbr>Transform<span class="tsd-signature-symbol">(</span>x<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, y<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, scaleX<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, scaleY<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, rotation<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, skewX<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, skewY<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pivotX<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span>, pivotY<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">number</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.setTransform</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:732</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Convenience function to set the position, scale, skew and pivot at once.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> x: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> y: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> scaleX: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> scaleY: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> rotation: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skewX: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skewY: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pivotX: <span class="tsd-signature-type">number</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> pivotY: <span class="tsd-signature-type">number</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <a href="LinkedListContainer.html" class="tsd-signature-type" data-tsd-kind="Class">LinkedListContainer</a></h4>
+							<p>The DisplayObject instance</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+					<a name="sortChildren" class="tsd-anchor"></a>
+					<h3>sort<wbr>Children</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">sort<wbr>Children<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.sortChildren</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:291</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Sorts children by zIndex. Previous order is maintained for 2 children with the same zIndex.</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="swapChildren" class="tsd-anchor"></a>
+					<h3>swap<wbr>Children</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">swap<wbr>Children<span class="tsd-signature-symbol">(</span>child<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span>, child2<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">DisplayObject</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.swapChildren</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L266">src/LinkedListContainer.ts:266</a></li>
+								</ul>
+							</aside>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>child: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+								<li>
+									<h5>child2: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+					<a name="toGlobal" class="tsd-anchor"></a>
+					<h3>to<wbr>Global</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Global&lt;P&gt;<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IPointData</span>, point<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">P</span>, skipUpdate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.toGlobal</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:699</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculates the global position of the display object.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IPointData</span> = <span class="tsd-signature-type">Point</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>position: <span class="tsd-signature-type">IPointData</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The world origin to calculate from.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> point: <span class="tsd-signature-type">P</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skipUpdate: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">P</span></h4>
+							<p>A point object representing the position of this object.</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+					<a name="toLocal" class="tsd-anchor"></a>
+					<h3>to<wbr>Local</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">to<wbr>Local&lt;P&gt;<span class="tsd-signature-symbol">(</span>position<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IPointData</span>, from<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">DisplayObject</span>, point<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">P</span>, skipUpdate<span class="tsd-signature-symbol">?: </span><span class="tsd-signature-type">boolean</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">P</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.toLocal</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:710</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Calculates the local position of the display object relative to another point.</p>
+								</div>
+							</div>
+							<h4 class="tsd-type-parameters-title">Type parameters</h4>
+							<ul class="tsd-type-parameters">
+								<li>
+									<h4>P<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">IPointData</span> = <span class="tsd-signature-type">Point</span></h4>
+								</li>
+							</ul>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>position: <span class="tsd-signature-type">IPointData</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The world origin to calculate from.</p>
+									</div>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> from: <span class="tsd-signature-type">DisplayObject</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> point: <span class="tsd-signature-type">P</span></h5>
+								</li>
+								<li>
+									<h5><span class="tsd-flag ts-flagOptional">Optional</span> skipUpdate: <span class="tsd-signature-type">boolean</span></h5>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">P</span></h4>
+							<p>A point object representing the position of this object</p>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+					<a name="updateTransform" class="tsd-anchor"></a>
+					<h3>update<wbr>Transform</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+						<li class="tsd-signature tsd-kind-icon">update<wbr>Transform<span class="tsd-signature-symbol">(</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Overrides Container.updateTransform</p>
+								<ul>
+									<li>Defined in <a href="https://github.com/pixijs/particle-emitter/blob/deaba53/src/LinkedListContainer.ts#L602">src/LinkedListContainer.ts:602</a></li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Updates the transform on all children of this container for rendering.
+									Copied from and overrides PixiJS v5 method (v4 method is identical)</p>
+								</div>
+							</div>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+				<section class="tsd-panel tsd-member tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+					<a name="mixin" class="tsd-anchor"></a>
+					<h3><span class="tsd-flag ts-flagStatic">Static</span> mixin</h3>
+					<ul class="tsd-signatures tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+						<li class="tsd-signature tsd-kind-icon">mixin<span class="tsd-signature-symbol">(</span>source<span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">Dict</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span><span class="tsd-signature-symbol">)</span><span class="tsd-signature-symbol">: </span><span class="tsd-signature-type">void</span></li>
+					</ul>
+					<ul class="tsd-descriptions">
+						<li class="tsd-description">
+							<aside class="tsd-sources">
+								<p>Inherited from Container.mixin</p>
+								<ul>
+									<li>Defined in node_modules/@pixi/display/index.d.ts:609</li>
+								</ul>
+							</aside>
+							<div class="tsd-comment tsd-typography">
+								<div class="lead">
+									<p>Mixes all enumerable properties and methods from a source object to DisplayObject.</p>
+								</div>
+							</div>
+							<h4 class="tsd-parameters-title">Parameters</h4>
+							<ul class="tsd-parameters">
+								<li>
+									<h5>source: <span class="tsd-signature-type">Dict</span><span class="tsd-signature-symbol">&lt;</span><span class="tsd-signature-type">any</span><span class="tsd-signature-symbol">&gt;</span></h5>
+									<div class="tsd-comment tsd-typography">
+										<p>The source of properties and methods to mix in.</p>
+									</div>
+								</li>
+							</ul>
+							<h4 class="tsd-returns-title">Returns <span class="tsd-signature-type">void</span></h4>
+						</li>
+					</ul>
+				</section>
+			</section>
+		</div>
+		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+			<nav class="tsd-navigation primary">
+				<ul>
+					<li class=" ">
+						<a href="../modules.html">Exports</a>
+					</li>
+				</ul>
+			</nav>
+			<nav class="tsd-navigation secondary menu-sticky">
+				<ul class="before-current">
+					<li class=" tsd-kind-class">
+						<a href="Emitter.html" class="tsd-kind-icon">Emitter</a>
+					</li>
+				</ul>
+				<ul class="current">
+					<li class="current tsd-kind-class">
+						<a href="LinkedListContainer.html" class="tsd-kind-icon">Linked<wbr>List<wbr>Container</a>
+						<ul>
+							<li class=" tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited">
+								<a href="LinkedListContainer.html#constructor" class="tsd-kind-icon">constructor</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#_bounds" class="tsd-kind-icon">_bounds</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_boundsID" class="tsd-kind-icon">_boundsID</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_boundsRect" class="tsd-kind-icon">_bounds<wbr>Rect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="LinkedListContainer.html#_childCount" class="tsd-kind-icon">_child<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_destroyed" class="tsd-kind-icon">_destroyed</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_enabledFilters" class="tsd-kind-icon">_enabled<wbr>Filters</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="LinkedListContainer.html#_firstChild" class="tsd-kind-icon">_first<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_height" class="tsd-kind-icon">_height</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-private">
+								<a href="LinkedListContainer.html#_lastChild" class="tsd-kind-icon">_last<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#_lastSortedIndex" class="tsd-kind-icon">_last<wbr>Sorted<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#_localBounds" class="tsd-kind-icon">_local<wbr>Bounds</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_localBoundsRect" class="tsd-kind-icon">_local<wbr>Bounds<wbr>Rect</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#_mask" class="tsd-kind-icon">_mask</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_width" class="tsd-kind-icon">_width</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_zIndex" class="tsd-kind-icon">_z<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#alpha" class="tsd-kind-icon">alpha</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#children" class="tsd-kind-icon">children</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#containerUpdateTransform" class="tsd-kind-icon">container<wbr>Update<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#displayObjectUpdateTransform" class="tsd-kind-icon">display<wbr>Object<wbr>Update<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#filterArea" class="tsd-kind-icon">filter<wbr>Area</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#filters" class="tsd-kind-icon">filters</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#isMask" class="tsd-kind-icon">is<wbr>Mask</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#isSprite" class="tsd-kind-icon">is<wbr>Sprite</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#parent" class="tsd-kind-icon">parent</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#renderable" class="tsd-kind-icon">renderable</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#sortDirty" class="tsd-kind-icon">sort<wbr>Dirty</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#sortableChildren" class="tsd-kind-icon">sortable<wbr>Children</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#transform" class="tsd-kind-icon">transform</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#visible" class="tsd-kind-icon">visible</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#worldAlpha" class="tsd-kind-icon">world<wbr>Alpha</a>
+							</li>
+							<li class=" tsd-kind-property tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="LinkedListContainer.html#prefixed" class="tsd-kind-icon">prefixed</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_tempDisplayObjectParent" class="tsd-kind-icon">_temp<wbr>Display<wbr>Object<wbr>Parent</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#angle" class="tsd-kind-icon">angle</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="LinkedListContainer.html#childCount" class="tsd-kind-icon">child<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="LinkedListContainer.html#firstChild" class="tsd-kind-icon">first<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#height" class="tsd-kind-icon">height</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class">
+								<a href="LinkedListContainer.html#lastChild" class="tsd-kind-icon">last<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#localTransform" class="tsd-kind-icon">local<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#mask" class="tsd-kind-icon">mask</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#pivot" class="tsd-kind-icon">pivot</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#position" class="tsd-kind-icon">position</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#rotation" class="tsd-kind-icon">rotation</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#scale" class="tsd-kind-icon">scale</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#skew" class="tsd-kind-icon">skew</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#width" class="tsd-kind-icon">width</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#worldTransform" class="tsd-kind-icon">world<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-get-signature tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#worldVisible" class="tsd-kind-icon">world<wbr>Visible</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#x" class="tsd-kind-icon">x</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#y" class="tsd-kind-icon">y</a>
+							</li>
+							<li class=" tsd-kind-accessor tsd-parent-kind-class tsd-is-external">
+								<a href="LinkedListContainer.html#zIndex" class="tsd-kind-icon">z<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_calculateBounds" class="tsd-kind-icon">_calculate<wbr>Bounds</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_recursivePostUpdateTransform" class="tsd-kind-icon">_recursive<wbr>Post<wbr>Update<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#_render" class="tsd-kind-icon">_render</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+								<a href="LinkedListContainer.html#addChild" class="tsd-kind-icon">add<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="LinkedListContainer.html#addChildAbove" class="tsd-kind-icon">add<wbr>Child<wbr>Above</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+								<a href="LinkedListContainer.html#addChildAt" class="tsd-kind-icon">add<wbr>Child<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter">
+								<a href="LinkedListContainer.html#addChildBelow" class="tsd-kind-icon">add<wbr>Child<wbr>Below</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#addListener" class="tsd-kind-icon">add<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#calculateBounds" class="tsd-kind-icon">calculate<wbr>Bounds</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#destroy" class="tsd-kind-icon">destroy</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#disableTempParent" class="tsd-kind-icon">disable<wbr>Temp<wbr>Parent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#emit" class="tsd-kind-icon">emit</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#enableTempParent" class="tsd-kind-icon">enable<wbr>Temp<wbr>Parent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#eventNames" class="tsd-kind-icon">event<wbr>Names</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#getBounds" class="tsd-kind-icon">get<wbr>Bounds</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#getChildAt" class="tsd-kind-icon">get<wbr>Child<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#getChildIndex" class="tsd-kind-icon">get<wbr>Child<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#getLocalBounds" class="tsd-kind-icon">get<wbr>Local<wbr>Bounds</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#listenerCount" class="tsd-kind-icon">listener<wbr>Count</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#listeners" class="tsd-kind-icon">listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#off" class="tsd-kind-icon">off</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#on" class="tsd-kind-icon">on</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-protected tsd-is-external">
+								<a href="LinkedListContainer.html#onChildrenChange" class="tsd-kind-icon">on<wbr>Children<wbr>Change</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#once" class="tsd-kind-icon">once</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#removeAllListeners" class="tsd-kind-icon">remove<wbr>All<wbr>Listeners</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-overwrite">
+								<a href="LinkedListContainer.html#removeChild" class="tsd-kind-icon">remove<wbr>Child</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#removeChildAt" class="tsd-kind-icon">remove<wbr>Child<wbr>At</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#removeChildren" class="tsd-kind-icon">remove<wbr>Children</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#removeListener" class="tsd-kind-icon">remove<wbr>Listener</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#render" class="tsd-kind-icon">render</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite tsd-is-protected">
+								<a href="LinkedListContainer.html#renderAdvanced" class="tsd-kind-icon">render<wbr>Advanced</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class">
+								<a href="LinkedListContainer.html#renderCanvas" class="tsd-kind-icon">render<wbr>Canvas</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#setChildIndex" class="tsd-kind-icon">set<wbr>Child<wbr>Index</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#setParent" class="tsd-kind-icon">set<wbr>Parent</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#setTransform" class="tsd-kind-icon">set<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#sortChildren" class="tsd-kind-icon">sort<wbr>Children</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#swapChildren" class="tsd-kind-icon">swap<wbr>Children</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#toGlobal" class="tsd-kind-icon">to<wbr>Global</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-has-type-parameter tsd-is-inherited tsd-is-external">
+								<a href="LinkedListContainer.html#toLocal" class="tsd-kind-icon">to<wbr>Local</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-overwrite">
+								<a href="LinkedListContainer.html#updateTransform" class="tsd-kind-icon">update<wbr>Transform</a>
+							</li>
+							<li class=" tsd-kind-method tsd-parent-kind-class tsd-is-inherited tsd-is-static tsd-is-external">
+								<a href="LinkedListContainer.html#mixin" class="tsd-kind-icon">mixin</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+				<ul class="after-current">
+					<li class=" tsd-kind-class">
+						<a href="Particle.html" class="tsd-kind-icon">Particle</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="PropertyList.html" class="tsd-kind-icon">Property<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-class tsd-has-type-parameter">
+						<a href="PropertyNode.html" class="tsd-kind-icon">Property<wbr>Node</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/BasicTweenable.html" class="tsd-kind-icon">Basic<wbr>Tweenable</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/BehaviorEntry.html" class="tsd-kind-icon">Behavior<wbr>Entry</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/EmitterConfigV1.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V1</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/EmitterConfigV2.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V2</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/EmitterConfigV3.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V3</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/LinkedListChild.html" class="tsd-kind-icon">Linked<wbr>List<wbr>Child</a>
+					</li>
+					<li class=" tsd-kind-interface">
+						<a href="../interfaces/RandNumber.html" class="tsd-kind-icon">Rand<wbr>Number</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/ValueList.html" class="tsd-kind-icon">Value<wbr>List</a>
+					</li>
+					<li class=" tsd-kind-interface tsd-has-type-parameter">
+						<a href="../interfaces/ValueStep.html" class="tsd-kind-icon">Value<wbr>Step</a>
+					</li>
+					<li class=" tsd-kind-function">
+						<a href="../modules.html#upgradeConfig" class="tsd-kind-icon">upgrade<wbr>Config</a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>
+<footer class="with-border-bottom">
+	<div class="container">
+		<h2>Legend</h2>
+		<div class="tsd-legend-group">
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
+				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
+				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
+			</ul>
+			<ul class="tsd-legend">
+				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
+			</ul>
+		</div>
+	</div>
+</footer>
+<div class="container tsd-generator">
+	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
+</div>
+<div class="overlay"></div>
+<script src="../assets/js/main.js"></script>
+</body>
+</html>
