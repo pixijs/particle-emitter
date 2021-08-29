@@ -267,7 +267,7 @@ export class SingleAnimatedTextureBehavior implements IEmitterBehavior
         if (config.animElapsed >= config.animDuration)
         {
             // loop elapsed back around
-            if (config.anim.loop)
+            if (anim.loop)
             {
                 config.animElapsed = config.animElapsed % config.animDuration;
             }
