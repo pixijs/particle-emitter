@@ -7,6 +7,7 @@ A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) li
 ## Breaking changes in v5 from v4
 * Project has been renamed from `pixi-particles` to `@pixi/particle-emitter`
 * On `Emitter`, configuration format has drastically changed. Use [`upgradeConfig()`](https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig) to convert old configuration objects automatically.
+* `PathParticle` and `AnimatedParticle` no longer exist, use the new behaviors instead.
 * Dropped support for PixiJS v4. Please use v6 - while v5 may work, Typescript definitions won't work and will cause you a headache.
 * The library now outputs ES6 code - if you need it in ES5 code, you'll need to make sure your build process transpiles it.
 
@@ -134,7 +135,7 @@ var emitter = new PIXI.particles.Emitter(
 			{
 				type: 'textureSingle',
 				config: {
-					texture: PIXI.Texture.fromImage('image.jpg')
+					texture: PIXI.Texture.from('image.jpg')
 				}
 			}
 		],

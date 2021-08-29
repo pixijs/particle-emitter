@@ -184,7 +184,7 @@ export class Emitter
      * @param particleParent The container to add the particles to.
      * @param particleImages A texture or array of textures to use
      *                       for the particles. Strings will be turned
-     *                       into textures via Texture.fromImage().
+     *                       into textures via Texture.from().
      * @param config A configuration object containing settings for the emitter.
      * @param config.emit If config.emit is explicitly passed as false, the
      *                    Emitter will start disabled.
