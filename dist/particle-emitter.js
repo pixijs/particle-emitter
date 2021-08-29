@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.1
- * Compiled Mon, 23 Aug 2021 02:25:57 UTC
+ * @pixi/particle-emitter - v5.0.2
+ * Compiled Sun, 29 Aug 2021 19:43:53 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -362,7 +362,7 @@ this.PIXI = this.PIXI || {};
          * @param particleParent The container to add the particles to.
          * @param particleImages A texture or array of textures to use
          *                       for the particles. Strings will be turned
-         *                       into textures via Texture.fromImage().
+         *                       into textures via Texture.from().
          * @param config A configuration object containing settings for the emitter.
          * @param config.emit If config.emit is explicitly passed as false, the
          *                    Emitter will start disabled.
@@ -1646,7 +1646,7 @@ this.PIXI = this.PIXI || {};
             config.animElapsed += deltaSec;
             if (config.animElapsed >= config.animDuration) {
                 // loop elapsed back around
-                if (config.anim.loop) {
+                if (anim.loop) {
                     config.animElapsed = config.animElapsed % config.animDuration;
                 }
                 // subtract a small amount to prevent attempting to go past the end of the animation
@@ -2220,10 +2220,11 @@ this.PIXI = this.PIXI || {};
      */
     class ScaleBehavior {
         constructor(config) {
+            var _a;
             this.order = BehaviorOrder.Normal;
             this.list = new PropertyList(false);
             this.list.reset(PropertyNode.createList(config.scale));
-            this.minMult = config.minMult;
+            this.minMult = (_a = config.minMult) !== null && _a !== void 0 ? _a : 1;
         }
         initParticles(first) {
             let next = first;
