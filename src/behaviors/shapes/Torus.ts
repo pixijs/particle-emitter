@@ -48,7 +48,8 @@ export class Torus implements SpawnShape
 
     constructor(config: {
         /**
-         * Radius of circle, or outer radius of a ring.
+         * Radius of circle, or outer radius of a ring. Note that this uses the full name of 'radius',
+         * where earlier versions of the library may have used 'r'.
          */
         radius: number;
         /**

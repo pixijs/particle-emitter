@@ -43,7 +43,7 @@ export class ScaleBehavior implements IEmitterBehavior
     {
         this.list = new PropertyList(false);
         this.list.reset(PropertyNode.createList(config.scale));
-        this.minMult = config.minMult;
+        this.minMult = config.minMult ?? 1;
     }
 
     initParticles(first: Particle): void
