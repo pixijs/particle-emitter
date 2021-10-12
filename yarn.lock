@@ -314,6 +314,11 @@
     "@pixi/display" "6.0.4"
     "@pixi/math" "6.0.4"
 
+"@pixi/particle-emitter@*":
+  version "5.0.2"
+  resolved "https://registry.npmjs.org/@pixi/particle-emitter/-/particle-emitter-5.0.2.tgz#29e77d2c63c3cb24191edfb7903941606f439681"
+  integrity sha512-PNG2AveL2meWLY53Fy83C2s0ybF1/xyOvx+L68wgdVw3r4ZkObuKeWSfsI7dO4EUUuayKd+5vU/vfjU+2jVbng==
+
 "@pixi/particles@6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/particles/-/particles-6.0.4.tgz"
@@ -870,10 +875,10 @@ earcut@^2.2.2:
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.2.tgz"
   integrity sha512-eZoZPPJcUHnfRZ0PjLvx2qBordSiO8ofC3vt+qACLM95u+4DovnbYNpQtJh0DNsWj8RnxrQytD4WA8gj5cRIaQ==
 
-electron@^9.4.0:
-  version "9.4.0"
-  resolved "https://registry.npmjs.org/electron/-/electron-9.4.0.tgz"
-  integrity sha512-hOC4q0jkb+UDYZRy8vrZ1IANnq+jznZnbkD62OEo06nU+hIbp2IrwDRBNuSLmQ3cwZMVir0WSIA1qEVK0PkzGA==
+electron@^11.5.0:
+  version "11.5.0"
+  resolved "https://registry.npmjs.org/electron/-/electron-11.5.0.tgz#f1650543b9d8f2047d3807755bdb120153ed210f"
+  integrity sha512-WjNDd6lGpxyiNjE3LhnFCAk/D9GIj1rU3GSDealVShhkkkPR3Vh4q8ErXGDl1OAO/faomVa10KoFPUN/pLbNxg==
   dependencies:
     "@electron/get" "^1.0.1"
     "@types/node" "^12.0.12"
