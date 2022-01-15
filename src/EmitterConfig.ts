@@ -250,49 +250,51 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     // normal speed movement
     else
     {
-        if ('start' in config.speed)
-        {
-            if (config.speed.start === config.speed.end)
+        if (config.speed) {
+            if ('start' in config.speed)
+            {
+                if (config.speed.start === config.speed.end)
+                {
+                    out.behaviors.push({
+                        type: 'moveSpeedStatic',
+                        config: {
+                            min: config.speed.start * (config.speed.minimumSpeedMultiplier ?? 1),
+                            max: config.speed.start,
+                        },
+                    });
+                }
+                else
+                {
+                    const list: ValueList<number> = {
+                        list: [
+                            { time: 0, value: config.speed.start },
+                            { time: 1, value: config.speed.end },
+                        ],
+                    };
+
+                    out.behaviors.push({
+                        type: 'moveSpeed',
+                        config: { speed: list, minMult: config.speed.minimumSpeedMultiplier },
+                    });
+                }
+            }
+            else if (config.speed.list.length === 1)
             {
                 out.behaviors.push({
                     type: 'moveSpeedStatic',
                     config: {
-                        min: config.speed.start * (config.speed.minimumSpeedMultiplier ?? 1),
-                        max: config.speed.start,
+                        min: config.speed.list[0].value * ((config as EmitterConfigV2).minimumSpeedMultiplier ?? 1),
+                        max: config.speed.list[0].value,
                     },
                 });
             }
             else
             {
-                const list: ValueList<number> = {
-                    list: [
-                        { time: 0, value: config.speed.start },
-                        { time: 1, value: config.speed.end },
-                    ],
-                };
-
                 out.behaviors.push({
                     type: 'moveSpeed',
-                    config: { speed: list, minMult: config.speed.minimumSpeedMultiplier },
+                    config: { speed: config.speed, minMult: ((config as EmitterConfigV2).minimumSpeedMultiplier ?? 1) },
                 });
             }
-        }
-        else if (config.speed.list.length === 1)
-        {
-            out.behaviors.push({
-                type: 'moveSpeedStatic',
-                config: {
-                    min: config.speed.list[0].value * ((config as EmitterConfigV2).minimumSpeedMultiplier ?? 1),
-                    max: config.speed.list[0].value,
-                },
-            });
-        }
-        else
-        {
-            out.behaviors.push({
-                type: 'moveSpeed',
-                config: { speed: config.speed, minMult: ((config as EmitterConfigV2).minimumSpeedMultiplier ?? 1) },
-            });
         }
     }
 
@@ -397,7 +399,7 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     }
 
     // rotation
-    if (config.rotationAcceleration || config.rotationSpeed?.min || config.rotationSpeed.max)
+    if (config.rotationAcceleration || config.rotationSpeed?.min || config.rotationSpeed?.max)
     {
         out.behaviors.push({
             type: 'rotation',
@@ -566,10 +568,13 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
                 data: config.spawnPolygon,
             };
         }
-        out.behaviors.push({
-            type: 'spawnShape',
-            config: shape,
-        });
+
+        if (shape) {
+            out.behaviors.push({
+                type: 'spawnShape',
+                config: shape,
+            });
+        }
     }
 
     return out;
