@@ -314,11 +314,6 @@
     "@pixi/display" "6.0.4"
     "@pixi/math" "6.0.4"
 
-"@pixi/particle-emitter@*":
-  version "5.0.2"
-  resolved "https://registry.npmjs.org/@pixi/particle-emitter/-/particle-emitter-5.0.2.tgz#29e77d2c63c3cb24191edfb7903941606f439681"
-  integrity sha512-PNG2AveL2meWLY53Fy83C2s0ybF1/xyOvx+L68wgdVw3r4ZkObuKeWSfsI7dO4EUUuayKd+5vU/vfjU+2jVbng==
-
 "@pixi/particles@6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/particles/-/particles-6.0.4.tgz"

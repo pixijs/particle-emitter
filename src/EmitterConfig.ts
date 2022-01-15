@@ -250,7 +250,8 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     // normal speed movement
     else
     {
-        if (config.speed) {
+        if (config.speed)
+        {
             if ('start' in config.speed)
             {
                 if (config.speed.start === config.speed.end)
@@ -569,7 +570,8 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
             };
         }
 
-        if (shape) {
+        if (shape)
+        {
             out.behaviors.push({
                 type: 'spawnShape',
                 config: shape,
