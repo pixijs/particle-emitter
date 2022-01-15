@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.2
- * Compiled Sun, 29 Aug 2021 19:43:53 UTC
+ * @pixi/particle-emitter - v5.0.3
+ * Compiled Sat, 15 Jan 2022 18:39:49 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -2503,7 +2503,7 @@ this.PIXI = this.PIXI || {};
      */
     // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types
     function upgradeConfig(config, art) {
-        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v;
+        var _a, _b, _c, _d, _e, _f, _g, _h, _j, _k, _l, _m, _o, _p, _q, _r, _s, _t, _u, _v, _w;
         // just ensure we aren't given any V3 config data
         if ('behaviors' in config) {
             return config;
@@ -2619,43 +2619,45 @@ this.PIXI = this.PIXI || {};
         }
         // normal speed movement
         else {
-            if ('start' in config.speed) {
-                if (config.speed.start === config.speed.end) {
+            if (config.speed) {
+                if ('start' in config.speed) {
+                    if (config.speed.start === config.speed.end) {
+                        out.behaviors.push({
+                            type: 'moveSpeedStatic',
+                            config: {
+                                min: config.speed.start * ((_f = config.speed.minimumSpeedMultiplier) !== null && _f !== void 0 ? _f : 1),
+                                max: config.speed.start,
+                            },
+                        });
+                    }
+                    else {
+                        const list = {
+                            list: [
+                                { time: 0, value: config.speed.start },
+                                { time: 1, value: config.speed.end },
+                            ],
+                        };
+                        out.behaviors.push({
+                            type: 'moveSpeed',
+                            config: { speed: list, minMult: config.speed.minimumSpeedMultiplier },
+                        });
+                    }
+                }
+                else if (config.speed.list.length === 1) {
                     out.behaviors.push({
                         type: 'moveSpeedStatic',
                         config: {
-                            min: config.speed.start * ((_f = config.speed.minimumSpeedMultiplier) !== null && _f !== void 0 ? _f : 1),
-                            max: config.speed.start,
+                            min: config.speed.list[0].value * ((_g = config.minimumSpeedMultiplier) !== null && _g !== void 0 ? _g : 1),
+                            max: config.speed.list[0].value,
                         },
                     });
                 }
                 else {
-                    const list = {
-                        list: [
-                            { time: 0, value: config.speed.start },
-                            { time: 1, value: config.speed.end },
-                        ],
-                    };
                     out.behaviors.push({
                         type: 'moveSpeed',
-                        config: { speed: list, minMult: config.speed.minimumSpeedMultiplier },
+                        config: { speed: config.speed, minMult: ((_h = config.minimumSpeedMultiplier) !== null && _h !== void 0 ? _h : 1) },
                     });
                 }
-            }
-            else if (config.speed.list.length === 1) {
-                out.behaviors.push({
-                    type: 'moveSpeedStatic',
-                    config: {
-                        min: config.speed.list[0].value * ((_g = config.minimumSpeedMultiplier) !== null && _g !== void 0 ? _g : 1),
-                        max: config.speed.list[0].value,
-                    },
-                });
-            }
-            else {
-                out.behaviors.push({
-                    type: 'moveSpeed',
-                    config: { speed: config.speed, minMult: ((_h = config.minimumSpeedMultiplier) !== null && _h !== void 0 ? _h : 1) },
-                });
             }
         }
         // scale
@@ -2739,24 +2741,24 @@ this.PIXI = this.PIXI || {};
             }
         }
         // rotation
-        if (config.rotationAcceleration || ((_m = config.rotationSpeed) === null || _m === void 0 ? void 0 : _m.min) || config.rotationSpeed.max) {
+        if (config.rotationAcceleration || ((_m = config.rotationSpeed) === null || _m === void 0 ? void 0 : _m.min) || ((_o = config.rotationSpeed) === null || _o === void 0 ? void 0 : _o.max)) {
             out.behaviors.push({
                 type: 'rotation',
                 config: {
                     accel: config.rotationAcceleration || 0,
-                    minSpeed: ((_o = config.rotationSpeed) === null || _o === void 0 ? void 0 : _o.min) || 0,
-                    maxSpeed: ((_p = config.rotationSpeed) === null || _p === void 0 ? void 0 : _p.max) || 0,
-                    minStart: ((_q = config.startRotation) === null || _q === void 0 ? void 0 : _q.min) || 0,
-                    maxStart: ((_r = config.startRotation) === null || _r === void 0 ? void 0 : _r.max) || 0,
+                    minSpeed: ((_p = config.rotationSpeed) === null || _p === void 0 ? void 0 : _p.min) || 0,
+                    maxSpeed: ((_q = config.rotationSpeed) === null || _q === void 0 ? void 0 : _q.max) || 0,
+                    minStart: ((_r = config.startRotation) === null || _r === void 0 ? void 0 : _r.min) || 0,
+                    maxStart: ((_s = config.startRotation) === null || _s === void 0 ? void 0 : _s.max) || 0,
                 },
             });
         }
-        else if (((_s = config.startRotation) === null || _s === void 0 ? void 0 : _s.min) || ((_t = config.startRotation) === null || _t === void 0 ? void 0 : _t.max)) {
+        else if (((_t = config.startRotation) === null || _t === void 0 ? void 0 : _t.min) || ((_u = config.startRotation) === null || _u === void 0 ? void 0 : _u.max)) {
             out.behaviors.push({
                 type: 'rotationStatic',
                 config: {
-                    min: ((_u = config.startRotation) === null || _u === void 0 ? void 0 : _u.min) || 0,
-                    max: ((_v = config.startRotation) === null || _v === void 0 ? void 0 : _v.max) || 0,
+                    min: ((_v = config.startRotation) === null || _v === void 0 ? void 0 : _v.min) || 0,
+                    max: ((_w = config.startRotation) === null || _w === void 0 ? void 0 : _w.max) || 0,
                 },
             });
         }
@@ -2885,10 +2887,12 @@ this.PIXI = this.PIXI || {};
                     data: config.spawnPolygon,
                 };
             }
-            out.behaviors.push({
-                type: 'spawnShape',
-                config: shape,
-            });
+            if (shape) {
+                out.behaviors.push({
+                    type: 'spawnShape',
+                    config: shape,
+                });
+            }
         }
         return out;
     }
