@@ -29,7 +29,10 @@ export interface AnimatedParticleArt
     textures: (string|Texture|{texture: string|Texture; count: number})[];
 }
 
-interface ParsedAnimatedParticleArt
+/**
+ * Internal data format for playback.
+ */
+export interface ParsedAnimatedParticleArt
 {
     textures: Texture[];
     duration: number;

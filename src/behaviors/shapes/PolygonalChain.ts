@@ -2,7 +2,10 @@ import { IPointData } from '@pixi/math';
 import { ListProperty } from '../editor/Types';
 import { SpawnShape } from './SpawnShape';
 
-interface Segment
+/**
+ * Data structure for internal parsed data in PolygonalChain spawn shapes.
+ */
+export interface Segment
 {
     p1: IPointData;
     p2: IPointData;
