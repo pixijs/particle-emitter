@@ -17,7 +17,7 @@
     "clean": "rimraf docs/docs docs/dist .publish",
     "lint": "eslint --ext .ts src",
     "prebuild": "npm run lint",
-    "build": "tsc && rollup -c && npm run build:min && npm run build:dts",
+    "build": "tsc && rollup -c && yarn build:min && yarn build:dts",
     "build:min": "terser dist/particle-emitter.js -c -m -o dist/particle-emitter.min.js --source-map \"content='dist/particle-emitter.js.map',includeSources=true,filename='dist/particle-emitter.min.js.map',url='particle-emitter.min.js.map'\" --comments \"/particle-emitter.js - /\"",
     "build:dts": "tsc --noEmit false --declaration --emitDeclarationOnly --declarationDir lib",
     "postbuild": "ncp dist docs/dist",
