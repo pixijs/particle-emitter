@@ -2,7 +2,7 @@
 
 [![Build Status](https://github.com/pixijs/particle-emitter/workflows/Build/badge.svg)](https://github.com/pixijs/particle-emitter/actions?query=workflow%3A%22Build%22) [![Dependency Status](https://david-dm.org/pixijs/particle-emitter.svg?style=flat)](https://david-dm.org/pixijs/particle-emitter) [![GitHub version](https://badge.fury.io/gh/pixijs%2Fparticle-emitter.svg)](https://github.com/pixijs/particle-emitter/releases/latest)
 
-A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiJS Particle Emitter.
+A particle system library for the [PixiJS](https://github.com/pixijs/pixi.js) library. Also, we created an [interactive particle editor](http://pixijs.github.io/pixi-particles-editor/) to design and preview custom particle emitters which utilitze PixiJS Particle Emitter. Note that the editor was built for an older version of the library - to use its output you'll have to use the [`upgradeConfig()`](https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig) function.
 
 ## Breaking changes in v5 from v4
 * Project has been renamed from `pixi-particles` to `@pixi/particle-emitter`
