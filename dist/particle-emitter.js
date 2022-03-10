@@ -1,6 +1,6 @@
 /*!
  * @pixi/particle-emitter - v5.0.3
- * Compiled Sat, 15 Jan 2022 18:39:49 UTC
+ * Compiled Thu, 10 Mar 2022 02:58:02 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -851,7 +851,7 @@ this.PIXI = this.PIXI || {};
                                     particle.position.x += emitPosX;
                                     particle.position.y += emitPosY;
                                     // also, just update the particle's age properties while we are looping through
-                                    particle.age += delta;
+                                    particle.age += -this._spawnTimer;
                                     // determine our interpolation value
                                     let lerp = particle.age * particle.oneOverLife; // lifetime / maxLife;
                                     // global ease affects all interpolation calculations
