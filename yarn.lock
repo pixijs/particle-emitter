@@ -314,6 +314,11 @@
     "@pixi/display" "6.0.4"
     "@pixi/math" "6.0.4"
 
+"@pixi/particle-emitter@*":
+  version "5.0.4"
+  resolved "https://registry.npmjs.org/@pixi/particle-emitter/-/particle-emitter-5.0.4.tgz#40ed334c36c3f1986d5245e427179ddfcb7558c0"
+  integrity sha512-ZKEjRXjBe/xVZrVXC+HGEztmFyOE5GCBEbny0uD5jACFpd3tkUUqmhRxdi6R8Crqx2xe0jRpPuCUsa/eHp23+w==
+
 "@pixi/particles@6.0.4":
   version "6.0.4"
   resolved "https://registry.npmjs.org/@pixi/particles/-/particles-6.0.4.tgz"
@@ -466,10 +471,10 @@
   resolved "https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.8.tgz"
   integrity sha512-YSBPTLTVm2e2OoQIDYx8HaeWJ5tTToLH67kXR7zYNGupXMEHa2++G8k+DczX2cFVgalypqtyZIcU19AFcmOpmg==
 
-"@types/node@^12.0.12":
-  version "12.12.37"
-  resolved "https://registry.npmjs.org/@types/node/-/node-12.12.37.tgz"
-  integrity sha512-4mXKoDptrXAwZErQHrLzpe0FN/0Wmf5JRniSVIdwUrtDf9wnmEV1teCNLBo/TwuXhkK/bVegoEn/wmb+x0AuPg==
+"@types/node@^14.6.2":
+  version "14.18.12"
+  resolved "https://registry.npmjs.org/@types/node/-/node-14.18.12.tgz#0d4557fd3b94497d793efd4e7d92df2f83b4ef24"
+  integrity sha512-q4jlIR71hUpWTnGhXWcakgkZeHa3CCjcQcnuzU8M891BAWA2jHiziiWEPEkdS5pFsz7H9HJiy8BrK7tBRNrY7A==
 
 "@types/node@^8.0.0":
   version "8.10.43"
@@ -882,13 +887,13 @@ earcut@^2.2.2:
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.2.tgz"
   integrity sha512-eZoZPPJcUHnfRZ0PjLvx2qBordSiO8ofC3vt+qACLM95u+4DovnbYNpQtJh0DNsWj8RnxrQytD4WA8gj5cRIaQ==
 
-electron@^11.5.0:
-  version "11.5.0"
-  resolved "https://registry.npmjs.org/electron/-/electron-11.5.0.tgz#f1650543b9d8f2047d3807755bdb120153ed210f"
-  integrity sha512-WjNDd6lGpxyiNjE3LhnFCAk/D9GIj1rU3GSDealVShhkkkPR3Vh4q8ErXGDl1OAO/faomVa10KoFPUN/pLbNxg==
+electron@^13.6.6:
+  version "13.6.6"
+  resolved "https://registry.npmjs.org/electron/-/electron-13.6.6.tgz#ebd4754b2b55d54a2e8e9cdc3d0a2bb6b7053827"
+  integrity sha512-TP2Bl1nTxaH1yRmlYiF7imzvKE/NASE0cl6wOYA3AaP/UrBGc4L3NwJfn5Z55o+1t4TH8vCRxENufESyb32HhA==
   dependencies:
     "@electron/get" "^1.0.1"
-    "@types/node" "^12.0.12"
+    "@types/node" "^14.6.2"
     extract-zip "^1.0.3"
 
 email-addresses@^3.0.1:
