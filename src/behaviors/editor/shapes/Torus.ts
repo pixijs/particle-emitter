@@ -1,6 +1,6 @@
-import { Rectangle } from '../../shapes/Rectangle';
+import { Torus } from '../../shapes/Torus';
 
-Rectangle.editorConfig = {
+Torus.editorConfig = {
     type: 'object',
     name: '',
     title: 'Torus',
