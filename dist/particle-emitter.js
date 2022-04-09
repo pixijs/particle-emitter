@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.4
- * Compiled Thu, 10 Mar 2022 03:05:45 UTC
+ * @pixi/particle-emitter - v5.0.5
+ * Compiled Sat, 09 Apr 2022 18:10:40 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license

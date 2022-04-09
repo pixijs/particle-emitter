@@ -1,390 +1,82 @@
-<!doctype html>
-<html class="default no-js">
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>@pixi/particle-emitter</title>
-	<meta name="description" content="Documentation for @pixi/particle-emitter">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="stylesheet" href="assets/css/main.css">
-	<script async src="assets/js/search.js" id="search-script"></script>
-</head>
-<body>
-<header>
-	<div class="tsd-page-toolbar">
-		<div class="container">
-			<div class="table-wrap">
-				<div class="table-cell" id="tsd-search" data-index="assets/js/search.json" data-base=".">
-					<div class="field">
-						<label for="tsd-search-field" class="tsd-widget search no-caption">Search</label>
-						<input id="tsd-search-field" type="text" />
-					</div>
-					<ul class="results">
-						<li class="state loading">Preparing search index...</li>
-						<li class="state failure">The search index is not available</li>
-					</ul>
-					<a href="index.html" class="title">@pixi/particle-emitter</a>
-				</div>
-				<div class="table-cell" id="tsd-widgets">
-					<div id="tsd-filter">
-						<a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a>
-						<div class="tsd-filter-group">
-							<div class="tsd-select" id="tsd-filter-visibility">
-								<span class="tsd-select-label">All</span>
-								<ul class="tsd-select-list">
-									<li data-value="public">Public</li>
-									<li data-value="protected">Public/Protected</li>
-									<li data-value="private" class="selected">All</li>
-								</ul>
-							</div>
-							<input type="checkbox" id="tsd-filter-inherited" checked />
-							<label class="tsd-widget" for="tsd-filter-inherited">Inherited</label>
-							<input type="checkbox" id="tsd-filter-externals" checked />
-							<label class="tsd-widget" for="tsd-filter-externals">Externals</label>
-						</div>
-					</div>
-					<a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="tsd-page-title">
-		<div class="container">
-			<h1>@pixi/particle-emitter</h1>
-		</div>
-	</div>
-</header>
-<div class="container container-main">
-	<div class="row">
-		<div class="col-8 col-content">
-			<div class="tsd-panel tsd-typography">
-				<a href="#pixijs-particle-emitter" id="pixijs-particle-emitter" style="color: inherit; text-decoration: none;">
-					<h1>PixiJS Particle Emitter</h1>
-				</a>
-				<p><a href="https://github.com/pixijs/particle-emitter/actions?query=workflow%3A%22Build%22"><img src="https://github.com/pixijs/particle-emitter/workflows/Build/badge.svg" alt="Build Status"></a> <a href="https://david-dm.org/pixijs/particle-emitter"><img src="https://david-dm.org/pixijs/particle-emitter.svg?style=flat" alt="Dependency Status"></a> <a href="https://github.com/pixijs/particle-emitter/releases/latest"><img src="https://badge.fury.io/gh/pixijs%2Fparticle-emitter.svg" alt="GitHub version"></a></p>
-				<p>A particle system library for the <a href="https://github.com/pixijs/pixi.js">PixiJS</a> library. Also, we created an <a href="http://pixijs.github.io/pixi-particles-editor/">interactive particle editor</a> to design and preview custom particle emitters which utilitze PixiJS Particle Emitter. Note that the editor was built for an older version of the library - to use its output you&#39;ll have to use the <a href="https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig"><code>upgradeConfig()</code></a> function.</p>
-				<a href="#breaking-changes-in-v5-from-v4" id="breaking-changes-in-v5-from-v4" style="color: inherit; text-decoration: none;">
-					<h2>Breaking changes in v5 from v4</h2>
-				</a>
-				<ul>
-					<li>Project has been renamed from <code>pixi-particles</code> to <code>@pixi/particle-emitter</code></li>
-					<li>On <code>Emitter</code>, configuration format has drastically changed. Use <a href="https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig"><code>upgradeConfig()</code></a> to convert old configuration objects automatically.</li>
-					<li><code>PathParticle</code> and <code>AnimatedParticle</code> no longer exist, use the new behaviors instead.</li>
-					<li>Dropped support for PixiJS v4. Please use v6 - while v5 may work, Typescript definitions won&#39;t work and will cause you a headache.</li>
-					<li>The library now outputs ES6 code - if you need it in ES5 code, you&#39;ll need to make sure your build process transpiles it.</li>
-				</ul>
-				<a href="#sample-usage" id="sample-usage" style="color: inherit; text-decoration: none;">
-					<h2>Sample Usage</h2>
-				</a>
-				<p>Please see the examples for various pre-made particle configurations.</p>
-				<pre><code class="language-js"><span style="color: #008000">// Create a new emitter</span>
-<span style="color: #008000">// note: if importing library like &quot;import * as particles from &#039;@pixi/particle-emitter&#039;&quot;</span>
-<span style="color: #008000">// or &quot;const particles = require(&#039;@pixi/particle-emitter&#039;)&quot;, the PIXI namespace will</span>
-<span style="color: #008000">// not be modified, and may not exist - use &quot;new particles.Emitter()&quot;, or whatever</span>
-<span style="color: #008000">// your imported namespace is</span>
-<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">emitter</span><span style="color: #000000"> = </span><span style="color: #0000FF">new</span><span style="color: #000000"> </span><span style="color: #0070C1">PIXI</span><span style="color: #000000">.</span><span style="color: #001080">particles</span><span style="color: #000000">.</span><span style="color: #795E26">Emitter</span><span style="color: #000000">(</span>
+<!DOCTYPE html><html class="default"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>@pixi/particle-emitter</title><meta name="description" content="Documentation for @pixi/particle-emitter"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.body.classList.add(localStorage.getItem("tsd-theme") || "os")</script><header><div class="tsd-page-toolbar"><div class="container"><div class="table-wrap"><div class="table-cell" id="tsd-search" data-base="."><div class="field"><label for="tsd-search-field" class="tsd-widget search no-caption">Search</label><input type="text" id="tsd-search-field"/></div><ul class="results"><li class="state loading">Preparing search index...</li><li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">@pixi/particle-emitter</a></div><div class="table-cell" id="tsd-widgets"><div id="tsd-filter"><a href="#" class="tsd-widget options no-caption" data-toggle="options">Options</a><div class="tsd-filter-group"><div class="tsd-select" id="tsd-filter-visibility"><span class="tsd-select-label">All</span><ul class="tsd-select-list"><li data-value="public">Public</li><li data-value="protected">Public/Protected</li><li data-value="private" class="selected">All</li></ul></div> <input type="checkbox" id="tsd-filter-inherited" checked/><label class="tsd-widget" for="tsd-filter-inherited">Inherited</label><input type="checkbox" id="tsd-filter-externals" checked/><label class="tsd-widget" for="tsd-filter-externals">Externals</label></div></div><a href="#" class="tsd-widget menu no-caption" data-toggle="menu">Menu</a></div></div></div></div><div class="tsd-page-title"><div class="container"><h1>@pixi/particle-emitter</h1></div></div></header><div class="container container-main"><div class="row"><div class="col-8 col-content"><div class="tsd-panel tsd-typography">
+<a href="#pixijs-particle-emitter" id="pixijs-particle-emitter" style="color: inherit; text-decoration: none;">
+  <h1>PixiJS Particle Emitter</h1>
+</a>
+<p><a href="https://github.com/pixijs/particle-emitter/actions?query=workflow%3A%22Build%22"><img src="https://github.com/pixijs/particle-emitter/workflows/Build/badge.svg" alt="Build Status"></a> <a href="https://github.com/pixijs/particle-emitter/releases/latest"><img src="https://badge.fury.io/gh/pixijs%2Fparticle-emitter.svg" alt="GitHub version"></a></p>
+<p>A particle system library for the <a href="https://github.com/pixijs/pixi.js">PixiJS</a> library. Also, we created an <a href="http://pixijs.github.io/pixi-particles-editor/">interactive particle editor</a> to design and preview custom particle emitters which utilitze PixiJS Particle Emitter. Note that the editor was built for an older version of the library - to use its output you&#39;ll have to use the <a href="https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig"><code>upgradeConfig()</code></a> function.</p>
 
-<span style="color: #000000">    </span><span style="color: #008000">// The PIXI.Container to put the emitter in</span>
-<span style="color: #000000">    </span><span style="color: #008000">// if using blend modes, it&#039;s important to put this</span>
-<span style="color: #000000">    </span><span style="color: #008000">// on top of a bitmap, and not use the root stage Container</span>
-<span style="color: #000000">    </span><span style="color: #001080">container</span><span style="color: #000000">,</span>
-<span style="color: #000000">    </span><span style="color: #008000">// Emitter configuration, edit this to change the look</span>
-<span style="color: #000000">    </span><span style="color: #008000">// of the emitter</span>
-<span style="color: #000000">    {</span>
-<span style="color: #000000">        </span><span style="color: #001080">lifetime:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">0.5</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">0.5</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">        </span><span style="color: #001080">frequency:</span><span style="color: #000000"> </span><span style="color: #098658">0.008</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">spawnChance:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">particlesPerWave:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">emitterLifetime:</span><span style="color: #000000"> </span><span style="color: #098658">0.31</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">maxParticles:</span><span style="color: #000000"> </span><span style="color: #098658">1000</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">pos:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">            </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">            </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
-<span style="color: #000000">        },</span>
-<span style="color: #000000">        </span><span style="color: #001080">addAtBack:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span><span style="color: #000000">,</span>
-<span style="color: #000000">        </span><span style="color: #001080">behaviors:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;alpha&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">alpha:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">list:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">0.8</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
-<span style="color: #000000">                            },</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">0.1</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
-<span style="color: #000000">                            }</span>
-<span style="color: #000000">                        ],</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;scale&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">scale:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">list:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">1</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
-<span style="color: #000000">                            },</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">0.3</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
-<span style="color: #000000">                            }</span>
-<span style="color: #000000">                        ],</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;color&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">color:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">list:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;fb1010&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
-<span style="color: #000000">                            },</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #A31515">&quot;f5b830&quot;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
-<span style="color: #000000">                            }</span>
-<span style="color: #000000">                        ],</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;moveSpeed&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">speed:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">list:</span><span style="color: #000000"> [</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">200</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">0</span>
-<span style="color: #000000">                            },</span>
-<span style="color: #000000">                            {</span>
-<span style="color: #000000">                                </span><span style="color: #001080">value:</span><span style="color: #000000"> </span><span style="color: #098658">100</span><span style="color: #000000">,</span>
-<span style="color: #000000">                                </span><span style="color: #001080">time:</span><span style="color: #000000"> </span><span style="color: #098658">1</span>
-<span style="color: #000000">                            }</span>
-<span style="color: #000000">                        ],</span>
-<span style="color: #000000">                        </span><span style="color: #001080">isStepped:</span><span style="color: #000000"> </span><span style="color: #0000FF">false</span>
-<span style="color: #000000">                    },</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;rotationStatic&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">min:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">max:</span><span style="color: #000000"> </span><span style="color: #098658">360</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;spawnShape&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;torus&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                    </span><span style="color: #001080">data:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                        </span><span style="color: #001080">x:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">y:</span><span style="color: #000000"> </span><span style="color: #098658">0</span><span style="color: #000000">,</span>
-<span style="color: #000000">                        </span><span style="color: #001080">r:</span><span style="color: #000000"> </span><span style="color: #098658">10</span>
-<span style="color: #000000">                    }</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            },</span>
-<span style="color: #000000">            {</span>
-<span style="color: #000000">                </span><span style="color: #001080">type:</span><span style="color: #000000"> </span><span style="color: #A31515">&#039;textureSingle&#039;</span><span style="color: #000000">,</span>
-<span style="color: #000000">                </span><span style="color: #001080">config:</span><span style="color: #000000"> {</span>
-<span style="color: #000000">                    </span><span style="color: #001080">texture:</span><span style="color: #000000"> </span><span style="color: #0070C1">PIXI</span><span style="color: #000000">.</span><span style="color: #001080">Texture</span><span style="color: #000000">.</span><span style="color: #795E26">from</span><span style="color: #000000">(</span><span style="color: #A31515">&#039;image.jpg&#039;</span><span style="color: #000000">)</span>
-<span style="color: #000000">                }</span>
-<span style="color: #000000">            }</span>
-<span style="color: #000000">        ],</span>
-<span style="color: #000000">    }</span>
-<span style="color: #000000">);</span>
+<a href="#breaking-changes-in-v5-from-v4" id="breaking-changes-in-v5-from-v4" style="color: inherit; text-decoration: none;">
+  <h2>Breaking changes in v5 from v4</h2>
+</a>
+<ul>
+<li>Project has been renamed from <code>pixi-particles</code> to <code>@pixi/particle-emitter</code></li>
+<li>On <code>Emitter</code>, configuration format has drastically changed. Use <a href="https://pixijs.github.io/particle-emitter/docs/modules.html#upgradeConfig"><code>upgradeConfig()</code></a> to convert old configuration objects automatically.</li>
+<li><code>PathParticle</code> and <code>AnimatedParticle</code> no longer exist, use the new behaviors instead.</li>
+<li>Dropped support for PixiJS v4. Please use v6 - while v5 may work, Typescript definitions won&#39;t work and will cause you a headache.</li>
+<li>The library now outputs ES6 code - if you need it in ES5 code, you&#39;ll need to make sure your build process transpiles it.</li>
+</ul>
 
-<span style="color: #008000">// Calculate the current time</span>
-<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">elapsed</span><span style="color: #000000"> = </span><span style="color: #267F99">Date</span><span style="color: #000000">.</span><span style="color: #795E26">now</span><span style="color: #000000">();</span>
-
-<span style="color: #008000">// Update function every frame</span>
-<span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #795E26">update</span><span style="color: #000000"> = </span><span style="color: #0000FF">function</span><span style="color: #000000">(){</span>
-
-<span style="color: #000000">    </span><span style="color: #008000">// Update the next frame</span>
-<span style="color: #000000">    </span><span style="color: #795E26">requestAnimationFrame</span><span style="color: #000000">(</span><span style="color: #001080">update</span><span style="color: #000000">);</span>
-
-<span style="color: #000000">    </span><span style="color: #0000FF">var</span><span style="color: #000000"> </span><span style="color: #001080">now</span><span style="color: #000000"> = </span><span style="color: #267F99">Date</span><span style="color: #000000">.</span><span style="color: #795E26">now</span><span style="color: #000000">();</span>
-
-<span style="color: #000000">    </span><span style="color: #008000">// The emitter requires the elapsed</span>
-<span style="color: #000000">    </span><span style="color: #008000">// number of seconds since the last update</span>
-<span style="color: #000000">    </span><span style="color: #001080">emitter</span><span style="color: #000000">.</span><span style="color: #795E26">update</span><span style="color: #000000">((</span><span style="color: #001080">now</span><span style="color: #000000"> - </span><span style="color: #001080">elapsed</span><span style="color: #000000">) * </span><span style="color: #098658">0.001</span><span style="color: #000000">);</span>
-<span style="color: #000000">    </span><span style="color: #001080">elapsed</span><span style="color: #000000"> = </span><span style="color: #001080">now</span><span style="color: #000000">;</span>
-<span style="color: #000000">};</span>
-
-<span style="color: #008000">// Start emitting</span>
-<span style="color: #001080">emitter</span><span style="color: #000000">.</span><span style="color: #001080">emit</span><span style="color: #000000"> = </span><span style="color: #0000FF">true</span><span style="color: #000000">;</span>
-
-<span style="color: #008000">// Start the update</span>
-<span style="color: #795E26">update</span><span style="color: #000000">();</span>
+<a href="#sample-usage" id="sample-usage" style="color: inherit; text-decoration: none;">
+  <h2>Sample Usage</h2>
+</a>
+<p>Please see the examples for various pre-made particle configurations.</p>
+<pre><code class="language-js"><span class="hl-5">// Create a new emitter</span><br/><span class="hl-5">// note: if importing library like &quot;import * as particles from &#39;@pixi/particle-emitter&#39;&quot;</span><br/><span class="hl-5">// or &quot;const particles = require(&#39;@pixi/particle-emitter&#39;)&quot;, the PIXI namespace will</span><br/><span class="hl-5">// not be modified, and may not exist - use &quot;new particles.Emitter()&quot;, or whatever</span><br/><span class="hl-5">// your imported namespace is</span><br/><span class="hl-0">var</span><span class="hl-1"> </span><span class="hl-4">emitter</span><span class="hl-1"> = </span><span class="hl-0">new</span><span class="hl-1"> </span><span class="hl-2">PIXI</span><span class="hl-1">.</span><span class="hl-4">particles</span><span class="hl-1">.</span><span class="hl-3">Emitter</span><span class="hl-1">(</span><br/><br/><span class="hl-1">    </span><span class="hl-5">// The PIXI.Container to put the emitter in</span><br/><span class="hl-1">    </span><span class="hl-5">// if using blend modes, it&#39;s important to put this</span><br/><span class="hl-1">    </span><span class="hl-5">// on top of a bitmap, and not use the root stage Container</span><br/><span class="hl-1">    </span><span class="hl-4">container</span><span class="hl-1">,</span><br/><span class="hl-1">    </span><span class="hl-5">// Emitter configuration, edit this to change the look</span><br/><span class="hl-1">    </span><span class="hl-5">// of the emitter</span><br/><span class="hl-1">    {</span><br/><span class="hl-1">        </span><span class="hl-4">lifetime:</span><span class="hl-1"> {</span><br/><span class="hl-1">            </span><span class="hl-4">min:</span><span class="hl-1"> </span><span class="hl-6">0.5</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-4">max:</span><span class="hl-1"> </span><span class="hl-6">0.5</span><br/><span class="hl-1">        },</span><br/><span class="hl-1">        </span><span class="hl-4">frequency:</span><span class="hl-1"> </span><span class="hl-6">0.008</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">spawnChance:</span><span class="hl-1"> </span><span class="hl-6">1</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">particlesPerWave:</span><span class="hl-1"> </span><span class="hl-6">1</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">emitterLifetime:</span><span class="hl-1"> </span><span class="hl-6">0.31</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">maxParticles:</span><span class="hl-1"> </span><span class="hl-6">1000</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">pos:</span><span class="hl-1"> {</span><br/><span class="hl-1">            </span><span class="hl-4">x:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">            </span><span class="hl-4">y:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">        },</span><br/><span class="hl-1">        </span><span class="hl-4">addAtBack:</span><span class="hl-1"> </span><span class="hl-0">false</span><span class="hl-1">,</span><br/><span class="hl-1">        </span><span class="hl-4">behaviors:</span><span class="hl-1"> [</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;alpha&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">alpha:</span><span class="hl-1"> {</span><br/><span class="hl-1">                        </span><span class="hl-4">list:</span><span class="hl-1"> [</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">0.8</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">                            },</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">0.1</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">1</span><br/><span class="hl-1">                            }</span><br/><span class="hl-1">                        ],</span><br/><span class="hl-1">                    },</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;scale&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">scale:</span><span class="hl-1"> {</span><br/><span class="hl-1">                        </span><span class="hl-4">list:</span><span class="hl-1"> [</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">1</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">                            },</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">0.3</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">1</span><br/><span class="hl-1">                            }</span><br/><span class="hl-1">                        ],</span><br/><span class="hl-1">                    },</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;color&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">color:</span><span class="hl-1"> {</span><br/><span class="hl-1">                        </span><span class="hl-4">list:</span><span class="hl-1"> [</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-7">&quot;fb1010&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">                            },</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-7">&quot;f5b830&quot;</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">1</span><br/><span class="hl-1">                            }</span><br/><span class="hl-1">                        ],</span><br/><span class="hl-1">                    },</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;moveSpeed&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">speed:</span><span class="hl-1"> {</span><br/><span class="hl-1">                        </span><span class="hl-4">list:</span><span class="hl-1"> [</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">200</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">0</span><br/><span class="hl-1">                            },</span><br/><span class="hl-1">                            {</span><br/><span class="hl-1">                                </span><span class="hl-4">value:</span><span class="hl-1"> </span><span class="hl-6">100</span><span class="hl-1">,</span><br/><span class="hl-1">                                </span><span class="hl-4">time:</span><span class="hl-1"> </span><span class="hl-6">1</span><br/><span class="hl-1">                            }</span><br/><span class="hl-1">                        ],</span><br/><span class="hl-1">                        </span><span class="hl-4">isStepped:</span><span class="hl-1"> </span><span class="hl-0">false</span><br/><span class="hl-1">                    },</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;rotationStatic&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">min:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">                    </span><span class="hl-4">max:</span><span class="hl-1"> </span><span class="hl-6">360</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;spawnShape&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;torus&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                    </span><span class="hl-4">data:</span><span class="hl-1"> {</span><br/><span class="hl-1">                        </span><span class="hl-4">x:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">                        </span><span class="hl-4">y:</span><span class="hl-1"> </span><span class="hl-6">0</span><span class="hl-1">,</span><br/><span class="hl-1">                        </span><span class="hl-4">r:</span><span class="hl-1"> </span><span class="hl-6">10</span><br/><span class="hl-1">                    }</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            },</span><br/><span class="hl-1">            {</span><br/><span class="hl-1">                </span><span class="hl-4">type:</span><span class="hl-1"> </span><span class="hl-7">&#39;textureSingle&#39;</span><span class="hl-1">,</span><br/><span class="hl-1">                </span><span class="hl-4">config:</span><span class="hl-1"> {</span><br/><span class="hl-1">                    </span><span class="hl-4">texture:</span><span class="hl-1"> </span><span class="hl-2">PIXI</span><span class="hl-1">.</span><span class="hl-4">Texture</span><span class="hl-1">.</span><span class="hl-3">from</span><span class="hl-1">(</span><span class="hl-7">&#39;image.jpg&#39;</span><span class="hl-1">)</span><br/><span class="hl-1">                }</span><br/><span class="hl-1">            }</span><br/><span class="hl-1">        ],</span><br/><span class="hl-1">    }</span><br/><span class="hl-1">);</span><br/><br/><span class="hl-5">// Calculate the current time</span><br/><span class="hl-0">var</span><span class="hl-1"> </span><span class="hl-4">elapsed</span><span class="hl-1"> = </span><span class="hl-8">Date</span><span class="hl-1">.</span><span class="hl-3">now</span><span class="hl-1">();</span><br/><br/><span class="hl-5">// Update function every frame</span><br/><span class="hl-0">var</span><span class="hl-1"> </span><span class="hl-3">update</span><span class="hl-1"> = </span><span class="hl-0">function</span><span class="hl-1">(){</span><br/><br/><span class="hl-1">    </span><span class="hl-5">// Update the next frame</span><br/><span class="hl-1">    </span><span class="hl-3">requestAnimationFrame</span><span class="hl-1">(</span><span class="hl-4">update</span><span class="hl-1">);</span><br/><br/><span class="hl-1">    </span><span class="hl-0">var</span><span class="hl-1"> </span><span class="hl-4">now</span><span class="hl-1"> = </span><span class="hl-8">Date</span><span class="hl-1">.</span><span class="hl-3">now</span><span class="hl-1">();</span><br/><br/><span class="hl-1">    </span><span class="hl-5">// The emitter requires the elapsed</span><br/><span class="hl-1">    </span><span class="hl-5">// number of seconds since the last update</span><br/><span class="hl-1">    </span><span class="hl-4">emitter</span><span class="hl-1">.</span><span class="hl-3">update</span><span class="hl-1">((</span><span class="hl-4">now</span><span class="hl-1"> - </span><span class="hl-4">elapsed</span><span class="hl-1">) * </span><span class="hl-6">0.001</span><span class="hl-1">);</span><br/><span class="hl-1">    </span><span class="hl-4">elapsed</span><span class="hl-1"> = </span><span class="hl-4">now</span><span class="hl-1">;</span><br/><span class="hl-1">};</span><br/><br/><span class="hl-5">// Start emitting</span><br/><span class="hl-4">emitter</span><span class="hl-1">.</span><span class="hl-4">emit</span><span class="hl-1"> = </span><span class="hl-0">true</span><span class="hl-1">;</span><br/><br/><span class="hl-5">// Start the update</span><br/><span class="hl-3">update</span><span class="hl-1">();</span>
 </code></pre>
-				<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
-					<h2>Documentation</h2>
-				</a>
-				<p><a href="http://pixijs.github.io/particle-emitter/docs/">http://pixijs.github.io/particle-emitter/docs/</a></p>
-				<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
-					<h2>Installation</h2>
-				</a>
-				<p>PixiJS Particle Emitter can be installed with NPM or other package managers.</p>
-				<pre><code class="language-bash"><span style="color: #000000">npm install @pixi/particle-emitter</span>
+
+<a href="#documentation" id="documentation" style="color: inherit; text-decoration: none;">
+  <h2>Documentation</h2>
+</a>
+<p><a href="http://pixijs.github.io/particle-emitter/docs/">http://pixijs.github.io/particle-emitter/docs/</a></p>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>PixiJS Particle Emitter can be installed with NPM or other package managers.</p>
+<pre><code class="language-bash"><span class="hl-1">npm install @pixi/particle-emitter</span>
 </code></pre>
-				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
-					<h2>Examples</h2>
-				</a>
-				<ul>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion.html">Explosion 1</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion2.html">Explosion 2</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion3.html">Explosion 3</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/explosionRing.html">Explosion Ring</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/megamanDeath.html">Megaman Death</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/rain.html">Rain</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flame.html">Flame</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flamePolygonal.html">Flame on Polygonal Chain</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flamePolygonalAdv.html">Flame on Advanced Polygonal Chain</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flameStepped.html">Flame - Stepped Colors</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flameAndSmoke.html">Flame with Smoke</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/flameUneven.html">Flame - Sputtering</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/gas.html">Gas</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbles.html">Bubbles</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleSpray.html">Bubble Spray</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleStream.html">Bubble Stream</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleStreamPath.html">Bubble Stream - path following</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/bubblesVertical.html">Vertical Bubbles</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmoke.html">Cartoon Smoke</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmoke2.html">Cartoon Smoke Alt.</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmokeBlast.html">Cartoon Smoke Blast</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/snow.html">Snow</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/sparks.html">Sparks</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/fountain.html">Fountain</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/coins.html">Animated Coins</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/animatedBubbles.html">Animated Bubbles</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/spaceshipDestruction.html">Spaceship Destruction - Ordered Art</a></li>
-					<li><a href="https://pixijs.github.io/particle-emitter/examples/particleContainerPerformance.html">Particle Container Performance</a></li>
-				</ul>
-				<a href="#contributer-note" id="contributer-note" style="color: inherit; text-decoration: none;">
-					<h2>Contributer Note</h2>
-				</a>
-				<p>This project uses <code>yarn</code> rather than <code>npm</code> to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.</p>
-				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
-					<h2>License</h2>
-				</a>
-				<p>Copyright (c) 2015 <a href="http://github.com/cloudkidstudio">CloudKid</a></p>
-				<p>Released under the MIT License.</p>
-			</div>
-		</div>
-		<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
-			<nav class="tsd-navigation primary">
-				<ul>
-					<li class=" ">
-						<a href="modules.html">Exports</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="modules/ParticleUtils.html">Particle<wbr>Utils</a>
-					</li>
-					<li class=" tsd-kind-namespace">
-						<a href="modules/behaviors.html">behaviors</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-						<a href="modules/behaviors.editor.html">behaviors.editor</a>
-					</li>
-					<li class=" tsd-kind-namespace tsd-parent-kind-namespace">
-						<a href="modules/behaviors.spawnShapes.html">behaviors.spawn<wbr>Shapes</a>
-					</li>
-				</ul>
-			</nav>
-			<nav class="tsd-navigation secondary menu-sticky">
-				<ul class="before-current">
-					<li class=" tsd-kind-class">
-						<a href="classes/Emitter.html" class="tsd-kind-icon">Emitter</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/LinkedListContainer.html" class="tsd-kind-icon">Linked<wbr>List<wbr>Container</a>
-					</li>
-					<li class=" tsd-kind-class">
-						<a href="classes/Particle.html" class="tsd-kind-icon">Particle</a>
-					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/PropertyList.html" class="tsd-kind-icon">Property<wbr>List</a>
-					</li>
-					<li class=" tsd-kind-class tsd-has-type-parameter">
-						<a href="classes/PropertyNode.html" class="tsd-kind-icon">Property<wbr>Node</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/BasicTweenable.html" class="tsd-kind-icon">Basic<wbr>Tweenable</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/BehaviorEntry.html" class="tsd-kind-icon">Behavior<wbr>Entry</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/EmitterConfigV1.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V1</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/EmitterConfigV2.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V2</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/EmitterConfigV3.html" class="tsd-kind-icon">Emitter<wbr>Config<wbr>V3</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/LinkedListChild.html" class="tsd-kind-icon">Linked<wbr>List<wbr>Child</a>
-					</li>
-					<li class=" tsd-kind-interface">
-						<a href="interfaces/RandNumber.html" class="tsd-kind-icon">Rand<wbr>Number</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/ValueList.html" class="tsd-kind-icon">Value<wbr>List</a>
-					</li>
-					<li class=" tsd-kind-interface tsd-has-type-parameter">
-						<a href="interfaces/ValueStep.html" class="tsd-kind-icon">Value<wbr>Step</a>
-					</li>
-					<li class=" tsd-kind-function">
-						<a href="modules.html#upgradeConfig" class="tsd-kind-icon">upgrade<wbr>Config</a>
-					</li>
-				</ul>
-			</nav>
-		</div>
-	</div>
-</div>
-<footer class="with-border-bottom">
-	<div class="container">
-		<h2>Legend</h2>
-		<div class="tsd-legend-group">
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li>
-				<li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li>
-				<li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li>
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li>
-			</ul>
-			<ul class="tsd-legend">
-				<li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-<div class="container tsd-generator">
-	<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p>
-</div>
-<div class="overlay"></div>
-<script src="assets/js/main.js"></script>
-</body>
-</html>
+
+<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+  <h2>Examples</h2>
+</a>
+<ul>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion.html">Explosion 1</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion2.html">Explosion 2</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/explosion3.html">Explosion 3</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/explosionRing.html">Explosion Ring</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/megamanDeath.html">Megaman Death</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/rain.html">Rain</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flame.html">Flame</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flamePolygonal.html">Flame on Polygonal Chain</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flamePolygonalAdv.html">Flame on Advanced Polygonal Chain</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flameStepped.html">Flame - Stepped Colors</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flameAndSmoke.html">Flame with Smoke</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/flameUneven.html">Flame - Sputtering</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/gas.html">Gas</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbles.html">Bubbles</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleSpray.html">Bubble Spray</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleStream.html">Bubble Stream</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/bubbleStreamPath.html">Bubble Stream - path following</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/bubblesVertical.html">Vertical Bubbles</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmoke.html">Cartoon Smoke</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmoke2.html">Cartoon Smoke Alt.</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/cartoonSmokeBlast.html">Cartoon Smoke Blast</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/snow.html">Snow</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/sparks.html">Sparks</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/fountain.html">Fountain</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/coins.html">Animated Coins</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/animatedBubbles.html">Animated Bubbles</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/spaceshipDestruction.html">Spaceship Destruction - Ordered Art</a></li>
+<li><a href="https://pixijs.github.io/particle-emitter/examples/particleContainerPerformance.html">Particle Container Performance</a></li>
+</ul>
+
+<a href="#contributer-note" id="contributer-note" style="color: inherit; text-decoration: none;">
+  <h2>Contributer Note</h2>
+</a>
+<p>This project uses <code>yarn</code> rather than <code>npm</code> to take advantage of the workspaces feature for the tests, making it easier to have standalone tests that share dependencies where possible.</p>
+
+<a href="#license" id="license" style="color: inherit; text-decoration: none;">
+  <h2>License</h2>
+</a>
+<p>Copyright (c) 2015 <a href="http://github.com/cloudkidstudio">CloudKid</a></p>
+<p>Released under the MIT License.</p>
+</div></div><div class="col-4 col-menu menu-sticky-wrap menu-highlight"><nav class="tsd-navigation primary"><ul><li class="current"><a href="modules.html">Exports</a></li><li class=" tsd-kind-namespace"><a href="modules/ParticleUtils.html">Particle<wbr/>Utils</a></li><li class=" tsd-kind-namespace"><a href="modules/behaviors.html">behaviors</a></li></ul></nav><nav class="tsd-navigation secondary menu-sticky"><ul><li class="tsd-kind-class"><a href="classes/Emitter.html" class="tsd-kind-icon">Emitter</a></li><li class="tsd-kind-class"><a href="classes/LinkedListContainer.html" class="tsd-kind-icon">Linked<wbr/>List<wbr/>Container</a></li><li class="tsd-kind-class"><a href="classes/Particle.html" class="tsd-kind-icon">Particle</a></li><li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/PropertyList.html" class="tsd-kind-icon">Property<wbr/>List</a></li><li class="tsd-kind-class tsd-has-type-parameter"><a href="classes/PropertyNode.html" class="tsd-kind-icon">Property<wbr/>Node</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/BasicTweenable.html" class="tsd-kind-icon">Basic<wbr/>Tweenable</a></li><li class="tsd-kind-interface"><a href="interfaces/BehaviorEntry.html" class="tsd-kind-icon">Behavior<wbr/>Entry</a></li><li class="tsd-kind-interface"><a href="interfaces/EmitterConfigV1.html" class="tsd-kind-icon">Emitter<wbr/>Config<wbr/>V1</a></li><li class="tsd-kind-interface"><a href="interfaces/EmitterConfigV2.html" class="tsd-kind-icon">Emitter<wbr/>Config<wbr/>V2</a></li><li class="tsd-kind-interface"><a href="interfaces/EmitterConfigV3.html" class="tsd-kind-icon">Emitter<wbr/>Config<wbr/>V3</a></li><li class="tsd-kind-interface"><a href="interfaces/LinkedListChild.html" class="tsd-kind-icon">Linked<wbr/>List<wbr/>Child</a></li><li class="tsd-kind-interface"><a href="interfaces/RandNumber.html" class="tsd-kind-icon">Rand<wbr/>Number</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ValueList.html" class="tsd-kind-icon">Value<wbr/>List</a></li><li class="tsd-kind-interface tsd-has-type-parameter"><a href="interfaces/ValueStep.html" class="tsd-kind-icon">Value<wbr/>Step</a></li><li class="tsd-kind-function"><a href="modules.html#upgradeConfig" class="tsd-kind-icon">upgrade<wbr/>Config</a></li></ul></nav></div></div></div><footer class="with-border-bottom"><div class="container"><h2>Legend</h2><div class="tsd-legend-group"><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class"><span class="tsd-kind-icon">Constructor</span></li><li class="tsd-kind-property tsd-parent-kind-class"><span class="tsd-kind-icon">Property</span></li><li class="tsd-kind-method tsd-parent-kind-class"><span class="tsd-kind-icon">Method</span></li><li class="tsd-kind-accessor tsd-parent-kind-class"><span class="tsd-kind-icon">Accessor</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected property</span></li><li class="tsd-kind-method tsd-parent-kind-class tsd-is-protected"><span class="tsd-kind-icon">Protected method</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-interface"><span class="tsd-kind-icon">Property</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-constructor tsd-parent-kind-class tsd-is-inherited"><span class="tsd-kind-icon">Inherited constructor</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-property tsd-parent-kind-class tsd-is-private"><span class="tsd-kind-icon">Private property</span></li></ul><ul class="tsd-legend"><li class="tsd-kind-method tsd-parent-kind-class tsd-is-static"><span class="tsd-kind-icon">Static method</span></li></ul></div><h2>Settings</h2><p>Theme <select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></p></div></footer><div class="container tsd-generator"><p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div><div class="overlay"></div><script src="assets/main.js"></script></body></html>
