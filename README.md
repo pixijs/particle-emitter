@@ -128,7 +128,7 @@ var emitter = new PIXI.particles.Emitter(
                     data: {
                         x: 0,
                         y: 0,
-                        r: 10
+                        radius: 10
                     }
                 }
             },
