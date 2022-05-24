@@ -38,7 +38,6 @@
     "@pixi/core": "^6.0.4",
     "@pixi/display": "^6.0.4",
     "@pixi/math": "^6.0.4",
-    "@pixi/settings": "^6.0.4",
     "@pixi/sprite": "^6.0.4",
     "@pixi/ticker": "^6.0.4"
   },

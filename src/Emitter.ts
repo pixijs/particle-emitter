@@ -2,7 +2,6 @@ import { generateEase, rotatePoint, SimpleEase } from './ParticleUtils';
 import { Particle } from './Particle';
 import { EmitterConfigV3 } from './EmitterConfig';
 import { Container } from '@pixi/display';
-import { settings } from '@pixi/settings';
 import { Point } from '@pixi/math';
 import { Ticker } from '@pixi/ticker';
 import { BehaviorOrder, IEmitterBehavior, IEmitterBehaviorClass } from './behaviors/Behaviors';
@@ -563,7 +562,7 @@ export class Emitter
     {
         if (this._autoUpdate)
         {
-            delta = delta / settings.TARGET_FPMS / 1000;
+            delta = ticker.elapsedMS * 0.001;
         }
 
         // if we don't have a parent to add particles to, then don't do anything.
