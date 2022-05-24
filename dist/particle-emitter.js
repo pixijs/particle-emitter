@@ -1,12 +1,12 @@
 /*!
- * @pixi/particle-emitter - v5.0.5
- * Compiled Sat, 09 Apr 2022 18:10:40 UTC
+ * @pixi/particle-emitter - v5.0.6
+ * Compiled Tue, 24 May 2022 01:20:10 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
  */
 this.PIXI = this.PIXI || {};
-(function (exports, core, constants, sprite, settings, math, ticker$1, display) {
+(function (exports, core, constants, sprite, math, ticker$1, display) {
     'use strict';
 
     /**
@@ -681,7 +681,7 @@ this.PIXI = this.PIXI || {};
          */
         update(delta) {
             if (this._autoUpdate) {
-                delta = delta / settings.settings.TARGET_FPMS / 1000;
+                delta = ticker.elapsedMS * 0.001;
             }
             // if we don't have a parent to add particles to, then don't do anything.
             // this also works as a isDestroyed check
@@ -3514,5 +3514,5 @@ this.PIXI = this.PIXI || {};
     exports.behaviors = index$1;
     exports.upgradeConfig = upgradeConfig;
 
-}(this.PIXI.particles = this.PIXI.particles || {}, PIXI, PIXI, PIXI, PIXI, PIXI, PIXI, PIXI));
+}(this.PIXI.particles = this.PIXI.particles || {}, PIXI, PIXI, PIXI, PIXI, PIXI, PIXI));
 //# sourceMappingURL=particle-emitter.js.map
