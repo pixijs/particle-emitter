@@ -519,6 +519,13 @@ export class LinkedListContainer extends Container
     public removeChildren(beginIndex = 0, endIndex = this._childCount): DisplayObject[]
     {
         const begin = beginIndex;
+
+        // because Container.destroy() has removeChildren(0, this.children.count), assume that an end index of 0
+        // should actually be _childCount.
+        if (endIndex === 0 && this._childCount > 0)
+        {
+            endIndex = this._childCount;
+        }
         const end = endIndex;
         const range = end - begin;
 
