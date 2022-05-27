@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.6
- * Compiled Tue, 24 May 2022 01:20:10 UTC
+ * @pixi/particle-emitter - v5.0.7
+ * Compiled Fri, 27 May 2022 02:00:53 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -3270,6 +3270,11 @@ this.PIXI = this.PIXI || {};
         }
         removeChildren(beginIndex = 0, endIndex = this._childCount) {
             const begin = beginIndex;
+            // because Container.destroy() has removeChildren(0, this.children.count), assume that an end index of 0
+            // should actually be _childCount.
+            if (endIndex === 0 && this._childCount > 0) {
+                endIndex = this._childCount;
+            }
             const end = endIndex;
             const range = end - begin;
             if (range > 0 && range <= end) {
