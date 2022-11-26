@@ -438,7 +438,9 @@ export class LinkedListContainer extends Container
             // TODO - lets either do all callbacks or all events.. not both!
             this.onChildrenChange();
             child.emit('removed', this);
-            this.emit('childRemoved', child, this, this._childCount);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            this.emit('childRemoved', child, this);
         }
 
         return children[0];
