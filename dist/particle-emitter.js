@@ -1,6 +1,6 @@
 /*!
- * @pixi/particle-emitter - v5.0.7
- * Compiled Fri, 27 May 2022 02:00:53 UTC
+ * @pixi/particle-emitter - v5.0.8
+ * Compiled Mon, 28 Nov 2022 04:02:20 UTC
  *
  * @pixi/particle-emitter is licensed under the MIT License.
  * http://www.opensource.org/licenses/mit-license
@@ -3212,6 +3212,8 @@ this.PIXI = this.PIXI || {};
                 // TODO - lets either do all callbacks or all events.. not both!
                 this.onChildrenChange();
                 child.emit('removed', this);
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                // @ts-ignore
                 this.emit('childRemoved', child, this);
             }
             return children[0];
