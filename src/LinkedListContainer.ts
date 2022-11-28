@@ -438,6 +438,8 @@ export class LinkedListContainer extends Container
             // TODO - lets either do all callbacks or all events.. not both!
             this.onChildrenChange();
             child.emit('removed', this);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             this.emit('childRemoved', child, this);
         }
 
