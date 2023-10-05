@@ -1141,10 +1141,10 @@ earcut@^2.2.4:
   resolved "https://registry.npmjs.org/earcut/-/earcut-2.2.4.tgz#6d02fd4d68160c114825d06890a92ecaae60343a"
   integrity sha512-/pjZsA1b4RPHbeWZQn66SWS8nZZWLQQ23oE3Eam7aroEFGEvwKAsJfZ9ytiEMycfzXWpca4FA9QIOehf7PocBQ==
 
-electron@^22.3.24:
-  version "22.3.24"
-  resolved "https://registry.npmjs.org/electron/-/electron-22.3.24.tgz#14479cf11cf4709f78d324015429fa82492c2150"
-  integrity sha512-wnGsShoRVk1Jmgr7h/jZK9bI5UwMF88sdQ5c8z2j2N8B9elhF/jKDFjwDXUrY1Y0xzAskOP0tYIDE+UbUM4byQ==
+electron@^22.3.25:
+  version "22.3.25"
+  resolved "https://registry.npmjs.org/electron/-/electron-22.3.25.tgz#a9a70b63a6712c658cd7fab343129b2a78450f80"
+  integrity sha512-AjrP7bebMs/IPsgmyowptbA7jycTkrJC7jLZTb5JoH30PkBC6pZx/7XQ0aDok82SsmSiF4UJDOg+HoLrEBiqmg==
   dependencies:
     "@electron/get" "^2.0.0"
     "@types/node" "^16.11.26"

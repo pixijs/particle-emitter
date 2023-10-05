@@ -18,7 +18,7 @@
     "@pixi/ticker": "^6.0.4",
     "@pixi/utils": "^6.0.4",
     "@types/node": "^8.0.0",
-    "electron": "^22.3.24",
+    "electron": "^22.3.25",
     "override-require": "^1.1.1",
     "@pixi/particle-emitter": "*",
     "resource-loader": "3",

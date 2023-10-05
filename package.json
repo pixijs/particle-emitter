@@ -50,7 +50,7 @@
     "@pixi/settings": ">=6.0.4 <8.0.0",
     "@pixi/sprite": ">=6.0.4 <8.0.0",
     "@pixi/ticker": ">=6.0.4 <8.0.0",
-    "electron": "^22.3.24",
+    "electron": "^22.3.25",
     "eslint": "^7.2.0",
     "gh-pages": "^2.0.0",
     "ncp": "^2.0.0",
