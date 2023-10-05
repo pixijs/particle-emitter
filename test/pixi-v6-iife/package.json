@@ -7,7 +7,7 @@
   },
   "license": "ISC",
   "dependencies": {
-    "electron": "^22.3.24",
+    "electron": "^22.3.25",
     "@pixi/particle-emitter": "*",
     "pixi.js": "^6.0.4",
     "typescript": "^4.3.4"
