@@ -21,38 +21,38 @@ import { BehaviorEditorConfig } from './editor/Types';
  */
 export class AlphaBehavior implements IEmitterBehavior
 {
-	public static type = 'alpha';
-	public static editorConfig: BehaviorEditorConfig = null;
+  public static type = 'alpha';
+  public static editorConfig: BehaviorEditorConfig = null;
 
-	public order = BehaviorOrder.Normal;
-	private list: PropertyList<number>;
-	constructor(config: {
-		/**
-		 * Transparency of the particles from 0 (transparent) to 1 (opaque)
-		 */
-		alpha: ValueList<number>;
-	})
-	{
-	    this.list = new PropertyList(false);
-	    this.list.reset(PropertyNode.createList(config.alpha));
-	}
+  public order = BehaviorOrder.Normal;
+  private list: PropertyList<number>;
+  constructor(config: {
+    /**
+     * Transparency of the particles from 0 (transparent) to 1 (opaque)
+     */
+    alpha: ValueList<number>;
+  })
+  {
+      this.list = new PropertyList(false);
+      this.list.reset(PropertyNode.createList(config.alpha));
+  }
 
-	initParticles(first: Particle): void
-	{
-	    let next = first;
+  initParticles(first: Particle): void
+  {
+      let next = first;
 
-	    while (next)
-	    {
-	        next.config.originAlpha = next.config.originAlpha ?? 1;
-	        next.alpha = next.config.originAlpha * this.list.first.value;
-	        next = next.next;
-	    }
-	}
+      while (next)
+      {
+          next.config.originAlpha = next.config.originAlpha ?? 1;
+          next.alpha = next.config.originAlpha * this.list.first.value;
+          next = next.next;
+      }
+  }
 
-	updateParticle(particle: Particle): void
-	{
-	    particle.alpha = this.list.interpolate(particle.agePercent);
-	}
+  updateParticle(particle: Particle): void
+  {
+      particle.alpha = this.list.interpolate(particle.agePercent);
+  }
 }
 
 /**
@@ -78,39 +78,39 @@ export class AlphaBehavior implements IEmitterBehavior
  */
 
 type AlphaData = {
-	min: number;
-	max: number;
+  min: number;
+  max: number;
 };
 export class StaticAlphaBehavior implements IEmitterBehavior
 {
-	public static type = 'alphaStatic';
-	public static editorConfig: BehaviorEditorConfig = null;
+  public static type = 'alphaStatic';
+  public static editorConfig: BehaviorEditorConfig = null;
 
-	public order = BehaviorOrder.Normal;
-	private value: number | AlphaData;
-	constructor(config: {
-		/**
-		 * Transparency of the particles from 0 (transparent) to 1 (opaque)
-		 */
-		alpha: number | AlphaData;
-	})
-	{
-	    this.value = config.alpha;
-	}
+  public order = BehaviorOrder.Normal;
+  private value: number | AlphaData;
+  constructor(config: {
+    /**
+     * Transparency of the particles from 0 (transparent) to 1 (opaque)
+     */
+    alpha: number | AlphaData;
+  })
+  {
+      this.value = config.alpha;
+  }
 
-	initParticles(first: Particle): void
-	{
-	    let next = first;
+  initParticles(first: Particle): void
+  {
+      let next = first;
 
-	    while (next)
-	    {
-	        const val
-				= typeof this.value === 'number'
-				    ? this.value
-				    : (Math.random() * (this.value.max - this.value.min)) + this.value.min;
+      while (next)
+      {
+          const val
+        = typeof this.value === 'number'
+            ? this.value
+            : (Math.random() * (this.value.max - this.value.min)) + this.value.min;
 
-	        next.config.originAlpha = next.alpha = Math.min(val, 1);
-	        next = next.next;
-	    }
-	}
+          next.config.originAlpha = next.alpha = Math.min(val, 1);
+          next = next.next;
+      }
+  }
 }
