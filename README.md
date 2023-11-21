@@ -204,6 +204,7 @@ npm install @pixi/particle-emitter
 * [Snow](https://pixijs.github.io/particle-emitter/examples/snow.html)
 * [Sparks](https://pixijs.github.io/particle-emitter/examples/sparks.html)
 * [Fountain](https://pixijs.github.io/particle-emitter/examples/fountain.html)
+* [Confetti](https://pixijs.github.io/particle-emitter/examples/confetti.html)
 * [Animated Coins](https://pixijs.github.io/particle-emitter/examples/coins.html)
 * [Animated Bubbles](https://pixijs.github.io/particle-emitter/examples/animatedBubbles.html)
 * [Spaceship Destruction - Ordered Art](https://pixijs.github.io/particle-emitter/examples/spaceshipDestruction.html)

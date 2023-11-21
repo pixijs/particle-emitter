@@ -112,7 +112,7 @@ export function upgradeConfig(config: EmitterConfigV2|EmitterConfigV1, art: any)
     // just ensure we aren't given any V3 config data
     if ('behaviors' in config)
     {
-        return config;
+        return config as EmitterConfigV3;
     }
 
     const out: EmitterConfigV3 = {
