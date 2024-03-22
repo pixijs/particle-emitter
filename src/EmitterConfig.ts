@@ -74,7 +74,33 @@ export interface BehaviorEntry
     /**
      * The behavior type, as defined as the static `type` property of a behavior class.
      */
-    type: string;
+    type:        
+        | string
+        | 'alpha'
+        | 'alphaStatic'
+        | 'animatedRandom'
+        | 'animatedSingle'
+        | 'blendMode'
+        | 'color'
+        | 'colorStatic'
+        | 'moveAcceleration'
+        | 'movePath'
+        | 'moveSpeed'
+        | 'moveSpeedStatic'
+        | 'noRotation'
+        | 'polygonalChain'
+        | 'rect'
+        | 'rotation'
+        | 'rotationStatic'
+        | 'scale'
+        | 'scaleStatic'
+        | 'spawnBurst'
+        | 'spawnPoint'
+        | 'spawnShape'
+        | 'textureOrdered'
+        | 'textureRandom'
+        | 'textureSingle'
+        | 'torus';
     /**
      * Configuration data specific to that behavior.
      */
